@@ -11,13 +11,14 @@ class ValidadorTest {
     @Test
     @DisplayName("pruebo todos los casos de contrasenas para ver si son validas o no")
     void esValidaTest() {
+        Validador unValidador = new Validador();
         // es de las peores
-        Assertions.assertFalse(Validador.esValida("password"));
+        Assertions.assertFalse(unValidador.esValida("password"));
         // esta es muy corta
-        Assertions.assertFalse(Validador.esValida("123"));
+        Assertions.assertFalse(unValidador.esValida("123"));
         //esta es muy larga
-        Assertions.assertFalse(Validador.esValida("D$w9&XqPz4!sGv2@rN#lJ*cEoF+tH(3zL-xM/vK,nA.bQ1:wG^fR%yT&uI=8Y7U6iO;9P0"));
+        Assertions.assertFalse(unValidador.esValida("D$w9&XqPz4!sGv2@rN#lJ*cEoF+tH(3zL-xM/vK,nA.bQ1:wG^fR%yT&uI=8Y7U6iO;9P0"));
         //esta pasa
-        Assertions.assertTrue(Validador.esValida("thomas_ariel_luca"));
+        Assertions.assertTrue(unValidador.esValida("thomas_ariel_luca"));
     }
 }
