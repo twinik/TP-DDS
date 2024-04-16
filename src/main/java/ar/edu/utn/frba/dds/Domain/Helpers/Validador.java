@@ -4,17 +4,30 @@ import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
-@NoArgsConstructor
+
 public class Validador {
 
     //TODO: el lector del properties
-    private static final File archivo = new File("src/main/java/ar/edu/utn/frba/dds/Domain/Assets/top10000PeoresContrasenas");
 
+
+
+    private ConfigReader config;
     private static final Integer LONGITUD_MINIMA = 8;
     private static final Integer LONGITUD_MAXIMA = 64;
+
+    public Validador(){
+        config = new ConfigReader();
+    }
     private boolean perteneceA100000Peores(String contrasena) {
+        File archivo = null;
+        try {
+            archivo = new File(this.config.getProperty("worstPasswordsFilePath"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         String linea;
         try (Scanner entrada = new Scanner(archivo)) {
             while (entrada.hasNext()) {
