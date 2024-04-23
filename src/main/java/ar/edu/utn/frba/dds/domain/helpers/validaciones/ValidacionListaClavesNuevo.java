@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.helpers.validaciones;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.helpers.MotivoNoValido;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class ValidacionListaClavesNuevo implements Validacion{
 

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
 import ar.edu.utn.frba.dds.domain.helpers.validaciones.Validacion;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.File;
@@ -18,6 +19,10 @@ public class ValidadorClaves {
 
     @Getter
     private MotivoNoValido motivoNoValida;
+
+    public ValidadorClaves(List<Validacion> validaciones) {
+        this.validaciones = validaciones;
+    }
 
     public ValidadorClaves() {
         this.validaciones = new ArrayList<>();
