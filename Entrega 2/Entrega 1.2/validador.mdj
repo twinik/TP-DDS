@@ -2824,7 +2824,7 @@
 											"top": 772,
 											"width": 244.6708984375,
 											"height": 13,
-											"text": "ValidacionFactory"
+											"text": "ValidadorFactory"
 										},
 										{
 											"_type": "LabelView",
@@ -4157,7 +4157,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ValidacionFactory",
+					"name": "ValidadorFactory",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
