@@ -17,7 +17,7 @@ public class ValidadorClaves {
     private List<Validacion> validaciones;
 
     @Getter
-    private String motivoNoValida;
+    private MotivoNoValido motivoNoValida;
 
     public ValidadorClaves() {
         this.validaciones = new ArrayList<>();

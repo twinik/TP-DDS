@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.helpers.validaciones;
 
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.domain.helpers.MotivoNoValido;
 import lombok.Getter;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 public class ValidacionListaClavesNuevo implements Validacion{
 
     @Getter
-    private String motivo = "La clave aparece en la lista de las 10.000 peores contrasenias";
+    private MotivoNoValido motivo = new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias");
     private List<String> peoresContrasenias = new ArrayList<>();
     private ConfigReader config;
 
