@@ -13,15 +13,14 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class ValidacionListaClavesNuevo implements Validacion{
+public class ValidacionListaClavesNuevo extends Validacion{
 
-    @Getter
-    private MotivoNoValido motivo = new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias");
     private List<String> peoresContrasenias = new ArrayList<>();
     private ConfigReader config;
 
 
     public ValidacionListaClavesNuevo() {
+        this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias"));
         this.config = new ConfigReader();
         cargarPeoresContrasenias();
     }

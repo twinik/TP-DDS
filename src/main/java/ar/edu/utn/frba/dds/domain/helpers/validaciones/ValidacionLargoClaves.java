@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class ValidacionLargoClaves implements Validacion {
-    @Getter
-    private MotivoNoValido motivo;
+public class ValidacionLargoClaves extends Validacion{
     @Getter
     private static final Integer LONGITUD_MINIMA = 8;
     @Getter
@@ -16,7 +14,7 @@ public class ValidacionLargoClaves implements Validacion {
     private boolean esMuyCorta (String contrasena){
         boolean result = contrasena.length() < LONGITUD_MINIMA;
         if (result) {
-            this.motivo = new MotivoNoValido( "La contrasena es muy corta, debe tener como minimo " + LONGITUD_MINIMA + " caracteres.");
+            this.setMotivo(new MotivoNoValido( "La contrasena es muy corta, debe tener como minimo " + LONGITUD_MINIMA + " caracteres."));
         }
         return result;
     }
@@ -24,7 +22,7 @@ public class ValidacionLargoClaves implements Validacion {
     private boolean esMuyLarga(String contrasena) {
         boolean result = contrasena.length() > LONGITUD_MAXIMA;
         if (result) {
-            this.motivo = new MotivoNoValido( "La contrasena es muy larga, debe tener como maximo " + LONGITUD_MAXIMA + " caracteres.");
+            this.setMotivo(new MotivoNoValido( "La contrasena es muy larga, debe tener como maximo " + LONGITUD_MAXIMA + " caracteres."));
         }
         return result;
     }
