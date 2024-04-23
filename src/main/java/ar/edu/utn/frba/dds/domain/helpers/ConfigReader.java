@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.Domain.Helpers;
+package ar.edu.utn.frba.dds.domain.helpers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
