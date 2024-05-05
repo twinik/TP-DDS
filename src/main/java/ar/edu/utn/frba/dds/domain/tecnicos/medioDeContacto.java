@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds.domain.tecnicos;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class medioDeContacto {
 
@@ -12,11 +12,6 @@ public class medioDeContacto {
      */
     public medioDeContacto() {
     }
-
-    /**
-     * 
-     */
-    private void noSeQuePonerAcaPeroSeuguroEsAsi;
 
     /**
      * 

@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+
 import java.util.*;
 
 /**
@@ -16,7 +18,7 @@ public abstract class Colaboracion {
     /**
      * 
      */
-    protected void colaborador;
+    protected Colaborador colaborador;
 
     /**
      * 

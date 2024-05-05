@@ -1,26 +1,19 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.*;
 
-/**
- * 
- */
+@Getter
+@Setter
+@AllArgsConstructor
 public class SensorTemperatura {
 
-    /**
-     * Default constructor
-     */
-    public SensorTemperatura() {
-    }
 
-    /**
-     * 
-     */
     private Float utlimaTempRegistrada;
 
-    /**
-     * @return
-     */
     public Float registrarTemperatura() {
         // TODO implement here
         return null;
