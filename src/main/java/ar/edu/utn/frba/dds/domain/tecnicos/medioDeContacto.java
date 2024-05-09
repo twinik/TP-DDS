@@ -7,15 +7,15 @@ import java.util.*;
  */
 public class medioDeContacto {
 
-    /**
-     * Default constructor
-     */
-    public medioDeContacto() {
-    }
+  /**
+   * Default constructor
+   */
+  public medioDeContacto() {
+  }
 
-    /**
-     * 
-     */
-    private Map<String, String> medios;
+  /**
+   *
+   */
+  private Map<String, String> medios;
 
 }

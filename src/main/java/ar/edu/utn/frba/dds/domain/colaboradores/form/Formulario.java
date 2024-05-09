@@ -10,14 +10,14 @@ import java.util.*;
 @Setter
 public class Formulario {
 
-    public Formulario() {
-        this.campos = new ArrayList<Campo>();
-    }
+  public Formulario() {
+    this.campos = new ArrayList<Campo>();
+  }
 
-    private List<Campo> campos;
+  private List<Campo> campos;
 
-    public void agregarCampos(Campo ... campos) {
-        Collections.addAll(this.campos, campos);
-    }
+  public void agregarCampos(Campo... campos) {
+    Collections.addAll(this.campos, campos);
+  }
 
 }

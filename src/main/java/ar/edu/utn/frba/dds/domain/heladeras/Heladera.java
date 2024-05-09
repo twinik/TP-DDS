@@ -13,38 +13,38 @@ import java.util.*;
 @AllArgsConstructor
 public class Heladera {
 
-    private Ubicacion ubicacion;
+  private Ubicacion ubicacion;
 
-    private Direccion direccion;
+  private Direccion direccion;
 
-    private String nombre;
+  private String nombre;
 
-    private Integer capacidadViandas;
+  private Integer capacidadViandas;
 
-    private Date fechaPuestaFuncionamiento;
+  private Date fechaPuestaFuncionamiento;
 
-    private List<Vianda> viandas;
+  private List<Vianda> viandas;
 
-    private Float tempMin;
+  private Float tempMin;
 
-    private Float tempMax;
+  private Float tempMax;
 
-    private SensorTemperatura sensorTemp;
+  private SensorTemperatura sensorTemp;
 
-    private SensorMovimiento sensorMov;
+  private SensorMovimiento sensorMov;
 
-    public void agregarVianda(Vianda vianda) {
-        this.viandas.add(vianda);
+  public void agregarVianda(Vianda vianda) {
+    this.viandas.add(vianda);
+  }
+
+  public void verificarTemperatura() {
+    if (this.sensorTemp.getUtlimaTempRegistrada() > this.tempMax || this.sensorTemp.getUtlimaTempRegistrada() > this.tempMin) {
+      System.console().printf("La temperatura esta fuera del rango aceptable!\n");
     }
+  }
 
-    public void verificarTemperatura() {
-        if (this.sensorTemp.getUtlimaTempRegistrada() > this.tempMax || this.sensorTemp.getUtlimaTempRegistrada() > this.tempMin) {
-            System.console().printf("La temperatura esta fuera del rango aceptable!\n");
-        }
-    }
-
-    public void alertarEnMapa(String mensajeAlerta) {
-        // TODO implement here
-    }
+  public void alertarEnMapa(String mensajeAlerta) {
+    // TODO implement here
+  }
 
 }

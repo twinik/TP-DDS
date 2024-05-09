@@ -8,20 +8,20 @@ import java.util.*;
 @Getter
 @Setter
 public class RespuestaACampo {
-    public RespuestaACampo(Campo campo, String respuesta) {
-        this.campo = campo;
-        this.respuesta = respuesta;
-        this.opcionesElegidas = new ArrayList<Opcion>();
-    }
+  public RespuestaACampo(Campo campo, String respuesta) {
+    this.campo = campo;
+    this.respuesta = respuesta;
+    this.opcionesElegidas = new ArrayList<Opcion>();
+  }
 
-    private Campo campo;
+  private Campo campo;
 
-    private String respuesta;
+  private String respuesta;
 
-    private List<Opcion> opcionesElegidas;
+  private List<Opcion> opcionesElegidas;
 
-    public void agregarOpcionesElegidas(Opcion ... opciones) {
-        Collections.addAll(this.opcionesElegidas, opciones);
-    }
+  public void agregarOpcionesElegidas(Opcion... opciones) {
+    Collections.addAll(this.opcionesElegidas, opciones);
+  }
 
 }

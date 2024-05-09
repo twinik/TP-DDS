@@ -5,26 +5,26 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public abstract class Colaboracion {
 
-    /**
-     * Default constructor
-     */
-    public Colaboracion() {
-    }
+  /**
+   * Default constructor
+   */
+  public Colaboracion() {
+  }
 
-    /**
-     * 
-     */
-    protected Colaborador colaborador;
+  /**
+   *
+   */
+  protected Colaborador colaborador;
 
-    /**
-     * 
-     */
-    public void sumarPuntos() {
-        // TODO implement here
-    }
+  /**
+   *
+   */
+  public void sumarPuntos() {
+    // TODO implement here
+  }
 
 }

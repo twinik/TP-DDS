@@ -19,40 +19,40 @@ import java.util.*;
 @AllArgsConstructor
 public class Colaborador {
 
-    private Usuario usuario;
+  private Usuario usuario;
 
-    private String clave;
+  private String clave;
 
-    private TipoColaborador tipoColaborador;
+  private TipoColaborador tipoColaborador;
 
-    public Date fechaCaducidad;
+  public Date fechaCaducidad;
 
-    private RespuestaFormulario respuestas;
+  private RespuestaFormulario respuestas;
 
-    private Float puntosGanados;
+  private Float puntosGanados;
 
-    public void contribuirVianda(Heladera heladera, Vianda vianda) {
-        // TODO implement here
-    }
+  public void contribuirVianda(Heladera heladera, Vianda vianda) {
+    // TODO implement here
+  }
 
-    public void contribuirHeladera(Heladera heladera) {
-        // TODO implement here
-    }
+  public void contribuirHeladera(Heladera heladera) {
+    // TODO implement here
+  }
 
-    public void distribucionVianda(Heladera origen, Heladera destino, String motivo, Integer cantidad) {
-        // TODO implement here
-    }
+  public void distribucionVianda(Heladera origen, Heladera destino, String motivo, Integer cantidad) {
+    // TODO implement here
+  }
 
-    public void donarDinero(Float monto, FrecuenciaDonacion frecuencia) {
-        // TODO implement here
-    }
+  public void donarDinero(Float monto, FrecuenciaDonacion frecuencia) {
+    // TODO implement here
+  }
 
-    public void darDeAltaPersonaVulnerable(PersonaVulnerable persona, Tarjeta tarjeta) {
-        // TODO implement here
-    }
+  public void darDeAltaPersonaVulnerable(PersonaVulnerable persona, Tarjeta tarjeta) {
+    // TODO implement here
+  }
 
-    public void crearOfertaProducto(Producto prod, Integer puntosNecesarios, CategoriaOferta rubro) {
-        // TODO implement here
-    }
+  public void crearOfertaProducto(Producto prod, Integer puntosNecesarios, CategoriaOferta rubro) {
+    // TODO implement here
+  }
 
 }

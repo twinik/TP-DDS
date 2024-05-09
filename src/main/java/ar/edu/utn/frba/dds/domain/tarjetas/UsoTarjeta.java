@@ -11,8 +11,8 @@ import java.util.*;
 @AllArgsConstructor
 public class UsoTarjeta {
 
-    private LocalDateTime fechaUso;
+  private LocalDateTime fechaUso;
 
-    private Heladera heladera;
+  private Heladera heladera;
 
 }

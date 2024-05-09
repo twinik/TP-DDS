@@ -11,6 +11,6 @@ import java.util.*;
 @AllArgsConstructor
 public class Opcion {
 
-    private String opcion;
+  private String opcion;
 
 }

@@ -12,8 +12,8 @@ import java.util.*;
 public class Usuario {
 
 
-    private String usuario;
+  private String usuario;
 
-    private String clave;
+  private String clave;
 
 }

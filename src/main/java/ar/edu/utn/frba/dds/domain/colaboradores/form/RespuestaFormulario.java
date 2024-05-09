@@ -9,17 +9,17 @@ import java.util.*;
 @Setter
 public class RespuestaFormulario {
 
-    public RespuestaFormulario(Formulario formulario) {
-        this.formulario = formulario;
-        this.respuestas = new ArrayList<RespuestaACampo>();
-    }
+  public RespuestaFormulario(Formulario formulario) {
+    this.formulario = formulario;
+    this.respuestas = new ArrayList<RespuestaACampo>();
+  }
 
-    private Formulario formulario;
+  private Formulario formulario;
 
-    private List<RespuestaACampo> respuestas;
+  private List<RespuestaACampo> respuestas;
 
-    public void agregarRespuestasACampo(RespuestaACampo ... respuestas) {
-        Collections.addAll(this.respuestas, respuestas);
-    }
+  public void agregarRespuestasACampo(RespuestaACampo... respuestas) {
+    Collections.addAll(this.respuestas, respuestas);
+  }
 
 }

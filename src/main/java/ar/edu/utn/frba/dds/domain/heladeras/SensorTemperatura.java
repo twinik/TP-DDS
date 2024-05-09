@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
 
 @Getter
 @Setter
@@ -12,11 +11,11 @@ import java.util.*;
 public class SensorTemperatura {
 
 
-    private Float utlimaTempRegistrada;
+  private Float utlimaTempRegistrada;
 
-    public Float registrarTemperatura() {
-        // TODO implement here
-        return null;
-    }
+  public Float registrarTemperatura() {
+    // TODO implement here
+    return null;
+  }
 
 }

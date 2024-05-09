@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class MotivoNoValido {
-    private String motivo;
+  private String motivo;
 }

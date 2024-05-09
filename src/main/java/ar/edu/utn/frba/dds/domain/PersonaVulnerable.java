@@ -17,48 +17,48 @@ import java.util.*;
 public class PersonaVulnerable {
 
 
-    private String nombre;
+  private String nombre;
 
-    private Date fechaNacimiento;
+  private Date fechaNacimiento;
 
-    private Date fechaRegistro;
+  private Date fechaRegistro;
 
-    private boolean poseeDomicilio;
+  private boolean poseeDomicilio;
 
-    private String domicilio;
+  private String domicilio;
 
-    private TipoDocumento tipoDocumento;
+  private TipoDocumento tipoDocumento;
 
-    private String nroDocumento;
+  private String nroDocumento;
 
-    private Colaborador colaborador;
+  private Colaborador colaborador;
 
-    private List <PersonaVulnerable> tutorados;
-
-
-    public boolean poseeMenores() {
-        return tutorados.stream().anyMatch(PersonaVulnerable::esMenor);
-    }
+  private List<PersonaVulnerable> tutorados;
 
 
-    public Integer cantidadMenores() {
-        return Math.toIntExact(tutorados.stream().filter(PersonaVulnerable::esMenor).count());
-    }
+  public boolean poseeMenores() {
+    return tutorados.stream().anyMatch(PersonaVulnerable::esMenor);
+  }
 
-    public boolean esMenor() {
-        return this.edad() < 18;
-    }
 
-    private Integer edad() {
-        DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-        int d1 = Integer.parseInt(formatter.format(this.fechaNacimiento));
-        int d2 = Integer.parseInt(formatter.format(new Date()));
-        int age = (d2 - d1) / 10000;
-        return age;
-    }
+  public Integer cantidadMenores() {
+    return Math.toIntExact(tutorados.stream().filter(PersonaVulnerable::esMenor).count());
+  }
 
-    public void agregarTutorados(PersonaVulnerable ... tutorados) {
-        Collections.addAll(this.tutorados, tutorados);
-    }
+  public boolean esMenor() {
+    return this.edad() < 18;
+  }
+
+  private Integer edad() {
+    DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+    int d1 = Integer.parseInt(formatter.format(this.fechaNacimiento));
+    int d2 = Integer.parseInt(formatter.format(new Date()));
+    int age = (d2 - d1) / 10000;
+    return age;
+  }
+
+  public void agregarTutorados(PersonaVulnerable... tutorados) {
+    Collections.addAll(this.tutorados, tutorados);
+  }
 
 }

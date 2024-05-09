@@ -13,38 +13,38 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class ValidacionListaClavesNuevo extends Validacion{
+public class ValidacionListaClavesNuevo extends Validacion {
 
-    private List<String> peoresContrasenias = new ArrayList<>();
-    private ConfigReader config;
+  private List<String> peoresContrasenias = new ArrayList<>();
+  private ConfigReader config;
 
 
-    public ValidacionListaClavesNuevo() {
-        this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias"));
-        this.config = new ConfigReader();
-        cargarPeoresContrasenias();
+  public ValidacionListaClavesNuevo() {
+    this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias"));
+    this.config = new ConfigReader();
+    cargarPeoresContrasenias();
+  }
+
+  private void cargarPeoresContrasenias() {
+    String archivo = null;
+    try {
+      archivo = this.config.getProperty("worstPasswordsFilePath");
+    } catch (IOException e) {
+      throw new RuntimeException("No se pudo leer la configuración", e);
     }
 
-    private void cargarPeoresContrasenias() {
-        String archivo = null;
-        try {
-            archivo = this.config.getProperty("worstPasswordsFilePath");
-        } catch (IOException e) {
-            throw new RuntimeException("No se pudo leer la configuración", e);
-        }
-
-        try (Scanner scanner = new Scanner(new File(archivo))) {
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine();
-                peoresContrasenias.add(linea);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("Archivo de contraseñas no encontrado", e);
-        }
-
+    try (Scanner scanner = new Scanner(new File(archivo))) {
+      while (scanner.hasNextLine()) {
+        String linea = scanner.nextLine();
+        peoresContrasenias.add(linea);
+      }
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException("Archivo de contraseñas no encontrado", e);
     }
 
-    public boolean validar(String clave) {
-        return !peoresContrasenias.contains(clave);
-    }
+  }
+
+  public boolean validar(String clave) {
+    return !peoresContrasenias.contains(clave);
+  }
 }

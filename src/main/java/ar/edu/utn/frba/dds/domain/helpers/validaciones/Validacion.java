@@ -8,8 +8,9 @@ import lombok.Setter;
 @Setter
 public abstract class Validacion {
 
-    protected MotivoNoValido motivo;
-    public abstract boolean validar(String clave);
+  protected MotivoNoValido motivo;
+
+  public abstract boolean validar(String clave);
 
 
 }

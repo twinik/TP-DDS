@@ -5,28 +5,27 @@ import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.*;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class Vianda {
 
-    private String comida;
+  private String comida;
 
-    private Date fechaCaducidad;
+  private Date fechaCaducidad;
 
-    private Date fechaDonacion;
+  private Date fechaDonacion;
 
-    private Colaborador colaborador;
+  private Colaborador colaborador;
 
-    private Heladera heladera;
+  private Heladera heladera;
 
-    private Integer calorias;
+  private Integer calorias;
 
-    private Integer peso;
+  private Integer peso;
 
-    private boolean entregada;
+  private boolean entregada;
 
 }

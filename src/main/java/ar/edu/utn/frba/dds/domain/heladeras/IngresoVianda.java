@@ -11,18 +11,18 @@ import java.util.*;
 public class IngresoVianda {
 
 
-    private Date fechaDonacion;
+  private Date fechaDonacion;
 
-    private Colaborador colaborador;
+  private Colaborador colaborador;
 
-    private boolean entregada;
+  private boolean entregada;
 
-    private List <Vianda> viandas;
+  private List<Vianda> viandas;
 
-    private Heladera heladera;
+  private Heladera heladera;
 
-    public void donar() {
-        // TODO implement here
-    }
+  public void donar() {
+    // TODO implement here
+  }
 
 }

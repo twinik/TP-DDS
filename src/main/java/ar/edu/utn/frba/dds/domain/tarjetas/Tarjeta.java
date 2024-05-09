@@ -12,16 +12,16 @@ import java.util.*;
 @AllArgsConstructor
 public class Tarjeta {
 
-    private String codigo;
+  private String codigo;
 
-    private Integer nroUsos;
+  private Integer nroUsos;
 
-    private FrecuenciaUso frecuenciaPermitida;
+  private FrecuenciaUso frecuenciaPermitida;
 
-    private List<UsoTarjeta> usos;
+  private List<UsoTarjeta> usos;
 
-    private PersonaVulnerable duenio;
+  private PersonaVulnerable duenio;
 
-    private Date fechaAdjudicacion;
+  private Date fechaAdjudicacion;
 
 }

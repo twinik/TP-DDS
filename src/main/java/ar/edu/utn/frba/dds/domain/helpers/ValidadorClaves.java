@@ -1,46 +1,47 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
 import ar.edu.utn.frba.dds.domain.helpers.validaciones.Validacion;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
+import lombok.Getter;
+
+
+
+
+/**
+ * Representa el validador de las contrasenias.
+ */
 
 
 public class ValidadorClaves {
 
-    private List<Validacion> validaciones;
+  private List<Validacion> validaciones;
 
-    @Getter
-    private MotivoNoValido motivoNoValida;
+  @Getter
+  private MotivoNoValido motivoNoValida;
 
-    public ValidadorClaves(List<Validacion> validaciones) {
-        this.validaciones = validaciones;
+  public ValidadorClaves(List<Validacion> validaciones) {
+    this.validaciones = validaciones;
+  }
+
+  public ValidadorClaves() {
+    this.validaciones = new ArrayList<>();
+  }
+
+  public void agregarValidaciones(Validacion... validaciones) {
+    Collections.addAll(this.validaciones, validaciones);
+  }
+
+  public boolean esValida(String contrasena) {
+    for (Validacion v : validaciones) {
+      if (!v.validar(contrasena)) {
+        this.motivoNoValida = v.getMotivo();
+        return false;
+      }
     }
-
-    public ValidadorClaves() {
-        this.validaciones = new ArrayList<>();
-    }
-
-    public void agregarValidaciones(Validacion... validaciones) {
-        Collections.addAll(this.validaciones, validaciones);
-    }
-
-    public boolean esValida(String contrasena) {
-        for(Validacion v : validaciones) {
-            if (!v.validar(contrasena)) {
-                this.motivoNoValida = v.getMotivo();
-                return false;
-            }
-        }
-        return true;
-    }
+    return true;
+  }
 
 
 }
