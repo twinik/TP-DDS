@@ -14,6 +14,9 @@ public class AltaPersonaVulnerable extends Colaboracion {
 
   private Date fechaAlta;
 
-  public void efectuar(){}
+  @Override
+  public void efectuar() {
+    super.efectuar();
+  }
 
 }

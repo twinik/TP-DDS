@@ -14,8 +14,9 @@ public class ColocacionHeladeras extends Colaboracion{
   public ColocacionHeladeras() {
   }
 
+  @Override
   public void efectuar() {
-
+    super.efectuar();
   }
 
   /**

@@ -16,8 +16,9 @@ public class DonacionDinero extends Colaboracion{
   }
 
 
+  @Override
   public void efectuar() {
-
+    super.efectuar();
   }
 
   /**

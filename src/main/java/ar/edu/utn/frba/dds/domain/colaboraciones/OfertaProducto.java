@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class OfertaProducto extends Colaboracion{
+public class OfertaProducto extends Colaboracion {
 
   /**
    * Default constructor
@@ -18,28 +18,20 @@ public class OfertaProducto extends Colaboracion{
   public OfertaProducto() {
   }
 
-
-  public void efectuar() {
-
-  }
-
-  /**
-   *
-   */
-
-  /**
-   *
-   */
   private Producto producto;
 
-  /**
-   *
-   */
+
   private Integer puntosNecesarios;
 
-  /**
-   *
-   */
+
   private CategoriaOferta categoria;
+
+
+  public void efectuar() {
+  }
+
+  public boolean puedeSerCanjeadoPor(Colaborador colaborador){
+    return colaborador.getPuntosGanados() >= this.puntosNecesarios;
+  }
 
 }

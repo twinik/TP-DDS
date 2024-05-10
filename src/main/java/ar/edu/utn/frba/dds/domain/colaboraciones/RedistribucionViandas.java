@@ -21,8 +21,9 @@ public class RedistribucionViandas extends Colaboracion{
   }
 
 
+  @Override
   public void efectuar() {
-
+    super.efectuar();
   }
 
 

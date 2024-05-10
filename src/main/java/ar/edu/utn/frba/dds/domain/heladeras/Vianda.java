@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Date;
+
 
 @Getter
 @Setter

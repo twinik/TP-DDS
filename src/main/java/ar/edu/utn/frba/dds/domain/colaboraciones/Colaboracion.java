@@ -28,6 +28,9 @@ public abstract class Colaboracion {
   /**
    *
    */
-  public abstract void efectuar();
+  public void efectuar() {
+    this.colaborador.sumarPuntos(this.calculadorDePuntos.calcularPuntos(this));
+  }
+
 
 }
