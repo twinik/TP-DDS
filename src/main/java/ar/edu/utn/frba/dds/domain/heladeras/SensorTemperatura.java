@@ -13,9 +13,8 @@ public class SensorTemperatura {
 
   private Float utlimaTempRegistrada;
 
-  public Float registrarTemperatura() {
-    // TODO implement here
-    return null;
+  public void registrarTemperatura(Float temp) {
+    this.utlimaTempRegistrada = temp;
   }
 
 }

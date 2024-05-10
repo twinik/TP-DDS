@@ -43,8 +43,5 @@ public class Heladera {
     }
   }
 
-  public void alertarEnMapa(String mensajeAlerta) {
-    // TODO implement here
-  }
 
 }

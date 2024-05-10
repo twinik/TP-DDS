@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 /**
  *
  */
-public class DonacionVianda {
+public class DonacionVianda extends Colaboracion{
 
   /**
    * Default constructor
@@ -14,10 +14,13 @@ public class DonacionVianda {
   public DonacionVianda() {
   }
 
+  public void efectuar() {
+
+  }
+
   /**
    *
    */
-  private Colaborador colaborador;
 
   /**
    *

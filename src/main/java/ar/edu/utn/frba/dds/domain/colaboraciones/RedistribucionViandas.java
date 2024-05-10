@@ -2,13 +2,17 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.*;
 
 /**
- *
+ * representa el movimiento de una vianda entre heladeras.
  */
-public class RedistribucionViandas {
+@Getter
+@AllArgsConstructor
+public class RedistribucionViandas extends Colaboracion{
 
   /**
    * Default constructor
@@ -16,34 +20,23 @@ public class RedistribucionViandas {
   public RedistribucionViandas() {
   }
 
-  /**
-   *
-   */
-  private Colaborador colaborador;
 
-  /**
-   *
-   */
+  public void efectuar() {
+
+  }
+
+
   private Heladera heladeraOrigen;
 
-  /**
-   *
-   */
   private Heladera heladeraDestino;
 
-  /**
-   *
-   */
+
   private Date fecha;
 
-  /**
-   *
-   */
-  private Date motivo;
 
-  /**
-   *
-   */
+  private MotivoRedistribucionVianda motivo;
+
+
   private Integer cantidad;
 
 }

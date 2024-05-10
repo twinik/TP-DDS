@@ -1,9 +1,15 @@
 package ar.edu.utn.frba.dds.domain.colaboradores;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import java.util.List;
+
 /**
  *
  */
-public enum TipoColaborador {
-  PERSONA_HUMANA,
-  PERSONA_JURIDICA
+@Getter
+@AllArgsConstructor
+public class TipoColaborador {
+    private TipoPersona tipo;
+    private List<FormaColaboracion> formasPosiblesColaboracion;
 }

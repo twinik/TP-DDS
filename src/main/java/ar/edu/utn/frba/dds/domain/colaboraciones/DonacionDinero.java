@@ -7,12 +7,17 @@ import java.util.*;
 /**
  *
  */
-public class DonacionDinero {
+public class DonacionDinero extends Colaboracion{
 
   /**
    * Default constructor
    */
   public DonacionDinero() {
+  }
+
+
+  public void efectuar() {
+
   }
 
   /**
@@ -28,7 +33,6 @@ public class DonacionDinero {
   /**
    *
    */
-  private Colaborador colaborador;
 
   /**
    *

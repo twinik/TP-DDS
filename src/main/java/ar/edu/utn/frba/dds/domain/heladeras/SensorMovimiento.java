@@ -1,10 +1,12 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
+import lombok.NoArgsConstructor;
 
 /**
  *
  */
+
 public class SensorMovimiento {
 
   /**

@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +19,7 @@ public class Tecnico {
 
   private TipoDocumento tipoDocumento;
 
-  private medioDeContacto medioContacto;
+  private List<medioDeContacto> medioContacto;
 
   private AreaDeCobertura areaDeCobertura;
 

@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 /**
  *
  */
-public class ColocacionHeladeras {
+public class ColocacionHeladeras extends Colaboracion{
 
   /**
    * Default constructor
@@ -14,10 +14,13 @@ public class ColocacionHeladeras {
   public ColocacionHeladeras() {
   }
 
+  public void efectuar() {
+
+  }
+
   /**
    *
    */
-  private Colaborador colaborador;
 
   /**
    *
