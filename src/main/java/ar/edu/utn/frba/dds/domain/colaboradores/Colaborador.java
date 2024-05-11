@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain.colaboradores;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.OfertaProducto;
+import ar.edu.utn.frba.dds.domain.colaboradores.form.Campo;
+import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -28,5 +30,12 @@ public class Colaborador {
     this.puntosGanados += puntos;
   }
 
+  public void restarPuntos(Float puntos) {
+    this.puntosGanados -= puntos;
+  }
+
+  public void completarCampo(RespuestaACampo respuesta) {
+    this.respuestas.agregarRespuestasACampo(respuesta);
+  }
 
 }

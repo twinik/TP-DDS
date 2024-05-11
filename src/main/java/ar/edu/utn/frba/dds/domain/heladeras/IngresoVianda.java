@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,8 +22,8 @@ public class IngresoVianda {
 
   private Heladera heladera;
 
-  public void donar() {
-    // TODO implement here
+  public List<DonacionVianda> donar() {
+    return this.viandas.stream().map(DonacionVianda::new).toList();
   }
 
 }

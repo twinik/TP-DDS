@@ -24,4 +24,6 @@ public class Tarjeta {
 
   private Date fechaAdjudicacion;
 
+  private Integer cantidadUsosDia; // TODO agregar cron job para reiniciarlos todos los dias a las 00hs
+
 }

@@ -7,10 +7,16 @@ import java.time.LocalDateTime;
 
 
 @Getter
-@AllArgsConstructor
 public class CanjeProducto {
   Colaborador comprador;
   OfertaProducto ofertaCanjeada;
-
   LocalDateTime fechaCanje;
+
+  public CanjeProducto(Colaborador comprador, OfertaProducto ofertaCanjeada, LocalDateTime fechaCanje) {
+    this.comprador = comprador;
+    this.ofertaCanjeada = ofertaCanjeada;
+    this.fechaCanje = fechaCanje;
+    // el chequeo de si tiene los puntos necesarios deberia hacerse antes. Si no se puede agregar aca y que tire una exception
+    comprador.restarPuntos(ofertaCanjeada.getPuntosNecesarios());
+  }
 }

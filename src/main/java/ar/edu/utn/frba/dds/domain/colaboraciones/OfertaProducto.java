@@ -21,7 +21,7 @@ public class OfertaProducto extends Colaboracion {
   private Producto producto;
 
 
-  private Integer puntosNecesarios;
+  private Float puntosNecesarios;
 
 
   private CategoriaOferta categoria;

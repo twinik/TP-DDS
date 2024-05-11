@@ -11,7 +11,8 @@ public class DonacionVianda extends Colaboracion{
   /**
    * Default constructor
    */
-  public DonacionVianda() {
+  public DonacionVianda(Vianda vianda) {
+    this.vianda = vianda;
   }
 
   @Override

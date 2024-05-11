@@ -12174,13 +12174,30 @@
 											"height": 13,
 											"text": "-fechaAdjudicacion: Date",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGPaD0+mZ9+J2k=",
+											"_parent": {
+												"$ref": "AAAAAAGPHCJAoN7WVOs="
+											},
+											"model": {
+												"$ref": "AAAAAAGPaD0+hp8zG/A="
+											},
+											"font": "Arial;13;0",
+											"left": 4037,
+											"top": 4120,
+											"width": 218.1279296875,
+											"height": 13,
+											"text": "-cantidadUsosDia: Integer",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 4032,
 									"top": 4025,
 									"width": 228.1279296875,
-									"height": 98
+									"height": 113
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -12193,7 +12210,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 4032,
-									"top": 4123,
+									"top": 4138,
 									"width": 228.1279296875,
 									"height": 10
 								},
@@ -12235,7 +12252,7 @@
 							"left": 4032,
 							"top": 4000,
 							"width": 227.1279296875,
-							"height": 133,
+							"height": 148,
 							"nameCompartment": {
 								"$ref": "AAAAAAGPHCJAoN7RpC8="
 							},
@@ -12690,6 +12707,7 @@
 											"model": {
 												"$ref": "AAAAAAGPSf6rtMkpLXE="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 4333,
 											"top": 4253,
@@ -12703,7 +12721,7 @@
 									"left": 4328,
 									"top": 4233,
 									"width": 278.71240234375,
-									"height": 38
+									"height": 23
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -12726,7 +12744,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 4333,
-											"top": 4276,
+											"top": 4261,
 											"width": 268.71240234375,
 											"height": 13,
 											"text": "+permiteUsar(tarjeta: Tarjeta): boolean",
@@ -12735,7 +12753,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 4328,
-									"top": 4271,
+									"top": 4256,
 									"width": 278.71240234375,
 									"height": 23
 								},
@@ -13667,7 +13685,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 4151,
-									"top": 4163,
+									"top": 4171,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -13688,7 +13706,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 4166,
-									"top": 4163,
+									"top": 4171,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -13709,7 +13727,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 4122,
-									"top": 4164,
+									"top": 4172,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -13730,7 +13748,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 4152,
-									"top": 4152,
+									"top": 4167,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -13751,7 +13769,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 4165,
-									"top": 4155,
+									"top": 4170,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -13771,7 +13789,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 4121,
-									"top": 4148,
+									"top": 4163,
 									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -13882,7 +13900,7 @@
 							"tail": {
 								"$ref": "AAAAAAGPHCJAoN7QLQo="
 							},
-							"points": "4137:4133;4137:4208",
+							"points": "4137:4148;4137:4208",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGPHC4yJxZTw6E="
@@ -16678,7 +16696,7 @@
 											"top": 3247,
 											"width": 371.36669921875,
 											"height": 13,
-											"text": "-puntosNecesarios: Integer",
+											"text": "-puntosNecesarios: Float",
 											"horizontalAlignment": 0
 										},
 										{
@@ -31264,6 +31282,16 @@
 							"name": "fechaAdjudicacion",
 							"visibility": "private",
 							"type": "Date"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGPaD0+hp8zG/A=",
+							"_parent": {
+								"$ref": "AAAAAAGPHCJAoN7OBMg="
+							},
+							"name": "cantidadUsosDia",
+							"visibility": "private",
+							"type": "Integer"
 						}
 					]
 				},
@@ -32316,7 +32344,7 @@
 							},
 							"name": "puntosNecesarios",
 							"visibility": "private",
-							"type": "Integer"
+							"type": "Float"
 						},
 						{
 							"_type": "UMLAttribute",
