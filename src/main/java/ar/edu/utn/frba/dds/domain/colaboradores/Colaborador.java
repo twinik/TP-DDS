@@ -1,10 +1,12 @@
 package ar.edu.utn.frba.dds.domain.colaboradores;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.Campo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
 import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,12 +28,18 @@ public class Colaborador {
 
   private Float puntosGanados;
 
+  private List<ColocacionHeladeras> heladerasColocadas;
+
   public void sumarPuntos(Float puntos) {
     this.puntosGanados += puntos;
   }
 
   public void restarPuntos(Float puntos) {
     this.puntosGanados -= puntos;
+  }
+
+  public void agregarColocacionHeladera(ColocacionHeladeras colocacion) {
+    this.heladerasColocadas.add(colocacion);
   }
 
   public void completarCampo(RespuestaACampo respuesta) {

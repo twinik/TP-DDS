@@ -9,6 +9,6 @@ public class CalculadorPuntosColocacionHeladera implements CalculadorDePuntos {
     //TODO
     // [CANTIDAD_HELADERAS_ACTIVAS] * [sumatoria MESES_ACTIVAS] * 5
     // esto no se puede calcular al momento de colocar la heladera por lo de los meses activa???
-    return (float) 0;
+    return (float) (colocacion.getMesesActiva() * 5);
   }
 }

@@ -2,11 +2,15 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
+import java.time.LocalDate;
 
 /**
  *
  */
-public class ColocacionHeladeras extends Colaboracion{
+public class ColocacionHeladeras extends Colaboracion {
+
+  private LocalDate fechaColocacion;
+  private Heladera heladera;
 
   /**
    * Default constructor
@@ -16,7 +20,14 @@ public class ColocacionHeladeras extends Colaboracion{
 
   @Override
   public void efectuar() {
-    super.efectuar();
+    this.colaborador.agregarColocacionHeladera(this);
+  }
+
+  public Integer getMesesActiva() {
+    LocalDate hoy = LocalDate.now();
+    Integer difAnios = hoy.getYear() - this.fechaColocacion.getYear();
+    Integer difMeses = hoy.getMonthValue() - this.fechaColocacion.getMonthValue();
+    return difAnios + difMeses;
   }
 
   /**
@@ -26,6 +37,6 @@ public class ColocacionHeladeras extends Colaboracion{
   /**
    *
    */
-  private Heladera heladera;
+
 
 }
