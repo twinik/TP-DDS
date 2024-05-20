@@ -12,11 +12,13 @@ public class CanjeProducto {
   OfertaProducto ofertaCanjeada;
   LocalDateTime fechaCanje;
 
-  public CanjeProducto(Colaborador comprador, OfertaProducto ofertaCanjeada, LocalDateTime fechaCanje) {
+  public CanjeProducto(Colaborador comprador, OfertaProducto ofertaCanjeada, LocalDateTime fechaCanje) throws PuntosInsuficientesException {
     this.comprador = comprador;
     this.ofertaCanjeada = ofertaCanjeada;
     this.fechaCanje = fechaCanje;
-    // el chequeo de si tiene los puntos necesarios deberia hacerse antes. Si no se puede agregar aca y que tire una exception
+    if (!ofertaCanjeada.puedeSerCanjeadoPor(comprador)) {
+      throw new PuntosInsuficientesException();
+    }
     comprador.restarPuntos(ofertaCanjeada.getPuntosNecesarios());
   }
 }
