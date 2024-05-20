@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion;
 
+import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class RecomendadorDePuntosDeColocacion {
 
   private static RecomendadorDePuntosDeColocacion instance = null;
-  private static final String API_URL = "usarconfig.com";
+  private static String API_URL = null;
   private Retrofit retrofit;
 
   public RecomendadorDePuntosDeColocacion() {
@@ -24,9 +25,10 @@ public class RecomendadorDePuntosDeColocacion {
         .build();
   }
 
-  public static RecomendadorDePuntosDeColocacion getInstance() {
+  public static RecomendadorDePuntosDeColocacion getInstance() throws IOException {
     if (instance == null) {
       instance = new RecomendadorDePuntosDeColocacion();
+      API_URL = new ConfigReader("api-recomendador-ubicaciones-config.properties").getProperty("API_URL");
     }
     return instance;
   }

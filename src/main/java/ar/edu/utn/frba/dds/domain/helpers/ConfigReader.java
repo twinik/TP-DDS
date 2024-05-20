@@ -7,8 +7,8 @@ import java.util.Properties;
 public class ConfigReader {
   private String filePath;
 
-  public ConfigReader() {
-    this.filePath = "validadorconfig.properties";
+  public ConfigReader(String filePath) {
+    this.filePath = filePath;
   }
 
   public Properties getProperties() throws IOException {

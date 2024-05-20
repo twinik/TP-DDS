@@ -21,7 +21,7 @@ public class ValidacionListaClavesNuevo extends Validacion {
 
   public ValidacionListaClavesNuevo() {
     this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias"));
-    this.config = new ConfigReader();
+    this.config = new ConfigReader("validadorconfig.properties");
     cargarPeoresContrasenias();
   }
 
