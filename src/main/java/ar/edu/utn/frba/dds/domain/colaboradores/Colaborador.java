@@ -31,6 +31,7 @@ public class Colaborador {
   private Float puntosGanados;
 
   private List<ColocacionHeladeras> heladerasColocadas;
+
   public void sumarPuntos(Float puntos) {
     this.puntosGanados += puntos;
   }

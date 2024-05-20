@@ -13,27 +13,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HeladeraTest {
-
   ColocacionHeladeras donacion;
   CalculadorDePuntos calculador;
-
   Colaborador colaborador;
+
   @BeforeEach
-  void test_init(){
+  void test_init() {
     colaborador = new Colaborador();
-    donacion = new ColocacionHeladeras(new Heladera(LocalDate.of(2023,1,1)));
+    donacion = new ColocacionHeladeras(new Heladera(LocalDate.of(2023, 1, 1)));
     colaborador.setHeladerasColocadas(new ArrayList<>());
     colaborador.agregarColocacionHeladera(donacion);
     calculador = new CalculadorPuntosColocacionHeladera();
   }
 
-
   @Test
   @DisplayName("activa desde octubre del 23")
   void validarPuntosAcumuladosHeladera() {
-    Assertions.assertEquals(16,donacion.getMesesActiva());
-    Assertions.assertEquals(80,calculador.calcularPuntos(donacion));
+    Assertions.assertEquals(16, donacion.getMesesActiva());
+    Assertions.assertEquals(80, calculador.calcularPuntos(donacion));
   }
-
-
 }
