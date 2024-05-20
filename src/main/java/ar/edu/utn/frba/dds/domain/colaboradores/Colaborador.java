@@ -9,11 +9,13 @@ import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Colaborador {
 
   private Usuario usuario;
@@ -29,7 +31,6 @@ public class Colaborador {
   private Float puntosGanados;
 
   private List<ColocacionHeladeras> heladerasColocadas;
-
   public void sumarPuntos(Float puntos) {
     this.puntosGanados += puntos;
   }

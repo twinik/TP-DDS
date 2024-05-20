@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Getter
@@ -21,7 +22,7 @@ public class Heladera {
 
   private Integer capacidadViandas;
 
-  private Date fechaPuestaFuncionamiento;
+  private LocalDate fechaPuestaFuncionamiento;
 
   private List<Vianda> viandas;
 
@@ -32,6 +33,10 @@ public class Heladera {
   private SensorTemperatura sensorTemp;
 
   private SensorMovimiento sensorMov;
+
+  public Heladera(LocalDate fecha) {
+    this.fechaPuestaFuncionamiento = fecha;
+  }
 
   public void agregarVianda(Vianda vianda) {
     this.viandas.add(vianda);
