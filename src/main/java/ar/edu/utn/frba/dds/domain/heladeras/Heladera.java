@@ -43,7 +43,7 @@ public class Heladera {
   }
 
   public void verificarTemperatura() {
-    if (this.sensorTemp.getUtlimaTempRegistrada() > this.tempMax || this.sensorTemp.getUtlimaTempRegistrada() > this.tempMin) {
+    if (this.sensorTemp.getUtlimaTempRegistrada() > this.tempMax || this.sensorTemp.getUtlimaTempRegistrada() < this.tempMin) {
       System.console().printf("La temperatura esta fuera del rango aceptable!\n");
     }
   }

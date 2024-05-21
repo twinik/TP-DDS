@@ -11,7 +11,6 @@ import java.util.*;
 @AllArgsConstructor
 public class Usuario {
 
-
   private String usuario;
 
   private String clave;

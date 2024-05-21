@@ -11,7 +11,6 @@ import java.util.Date;
 public class AltaPersonaVulnerable extends Colaboracion {
   private PersonaVulnerable persona;
   private Tarjeta tarjeta;
-
   private Date fechaAlta;
 
   @Override

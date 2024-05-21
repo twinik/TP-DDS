@@ -10,14 +10,9 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 public class Direccion {
-
-
-    private String calle;
-
-    private Integer altura;
-
-    private Integer piso;
-
-    private Integer codigoPostal;
+  private String calle;
+  private Integer altura;
+  private Integer piso;
+  private Integer codigoPostal;
 
 }

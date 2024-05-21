@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.TipoPersona;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -12,24 +13,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class OfertaProducto extends Colaboracion {
-
-  /**
-   * Default constructor
-   */
-  public OfertaProducto() {
-  }
-
   private Producto producto;
-
-
   private Float puntosNecesarios;
-
-
   private CategoriaOferta categoria;
 
-
-  public void efectuar() {
-  }
+  public void efectuar() {}
 
   public boolean puedeSerCanjeadoPor(Colaborador colaborador){
     if (colaborador.getTipoColaborador().getTipo().equals(TipoPersona.PERSONA_JURIDICA)) {

@@ -16,6 +16,7 @@ public class HeladeraTest {
   ColocacionHeladeras donacion;
   CalculadorDePuntos calculador;
   Colaborador colaborador;
+  Heladera heladera;
 
   @BeforeEach
   void test_init() {
@@ -24,6 +25,7 @@ public class HeladeraTest {
     colaborador.setHeladerasColocadas(new ArrayList<>());
     colaborador.agregarColocacionHeladera(donacion);
     calculador = new CalculadorPuntosColocacionHeladera();
+    heladera = new Heladera(LocalDate.of(2023, 10, 23));
   }
 
   @Test
@@ -32,4 +34,5 @@ public class HeladeraTest {
     Assertions.assertEquals(16, donacion.getMesesActiva());
     Assertions.assertEquals(80, calculador.calcularPuntos(donacion));
   }
+
 }

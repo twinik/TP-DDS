@@ -12,19 +12,15 @@ import java.util.*;
 @Setter
 @Getter
 public class CargadorDeColaboraciones {
+  private CSVReaderAdapter csvReader;
+  private MailSenderAdapter mailSender;
 
-  /**
-   * Default constructor
-   */
-  public CargadorDeColaboraciones() {
+  public CargadorDeColaboraciones(CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter) {
+    this.csvReader = csvReader;
+    this.mailSender = mailAdapter;
   }
 
-  /**
-   *
-   */
-  private CsvReaderAdapter csvReaderAdapter;
 
-  private MailSenderAdapter mailSenderAdapter;
 
   /**
    * @param path

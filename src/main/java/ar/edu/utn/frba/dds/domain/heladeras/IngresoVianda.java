@@ -11,7 +11,6 @@ import java.util.*;
 @AllArgsConstructor
 public class IngresoVianda {
 
-
   private Date fechaDonacion;
 
   private Colaborador colaborador;

@@ -10,9 +10,7 @@ import java.util.*;
 @Getter
 @AllArgsConstructor
 public class UsoTarjeta {
-
   private LocalDateTime fechaUso;
-
   private Heladera heladera;
 
 }

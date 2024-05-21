@@ -11,8 +11,8 @@ import java.util.*;
 @Getter
 public class medioDeContacto {
 
-
   private CanalContacto canal;
+
   private String contacto;
 
 }

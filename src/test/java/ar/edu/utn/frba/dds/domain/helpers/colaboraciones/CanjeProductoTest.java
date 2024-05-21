@@ -1,13 +1,16 @@
 package ar.edu.utn.frba.dds.domain.helpers.colaboraciones;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.CategoriaOferta;
+import ar.edu.utn.frba.dds.domain.colaboraciones.Producto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboraciones.CanjeProducto;
 import ar.edu.utn.frba.dds.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.domain.colaboraciones.PuntosInsuficientesException;
+import ar.edu.utn.frba.dds.domain.colaboradores.TipoColaborador;
+import ar.edu.utn.frba.dds.domain.colaboradores.TipoPersona;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 
@@ -16,42 +19,38 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class CanjeProductoTest {
+
   private static final LocalDateTime FECHA_CANJE = LocalDateTime.now();
   private static final float PUNTOS_NECESARIOS = 100.0f;
 
   private Colaborador comprador;
   private OfertaProducto ofertaCanjeada;
-  private CanjeProducto canjeProducto;
 
   @BeforeEach
   void setUp() {
-    comprador = Mockito.mock(Colaborador.class);
-    ofertaCanjeada = Mockito.mock(OfertaProducto.class);
+    comprador = new Colaborador();
+    comprador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_HUMANA, null));
+    comprador.setPuntosGanados((float) 0);
+    ofertaCanjeada = new OfertaProducto(new Producto(), PUNTOS_NECESARIOS, CategoriaOferta.ELECTRONICA);
   }
 
   @Test
-  @DisplayName("Canje producto exitoso")
+  @DisplayName("Canje de producto exitoso")
   void testCanjeProductoExitoso() throws PuntosInsuficientesException {
-    when(ofertaCanjeada.puedeSerCanjeadoPor(comprador)).thenReturn(true);
-    when(ofertaCanjeada.getPuntosNecesarios()).thenReturn(PUNTOS_NECESARIOS);
+    comprador.sumarPuntos(PUNTOS_NECESARIOS);
+    CanjeProducto canjeProducto = new CanjeProducto(comprador, ofertaCanjeada, FECHA_CANJE);
 
-    canjeProducto = new CanjeProducto(comprador, ofertaCanjeada, FECHA_CANJE);
-
-    assertEquals(comprador, canjeProducto.getComprador());
-    assertEquals(ofertaCanjeada, canjeProducto.getOfertaCanjeada());
-    assertEquals(FECHA_CANJE, canjeProducto.getFechaCanje());
-    verify(comprador).restarPuntos(PUNTOS_NECESARIOS);
+    assertEquals(0, comprador.getPuntosGanados());
   }
 
   @Test
-  @DisplayName("Canje producto con puntos insuficientes")
+  @DisplayName("Canje de producto fallido por puntos insuficientes")
   void testCanjeProductoConPuntosInsuficientes() {
-    when(ofertaCanjeada.puedeSerCanjeadoPor(comprador)).thenReturn(false);
+    comprador.sumarPuntos(PUNTOS_NECESARIOS - 1);
 
     assertThrows(PuntosInsuficientesException.class, () ->
         new CanjeProducto(comprador, ofertaCanjeada, FECHA_CANJE)
     );
-
-    verify(comprador, never()).restarPuntos(anyFloat());
+    assertEquals(PUNTOS_NECESARIOS - 1, comprador.getPuntosGanados());
   }
 }

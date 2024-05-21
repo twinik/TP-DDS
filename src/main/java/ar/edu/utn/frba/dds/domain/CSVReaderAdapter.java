@@ -5,7 +5,7 @@ import java.util.*;
 /**
  *
  */
-public interface CsvReaderAdapter {
+public interface CSVReaderAdapter {
 
   /**
    * @param path

@@ -14,7 +14,6 @@ public class DateHelper {
     int anios = periodo.getYears();
     int meses = periodo.getMonths();
 
-
     return anios * 12 + meses;
   }
 

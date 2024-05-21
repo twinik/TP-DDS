@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SensorTemperatura {
 
-
   private Float utlimaTempRegistrada;
 
   public void registrarTemperatura(Float temp) {

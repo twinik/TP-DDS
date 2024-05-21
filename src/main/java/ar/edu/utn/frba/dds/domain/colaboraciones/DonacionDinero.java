@@ -11,20 +11,7 @@ import java.util.*;
  */
 @Getter
 @AllArgsConstructor
-public class DonacionDinero extends Colaboracion{
-
-  /**
-   * Default constructor
-   */
-  public DonacionDinero() {
-  }
-
-
-  @Override
-  public void efectuar() {
-    super.efectuar();
-  }
-
+public class DonacionDinero extends Colaboracion {
   /**
    *
    */
@@ -38,10 +25,18 @@ public class DonacionDinero extends Colaboracion{
   /**
    *
    */
+  private Date fecha;
 
   /**
-   *
+   * Default constructor
    */
-  private Date fecha;
+  public DonacionDinero() {
+  }
+
+
+  @Override
+  public void efectuar() {
+    super.efectuar();
+  }
 
 }

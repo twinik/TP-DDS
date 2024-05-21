@@ -9,6 +9,7 @@ import lombok.Getter;
 public class AreaDeCobertura {
 
   private Direccion referencia;
+
   private Float radioDeCoberturaEnKM;
 
 }
