@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.colaboraciones;
+package ar.edu.utn.frba.dds.domain.colaboraciones.utils;
 
 public class PuntosInsuficientesException extends Exception {
   public PuntosInsuficientesException() {

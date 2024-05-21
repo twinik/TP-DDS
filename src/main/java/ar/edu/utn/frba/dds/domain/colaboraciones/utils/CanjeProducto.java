@@ -1,7 +1,7 @@
-package ar.edu.utn.frba.dds.domain.colaboraciones;
+package ar.edu.utn.frba.dds.domain.colaboraciones.utils;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.time.LocalDateTime;
 

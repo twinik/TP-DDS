@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.colaboraciones;
+package ar.edu.utn.frba.dds.domain.colaboraciones.utils;
 
 /**
  * tipos de categoria.

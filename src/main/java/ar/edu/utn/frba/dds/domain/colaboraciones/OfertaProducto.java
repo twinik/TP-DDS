@@ -1,10 +1,11 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.CategoriaOferta;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.TipoPersona;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 
 /**

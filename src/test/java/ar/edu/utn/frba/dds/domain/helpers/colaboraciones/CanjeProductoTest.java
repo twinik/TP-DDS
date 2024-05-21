@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.domain.helpers.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.CategoriaOferta;
-import ar.edu.utn.frba.dds.domain.colaboraciones.Producto;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.CategoriaOferta;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.colaboraciones.CanjeProducto;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.CanjeProducto;
 import ar.edu.utn.frba.dds.domain.colaboraciones.OfertaProducto;
-import ar.edu.utn.frba.dds.domain.colaboraciones.PuntosInsuficientesException;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.PuntosInsuficientesException;
 import ar.edu.utn.frba.dds.domain.colaboradores.TipoColaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.TipoPersona;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 
 class CanjeProductoTest {
 

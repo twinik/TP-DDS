@@ -1,9 +1,10 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -25,7 +26,7 @@ public class DonacionDinero extends Colaboracion {
   /**
    *
    */
-  private Date fecha;
+  private LocalDate fecha;
 
   /**
    * Default constructor

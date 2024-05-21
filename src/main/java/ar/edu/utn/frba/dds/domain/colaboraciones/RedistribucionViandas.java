@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
