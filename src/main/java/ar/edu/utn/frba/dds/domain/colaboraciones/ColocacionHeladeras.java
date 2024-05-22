@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosColocacionHeladera;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
@@ -18,6 +20,12 @@ public class ColocacionHeladeras extends Colaboracion {
    * Default constructor
    */
   public ColocacionHeladeras() {
+    this.calculadorDePuntos = new CalculadorPuntosColocacionHeladera();
+  }
+
+  public ColocacionHeladeras(Colaborador colaborador, Heladera heladera) {
+    super(colaborador, new CalculadorPuntosColocacionHeladera(), heladera.getFechaPuestaFuncionamiento());
+    this.heladera = heladera;
   }
 
   @Override
@@ -28,14 +36,5 @@ public class ColocacionHeladeras extends Colaboracion {
   public Integer getMesesActiva() {
     return DateHelper.mesesEntre(this.heladera.getFechaPuestaFuncionamiento(), LocalDate.now());
   }
-
-  /**
-   *
-   */
-
-  /**
-   *
-   */
-
 
 }

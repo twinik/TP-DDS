@@ -4,11 +4,14 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import java.time.LocalDate;
 
 /**
  *
  */
 @Getter
+@Setter
 @AllArgsConstructor
 public abstract class Colaboracion {
 
@@ -23,7 +26,9 @@ public abstract class Colaboracion {
    */
   protected Colaborador colaborador;
 
-  private CalculadorDePuntos calculadorDePuntos;
+  protected CalculadorDePuntos calculadorDePuntos;
+
+  protected LocalDate fecha;
 
   /**
    *

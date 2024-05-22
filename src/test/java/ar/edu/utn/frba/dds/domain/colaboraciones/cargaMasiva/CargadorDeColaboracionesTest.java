@@ -16,7 +16,7 @@ class CargadorDeColaboracionesTest {
     CargaColaboracion carga = new CargaColaboracion();
     carga.setFormaColaboracion("DINERO");
     carga.setJsonColaboracion(json);
-    DonacionDinero donacion = (DonacionDinero) new CargadorDeColaboraciones().colaboracionFromCarga(carga);
+    DonacionDinero donacion = (DonacionDinero) CargaToColaboracionMapper.colaboracionFromCarga(carga);
     assertEquals(10000, donacion.getMonto());
     assertEquals(FrecuenciaDonacion.DIARIA, donacion.getFrecuencia());
     assertEquals(LocalDate.of(2018, 12, 9), donacion.getFecha());

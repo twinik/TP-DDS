@@ -13,7 +13,7 @@ public class MailSenderTest {
   @BeforeEach
   void setUp() {
     email = new MyEmail("grupo7ddsutn@gmail.com", "gturri@frba.utn.edu.ar", "Hola Gon desde TP DDS", "Cuerpo del correo");
-    mailSender = new MailSender("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");
+    mailSender = MailSender.getInstance();
   }
 
   @Test

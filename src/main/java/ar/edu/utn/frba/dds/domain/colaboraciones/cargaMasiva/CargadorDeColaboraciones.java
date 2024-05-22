@@ -5,10 +5,18 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.Colaboracion;
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.helpers.LocalDateTypeAdapter;
+import ar.edu.utn.frba.dds.domain.helpers.PasswordGenerator;
 import ar.edu.utn.frba.dds.domain.utils.FormaColaboracionMapper;
+import ar.edu.utn.frba.dds.domain.utils.MailSender;
 import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
+import ar.edu.utn.frba.dds.domain.utils.MyEmail;
+import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Getter;
@@ -29,7 +37,8 @@ public class CargadorDeColaboraciones {
   private String filePath;
   private String separator;
 
-  public CargadorDeColaboraciones() {}
+  public CargadorDeColaboraciones() {
+  }
 
   public CargadorDeColaboraciones(CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter) throws IOException {
     this.csvReader = csvReader;
@@ -47,36 +56,46 @@ public class CargadorDeColaboraciones {
     ArrayList<Colaboracion> colaboraciones = new ArrayList<Colaboracion>();
 
     for (Object reg : registros) {
-      CargaColaboracion cargaColaboracion = (CargaColaboracion) reg;
+      CargaColaboracion carga = (CargaColaboracion) reg;
 
-      colaboraciones.add(colaboracionFromCarga(cargaColaboracion));
+      Colaboracion colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga);
 
-      //TODO: chequear si el colaborador no tiene usuario (repository?) => mandar mail
+      TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
+
+      ColaboradorRepository colaboradoresRepo = ColaboradorRepository.getInstance();
+      Optional<Colaborador> colaboradorOption = colaboradoresRepo.buscar(
+          tipoDoc,
+          carga.getDocumento());
+
+      Colaborador colaborador;
+
+      if (colaboradorOption.isEmpty()) {
+        String claveGenerada = PasswordGenerator.generatePassword();
+        Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
+        Colaborador nuevoColaborador = new Colaborador();
+        nuevoColaborador.setUsuario(nuevoUsuario);
+
+        // TODO: todo esto deberia salir de algun archivo de configuracion
+        MyEmail email = new MyEmail("grupo7ddsutn@gmail.com",
+            carga.getMail(),
+            "Acceso a cuenta de colaborador",
+            "Hola, gracias por colaborar, aca dejamos la clave para acceder a tu cuenta, recomendamos acceder a la pagina y cambiarla inmediatamente por una personal.\nClave: " + claveGenerada);
+        MailSender.getInstance().enviarMail(email);
+        colaborador = nuevoColaborador;
+        colaboradoresRepo.guardar(colaborador);
+      } else {
+        colaborador = colaboradorOption.get();
+      }
+
+      colaboracion.setColaborador(colaborador);
+
+      for(int i = 0; i < carga.getCantidad(); i++){
+        colaboraciones.add(colaboracion);
+        colaboracion.efectuar();
+      }
+
     }
     return colaboraciones;
-  }
-
-  public Colaboracion colaboracionFromCarga(CargaColaboracion carga) {
-
-    Gson gson = new GsonBuilder()
-        .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
-        .create();
-
-    switch (FormaColaboracionMapper.obtenerFormaColaboracion(carga.getFormaColaboracion())) {
-      case DONACION_DINERO -> {
-        return gson.fromJson(carga.getJsonColaboracion(), DonacionDinero.class);
-      }
-      case DONACION_VIANDA -> {
-        return gson.fromJson(carga.getJsonColaboracion(), DonacionVianda.class);
-      }
-      case REDISTRIBUCION_VIANDA -> {
-        return gson.fromJson(carga.getJsonColaboracion(), RedistribucionViandas.class);
-      }
-      case REGISTRO_PERSONA -> {
-        return gson.fromJson(carga.getJsonColaboracion(), AltaPersonaVulnerable.class);
-      }
-      default -> throw new RuntimeException("Forma de Colaboracion Invalida");
-    }
   }
 
 }

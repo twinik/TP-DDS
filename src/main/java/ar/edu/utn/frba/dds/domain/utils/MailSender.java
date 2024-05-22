@@ -6,10 +6,18 @@ import com.sendgrid.helpers.mail.objects.Email;
 import java.io.IOException;
 
 public class MailSender implements MailSenderAdapter{
-  private String apiKey;
+  private static String apiKey;
+  private static MailSender instance = null;
 
-  public MailSender(String apiKey) {
-    this.apiKey = apiKey;
+  public static MailSender getInstance(){
+    if(instance == null){
+      instance = new MailSender();
+    }
+    return instance;
+  }
+
+  public MailSender() {
+    apiKey = "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"; //TODO sacar de un config file
   }
 
   @Override
