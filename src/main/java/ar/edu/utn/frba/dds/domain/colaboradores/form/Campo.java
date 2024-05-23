@@ -1,15 +1,19 @@
 package ar.edu.utn.frba.dds.domain.colaboradores.form;
 
-import lombok.AllArgsConstructor;
+import java.util.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
-
+/**
+ * Campo class permite representar un campo de un formulario.
+ */
 @Getter
 @Setter
 public class Campo {
 
+  /**
+   * Campo class constructor.
+   */
   public Campo(TipoCampo tipo, String pregunta, boolean obligatorio) {
     this.tipo = tipo;
     this.pregunta = pregunta;

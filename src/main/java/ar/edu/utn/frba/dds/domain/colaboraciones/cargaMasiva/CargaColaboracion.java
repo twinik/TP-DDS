@@ -1,9 +1,12 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
 
+/**
+ * CargaColaboracion class representa una carga de colaboracion.
+ */
 @Getter
 @Setter
 public class CargaColaboracion {

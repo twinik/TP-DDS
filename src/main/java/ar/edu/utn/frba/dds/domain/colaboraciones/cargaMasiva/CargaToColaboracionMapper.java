@@ -11,7 +11,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.time.LocalDate;
 
+/**
+ * CargaToColaboracionMapper class se encarga de mapear una carga a una colaboracion.
+ */
 public class CargaToColaboracionMapper {
+
+  /**
+   * colaboracionFromCarga mapea una carga a una colaboracion.
+   */
   public static Colaboracion colaboracionFromCarga(CargaColaboracion carga) {
 
     Gson gson = new GsonBuilder()

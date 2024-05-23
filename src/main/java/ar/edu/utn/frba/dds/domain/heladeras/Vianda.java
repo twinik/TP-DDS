@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/**
+ * Vianda class permite representar una vianda.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

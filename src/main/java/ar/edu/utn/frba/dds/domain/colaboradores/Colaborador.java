@@ -3,13 +3,15 @@ package ar.edu.utn.frba.dds.domain.colaboradores;
 import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
-import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Colaborador class permite representar un colaborador.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

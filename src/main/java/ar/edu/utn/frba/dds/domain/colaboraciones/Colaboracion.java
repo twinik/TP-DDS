@@ -2,13 +2,14 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
+
 
 /**
- *
+ * Colaboracion class representa una colaboracion de un colaborador.
  */
 @Getter
 @Setter
@@ -16,13 +17,13 @@ import java.time.LocalDate;
 public abstract class Colaboracion {
 
   /**
-   * Default constructor
+   * Constructor por defecto.
    */
   public Colaboracion() {
   }
 
   /**
-   *
+   * Atributos de la clase Colaboracion.
    */
   protected Colaborador colaborador;
 
@@ -31,7 +32,8 @@ public abstract class Colaboracion {
   protected LocalDate fecha;
 
   /**
-   *
+   * Metodo abstracto efectuar que se implementa en las clases hijas de Colaboracion.
+   * Su funcion es sumar puntos al colaborador.
    */
   public void efectuar() {
     this.colaborador.sumarPuntos(this.calculadorDePuntos.calcularPuntos(this));

@@ -1,11 +1,12 @@
 package ar.edu.utn.frba.dds.domain.colaboradores.form;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.form.Campo;
+import java.util.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
-
+/**
+ * Formulario class permite representar un formulario.
+ */
 @Getter
 @Setter
 public class Formulario {

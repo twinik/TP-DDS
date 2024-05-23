@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/**
+ * SensorTemperatura class permite representar un sensor de temperatura.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

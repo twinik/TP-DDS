@@ -1,29 +1,31 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import lombok.AllArgsConstructor;
+import java.time.LocalDate;
 import lombok.Getter;
 
-import java.time.LocalDate;
-import java.util.*;
+
 
 /**
- * representa el movimiento de una vianda entre heladeras.
+ * RedistribucionViandas class representa una colaboracion de un colaborador.
+ * Representa el movimiento de una vianda entre heladeras.
  */
 @Getter
 public class RedistribucionViandas extends Colaboracion {
 
   /**
-   * Default constructor
+   * Constructor por defecto.
    */
   public RedistribucionViandas() {
     this.calculadorDePuntos = new CalculadorPuntosRedistribucionVianda();
   }
 
+  /**
+   * Constructor con parametros.
+   */
   public RedistribucionViandas(Heladera heladeraOrigen, Heladera heladeraDestino, LocalDate fecha, MotivoRedistribucionVianda motivo, Integer cantidad) {
     this.calculadorDePuntos = new CalculadorPuntosRedistribucionVianda();
     this.heladeraOrigen = heladeraOrigen;
@@ -33,6 +35,9 @@ public class RedistribucionViandas extends Colaboracion {
     this.cantidad = cantidad;
   }
 
+  /**
+   * Constructor con parametros.
+   */
   public RedistribucionViandas(Colaborador colaborador, Heladera heladeraOrigen, Heladera heladeraDestino, LocalDate fecha, MotivoRedistribucionVianda motivo, Integer cantidad) {
     super(colaborador, new CalculadorPuntosRedistribucionVianda(), fecha);
     this.heladeraOrigen = heladeraOrigen;
@@ -41,6 +46,9 @@ public class RedistribucionViandas extends Colaboracion {
     this.cantidad = cantidad;
   }
 
+  /**
+   * Metodo efectuar que se encarga de sumar puntos al colaborador.
+   */
   @Override
   public void efectuar() {
     super.efectuar();

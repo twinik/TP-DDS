@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
-
+/**
+ * Opcion class permite representar una opcion de un campo de un formulario.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

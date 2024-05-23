@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboradores.form;
 
 /**
- *
+ * TipoCampo enum permite representar los tipos de campos que puede tener un formulario.
  */
 public enum TipoCampo {
   LIBRE,

@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CargaColaboracionCsvReader class lee un archivo csv de colaboraciones.
+ */
 public class CargaColaboracionCsvReader implements CSVReaderAdapter {
   @Override
   public List<Object> readCsv(String path, String separator) throws IOException {

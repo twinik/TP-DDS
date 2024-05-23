@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
-
+/**
+ * Usuario class permite representar un usuario.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

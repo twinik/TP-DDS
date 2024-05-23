@@ -1,33 +1,23 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.AltaPersonaVulnerable;
 import ar.edu.utn.frba.dds.domain.colaboraciones.Colaboracion;
-import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
-import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
-import ar.edu.utn.frba.dds.domain.helpers.LocalDateTypeAdapter;
 import ar.edu.utn.frba.dds.domain.helpers.PasswordGenerator;
-import ar.edu.utn.frba.dds.domain.utils.FormaColaboracionMapper;
 import ar.edu.utn.frba.dds.domain.utils.MailSender;
 import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
 import ar.edu.utn.frba.dds.domain.utils.MyEmail;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.io.IOException;
+import java.util.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.*;
-
 /**
- *
+ * CargadorDeColaboraciones class se encarga de cargar colaboraciones.
  */
 @Setter
 @Getter
@@ -40,6 +30,9 @@ public class CargadorDeColaboraciones {
   public CargadorDeColaboraciones() {
   }
 
+  /**
+   * Constructor con parametros.
+   */
   public CargadorDeColaboraciones(CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter) throws IOException {
     this.csvReader = csvReader;
     this.mailSender = mailAdapter;
@@ -48,12 +41,12 @@ public class CargadorDeColaboraciones {
   }
 
   /**
-   *
+   * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
    */
   public List<Colaboracion> cargarColaboraciones() throws IOException {
     List<Object> registros = csvReader.readCsv(filePath, separator);
 
-    ArrayList<Colaboracion> colaboraciones = new ArrayList<Colaboracion>();
+    ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
 
     for (Object reg : registros) {
       CargaColaboracion carga = (CargaColaboracion) reg;
@@ -89,7 +82,7 @@ public class CargadorDeColaboraciones {
 
       colaboracion.setColaborador(colaborador);
 
-      for(int i = 0; i < carga.getCantidad(); i++){
+      for (int i = 0; i < carga.getCantidad(); i++) {
         colaboraciones.add(colaboracion);
         colaboracion.efectuar();
       }

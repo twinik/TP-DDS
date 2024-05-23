@@ -1,23 +1,15 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import lombok.NoArgsConstructor;
-
 /**
- *
+ * SensorMovimiento class permite representar un sensor de movimiento.
  */
-
 public class SensorMovimiento {
-
   /**
-   * Default constructor
+   * Default constructor.
    */
   public SensorMovimiento() {
   }
 
-  /**
-   * @param heladera
-   */
   public void alertarRobo(Heladera heladera) {
     // TODO implement here
   }
