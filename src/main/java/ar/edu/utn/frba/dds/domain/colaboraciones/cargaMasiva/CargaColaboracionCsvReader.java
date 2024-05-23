@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
+
 import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,6 +12,8 @@ import java.util.List;
  * CargaColaboracionCsvReader class lee un archivo csv de colaboraciones.
  */
 public class CargaColaboracionCsvReader implements CSVReaderAdapter {
+
+
   @Override
   public List<Object> readCsv(String path, String separator) throws IOException {
     List<Object> registros = new ArrayList<>();

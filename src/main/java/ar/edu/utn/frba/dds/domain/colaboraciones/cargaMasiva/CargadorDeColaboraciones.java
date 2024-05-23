@@ -26,7 +26,6 @@ public class CargadorDeColaboraciones {
   private MailSenderAdapter mailSender;
   private String filePath;
   private String separator;
-
   public CargadorDeColaboraciones() {
   }
 
@@ -44,6 +43,7 @@ public class CargadorDeColaboraciones {
    * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
    */
   public List<Colaboracion> cargarColaboraciones() throws IOException {
+    ConfigReader config = new ConfigReader("mail-sender.properties");
     List<Object> registros = csvReader.readCsv(filePath, separator);
 
     ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
@@ -69,10 +69,10 @@ public class CargadorDeColaboraciones {
         nuevoColaborador.setUsuario(nuevoUsuario);
 
         // TODO: todo esto deberia salir de algun archivo de configuracion
-        MyEmail email = new MyEmail("grupo7ddsutn@gmail.com",
+        MyEmail email = new MyEmail(config.getProperty("MAIL-DIR"),
             carga.getMail(),
-            "Acceso a cuenta de colaborador",
-            "Hola, gracias por colaborar, aca dejamos la clave para acceder a tu cuenta, recomendamos acceder a la pagina y cambiarla inmediatamente por una personal.\nClave: " + claveGenerada);
+            config.getProperty("ASUNTO"),
+            config.getProperty("CUERPO") + claveGenerada);
         MailSender.getInstance().enviarMail(email);
         colaborador = nuevoColaborador;
         colaboradoresRepo.guardar(colaborador);

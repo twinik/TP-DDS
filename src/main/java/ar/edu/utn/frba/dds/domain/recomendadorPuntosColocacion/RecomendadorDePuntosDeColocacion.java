@@ -18,7 +18,7 @@ public class RecomendadorDePuntosDeColocacion {
   private static String API_URL = null;
   private Retrofit retrofit;
 
-  public RecomendadorDePuntosDeColocacion() {
+  private RecomendadorDePuntosDeColocacion() {
     this.retrofit = new Retrofit.Builder()
         .baseUrl(API_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -27,8 +27,8 @@ public class RecomendadorDePuntosDeColocacion {
 
   public static RecomendadorDePuntosDeColocacion getInstance() throws IOException {
     if (instance == null) {
-      instance = new RecomendadorDePuntosDeColocacion();
       API_URL = new ConfigReader("api-recomendador-ubicaciones-config.properties").getProperty("API_URL");
+      instance = new RecomendadorDePuntosDeColocacion();
     }
     return instance;
   }

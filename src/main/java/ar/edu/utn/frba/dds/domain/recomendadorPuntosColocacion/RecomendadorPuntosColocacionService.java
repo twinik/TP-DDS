@@ -7,6 +7,6 @@ import retrofit2.http.Query;
 import java.util.ArrayList;
 
 public interface RecomendadorPuntosColocacionService {
-  @GET()
+  @GET("/puntos")
   Call<ListadoUbicaciones> puntosRecomendados(@Query("latitud") float latitud, @Query("longitud") float longitud, @Query("radio") float radio);
 }
