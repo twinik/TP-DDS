@@ -34,5 +34,4 @@ public class HeladeraTest {
     Assertions.assertEquals(16, donacion.getMesesActiva());
     Assertions.assertEquals(80, calculador.calcularPuntos(donacion));
   }
-
 }

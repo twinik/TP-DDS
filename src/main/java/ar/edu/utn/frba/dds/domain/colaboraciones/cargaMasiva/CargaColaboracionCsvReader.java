@@ -1,39 +1,48 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
-
 import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * CargaColaboracionCsvReader class lee un archivo csv de colaboraciones.
  */
 public class CargaColaboracionCsvReader implements CSVReaderAdapter {
 
-
   @Override
-  public List<Object> readCsv(String path, String separator) throws IOException {
+  public List<Object> readCsv(String path, String separator) {
     List<Object> registros = new ArrayList<>();
-    BufferedReader br = new BufferedReader(new FileReader(path));
-    String line;
-    while ((line = br.readLine()) != null) {
-      String[] values = line.split(separator, 9);
-      CargaColaboracion cargaColaboracion = new CargaColaboracion();
+    try (Scanner scanner = new Scanner(new File(path))) {
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] values = line.split(separator);
+        if (values.length < 9) {
+          // Log error: Incorrect number of fields
+          continue;
+        }
 
-      cargaColaboracion.setTipoDocumento(values[0]);
-      cargaColaboracion.setDocumento(Integer.valueOf(values[1]));
-      cargaColaboracion.setNombre(values[2]);
-      cargaColaboracion.setApellido(values[3]);
-      cargaColaboracion.setMail(values[4]);
-      cargaColaboracion.setFechaColaboracion(DateHelper.fechaFromString(values[5], "dd/MM/yyyy"));
-      cargaColaboracion.setFormaColaboracion(values[6]);
-      cargaColaboracion.setCantidad(Integer.valueOf(values[7]));
-      cargaColaboracion.setJsonColaboracion(values[8]);
+        CargaColaboracion cargaColaboracion = new CargaColaboracion();
+        try {
+          cargaColaboracion.setTipoDocumento(values[0]);
+          cargaColaboracion.setDocumento(Integer.valueOf(values[1]));
+          cargaColaboracion.setNombre(values[2]);
+          cargaColaboracion.setApellido(values[3]);
+          cargaColaboracion.setMail(values[4]);
+          cargaColaboracion.setFechaColaboracion(DateHelper.fechaFromString(values[5], "dd/MM/yyyy"));
+          cargaColaboracion.setFormaColaboracion(values[6]);
+          cargaColaboracion.setCantidad(Integer.valueOf(values[7]));
+          cargaColaboracion.setJsonColaboracion(values[8]);
 
-      registros.add(cargaColaboracion);
+          registros.add(cargaColaboracion);
+        } catch (NumberFormatException e) {
+          System.err.println("Error al parsear un número en la línea: " + line);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException("Archivo de colaboraciones no encontrado", e);
     }
     return registros;
   }
