@@ -4,6 +4,9 @@ import ar.edu.utn.frba.dds.domain.helpers.MotivoNoValido;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * ValidacionLargoClaves class permite representar una validacion de largo de claves.
+ */
 @NoArgsConstructor
 public class ValidacionLargoClaves extends Validacion {
   @Getter
@@ -14,7 +17,9 @@ public class ValidacionLargoClaves extends Validacion {
   private boolean esMuyCorta(String contrasena) {
     boolean result = contrasena.length() < LONGITUD_MINIMA;
     if (result) {
-      this.setMotivo(new MotivoNoValido("La contrasena es muy corta, debe tener como minimo " + LONGITUD_MINIMA + " caracteres."));
+      this.setMotivo(new MotivoNoValido("La contrasena es muy corta, debe tener como minimo "
+          + LONGITUD_MINIMA
+          + " caracteres."));
     }
     return result;
   }

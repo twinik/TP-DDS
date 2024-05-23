@@ -5,10 +5,17 @@ import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * IColaboradorRepository interface permite interactuar con los colaboradores.
+ */
 public interface IColaboradorRepository {
   Optional<Colaborador> buscar(TipoDocumento tipoDocumento, Integer documento);
+
   List<Colaborador> buscarTodos();
+
   void guardar(Colaborador colaborador);
+
   void actualizar(Colaborador colaborador);
+
   void eliminar(Colaborador colaborador);
 }

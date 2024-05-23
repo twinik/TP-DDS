@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
-
+/**
+ * Direccion class permite representar una direccion.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

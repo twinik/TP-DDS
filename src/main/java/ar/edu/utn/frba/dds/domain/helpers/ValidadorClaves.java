@@ -6,14 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import lombok.Getter;
 
-
-
-
 /**
  * Representa el validador de las contrasenias.
  */
-
-
 public class ValidadorClaves {
 
   private List<Validacion> validaciones;
@@ -33,6 +28,9 @@ public class ValidadorClaves {
     Collections.addAll(this.validaciones, validaciones);
   }
 
+  /**
+   * Valida la contrasenia.
+   */
   public boolean esValida(String contrasena) {
     for (Validacion v : validaciones) {
       if (!v.validar(contrasena)) {

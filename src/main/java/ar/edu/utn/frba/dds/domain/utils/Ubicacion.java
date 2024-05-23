@@ -3,8 +3,9 @@ package ar.edu.utn.frba.dds.domain.utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.*;
-
+/**
+ * Ubicacion class permite representar una ubicacion.
+ */
 @AllArgsConstructor
 @Getter
 public class Ubicacion {

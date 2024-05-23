@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.tarjetas;
 
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
+import java.util.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,15 +10,15 @@ import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.util.*;
-
+/**
+ * Tarjeta class permite representar una tarjeta.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,6 +39,9 @@ public class Tarjeta {
   private Integer cantidadUsosDia;
   // CRON JOB string (todos los dias a las 00:00hs): "0 0 0 1/1 * ? *"
 
+  /**
+   * Constructor de Tarjeta.
+   */
   public Tarjeta(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Date fechaAdjudicacion, Integer cantidadUsosDia) {
     this.codigo = codigo;
     this.nroUsos = nroUsos;
@@ -65,10 +69,12 @@ public class Tarjeta {
     }
   }
 
+  /**
+   * Resetea la cantidad de usos del dia.
+   */
   public class ResetarUsosDia implements Job {
-    public void execute(JobExecutionContext context) throws JobExecutionException {
+    public void execute(JobExecutionContext context) {
       cantidadUsosDia = 0;
     }
   }
-
 }

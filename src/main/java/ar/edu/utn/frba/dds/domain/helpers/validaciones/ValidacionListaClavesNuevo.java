@@ -2,9 +2,6 @@ package ar.edu.utn.frba.dds.domain.helpers.validaciones;
 
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.helpers.MotivoNoValido;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,13 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * ValidacionListaClavesNuevo class permite representar una validacion de lista de claves.
+ */
 public class ValidacionListaClavesNuevo extends Validacion {
 
   private List<String> peoresContrasenias = new ArrayList<>();
   private ConfigReader config;
 
 
+  /**
+   * Constructor.
+   */
   public ValidacionListaClavesNuevo() {
     this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias"));
     this.config = new ConfigReader("validadorconfig.properties");

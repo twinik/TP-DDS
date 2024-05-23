@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Crea un validador de tipo owasp.
+ * ValidadorOwaspFactory class permite crear un validador de tipo owasp.
  */
 public class ValidadorOwaspFactory implements ValidadorFactory {
 
   /**
-   * Crea un validador de tipo owasp.
+   * Constructor.
    */
   public ValidadorClaves crearValidador() {
     List<Validacion> estrategias = new ArrayList<>();

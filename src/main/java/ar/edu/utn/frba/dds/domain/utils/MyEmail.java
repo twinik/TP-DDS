@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * MyEmail class permite representar un email.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

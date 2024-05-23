@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * ConfigReader class permite leer un archivo de configuracion.
+ */
 public class ConfigReader {
   private String filePath;
 
@@ -11,6 +14,9 @@ public class ConfigReader {
     this.filePath = filePath;
   }
 
+  /**
+   * Lee un archivo de configuracion.
+   */
   public Properties getProperties() throws IOException {
     Properties prop = new Properties();
     try (InputStream input = getClass().getClassLoader().getResourceAsStream(filePath)) {

@@ -8,9 +8,11 @@ import lombok.Setter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.*;
 
+/**
+ * PersonaVulnerable class permite representar una persona vulnerable.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

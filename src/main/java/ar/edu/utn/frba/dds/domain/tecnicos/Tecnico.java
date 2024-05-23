@@ -1,11 +1,14 @@
 package ar.edu.utn.frba.dds.domain.tecnicos;
 
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.List;
 
+/**
+ * Tecnico class permite representar un tecnico.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

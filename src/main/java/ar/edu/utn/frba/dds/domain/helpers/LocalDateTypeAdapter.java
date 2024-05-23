@@ -11,6 +11,9 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * LocalDateTypeAdapter class permite adaptar un LocalDate a un formato Json.
+ */
 public class LocalDateTypeAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
 
   private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -3,10 +3,15 @@ package ar.edu.utn.frba.dds.domain.helpers;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
+/**
+ * DateHelper class permite realizar operaciones con fechas.
+ */
 public class DateHelper {
 
+  /**
+   * Constructor.
+   */
   public static int mesesEntre(LocalDate fechaInicio, LocalDate fechaFin) {
     if (fechaInicio.isAfter(fechaFin)) {
       throw new IllegalArgumentException("fecha inicio mas tardia que la fecha final");
@@ -19,6 +24,9 @@ public class DateHelper {
     return anios * 12 + meses;
   }
 
+  /**
+   * fechaFromString method permite convertir un string a una fecha.
+   */
   public static LocalDate fechaFromString(String fecha, String pattern) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
     LocalDate date = LocalDate.parse(fecha, formatter);

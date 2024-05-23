@@ -1,14 +1,11 @@
 package ar.edu.utn.frba.dds.domain.tarjetas;
 
-import ar.edu.utn.frba.dds.domain.tarjetas.FrecuenciaUso;
-import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.util.Date;
-
+/**
+ * FrecuenciaDiaria class permite representar la frecuencia de uso diaria.
+ */
 @Getter
 @Setter
 public class FrecuenciaDiaria implements FrecuenciaUso {

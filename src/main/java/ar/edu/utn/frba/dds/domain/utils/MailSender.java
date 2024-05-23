@@ -5,12 +5,19 @@ import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import java.io.IOException;
 
-public class MailSender implements MailSenderAdapter{
+/**
+ * MailSender class permite enviar un mail.
+ */
+public class MailSender implements MailSenderAdapter {
   private static String apiKey;
   private static MailSender instance = null;
 
-  public static MailSender getInstance(){
-    if(instance == null){
+  /**
+   * getInstance method permite obtener una instancia de MailSender.
+   */
+
+  public static MailSender getInstance() {
+    if (instance == null) {
       instance = new MailSender();
     }
     return instance;

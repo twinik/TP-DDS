@@ -7,10 +7,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
- *
+ * RecomendadorDePuntosDeColocacion class permite recomendar puntos de colocacion.
  */
 public class RecomendadorDePuntosDeColocacion {
 
@@ -34,9 +33,7 @@ public class RecomendadorDePuntosDeColocacion {
   }
 
   /**
-   * @param punto
-   * @param radio
-   * @return
+   * Recomienda una ubicacion.
    */
   public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) throws IOException {
     RecomendadorPuntosColocacionService service = this.retrofit.create(RecomendadorPuntosColocacionService.class);

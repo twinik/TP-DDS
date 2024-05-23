@@ -1,19 +1,24 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.repositories.IColaboradorRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * ColaboradorRepository class permite interactuar con los colaboradores.
+ */
 public class ColaboradorRepository implements IColaboradorRepository {
 
   private List<Colaborador> colaboradores;
 
   private static ColaboradorRepository instance = null;
 
+  /**
+   * getInstance method permite obtener una instancia de ColaboradorRepository.
+   */
   public static ColaboradorRepository getInstance() {
     if (instance == null) {
       instance = new ColaboradorRepository();

@@ -4,6 +4,9 @@ import ar.edu.utn.frba.dds.domain.helpers.MotivoNoValido;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Validacion abstract class permite representar una validacion.
+ */
 @Getter
 @Setter
 public abstract class Validacion {

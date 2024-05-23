@@ -2,10 +2,9 @@ package ar.edu.utn.frba.dds.domain.tecnicos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import java.util.*;
 
 /**
- *
+ * medioDeContacto class permite representar un medio de contacto.
  */
 @AllArgsConstructor
 @Getter
