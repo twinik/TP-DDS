@@ -27,9 +27,7 @@ class CargadorDeColaboracionesTest {
   @BeforeEach
   void setUp() throws IOException {
     csvReader = new CargaColaboracionCsvReader();
-    MockedStatic<MailSender> mocked = mockStatic(MailSender.class); // esto es para poder usar Mockito con un singleton
     mailSender = mock(MailSender.class);
-    mocked.when(MailSender::getInstance).thenReturn(mailSender);
     doNothing().when(mailSender).enviarMail(any());
     cargador = new CargadorDeColaboraciones(csvReader, mailSender);
   }

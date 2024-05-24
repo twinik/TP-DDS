@@ -74,7 +74,7 @@ public class CargadorDeColaboraciones {
             carga.getMail(),
             config.getProperty("ASUNTO"),
             config.getProperty("CUERPO") + claveGenerada);
-        MailSender.getInstance().enviarMail(email);
+        mailSender.enviarMail(email);
         colaborador = nuevoColaborador;
         colaboradoresRepo.guardar(colaborador);
       } else {

@@ -10,20 +10,8 @@ import java.io.IOException;
  */
 public class MailSender implements MailSenderAdapter {
   private static String apiKey;
-  private static MailSender instance = null;
 
-  /**
-   * getInstance method permite obtener una instancia de MailSender.
-   */
-
-  public static MailSender getInstance() {
-    if (instance == null) {
-      instance = new MailSender();
-    }
-    return instance;
-  }
-
-  private MailSender() {
+  public MailSender() {
     apiKey = "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"; //TODO sacar de un config file
   }
 
