@@ -5,10 +5,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.utils.MailSender;
+import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,6 +49,8 @@ class CargadorDeColaboracionesTest {
   @Test
   @DisplayName("Carga de colaboraciones")
   void cargarColaboraciones() throws IOException {
-    assertEquals(7, cargador.cargarColaboraciones().size());
+    assertEquals(19, cargador.cargarColaboraciones().size());
+    assertEquals(3, ColaboradorRepository.getInstance().buscarTodos().size());
+    verify(mailSender, times(3)).enviarMail(any());
   }
 }
