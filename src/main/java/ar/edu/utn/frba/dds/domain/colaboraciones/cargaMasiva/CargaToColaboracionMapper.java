@@ -5,11 +5,13 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.Colaboracion;
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
+import ar.edu.utn.frba.dds.domain.helpers.LocalDateTimeTypeAdapter;
 import ar.edu.utn.frba.dds.domain.helpers.LocalDateTypeAdapter;
 import ar.edu.utn.frba.dds.domain.utils.FormaColaboracionMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * CargaToColaboracionMapper class se encarga de mapear una carga a una colaboracion.
@@ -23,6 +25,7 @@ public class CargaToColaboracionMapper {
 
     Gson gson = new GsonBuilder()
         .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
         .create();
 
     switch (FormaColaboracionMapper.obtenerFormaColaboracion(carga.getFormaColaboracion())) {

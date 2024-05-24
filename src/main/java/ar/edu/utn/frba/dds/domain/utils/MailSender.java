@@ -23,7 +23,7 @@ public class MailSender implements MailSenderAdapter {
     return instance;
   }
 
-  public MailSender() {
+  private MailSender() {
     apiKey = "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"; //TODO sacar de un config file
   }
 
@@ -37,16 +37,18 @@ public class MailSender implements MailSenderAdapter {
 
     SendGrid sg = new SendGrid(apiKey);
     Request request = new Request();
-    try {
-      request.setMethod(Method.POST);
-      request.setEndpoint("mail/send");
-      request.setBody(mail.build());
-      Response response = sg.api(request);
-      System.out.println("Status Code: " + response.getStatusCode());
-      System.out.println("Body: " + response.getBody());
-      System.out.println("Headers: " + response.getHeaders());
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    System.out.println("ENTRO AL COSO");
+
+//    try {
+//      request.setMethod(Method.POST);
+//      request.setEndpoint("mail/send");
+//      request.setBody(mail.build());
+//      Response response = sg.api(request);
+//      System.out.println("Status Code: " + response.getStatusCode());
+//      System.out.println("Body: " + response.getBody());
+//      System.out.println("Headers: " + response.getHeaders());
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
   }
 }
