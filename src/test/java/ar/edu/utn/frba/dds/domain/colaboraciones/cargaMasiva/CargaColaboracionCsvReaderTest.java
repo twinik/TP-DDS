@@ -31,6 +31,7 @@ class CargaColaboracionCsvReaderTest {
     void readCsv() {
       List<Object> registros = cargaColaboracionCsvReader.readCsv(path, separator);
       assertFalse(registros.isEmpty(), "La lista de registros no debería estar vacía");
+      assertEquals(7, registros.size(), "La lista de registros debería tener 7 elementos");
     }
 
 }

@@ -26,6 +26,7 @@ public class CargadorDeColaboraciones {
   private MailSenderAdapter mailSender;
   private String filePath;
   private String separator;
+
   public CargadorDeColaboraciones() {
   }
 
@@ -68,7 +69,6 @@ public class CargadorDeColaboraciones {
         Colaborador nuevoColaborador = new Colaborador();
         nuevoColaborador.setUsuario(nuevoUsuario);
 
-        // TODO: todo esto deberia salir de algun archivo de configuracion
         MyEmail email = new MyEmail(config.getProperty("MAIL-DIR"),
             carga.getMail(),
             config.getProperty("ASUNTO"),

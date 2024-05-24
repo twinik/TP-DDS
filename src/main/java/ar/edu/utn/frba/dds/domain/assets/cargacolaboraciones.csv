@@ -4,4 +4,4 @@ DNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,REDISTRIBUCION_VIANDAS,1,{"
 DNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,ENTREGA_TARJETAS,3,{"fecha":"12/12/2023"}
 LC,12345,Johnas,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDAS,10,{"vianda":{"fechaDonacion":"12/12/2023"}}
 LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDAS,1,{"vianda":{"fechaDonacion":"12/12/2023"}}
-LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}
+LE,12345,John,Doe,twinik@frba.utn.edu.ar,22/05/2024,DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}
