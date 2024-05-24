@@ -16,7 +16,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class DonacionDinero extends Colaboracion {
-
   private Float monto;
   private FrecuenciaDonacion frecuencia;
 

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import lombok.Getter;
 
 
-
 /**
  * RedistribucionViandas class representa una colaboracion de un colaborador.
  * Representa el movimiento de una vianda entre heladeras.
@@ -22,6 +21,10 @@ public class RedistribucionViandas extends Colaboracion {
   public RedistribucionViandas() {
     this.calculadorDePuntos = new CalculadorPuntosRedistribucionVianda();
   }
+  private Heladera heladeraOrigen;
+  private Heladera heladeraDestino;
+  private MotivoRedistribucionVianda motivo;
+  private Integer cantidad;
 
   /**
    * Constructor con parametros.
@@ -54,15 +57,5 @@ public class RedistribucionViandas extends Colaboracion {
     super.efectuar();
   }
 
-
-  private Heladera heladeraOrigen;
-
-  private Heladera heladeraDestino;
-
-
-  private MotivoRedistribucionVianda motivo;
-
-
-  private Integer cantidad;
 
 }

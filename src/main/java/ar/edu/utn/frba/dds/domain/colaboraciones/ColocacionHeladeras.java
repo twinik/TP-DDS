@@ -7,14 +7,12 @@ import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 
-
 /**
  * ColocacionHeladeras class representa una colaboracion de un colaborador.
  * Consiste en colocar una heladera en un establecimiento.
  */
 @AllArgsConstructor
 public class ColocacionHeladeras extends Colaboracion {
-
   private Heladera heladera;
 
   /**

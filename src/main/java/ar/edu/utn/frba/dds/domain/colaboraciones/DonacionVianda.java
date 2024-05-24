@@ -8,7 +8,6 @@ import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
  * Consiste en donar viandas.
  */
 public class DonacionVianda extends Colaboracion {
-
   private Vianda vianda;
 
   /**

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
-
 /**
  * AltaPersonaVulnerable class representa una colaboracion de un colaborador.
  * Consiste en dar de alta a una persona vulnerable.

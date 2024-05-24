@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-
 /**
  * Colaboracion class representa una colaboracion de un colaborador.
  */
@@ -15,6 +14,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public abstract class Colaboracion {
+  protected Colaborador colaborador;
+  protected CalculadorDePuntos calculadorDePuntos;
+  protected LocalDate fecha;
 
   /**
    * Constructor por defecto.
@@ -23,21 +25,11 @@ public abstract class Colaboracion {
   }
 
   /**
-   * Atributos de la clase Colaboracion.
-   */
-  protected Colaborador colaborador;
-
-  protected CalculadorDePuntos calculadorDePuntos;
-
-  protected LocalDate fecha;
-
-  /**
    * Metodo abstracto efectuar que se implementa en las clases hijas de Colaboracion.
    * Su funcion es sumar puntos al colaborador.
    */
   public void efectuar() {
     this.colaborador.sumarPuntos(this.calculadorDePuntos.calcularPuntos(this));
   }
-
 
 }

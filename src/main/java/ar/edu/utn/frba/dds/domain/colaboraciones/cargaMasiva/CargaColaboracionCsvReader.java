@@ -18,7 +18,7 @@ public class CargaColaboracionCsvReader implements CSVReaderAdapter {
     try (Scanner scanner = new Scanner(new File(path))) {
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
-        String[] values = line.split(separator);
+        String[] values = line.split(separator, 9);
         if (values.length < 9) {
           // Log error: Incorrect number of fields
           continue;

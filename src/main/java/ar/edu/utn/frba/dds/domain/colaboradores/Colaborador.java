@@ -24,7 +24,7 @@ public class Colaborador {
 
   private RespuestaFormulario respuestas;
 
-  private Float puntosGanados;
+  private Float puntosGanados = 0f;
 
   private List<ColocacionHeladeras> heladerasColocadas;
 
