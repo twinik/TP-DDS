@@ -64,6 +64,7 @@ public class CargadorDeColaboraciones {
       Colaborador colaborador;
 
       if (colaboradorOption.isEmpty()) {
+        //TODO: mover esta logica a algun metodo privado
         String claveGenerada = PasswordGenerator.generatePassword();
         Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
         Colaborador nuevoColaborador = new Colaborador();

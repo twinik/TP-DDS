@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.helpers.colaboraciones;
+package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos;

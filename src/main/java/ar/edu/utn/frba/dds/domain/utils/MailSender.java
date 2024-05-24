@@ -37,18 +37,17 @@ public class MailSender implements MailSenderAdapter {
 
     SendGrid sg = new SendGrid(apiKey);
     Request request = new Request();
-    System.out.println("ENTRO AL COSO");
 
-//    try {
-//      request.setMethod(Method.POST);
-//      request.setEndpoint("mail/send");
-//      request.setBody(mail.build());
-//      Response response = sg.api(request);
-//      System.out.println("Status Code: " + response.getStatusCode());
-//      System.out.println("Body: " + response.getBody());
-//      System.out.println("Headers: " + response.getHeaders());
-//    } catch (IOException e) {
-//      throw new RuntimeException(e);
-//    }
+    try {
+      request.setMethod(Method.POST);
+      request.setEndpoint("mail/send");
+      request.setBody(mail.build());
+      Response response = sg.api(request);
+      System.out.println("Status Code: " + response.getStatusCode());
+      System.out.println("Body: " + response.getBody());
+      System.out.println("Headers: " + response.getHeaders());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
