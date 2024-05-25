@@ -8,6 +8,6 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.Colaboracion;
 public class CalculadorPuntosDonacionVianda implements CalculadorDePuntos {
   public Float calcularPuntos(Colaboracion colaboracion) {
     // suma 1 por cada vianda distribuida
-    return (float) 1;
+    return (float) 1.5;
   }
 }
