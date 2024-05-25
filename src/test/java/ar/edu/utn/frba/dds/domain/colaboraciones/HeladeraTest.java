@@ -14,24 +14,21 @@ import java.util.ArrayList;
 
 public class HeladeraTest {
   ColocacionHeladeras donacion;
-  CalculadorDePuntos calculador;
   Colaborador colaborador;
-  Heladera heladera;
 
   @BeforeEach
   void test_init() {
     colaborador = new Colaborador();
-    donacion = new ColocacionHeladeras(new Heladera(LocalDate.of(2023, 1, 1)));
+    donacion = new ColocacionHeladeras(colaborador,new Heladera(LocalDate.of(2023, 1, 1)));
     colaborador.setHeladerasColocadas(new ArrayList<>());
-    colaborador.agregarColocacionHeladera(donacion);
-    calculador = new CalculadorPuntosColocacionHeladera();
-    heladera = new Heladera(LocalDate.of(2023, 10, 23));
+    donacion.efectuar();
   }
 
   @Test
   @DisplayName("activa desde octubre del 23")
   void validarPuntosAcumuladosHeladera() {
+    // este test va a empezar a fallar el mes que viene xd
     Assertions.assertEquals(16, donacion.getMesesActiva());
-    Assertions.assertEquals(80, calculador.calcularPuntos(donacion));
+    Assertions.assertEquals(80, donacion.calculadorDePuntos.calcularPuntos(donacion));
   }
 }

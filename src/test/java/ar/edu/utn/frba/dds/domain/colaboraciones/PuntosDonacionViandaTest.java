@@ -29,11 +29,8 @@ public class PuntosDonacionViandaTest {
         colaborador = new Colaborador();
         vianda_1 = new Vianda("Pollo",  new GregorianCalendar(1990, Calendar.AUGUST, 4).getTime(),LocalDate.of(2024, 4, 5),colaborador, heladera,300, (int) 0.5, true);
         vianda_2 = new Vianda("Carne",  new GregorianCalendar(1991, Calendar.AUGUST, 4).getTime(),LocalDate.of(2024, 5, 5),colaborador, heladera,300, (int) 0.4, true);
-        donacion_1 = new DonacionVianda(vianda_1);
-        donacion_2 = new DonacionVianda(vianda_2);
-        calculador = new CalculadorPuntosDonacionVianda();
-        donacion_1.setCalculadorDePuntos(calculador);
-        donacion_2.setCalculadorDePuntos(calculador);
+        donacion_1 = new DonacionVianda(vianda_1,colaborador);
+        donacion_2 = new DonacionVianda(vianda_2,colaborador);
     }
 
     @Test

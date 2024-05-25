@@ -20,20 +20,16 @@ public class PuntosViandasDistribuidasTest {
     Colaborador colaborador;
     RedistribucionViandas donacion_1, donacion_2;
     Heladera heladera_1,heladera_2;
-    CalculadorDePuntos calculador;
 
     @BeforeEach
     void test_init(){
         colaborador = new Colaborador();
         donacion_1 = new RedistribucionViandas(colaborador, heladera_1, heladera_2, LocalDate.of(2023, 2 ,4),new MotivoRedistribucionVianda("Llegaron viandas nuevas"),10);
         donacion_2 = new RedistribucionViandas(colaborador, heladera_1, heladera_2, LocalDate.of(2023, 4 ,3),new MotivoRedistribucionVianda("Llegaron viandas nuevas"),5);
-        calculador = new CalculadorPuntosAltaPersona();
-        donacion_1.setCalculadorDePuntos(calculador);
-        donacion_2.setCalculadorDePuntos(calculador);
     }
 
     @Test
-    @DisplayName("Se repartieron 2 tarjetas y se obtuvieron 4 puntos")
+    @DisplayName("redistribui 15 viandas")
     void validarPuntosAcumuladosPersonaVulnerable() {
         donacion_1.efectuar();
         donacion_2.efectuar();

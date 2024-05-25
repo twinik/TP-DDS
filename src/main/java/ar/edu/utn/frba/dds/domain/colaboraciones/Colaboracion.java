@@ -24,6 +24,7 @@ public abstract class Colaboracion {
   public Colaboracion() {
   }
 
+
   /**
    * Metodo abstracto efectuar que se implementa en las clases hijas de Colaboracion.
    * Su funcion es sumar puntos al colaborador.

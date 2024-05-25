@@ -24,7 +24,7 @@ public class IngresoVianda {
   private Heladera heladera;
 
   public List<DonacionVianda> donar() {
-    return this.viandas.stream().map(DonacionVianda::new).toList();
+    return this.viandas.stream().map(vianda -> new DonacionVianda(vianda, this.colaborador)).toList();
   }
 
 }

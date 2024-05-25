@@ -17,7 +17,6 @@ import java.util.GregorianCalendar;
 
 public class PuntosAltaPersonaVulnerableTest {
     AltaPersonaVulnerable donacion_1, donacion_2;
-    CalculadorDePuntos calculador;
     Colaborador colaborador;
     PersonaVulnerable personaVulnerable_1, personaVulnerable_2;
     Tarjeta tarjeta_1, tarjeta_2;
@@ -29,9 +28,6 @@ public class PuntosAltaPersonaVulnerableTest {
         personaVulnerable_2 = new PersonaVulnerable("Jaime", new GregorianCalendar(1995, Calendar.AUGUST, 8).getTime(),  new GregorianCalendar(2005, Calendar.AUGUST, 2).getTime(), true, "Monte Grande", TipoDocumento.DNI, "45419967", colaborador, null);
         donacion_1 = new AltaPersonaVulnerable(colaborador, personaVulnerable_1, tarjeta_1, LocalDate.of(2023, 1, 1));
         donacion_2 = new AltaPersonaVulnerable(colaborador, personaVulnerable_2, tarjeta_2, LocalDate.of(2024, 4, 5));
-        calculador = new CalculadorPuntosAltaPersona();
-        donacion_1.setCalculadorDePuntos(calculador);
-        donacion_2.setCalculadorDePuntos(calculador);
     }
 
     @Test
