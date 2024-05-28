@@ -11,22 +11,20 @@ import lombok.Getter;
  */
 @Getter
 public class CanjeProducto {
-  Colaborador comprador;
-  OfertaProducto ofertaCanjeada;
-  LocalDateTime fechaCanje;
+  private Colaborador comprador;
+  private OfertaProducto ofertaCanjeada;
+  private LocalDateTime fechaCanje;
+  private float puntosGastados;
 
   /**
    * Constructor con parametros.
    */
   public CanjeProducto(Colaborador comprador,
                        OfertaProducto ofertaCanjeada,
-                       LocalDateTime fechaCanje) throws PuntosInsuficientesException {
+                       LocalDateTime fechaCanje, float puntosGastados) {
     this.comprador = comprador;
     this.ofertaCanjeada = ofertaCanjeada;
     this.fechaCanje = fechaCanje;
-    if (!ofertaCanjeada.puedeSerCanjeadoPor(comprador)) {
-      throw new PuntosInsuficientesException();
-    }
-    comprador.restarPuntos(ofertaCanjeada.getPuntosNecesarios());
+    this.puntosGastados = puntosGastados;
   }
 }

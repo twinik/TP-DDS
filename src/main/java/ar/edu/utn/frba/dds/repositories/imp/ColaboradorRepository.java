@@ -13,18 +13,9 @@ import java.util.Optional;
 public class ColaboradorRepository implements IColaboradorRepository {
 
   private List<Colaborador> colaboradores;
-
-  private static ColaboradorRepository instance = null;
-
   /**
    * getInstance method permite obtener una instancia de ColaboradorRepository.
    */
-  public static ColaboradorRepository getInstance() {
-    if (instance == null) {
-      instance = new ColaboradorRepository();
-    }
-    return instance;
-  }
 
   public ColaboradorRepository() {
     colaboradores = new ArrayList<Colaborador>();

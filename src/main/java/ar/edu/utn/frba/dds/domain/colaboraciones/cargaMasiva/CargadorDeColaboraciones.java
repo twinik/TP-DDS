@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.helpers.PasswordGenerator;
-import ar.edu.utn.frba.dds.domain.utils.MailSender;
 import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
 import ar.edu.utn.frba.dds.domain.utils.MyEmail;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
@@ -26,18 +25,21 @@ public class CargadorDeColaboraciones {
   private MailSenderAdapter mailSender;
   private String filePath;
   private String separator;
+  private ColaboradorRepository colaboradoRepository;
 
   public CargadorDeColaboraciones() {
+
   }
 
   /**
    * Constructor con parametros.
    */
-  public CargadorDeColaboraciones(CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter) throws IOException {
+  public CargadorDeColaboraciones(CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradorRepository respository) throws IOException {
     this.csvReader = csvReader;
     this.mailSender = mailAdapter;
     this.filePath = new ConfigReader("cargacolaboraciones.properties").getProperty("cargadorColaboracionesFilePath");
     this.separator = new ConfigReader("cargacolaboraciones.properties").getProperty("separator");
+    this.colaboradoRepository = respository;
   }
 
   /**
@@ -56,8 +58,7 @@ public class CargadorDeColaboraciones {
 
       TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
 
-      ColaboradorRepository colaboradoresRepo = ColaboradorRepository.getInstance();
-      Optional<Colaborador> colaboradorOption = colaboradoresRepo.buscar(
+      Optional<Colaborador> colaboradorOption = colaboradoRepository.buscar(
           tipoDoc,
           carga.getDocumento());
 
@@ -65,7 +66,7 @@ public class CargadorDeColaboraciones {
 
       if (colaboradorOption.isEmpty()) {
         //TODO: mover esta logica a algun metodo privado
-        String claveGenerada = PasswordGenerator.generatePassword();
+        String claveGenerada = PasswordGenerator.generatePassword(20); //config
         Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
         Colaborador nuevoColaborador = new Colaborador();
         nuevoColaborador.setUsuario(nuevoUsuario);
@@ -76,7 +77,7 @@ public class CargadorDeColaboraciones {
             config.getProperty("CUERPO") + claveGenerada);
         mailSender.enviarMail(email);
         colaborador = nuevoColaborador;
-        colaboradoresRepo.guardar(colaborador);
+        colaboradoRepository.guardar(colaborador);
       } else {
         colaborador = colaboradorOption.get();
       }
@@ -85,7 +86,7 @@ public class CargadorDeColaboraciones {
 
       for (int i = 0; i < carga.getCantidad(); i++) {
         colaboraciones.add(colaboracion);
-        colaboracion.efectuar();
+        colaborador.sumarPuntos(colaboracion.getCalculadorDePuntos().calcularPuntos(colaboracion));
       }
 
     }
