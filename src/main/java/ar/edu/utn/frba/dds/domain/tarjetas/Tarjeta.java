@@ -47,37 +47,11 @@ public class Tarjeta {
     this.duenio = duenio;
     this.fechaAdjudicacion = fechaAdjudicacion;
     this.cantidadUsosDia = 0;
-
-    try {
-      Trigger trigger = TriggerBuilder.newTrigger()
-          .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0 1/1 * ? *"))
-          .build();
-
-      JobDetail job = JobBuilder.newJob(ResetarUsosDia.class)
-          .build();
-
-      Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-
-      scheduler.scheduleJob(job, trigger);
-
-      scheduler.start();
-    } catch (SchedulerException e) {
-      System.console().printf("Error al crear cron job en Tarjeta: %s", e.getMessage());
-    }
   }
 
   public void agregarUsos() {
     this.cantidadUsosDia++;
     this.nroUsos++;
-  }
-
-  /**
-   * Resetea la cantidad de usos del dia.
-   */
-  public class ResetarUsosDia implements Job {
-    public void execute(JobExecutionContext context) {
-      cantidadUsosDia = 0;
-    }
   }
 
 }

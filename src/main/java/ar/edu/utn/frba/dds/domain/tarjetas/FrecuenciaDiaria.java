@@ -20,7 +20,7 @@ public class FrecuenciaDiaria extends FrecuenciaUso {
 
   public boolean frecuenciaValida(Tarjeta tarjeta) {
     Integer usosTotalesPermitidos = MAXIMOS_USOS_BASE + tarjeta.getDuenio().cantidadMenores() * 2;
-    return tarjeta.isActiva() && tarjeta.getCantidadUsosDia() < usosTotalesPermitidos;
+    return tarjeta.isActiva() && tarjeta.getCantidadUsosDia() <= usosTotalesPermitidos;
   }
 
 }

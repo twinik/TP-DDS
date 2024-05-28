@@ -31,11 +31,11 @@ public class CargadorDeColaboraciones {
   /**
    * Constructor con parametros.
    */
-  public CargadorDeColaboraciones(CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradorRepository respository) throws IOException {
+  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradorRepository respository) throws IOException {
     this.config = new ConfigReader("config.properties");
     this.csvReader = csvReader;
     this.mailSender = mailAdapter;
-    this.filePath = config.getProperty("cargadorColaboracionesFilePath");
+    this.filePath = filePath;
     this.separator = config.getProperty("separator");
     this.colaboradoRepository = respository;
   }
@@ -50,26 +50,13 @@ public class CargadorDeColaboraciones {
     for (Object reg : registros) {
       CargaColaboracion carga = (CargaColaboracion) reg;
       Colaboracion colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga);
-      TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
       Optional<Colaborador> colaboradorOption = colaboradoRepository.buscar(
-          tipoDoc,
+          new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
           carga.getDocumento());
       Colaborador colaborador;
 
       if (colaboradorOption.isEmpty()) {
-        //TODO: mover esta logica a algun metodo privado
-        String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
-        Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
-        Colaborador nuevoColaborador = new Colaborador();
-        nuevoColaborador.setUsuario(nuevoUsuario);
-
-        MyEmail email = new MyEmail(config.getProperty("MAIL-DIR"),
-            carga.getMail(),
-            config.getProperty("ASUNTO"),
-            config.getProperty("CUERPO") + claveGenerada);
-        mailSender.enviarMail(email);
-        colaborador = nuevoColaborador;
-        colaboradoRepository.guardar(colaborador);
+        colaborador = crearUsuarioColaboradorNoRegistrado(carga, config);
       } else {
         colaborador = colaboradorOption.get();
       }
@@ -83,6 +70,28 @@ public class CargadorDeColaboraciones {
 
     }
     return colaboraciones;
+  }
+
+  private Colaborador crearUsuarioColaboradorNoRegistrado(CargaColaboracion carga, ConfigReader config) {
+    try {
+      TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
+      String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
+      Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
+      Colaborador nuevoColaborador = new Colaborador();
+      nuevoColaborador.setUsuario(nuevoUsuario);
+
+      // TODO para mas adelante, usar algun patron creacional para esto
+      MyEmail email = new MyEmail(config.getProperty("MAIL-DIR"),
+          carga.getMail(),
+          config.getProperty("ASUNTO"),
+          config.getProperty("CUERPO") + claveGenerada);
+      mailSender.enviarMail(email);
+
+      colaboradoRepository.guardar(nuevoColaborador);
+      return nuevoColaborador;
+    } catch(IOException e) {
+     throw new RuntimeException(e);
+    }
   }
 
 }

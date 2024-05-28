@@ -21,6 +21,7 @@ public class ColocacionHeladeras extends Colaboracion {
   public ColocacionHeladeras() {
     this.calculadorDePuntos = new CalculadorPuntosColocacionHeladera();
   }
+  // TODO crear cron job que sume puntos cada vez que pasa un mes desde que la heladera fue colocada
 
   /**
    * Constructor con parametros.

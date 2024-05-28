@@ -30,7 +30,7 @@ class CargadorDeColaboracionesTest {
     mailSender = mock(SendGridMailSender.class);
     doNothing().when(mailSender).enviarMail(any());
     repositorio = new ColaboradorRepository();
-    cargador = new CargadorDeColaboraciones(csvReader, mailSender,repositorio);
+    cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/domain/assets/cargacolaboraciones.csv", csvReader, mailSender,repositorio);
   }
 
   @Test

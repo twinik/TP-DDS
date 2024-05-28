@@ -20,7 +20,7 @@ public class TarjetaTest {
   public void setUp() {
     duenioMock = Mockito.mock(PersonaVulnerable.class);
     FrecuenciaUso frecuenciaDiaria = new FrecuenciaDiaria();
-    FrecuenciaDiaria.setMaximosUsosBase(5);
+    FrecuenciaDiaria.setMaximosUsosBase(4);
     tarjeta = new Tarjeta(5, frecuenciaDiaria, duenioMock, new Date(), 10);
   }
 
