@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.tarjetas;
 
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
 import java.util.*;
+import ar.edu.utn.frba.dds.domain.helpers.GeneradorDeCodigosHelper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,13 +40,15 @@ public class Tarjeta {
   private Date fechaAdjudicacion;
 
   private Integer cantidadUsosDia;
+
+  private static final int TAMANIO_CODIGO = 11;
   // CRON JOB string (todos los dias a las 00:00hs): "0 0 0 1/1 * ? *"
 
   /**
    * Constructor de Tarjeta.
    */
-  public Tarjeta(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Date fechaAdjudicacion, Integer cantidadUsosDia) {
-    this.codigo = codigo;
+  public Tarjeta(Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Date fechaAdjudicacion, Integer cantidadUsosDia) {
+    this.codigo = GeneradorDeCodigosHelper.generarAlfanumericoUnico(TAMANIO_CODIGO);
     this.nroUsos = nroUsos;
     this.frecuenciaPermitida = frecuenciaPermitida;
     this.activa = true;

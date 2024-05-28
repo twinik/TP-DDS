@@ -18,9 +18,7 @@ public class RedistribucionViandas extends Colaboracion {
   /**
    * Constructor por defecto.
    */
-  public RedistribucionViandas() {
-    this.calculadorDePuntos = new CalculadorPuntosRedistribucionVianda();
-  }
+
   private Heladera heladeraOrigen;
   private Heladera heladeraDestino;
   private MotivoRedistribucionVianda motivo;
@@ -47,6 +45,10 @@ public class RedistribucionViandas extends Colaboracion {
     this.heladeraDestino = heladeraDestino;
     this.motivo = motivo;
     this.cantidad = cantidad;
+  }
+
+  public RedistribucionViandas() {
+    this.calculadorDePuntos = new CalculadorPuntosRedistribucionVianda();
   }
 
   /**

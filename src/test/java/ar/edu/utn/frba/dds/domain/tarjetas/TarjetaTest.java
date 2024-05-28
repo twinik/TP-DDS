@@ -21,13 +21,12 @@ public class TarjetaTest {
     duenioMock = Mockito.mock(PersonaVulnerable.class);
     FrecuenciaUso frecuenciaDiaria = new FrecuenciaDiaria();
     FrecuenciaDiaria.setMaximosUsosBase(5);
-    tarjeta = new Tarjeta("123", 5, frecuenciaDiaria, duenioMock, new Date(), 10);
+    tarjeta = new Tarjeta(5, frecuenciaDiaria, duenioMock, new Date(), 10);
   }
 
   @Test
   @DisplayName("Test de inicialización correcta")
   public void testInicializacionCorrecta() {
-    assertEquals("123", tarjeta.getCodigo());
     assertEquals(5, tarjeta.getNroUsos());
     assertInstanceOf(FrecuenciaDiaria.class, tarjeta.getFrecuenciaPermitida());
     assertNotNull(tarjeta.getUsos());
