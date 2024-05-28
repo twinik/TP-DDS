@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.TipoPersona;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -13,43 +14,14 @@ import lombok.Getter;
  * Consiste en ofrecer un producto a cambio de puntos.
  */
 @Getter
-public class OfertaProducto extends Colaboracion {
+@AllArgsConstructor
+public class OfertaProducto {
+  private Colaborador colaborador;
+  private LocalDate fechaCreacion;
   private Producto producto;
   private Float puntosNecesarios;
   private CategoriaOferta categoria;
-
-  /**
-   * Constructor por defecto con parametros.
-   */
-  public OfertaProducto(Colaborador colaborador,
-                        Producto producto,
-                        Float puntosNecesarios,
-                        CategoriaOferta categoria,
-                        LocalDate fecha) {
-    super(colaborador, new CalculadorPuntosOfertaProducto(), fecha);
-    this.producto = producto;
-    this.puntosNecesarios = puntosNecesarios;
-    this.categoria = categoria;
-  }
-
-  /**
-   * Constructor por defecto con parametros.
-   */
-  public OfertaProducto(Producto producto, Float puntosNecesarios, CategoriaOferta categoria) {
-    this.calculadorDePuntos = new CalculadorPuntosOfertaProducto();
-    this.producto = producto;
-    this.puntosNecesarios = puntosNecesarios;
-    this.categoria = categoria;
-  }
-
-  /**
-   * Metodo efectuar que se encarga de sumar puntos al colaborador.
-   */
-  @Override
-  public void efectuar() {
-    super.efectuar();
-  }
-
+  
   /**
    * Metodo puedeSerCanjeadoPor que se encarga de verificar.
    * si el colaborador puede canjear el producto.
