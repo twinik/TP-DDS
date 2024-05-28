@@ -8,7 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class FrecuenciaDiaria implements FrecuenciaUso {
+public class FrecuenciaDiaria extends FrecuenciaUso {
   public FrecuenciaDiaria() {
   }
 
@@ -18,9 +18,9 @@ public class FrecuenciaDiaria implements FrecuenciaUso {
     MAXIMOS_USOS_BASE = maximosUsosBase;
   }
 
-  public boolean permiteUsar(Tarjeta tarjeta) {
+  public boolean frecuenciaValida(Tarjeta tarjeta) {
     Integer usosTotalesPermitidos = MAXIMOS_USOS_BASE + tarjeta.getDuenio().cantidadMenores() * 2;
-    return tarjeta.getCantidadUsosDia() < usosTotalesPermitidos;
+    return tarjeta.isActiva() && tarjeta.getCantidadUsosDia() < usosTotalesPermitidos;
   }
 
 }

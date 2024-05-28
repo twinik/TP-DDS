@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +31,7 @@ class CanjeProductoTest {
     comprador = new Colaborador();
     comprador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_HUMANA, null));
     comprador.setPuntosGanados((float) 0);
-    ofertaCanjeada = new OfertaProducto(new Producto(), PUNTOS_NECESARIOS, CategoriaOferta.ELECTRONICA);
+    ofertaCanjeada = new OfertaProducto(comprador,LocalDate.now(),new Producto(), PUNTOS_NECESARIOS, CategoriaOferta.ELECTRONICA);
   }
 
   @Test

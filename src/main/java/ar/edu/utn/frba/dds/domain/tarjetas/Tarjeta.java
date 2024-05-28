@@ -28,6 +28,8 @@ public class Tarjeta {
 
   private Integer nroUsos;
 
+  private boolean activa;
+
   private FrecuenciaUso frecuenciaPermitida;
 
   private List<UsoTarjeta> usos;
@@ -46,6 +48,7 @@ public class Tarjeta {
     this.codigo = codigo;
     this.nroUsos = nroUsos;
     this.frecuenciaPermitida = frecuenciaPermitida;
+    this.activa = true;
     this.usos = new ArrayList<UsoTarjeta>();
     this.duenio = duenio;
     this.fechaAdjudicacion = fechaAdjudicacion;
@@ -69,6 +72,11 @@ public class Tarjeta {
     }
   }
 
+  public void agregarUsos() {
+    this.cantidadUsosDia++;
+    this.nroUsos++;
+  }
+
   /**
    * Resetea la cantidad de usos del dia.
    */
@@ -77,4 +85,6 @@ public class Tarjeta {
       cantidadUsosDia = 0;
     }
   }
+
+
 }
