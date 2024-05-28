@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.heladeras;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class Heladera {
 
   private Direccion direccion;
 
+  private boolean activa = true;
+
   private String nombre;
 
   private Integer capacidadViandas;
@@ -28,13 +31,9 @@ public class Heladera {
 
   private List<Vianda> viandas;
 
-  private Float tempMin;
+  private ModeloHeladera modelo;
 
-  private Float tempMax;
-
-  private SensorTemperatura sensorTemp;
-
-  private SensorMovimiento sensorMov;
+  private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {
     this.fechaPuestaFuncionamiento = fecha;
@@ -44,13 +43,27 @@ public class Heladera {
     this.viandas.add(vianda);
   }
 
+
+  public Heladera(Ubicacion ubicacion, Direccion direccion, String nombre, Integer capacidadViandas,
+                  LocalDate fechaPuestaFuncionamiento, List<Vianda> viandas,
+                  ModeloHeladera modelo) {
+    this.ubicacion = ubicacion;
+    this.direccion = direccion;
+    this.nombre = nombre;
+    this.capacidadViandas = capacidadViandas;
+    this.fechaPuestaFuncionamiento = fechaPuestaFuncionamiento;
+    this.viandas = viandas;
+    this.modelo = modelo;
+  }
+
   /**
    * Metodo que verifica la temperatura de la heladera.
    */
-  public void verificarTemperatura() {
-    if (this.sensorTemp.getUtlimaTempRegistrada() > this.tempMax || this.sensorTemp.getUtlimaTempRegistrada() < this.tempMin) {
-      System.console().printf("La temperatura esta fuera del rango aceptable!\n");
+  public void verificarTemperatura(float temperatura) {
+    if (temperatura > this.modelo.getTempMax() || temperatura < this.modelo.getTempMin()) {
+      this.activa = false;
     }
+    registroTemperaturas.add(new RegistroTemperatura(LocalDateTime.now(), temperatura));
   }
 
 

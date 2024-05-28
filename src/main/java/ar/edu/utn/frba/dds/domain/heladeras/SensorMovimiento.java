@@ -7,11 +7,14 @@ public class SensorMovimiento {
   /**
    * Default constructor.
    */
+
+  private Heladera heladera;
   public SensorMovimiento() {
   }
 
   public void alertarRobo(Heladera heladera) {
-    // TODO implement here
+    // PONELE ?
+    this.heladera.setActiva(false);
   }
 
 }
