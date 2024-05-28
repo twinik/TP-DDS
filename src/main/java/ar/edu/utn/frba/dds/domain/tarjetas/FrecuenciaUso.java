@@ -12,5 +12,4 @@ public abstract class FrecuenciaUso {
     return tarjeta.isActiva() && frecuenciaValida(tarjeta);
   }
 
-
 }

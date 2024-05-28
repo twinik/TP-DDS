@@ -17,31 +17,19 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 public class PersonaVulnerable {
-
-
   private String nombre;
-
   private Date fechaNacimiento;
-
   private Date fechaRegistro;
-
   private boolean poseeDomicilio;
-
   private String domicilio;
-
   private TipoDocumento tipoDocumento;
-
   private String nroDocumento;
-
   private Colaborador colaborador;
-
   private List<PersonaVulnerable> tutorados;
-
 
   public boolean poseeMenores() {
     return tutorados.stream().anyMatch(PersonaVulnerable::esMenor);
   }
-
 
   public Integer cantidadMenores() {
     return Math.toIntExact(tutorados.stream().filter(PersonaVulnerable::esMenor).count());

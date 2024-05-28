@@ -11,7 +11,6 @@ import java.util.Optional;
  * ColaboradorRepository class permite interactuar con los colaboradores.
  */
 public class ColaboradorRepository implements IColaboradorRepository {
-
   private List<Colaborador> colaboradores;
   /**
    * getInstance method permite obtener una instancia de ColaboradorRepository.

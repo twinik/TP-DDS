@@ -9,10 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FrecuenciaDiaria extends FrecuenciaUso {
+  private static Integer MAXIMOS_USOS_BASE;
+
   public FrecuenciaDiaria() {
   }
-
-  private static Integer MAXIMOS_USOS_BASE;
 
   public static void setMaximosUsosBase(Integer maximosUsosBase) {
     MAXIMOS_USOS_BASE = maximosUsosBase;

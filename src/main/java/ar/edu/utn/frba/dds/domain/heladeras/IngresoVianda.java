@@ -12,15 +12,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class IngresoVianda {
-
   private Date fechaDonacion;
-
   private Colaborador colaborador;
-
   private boolean entregada;
-
   private List<Vianda> viandas;
-
   private Heladera heladera;
 
   public List<DonacionVianda> donar() {

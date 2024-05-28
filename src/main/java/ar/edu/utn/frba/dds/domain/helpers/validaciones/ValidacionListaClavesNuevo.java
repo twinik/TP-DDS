@@ -13,17 +13,15 @@ import java.util.Scanner;
  * ValidacionListaClavesNuevo class permite representar una validacion de lista de claves.
  */
 public class ValidacionListaClavesNuevo extends Validacion {
-
   private List<String> peoresContrasenias = new ArrayList<>();
-  private ConfigReader config;
-
+  private final ConfigReader config;
 
   /**
    * Constructor.
    */
   public ValidacionListaClavesNuevo() {
     this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias"));
-    this.config = new ConfigReader("validadorconfig.properties");
+    this.config = new ConfigReader("config.properties");
     cargarPeoresContrasenias();
   }
 

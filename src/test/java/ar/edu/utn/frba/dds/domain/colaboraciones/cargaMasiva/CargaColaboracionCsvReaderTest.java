@@ -18,7 +18,7 @@ class CargaColaboracionCsvReaderTest {
     void setUp() {
         try {
             cargaColaboracionCsvReader = new CargaColaboracionCsvReader();
-            ConfigReader config = new ConfigReader("cargacolaboraciones.properties");
+            ConfigReader config = new ConfigReader("config.properties");
             path = config.getProperty("cargadorColaboracionesFilePath");
             separator = config.getProperty("separator");
         } catch (IOException e) {

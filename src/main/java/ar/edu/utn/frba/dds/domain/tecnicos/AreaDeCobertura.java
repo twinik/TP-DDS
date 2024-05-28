@@ -10,9 +10,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class AreaDeCobertura {
-
   private Direccion referencia;
-
   private Float radioDeCoberturaEnKM;
-
 }

@@ -9,9 +9,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class medioDeContacto {
-
   private CanalContacto canal;
-
   private String contacto;
-
 }

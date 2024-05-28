@@ -26,19 +26,17 @@ public class CargadorDeColaboraciones {
   private String filePath;
   private String separator;
   private ColaboradorRepository colaboradoRepository;
-
-  public CargadorDeColaboraciones() {
-
-  }
+  private ConfigReader config;
 
   /**
    * Constructor con parametros.
    */
   public CargadorDeColaboraciones(CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradorRepository respository) throws IOException {
+    this.config = new ConfigReader("config.properties");
     this.csvReader = csvReader;
     this.mailSender = mailAdapter;
-    this.filePath = new ConfigReader("cargacolaboraciones.properties").getProperty("cargadorColaboracionesFilePath");
-    this.separator = new ConfigReader("cargacolaboraciones.properties").getProperty("separator");
+    this.filePath = config.getProperty("cargadorColaboracionesFilePath");
+    this.separator = config.getProperty("separator");
     this.colaboradoRepository = respository;
   }
 
@@ -46,27 +44,21 @@ public class CargadorDeColaboraciones {
    * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
    */
   public List<Colaboracion> cargarColaboraciones() throws IOException {
-    ConfigReader config = new ConfigReader("mail-sender.properties");
     List<Object> registros = csvReader.readCsv(filePath, separator);
-
     ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
 
     for (Object reg : registros) {
       CargaColaboracion carga = (CargaColaboracion) reg;
-
       Colaboracion colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga);
-
       TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
-
       Optional<Colaborador> colaboradorOption = colaboradoRepository.buscar(
           tipoDoc,
           carga.getDocumento());
-
       Colaborador colaborador;
 
       if (colaboradorOption.isEmpty()) {
         //TODO: mover esta logica a algun metodo privado
-        String claveGenerada = PasswordGenerator.generatePassword(20); //config
+        String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
         Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
         Colaborador nuevoColaborador = new Colaborador();
         nuevoColaborador.setUsuario(nuevoUsuario);

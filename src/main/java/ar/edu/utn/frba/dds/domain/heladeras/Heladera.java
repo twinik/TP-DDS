@@ -16,33 +16,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Heladera {
-
   private Ubicacion ubicacion;
-
   private Direccion direccion;
-
   private boolean activa = true;
-
   private String nombre;
-
   private Integer capacidadViandas;
-
   private LocalDate fechaPuestaFuncionamiento;
-
   private List<Vianda> viandas;
-
   private ModeloHeladera modelo;
-
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {
     this.fechaPuestaFuncionamiento = fecha;
   }
-
-  public void agregarVianda(Vianda vianda) {
-    this.viandas.add(vianda);
-  }
-
 
   public Heladera(Ubicacion ubicacion, Direccion direccion, String nombre, Integer capacidadViandas,
                   LocalDate fechaPuestaFuncionamiento, List<Vianda> viandas,
@@ -54,6 +40,10 @@ public class Heladera {
     this.fechaPuestaFuncionamiento = fechaPuestaFuncionamiento;
     this.viandas = viandas;
     this.modelo = modelo;
+  }
+
+  public void agregarVianda(Vianda vianda) {
+    this.viandas.add(vianda);
   }
 
   /**
@@ -68,8 +58,7 @@ public class Heladera {
 
   public float getUltimaTemperaturaRegistrada() {
     // asumo que van en orden la lista, si no hay que comparar las fechas
-    return this.registroTemperaturas.get(this.registroTemperaturas.size() - 1).temperaturaRegsitrada;
+    return this.registroTemperaturas.get(this.registroTemperaturas.size() - 1).temperaturaRegistrada;
   }
-
 
 }

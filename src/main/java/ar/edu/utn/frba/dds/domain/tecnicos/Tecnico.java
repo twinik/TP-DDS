@@ -13,17 +13,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Tecnico {
-
   private String nombre;
-
   private String apellido;
-
   private String nroDocumento;
-
   private TipoDocumento tipoDocumento;
-
   private List<medioDeContacto> medioContacto;
-
   private AreaDeCobertura areaDeCobertura;
-
 }

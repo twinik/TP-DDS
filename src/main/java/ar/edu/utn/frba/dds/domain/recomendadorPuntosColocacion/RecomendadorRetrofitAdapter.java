@@ -10,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 
 public class RecomendadorRetrofitAdapter implements RecomendadorDePuntosAdapter {
-
   private static RecomendadorRetrofitAdapter instance = null;
   private static String API_URL = null;
   private Retrofit retrofit;
@@ -24,7 +23,7 @@ public class RecomendadorRetrofitAdapter implements RecomendadorDePuntosAdapter 
 
   public static RecomendadorRetrofitAdapter getInstance() throws IOException {
     if (instance == null) {
-      API_URL = new ConfigReader("api-recomendador-ubicaciones-config.properties").getProperty("API_URL");
+      API_URL = new ConfigReader("config.properties").getProperty("API_URL");
       instance = new RecomendadorRetrofitAdapter();
     }
     return instance;

@@ -24,23 +24,14 @@ import org.quartz.impl.StdSchedulerFactory;
 @Setter
 @AllArgsConstructor
 public class Tarjeta {
-
   private String codigo;
-
   private Integer nroUsos;
-
   private boolean activa;
-
   private FrecuenciaUso frecuenciaPermitida;
-
   private List<UsoTarjeta> usos;
-
   private PersonaVulnerable duenio;
-
   private Date fechaAdjudicacion;
-
   private Integer cantidadUsosDia;
-
   private static final int TAMANIO_CODIGO = 11;
   // CRON JOB string (todos los dias a las 00:00hs): "0 0 0 1/1 * ? *"
 
@@ -88,6 +79,5 @@ public class Tarjeta {
       cantidadUsosDia = 0;
     }
   }
-
 
 }

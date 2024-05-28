@@ -18,7 +18,6 @@ public class PasswordGenerator {
   private static final SecureRandom random = new SecureRandom();
 
   /**
-   *
    * @param tamanio largo de la contrasenia
    * @return genera una contrasenia de largo @tamanio y la devuelve
    */

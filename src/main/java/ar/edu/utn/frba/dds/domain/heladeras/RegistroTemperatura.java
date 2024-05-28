@@ -11,6 +11,5 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class RegistroTemperatura {
   LocalDateTime fechaHora;
-  float temperaturaRegsitrada;
-
+  float temperaturaRegistrada;
 }

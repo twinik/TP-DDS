@@ -11,5 +11,4 @@ import lombok.Getter;
 public class Ubicacion {
     private Float latitud;
     private Float longitud;
-
 }

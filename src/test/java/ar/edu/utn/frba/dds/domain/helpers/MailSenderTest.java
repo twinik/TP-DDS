@@ -8,7 +8,6 @@ import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
 import ar.edu.utn.frba.dds.domain.utils.MyEmail;
-import ar.edu.utn.frba.dds.domain.utils.SengridMailAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

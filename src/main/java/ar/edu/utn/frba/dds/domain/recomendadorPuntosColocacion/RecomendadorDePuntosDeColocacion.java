@@ -22,7 +22,6 @@ public class RecomendadorDePuntosDeColocacion {
   /**
    * Recomienda una ubicacion.
    */
-
   public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
     return recomendadorDePuntosAdapter.recomendarUbicacion(punto, radio);
   }

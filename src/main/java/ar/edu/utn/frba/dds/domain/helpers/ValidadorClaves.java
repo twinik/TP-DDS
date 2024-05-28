@@ -10,7 +10,6 @@ import lombok.Getter;
  * Representa el validador de las contrasenias.
  */
 public class ValidadorClaves {
-
   private List<Validacion> validaciones;
 
   @Getter

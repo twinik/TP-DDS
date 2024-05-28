@@ -10,7 +10,7 @@ import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
-import ar.edu.utn.frba.dds.domain.utils.SengridMailAdapter;
+import ar.edu.utn.frba.dds.domain.utils.SendGridMailSender;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,14 +20,14 @@ import java.time.LocalDate;
 
 class CargadorDeColaboracionesTest {
   private CargaColaboracionCsvReader csvReader;
-  private SengridMailAdapter mailSender;
+  private SendGridMailSender mailSender;
   private CargadorDeColaboraciones cargador;
 
   private ColaboradorRepository repositorio;
   @BeforeEach
   void setUp() throws IOException {
     csvReader = new CargaColaboracionCsvReader();
-    mailSender = mock(SengridMailAdapter.class);
+    mailSender = mock(SendGridMailSender.class);
     doNothing().when(mailSender).enviarMail(any());
     repositorio = new ColaboradorRepository();
     cargador = new CargadorDeColaboraciones(csvReader, mailSender,repositorio);
