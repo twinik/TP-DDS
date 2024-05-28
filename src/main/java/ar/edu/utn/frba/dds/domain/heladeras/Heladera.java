@@ -66,5 +66,10 @@ public class Heladera {
     registroTemperaturas.add(new RegistroTemperatura(LocalDateTime.now(), temperatura));
   }
 
+  public float getUltimaTemperaturaRegistrada() {
+    // asumo que van en orden la lista, si no hay que comparar las fechas
+    return this.registroTemperaturas.get(this.registroTemperaturas.size() - 1).temperaturaRegsitrada;
+  }
+
 
 }
