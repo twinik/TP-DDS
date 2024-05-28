@@ -10,26 +10,27 @@ import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
-import ar.edu.utn.frba.dds.domain.utils.MailSender;
+import ar.edu.utn.frba.dds.domain.utils.SengridMailAdapter;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 import java.io.IOException;
 import java.time.LocalDate;
 
 class CargadorDeColaboracionesTest {
   private CargaColaboracionCsvReader csvReader;
-  private MailSender mailSender;
+  private SengridMailAdapter mailSender;
   private CargadorDeColaboraciones cargador;
 
+  private ColaboradorRepository repositorio;
   @BeforeEach
   void setUp() throws IOException {
     csvReader = new CargaColaboracionCsvReader();
-    mailSender = mock(MailSender.class);
+    mailSender = mock(SengridMailAdapter.class);
     doNothing().when(mailSender).enviarMail(any());
-    cargador = new CargadorDeColaboraciones(csvReader, mailSender);
+    repositorio = new ColaboradorRepository();
+    cargador = new CargadorDeColaboraciones(csvReader, mailSender,repositorio);
   }
 
   @Test
@@ -48,7 +49,7 @@ class CargadorDeColaboracionesTest {
   @DisplayName("Carga de colaboraciones")
   void cargarColaboraciones() throws IOException {
     assertEquals(19, cargador.cargarColaboraciones().size());
-    assertEquals(3, ColaboradorRepository.getInstance().buscarTodos().size());
+    assertEquals(3, repositorio.buscarTodos().size());
     verify(mailSender, times(3)).enviarMail(any());
   }
 }

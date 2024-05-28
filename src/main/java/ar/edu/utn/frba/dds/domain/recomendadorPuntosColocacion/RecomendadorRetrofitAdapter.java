@@ -30,6 +30,12 @@ public class RecomendadorRetrofitAdapter implements RecomendadorDePuntosAdapter 
     return instance;
   }
 
+  /**
+   *
+   * @param punto punto donde esta usted y quisiera colocar la heladera
+   * @param radio cuantos killoemtros desde tu punto de referencia toleraria alejarse
+   * @return el listado de posibles ubicaciones a paartir de los parametros
+   */
   public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
     RecomendadorPuntosColocacionService service = this.retrofit.create(RecomendadorPuntosColocacionService.class);
     Call<ListadoUbicaciones> requestRecomendacionPuntos = service.puntosRecomendados(punto.getLatitud(), punto.getLongitud(), radio);
@@ -37,7 +43,7 @@ public class RecomendadorRetrofitAdapter implements RecomendadorDePuntosAdapter 
     try {
       response = requestRecomendacionPuntos.execute();
     } catch (IOException e) {
-      throw new FallaAlConsumirApiException(e.getMessage());
+      throw new FallaAlConsumirApiException(e);
     }
     return response.body();
   }

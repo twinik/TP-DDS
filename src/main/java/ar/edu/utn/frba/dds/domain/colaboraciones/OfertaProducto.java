@@ -27,14 +27,6 @@ public class OfertaProducto {
    * si el colaborador puede canjear el producto.
    */
   public boolean puedeSerCanjeadoPor(Colaborador colaborador) {
-    if (colaborador.getTipoColaborador().getTipo().equals(TipoPersona.PERSONA_JURIDICA)) {
-      Float sumaMesesActivas = (float) colaborador.getHeladerasColocadas().stream().mapToDouble(ColocacionHeladeras::getMesesActiva).sum();
-      Float puntosPorHeladerasColocadas = colaborador.getHeladerasColocadas().size() * sumaMesesActivas * 5;
-
-      if (colaborador.getPuntosGanados() + puntosPorHeladerasColocadas >= this.puntosNecesarios) {
-        colaborador.sumarPuntos(puntosPorHeladerasColocadas);
-      }
-    }
     return colaborador.getPuntosGanados() >= this.puntosNecesarios;
   }
 

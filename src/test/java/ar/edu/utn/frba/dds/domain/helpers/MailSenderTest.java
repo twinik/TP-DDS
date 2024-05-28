@@ -3,16 +3,19 @@ package ar.edu.utn.frba.dds.domain.helpers;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
+import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
 import ar.edu.utn.frba.dds.domain.utils.MyEmail;
-import ar.edu.utn.frba.dds.domain.utils.MailSender;
+import ar.edu.utn.frba.dds.domain.utils.SengridMailAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class MailSenderTest {
   private static MyEmail email;
-  private static MailSender mailSender;
+  private MailSenderAdapter mailSender;
 
 //  @BeforeEach
 //  void setUp() {
@@ -23,7 +26,7 @@ public class MailSenderTest {
   @BeforeEach
   void setUp() {
     email = new MyEmail("grupo7ddsutn@gmail.com", "twinik@frba.utn.edu.ar", "Hola Gon desde TP DDS", "Cuerpo del correo");
-    mailSender = mock(MailSender.class);
+    mailSender = mock(MailSenderAdapter.class);
     doNothing().when(mailSender).enviarMail(any());
   }
 
@@ -31,5 +34,6 @@ public class MailSenderTest {
   @DisplayName("Envio de mail exitoso")
   void testEnvioMailExitoso() {
     mailSender.enviarMail(email);
+    verify(mailSender,times(1)).enviarMail(email);
   }
 }

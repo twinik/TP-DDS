@@ -1,4 +1,6 @@
 package ar.edu.utn.frba.dds.domain.utils;
+
+import ar.edu.utn.frba.dds.domain.excepciones.CrearMailException;
 import com.sendgrid.*;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
@@ -8,10 +10,10 @@ import java.io.IOException;
 /**
  * MailSender class permite enviar un mail.
  */
-public class MailSender implements MailSenderAdapter {
+public class SengridMailAdapter implements MailSenderAdapter {
   private static String apiKey;
 
-  public MailSender() {
+  public SengridMailAdapter() {
     apiKey = "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"; //TODO sacar de un config file
   }
 
@@ -35,7 +37,7 @@ public class MailSender implements MailSenderAdapter {
       System.out.println("Body: " + response.getBody());
       System.out.println("Headers: " + response.getHeaders());
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new CrearMailException(e);
     }
   }
 }
