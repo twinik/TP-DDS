@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.Colaboracion;
+import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
@@ -46,6 +47,7 @@ public class CargadorDeColaboraciones {
   public List<Colaboracion> cargarColaboraciones() throws IOException {
     List<Object> registros = csvReader.readCsv(filePath, separator);
     ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
+    Colaborador colaborador = null;
 
     for (Object reg : registros) {
       CargaColaboracion carga = (CargaColaboracion) reg;
@@ -53,7 +55,7 @@ public class CargadorDeColaboraciones {
       Optional<Colaborador> colaboradorOption = colaboradoRepository.buscar(
           new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
           carga.getDocumento());
-      Colaborador colaborador;
+
 
       if (colaboradorOption.isEmpty()) {
         colaborador = crearUsuarioColaboradorNoRegistrado(carga, config);
@@ -65,9 +67,13 @@ public class CargadorDeColaboraciones {
 
       for (int i = 0; i < carga.getCantidad(); i++) {
         colaboraciones.add(colaboracion);
-        colaborador.sumarPuntos(colaboracion.getCalculadorDePuntos().calcularPuntos(colaboracion));
+        colaboracion.efectuar();
       }
 
+    }
+    // medio raro, se puede cambiar pero habria que hacer algo asi
+    for (ColocacionHeladeras colocacion : colaborador.getHeladerasColocadas()) {
+      colaborador.sumarPuntos(colocacion.getCalculadorDePuntos().calcularPuntos(colocacion));
     }
     return colaboraciones;
   }
@@ -89,8 +95,8 @@ public class CargadorDeColaboraciones {
 
       colaboradoRepository.guardar(nuevoColaborador);
       return nuevoColaborador;
-    } catch(IOException e) {
-     throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 
