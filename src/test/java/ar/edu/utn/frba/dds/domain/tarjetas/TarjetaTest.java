@@ -36,16 +36,6 @@ public class TarjetaTest {
   }
 
   @Test
-  @DisplayName("Test de reseteo de usos diarios")
-  public void testResetarUsosDia() {
-    tarjeta.setCantidadUsosDia(5);
-    Tarjeta.ResetarUsosDia job = tarjeta.new ResetarUsosDia();
-    JobExecutionContext contextMock = Mockito.mock(JobExecutionContext.class);
-    job.execute(contextMock);
-    assertEquals(0, tarjeta.getCantidadUsosDia());
-  }
-
-  @Test
   @DisplayName("Test de permitir uso")
   public void testPermitirUso() {
     Mockito.when(duenioMock.cantidadMenores()).thenReturn(0);

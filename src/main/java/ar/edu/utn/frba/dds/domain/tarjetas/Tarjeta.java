@@ -54,4 +54,8 @@ public class Tarjeta {
     this.nroUsos++;
   }
 
+  boolean permiteUsar() {
+    return this.activa && frecuenciaPermitida.permiteUsar(this);
+  }
+
 }
