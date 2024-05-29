@@ -40,9 +40,9 @@ public class TarjetaTest {
   public void testPermitirUso() {
     Mockito.when(duenioMock.cantidadMenores()).thenReturn(0);
     tarjeta.setCantidadUsosDia(0);
-    assertTrue(tarjeta.getFrecuenciaPermitida().permiteUsar(tarjeta));
+    assertTrue(tarjeta.permiteUsar());
 
     tarjeta.setCantidadUsosDia(5);
-    assertFalse(tarjeta.getFrecuenciaPermitida().permiteUsar(tarjeta));
+    assertFalse(tarjeta.permiteUsar());
   }
 }
