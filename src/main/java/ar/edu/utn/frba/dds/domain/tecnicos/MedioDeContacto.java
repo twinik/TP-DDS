@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public class medioDeContacto {
+public class MedioDeContacto {
   private CanalContacto canal;
   private String contacto;
 }

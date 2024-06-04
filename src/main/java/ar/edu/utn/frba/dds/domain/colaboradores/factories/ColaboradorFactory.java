@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.utils.factories;
+package ar.edu.utn.frba.dds.domain.colaboradores.factories;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;

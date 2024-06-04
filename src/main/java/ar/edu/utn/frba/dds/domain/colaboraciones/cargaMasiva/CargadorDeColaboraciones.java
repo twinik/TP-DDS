@@ -9,9 +9,9 @@ import ar.edu.utn.frba.dds.domain.helpers.PasswordGenerator;
 import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumentoMapper;
-import ar.edu.utn.frba.dds.domain.utils.factories.ColaboradorFactory;
+import ar.edu.utn.frba.dds.domain.colaboradores.factories.ColaboradorFactory;
 import ar.edu.utn.frba.dds.domain.utils.factories.MyMailFactory;
-import ar.edu.utn.frba.dds.domain.utils.factories.UsuarioFactory;
+import ar.edu.utn.frba.dds.domain.colaboradores.factories.UsuarioFactory;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import java.io.IOException;
 import java.util.*;
@@ -70,8 +70,10 @@ public class CargadorDeColaboraciones {
 
     }
     // medio raro, se puede cambiar pero habria que hacer algo asi
-    for (ColocacionHeladeras colocacion : colaborador.getHeladerasColocadas()) {
-      colaborador.sumarPuntos(colocacion.getCalculadorDePuntos().calcularPuntos(colocacion));
+    if (colaborador != null) {
+      for (ColocacionHeladeras colocacion : colaborador.getHeladerasColocadas()) {
+        colaborador.sumarPuntos(colocacion.getCalculadorDePuntos().calcularPuntos(colocacion));
+      }
     }
     return colaboraciones;
   }

@@ -1,19 +1,16 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
 import ar.edu.utn.frba.dds.domain.helpers.factories.ValidadorFactory;
-import ar.edu.utn.frba.dds.domain.helpers.factories.ValidadorOwaspFactory;
 import ar.edu.utn.frba.dds.domain.helpers.validaciones.ValidacionLargoClaves;
 import org.junit.jupiter.api.*;
 
 class ValidadorTest {
 
     ValidadorClaves unValidador;
-    ValidadorFactory miFactoria;
 
     @BeforeEach
     void test_init() {
-        miFactoria = new ValidadorOwaspFactory();
-        unValidador = miFactoria.crearValidador();
+        unValidador = ValidadorFactory.create();
     }
 
     @Test

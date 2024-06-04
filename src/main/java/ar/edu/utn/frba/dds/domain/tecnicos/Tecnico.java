@@ -17,6 +17,6 @@ public class Tecnico {
   private String apellido;
   private String nroDocumento;
   private TipoDocumento tipoDocumento;
-  private List<medioDeContacto> medioContacto;
+  private List<MedioDeContacto> medioContacto;
   private AreaDeCobertura areaDeCobertura;
 }
