@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.tarjetas;
 
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
+import ar.edu.utn.frba.dds.domain.helpers.GeneradorDeCodigosHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class TarjetaTest {
     duenioMock = Mockito.mock(PersonaVulnerable.class);
     FrecuenciaUso frecuenciaDiaria = new FrecuenciaDiaria();
     FrecuenciaDiaria.setMaximosUsosBase(4);
-    tarjeta = new Tarjeta(5, frecuenciaDiaria, duenioMock, new Date(), 10);
+    tarjeta = new Tarjeta(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), 5, frecuenciaDiaria, duenioMock, new Date(), 10);
   }
 
   @Test

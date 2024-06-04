@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.utils;
+package ar.edu.utn.frba.dds.domain.emailSending;
 
 /**
  * MailSenderAdapter interface permite enviar un mail.

@@ -10,5 +10,4 @@ public enum FormaColaboracion {
   REDISTRIBUCION_VIANDA,
   REGISTRO_PERSONA,
   OFERTA_PRODUCTO
-
 }

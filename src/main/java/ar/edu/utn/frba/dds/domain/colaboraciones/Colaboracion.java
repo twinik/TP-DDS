@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public abstract class Colaboracion {
   protected Colaborador colaborador;
-  protected CalculadorDePuntos calculadorDePuntos; // TODO usar patron Factory para setear el calculador en cada una de las clases hijas y desacoplar las clases
+  protected CalculadorDePuntos calculadorDePuntos;
   protected LocalDate fecha;
 
   /**

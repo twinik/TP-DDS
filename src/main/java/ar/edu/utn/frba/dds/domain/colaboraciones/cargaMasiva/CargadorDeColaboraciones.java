@@ -6,11 +6,12 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.helpers.PasswordGenerator;
-import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
+import ar.edu.utn.frba.dds.domain.emailSending.MailSenderAdapter;
+import ar.edu.utn.frba.dds.domain.emailSending.MyEmail;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.domain.colaboradores.factories.ColaboradorFactory;
-import ar.edu.utn.frba.dds.domain.utils.factories.MyMailFactory;
+import ar.edu.utn.frba.dds.domain.emailSending.MyMailFactory;
 import ar.edu.utn.frba.dds.domain.colaboradores.factories.UsuarioFactory;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import java.io.IOException;
@@ -86,11 +87,12 @@ public class CargadorDeColaboraciones {
       Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
       Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
 
-      MyMailFactory.sendMail(mailSender, config.getProperty("MAIL-DIR"),
+      MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
           carga.getMail(),
           config.getProperty("ASUNTO"),
           config.getProperty("CUERPO") + claveGenerada);
 
+      mailSender.enviarMail(email);
 
       colaboradoRepository.guardar(nuevoColaborador);
       return nuevoColaborador;

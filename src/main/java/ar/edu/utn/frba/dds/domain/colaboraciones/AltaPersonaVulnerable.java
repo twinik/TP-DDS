@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosAltaPersona;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -26,7 +28,7 @@ public class AltaPersonaVulnerable extends Colaboracion {
                                PersonaVulnerable persona,
                                Tarjeta tarjeta,
                                LocalDate fecha) {
-    super(colaborador, new CalculadorPuntosAltaPersona(), fecha);
+    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.REGISTRO_PERSONA), fecha);
     this.persona = persona;
     this.tarjeta = tarjeta;
   }
@@ -35,7 +37,7 @@ public class AltaPersonaVulnerable extends Colaboracion {
    * Constructor por defecto.
    */
   public AltaPersonaVulnerable() {
-    this.calculadorDePuntos = new CalculadorPuntosAltaPersona();
+    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.REGISTRO_PERSONA);
   }
 
   /**

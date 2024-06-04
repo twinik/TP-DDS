@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.utils;
+package ar.edu.utn.frba.dds.domain.emailSending;
 
 import ar.edu.utn.frba.dds.domain.excepciones.CrearMailException;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;

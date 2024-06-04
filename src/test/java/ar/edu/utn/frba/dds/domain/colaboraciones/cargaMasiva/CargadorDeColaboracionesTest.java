@@ -10,7 +10,7 @@ import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
-import ar.edu.utn.frba.dds.domain.utils.SendGridMailSender;
+import ar.edu.utn.frba.dds.domain.emailSending.SendGridMailSender;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

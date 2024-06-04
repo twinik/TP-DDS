@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import java.time.LocalDate;
 
@@ -16,14 +18,14 @@ public class DonacionVianda extends Colaboracion {
    * Constructor por defecto.
    */
   public DonacionVianda() {
-    this.calculadorDePuntos = new CalculadorPuntosDonacionVianda();
+    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_VIANDA);
   }
 
   /**
    * Constructor con parametros.
    */
   public DonacionVianda(Vianda vianda, Colaborador colaborador) {
-    super(colaborador, new CalculadorPuntosDonacionVianda(), vianda.getFechaDonacion());
+    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_VIANDA), vianda.getFechaDonacion());
     this.vianda = vianda;
   }
 

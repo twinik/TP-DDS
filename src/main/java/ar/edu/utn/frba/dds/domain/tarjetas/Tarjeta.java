@@ -32,14 +32,13 @@ public class Tarjeta {
   private PersonaVulnerable duenio;
   private Date fechaAdjudicacion;
   private Integer cantidadUsosDia;
-  private static final int TAMANIO_CODIGO = 11;
   // CRON JOB string (todos los dias a las 00:00hs): "0 0 0 1/1 * ? *"
 
   /**
    * Constructor de Tarjeta.
    */
-  public Tarjeta(Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Date fechaAdjudicacion, Integer cantidadUsosDia) {
-    this.codigo = GeneradorDeCodigosHelper.generarAlfanumericoUnico(TAMANIO_CODIGO);
+  public Tarjeta(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Date fechaAdjudicacion, Integer cantidadUsosDia) {
+    this.codigo = codigo;
     this.nroUsos = nroUsos;
     this.frecuenciaPermitida = frecuenciaPermitida;
     this.activa = true;
