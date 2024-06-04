@@ -21,4 +21,8 @@ public class Usuario {
 
   private String clave;
 
+  public static Usuario create(String email, TipoDocumento tipoDocumento, Integer documento, String contrasenia) {
+    return new Usuario(email, tipoDocumento, documento, contrasenia);
+  }
+
 }

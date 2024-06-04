@@ -72,8 +72,10 @@ public class CargadorDeColaboraciones {
 
     }
     // medio raro, se puede cambiar pero habria que hacer algo asi
-    for (ColocacionHeladeras colocacion : colaborador.getHeladerasColocadas()) {
-      colaborador.sumarPuntos(colocacion.getCalculadorDePuntos().calcularPuntos(colocacion));
+    if (colaborador != null) {
+      for (ColocacionHeladeras colocacion : colaborador.getHeladerasColocadas()) {
+        colaborador.sumarPuntos(colocacion.getCalculadorDePuntos().calcularPuntos(colocacion));
+      }
     }
     return colaboraciones;
   }
@@ -82,7 +84,7 @@ public class CargadorDeColaboraciones {
     try {
       TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
       String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
-      Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
+      Usuario nuevoUsuario = Usuario.create(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
       Colaborador nuevoColaborador = new Colaborador();
       nuevoColaborador.setUsuario(nuevoUsuario);
 
