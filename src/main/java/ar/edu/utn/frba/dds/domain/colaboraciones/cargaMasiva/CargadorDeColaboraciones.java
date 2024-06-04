@@ -7,9 +7,11 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.helpers.PasswordGenerator;
 import ar.edu.utn.frba.dds.domain.utils.MailSenderAdapter;
-import ar.edu.utn.frba.dds.domain.utils.MyEmail;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.domain.utils.factories.ColaboradorFactory;
+import ar.edu.utn.frba.dds.domain.utils.factories.MyMailFactory;
+import ar.edu.utn.frba.dds.domain.utils.factories.UsuarioFactory;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import java.io.IOException;
 import java.util.*;
@@ -57,11 +59,7 @@ public class CargadorDeColaboraciones {
           carga.getDocumento());
 
 
-      if (colaboradorOption.isEmpty()) {
-        colaborador = crearUsuarioColaboradorNoRegistrado(carga, config);
-      } else {
-        colaborador = colaboradorOption.get();
-      }
+      colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
 
       colaboracion.setColaborador(colaborador);
 
@@ -78,20 +76,19 @@ public class CargadorDeColaboraciones {
     return colaboraciones;
   }
 
-  private Colaborador crearUsuarioColaboradorNoRegistrado(CargaColaboracion carga, ConfigReader config) {
+  private Colaborador crearUsuarioColaboradorNoRegistrado(CargaColaboracion carga,
+                                                          ConfigReader config) {
     try {
       TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
       String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
-      Usuario nuevoUsuario = new Usuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
-      Colaborador nuevoColaborador = new Colaborador();
-      nuevoColaborador.setUsuario(nuevoUsuario);
+      Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), tipoDoc, carga.getDocumento(), claveGenerada);
+      Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
 
-      // TODO para mas adelante, usar algun patron creacional para esto
-      MyEmail email = new MyEmail(config.getProperty("MAIL-DIR"),
+      MyMailFactory.sendMail(mailSender, config.getProperty("MAIL-DIR"),
           carga.getMail(),
           config.getProperty("ASUNTO"),
           config.getProperty("CUERPO") + claveGenerada);
-      mailSender.enviarMail(email);
+
 
       colaboradoRepository.guardar(nuevoColaborador);
       return nuevoColaborador;
