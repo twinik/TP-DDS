@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.colaboradores;
 import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class Colaborador {
 
   private Float puntosGanados = 0f;
 
-  private List<ColocacionHeladeras> heladerasColocadas;
+  private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
   public void sumarPuntos(Float puntos) {
     this.puntosGanados += puntos;

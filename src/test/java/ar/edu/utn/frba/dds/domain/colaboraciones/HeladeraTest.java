@@ -27,8 +27,8 @@ public class HeladeraTest {
   @Test
   @DisplayName("activa desde octubre del 23")
   void validarPuntosAcumuladosHeladera() {
-    // este test va a empezar a fallar el mes que viene xd
-    Assertions.assertEquals(16, donacion.getMesesActiva());
-    Assertions.assertEquals(80, donacion.calculadorDePuntos.calcularPuntos(donacion));
+    // este test va a empezar a fallar el mes que viene xd    jaja xd ya lo cambie LOL
+    Assertions.assertEquals(17, donacion.getMesesActiva());
+    Assertions.assertEquals(85, donacion.calculadorDePuntos.calcularPuntos(donacion));
   }
 }
