@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
@@ -33,4 +35,8 @@ public class DateHelper {
     return date;
   }
 
+  public static int horasEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
+    Duration duracion = Duration.between(fechaInicio,fechaFin);
+    return (int) duracion.toHours();
+  }
 }

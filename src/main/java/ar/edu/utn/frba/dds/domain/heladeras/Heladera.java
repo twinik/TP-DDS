@@ -25,6 +25,7 @@ public class Heladera {
   private List<Vianda> viandas;
   private ModeloHeladera modelo;
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
+  private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {
     this.fechaPuestaFuncionamiento = fecha;
@@ -51,7 +52,7 @@ public class Heladera {
    */
   public void verificarTemperatura(float temperatura) {
     if (temperatura > this.modelo.getTempMax() || temperatura < this.modelo.getTempMin()) {
-      this.activa = false;
+      inhabilitar();
     }
     registroTemperaturas.add(new RegistroTemperatura(LocalDateTime.now(), temperatura));
   }
@@ -59,6 +60,10 @@ public class Heladera {
   public float getUltimaTemperaturaRegistrada() {
     // asumo que van en orden la lista, si no hay que comparar las fechas
     return this.registroTemperaturas.get(this.registroTemperaturas.size() - 1).temperaturaRegistrada;
+  }
+
+  public void inhabilitar() {
+    this.activa = false;
   }
 
 }

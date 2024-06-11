@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
 import java.util.ArrayList;
 import java.util.List;
+import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
+import ar.edu.utn.frba.dds.domain.utils.Direccion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,20 @@ public class Colaborador {
   private Float puntosGanados = 0f;
 
   private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
+
+  private Direccion direccion;
+
+  private List<MedioDeContacto> medioContacto;
+
+  private String nombre;
+
+  private String apellido;
+
+  private String rubro;
+
+  private String razonSocial;
+
+  private TipoPersonaJuridica tipoPersonaJuridica;
 
   public void sumarPuntos(Float puntos) {
     this.puntosGanados += puntos;

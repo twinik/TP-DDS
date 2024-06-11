@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.tecnicos;
 
+import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import java.util.List;
 import lombok.AllArgsConstructor;
