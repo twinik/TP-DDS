@@ -4,11 +4,15 @@ import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.repositories.IHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.IViandaRepository;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * reporta cuantas viandas tiene cada heladera
  */
 @AllArgsConstructor
+@Setter
+@Getter
 public class ReporteViandasPorHeladera implements IReporte {
 
     private IPDFGeneratorAdapter pdfGenerator;
@@ -18,7 +22,7 @@ public class ReporteViandasPorHeladera implements IReporte {
     private IViandaRepository viandasRepository;
 
     public void generarPDF() {
-        // TODO implement here
+        pdfGenerator.generarPdf("ejemplo","ejemplo","ejemplo");
     }
 
 
