@@ -35,7 +35,7 @@ public class TwilioWhatsappSender implements WhatsappSenderAdapter{
 
     TwilioWhatsappSender sender = new TwilioWhatsappSender();
 
-    sender.enviarWhatsapp(messageBody,toWhatsAppNumber);
+    sender.enviarWhatsapp(messageBody, toWhatsAppNumber);
     System.out.println("Message sent!");
   }
 
