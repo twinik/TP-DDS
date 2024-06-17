@@ -13,9 +13,9 @@ import ar.edu.utn.frba.dds.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.domain.colaboradores.factories.ColaboradorFactory;
 import ar.edu.utn.frba.dds.domain.emailSending.MyMailFactory;
 import ar.edu.utn.frba.dds.domain.colaboradores.factories.UsuarioFactory;
-import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import java.io.IOException;
 import java.util.*;
+import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,13 +29,13 @@ public class CargadorDeColaboraciones {
   private MailSenderAdapter mailSender;
   private String filePath;
   private String separator;
-  private ColaboradorRepository colaboradoRepository;
+  private ColaboradoresRepository colaboradoRepository;
   private ConfigReader config;
 
   /**
    * Constructor con parametros.
    */
-  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradorRepository respository) throws IOException {
+  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradoresRepository respository) throws IOException {
     this.config = new ConfigReader("config.properties");
     this.csvReader = csvReader;
     this.mailSender = mailAdapter;

@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockStatic;
+;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.emailSending.SendGridMailSender;
-import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
+import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,13 +23,13 @@ class CargadorDeColaboracionesTest {
   private SendGridMailSender mailSender;
   private CargadorDeColaboraciones cargador;
 
-  private ColaboradorRepository repositorio;
+  private ColaboradoresRepository repositorio;
   @BeforeEach
   void setUp() throws IOException {
     csvReader = new CargaColaboracionCsvReader();
     mailSender = mock(SendGridMailSender.class);
     doNothing().when(mailSender).enviarMail(any());
-    repositorio = new ColaboradorRepository();
+    repositorio = new ColaboradoresRepository();
     cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/domain/assets/cargacolaboraciones.csv", csvReader, mailSender,repositorio);
   }
 

@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
-import ar.edu.utn.frba.dds.repositories.IHeladeraRepository;
+import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
 import lombok.AllArgsConstructor;
 import java.util.*;
 
@@ -10,7 +10,7 @@ import java.util.*;
 @AllArgsConstructor
 public class RecomendadorHeladeras {
 
-    private IHeladeraRepository heladerasRepository;
+    private IHeladerasRepository heladerasRepository;
 
     public List<Heladera> recomendarHeladeras(Heladera heladera) {
         // TODO implement here

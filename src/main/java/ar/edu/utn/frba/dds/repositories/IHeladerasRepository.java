@@ -4,8 +4,8 @@ import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import java.util.List;
 import java.util.Optional;
 
-public interface IHeladeraRepository {
-  Optional<Heladera> buscar();
+public interface IHeladerasRepository {
+  Optional<Heladera> buscar(int id);
 
   List<Heladera> buscarTodos();
 

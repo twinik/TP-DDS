@@ -4,7 +4,7 @@ import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import java.util.List;
 import java.util.Optional;
 
-public interface IViandaRepository {
+public interface IViandasRepository {
   Optional<Vianda> buscar();
 
   List<Vianda> buscarTodos();

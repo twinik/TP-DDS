@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
-import ar.edu.utn.frba.dds.domain.reportes.IReporte;
-import ar.edu.utn.frba.dds.repositories.IColaboradorRepository;
-import ar.edu.utn.frba.dds.repositories.IViandaRepository;
+import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
+import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +19,9 @@ public class ReporteViandasPorColaborador implements IReporte {
 
     private IPDFGeneratorAdapter pdfGenerator;
 
-    private IViandaRepository viandasRepository;
+    private IViandasRepository viandasRepository;
 
-    private IColaboradorRepository colaboradorRepository;
+    private IColaboradoresRepository colaboradorRepository;
 
     public void generarPDF() {
         pdfGenerator.generarPdf("ejemplo","ejemplo","ejemplo");

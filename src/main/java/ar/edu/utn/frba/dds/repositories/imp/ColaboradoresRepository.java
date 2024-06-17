@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
-import ar.edu.utn.frba.dds.repositories.IColaboradorRepository;
+import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,10 +10,10 @@ import java.util.Optional;
 /**
  * ColaboradorRepository class permite interactuar con los colaboradores.
  */
-public class ColaboradorRepository implements IColaboradorRepository {
+public class ColaboradoresRepository implements IColaboradoresRepository {
   private List<Colaborador> colaboradores;
 
-  public ColaboradorRepository() {
+  public ColaboradoresRepository() {
     colaboradores = new ArrayList<Colaborador>();
   }
 
