@@ -14,7 +14,7 @@ public class SensorTemperatura {
   private Heladera heladera;
 
   public void registrarTemperatura(Float temp) {
-    heladera.verificarTemperatura(temp);
+    heladera.registrarTemperatura(temp);
   }
 
 }

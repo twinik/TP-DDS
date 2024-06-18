@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
+import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
+import ar.edu.utn.frba.dds.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
 import java.time.LocalDate;
@@ -26,6 +29,7 @@ public class Heladera {
   private ModeloHeladera modelo;
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
+  private List<Suscripcion> suscripciones = new ArrayList<>(); // TODO implementar observer
 
   public Heladera(LocalDate fecha) {
     this.fechaPuestaFuncionamiento = fecha;
@@ -45,16 +49,24 @@ public class Heladera {
 
   public void agregarVianda(Vianda vianda) {
     this.viandas.add(vianda);
+    avisarObservers();
+  }
+
+  public void quitarVianda(Vianda vianda) {
+    this.viandas.remove(vianda);
+    avisarObservers();
   }
 
   /**
-   * Metodo que verifica la temperatura de la heladera.
+   * Metodo que registra la temperatura de la heladera.
    */
-  public void verificarTemperatura(float temperatura) {
-    if (temperatura > this.modelo.getTempMax() || temperatura < this.modelo.getTempMin()) {
-      inhabilitar();
-    }
+  public void registrarTemperatura(float temperatura) {
     registroTemperaturas.add(new RegistroTemperatura(LocalDateTime.now(), temperatura));
+  }
+
+  public boolean temperaturaEsAdecuada() {
+    Float temp = this.registroTemperaturas.get(registroTemperaturas.size() - 1).temperaturaRegistrada;
+    return (temp < this.modelo.getTempMax() && temp > this.modelo.getTempMin());
   }
 
   public float getUltimaTemperaturaRegistrada() {
@@ -64,6 +76,11 @@ public class Heladera {
 
   public void inhabilitar() {
     this.activa = false;
+    avisarObservers();
+  }
+
+  private void avisarObservers() {
+    this.suscripciones.stream().parallel().forEach(s -> s.avisarEvento(this));
   }
 
 }

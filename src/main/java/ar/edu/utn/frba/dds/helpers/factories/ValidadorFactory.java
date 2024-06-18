@@ -1,9 +1,9 @@
-package ar.edu.utn.frba.dds.domain.helpers.factories;
+package ar.edu.utn.frba.dds.helpers.factories;
 
-import ar.edu.utn.frba.dds.domain.helpers.ValidadorClaves;
-import ar.edu.utn.frba.dds.domain.helpers.validaciones.Validacion;
-import ar.edu.utn.frba.dds.domain.helpers.validaciones.ValidacionLargoClaves;
-import ar.edu.utn.frba.dds.domain.helpers.validaciones.ValidacionListaClavesNuevo;
+import ar.edu.utn.frba.dds.helpers.ValidadorClaves;
+import ar.edu.utn.frba.dds.helpers.validaciones.Validacion;
+import ar.edu.utn.frba.dds.helpers.validaciones.ValidacionLargoClaves;
+import ar.edu.utn.frba.dds.helpers.validaciones.ValidacionListaClavesNuevo;
 import java.util.ArrayList;
 import java.util.List;
 

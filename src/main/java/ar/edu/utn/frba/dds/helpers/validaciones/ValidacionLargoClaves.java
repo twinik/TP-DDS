@@ -1,6 +1,6 @@
-package ar.edu.utn.frba.dds.domain.helpers.validaciones;
+package ar.edu.utn.frba.dds.helpers.validaciones;
 
-import ar.edu.utn.frba.dds.domain.helpers.MotivoNoValido;
+import ar.edu.utn.frba.dds.helpers.MotivoNoValido;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

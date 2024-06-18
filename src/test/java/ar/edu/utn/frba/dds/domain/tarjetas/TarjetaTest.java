@@ -1,12 +1,11 @@
 package ar.edu.utn.frba.dds.domain.tarjetas;
 
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
-import ar.edu.utn.frba.dds.domain.helpers.GeneradorDeCodigosHelper;
+import ar.edu.utn.frba.dds.helpers.GeneradorDeCodigosHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.quartz.JobExecutionContext;
 
 import java.util.Date;
 

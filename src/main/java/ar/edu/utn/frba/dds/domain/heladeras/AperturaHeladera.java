@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.excepciones.NoAutorizadoParaAbrirHeladeraException;
-import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
-import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.tarjetas.TarjetaColaborador;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

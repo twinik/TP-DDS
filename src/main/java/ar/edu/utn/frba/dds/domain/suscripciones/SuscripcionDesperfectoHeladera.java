@@ -12,7 +12,7 @@ public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
     private RecomendadorHeladeras recomendadorHeladeras;
 
     public void notificar(Heladera heladera, Suscripcion suscripcion) {
-        suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto());
+        suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(), ""); //TODO sacar mensaje de config
     }
 
 

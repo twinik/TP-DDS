@@ -1,7 +1,8 @@
 package ar.edu.utn.frba.dds.domain.helpers;
 
-import ar.edu.utn.frba.dds.domain.helpers.factories.ValidadorFactory;
-import ar.edu.utn.frba.dds.domain.helpers.validaciones.ValidacionLargoClaves;
+import ar.edu.utn.frba.dds.helpers.ValidadorClaves;
+import ar.edu.utn.frba.dds.helpers.factories.ValidadorFactory;
+import ar.edu.utn.frba.dds.helpers.validaciones.ValidacionLargoClaves;
 import org.junit.jupiter.api.*;
 
 class ValidadorTest {

@@ -11,7 +11,8 @@ public class SuscripcionViandasRestantes implements ITipoSuscripcion {
 
     public void notificar(Heladera heladera, Suscripcion suscripcion) {
         if(heladera.getViandas().size() <= suscripcion.getNumero()){
-            suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto());
+            String message = "Quedan " + heladera.getViandas().size() + " viandas en la heladera " + heladera.getNombre();
+            suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(), message);
         }
     }
 

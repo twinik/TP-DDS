@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.domain.emailSending;
 
 import ar.edu.utn.frba.dds.domain.excepciones.CrearMailException;
-import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import com.sendgrid.*;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;

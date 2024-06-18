@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.helpers;
+package ar.edu.utn.frba.dds.helpers;
 
 import java.security.SecureRandom;
 

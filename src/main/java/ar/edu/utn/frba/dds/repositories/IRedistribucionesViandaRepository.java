@@ -1,14 +1,13 @@
 package ar.edu.utn.frba.dds.repositories;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * IColaboradorRepository interface permite interactuar con las redistribuciones de viandas
+ * IRedistribucionesRepository interface permite interactuar con las redistribuciones de viandas
  */
-public interface IRedistribucionesVIandaRepository {
+public interface IRedistribucionesViandaRepository {
 
   Optional<RedistribucionViandas> buscar(int id);
 

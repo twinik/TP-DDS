@@ -1,15 +1,5 @@
 package ar.edu.utn.frba.dds.domain.serviceLocator;
 
-import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
-import ar.edu.utn.frba.dds.repositories.IDonacionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
-import ar.edu.utn.frba.dds.repositories.IRedistribucionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.ITarjetasRepository;
-import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
-import ar.edu.utn.frba.dds.repositories.imp.DonacionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.imp.HeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.imp.RedistribucionesViandaRepository;
-import ar.edu.utn.frba.dds.repositories.imp.TarjetaRepository;
 import java.util.HashMap;
 import java.util.Map;
 
