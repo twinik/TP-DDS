@@ -53,6 +53,10 @@ public class Tarjeta {
     this.nroUsos++;
   }
 
+  public void resetearUsosDiarios(){
+    this.cantidadUsosDia = 0;
+  }
+
   boolean permiteUsar() {
     return this.activa && frecuenciaPermitida.permiteUsar(this);
   }

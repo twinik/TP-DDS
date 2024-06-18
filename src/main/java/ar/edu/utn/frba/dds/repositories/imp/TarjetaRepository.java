@@ -34,10 +34,6 @@ public class TarjetaRepository implements ITarjetasRepository {
     // nada
   }
 
-  @Override
-  public void resetearUsosDiarios() {
-    this.tarjetas.stream().filter(Tarjeta::isActiva).forEach(t -> t.setCantidadUsosDia(0));
-  }
 
   @Override
   public void eliminar(Tarjeta tarjeta) {
