@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.domain.telegramSender;
 
-import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import java.io.IOException;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;

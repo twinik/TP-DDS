@@ -1,11 +1,13 @@
 package ar.edu.utn.frba.dds.domain.whatsappSender;
 
-import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.io.IOException;
-
 
 
 public class TwilioWhatsappSender implements WhatsappSenderAdapter{

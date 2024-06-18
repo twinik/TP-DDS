@@ -21,8 +21,8 @@ public class Suscripcion {
     private int numero;
     private MedioDeContacto medioDeContacto;
 
-    public void avisarEvento(Heladera heladera, Suscripcion suscripcion) {
-        // TODO implement here
+    public void avisarEvento(Heladera heladera) {
+        tipoSuscripcion.notificar(heladera, this);
     }
 
 }

@@ -1,6 +1,6 @@
-package ar.edu.utn.frba.dds.domain.helpers;
+package ar.edu.utn.frba.dds.helpers;
 
-import ar.edu.utn.frba.dds.domain.helpers.validaciones.Validacion;
+import ar.edu.utn.frba.dds.helpers.validaciones.Validacion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

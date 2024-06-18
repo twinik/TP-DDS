@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
-import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,10 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosColocacionHeladera;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 

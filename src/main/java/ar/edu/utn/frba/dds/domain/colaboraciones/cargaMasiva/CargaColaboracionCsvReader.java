@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
-import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

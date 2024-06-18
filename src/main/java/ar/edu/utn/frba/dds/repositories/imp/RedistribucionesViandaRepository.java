@@ -1,12 +1,12 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
-import ar.edu.utn.frba.dds.repositories.IRedistribucionesVIandaRepository;
+import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RedistribucionesViandaRepository implements IRedistribucionesVIandaRepository {
+public class RedistribucionesViandaRepository implements IRedistribucionesViandaRepository {
 
   private List<RedistribucionViandas> redistribucionViandas;
 

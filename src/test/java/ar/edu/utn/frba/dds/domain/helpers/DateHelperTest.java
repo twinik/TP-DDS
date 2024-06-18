@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.helpers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 

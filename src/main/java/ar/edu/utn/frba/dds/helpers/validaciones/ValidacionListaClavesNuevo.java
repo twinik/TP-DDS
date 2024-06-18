@@ -1,7 +1,7 @@
-package ar.edu.utn.frba.dds.domain.helpers.validaciones;
+package ar.edu.utn.frba.dds.helpers.validaciones;
 
-import ar.edu.utn.frba.dds.domain.helpers.ConfigReader;
-import ar.edu.utn.frba.dds.domain.helpers.MotivoNoValido;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.MotivoNoValido;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

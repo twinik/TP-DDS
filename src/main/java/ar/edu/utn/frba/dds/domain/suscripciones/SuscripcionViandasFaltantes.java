@@ -13,7 +13,8 @@ public class SuscripcionViandasFaltantes implements ITipoSuscripcion {
     public void notificar(Heladera heladera, Suscripcion suscripcion) {
         int viandasFaltantes = heladera.getCapacidadViandas() - heladera.getViandas().size();
         if(viandasFaltantes <= suscripcion.getNumero()){
-            suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto());
+            String message = "Faltan " + viandasFaltantes + " viandas para que la heladera " + heladera.getNombre() + " alcance su capacidad maxima";
+            suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(), message);
         }
     }
 
