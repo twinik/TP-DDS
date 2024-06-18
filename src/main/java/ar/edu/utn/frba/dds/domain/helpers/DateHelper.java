@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
 
 /**
  * DateHelper class permite realizar operaciones con fechas.
@@ -38,5 +39,10 @@ public class DateHelper {
   public static int horasEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
     Duration duracion = Duration.between(fechaInicio,fechaFin);
     return (int) duracion.toHours();
+  }
+
+  public static boolean esLaMismaSemana(LocalDate fecha1, LocalDate fecha2){
+    Period periodo = Period.between(fecha1,fecha2);
+    return periodo.getDays() <= 6;
   }
 }
