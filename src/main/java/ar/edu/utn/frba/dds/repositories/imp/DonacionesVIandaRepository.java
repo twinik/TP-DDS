@@ -1,13 +1,12 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
-import ar.edu.utn.frba.dds.repositories.IDonacionesVIandaRepository;
+import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DonacionesVIandaRepository implements IDonacionesVIandaRepository {
+public class DonacionesVIandaRepository implements IDonacionesViandaRepository {
 
   private List<DonacionVianda> donaciones;
 

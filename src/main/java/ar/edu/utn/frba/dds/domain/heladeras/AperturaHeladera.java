@@ -23,7 +23,7 @@ public class AperturaHeladera {
     private LocalDateTime timestamp;
     private Heladera heladera;
 
-    public static AperturaHeladera from(Heladera heladera, TarjetaColaborador tarjeta, ConfigReader configReader) throws IOException {
+    public static AperturaHeladera from(Heladera heladera, TarjetaColaborador tarjeta, LocalDateTime fechaYHora, ConfigReader configReader) throws IOException {
         Optional<SolicitudAperturaHeladera> solicitudAperturaHeladera = heladera.getSolicitudesApertura().stream().
             filter(s -> s.getColaborador().equals(tarjeta.getColaborador())).
             max(Comparator.comparing(SolicitudAperturaHeladera::getTimestamp));
@@ -31,10 +31,10 @@ public class AperturaHeladera {
         if(solicitudAperturaHeladera.isEmpty())
             throw new NoAutorizadoParaAbrirHeladeraException("colaborador no autorizado para abrir la heladera");
 
-        if(DateHelper.horasEntre(LocalDateTime.now(), solicitudAperturaHeladera.get().getTimestamp()) > Integer.parseInt(configReader.getProperty("LIMITE_HORAS_APERTURA_HELADERA")))
+        if(DateHelper.horasEntre(fechaYHora, solicitudAperturaHeladera.get().getTimestamp()) > Integer.parseInt(configReader.getProperty("LIMITE_HORAS_APERTURA_HELADERA")))
             throw new NoAutorizadoParaAbrirHeladeraException("colaborador no autorizado para abrir la heladera");
 
-        return new AperturaHeladera(solicitudAperturaHeladera.get(),LocalDateTime.now(),heladera);
+        return new AperturaHeladera(solicitudAperturaHeladera.get(),fechaYHora,heladera);
     }
 
 }

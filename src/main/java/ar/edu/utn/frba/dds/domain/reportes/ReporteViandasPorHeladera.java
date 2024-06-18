@@ -1,24 +1,12 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
-import ar.edu.utn.frba.dds.repositories.IDonacionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * reporta cuantas viandas tiene cada heladera
@@ -32,7 +20,7 @@ public class ReporteViandasPorHeladera implements IReporte {
 
     private IPDFGeneratorAdapter pdfGenerator;
 
-    private IDonacionesVIandaRepository donacionesVIandaRepository;
+    private IDonacionesViandaRepository donacionesVIandaRepository;
 
     private IRedistribucionesVIandaRepository redistribucionesVIandaRepository;
 

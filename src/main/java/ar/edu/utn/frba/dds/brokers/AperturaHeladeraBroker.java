@@ -2,20 +2,23 @@ package ar.edu.utn.frba.dds.brokers;
 
 import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
-import ar.edu.utn.frba.dds.repositories.ISensorTemperaturaRepository;
+import ar.edu.utn.frba.dds.repositories.IAperturasHeladeraRepository;
+import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.repositories.ISensorMovimientoRepository;
+import ar.edu.utn.frba.dds.repositories.ITarjetasColaboradorRepository;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import java.io.IOException;
 
-public class TemperaturaHeladeraBroker {
-  public static void suscribirseASensorTemperatura(String[] args) throws IOException {
+public class AperturaHeladeraBroker {
+  public static void suscribirseAAperturasHeladeras(String[] args) throws IOException {
 
     ConfigReader configReader = new ConfigReader("config.properties");
 
-    String topic        = configReader.getProperty("SENSOR_TEMP_BROKER_TOPIC");
-    String broker       = configReader.getProperty("SENSOR_TEMP_BROKER");
+    String topic        = configReader.getProperty("APERTURA_HELADERA_BROKER_TOPIC");
+    String broker       = configReader.getProperty("APERTURA_HELADERA_BROKER");
     String clientId     = "TP_DDS";
     MemoryPersistence persistence = new MemoryPersistence();
 
@@ -29,8 +32,11 @@ public class TemperaturaHeladeraBroker {
       System.out.println("Connected");
 
       System.out.println("Building receptor");
-      SensorTemperaturaListener receptor = new SensorTemperaturaListener();
-      receptor.setSensorTemperaturaRepository((ISensorTemperaturaRepository) ServiceLocator.get("SensoresTemperaturaRepository"));
+      AperturaHeladeraListener receptor = new AperturaHeladeraListener();
+      receptor.setHeladerasRepository((IHeladerasRepository) ServiceLocator.get("HeladerasRepository"));
+      receptor.setTarjetasColaboradorRepository((ITarjetasColaboradorRepository) ServiceLocator.get("TarjetasColaboradorRepository"));
+      receptor.setAperturasHeladeraRepository((IAperturasHeladeraRepository) ServiceLocator.get("AperturasHeladeraRepository"));
+
 
       System.out.println("Subscribe to topic");
       sampleClient.subscribe(topic, receptor);

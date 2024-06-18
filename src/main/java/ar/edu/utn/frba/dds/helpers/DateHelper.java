@@ -1,9 +1,11 @@
 package ar.edu.utn.frba.dds.helpers;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 
@@ -41,8 +43,17 @@ public class DateHelper {
     return (int) duracion.toHours();
   }
 
+  public static int minutosEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+    Duration duracion = Duration.between(fechaInicio,fechaFin);
+    return (int) duracion.toMinutes();
+  }
+
   public static boolean esLaMismaSemana(LocalDate fecha1, LocalDate fecha2){
     Period periodo = Period.between(fecha1,fecha2);
     return periodo.getDays() <= 6;
+  }
+
+  public static LocalDateTime localDateTimeFromTimestamp(long timestamp) {
+    return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC);
   }
 }

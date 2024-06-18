@@ -9,9 +9,9 @@ public interface ISensorTemperaturaRepository {
 
     List<SensorTemperatura> buscarTodos();
 
-    void guardar(SensorTemperatura redistribucionViandas);
+    void guardar(SensorTemperatura sensorTemperatura);
 
-    void actualizar(SensorTemperatura redistribucionViandas);
+    void actualizar(SensorTemperatura sensorTemperatura);
 
-    void eliminar(SensorTemperatura redistribucionViandas);
+    void eliminar(SensorTemperatura sensorTemperatura);
 }

@@ -9,9 +9,9 @@ public interface ITecnicosRepository {
 
   List<Tecnico> buscarTodos();
 
-  void guardar(Tecnico tarjeta);
+  void guardar(Tecnico tecnico);
 
-  void actualizar(Tecnico tarjeta);
+  void actualizar(Tecnico tecnico);
 
-  void eliminar(Tecnico tarjeta);
+  void eliminar(Tecnico tecnico);
 }

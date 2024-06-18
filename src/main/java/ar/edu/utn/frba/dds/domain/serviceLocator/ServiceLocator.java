@@ -1,10 +1,6 @@
 package ar.edu.utn.frba.dds.domain.serviceLocator;
 
-import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
-import ar.edu.utn.frba.dds.repositories.IDonacionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.ITarjetasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.AlertasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
 import ar.edu.utn.frba.dds.repositories.imp.DonacionesVIandaRepository;

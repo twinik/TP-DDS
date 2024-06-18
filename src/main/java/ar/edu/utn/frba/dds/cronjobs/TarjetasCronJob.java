@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.cronjobs;
+package ar.edu.utn.frba.dds.cronjobs;
 
 import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
