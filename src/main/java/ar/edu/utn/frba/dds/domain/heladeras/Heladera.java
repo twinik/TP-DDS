@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.heladeras;
 
 import ar.edu.utn.frba.dds.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
