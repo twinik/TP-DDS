@@ -53,6 +53,11 @@ public class DateHelper {
     return periodo.getDays() <= 6;
   }
 
+  public static boolean esLaMismaSemana(LocalDateTime fecha1, LocalDateTime fecha2){
+    Period periodo = Period.between(fecha1.toLocalDate(),fecha2.toLocalDate());
+    return periodo.getDays() <= 6;
+  }
+
   public static LocalDateTime localDateTimeFromTimestamp(long timestamp) {
     return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC);
   }
