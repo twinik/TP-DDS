@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.domain.reportes;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
-import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;

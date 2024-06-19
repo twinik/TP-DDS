@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.domain.tecnicos;
 
-import ar.edu.utn.frba.dds.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,6 +10,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class AreaDeCobertura {
-  private Direccion referencia;
+  private Ubicacion referencia;
   private Float radioDeCoberturaEnKM;
+
+  public boolean contieneUbicacion(Ubicacion ubicacion) {
+    float distancia = referencia.calcularDistanciaHasta(ubicacion);
+    return distancia <= radioDeCoberturaEnKM;
+  }
 }

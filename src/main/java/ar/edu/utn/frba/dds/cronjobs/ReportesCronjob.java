@@ -10,7 +10,6 @@ import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
-import ar.edu.utn.frba.dds.repositories.IRedistribucionesVIandaRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import java.util.ArrayList;

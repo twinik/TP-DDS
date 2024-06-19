@@ -41,8 +41,9 @@ public class BotTelegramSender extends TelegramLongPollingBot implements Telegra
 
   @Override
   public void onUpdateReceived(Update update) {
-        //
-    }
+    // No se implementa
+  }
+
 
 /**
  * Método principal para enviar un mensaje de Telegram.

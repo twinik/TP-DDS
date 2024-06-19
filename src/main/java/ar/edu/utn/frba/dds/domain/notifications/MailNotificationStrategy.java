@@ -18,4 +18,8 @@ public class MailNotificationStrategy implements NotificationStrategy {
         // TODO implement here
     }
 
+    @Override
+    public void notificar(MedioDeContacto medioContacto, String message) {
+
+    }
 }

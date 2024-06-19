@@ -29,6 +29,10 @@ public class DonacionVianda extends Colaboracion {
     this.vianda = vianda;
   }
 
+  public Vianda getVianda() {
+    return vianda;
+  }
+
   /**
    * Metodo efectuar que se encarga de sumar puntos al colaborador.
    */

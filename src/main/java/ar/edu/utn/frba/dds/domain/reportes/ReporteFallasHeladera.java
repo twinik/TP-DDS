@@ -1,27 +1,21 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
-import ar.edu.utn.frba.dds.domain.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
-import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
- * reporta todas las fallas de una heladera
+ * reporta todas las fallas de una heladera.
  */
 @AllArgsConstructor
 @Setter

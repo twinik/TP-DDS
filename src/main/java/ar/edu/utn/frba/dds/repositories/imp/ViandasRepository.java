@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public class ViandasRepository implements IViandasRepository {
 
-  private List<Vianda> viandas
+  private List<Vianda> viandas;
+
   @Override
   public Optional<Vianda> buscar() {
     return Optional.empty();
@@ -20,7 +21,7 @@ public class ViandasRepository implements IViandasRepository {
 
   @Override
   public void guardar(Vianda vianda) {
-    this.viandas.add(vianda)
+    this.viandas.add(vianda);
   }
 
   @Override
