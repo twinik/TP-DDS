@@ -43,10 +43,11 @@ public class HeladeraRepository implements IHeladerasRepository {
   }
 
   @Override
-  public List<Heladera> heladerasCercanas(Heladera heladera) {
+  public List<Heladera> heladerasCercanas(Heladera heladera, int limite) {
     return heladeras.stream()
         .filter(Heladera::isActiva)
         .sorted(Comparator.comparing(h -> h.getUbicacion().calcularDistanciaHasta(heladera.getUbicacion())))
+        .limit(limite)
         .collect(Collectors.toList());
   }
 }

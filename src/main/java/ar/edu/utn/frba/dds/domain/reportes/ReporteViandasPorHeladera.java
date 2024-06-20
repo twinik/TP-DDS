@@ -40,8 +40,11 @@ public class ReporteViandasPorHeladera implements IReporte {
     Map<Heladera, Long> viandasColocadasPorHeladera = donacionesViandaRepository.buscarTodos()
         .stream().collect(Collectors.groupingBy(donacion -> donacion.getVianda().getHeladera(), Collectors.counting()));
 
+    viandasColocadasPorHeladera.putAll(redistribucionesViandaRepository.buscarTodos()
+        .stream().collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraDestino, Collectors.counting())));
+
     Map<Heladera, Long> viandasRetiradasPorHeladera = redistribucionesViandaRepository.buscarTodos()
-        .stream().collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraDestino, Collectors.counting()));
+        .stream().collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraOrigen, Collectors.counting()));
 
     String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 

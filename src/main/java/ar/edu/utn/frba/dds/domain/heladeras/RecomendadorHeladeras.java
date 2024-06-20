@@ -7,15 +7,17 @@ import java.util.List;
 public class RecomendadorHeladeras {
 
   private IHeladerasRepository heladerasRepository;
+  private int limite;
 
-  public RecomendadorHeladeras(IHeladerasRepository heladerasRepository) {
+  public RecomendadorHeladeras(IHeladerasRepository heladerasRepository, int limite) {
     this.heladerasRepository = heladerasRepository;
+    this.limite = limite;
   }
 
   public List<Heladera> recomendarCombinacionHeladeras(Heladera heladera) {
     int totalViandas = heladera.getViandas().size();
 
-    List<Heladera> heladerasCercanas = heladerasRepository.heladerasCercanas(heladera);
+    List<Heladera> heladerasCercanas = heladerasRepository.heladerasCercanas(heladera, limite);
 
     List<Heladera> heladerasSeleccionadas = new ArrayList<>();
     int capacidadAcumulada = 0;

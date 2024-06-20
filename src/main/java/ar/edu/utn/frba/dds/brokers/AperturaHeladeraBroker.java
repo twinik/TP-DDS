@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.repositories.IAperturasHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.repositories.ISolicitudesAperturaHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.ITarjetasColaboradorRepository;
 import java.io.IOException;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -43,7 +44,7 @@ public class AperturaHeladeraBroker {
       receptor.setHeladerasRepository((IHeladerasRepository) ServiceLocator.get("HeladerasRepository"));
       receptor.setTarjetasColaboradorRepository((ITarjetasColaboradorRepository) ServiceLocator.get("TarjetasColaboradorRepository"));
       receptor.setAperturasHeladeraRepository((IAperturasHeladeraRepository) ServiceLocator.get("AperturasHeladeraRepository"));
-
+      receptor.setSolicitudesAperturaHeladeraRepository((ISolicitudesAperturaHeladeraRepository) ServiceLocator.get("SolicitudesAperturaHeladeraRepository"));
 
       System.out.println("Subscribe to topic");
       sampleClient.subscribe(topic, receptor);

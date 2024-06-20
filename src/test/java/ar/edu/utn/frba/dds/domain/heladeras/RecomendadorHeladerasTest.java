@@ -20,7 +20,7 @@ class RecomendadorHeladerasTest {
     @BeforeEach
     void setUp() {
         heladerasRepository = Mockito.mock(IHeladerasRepository.class);
-        recomendadorHeladeras = new RecomendadorHeladeras(heladerasRepository);
+        recomendadorHeladeras = new RecomendadorHeladeras(heladerasRepository, 5);
     }
 
     @Test
@@ -39,7 +39,7 @@ class RecomendadorHeladerasTest {
         Heladera heladeraObjetivo = new Heladera(null, null, "Heladera Objetivo", null, LocalDate.now(), Arrays.asList(vianda1, vianda2, vianda3, vianda4, vianda5), null);
 
 
-        when(heladerasRepository.heladerasCercanas(heladeraObjetivo)).thenReturn(Arrays.asList(heladera1, heladera2, heladera3));
+        when(heladerasRepository.heladerasCercanas(heladeraObjetivo, 5)).thenReturn(Arrays.asList(heladera1, heladera2, heladera3));
 
 
         List<Heladera> resultado = recomendadorHeladeras.recomendarCombinacionHeladeras(heladeraObjetivo);

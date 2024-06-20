@@ -27,7 +27,7 @@ public class Heladera {
   private ModeloHeladera modelo;
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
-  private List<Suscripcion> suscripciones = new ArrayList<>(); // TODO implementar observer
+  private List<Suscripcion> suscripciones = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {
     this.fechaPuestaFuncionamiento = fecha;
