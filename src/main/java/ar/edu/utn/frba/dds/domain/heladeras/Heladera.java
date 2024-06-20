@@ -55,6 +55,10 @@ public class Heladera {
     avisarObservers();
   }
 
+  public void agregarSuscripcion(Suscripcion... suscripciones){
+    this.suscripciones.addAll(Arrays.stream(suscripciones).toList());
+  }
+
   /**
    * Metodo que registra la temperatura de la heladera.
    */
