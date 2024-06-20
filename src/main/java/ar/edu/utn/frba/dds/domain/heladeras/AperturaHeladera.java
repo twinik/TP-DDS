@@ -23,6 +23,7 @@ public class AperturaHeladera {
     private LocalDateTime timestamp;
     private Heladera heladera;
 
+    //TODO uri no te olvides de cambiar que hice un metodo para que la heladera conozca a sus heladerasCercanas
     public static AperturaHeladera from(Heladera heladera, TarjetaColaborador tarjeta, LocalDateTime fechaYHora, ConfigReader configReader) throws IOException {
         Optional<SolicitudAperturaHeladera> solicitudAperturaHeladera = heladera.getSolicitudesApertura().stream().
             filter(s -> s.getColaborador().equals(tarjeta.getColaborador())).

@@ -14,4 +14,6 @@ public interface IHeladerasRepository {
   void actualizar(Heladera heladera);
 
   void eliminar(Heladera heladera);
+
+  List<Heladera> heladerasCercanas(Heladera heladera);
 }

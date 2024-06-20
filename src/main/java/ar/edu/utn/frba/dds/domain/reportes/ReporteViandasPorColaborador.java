@@ -25,34 +25,34 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class ReporteViandasPorColaborador implements IReporte {
 
-    private final String tituloReporte = "Viandas Donadas Por Colaborador esta semana";
+  private final String tituloReporte = "Viandas Donadas Por Colaborador esta semana";
 
-    private IPDFGeneratorAdapter pdfGenerator;
+  private IPDFGeneratorAdapter pdfGenerator;
 
-    private IViandasRepository viandasRepository;
+  private IViandasRepository viandasRepository;
 
-    public void generarPDF() {
-        LocalDate hoy = LocalDate.now();
-        List<Vianda> viandasDonadasEstaSemana = viandasRepository.buscarTodos().
-            stream().
-            filter(v-> DateHelper.esLaMismaSemana(v.getFechaDonacion(), hoy)).
-            toList();
+  public void generarPDF() {
+    LocalDate hoy = LocalDate.now();
+    List<Vianda> viandasDonadasEstaSemana = viandasRepository.buscarTodos()
+        .stream()
+        .filter(v -> DateHelper.esLaMismaSemana(v.getFechaDonacion(), hoy))
+        .toList();
 
-        Map<Colaborador,Long> viandasPorColaborador = viandasDonadasEstaSemana
-            .stream().collect(Collectors.groupingBy(Vianda::getColaborador,Collectors.counting()));
+    Map<Colaborador, Long> viandasPorColaborador = viandasDonadasEstaSemana
+        .stream().collect(Collectors.groupingBy(Vianda::getColaborador, Collectors.counting()));
 
-         String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        pdfGenerator.generarPdf("reporte-viandas-colab",tituloConFecha,this.generarEntradasInforme(viandasPorColaborador));
+    pdfGenerator.generarPdf("reporte-viandas-colab", tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
 
 
-    }
+  }
 
-    private String generarEntradasInforme( Map<Colaborador,Long> viandasPorColaborador){
-        StringBuilder stringBuilder = new StringBuilder();
-        viandasPorColaborador.forEach((colab,cant)-> stringBuilder.
-            append(String.format("Colaborador: %s %s ha donado %d viandas\n",colab.getNombre(),colab.getApellido(),cant)));
-        return stringBuilder.toString();
-    }
+  private String generarEntradasInforme(Map<Colaborador, Long> viandasPorColaborador) {
+    StringBuilder stringBuilder = new StringBuilder();
+    viandasPorColaborador.forEach((colab, cant) -> stringBuilder
+        .append(String.format("Colaborador: %s %s ha donado %d viandas\n", colab.getNombre(), colab.getApellido(), cant)));
+    return stringBuilder.toString();
+  }
 
 }

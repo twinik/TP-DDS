@@ -3,8 +3,10 @@ package ar.edu.utn.frba.dds.repositories.imp;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class HeladeraRepository implements IHeladerasRepository {
 
@@ -38,5 +40,13 @@ public class HeladeraRepository implements IHeladerasRepository {
   @Override
   public void eliminar(Heladera heladera) {
 
+  }
+
+  @Override
+  public List<Heladera> heladerasCercanas(Heladera heladera) {
+    return heladeras.stream()
+        .filter(Heladera::isActiva)
+        .sorted(Comparator.comparing(h -> h.getUbicacion().calcularDistanciaHasta(heladera.getUbicacion())))
+        .collect(Collectors.toList());
   }
 }

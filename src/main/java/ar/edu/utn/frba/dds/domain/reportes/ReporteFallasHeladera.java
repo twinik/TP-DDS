@@ -24,34 +24,34 @@ import lombok.Setter;
 @Getter
 public class ReporteFallasHeladera implements IReporte {
 
-    private final String tituloReporte = "Cantidad de fallas por heladera esta semana";
-    private IPDFGeneratorAdapter pdfGenerator;
+  private final String tituloReporte = "Cantidad de fallas por heladera esta semana";
+  private IPDFGeneratorAdapter pdfGenerator;
 
-    private IFallasTecnicasRepository fallasTecnicasRepository;
+  private IFallasTecnicasRepository fallasTecnicasRepository;
 
-    private IAlertasRepository alertasRepository;
+  private IAlertasRepository alertasRepository;
 
-    public void generarPDF() {
-        LocalDateTime hoy = LocalDateTime.now();
+  public void generarPDF() {
+    LocalDateTime hoy = LocalDateTime.now();
 
-        Map<Heladera,Long> alertasPorHeladera = alertasRepository.buscarTodos()
-            .stream().filter(a -> DateHelper.esLaMismaSemana(a.getTimestamp(),hoy)).collect(Collectors.groupingBy(Alerta::getHeladera,Collectors.counting()));
+    Map<Heladera, Long> alertasPorHeladera = alertasRepository.buscarTodos()
+        .stream().filter(a -> DateHelper.esLaMismaSemana(a.getTimestamp(), hoy)).collect(Collectors.groupingBy(Alerta::getHeladera, Collectors.counting()));
 
-        Map<Heladera,Long> fallasTecnicasPorHeladera = fallasTecnicasRepository.buscarTodos()
-            .stream().filter(f -> DateHelper.esLaMismaSemana(f.getTimestamp(),hoy)).collect(Collectors.groupingBy(FallaTecnica::getHeladera,Collectors.counting()));
+    Map<Heladera, Long> fallasTecnicasPorHeladera = fallasTecnicasRepository.buscarTodos()
+        .stream().filter(f -> DateHelper.esLaMismaSemana(f.getTimestamp(), hoy)).collect(Collectors.groupingBy(FallaTecnica::getHeladera, Collectors.counting()));
 
-        alertasPorHeladera.forEach(((heladera,cant) -> fallasTecnicasPorHeladera.merge(heladera,cant, Long::sum)));
+    alertasPorHeladera.forEach(((heladera, cant) -> fallasTecnicasPorHeladera.merge(heladera, cant, Long::sum)));
 
-        String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        pdfGenerator.generarPdf("reporte-fallas-vianda",tituloConFecha,this.generarEntradasInforme(alertasPorHeladera));
-    }
+    pdfGenerator.generarPdf("reporte-fallas-vianda", tituloConFecha, this.generarEntradasInforme(alertasPorHeladera));
+  }
 
-    private String generarEntradasInforme(Map<Heladera,Long> incidnetesPorHeladera){
-        StringBuilder stringBuilder = new StringBuilder();
-        incidnetesPorHeladera.forEach((h,cant) -> stringBuilder.
-            append(String.format("Heladera: %s cantidad de fallas: %d",h,cant)));
-        return stringBuilder.toString();
-    }
+  private String generarEntradasInforme(Map<Heladera, Long> incidnetesPorHeladera) {
+    StringBuilder stringBuilder = new StringBuilder();
+    incidnetesPorHeladera.forEach((h, cant) -> stringBuilder
+        .append(String.format("Heladera: %s cantidad de fallas: %d", h, cant)));
+    return stringBuilder.toString();
+  }
 
 }

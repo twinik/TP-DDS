@@ -77,6 +77,9 @@ public class Heladera {
     avisarObservers();
   }
 
+  //un metodo llamado heladerasCercanas que devuelve una lista de heladeras cercanas a la heladera pasado por parametro
+
+
   private void avisarObservers() {
     this.suscripciones.stream().parallel().forEach(s -> s.avisarEvento(this));
   }
