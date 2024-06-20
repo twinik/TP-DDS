@@ -1,23 +1,21 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
+import lombok.NoArgsConstructor;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ */
+@NoArgsConstructor
 public class RecomendadorHeladeras {
-
-  private IHeladerasRepository heladerasRepository;
-  private int limite;
-
-  public RecomendadorHeladeras(IHeladerasRepository heladerasRepository, int limite) {
-    this.heladerasRepository = heladerasRepository;
-    this.limite = limite;
-  }
 
   public List<Heladera> recomendarCombinacionHeladeras(Heladera heladera) {
     int totalViandas = heladera.getViandas().size();
 
-    List<Heladera> heladerasCercanas = heladerasRepository.heladerasCercanas(heladera, limite);
+    List<Heladera> heladerasCercanas = heladera.getHeladerasCercanas();
 
     List<Heladera> heladerasSeleccionadas = new ArrayList<>();
     int capacidadAcumulada = 0;

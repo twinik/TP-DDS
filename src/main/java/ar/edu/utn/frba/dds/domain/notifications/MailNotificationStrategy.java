@@ -21,7 +21,7 @@ public class MailNotificationStrategy implements NotificationStrategy {
      */
     @Override
     public void notificar(MedioDeContacto medioContacto, String message) {
-        ConfigReader config = new ConfigReader("config.propertie");
+        ConfigReader config = new ConfigReader("config.properties");
         try {
             mailSenderAdapter.enviarMail(MyMailFactory.createMail(config.getProperty("MAIL-DIR")
                 , medioContacto.getContacto(),config.getProperty("ASUNTO_MENSAJE_TENICO"),message));

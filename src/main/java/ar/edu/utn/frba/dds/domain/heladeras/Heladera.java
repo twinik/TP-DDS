@@ -28,6 +28,7 @@ public class Heladera {
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
   private List<Suscripcion> suscripciones = new ArrayList<>();
+  private List<Heladera> heladerasCercanas = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {
     this.fechaPuestaFuncionamiento = fecha;
@@ -55,6 +56,11 @@ public class Heladera {
     avisarObservers();
   }
 
+  public void agregarHeladeraCercana(Heladera... heladeras){
+      this.heladerasCercanas.addAll(Arrays.stream(heladeras).toList());
+  }
+
+
   public void agregarSuscripcion(Suscripcion... suscripciones){
     this.suscripciones.addAll(Arrays.stream(suscripciones).toList());
   }
@@ -79,6 +85,10 @@ public class Heladera {
   public void inhabilitar() {
     this.activa = false;
     avisarObservers();
+  }
+
+  public int getCuposLibresViandas(){
+    return this.capacidadViandas - this.viandas.size();
   }
 
   //un metodo llamado heladerasCercanas que devuelve una lista de heladeras cercanas a la heladera pasado por parametro
