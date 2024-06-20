@@ -41,10 +41,10 @@ public class AperturaHeladeraBroker {
 
       System.out.println("Building receptor");
       AperturaHeladeraListener receptor = new AperturaHeladeraListener();
-      receptor.setHeladerasRepository((IHeladerasRepository) ServiceLocator.get("HeladerasRepository"));
-      receptor.setTarjetasColaboradorRepository((ITarjetasColaboradorRepository) ServiceLocator.get("TarjetasColaboradorRepository"));
-      receptor.setAperturasHeladeraRepository((IAperturasHeladeraRepository) ServiceLocator.get("AperturasHeladeraRepository"));
-      receptor.setSolicitudesAperturaHeladeraRepository((ISolicitudesAperturaHeladeraRepository) ServiceLocator.get("SolicitudesAperturaHeladeraRepository"));
+      receptor.setHeladerasRepository((IHeladerasRepository) ServiceLocator.get("heladerasRepository"));
+      receptor.setTarjetasColaboradorRepository((ITarjetasColaboradorRepository) ServiceLocator.get("tarjetasColaboradorRepository"));
+      receptor.setAperturasHeladeraRepository((IAperturasHeladeraRepository) ServiceLocator.get("aperturasHeladeraRepository"));
+      receptor.setSolicitudesAperturaHeladeraRepository((ISolicitudesAperturaHeladeraRepository) ServiceLocator.get("solicitudesAperturaHeladeraRepository"));
 
       System.out.println("Subscribe to topic");
       sampleClient.subscribe(topic, receptor);

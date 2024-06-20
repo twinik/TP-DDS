@@ -30,7 +30,8 @@ public class Incidente {
         if (notificationStrategy == null) {
             throw new InvalidNotificationStrategyException();
         }
-        String message = ""; // TODO armar mensaje de aviso de incidente
+        String message = String.format("Hola %s se rompio la heladera %s a las %s y necesitamos que por favor venga a repararla",
+            tecnicoAContactar.getNombre(),heladera.getNombre(),timestamp.toString());
         notificationStrategy.notificar(medioDeContacto, message);
     }
 

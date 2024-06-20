@@ -10,7 +10,7 @@ import java.util.List;
 public class TecnicosHelper {
 
   public static Tecnico findTecnicoMasCercano(Ubicacion ubicacion) {
-    ITecnicosRepository tecnicosRepository = (ITecnicosRepository) ServiceLocator.get("TecnicosRepository");
+    ITecnicosRepository tecnicosRepository = (ITecnicosRepository) ServiceLocator.get("tecnicosRepository");
     List<Tecnico> tecnicos = tecnicosRepository.buscarTodos();
 
     Tecnico tecnicoMasCercano = null;

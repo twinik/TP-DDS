@@ -31,7 +31,7 @@ public class FraudeHeladeraBroker {
 
       System.out.println("Building receptor");
       SensorMovimientoListener receptor = new SensorMovimientoListener();
-      receptor.setSensorMovimientoRepository((ISensorMovimientoRepository) ServiceLocator.get("SensoresMovimientoRepository"));
+      receptor.setSensorMovimientoRepository((ISensorMovimientoRepository) ServiceLocator.get("sensoresMovimientoRepository"));
 
       System.out.println("Subscribe to topic");
       sampleClient.subscribe(topic, receptor);

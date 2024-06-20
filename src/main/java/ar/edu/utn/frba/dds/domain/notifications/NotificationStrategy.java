@@ -7,6 +7,6 @@ import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
  */
 public interface NotificationStrategy {
 
-    public void notificar(MedioDeContacto medioContacto, String message);
+    void notificar(MedioDeContacto medioContacto, String message);
 
 }

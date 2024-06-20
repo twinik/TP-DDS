@@ -30,7 +30,7 @@ public class TemperaturaHeladeraBroker {
 
       System.out.println("Building receptor");
       SensorTemperaturaListener receptor = new SensorTemperaturaListener();
-      receptor.setSensorTemperaturaRepository((ISensorTemperaturaRepository) ServiceLocator.get("SensoresTemperaturaRepository"));
+      receptor.setSensorTemperaturaRepository((ISensorTemperaturaRepository) ServiceLocator.get("sensoresTemperaturaRepository"));
 
       System.out.println("Subscribe to topic");
       sampleClient.subscribe(topic, receptor);

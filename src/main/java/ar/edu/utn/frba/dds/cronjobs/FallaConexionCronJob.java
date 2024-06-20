@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FallaConexionCronJob {
   public static void main(String[] args) {
-    IHeladerasRepository heladerasRepository = (IHeladerasRepository) ServiceLocator.get("HeladerasRepository");
+    IHeladerasRepository heladerasRepository = (IHeladerasRepository) ServiceLocator.get("heladerasRepository");
     List<Heladera> heladeras = heladerasRepository.buscarTodos();
     for (Heladera h : heladeras) {
       List<RegistroTemperatura> registroTemperaturas = h.getRegistroTemperaturas();

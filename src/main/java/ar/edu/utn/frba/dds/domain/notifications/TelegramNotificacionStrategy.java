@@ -13,7 +13,7 @@ public class TelegramNotificacionStrategy implements NotificationStrategy {
     private TelegramSenderAdapter telegramSenderAdapter;
 
     public void notificar(MedioDeContacto medioContacto, String message) {
-        // TODO implement here
+        telegramSenderAdapter.enviarTelegram(message,medioContacto.getContacto());
     }
 
 

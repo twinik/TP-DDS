@@ -12,7 +12,8 @@ public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
     private RecomendadorHeladeras recomendadorHeladeras;
 
     public void notificar(Heladera heladera, Suscripcion suscripcion) {
-        suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(), ""); //TODO sacar mensaje de config
+        //TODO thomi: usar el recomendador y formatear un mensaje con las heladeras mas cercanas??
+        suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(), "");
     }
 
 
