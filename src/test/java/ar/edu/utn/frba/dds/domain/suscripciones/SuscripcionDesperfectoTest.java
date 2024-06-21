@@ -21,10 +21,6 @@ import java.util.List;
 
 public class SuscripcionDesperfectoTest {
 
-
-
-
-
   @Test
   @DisplayName("pruebo que notifique el observer ante evento")
   void mandarNotificacion(){

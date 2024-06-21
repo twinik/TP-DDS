@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.tarjetas;
 
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.helpers.GeneradorDeCodigosHelper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,12 +28,12 @@ public class TarjetaTest {
   @Test
   @DisplayName("Test de inicialización correcta")
   public void testInicializacionCorrecta() {
-    assertEquals(5, tarjeta.getNroUsos());
-    assertInstanceOf(FrecuenciaDiaria.class, tarjeta.getFrecuenciaPermitida());
-    assertNotNull(tarjeta.getUsos());
-    assertEquals(0, tarjeta.getUsos().size());
-    assertEquals(duenioMock, tarjeta.getDuenio());
-    assertEquals(0, tarjeta.getCantidadUsosDia());
+    Assertions.assertEquals(5, tarjeta.getNroUsos());
+    Assertions.assertInstanceOf(FrecuenciaDiaria.class, tarjeta.getFrecuenciaPermitida());
+    Assertions.assertNotNull(tarjeta.getUsos());
+    Assertions.assertEquals(0, tarjeta.getUsos().size());
+    Assertions.assertEquals(duenioMock, tarjeta.getDuenio());
+    Assertions.assertEquals(0, tarjeta.getCantidadUsosDia());
   }
 
   @Test
@@ -40,9 +41,9 @@ public class TarjetaTest {
   public void testPermitirUso() {
     Mockito.when(duenioMock.cantidadMenores()).thenReturn(0);
     tarjeta.setCantidadUsosDia(0);
-    assertTrue(tarjeta.permiteUsar());
+    Assertions.assertTrue(tarjeta.permiteUsar());
 
     tarjeta.setCantidadUsosDia(5);
-    assertFalse(tarjeta.permiteUsar());
+    Assertions.assertFalse(tarjeta.permiteUsar());
   }
 }

@@ -12,6 +12,8 @@ import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion.ListadoUbicaciones;
 import ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion.RecomendadorDePuntosAdapter;
 import ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion.RecomendadorDePuntosDeColocacion;
+import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,7 @@ public class TestReporte {
     ReporteViandasPorColaborador reporte = new ReporteViandasPorColaborador();
     IPDFGeneratorAdapter generador = Mockito.mock(IPDFGeneratorAdapter.class);
     reporte.setPdfGenerator(generador);
+    reporte.setViandasRepository((IViandasRepository) ServiceLocator.get("viandasRepository"));
     doNothing().when(generador).generarPdf(any(),any(),any());
     reporte.generarPDF();
     verify(generador,times(1)).generarPdf(any(),any(),any());

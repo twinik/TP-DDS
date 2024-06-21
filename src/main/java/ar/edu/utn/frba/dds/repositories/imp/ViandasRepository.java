@@ -2,12 +2,17 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class ViandasRepository implements IViandasRepository {
 
   private List<Vianda> viandas;
+
+  public ViandasRepository() {
+    viandas = new ArrayList<>();
+  }
 
   @Override
   public Optional<Vianda> buscar() {
