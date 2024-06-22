@@ -3,14 +3,13 @@ package ar.edu.utn.frba.dds.brokers;
 import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.repositories.ISensorMovimientoRepository;
-import ar.edu.utn.frba.dds.repositories.ISensorTemperaturaRepository;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import java.io.IOException;
 
-public class FraudeHeladeraBroker {
+public class SensorMovimientoBroker {
   public static void suscribirseASensorMovimiento(String[] args) throws IOException {
 
     ConfigReader configReader = new ConfigReader("config.properties");
