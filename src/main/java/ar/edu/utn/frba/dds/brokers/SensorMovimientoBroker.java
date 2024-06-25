@@ -17,32 +17,11 @@ public class SensorMovimientoBroker {
     String topic        = configReader.getProperty("SENSOR_MOV_BROKER_TOPIC");
     String broker       = configReader.getProperty("SENSOR_MOV_BROKER");
     String clientId     = "TP_DDS";
-    MemoryPersistence persistence = new MemoryPersistence();
 
-    try {
-      MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-      MqttConnectOptions connOpts = new MqttConnectOptions();
-      connOpts.setCleanSession(true);
+    SensorMovimientoListener receptor = new SensorMovimientoListener();
+    receptor.setSensorMovimientoRepository((ISensorMovimientoRepository) ServiceLocator.get("sensoresMovimientoRepository"));
 
-      System.out.println("Connecting to broker: "+broker);
-      sampleClient.connect(connOpts);
-      System.out.println("Connected");
-
-      System.out.println("Building receptor");
-      SensorMovimientoListener receptor = new SensorMovimientoListener();
-      receptor.setSensorMovimientoRepository((ISensorMovimientoRepository) ServiceLocator.get("sensoresMovimientoRepository"));
-
-      System.out.println("Subscribe to topic");
-      sampleClient.subscribe(topic, receptor);
-
-      System.out.println("Right! We are subscribed");
-    } catch(MqttException me) {
-      System.out.println("reason " + me.getReasonCode());
-      System.out.println("msg " + me.getMessage());
-      System.out.println("loc " + me.getLocalizedMessage());
-      System.out.println("cause " + me.getCause());
-      System.out.println("excep " + me);
-      me.printStackTrace();
-    }
+    BrokerListener brokerListener = new BrokerListener(topic, broker, clientId, receptor);
+    brokerListener.listen();
   }
 }
