@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.domain.serviceLocator;
+package ar.edu.utn.frba.dds.serviceLocator;
 
 import ar.edu.utn.frba.dds.repositories.imp.AlertasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.AperturasHeladeraRepository;

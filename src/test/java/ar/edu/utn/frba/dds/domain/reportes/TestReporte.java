@@ -1,20 +1,14 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
-import ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion.ListadoUbicaciones;
-import ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion.RecomendadorDePuntosAdapter;
-import ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion.RecomendadorDePuntosDeColocacion;
-import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

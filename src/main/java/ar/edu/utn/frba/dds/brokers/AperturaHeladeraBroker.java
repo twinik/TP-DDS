@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.brokers;
 
-import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.repositories.IAperturasHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
