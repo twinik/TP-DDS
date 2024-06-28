@@ -17,7 +17,6 @@ import java.util.Optional;
 
 @Setter
 public class AperturaHeladeraListener implements IMqttMessageListener {
-
   IHeladerasRepository heladerasRepository;
   ITarjetasColaboradorRepository tarjetasColaboradorRepository;
   IAperturasHeladeraRepository aperturasHeladeraRepository;

@@ -23,7 +23,7 @@ public class AperturaHeladeraBroker {
 
     String topic = configReader.getProperty("APERTURA_HELADERA_BROKER_TOPIC");
     String broker = configReader.getProperty("APERTURA_HELADERA_BROKER");
-    String clientId = "TP_DDS";
+    String clientId = configReader.getProperty("CLIENT_ID");
 
     AperturaHeladeraListener receptor = new AperturaHeladeraListener();
     receptor.setHeladerasRepository((IHeladerasRepository) ServiceLocator.get("heladerasRepository"));

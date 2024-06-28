@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Setter
 public class SensorMovimientoListener implements IMqttMessageListener {
-
   ISensorMovimientoRepository sensorMovimientoRepository;
 
   @Override

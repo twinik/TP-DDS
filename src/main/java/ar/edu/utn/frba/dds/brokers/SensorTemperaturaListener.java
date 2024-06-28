@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Setter
 public class SensorTemperaturaListener implements IMqttMessageListener {
-
   ISensorTemperaturaRepository sensorTemperaturaRepository;
 
   @Override

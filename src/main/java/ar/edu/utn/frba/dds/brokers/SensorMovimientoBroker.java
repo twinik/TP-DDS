@@ -12,7 +12,7 @@ public class SensorMovimientoBroker {
 
     String topic        = configReader.getProperty("SENSOR_MOV_BROKER_TOPIC");
     String broker       = configReader.getProperty("SENSOR_MOV_BROKER");
-    String clientId     = "TP_DDS";
+    String clientId     = configReader.getProperty("CLIENT_ID");
 
     SensorMovimientoListener receptor = new SensorMovimientoListener();
     receptor.setSensorMovimientoRepository((ISensorMovimientoRepository) ServiceLocator.get("sensoresMovimientoRepository"));
