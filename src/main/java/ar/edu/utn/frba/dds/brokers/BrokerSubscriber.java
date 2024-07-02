@@ -8,7 +8,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 @AllArgsConstructor
-public class BrokerListener {
+public class BrokerSubscriber {
   private String topic;
   private String broker;
   private String clientId;

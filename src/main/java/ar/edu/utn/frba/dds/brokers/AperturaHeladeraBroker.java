@@ -31,7 +31,7 @@ public class AperturaHeladeraBroker {
     receptor.setAperturasHeladeraRepository((IAperturasHeladeraRepository) ServiceLocator.get("aperturasHeladeraRepository"));
     receptor.setSolicitudesAperturaHeladeraRepository((ISolicitudesAperturaHeladeraRepository) ServiceLocator.get("solicitudesAperturaHeladeraRepository"));
 
-    BrokerListener brokerListener = new BrokerListener(topic, broker, clientId, receptor);
-    brokerListener.listen();
+    BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
+    brokerSubscriber.listen();
   }
 }
