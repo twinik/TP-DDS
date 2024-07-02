@@ -20,16 +20,16 @@ import java.util.stream.Collectors;
  * Reporta las viandas donadas por un colaborador
  */
 @AllArgsConstructor
-@Setter
-@Getter
 @NoArgsConstructor
 public class ReporteViandasPorColaborador implements IReporte {
 
-  private final String tituloReporte = "Viandas Donadas Por Colaborador esta semana";
+  private String rutaArchivo;
+  private final String tituloReporte = "Viandas donadas por colaborador - Semana ";
 
   private IPDFGeneratorAdapter pdfGenerator;
 
   private IViandasRepository viandasRepository;
+
 
   public void generarPDF() {
     LocalDate hoy = LocalDate.now();
@@ -43,15 +43,16 @@ public class ReporteViandasPorColaborador implements IReporte {
 
     String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-    pdfGenerator.generarPdf("reporte-viandas-colab", tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
+    pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
 
 
   }
 
   private String generarEntradasInforme(Map<Colaborador, Long> viandasPorColaborador) {
     StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("\n");
     viandasPorColaborador.forEach((colab, cant) -> stringBuilder
-        .append(String.format("Colaborador: %s %s ha donado %d viandas\n", colab.getNombre(), colab.getApellido(), cant)));
+        .append(String.format("%s ha donado %d vianda(s)\n", colab.getNombreYapellido(), cant)));
     return stringBuilder.toString();
   }
 

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.cronjobs;
 
+
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.domain.pdfs.ItextPdfGenerator;
 import ar.edu.utn.frba.dds.domain.reportes.IReporte;
@@ -20,9 +21,9 @@ public class ReportesCronjob {
     IPDFGeneratorAdapter ipdfGeneratorAdapter = new ItextPdfGenerator();
     IViandasRepository viandasRepository = (IViandasRepository) ServiceLocator.get("viandasRepository");
     List<IReporte> reportes = new ArrayList<>();
-    reportes.add(new ReporteViandasPorColaborador(ipdfGeneratorAdapter,viandasRepository));
-    reportes.add(new ReporteViandasPorHeladera(ipdfGeneratorAdapter,(IDonacionesViandaRepository) ServiceLocator.get("donacionesViandaRepository"),(IRedistribucionesViandaRepository) ServiceLocator.get("redistribucionesViandaRepository")));
-    reportes.add(new ReporteFallasHeladera(ipdfGeneratorAdapter,(IFallasTecnicasRepository) ServiceLocator.get("fallasTecnicas"),(IAlertasRepository) ServiceLocator.get("alertasRepository")));
+    reportes.add(new ReporteViandasPorColaborador("reporte-viandas-colab.pdf",ipdfGeneratorAdapter,viandasRepository));
+    reportes.add(new ReporteViandasPorHeladera("reporte-viandas-heladera.pdf",ipdfGeneratorAdapter,(IDonacionesViandaRepository) ServiceLocator.get("donacionesViandaRepository"),(IRedistribucionesViandaRepository) ServiceLocator.get("redistribucionesViandaRepository")));
+    reportes.add(new ReporteFallasHeladera("reporte-fallas-heladera.pdf",ipdfGeneratorAdapter,(IFallasTecnicasRepository) ServiceLocator.get("fallasTecnicasRepository"),(IAlertasRepository) ServiceLocator.get("alertasRepository")));
 
     reportes.forEach(IReporte::generarPDF);
 

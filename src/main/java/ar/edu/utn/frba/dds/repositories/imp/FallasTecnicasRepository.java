@@ -2,12 +2,17 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class FallasTecnicasRepository implements IFallasTecnicasRepository {
 
   List<FallaTecnica> fallaTecnicas;
+
+  public FallasTecnicasRepository() {
+    fallaTecnicas = new ArrayList<>();
+  }
 
   @Override
   public Optional<FallaTecnica> buscar(int id) {

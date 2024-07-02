@@ -61,4 +61,8 @@ public class Colaborador {
     this.respuestas.agregarRespuestasACampo(respuesta);
   }
 
+  public String getNombreYapellido(){
+    return String.format("%s %s",this.nombre,this.apellido);
+  }
+
 }

@@ -1,24 +1,27 @@
 package ar.edu.utn.frba.dds.domain.incidentes;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 /**
  * 
  */
 @Getter
 @Setter
+@AllArgsConstructor
 public class FallaTecnica extends Incidente {
     private Colaborador colaborador;
     private String descripcion;
     private String urlFoto;
 
-    /**
-     * Default constructor
-     */
-    public FallaTecnica() {
+    public FallaTecnica(Heladera heladera, LocalDateTime timestamp, Colaborador colaborador, String descripcion, String urlFoto) {
+        super(heladera, timestamp);
+        this.colaborador = colaborador;
+        this.descripcion = descripcion;
+        this.urlFoto = urlFoto;
     }
-
 }
