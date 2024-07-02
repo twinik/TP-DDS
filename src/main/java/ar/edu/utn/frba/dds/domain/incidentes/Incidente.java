@@ -17,23 +17,25 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class Incidente {
-    private Heladera heladera;
-    private LocalDateTime timestamp;
+  private Heladera heladera;
+  private LocalDateTime timestamp;
 
-    public Incidente() {}
+  public Incidente() {
+  }
 
-    public void reportar() {
-        heladera.inhabilitar();
-        Tecnico tecnicoAContactar = TecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
-        MedioDeContacto medioDeContacto = tecnicoAContactar.getMedioContacto().get(0);      //TODO: llamarlo por todos lados TOP
-        NotificationStrategy notificationStrategy = NotificationStrategyFactory.create(medioDeContacto.getCanal());
-        if (notificationStrategy == null) {
-            throw new InvalidNotificationStrategyException();
-        }
-        String message = String.format("Hola %s se rompio la heladera %s a las %s y necesitamos que por favor venga a repararla",
-            tecnicoAContactar.getNombre(),heladera.getNombre(),timestamp.toString());
-        notificationStrategy.notificar(medioDeContacto, message);
-    }
+  public void reportar() {
+    heladera.inhabilitar();
+    Tecnico tecnicoAContactar = TecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
+    String message = String.format("Hola %s se rompio la heladera %s a las %s y necesitamos que por favor venga a repararla",
+        tecnicoAContactar.getNombre(), heladera.getNombre(), timestamp.toString());
+    tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
+      NotificationStrategy strategy = NotificationStrategyFactory.create(medio.getCanal());
+      if (strategy == null) {
+        throw new InvalidNotificationStrategyException();
+      }
+      strategy.notificar(medio, message);
+    });
+  }
 
 }
 
