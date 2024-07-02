@@ -33,7 +33,7 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
     }
     Heladera heladera = heladeraOpt.get();
     SolicitudAperturaHeladera solicitudAperturaHeladera = solicitudAperturaHeladeraOpt.get();
-    AperturaHeladera aperturaHeladera = new AperturaHeladera(solicitudAperturaHeladera, DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
+    AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladera, DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
     aperturasHeladeraRepository.guardar(aperturaHeladera);
   }
 }

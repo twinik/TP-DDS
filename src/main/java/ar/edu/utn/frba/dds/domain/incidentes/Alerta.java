@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -21,5 +22,13 @@ public class Alerta extends Incidente {
 
     public Alerta(TipoAlerta tipoAlerta) {
         this.tipoAlerta = tipoAlerta;
+    }
+
+    public static Alerta of(Heladera heladera, LocalDateTime timeStamp, TipoAlerta tipoAlerta){
+        return new Alerta(heladera,timeStamp,tipoAlerta);
+    }
+
+    public static Alerta of(Heladera heladera, TipoAlerta tipoAlerta){
+        return new Alerta(heladera,LocalDateTime.now(),tipoAlerta);
     }
 }

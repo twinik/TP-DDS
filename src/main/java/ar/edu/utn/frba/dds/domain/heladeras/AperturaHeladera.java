@@ -22,4 +22,8 @@ public class AperturaHeladera {
     private SolicitudAperturaHeladera solicitud;
     private LocalDateTime timestamp;
     private Heladera heladera;
+
+    public static AperturaHeladera of(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera){
+        return new AperturaHeladera(solicitud,timestamp,heladera);
+    }
 }

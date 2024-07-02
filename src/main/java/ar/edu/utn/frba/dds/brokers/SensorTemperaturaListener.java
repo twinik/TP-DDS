@@ -6,7 +6,9 @@ import ar.edu.utn.frba.dds.domain.heladeras.SensorTemperatura;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
+import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.ISensorTemperaturaRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -27,8 +29,10 @@ public class SensorTemperaturaListener implements IMqttMessageListener {
 
       Heladera heladera = sensorTemperatura.getHeladera();
       if (!heladera.temperaturaEsAdecuada()) {
-        Alerta alerta = new Alerta(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), TipoAlerta.TEMPERATURA);
-        alerta.reportar();  //TODO factory + persistir alerta
+        Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), TipoAlerta.TEMPERATURA);
+        alerta.reportar();
+        IAlertasRepository repository = (IAlertasRepository) ServiceLocator.get("alertasRepository");
+        repository.guardar(alerta);
       }
     }
   }
