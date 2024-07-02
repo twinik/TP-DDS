@@ -7,7 +7,7 @@ import ar.edu.utn.frba.dds.domain.reportes.IReporte;
 import ar.edu.utn.frba.dds.domain.reportes.ReporteFallasHeladera;
 import ar.edu.utn.frba.dds.domain.reportes.ReporteViandasPorColaborador;
 import ar.edu.utn.frba.dds.domain.reportes.ReporteViandasPorHeladera;
-import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;

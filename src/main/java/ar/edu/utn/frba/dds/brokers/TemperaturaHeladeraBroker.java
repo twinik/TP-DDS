@@ -1,12 +1,8 @@
 package ar.edu.utn.frba.dds.brokers;
 
-import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.repositories.ISensorTemperaturaRepository;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import java.io.IOException;
 
 public class TemperaturaHeladeraBroker {
@@ -16,33 +12,12 @@ public class TemperaturaHeladeraBroker {
 
     String topic        = configReader.getProperty("SENSOR_TEMP_BROKER_TOPIC");
     String broker       = configReader.getProperty("SENSOR_TEMP_BROKER");
-    String clientId     = "TP_DDS";
-    MemoryPersistence persistence = new MemoryPersistence();
+    String clientId     = configReader.getProperty("CLIENT_ID");
 
-    try {
-      MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-      MqttConnectOptions connOpts = new MqttConnectOptions();
-      connOpts.setCleanSession(true);
+    SensorTemperaturaListener receptor = new SensorTemperaturaListener();
+    receptor.setSensorTemperaturaRepository((ISensorTemperaturaRepository) ServiceLocator.get("sensoresTemperaturaRepository"));
 
-      System.out.println("Connecting to broker: "+broker);
-      sampleClient.connect(connOpts);
-      System.out.println("Connected");
-
-      System.out.println("Building receptor");
-      SensorTemperaturaListener receptor = new SensorTemperaturaListener();
-      receptor.setSensorTemperaturaRepository((ISensorTemperaturaRepository) ServiceLocator.get("sensoresTemperaturaRepository"));
-
-      System.out.println("Subscribe to topic");
-      sampleClient.subscribe(topic, receptor);
-
-      System.out.println("Right! We are subscribed");
-    } catch(MqttException me) {
-      System.out.println("reason " + me.getReasonCode());
-      System.out.println("msg " + me.getMessage());
-      System.out.println("loc " + me.getLocalizedMessage());
-      System.out.println("cause " + me.getCause());
-      System.out.println("excep " + me);
-      me.printStackTrace();
-    }
+    BrokerListener brokerListener = new BrokerListener(topic, broker, clientId, receptor);
+    brokerListener.listen();
   }
 }

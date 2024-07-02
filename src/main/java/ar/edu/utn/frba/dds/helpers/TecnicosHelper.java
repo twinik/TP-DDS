@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.helpers;
 
-import ar.edu.utn.frba.dds.domain.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;

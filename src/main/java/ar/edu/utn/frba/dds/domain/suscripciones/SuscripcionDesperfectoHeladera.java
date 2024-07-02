@@ -17,8 +17,6 @@ public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
       suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(),
           GenerarMensajeHeladerasRecomendadas(heladera));
     }
-
-
   }
 
   private String GenerarMensajeHeladerasRecomendadas(Heladera heladera) {

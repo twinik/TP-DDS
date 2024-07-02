@@ -4,11 +4,13 @@ import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import java.time.LocalDateTime;
 
 /**
  * Alerta Class representa
  */
+@Getter
 public class Alerta extends Incidente {
     private TipoAlerta tipoAlerta;
 
