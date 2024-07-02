@@ -66,3 +66,6 @@ public class Colaborador {
   }
 
 }
+
+//el colaborador a lo largo del tiempo podria tener distintas tartehas
+//podria tener una lista de tarjetas con el dia que se dio de alta y de baja

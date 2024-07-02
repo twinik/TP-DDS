@@ -11,7 +11,6 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 /**
  * Registra una solicud de apertura por parte del colabnardor
@@ -29,12 +28,12 @@ public class SolicitudAperturaHeladera {
         String topic        = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER_TOPIC") + "/" + heladera.getNombre(); // cada heladera se va a suscribir a su topic
         int qos             = 2;
         String broker       = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER");
-        String clientId     = "TP-DDS";
+        String clientId     = configReader.getProperty("CLIENT_ID");
         MemoryPersistence persistence = new MemoryPersistence();
         String content      = String.join(";", colaborador.getUsuario().getTipoDocumento().toString(), colaborador.getUsuario().getDocumento().toString(), timestamp.toString());
 
         try {
-            MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+            MqttClient sampleClient = new MqttClient(broker, clientId, persistence);    //TODO emprolijar esto
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
             System.out.println("Connecting to broker: "+broker);

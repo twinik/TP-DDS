@@ -25,7 +25,7 @@ public class Incidente {
     public void reportar() {
         heladera.inhabilitar();
         Tecnico tecnicoAContactar = TecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
-        MedioDeContacto medioDeContacto = tecnicoAContactar.getMedioContacto().get(0);
+        MedioDeContacto medioDeContacto = tecnicoAContactar.getMedioContacto().get(0);      //TODO: llamarlo por todos lados TOP
         NotificationStrategy notificationStrategy = NotificationStrategyFactory.create(medioDeContacto.getCanal());
         if (notificationStrategy == null) {
             throw new InvalidNotificationStrategyException();
@@ -36,3 +36,6 @@ public class Incidente {
     }
 
 }
+
+//Mensaje: clase, interfaz, distintos factorys, no un string d mierda
+//InterfazMensaje

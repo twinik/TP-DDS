@@ -18,7 +18,7 @@ public class SensorTemperaturaListener implements IMqttMessageListener {
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
-    SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(s);
+    SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(mqttMessage.toString());   //Cambio TODO ver
     Optional<SensorTemperatura> sensorTemperaturaOpt = sensorTemperaturaRepository.buscar(sensorDto.getIdSensor());
 
     if (sensorTemperaturaOpt.isPresent()) {
@@ -28,7 +28,7 @@ public class SensorTemperaturaListener implements IMqttMessageListener {
       Heladera heladera = sensorTemperatura.getHeladera();
       if (!heladera.temperaturaEsAdecuada()) {
         Alerta alerta = new Alerta(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), TipoAlerta.TEMPERATURA);
-        alerta.reportar();
+        alerta.reportar();  //TODO factory + persistir alerta
       }
     }
   }

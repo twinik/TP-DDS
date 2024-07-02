@@ -24,7 +24,7 @@ public class ReportesCronjob {
     reportes.add(new ReporteViandasPorColaborador("reporte-viandas-colab.pdf",ipdfGeneratorAdapter,viandasRepository));
     reportes.add(new ReporteViandasPorHeladera("reporte-viandas-heladera.pdf",ipdfGeneratorAdapter,(IDonacionesViandaRepository) ServiceLocator.get("donacionesViandaRepository"),(IRedistribucionesViandaRepository) ServiceLocator.get("redistribucionesViandaRepository")));
     reportes.add(new ReporteFallasHeladera("reporte-fallas-heladera.pdf",ipdfGeneratorAdapter,(IFallasTecnicasRepository) ServiceLocator.get("fallasTecnicasRepository"),(IAlertasRepository) ServiceLocator.get("alertasRepository")));
-
+    //TODO: factory
     reportes.forEach(IReporte::generarPDF);
 
   }

@@ -17,10 +17,12 @@ public class FallaConexionCronJob {
     for (Heladera h : heladeras) {
       List<RegistroTemperatura> registroTemperaturas = h.getRegistroTemperaturas();
       LocalDateTime ultimaFechaYHoraRegistrada = registroTemperaturas.get(registroTemperaturas.size() - 1).getFechaHora();
-      if (DateHelper.minutosEntre(ultimaFechaYHoraRegistrada, LocalDateTime.now()) > 5) {
+      if (DateHelper.minutosEntre(ultimaFechaYHoraRegistrada, LocalDateTime.now()) > 5) { // Agregar desde el archivo de config (ya esta)
         Alerta alerta = new Alerta(h, LocalDateTime.now(), TipoAlerta.FALLA_CONEXION);
-        alerta.reportar();
+        alerta.reportar();  //TODO persistir alerta
       }
     }
   }
 }
+
+//A partir de la 18, clase verificador falla conexion. verificarfallaconexion(), con esos metodos puedo testearlos TOP.

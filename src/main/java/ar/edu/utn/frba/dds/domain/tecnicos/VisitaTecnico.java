@@ -16,3 +16,5 @@ public class VisitaTecnico {
     private Heladera heladera;
 
 }
+
+//TODO: tests

@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
-import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +18,9 @@ import java.util.stream.Collectors;
 /**
  * Reporta las viandas donadas por un colaborador
  */
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReporteViandasPorColaborador implements IReporte {
