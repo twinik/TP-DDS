@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.repositories.imp.RedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.SolcitudesAperturaHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.imp.TarjetaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.TarjetasColaboradorRepository;
+import ar.edu.utn.frba.dds.repositories.imp.TecnicosRepository;
 import ar.edu.utn.frba.dds.repositories.imp.ViandasRepository;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +41,7 @@ public class ServiceLocator {
         case "solicitudesAperturaHeladeraRepository" -> add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
         case "tarjetasColaboradorRepository" -> add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
         case "aperturasHeladeraRepository" -> add("aperturasHeladeraRepository", new AperturasHeladeraRepository());
+        case "tecnicosRepository" -> add("tecnicosRepository", new TecnicosRepository());
       }
     }
 

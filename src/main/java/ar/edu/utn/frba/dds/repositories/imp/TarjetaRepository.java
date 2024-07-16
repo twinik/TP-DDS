@@ -26,7 +26,7 @@ public class TarjetaRepository implements ITarjetasRepository {
 
   @Override
   public void guardar(Tarjeta tarjeta) {
-
+    this.tarjetas.add(tarjeta);
   }
 
   @Override

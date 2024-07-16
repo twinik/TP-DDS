@@ -8,7 +8,7 @@ import ar.edu.utn.frba.dds.domain.whatsappSender.TwilioWhatsappSender;
 import java.io.IOException;
 
 public class NotificationStrategyFactory {
-  public static NotificationStrategy create(CanalContacto canalContacto) {
+  public NotificationStrategy create(CanalContacto canalContacto) {
     try {
       return switch (canalContacto) {
         case EMAIL -> new MailNotificationStrategy(new SendGridMailSender());

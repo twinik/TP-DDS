@@ -1,16 +1,17 @@
 package ar.edu.utn.frba.dds.helpers;
 
-import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
 import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
+import lombok.AllArgsConstructor;
 import java.util.List;
 
+@AllArgsConstructor
 public class TecnicosHelper {
+  ITecnicosRepository tecnicosRepository;
 
-  public static Tecnico findTecnicoMasCercano(Ubicacion ubicacion) {
-    ITecnicosRepository tecnicosRepository = (ITecnicosRepository) ServiceLocator.get("tecnicosRepository");
+  public Tecnico findTecnicoMasCercano(Ubicacion ubicacion) {
     List<Tecnico> tecnicos = tecnicosRepository.buscarTodos();
 
     Tecnico tecnicoMasCercano = null;

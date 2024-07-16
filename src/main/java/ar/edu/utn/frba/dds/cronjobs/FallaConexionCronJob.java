@@ -5,8 +5,11 @@ import ar.edu.utn.frba.dds.domain.heladeras.RegistroTemperatura;
 import ar.edu.utn.frba.dds.domain.heladeras.VerificadorConexionHeladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
+import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
@@ -29,7 +32,8 @@ public class FallaConexionCronJob {
     for (Heladera h : heladeras) {
 
       if (verifcador.huboFallaConexion(h, limite_minutos)) { // Agregar desde el archivo de config (ya esta)
-        Alerta alerta = Alerta.of(h, TipoAlerta.FALLA_CONEXION);
+        Alerta alerta = Alerta.of(h, new TecnicosHelper((ITecnicosRepository) ServiceLocator.get("tecnicosRepository"))
+            ,new NotificationStrategyFactory(), TipoAlerta.FALLA_CONEXION);
         alerta.reportar();
         alertasRepository.guardar(alerta);
       }

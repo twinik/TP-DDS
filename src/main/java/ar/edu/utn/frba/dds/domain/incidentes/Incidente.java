@@ -19,17 +19,19 @@ import java.time.LocalDateTime;
 public class Incidente {
   private Heladera heladera;
   private LocalDateTime timestamp;
+  private TecnicosHelper tecnicosHelper;
+  private NotificationStrategyFactory notificationStrategyFactory;
 
   public Incidente() {
   }
 
   public void reportar() {
     heladera.inhabilitar();
-    Tecnico tecnicoAContactar = TecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
+    Tecnico tecnicoAContactar = tecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
     String message = String.format("Hola %s se rompio la heladera %s a las %s y necesitamos que por favor venga a repararla",
         tecnicoAContactar.getNombre(), heladera.getNombre(), timestamp.toString());
     tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
-      NotificationStrategy strategy = NotificationStrategyFactory.create(medio.getCanal());
+      NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
       if (strategy == null) {
         throw new InvalidNotificationStrategyException();
       }
