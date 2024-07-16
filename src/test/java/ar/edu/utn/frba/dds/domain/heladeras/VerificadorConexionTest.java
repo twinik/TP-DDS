@@ -29,20 +29,20 @@ public class VerificadorConexionTest {
     unaHeladera.registrarTemperatura(10);
     unaHeladera.registrarTemperatura(20);
     otraHeladera = new Heladera(LocalDate.now());
-    otraHeladera.getRegistroTemperaturas().add(new RegistroTemperatura(LocalDateTime.of(LocalDate.of(2024,7,2), LocalTime.of(3,20)),50));
+    otraHeladera.getRegistroTemperaturas().add(new RegistroTemperatura(LocalDateTime.now().minusMinutes(6),20f));
   }
 
   @Test
   @DisplayName("No hubo falla en conexion")
   void verificarConexionEstable(){
-    VerificadorConexionHeladera verificadorConexionHeladera = new VerificadorConexionHeladera(unaHeladera,5);
-    Assertions.assertFalse(verificadorConexionHeladera.huboFallaConexion());
+    VerificadorConexionHeladera verificadorConexionHeladera = new VerificadorConexionHeladera();
+    Assertions.assertFalse(verificadorConexionHeladera.huboFallaConexion(unaHeladera,5));
   }
 
   @Test
   @DisplayName("hubo falla en conexion")
   void verificarConexionFallida(){
-    VerificadorConexionHeladera verificadorConexionHeladera = new VerificadorConexionHeladera(otraHeladera,5);
-    Assertions.assertTrue(verificadorConexionHeladera.huboFallaConexion());
+    VerificadorConexionHeladera verificadorConexionHeladera = new VerificadorConexionHeladera();
+    Assertions.assertTrue(verificadorConexionHeladera.huboFallaConexion(otraHeladera,5));
   }
 }

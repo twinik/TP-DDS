@@ -16,7 +16,7 @@ import java.util.List;
 
 public class FallaConexionCronJob {
   public static void main(String[] args) {
-    int limite_minutos = 5;
+    int limite_minutos;
     IHeladerasRepository heladerasRepository = (IHeladerasRepository) ServiceLocator.get("heladerasRepository");
     IAlertasRepository alertasRepository = (IAlertasRepository) ServiceLocator.get("alertasRepository");
     List<Heladera> heladeras = heladerasRepository.buscarTodos();
@@ -25,10 +25,11 @@ public class FallaConexionCronJob {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    VerificadorConexionHeladera verifcador = new VerificadorConexionHeladera();
     for (Heladera h : heladeras) {
-      VerificadorConexionHeladera verifcador = new VerificadorConexionHeladera(h,limite_minutos);
-      if (verifcador.huboFallaConexion()) { // Agregar desde el archivo de config (ya esta)
-        Alerta alerta =  Alerta.of(h, TipoAlerta.FALLA_CONEXION);
+
+      if (verifcador.huboFallaConexion(h, limite_minutos)) { // Agregar desde el archivo de config (ya esta)
+        Alerta alerta = Alerta.of(h, TipoAlerta.FALLA_CONEXION);
         alerta.reportar();
         alertasRepository.guardar(alerta);
       }
