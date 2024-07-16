@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ public class TarjetaTest {
     duenioMock = Mockito.mock(PersonaVulnerable.class);
     FrecuenciaUso frecuenciaDiaria = new FrecuenciaDiaria();
     FrecuenciaDiaria.setMaximosUsosBase(4);
-    tarjeta = new Tarjeta(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), 5, frecuenciaDiaria, duenioMock, new Date(), 10);
+    tarjeta = Tarjeta.of(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), 5, frecuenciaDiaria, duenioMock, 10);
   }
 
   @Test
@@ -33,7 +34,7 @@ public class TarjetaTest {
     Assertions.assertNotNull(tarjeta.getUsos());
     Assertions.assertEquals(0, tarjeta.getUsos().size());
     Assertions.assertEquals(duenioMock, tarjeta.getDuenio());
-    Assertions.assertEquals(0, tarjeta.getCantidadUsosDia());
+    Assertions.assertEquals(10, tarjeta.getCantidadUsosDia());
   }
 
   @Test
