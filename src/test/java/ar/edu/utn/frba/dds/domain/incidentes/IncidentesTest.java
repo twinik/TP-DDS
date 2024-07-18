@@ -28,21 +28,26 @@ public class IncidentesTest {
 
   private MedioDeContacto medio;
 
+  private LocalDateTime fecha;
+
+  private String output;
+
   @BeforeEach
   public void setUp() {
-    heladera = new Heladera(LocalDate.now());
-    heladera.setNombre("unaHeladera");
-    tecnico = new Tecnico();
-    tecnico.setNombre("jorge");
-    tecnico.setApellido("lopez");
+    this.heladera = new Heladera(LocalDate.now());
+    this.heladera.setNombre("unaHeladera");
+    this.tecnico = new Tecnico();
+    this.tecnico.setNombre("jorge");
+    this.tecnico.setApellido("lopez");
     ArrayList<MedioDeContacto> medios = new ArrayList<>();
-    medio = new MedioDeContacto(CanalContacto.WHATSAPP,"+433434343");
+    this.medio = new MedioDeContacto(CanalContacto.WHATSAPP,"+433434343");
     medios.add(medio);
-    tecnico.setMedioContacto(medios);
+    this.tecnico.setMedioContacto(medios);
+    this.fecha = LocalDateTime.now();
   }
 
   @Test
-  @DisplayName("Test de llamado de reporte de incidente")
+  @DisplayName("Test de llamado de reporte de incidente, se debe notificar al tecnico y generar el mensaje adecuado")
   public void testInicializacionCorrecta() {
     TecnicosHelper helper = Mockito.mock(TecnicosHelper.class);
     Mockito.when(helper.findTecnicoMasCercano(any())).thenReturn(tecnico);
@@ -51,9 +56,10 @@ public class IncidentesTest {
 
     NotificationStrategyFactory factory = Mockito.mock(NotificationStrategyFactory.class);
     Mockito.when(factory.create(any())).thenReturn(strategy);
-    Alerta alerta = Alerta.of(heladera, LocalDateTime.now(),helper,factory,TipoAlerta.FRAUDE);
+    Alerta alerta = Alerta.of(heladera, this.fecha,helper,factory,TipoAlerta.FRAUDE);
     alerta.reportar();
-    verify(strategy,times(1)).notificar(eq(medio),any());
+    this.output = "Hola jorge se rompio la heladera unaHeladera a las " + fecha.toString() + " y necesitamos que por favor venga a repararla";
+    verify(strategy,times(1)).notificar(this.medio,this.output);
 
   }
 }
