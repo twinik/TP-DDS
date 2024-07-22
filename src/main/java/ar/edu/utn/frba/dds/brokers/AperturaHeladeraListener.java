@@ -24,7 +24,7 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
-    AperturaHeladeraBrokerDTO aperturaDto = AperturaHeladeraBrokerDTO.fromString(s);
+    AperturaHeladeraBrokerDTO aperturaDto = AperturaHeladeraBrokerDTO.fromString(mqttMessage.toString());
     Optional<Heladera> heladeraOpt = heladerasRepository.buscar(aperturaDto.getIdHeladera());
     Optional<TarjetaColaborador> tarjetaOpt = tarjetasColaboradorRepository.buscar(aperturaDto.getIdTarjetaColaborador());
     Optional<SolicitudAperturaHeladera> solicitudAperturaHeladeraOpt = solicitudesAperturaHeladeraRepository.buscar(aperturaDto.getIdSolicitudApertura());

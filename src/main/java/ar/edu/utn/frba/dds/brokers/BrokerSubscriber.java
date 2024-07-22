@@ -1,10 +1,13 @@
 package ar.edu.utn.frba.dds.brokers;
 
 import lombok.AllArgsConstructor;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 @AllArgsConstructor
@@ -19,7 +22,19 @@ public class BrokerSubscriber {
     try {
       MqttClient sampleClient = new MqttClient(this.broker, this.clientId, persistence);
       MqttConnectOptions connOpts = new MqttConnectOptions();
+      connOpts.setAutomaticReconnect(true);
       connOpts.setCleanSession(true);
+
+      sampleClient.setCallback(new MqttCallback() {
+        @Override
+        public void connectionLost(Throwable throwable) {
+          System.out.println("Mqtt Connection Lost!");
+        }
+        @Override
+        public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {}
+        @Override
+        public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {}
+      });
 
       System.out.println("Connecting to broker: " + broker);
       sampleClient.connect(connOpts);

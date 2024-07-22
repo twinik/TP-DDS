@@ -23,7 +23,7 @@ public class SensorTemperaturaListener implements IMqttMessageListener {
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
-    SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(mqttMessage.toString());   //Cambio TODO ver
+    SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(mqttMessage.toString());
     Optional<SensorTemperatura> sensorTemperaturaOpt = sensorTemperaturaRepository.buscar(sensorDto.getIdSensor());
 
     if (sensorTemperaturaOpt.isPresent()) {
