@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.tarjetas;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
+import ar.edu.utn.frba.dds.messageFactory.MessageFactory;
 import com.twilio.rest.api.v2010.account.incomingphonenumber.Local;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,13 +29,13 @@ public class TarjetaColaborador {
 
   public static TarjetaColaborador of(Colaborador colaborador, String codigo) throws NoTieneDireccionException {
     if (colaborador.getDireccion() == null)
-      throw new NoTieneDireccionException("Debe tener seteada una direccion para poder enviarle la tarjeta");
+      throw new NoTieneDireccionException(MessageFactory.mensajeExcepcionDireccionTarjeta());
     return new TarjetaColaborador(codigo, colaborador, true, LocalDate.now(), null, new ArrayList<>());
   }
 
   public static TarjetaColaborador of(Colaborador colaborador, String codigo, LocalDate fechaAlta) throws NoTieneDireccionException {
     if (colaborador.getDireccion() == null)
-      throw new NoTieneDireccionException("Debe tener seteada una direccion para poder enviarle la tarjeta");
+      throw new NoTieneDireccionException(MessageFactory.mensajeExcepcionDireccionTarjeta());
     return new TarjetaColaborador(codigo, colaborador, true, fechaAlta, null, new ArrayList<>());
   }
 

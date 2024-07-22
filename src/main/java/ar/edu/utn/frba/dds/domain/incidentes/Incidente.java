@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.incidentes;
 import ar.edu.utn.frba.dds.domain.excepciones.InvalidNotificationStrategyException;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
+import ar.edu.utn.frba.dds.messageFactory.MessageFactory;
 import lombok.Getter;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
@@ -28,8 +29,7 @@ public class Incidente {
   public void reportar() {
     heladera.inhabilitar();
     Tecnico tecnicoAContactar = tecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
-    String message = String.format("Hola %s se rompio la heladera %s a las %s y necesitamos que por favor venga a repararla",
-        tecnicoAContactar.getNombre(), heladera.getNombre(), timestamp.toString());
+    String message = MessageFactory.generarMensajeParaTecnicosPorIncidente(tecnicoAContactar,heladera,timestamp);
     tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
       NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
       if (strategy == null) {
