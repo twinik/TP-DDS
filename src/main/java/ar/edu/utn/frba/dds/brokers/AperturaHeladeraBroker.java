@@ -17,7 +17,7 @@ public class AperturaHeladeraBroker {
   /**
    * Método que se encarga de suscribirse al broker de aperturas de heladeras.
    */
-  public static void suscribirseAAperturasHeladeras(String[] args) throws IOException {
+  public static void suscribirseAAperturasHeladeras() throws IOException {
 
     ConfigReader configReader = new ConfigReader("config.properties");
 
@@ -34,4 +34,13 @@ public class AperturaHeladeraBroker {
     BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
     brokerSubscriber.listen();
   }
+  public static void main(String[] args) {
+    try {
+      suscribirseAAperturasHeladeras();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
+
+

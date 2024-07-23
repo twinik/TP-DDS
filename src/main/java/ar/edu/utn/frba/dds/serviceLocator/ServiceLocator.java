@@ -13,6 +13,8 @@ import ar.edu.utn.frba.dds.repositories.imp.DonacionesVIandaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.FallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.HeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.imp.RedistribucionesViandaRepository;
+import ar.edu.utn.frba.dds.repositories.imp.SensoresMovimientoRepository;
+import ar.edu.utn.frba.dds.repositories.imp.SensoresTemperaturaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.SolcitudesAperturaHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.imp.TarjetaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.TarjetasColaboradorRepository;
@@ -50,6 +52,8 @@ public class ServiceLocator {
             add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
         case "aperturasHeladeraRepository" -> add("aperturasHeladeraRepository", new AperturasHeladeraRepository());
         case "tecnicosRepository" -> add("tecnicosRepository", new TecnicosRepository());
+        case "sensoresMovimientoRepository" -> add("sensoresMovimientoRepository",new SensoresMovimientoRepository());
+        case "sensoresTemperaturaRepository" -> add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
         case "reportesFactory" ->
             add("reportesFactory", new ReportesFactory((IViandasRepository) get("viandasRepository"),
                 (IDonacionesViandaRepository) get("donacionesViandaRepository"),

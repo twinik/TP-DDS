@@ -19,4 +19,8 @@ public class SensorTemperaturaBrokerDto {
     String[] fields = s.split(";");
     return new SensorTemperaturaBrokerDto(Integer.parseInt(fields[0]), Float.parseFloat(fields[1]), Long.parseLong(fields[2]));
   }
+
+  public String toString(){
+    return String.format("ID: %d --- Temp: %f --- Timestamp: %d",this.idSensor,this.temperatura,this.timestamp);
+  }
 }

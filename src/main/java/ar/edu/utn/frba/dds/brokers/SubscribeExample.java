@@ -13,7 +13,7 @@ public class SubscribeExample {
 
   public static void main(String[] args) throws InterruptedException {
     SimpleMessageReceptor receptor = new SimpleMessageReceptor();
-    BrokerSubscriber brokerSubscriber = new BrokerSubscriber("dds-grupo07-ma-ma", "tcp://broker.hivemq.com:1883", "cliente", receptor);
+    BrokerSubscriber brokerSubscriber = new BrokerSubscriber("dds-grupo07-ma-ma", "tcp://localhost:1883", "cliente", receptor);
     brokerSubscriber.listen();
   }
 }

@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.repositories.ISensorTemperaturaRepository;
 import java.io.IOException;
 
 public class TemperaturaHeladeraBroker {
-  public static void suscribirseASensorTemperatura(String[] args) throws IOException {
+  public static void suscribirseASensorTemperatura() throws IOException {
 
     ConfigReader configReader = new ConfigReader("config.properties");
 
@@ -19,5 +19,13 @@ public class TemperaturaHeladeraBroker {
 
     BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
     brokerSubscriber.listen();
+  }
+
+  public static void main(String[] args) {
+    try {
+      suscribirseASensorTemperatura();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

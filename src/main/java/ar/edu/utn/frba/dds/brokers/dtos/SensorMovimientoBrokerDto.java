@@ -17,4 +17,8 @@ public class SensorMovimientoBrokerDto {
     String[] fields = s.split(";");
     return new SensorMovimientoBrokerDto(Integer.parseInt(fields[0]), Long.parseLong(fields[1]));
   }
+
+  public String toString(){
+    return String.format("ID: %d --- Timestamp: %d",this.idSensor,this.timestamp);
+  }
 }

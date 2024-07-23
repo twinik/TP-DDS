@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.brokers.dtos;
 
+import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
 import lombok.Getter;
+import org.bouncycastle.crypto.agreement.srp.SRP6Client;
 
 @Getter
 public class AperturaHeladeraBrokerDTO {
@@ -20,5 +22,9 @@ public class AperturaHeladeraBrokerDTO {
   public static AperturaHeladeraBrokerDTO fromString(String s) {
     String[] fields = s.split(";");
     return new AperturaHeladeraBrokerDTO(Integer.parseInt(fields[0]), fields[1], Integer.parseInt(fields[2]), Long.parseLong(fields[3]));
+  }
+
+  public String toString(){
+    return String.format("Id: %d -- Id Tarjeta: %s --- IdSolcitud: %d -- timestamp: %d",this.idHeladera,this.idTarjetaColaborador,this.idSolicitudApertura,this.timestamp);
   }
 }
