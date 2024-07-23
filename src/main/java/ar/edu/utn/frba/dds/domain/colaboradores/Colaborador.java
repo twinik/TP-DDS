@@ -21,6 +21,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Colaborador {
 
+  private long id;
+
   private Usuario usuario;
 
   private TipoColaborador tipoColaborador;

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ISensorTemperaturaRepository {
-    Optional<SensorTemperatura> buscar(int id);
+    Optional<SensorTemperatura> buscar(long id);
 
     List<SensorTemperatura> buscarTodos();
 

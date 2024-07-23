@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class TarjetaColaborador {
+  private long id;
   private String codigo;
   private Colaborador colaborador;
   private boolean activa;
@@ -25,6 +26,14 @@ public class TarjetaColaborador {
   private LocalDate fechaBaja;
   private List<AperturaHeladera> usos;
 
+  public TarjetaColaborador(String codigo, Colaborador colaborador, boolean activa, LocalDate fechaAlta, LocalDate fechaBaja, List<AperturaHeladera> usos) {
+    this.codigo = codigo;
+    this.colaborador = colaborador;
+    this.activa = activa;
+    this.fechaAlta = fechaAlta;
+    this.fechaBaja = fechaBaja;
+    this.usos = usos;
+  }
 
   public static TarjetaColaborador of(Colaborador colaborador, String codigo) throws NoTieneDireccionException {
     if (colaborador.getDireccion() == null)

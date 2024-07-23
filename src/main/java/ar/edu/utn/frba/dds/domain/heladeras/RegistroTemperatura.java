@@ -10,6 +10,12 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class RegistroTemperatura {
+  private long id;
   LocalDateTime fechaHora;
   float temperaturaRegistrada;
+
+  public RegistroTemperatura(LocalDateTime fechaHora, float temperaturaRegistrada) {
+    this.fechaHora = fechaHora;
+    this.temperaturaRegistrada = temperaturaRegistrada;
+  }
 }

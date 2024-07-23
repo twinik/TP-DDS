@@ -19,9 +19,16 @@ import java.util.Optional;
 @Setter
 @AllArgsConstructor
 public class AperturaHeladera {
+    private long id;
     private SolicitudAperturaHeladera solicitud;
     private LocalDateTime timestamp;
     private Heladera heladera;
+
+    public AperturaHeladera(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera) {
+        this.solicitud = solicitud;
+        this.timestamp = timestamp;
+        this.heladera = heladera;
+    }
 
     public static AperturaHeladera of(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera){
         return new AperturaHeladera(solicitud,timestamp,heladera);

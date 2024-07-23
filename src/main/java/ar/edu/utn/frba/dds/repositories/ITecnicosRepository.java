@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface ITecnicosRepository {
   Optional<Tecnico> buscar(String codigo);
+  Optional<Tecnico> buscar(long id);
 
   List<Tecnico> buscarTodos();
 

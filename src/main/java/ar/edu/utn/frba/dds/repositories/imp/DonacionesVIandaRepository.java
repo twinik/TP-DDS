@@ -15,8 +15,8 @@ public class DonacionesVIandaRepository implements IDonacionesViandaRepository {
   }
 
   @Override
-  public Optional<DonacionVianda> buscar(int id) {
-    return Optional.empty();
+  public Optional<DonacionVianda> buscar(long id) {
+    return donaciones.stream().filter(d -> d.getId() == id).findFirst();
   }
 
   @Override

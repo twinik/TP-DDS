@@ -17,9 +17,8 @@ public class HeladeraRepository implements IHeladerasRepository {
   }
 
   @Override
-  public Optional<Heladera> buscar(int id) {
-    // necesito la bd para esto
-    return Optional.empty();
+  public Optional<Heladera> buscar(long id) {
+    return heladeras.stream().filter(h -> h.getId() == id).findFirst();
   }
 
   @Override

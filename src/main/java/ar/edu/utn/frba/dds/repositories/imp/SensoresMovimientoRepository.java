@@ -15,8 +15,8 @@ public class SensoresMovimientoRepository implements ISensorMovimientoRepository
   }
 
   @Override
-  public Optional<SensorMovimiento> buscar(int id) {
-    return Optional.empty();
+  public Optional<SensorMovimiento> buscar(long id) {
+    return this.sensorMovimientos.stream().filter(s -> s.getId() == id).findFirst();
   }
 
   @Override

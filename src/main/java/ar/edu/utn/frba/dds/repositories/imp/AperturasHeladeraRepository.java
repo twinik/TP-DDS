@@ -15,8 +15,8 @@ public class AperturasHeladeraRepository implements IAperturasHeladeraRepository
   }
 
   @Override
-  public Optional<AperturaHeladera> buscar(int id) {
-    return Optional.empty();
+  public Optional<AperturaHeladera> buscar(long id) {
+    return this.aperturas.stream().filter(a -> a.getId() == id).findFirst();
   }
 
   @Override

@@ -14,9 +14,10 @@ public class AlertasRepository implements IAlertasRepository {
     alertas = new ArrayList<>();
   }
 
+
   @Override
-  public Optional<Alerta> buscar(int id) {
-    return Optional.empty();
+  public Optional<Alerta> buscar(long id) {
+    return this.alertas.stream().filter(a -> a.getId() == id).findFirst();
   }
 
   @Override

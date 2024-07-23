@@ -20,6 +20,10 @@ public class TecnicosRepository implements ITecnicosRepository {
     return this.tecnicos.stream().filter(t -> t.getNroDocumento().equals(codigo)).findFirst();
   }
 
+  public Optional<Tecnico> buscar(long id) {
+    return this.tecnicos.stream().filter(t -> t.getId() == id).findFirst();
+  }
+
   @Override
   public List<Tecnico> buscarTodos() {
     return this.tecnicos;

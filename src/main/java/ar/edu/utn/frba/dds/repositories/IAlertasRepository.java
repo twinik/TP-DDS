@@ -10,7 +10,7 @@ import java.util.Optional;
  * IAlertasRepository interface permite interactuar con las alertas.
  */
 public interface IAlertasRepository {
-  Optional<Alerta> buscar(int id);
+  Optional<Alerta> buscar(long id);
 
   List<Alerta> buscarTodos();
 

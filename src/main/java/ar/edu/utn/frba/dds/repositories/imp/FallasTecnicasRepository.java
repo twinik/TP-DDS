@@ -15,8 +15,8 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository {
   }
 
   @Override
-  public Optional<FallaTecnica> buscar(int id) {
-    return Optional.empty();
+  public Optional<FallaTecnica> buscar(long id) {
+    return fallaTecnicas.stream().filter(f -> f.getId() == id).findFirst();
   }
 
   @Override

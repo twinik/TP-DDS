@@ -17,6 +17,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Vianda {
 
+  public Vianda(String comida, Date fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Integer calorias, Integer peso, boolean entregada) {
+    this.comida = comida;
+    this.fechaCaducidad = fechaCaducidad;
+    this.fechaDonacion = fechaDonacion;
+    this.colaborador = colaborador;
+    this.heladera = heladera;
+    this.calorias = calorias;
+    this.peso = peso;
+    this.entregada = entregada;
+  }
+
+  private long id;
+
   private String comida;
 
   private Date fechaCaducidad;

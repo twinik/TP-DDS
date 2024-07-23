@@ -17,6 +17,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Heladera {
+  private long id;
   private Ubicacion ubicacion;
   private Direccion direccion;
   private boolean activa = true;

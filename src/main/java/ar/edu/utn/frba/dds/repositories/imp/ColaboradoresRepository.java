@@ -14,13 +14,19 @@ public class ColaboradoresRepository implements IColaboradoresRepository {
   private List<Colaborador> colaboradores;
 
   public ColaboradoresRepository() {
-    colaboradores = new ArrayList<Colaborador>();
+    colaboradores = new ArrayList<>();
   }
 
   @Override
   public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, Integer documento) {
     return this.colaboradores.stream().filter(c -> c.getUsuario().getDocumento().equals(documento) && c.getUsuario().getTipoDocumento().equals(tipoDocumento)).findFirst();
   }
+  @Override
+  public Optional<Colaborador> buscar(long id) {
+    return this.colaboradores.stream().filter(c -> c.getId() == id).findFirst();
+  }
+
+
 
   @Override
   public List<Colaborador> buscarTodos() {

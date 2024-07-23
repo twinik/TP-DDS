@@ -12,6 +12,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class IngresoVianda {
+  private long id;
   private Date fechaDonacion;
   private Colaborador colaborador;
   private boolean entregada;

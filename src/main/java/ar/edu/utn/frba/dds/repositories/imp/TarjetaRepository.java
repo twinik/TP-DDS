@@ -20,6 +20,11 @@ public class TarjetaRepository implements ITarjetasRepository {
   }
 
   @Override
+  public Optional<Tarjeta> buscar(long id) {
+    return this.tarjetas.stream().filter(t -> t.getId() == id).findFirst();
+  }
+
+  @Override
   public List<Tarjeta> buscarTodos() {
     return this.tarjetas;
   }

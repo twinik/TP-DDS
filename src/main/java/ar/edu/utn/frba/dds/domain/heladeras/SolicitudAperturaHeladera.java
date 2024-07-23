@@ -19,6 +19,7 @@ import java.time.ZonedDateTime;
 @Getter
 @AllArgsConstructor
 public class SolicitudAperturaHeladera {
+    private long id;
     private Colaborador colaborador;
     private String motivo;
     private LocalDateTime timestamp;
@@ -42,7 +43,7 @@ public class SolicitudAperturaHeladera {
         colab.setUsuario(new Usuario("jorge@mail", TipoDocumento.DNI,1111,"contrasenia"));
         Heladera heladera = new Heladera(LocalDate.now());
         heladera.setNombre("heladera_de_thomi");
-        SolicitudAperturaHeladera soli =  new SolicitudAperturaHeladera(colab,"un motivo",LocalDateTime.now(),heladera);
+        SolicitudAperturaHeladera soli =  new SolicitudAperturaHeladera(0,colab,"un motivo",LocalDateTime.now(),heladera);
       try {
         soli.publicarSolicitudABroker();
       } catch (IOException e) {

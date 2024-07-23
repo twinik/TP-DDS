@@ -7,9 +7,9 @@ import org.bouncycastle.crypto.agreement.srp.SRP6Client;
 @Getter
 public class AperturaHeladeraBrokerDTO {
   // formato: ID_HELADERA;ID_TARJETA_COLABORADOR;ID_SOLICITUD_APERTURA;TIMESTAMP
-  public int idHeladera;
+  public long idHeladera;
   public String idTarjetaColaborador;
-  public int idSolicitudApertura;
+  public long idSolicitudApertura;
   public long timestamp;
 
   private AperturaHeladeraBrokerDTO(int idHeladera, String idTarjetaColaborador, int idSolicitudApertura, long timestamp) {

@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import com.itextpdf.text.pdf.PRIndirectReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,7 +12,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class SensorTemperatura {
+  private long id;
   private Heladera heladera;
 
   public void registrarTemperatura(Float temp) {

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ISensorMovimientoRepository {
-  Optional<SensorMovimiento> buscar(int id);
+  Optional<SensorMovimiento> buscar(long id);
 
   List<SensorMovimiento> buscarTodos();
 

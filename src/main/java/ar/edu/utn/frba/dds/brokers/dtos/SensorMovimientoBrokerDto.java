@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class SensorMovimientoBrokerDto {
   // formato del mensaje: ID_SENSOR;TIMESTAMP
-  public int idSensor;
+  public long idSensor;
   public long timestamp;
 
   private SensorMovimientoBrokerDto(int idSensor, long timestamp) {

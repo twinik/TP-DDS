@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
@@ -15,13 +16,19 @@ import java.time.LocalDateTime;
  */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Incidente {
+  private long id;
   private Heladera heladera;
   private LocalDateTime timestamp;
   private TecnicosHelper tecnicosHelper;
   private NotificationStrategyFactory notificationStrategyFactory;
 
-  public Incidente() {
+  public Incidente(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory) {
+    this.heladera = heladera;
+    this.timestamp = timestamp;
+    this.tecnicosHelper = tecnicosHelper;
+    this.notificationStrategyFactory = notificationStrategyFactory;
   }
 
   public void reportar() {
@@ -35,6 +42,3 @@ public class Incidente {
   }
 
 }
-
-//Mensaje: clase, interfaz, distintos factorys, no un string d mierda
-//InterfazMensaje

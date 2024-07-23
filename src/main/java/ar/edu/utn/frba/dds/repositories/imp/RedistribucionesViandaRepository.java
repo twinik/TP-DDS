@@ -15,8 +15,8 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
   }
 
   @Override
-  public Optional<RedistribucionViandas> buscar(int id) {
-    return Optional.empty();
+  public Optional<RedistribucionViandas> buscar(long id) {
+    return redistribucionViandas.stream().filter(r -> r.getId() == id).findFirst();
   }
 
   @Override

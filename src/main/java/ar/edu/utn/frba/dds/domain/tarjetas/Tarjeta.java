@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Tarjeta {
+  private long id;
   private String codigo;
   private Integer nroUsos;
   private boolean activa;

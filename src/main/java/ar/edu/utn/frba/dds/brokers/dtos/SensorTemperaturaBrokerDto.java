@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class SensorTemperaturaBrokerDto {
   // formato del mensaje: ID_SENSOR;TEMPERATURA;TIMESTAMP
-  public int idSensor;
+  public long idSensor;
   public float temperatura;
   public long timestamp;
 

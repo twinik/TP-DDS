@@ -14,8 +14,8 @@ public class SensoresTemperaturaRepository implements ISensorTemperaturaReposito
   }
 
   @Override
-  public Optional<SensorTemperatura> buscar(int id) {
-    return Optional.empty();
+  public Optional<SensorTemperatura> buscar(long id) {
+    return this.sensorTemperatura.stream().filter(s -> s.getId() == id).findFirst();
   }
 
   @Override

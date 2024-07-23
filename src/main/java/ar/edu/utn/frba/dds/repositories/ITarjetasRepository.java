@@ -10,6 +10,7 @@ import java.util.Optional;
  */
 public interface ITarjetasRepository {
   Optional<Tarjeta> buscar(String codigo);
+  Optional<Tarjeta> buscar(long id);
 
   List<Tarjeta> buscarTodos();
 

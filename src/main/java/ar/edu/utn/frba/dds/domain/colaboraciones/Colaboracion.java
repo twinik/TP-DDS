@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,17 +14,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public abstract class Colaboracion {
+  protected long id;
   protected Colaborador colaborador;
   protected CalculadorDePuntos calculadorDePuntos;
   protected LocalDate fecha;
 
-  /**
-   * Constructor por defecto.
-   */
-  public Colaboracion() {
+  public Colaboracion(Colaborador colaborador, CalculadorDePuntos calculadorDePuntos, LocalDate fecha) {
+    this.colaborador = colaborador;
+    this.calculadorDePuntos = calculadorDePuntos;
+    this.fecha = fecha;
   }
-
 
   /**
    * Metodo abstracto efectuar que se implementa en las clases hijas de Colaboracion.

@@ -17,6 +17,8 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 public class PersonaVulnerable {
+
+  private long id;
   private String nombre;
   private Date fechaNacimiento;
   private Date fechaRegistro;
@@ -26,6 +28,19 @@ public class PersonaVulnerable {
   private String nroDocumento;
   private Colaborador colaborador;
   private List<PersonaVulnerable> tutorados;
+
+
+  public PersonaVulnerable(String nombre, Date fechaNacimiento, Date fechaRegistro, boolean poseeDomicilio, String domicilio, TipoDocumento tipoDocumento, String nroDocumento, Colaborador colaborador, List<PersonaVulnerable> tutorados) {
+    this.nombre = nombre;
+    this.fechaNacimiento = fechaNacimiento;
+    this.fechaRegistro = fechaRegistro;
+    this.poseeDomicilio = poseeDomicilio;
+    this.domicilio = domicilio;
+    this.tipoDocumento = tipoDocumento;
+    this.nroDocumento = nroDocumento;
+    this.colaborador = colaborador;
+    this.tutorados = tutorados;
+  }
 
   public boolean poseeMenores() {
     return tutorados.stream().anyMatch(PersonaVulnerable::esMenor);

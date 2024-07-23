@@ -16,8 +16,8 @@ public class SolcitudesAperturaHeladeraRepository implements ISolicitudesApertur
   }
 
   @Override
-  public Optional<SolicitudAperturaHeladera> buscar(int id) {
-    return Optional.empty();
+  public Optional<SolicitudAperturaHeladera> buscar(long id) {
+    return this.solcitudes.stream().filter(s -> s.getId() == id).findFirst();
   }
 
   @Override

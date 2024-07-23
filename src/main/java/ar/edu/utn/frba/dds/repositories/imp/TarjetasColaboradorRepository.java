@@ -16,7 +16,12 @@ public class TarjetasColaboradorRepository implements ITarjetasColaboradorReposi
 
   @Override
   public Optional<TarjetaColaborador> buscar(String codigo) {
-    return Optional.empty();
+    return this.tarjetas.stream().filter(t -> t.getCodigo().equals(codigo)).findFirst();
+  }
+
+  @Override
+  public Optional<TarjetaColaborador> buscar(long id) {
+    return this.tarjetas.stream().filter(t -> t.getId() == id).findFirst();
   }
 
   @Override

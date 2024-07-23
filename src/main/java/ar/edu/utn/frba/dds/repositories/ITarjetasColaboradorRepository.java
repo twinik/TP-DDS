@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface ITarjetasColaboradorRepository {
   Optional<TarjetaColaborador> buscar(String codigo);
+  Optional<TarjetaColaborador> buscar(long id);
 
   List<TarjetaColaborador> buscarTodos();
 

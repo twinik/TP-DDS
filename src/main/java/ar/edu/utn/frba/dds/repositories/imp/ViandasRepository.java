@@ -15,8 +15,8 @@ public class ViandasRepository implements IViandasRepository {
   }
 
   @Override
-  public Optional<Vianda> buscar() {
-    return Optional.empty();
+  public Optional<Vianda> buscar(long id) {
+    return this.viandas.stream().filter(v -> v.getId() == id).findFirst();
   }
 
   @Override

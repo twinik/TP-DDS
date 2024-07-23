@@ -8,7 +8,7 @@ import java.util.Optional;
  * IColaboradorRepository interface permite interactuar con los donacions de viandas
  */
 public interface IDonacionesViandaRepository {
-  Optional<DonacionVianda> buscar(int id);
+  Optional<DonacionVianda> buscar(long id);
 
   List<DonacionVianda> buscarTodos();
 
