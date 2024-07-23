@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.tecnicos;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -13,6 +14,5 @@ public class VisitaTecnico {
     private String descripcion;
     private String urlFoto;
     private boolean solucionado;
-    private Heladera heladera;
-
+    private Incidente incidente;
 }
