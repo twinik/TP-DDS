@@ -29,12 +29,9 @@ public class Incidente {
   public void reportar() {
     heladera.inhabilitar();
     Tecnico tecnicoAContactar = tecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
-    String message = MessageFactory.generarMensajeParaTecnicosPorIncidente(tecnicoAContactar,heladera,timestamp);
+    String message = MessageFactory.generarMensajeParaTecnicosPorIncidente(tecnicoAContactar, heladera, timestamp);
     tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
       NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
-      if (strategy == null) {
-        throw new InvalidNotificationStrategyException();
-      }
       strategy.notificar(medio, message);
     });
   }
