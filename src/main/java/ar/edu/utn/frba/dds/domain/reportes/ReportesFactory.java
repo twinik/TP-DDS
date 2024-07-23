@@ -8,20 +8,34 @@ import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class ReportesFactory {
-  public static IReporte create(TipoReporte tipo) {
 
-    IPDFGeneratorAdapter ipdfGeneratorAdapter = new ItextPdfGenerator();
+  private IViandasRepository viandasRepository;
+  private IDonacionesViandaRepository donacionesViandaRepository;
+  private IRedistribucionesViandaRepository redistribucionesViandaRepository;
+
+  private IFallasTecnicasRepository fallasTecnicasRepository;
+  private IAlertasRepository alertasRepository;
+
+  private static final String RUTA_VIANDAS_X_COLAB = "reporte-viandas-colab.pdf";
+  private static final String RUTA_VIANDAS_X_HELADERA = "reporte-viandas-heladera.pdf";
+  private static final String RUTA_FALLAS_X_HELADERA = "reporte-fallas-heladera.pdf";
+
+  public IReporte create(TipoReporte tipo) {
+
+
     switch (tipo) {
       case VIANDA_X_COLAB -> {
-        return new ReporteViandasPorColaborador("reporte-viandas-colab.pdf", ipdfGeneratorAdapter, (IViandasRepository) ServiceLocator.get("viandasRepository"));
+        return new ReporteViandasPorColaborador(RUTA_VIANDAS_X_COLAB, new ItextPdfGenerator(), this.viandasRepository);
       }
       case VIANDA_X_HELADERA -> {
-        return new ReporteViandasPorHeladera("reporte-viandas-heladera.pdf", ipdfGeneratorAdapter, (IDonacionesViandaRepository) ServiceLocator.get("donacionesViandaRepository"), (IRedistribucionesViandaRepository) ServiceLocator.get("redistribucionesViandaRepository"));
+        return new ReporteViandasPorHeladera(RUTA_VIANDAS_X_HELADERA, new ItextPdfGenerator(), this.donacionesViandaRepository,this.redistribucionesViandaRepository);
       }
       case FALLAS_HELADERA -> {
-        return new ReporteFallasHeladera("reporte-fallas-heladera.pdf", ipdfGeneratorAdapter, (IFallasTecnicasRepository) ServiceLocator.get("fallasTecnicasRepository"), (IAlertasRepository) ServiceLocator.get("alertasRepository"));
+        return new ReporteFallasHeladera(RUTA_FALLAS_X_HELADERA, new ItextPdfGenerator(), fallasTecnicasRepository, alertasRepository);
       }
       default -> {
         return null;

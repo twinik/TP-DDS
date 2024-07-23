@@ -1,5 +1,11 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
+import ar.edu.utn.frba.dds.domain.reportes.ReportesFactory;
+import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
+import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
+import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
+import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.AlertasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.AperturasHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
@@ -38,10 +44,18 @@ public class ServiceLocator {
         case "fallasTecnicasRepository" -> add("fallasTecnicasRepository", new FallasTecnicasRepository());
         case "tarjetasRepository" -> add("tarjetasRepository", new TarjetaRepository());
         case "viandasRepository" -> add("viandasRepository", new ViandasRepository());
-        case "solicitudesAperturaHeladeraRepository" -> add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
-        case "tarjetasColaboradorRepository" -> add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
+        case "solicitudesAperturaHeladeraRepository" ->
+            add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
+        case "tarjetasColaboradorRepository" ->
+            add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
         case "aperturasHeladeraRepository" -> add("aperturasHeladeraRepository", new AperturasHeladeraRepository());
         case "tecnicosRepository" -> add("tecnicosRepository", new TecnicosRepository());
+        case "reportesFactory" ->
+            add("reportesFactory", new ReportesFactory((IViandasRepository) get("viandasRepository"),
+                (IDonacionesViandaRepository) get("donacionesViandaRepository"),
+                (IRedistribucionesViandaRepository) get("redistribucionesViandaRepository"),
+                (IFallasTecnicasRepository) get("fallasTecnicasRepository"),
+                (IAlertasRepository) get("alertasRepository")));
       }
     }
 
