@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds.cronjobs;
 
 import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.FALLAS_HELADERA;
 import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.VIANDA_X_COLAB;
-import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.VIANDA_X_HELADERA;x
+import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.VIANDA_X_HELADERA;
 import ar.edu.utn.frba.dds.domain.reportes.IReporte;
 import ar.edu.utn.frba.dds.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
