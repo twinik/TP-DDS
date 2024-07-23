@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.domain.suscripciones;
 
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.heladeras.RecomendadorHeladeras;
-import ar.edu.utn.frba.dds.messageFactory.MessageFactory;
+import ar.edu.utn.frba.dds.messageFactory.MensajeHeladerasRecomendadasFactory;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
 
   private String GenerarMensajeHeladerasRecomendadas(Heladera heladera) {
     List<Heladera> heladeras = recomendadorHeladeras.recomendarCombinacionHeladeras(heladera);
-    return  MessageFactory.GenerarMensajeHeladerasRecomendadas(heladeras);
+    return  MensajeHeladerasRecomendadasFactory.GenerarMensaje(heladeras);
   }
 
 }
