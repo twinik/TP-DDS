@@ -25,9 +25,6 @@
         </svg>
     </button>
 
-
-    
-
     <!-- SIDEBAR -->
     <aside id="default-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
@@ -126,7 +123,8 @@
                     </a>
                 </li> -->
                 <li style="margin-top: auto !important">
-                    <a href="index.html" class="flex items-center p-2 rounded-lg group nav-item margin-top:auto">
+                    <a href="cerrar_sesion.html"
+                        class="flex items-center p-2 rounded-lg group nav-item margin-top:auto">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                             <path d="M0 0h24v24H0z" fill="none" />
                             <path fill="#eee"
@@ -144,143 +142,90 @@
 
     <div class="pageContainer">
         <div class="p-10 mx-auto max-w-4xl">
-            <h1 class="title1 mb-12">Colaborar</h1>
+            <h1 class="title1 mb-12">Suscripcion</h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">    
 
-    <!-- CARDS -->
-    <div class="container mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!--Cantidad de viandas restantes-->        
+        <form class="ml-5 mr-5 rounded-xl border-2 shadow-lg">
 
-        <div class="max-w-sm sidebar border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg" src="img/sidebar-profile.jpg" alt="" />
-            </a>
-            <div class="p-5">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-300 dark:text-white">Persona</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-300 dark:text-gray-400">10 Puntos</p>
-                <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white boton-canje rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Canjear
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
+            <h1 class="mt-5 mb-5" >Avisarme cuando solo quede una determinada cantidad de viandas restantes</h1>
+            <div class="ml-5 mr-5 relative z-0 mb-5 group">
+                <input type="text" name="floating_email" id="floating_email"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" " required />
+                <label for="floating_email"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Cantidad</label>
             </div>
+            <div class="mb-3 ml-5 mr-5">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option selected disabled>Medio de contacto</option>
+                    <option value="mail">Mail</option>
+                    <option value="telegram">Telegram</option>
+                    <option value="whatsapp">Whatsapp</option>
+                </select>
+            </div>
+            <a href="#"
+                    class="mt-5 mb-5 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white botonFormularios rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Suscribirse
+                </a>
+
+        </form>
+        <!--Cantidad de viandas restantes-->
+
+        <!--Cantidad de viandas para llenar la heladera-->
+        <form class="rounded-xl border-2 shadow-lg">
+
+            <h1 class="mt-5 mb-5" >Avisarme cuando solo falte una determinada cantidad de viandas para llenar la heladera</h1>
+            <div class="ml-5 mr-5 relative z-0 mb-5 group">
+                <input type="text" name="floating_email" id="floating_email"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" " required />
+                <label for="floating_email"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Cantidad</label>
+            </div>
+            <div class="ml-5 mr-5 mb-3">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option selected disabled>Medio de contacto</option>
+                    <option value="mail">Mail</option>
+                    <option value="telegram">Telegram</option>
+                    <option value="whatsapp">Whatsapp</option>
+                </select>
+            </div>
+            <a href="#"
+                    class="mt-5 mb-5 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white botonFormularios rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Suscribirse
+                </a>
+        </form> 
+        <!--Cantidad de viandas par llenar la heladera-->
+
+        <!--Heladera sufre desperfecto-->
+        <form class="rounded-xl border-2 shadow-lg">
+
+            <h1 class="mt-5 mb-5" >Avisarme cuando la heladera sufre un desperfecto</h1>
+            <div class="ml-5 mr-5 mb-3">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option selected disabled>Medio de contacto</option>
+                    <option value="mail">Mail</option>
+                    <option value="telegram">Telegram</option>
+                    <option value="whatsapp">Whatsapp</option>
+                </select>
+            </div>
+            <a href="#"
+                    class="mt-5 mb-5 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white botonFormularios rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Suscribirse
+                </a>
+        </form>
+        <!--Heladera sufre desperfecto-->
         </div>
 
-        <div class="max-w-sm sidebar border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg" src="img/sidebar-profile.jpg" alt="" />
-            </a>
-            <div class="p-5">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-300 dark:text-white">Persona</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-300 dark:text-gray-400">10 Puntos</p>
-                <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white boton-canje rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Canjear
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
-            </div>
         </div>
-
-        <div class="max-w-sm sidebar border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg" src="img/sidebar-profile.jpg" alt="" />
-            </a>
-            <div class="p-5">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-300 dark:text-white">Persona</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-300 dark:text-gray-400">10 Puntos</p>
-                <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white boton-canje rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Canjear
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="max-w-sm sidebar border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg" src="img/sidebar-profile.jpg" alt="" />
-            </a>
-            <div class="p-5">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-300 dark:text-white">Persona</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-300 dark:text-gray-400">10 Puntos</p>
-                <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white boton-canje rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Canjear
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="max-w-sm sidebar border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg" src="img/sidebar-profile.jpg" alt="" />
-            </a>
-            <div class="p-5">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-300 dark:text-white">Persona</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-300 dark:text-gray-400">10 Puntos</p>
-                <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white boton-canje rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Canjear
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="max-w-sm sidebar border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg" src="img/sidebar-profile.jpg" alt="" />
-            </a>
-            <div class="p-5">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-300 dark:text-white">Persona</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-300 dark:text-gray-400">10 Puntos</p>
-                <a href="#"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white boton-canje rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Canjear
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
     </div>
-    <!-- CARDS -->
-
-    </div>
-    </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 </body>
