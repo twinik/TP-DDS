@@ -9,11 +9,11 @@
 }
 
 .boton {
-    background-color: #3A4B6B;
+	background-color: #3a4b6b;
 }
 
-.boton-canje{
-    background-color: #202A3D;
+.boton-canje {
+	background-color: #202a3d;
 }
 
 .title1 {
@@ -26,4 +26,18 @@
 	font-family: "Roboto", sans-serif;
 	font-weight: 700;
 	font-size: 1.2rem;
+}
+
+.pageContainer {
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	padding-left: 0;
+}
+
+@media screen and (min-width: 768px) {
+	.pageContainer {
+		padding-left: 16rem !important;
+	}
 }
