@@ -1,298 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-		<title>
-			Mejora del Acceso Alimentario en Contextos de Vulnerabilidad
-			Socioeconómica
-		</title>
 
-		<link rel="stylesheet" href="css/index.css" />
-		<link
-			href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"
-			rel="stylesheet"
-		/>
-	</head>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<title>
+		Iniciar sesión | Mejora del Acceso Alimentario en Contextos de Vulnerabilidad Socioeconómica
+	</title>
 
-	<body class="bg-gray-100 flex items-center justify-center h-screen">
-		<button
-			data-drawer-target="default-sidebar"
-			data-drawer-toggle="default-sidebar"
-			aria-controls="default-sidebar"
-			type="button"
-			class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 absolute right-0 top-0 z-40"
-		>
-			<span class="sr-only">Open sidebar</span>
-			<svg
-				class="w-6 h-6"
-				aria-hidden="true"
-				fill="currentColor"
-				viewBox="0 0 20 20"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					clip-rule="evenodd"
-					fill-rule="evenodd"
-					d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-				></path>
-			</svg>
-		</button>
+	<link rel="stylesheet" href="css/index.css" />
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
+</head>
 
-		<!-- SIDEBAR -->
-		<aside
-			id="default-sidebar"
-			class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
-			aria-label="Sidebar"
-		>
-			<div class="h-full px-3 py-4 overflow-y-auto text-white sidebar">
-				<ul class="space-y-2 font-medium flex flex-col h-full">
-					<li class="mb-5">
-						<div class="flex flex-row items-center gap-x-2">
-							<!-- <div>
-								<img
-									src="img/sidebar-profile.jpg"
-									alt="Profile photo"
-									class="w-20 rounded-full"
-								/>
-							</div> -->
-							<div>
-								<span>GONZALO TURRI</span><br />
-								<span class="text-gray-400">Colaborador</span>
-							</div>
-						</div>
-					</li>
-					<li>
-						<a
-							href="quienes_somos.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								enable-background="new 0 0 24 24"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"
-							>
-								<g><path d="M0,0h24v24H0V0z" fill="none" /></g>
-								<g>
-									<g>
-										<polygon
-											fill="#eee"
-											points="1,11 1,21 6,21 6,15 10,15 10,21 15,21 15,11 8,6"
-										/>
-										<path
-											fill="#eee"
-											d="M10,3v1.97l7,5V11h2v2h-2v2h2v2h-2v4h6V3H10z M19,9h-2V7h2V9z"
-										/>
-									</g>
-								</g>
-							</svg>
-							<span class="ms-3">Quienes somos</span>
-						</a>
-					</li>
-					<li>
-						<a
-							href="colaborar.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								class="flex-shrink-0 w-5 h-5 transition duration-75"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="currentColor"
-								viewBox="0 0 18 18"
-							>
-								<path
-									d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Colaborar</span
-							>
-						</a>
-					</li>
-					<li>
-						<a
-							href="heladeras.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"
-							>
-								<path d="M0 0h24v24H0z" fill="none" />
-								<path
-									fill="#eee"
-									d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Heladeras</span
-							>
-						</a>
-					</li>
-					<li>
-						<a
-							href="productos.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								class="flex-shrink-0 w-5 h-5 transition duration-75"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="currentColor"
-								viewBox="0 0 18 20"
-							>
-								<path
-									d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Productos</span
-							>
-						</a>
-					</li>
-					<li>
-						<a
-							href="carga_masiva.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"
-							>
-								<path d="M0 0h24v24H0z" fill="none" />
-								<path
-									fill="#eee"
-									d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Carga masiva</span
-							>
-						</a>
-					</li>
-					<li>
-						<a
-							href="reportes.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								class="w-5 h-5 transition duration-75"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="currentColor"
-								viewBox="0 0 22 21"
-							>
-								<path
-									d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
-								/>
-								<path
-									d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Reportes</span
-							>
-						</a>
-					</li>
-					<!-- <li>
-                    <a href="iniciar_sesion"class="flex items-center p-2 rounded-lg group nav-item">
-                        <svg class="flex-shrink-0 w-5 h-5 transition duration-75 "
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Iniciar sesión</span>
-                    </a>
-                </li> -->
-					<li style="margin-top: auto !important">
-						<a
-							href="cerrar_sesion.html"
-							class="flex items-center p-2 rounded-lg group nav-item margin-top:auto"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"
-							>
-								<path d="M0 0h24v24H0z" fill="none" />
-								<path
-									fill="#eee"
-									d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap">
-								Cerrar sesión
-							</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</aside>
-		<!-- SIDEBAR -->
+<body>
+	<section class="azulOscuro">
+		<div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
+			<form class="w-full max-w-md" action="quienes_somos.html" method="get">
+				<h1 class="mt-3 text-4xl font-semibold text-white capitalize sm:text-3xl dark:text-white">
+					Iniciar Sesión
+				</h1>
 
-		<div class="pageContainer">
-			<div class="p-10 mx-auto max-w-4xl">
-				<h1 class="title1 mb-4">Bienvenidos a [Nombre de la ONG]</h1>
-				<img
-					src="/img/logo-rapido.png"
-					alt="logo"
-					class="mx-auto w-40 my-6"
-				/>
-				<h2 class="title2">
-					Mejorando el Acceso Alimentario en Contextos de
-					Vulnerabilidad Socioeconómica
-				</h2>
-				<p class="mt-2 mb-5">
-					En [Nombre de la ONG], creemos que todos tienen derecho a un
-					acceso digno y seguro a los alimentos. Nuestra misión es
-					reducir la inseguridad alimentaria y mejorar la calidad de
-					vida de las personas en situaciones de vulnerabilidad
-					socioeconómica a través de iniciativas innovadoras y
-					comunitarias.
-				</p>
-				<h2 class="title2">¿Quiénes Somos?</h2>
-				<p class="mt-2 mb-5">
-					Somos una organización no gubernamental comprometida con la
-					mejora del acceso alimentario en todo el país. Con un equipo
-					dedicado y una red creciente de voluntarios y colaboradores,
-					trabajamos incansablemente para asegurar que nadie pase
-					hambre en nuestras comunidades.
-				</p>
-				<h2 class="title2">Nuestra Iniciativa</h2>
-				<p class="mt-2 mb-5">
-					Para enfrentar la inseguridad alimentaria, hemos
-					implementado un proyecto revolucionario: heladeras
-					comunitarias. Estas heladeras están estratégicamente
-					ubicadas en restaurantes, estaciones de transporte público y
-					otros establecimientos de fácil acceso.
-					<br />
-					Cualquier persona o negocio puede contribuir donando
-					alimentos frescos y en buen estado. Todos podemos ser parte
-					de la solución.
-				</p>
-				<h2 class="title2">Únete a Nosotros</h2>
-				<p class="mt-2 mb-5">
-					Ya sea donando alimentos, siendo voluntario o ayudándonos a
-					difundir nuestra misión, tu apoyo es crucial. Juntos,
-					podemos hacer una diferencia real y tangible en la vida de
-					muchas personas.
-				</p>
-			</div>
+				<div class="relative flex items-center mt-8">
+					<input type="email"
+						class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+						placeholder="Email" required />
+				</div>
+
+				<div class="relative flex items-center mt-4">
+					<input type="password"
+						class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+						placeholder="Contraseña" required />
+				</div>
+
+				<div class="mt-6">
+					<button type="submit"
+						class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+						Iniciar Sesión
+					</button>
+
+					<p class="mt-4 text-center text-white">o continua con</p>
+
+					<a href="#"
+						class="flex items-center justify-center px-6 py-3 mt-4 text-white transition-colors duration-300 transform border rounded-lg hover:bg-gray-50 hover:text-black">
+						<svg class="w-6 h-6 mx-2" viewBox="0 0 40 40">
+							<path
+								d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
+								fill="#FFC107" />
+							<path
+								d="M5.25497 12.2425L10.7308 16.2583C12.2125 12.59 15.8008 9.99999 20 9.99999C22.5491 9.99999 24.8683 10.9617 26.6341 12.5325L31.3483 7.81833C28.3716 5.04416 24.39 3.33333 20 3.33333C13.5983 3.33333 8.04663 6.94749 5.25497 12.2425Z"
+								fill="#FF3D00" />
+							<path
+								d="M20 36.6667C24.305 36.6667 28.2167 35.0192 31.1742 32.34L26.0159 27.975C24.3425 29.2425 22.2625 30 20 30C15.665 30 11.9842 27.2359 10.5975 23.3784L5.16254 27.5659C7.92087 32.9634 13.5225 36.6667 20 36.6667Z"
+								fill="#4CAF50" />
+							<path
+								d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.7592 25.1975 27.56 26.805 26.0133 27.9758C26.0142 27.975 26.015 27.975 26.0158 27.9742L31.1742 32.3392C30.8092 32.6708 36.6667 28.3333 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
+								fill="#1976D2" />
+						</svg>
+
+						<span class="mx-2">Iniciar sesión con Google</span>
+					</a>
+
+					<div class="mt-6 text-center">
+						<a href="registro.html" class="text-sm text-blue-500 hover:underline dark:text-blue-400">
+							Aún no tienes una cuenta? Regístrate
+						</a>
+					</div>
+				</div>
+			</form>
 		</div>
+	</section>
 
-		<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
-	</body>
+	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+</body>
+
 </html>
