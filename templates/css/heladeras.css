@@ -1,12 +1,19 @@
+/* heladeras.css */
 .popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
     padding: 1.3rem;
     background-color: #202A3D;
     color: white;
     border-radius: 5px;
 }
+
 .popup-title {
     font-weight: bold;
 }
+
 .popup-button {
     background-color: #516894;
     color: white !important;
@@ -16,7 +23,6 @@
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
-    margin-top: 5px;
     max-width: fit-content;
     transition-property: all;
     transition-duration: 0.1s;
@@ -31,6 +37,7 @@
     background-color: #202A3D;
     color: white;
 }
+
 .leaflet-popup-content {
     margin: 0;
     padding: 0;
@@ -47,4 +54,9 @@
 
 .leaflet-popup-close-button:hover {
     color: #ccc !important;
+}
+
+/* Clase para popups inhabilitados */
+.disabled-heladera {
+    background-color: #821D1D !important;
 }
