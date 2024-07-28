@@ -28,6 +28,10 @@ body {
 	background-color: #3a4b6b;
 }
 
+.span-item {
+	margin-left: 7px !important;
+}
+
 .boton {
 	background-color: #3a4b6b;
 	color: #eee;
