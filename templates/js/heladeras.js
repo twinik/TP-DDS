@@ -34,6 +34,10 @@ var markers = [
 		title: "Heladera Parque Rivadavia",
 		extraContent: inhabilitadaContent,
 		disabled: true
+	},
+	{
+		coords: [-34.545278, -58.449722],
+		title: "Heladera Mudomental ChangoMas"
 	}
 ];
 
