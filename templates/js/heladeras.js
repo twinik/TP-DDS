@@ -7,7 +7,7 @@ var map = L.map("map").setView(cabaCoords, 13);
 // Añadir una capa de mapa (puedes usar otras capas como OpenStreetMap, Mapbox, etc.)
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 	maxZoom: 19,
-	minZoom: 5,
+	minZoom: 5
 }).addTo(map);
 
 const inhabilitadaContent =
@@ -18,24 +18,29 @@ const reportarFallaBtn =
 // Datos de los marcadores
 var markers = [
 	{
+		id: 1,
 		coords: [-34.59853190440259, -58.42009848935327],
 		title: "Heladera UTN Medrano"
 	},
 	{
+		id: 2,
 		coords: [-34.6067, -58.4299],
 		title: "Heladera Parque Centenario"
 	},
 	{
+		id: 3,
 		coords: [-34.6037, -58.4105],
 		title: "Heladera Abasto"
 	},
 	{
+		id: 4,
 		coords: [-34.6189, -58.4244],
 		title: "Heladera Parque Rivadavia",
 		extraContent: inhabilitadaContent,
 		disabled: true
 	},
 	{
+		id: 5,
 		coords: [-34.545278, -58.449722],
 		title: "Heladera Mudomental ChangoMas"
 	}

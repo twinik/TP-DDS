@@ -13,22 +13,27 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // Datos de los marcadores
 var markers = [
 	{
+		id: 1,
 		coords: [-34.59853190440259, -58.42009848935327],
 		title: "Heladera UTN Medrano"
 	},
 	{
+		id: 2,
 		coords: [-34.6067, -58.4299],
 		title: "Heladera Parque Centenario"
 	},
 	{
+		id: 3,
 		coords: [-34.6037, -58.4105],
 		title: "Heladera Abasto"
 	},
 	{
+		id: 4,
 		coords: [-34.6189, -58.4244],
 		title: "Heladera Parque Rivadavia"
 	},
 	{
+		id: 5,
 		coords: [-34.545278, -58.449722],
 		title: "Heladera Mudomental ChangoMas"
 	}
@@ -43,16 +48,11 @@ markers.forEach(function (markerData) {
 	var div = document.createElement("div");
 	div.innerHTML = popupContent;
 	div.querySelector(".popup-title").innerText = markerData.title;
+	div.querySelector(".popup-button").id = "selectBtn-" + markerData.id;
 
-	if (markerData.extraContent) {
-		var popupContentDiv = div.querySelector(".popup-content");
-		var extraContentDiv = document.createElement("div");
-		extraContentDiv.innerHTML = markerData.extraContent;
-		popupContentDiv.insertBefore(
-			extraContentDiv,
-			popupContentDiv.querySelector(".popup-button")
-		);
-	}
+	// para la redistribucion de heladeras
+	div.querySelector(".popup-destino").id =
+		"selectBtnDestino-" + markerData.id;
 
 	marker.bindPopup(div.innerHTML);
 });

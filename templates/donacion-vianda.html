@@ -220,7 +220,7 @@
 					</li>
 					<li>
 						<a
-							href="productos.html"
+							href="canjes.html"
 							class="flex items-center p-2 rounded-lg group nav-item"
 						>
 							<svg
@@ -235,7 +235,7 @@
 								/>
 							</svg>
 							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Productos</span
+								>Canjes</span
 							>
 						</a>
 					</li>
@@ -369,7 +369,7 @@
 
 					<div class="relative z-0 w-full mb-5 group text-left">
 						<input
-							type="text"
+							type="number"
 							name="calorias"
 							id="calorias"
 							class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -384,7 +384,7 @@
 					</div>
 					<div class="relative z-0 w-full mt-2 mb-5 group text-left">
 						<input
-							type="text"
+							type="number"
 							name="peso-vianda"
 							id="peso-vianda"
 							class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -398,7 +398,9 @@
 						>
 					</div>
 
-					<span>Seleccione una vianda</span>
+					<span
+						>Seleccione la heladera donde realiza la donación</span
+					>
 					<div
 						id="map"
 						style="height: 300px; width: 100%; z-index: 50"
@@ -407,16 +409,23 @@
 					<div id="marker-template" style="display: none">
 						<div class="flex flex-col popup-content">
 							<div class="popup-title"></div>
-							<div class="popup-button">Seleccionar</div>
+							<div
+								class="popup-button"
+								onclick="clickOnPopup(this)"
+							>
+								Seleccionar
+							</div>
 						</div>
 					</div>
-					<span>Heladera seleccionada: Heladera Medrano</span>
+					<span>Heladera seleccionada: </span
+					><span id="heladeraSeleccionada"></span>
+					<input type="hidden" name="idHeladera" id="idHeladera" />
 
 					<button
 						type="submit"
-						class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
+						class="content-center max-w-md mx-auto w-full mt-6 px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
 					>
-						Registrar Donacion
+						Registrar Donación
 					</button>
 				</form>
 			</div>
@@ -430,5 +439,22 @@
 		></script>
 		<script src="js/heladeras-seleccion.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+		<script>
+			function clickOnPopup(element) {
+				const btns = document.querySelectorAll(".popup-button");
+				console.log(btns);
+				const heladeraSelectedText = document.getElementById(
+					"heladeraSeleccionada"
+				);
+				const heladeraSelectedHidden =
+					document.getElementById("idHeladera");
+				const id = element.id.split("-")[1];
+				heladeraSelectedHidden.val;
+				heladeraSelectedHidden.value = id;
+				heladeraSelectedText.innerHTML = markers.find(
+					e => e.id == id
+				).title;
+			}
+		</script>
 	</body>
 </html>

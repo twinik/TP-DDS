@@ -220,7 +220,7 @@
 					</li>
 					<li>
 						<a
-							href="productos.html"
+							href="canjes.html"
 							class="flex items-center p-2 rounded-lg group nav-item"
 						>
 							<svg
@@ -235,7 +235,7 @@
 								/>
 							</svg>
 							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Productos</span
+								>Canjes</span
 							>
 						</a>
 					</li>
@@ -350,9 +350,35 @@
 					<div id="marker-template" style="display: none">
 						<div class="flex flex-col popup-content">
 							<div class="popup-title"></div>
-							<div class="popup-button">Seleccionar</div>
+							<div
+								class="popup-button"
+								onclick="clickSelectOrigen(this)"
+							>
+								Seleccionar Como Origen
+							</div>
+							<div
+								class="popup-button popup-destino"
+								onclick="clickSelectDestino(this)"
+							>
+								Seleccionar Como Destino
+							</div>
 						</div>
 					</div>
+					<span>Heladera Origen: </span
+					><span id="heladeraOrigen"></span>
+					<input
+						type="hidden"
+						name="idHeladeraOrigen"
+						id="idHeladeraOrigen"
+					/>
+					<br />
+					<span>Heladera Destino: </span
+					><span id="heladeraDestino"></span>
+					<input
+						type="hidden"
+						name="idHeladeraDestino"
+						id="idHeladeraDestino"
+					/>
 
 					<div class="relative z-0 w-full mb-5 group text-left">
 						<input
@@ -411,5 +437,36 @@
 		<script src="js/heladeras-seleccion.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+		<script>
+			function clickSelectOrigen(element) {
+				const btns = document.querySelectorAll(".popup-button");
+				console.log(btns);
+				const heladeraSelectedText =
+					document.getElementById("heladeraOrigen");
+				const heladeraSelectedHidden =
+					document.getElementById("idHeladeraOrigen");
+				const id = element.id.split("-")[1];
+				heladeraSelectedHidden.val;
+				heladeraSelectedHidden.value = id;
+				heladeraSelectedText.innerHTML = markers.find(
+					e => e.id == id
+				).title;
+			}
+
+			function clickSelectDestino(element) {
+				const btns = document.querySelectorAll(".popup-button");
+				console.log(btns);
+				const heladeraSelectedText =
+					document.getElementById("heladeraDestino");
+				const heladeraSelectedHidden =
+					document.getElementById("idHeladeraDestino");
+				const id = element.id.split("-")[1];
+				heladeraSelectedHidden.val;
+				heladeraSelectedHidden.value = id;
+				heladeraSelectedText.innerHTML = markers.find(
+					e => e.id == id
+				).title;
+			}
+		</script>
 	</body>
 </html>
