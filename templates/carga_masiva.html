@@ -1,120 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-		<title>
-			Mejora del Acceso Alimentario en Contextos de Vulnerabilidad
-			Socioeconómica
-		</title>
 
-		<link rel="stylesheet" href="css/index.css" />
-		<link
-			href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"
-			rel="stylesheet"
-		/>
-	</head>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<title>
+		Mejora del Acceso Alimentario en Contextos de Vulnerabilidad
+		Socioeconómica
+	</title>
 
-	<body class="bg-gray-100 flex items-center justify-center h-screen">
-		<button
-			data-drawer-target="default-sidebar"
-			data-drawer-toggle="default-sidebar"
-			aria-controls="default-sidebar"
-			type="button"
-			class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-		>
-			<span class="sr-only">Open sidebar</span>
-			<svg
-				class="w-6 h-6"
-				aria-hidden="true"
-				fill="currentColor"
-				viewBox="0 0 20 20"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					clip-rule="evenodd"
-					fill-rule="evenodd"
-					d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-				></path>
-			</svg>
-		</button>
+	<link rel="stylesheet" href="css/index.css" />
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
+</head>
 
-		<!-- SIDEBAR -->
-		<aside
-			id="default-sidebar"
-			class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
-			aria-label="Sidebar"
-		>
-			<div class="h-full px-3 py-4 overflow-y-auto text-white sidebar">
-				<ul class="space-y-2 font-medium flex flex-col h-full">
-					<li class="mb-2">
-						<div class="flex flex-col gap-x-2 pl-2">
-							<span class="text-xl font-bold">GONZALO TURRI</span>
-							<span class="text-gray-400 font-medium"
-								>Colaborador</span
-							>
-						</div>
-					</li>
-					<li>
-						<a
-							href="quienes_somos.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="#fff"
-								enable-background="new 0 0 24 24"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"
-							>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+	<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
+		type="button"
+		class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+		<span class="sr-only">Open sidebar</span>
+		<svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+			xmlns="http://www.w3.org/2000/svg">
+			<path clip-rule="evenodd" fill-rule="evenodd"
+				d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+			</path>
+		</svg>
+	</button>
+
+	<!-- SIDEBAR -->
+	<aside id="default-sidebar"
+		class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+		aria-label="Sidebar">
+		<div class="h-full px-3 py-4 overflow-y-auto text-white sidebar">
+			<ul class="space-y-2 font-medium flex flex-col h-full">
+				<li class="mb-2">
+					<div class="flex flex-col gap-x-2 pl-2">
+						<span class="text-xl font-bold">GONZALO TURRI</span>
+						<span class="text-gray-400 font-medium">Colaborador</span>
+					</div>
+				</li>
+				<li>
+					<a href="quienes_somos.html" class="flex items-center p-2 rounded-lg group nav-item">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="#fff" enable-background="new 0 0 24 24"
+							height="24" viewBox="0 0 24 24" width="24">
+							<g>
+								<path d="M0,0h24v24H0V0z" fill="none" />
+							</g>
+							<g>
 								<g>
-									<path d="M0,0h24v24H0V0z" fill="none" />
+									<polygon fill="#eee" points="1,11 1,21 6,21 6,15 10,15 10,21 15,21 15,11 8,6" />
+									<path fill="#eee" d="M10,3v1.97l7,5V11h2v2h-2v2h2v2h-2v4h6V3H10z M19,9h-2V7h2V9z" />
 								</g>
-								<g>
-									<g>
-										<polygon
-											fill="#eee"
-											points="1,11 1,21 6,21 6,15 10,15 10,21 15,21 15,11 8,6"
-										/>
-										<path
-											fill="#eee"
-											d="M10,3v1.97l7,5V11h2v2h-2v2h2v2h-2v4h6V3H10z M19,9h-2V7h2V9z"
-										/>
-									</g>
-								</g>
-							</svg>
-							<span class="ms-3">Quienes somos</span>
-						</a>
-					</li>
-					<li>
-						<a
-							href="colaborar.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								class="flex-shrink-0 w-5 h-5 transition duration-75"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="#fff"
-								viewBox="0 0 18 18"
-							>
-								<path
-									d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Colaborar</span
-							>
-						</a>
-					</li>
-					<li>
-						<!-- <a href="heladeras.html" class="flex items-center p-2 rounded-lg group nav-item">
+							</g>
+						</svg>
+						<span class="ms-3">Quienes somos</span>
+					</a>
+				</li>
+				<li>
+					<a href="colaborar.html" class="flex items-center p-2 rounded-lg group nav-item">
+						<svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 18 18">
+							<path
+								d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+						</svg>
+						<span class="flex-1 ms-3 whitespace-nowrap">Colaborar</span>
+					</a>
+				</li>
+				<li>
+					<!-- <a href="heladeras.html" class="flex items-center p-2 rounded-lg group nav-item">
 								<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
 									<path d="M0 0h24v24H0z" fill="none" />
 									<path fill="#eee"
@@ -122,164 +76,76 @@
 								</svg>
 								<span class="flex-1 ms-3 whitespace-nowrap">Heladeras</span>
 							</a> -->
-						<button
-							type="button"
-							class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group nav-item"
-							aria-controls="dropdown-example"
-							data-collapse-toggle="dropdown-example"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="#fff"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-							>
-								<path
-									d="M18 2H6c-1.103 0-2 .897-2 2v5h4V6h2v3h10V4c0-1.103-.897-2-2-2zm-8 13H8v-5H4v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V10H10v5z"
-								/>
-							</svg>
-							<span
-								class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
-								>Heladeras</span
-							>
-							<svg
-								class="w-3 h-3"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 10 6"
-							>
-								<path
-									stroke="#fff"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="m1 1 4 4 4-4"
-								/>
-							</svg>
-						</button>
-						<ul
-							id="dropdown-example"
-							class="hidden py-2 space-y-2 ml-4"
-						>
-							<li>
-								<a
-									href="heladeras.html"
-									class="flex items-center p-2 rounded-lg group nav-item"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										height="24"
-										viewBox="0 0 24 24"
-										width="24"
-									>
-										<path d="M0 0h24v24H0z" fill="none" />
-										<path
-											fill="#eee"
-											d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-										/>
-									</svg>
-									<span class="flex-1 ms-3 whitespace-nowrap"
-										>Mapa</span
-									>
-								</a>
-							</li>
-							<li>
-								<a
-									href="listado-alertas.html"
-									class="flex items-center p-2 rounded-lg group nav-item"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 24 24"
-										width="24"
-										height="24"
-										fill="#fff"
-										class="size-6"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M5.25 9a6.75 6.75 0 0 1 13.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 0 1-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 1 1-7.48 0 24.585 24.585 0 0 1-4.831-1.244.75.75 0 0 1-.298-1.205A8.217 8.217 0 0 0 5.25 9.75V9Zm4.502 8.9a2.25 2.25 0 1 0 4.496 0 25.057 25.057 0 0 1-4.496 0Z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-									<span class="flex-1 ms-3 whitespace-nowrap"
-										>Alertas</span
-									>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a
-							href="canjes.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								class="flex-shrink-0 w-5 h-5 transition duration-75"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="#fff"
-								viewBox="0 0 18 20"
-							>
-								<path
-									d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Canjes</span
-							>
-						</a>
-					</li>
-					<li>
-						<a
-							href="carga_masiva.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"
-							>
-								<path d="M0 0h24v24H0z" fill="none" />
-								<path
-									fill="#fff"
-									d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
-								/>
-							</svg>
-							<span
-								class="flex-1 ms-3 whitespace-nowrap span-item"
-								>Carga masiva</span
-							>
-						</a>
-					</li>
-					<li>
-						<a
-							href="reportes.html"
-							class="flex items-center p-2 rounded-lg group nav-item"
-						>
-							<svg
-								class="w-5 h-5 transition duration-75"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="#fff"
-								viewBox="0 0 22 21"
-							>
-								<path
-									d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
-								/>
-								<path
-									d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap"
-								>Reportes</span
-							>
-						</a>
-					</li>
-					<!-- <li>
+					<button type="button"
+						class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group nav-item"
+						aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
+							<path
+								d="M18 2H6c-1.103 0-2 .897-2 2v5h4V6h2v3h10V4c0-1.103-.897-2-2-2zm-8 13H8v-5H4v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V10H10v5z" />
+						</svg>
+						<span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Heladeras</span>
+						<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+							viewBox="0 0 10 6">
+							<path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="m1 1 4 4 4-4" />
+						</svg>
+					</button>
+					<ul id="dropdown-example" class="hidden py-2 space-y-2 ml-4">
+						<li>
+							<a href="heladeras.html" class="flex items-center p-2 rounded-lg group nav-item">
+								<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+									<path d="M0 0h24v24H0z" fill="none" />
+									<path fill="#eee"
+										d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+								</svg>
+								<span class="flex-1 ms-3 whitespace-nowrap">Mapa</span>
+							</a>
+						</li>
+						<li>
+							<a href="listado-alertas.html" class="flex items-center p-2 rounded-lg group nav-item">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+									fill="#fff" class="size-6">
+									<path fill-rule="evenodd"
+										d="M5.25 9a6.75 6.75 0 0 1 13.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 0 1-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 1 1-7.48 0 24.585 24.585 0 0 1-4.831-1.244.75.75 0 0 1-.298-1.205A8.217 8.217 0 0 0 5.25 9.75V9Zm4.502 8.9a2.25 2.25 0 1 0 4.496 0 25.057 25.057 0 0 1-4.496 0Z"
+										clip-rule="evenodd" />
+								</svg>
+								<span class="flex-1 ms-3 whitespace-nowrap">Alertas</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="productos.html" class="flex items-center p-2 rounded-lg group nav-item">
+						<svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 18 20">
+							<path
+								d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
+						</svg>
+						<span class="flex-1 ms-3 whitespace-nowrap">Canjes</span>
+					</a>
+				</li>
+				<li>
+					<a href="carga_masiva.html" class="flex items-center p-2 rounded-lg group nav-item">
+						<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="#fff" d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+						</svg>
+						<span class="flex-1 ms-3 whitespace-nowrap span-item">Carga masiva</span>
+					</a>
+				</li>
+				<li>
+					<a href="reportes.html" class="flex items-center p-2 rounded-lg group nav-item">
+						<svg class="w-5 h-5 transition duration-75" aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 22 21">
+							<path
+								d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+							<path
+								d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+						</svg>
+						<span class="flex-1 ms-3 whitespace-nowrap">Reportes</span>
+					</a>
+				</li>
+				<!-- <li>
 		                <a href="iniciar_sesion"class="flex items-center p-2 rounded-lg group nav-item">
 		                    <svg class="flex-shrink-0 w-5 h-5 transition duration-75 "
 		                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
@@ -289,126 +155,70 @@
 		                    <span class="flex-1 ms-3 whitespace-nowrap">Iniciar sesión</span>
 		                </a>
 		            </li> -->
-					<li style="margin-top: auto !important">
-						<a
-							href="index.html"
-							class="flex items-center p-2 rounded-lg group nav-item margin-top:auto"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24"
-								viewBox="0 0 24 24"
-								width="24"
-							>
-								<path d="M0 0h24v24H0z" fill="none" />
-								<path
-									fill="#eee"
-									d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
-								/>
-							</svg>
-							<span class="flex-1 ms-3 whitespace-nowrap">
-								Cerrar sesión
-							</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</aside>
-		<!-- SIDEBAR -->
-
-		<div class="pageContainer">
-			<div class="p-10 mx-auto max-w-4xl">
-				<h1 class="title1 mb-12">Carga masiva de colaboraciones</h1>
-
-				<!--Carga masiva-->
-				<form class="rounded-xl border-2 shadow-lg">
-					<h2 class="mt-5 mb-5">Formato del archivo a subir:</h2>
-					<span class="text-xs"
-						>El archivo debe contener los siguientes campos, en este
-						orden, separados por una coma (,):</span
-					>
-					<p class="px-3 w-full text-xs">
-						tipoDocumento - documento - nombre - apellido - mail -
-						fechaColaboracion - formaColaboracion - cantidad -
-						jsonColaboracion
-					</p>
-					<button id="downloadExampleBtn" class="text-sm mb-5 mt-2">
-						Descargar ejemplo
-					</button>
-
-					<!--Upload file-->
-					<div>
-						<label
-							for="dropzone-file"
-							class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="w-8 h-8 text-gray-500 dark:text-gray-400"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-								/>
-							</svg>
-
-							<h2
-								class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200"
-							>
-								Subir archivo
-							</h2>
-
-							<p
-								class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400"
-							>
-								Ingrese un archivo .csv con las colaboraciones a
-								cargar
-							</p>
-
-							<input
-								id="dropzone-file"
-								type="file"
-								class="hidden"
-							/>
-						</label>
-					</div>
-					<!--Upload file-->
-
-					<a
-						href="#"
-						class="mt-5 mb-5 inline-flex items-center boton"
-					>
-						Confirmar
+				<li style="margin-top: auto !important">
+					<a href="index.html" class="flex items-center p-2 rounded-lg group nav-item margin-top:auto">
+						<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path fill="#eee"
+								d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+						</svg>
+						<span class="flex-1 ms-3 whitespace-nowrap">
+							Cerrar sesión
+						</span>
 					</a>
-				</form>
-			</div>
+				</li>
+			</ul>
 		</div>
+	</aside>
+	<!-- SIDEBAR -->
 
-		<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
-		<script>
-			document
-				.getElementById("downloadExampleBtn")
-				.addEventListener("click", function () {
-					// Convert the data to CSV format
-					const csvContent =
-						"data:text/csv;charset=utf-8," +
-						'LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}\nLC,12345,\nJohnas,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDAS,2,{"vianda":{"fechaDonacion":"12/12/2023"}}\nDNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,REDISTRIBUCION_VIANDAS,1,{"fecha":"12/12/2023"}\nDNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,ENTREGA_TARJETAS,3,{"fecha":"12/12/2023"}\nLC,12345,Johnas,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDAS,10,{"vianda":{"fechaDonacion":"12/12/2023"}}\nLE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDAS,1,{"vianda":{"fechaDonacion":"12/12/2023"}}\nLE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}';
+	<div class="pageContainer">
+		<div class="p-10 mx-auto max-w-4xl">
+			<h1 class="title1 mb-12">Carga masiva de colaboraciones</h1>
 
-					// Create a temporary link element
-					const downloadLink = document.createElement("a");
-					downloadLink.href = encodeURI(csvContent);
-					downloadLink.download = "data.csv";
+			<!--Carga masiva-->
+			<form class="rounded-xl border-2 shadow-lg">
+				<h2 class="mt-5 mb-5">Formato del archivo a subir:</h2>
+				<span class="text-xs">El archivo debe contener los siguientes campos, en este
+					orden, separados por una coma (,):</span>
+				<p class="px-3 w-full text-xs mb-5">
+					tipoDocumento - documento - nombre - apellido - mail -
+					fechaColaboracion - formaColaboracion - cantidad -
+					jsonColaboracion
+				</p>
 
-					// Programmatically click the link to trigger the download
-					document.body.appendChild(downloadLink);
-					downloadLink.click();
-					document.body.removeChild(downloadLink);
-				});
-		</script>
-	</body>
+				<!--Upload file-->
+				<div>
+					<label for="dropzone-file"
+						class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+							stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
+							<path stroke-linecap="round" stroke-linejoin="round"
+								d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+						</svg>
+
+						<h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+							Subir archivo
+						</h2>
+
+						<p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+							Ingrese un archivo .csv con las colaboraciones a
+							cargar
+						</p>
+
+						<input id="dropzone-file" type="file" class="hidden" />
+					</label>
+				</div>
+				<!--Upload file-->
+
+				<a href="#" class="mt-5 mb-5 inline-flex items-center boton">
+					Confirmar
+				</a>
+			</form>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+</body>
+
 </html>
