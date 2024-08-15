@@ -221,7 +221,7 @@
 					domicilio?</label>
 				<fieldset id="posee-domicilio">
 					<div class="flex items-center mb-2">
-						<input id="con-domicilio" type="radio" name="posee-domicilio" value="si"
+						<input id="con-domicilio" type="radio" name="posee-domicilio" value="si" required
 							class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
 						<label for="con-domicilio"
 							class="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -229,7 +229,7 @@
 						</label>
 					</div>
 					<div class="flex items-center mb-5">
-						<input id="sin-domicilio" type="radio" name="posee-domicilio" value="no"
+						<input id="sin-domicilio" type="radio" name="posee-domicilio" value="no" required
 							class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
 						<label for="sin-domicilio"
 							class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -243,7 +243,7 @@
 						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Domicilio</label>
 					<input type="text" id="domicilio"
 						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="Domicilio" required />
+						placeholder="Domicilio" />
 				</div>
 
 				<label for="tiene-tutorados"
@@ -251,7 +251,7 @@
 					cargo?</label>
 				<fieldset id="tiene-tutorados">
 					<div class="flex items-center mb-2">
-						<input id="tiene-tutorados" type="radio" name="tiene-tutorados" value="si"
+						<input id="tiene-tutorados" type="radio" name="tiene-tutorados" value="si" required
 							class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
 						<label for="tiene-tutorados"
 							class="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -259,7 +259,7 @@
 						</label>
 					</div>
 					<div class="flex items-center mb-5">
-						<input id="no-tiene-tutorados" type="radio" name="tiene-tutorados" value="no"
+						<input id="no-tiene-tutorados" type="radio" name="tiene-tutorados" value="no" required
 							class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
 						<label for="no-tiene-tutorados"
 							class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -274,7 +274,7 @@
 						menores a cargo</label>
 					<input type="number" id="cant-menores" aria-describedby="helper-text-explanation"
 						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="Cantidad de menores a cargo" required min="1" />
+						placeholder="Cantidad de menores a cargo" min="1" />
 				</div>
 
 				<button type="submit"
