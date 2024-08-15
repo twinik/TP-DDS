@@ -51,8 +51,10 @@ markers.forEach(function (markerData) {
 	div.querySelector(".popup-button").id = "selectBtn-" + markerData.id;
 
 	// para la redistribucion de heladeras
-	div.querySelector(".popup-destino").id =
-		"selectBtnDestino-" + markerData.id;
+	if (div.querySelector(".popup-destino")) {
+		div.querySelector(".popup-destino").id =
+			"selectBtnDestino-" + markerData.id;
+	}
 
 	marker.bindPopup(div.innerHTML);
 });
