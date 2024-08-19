@@ -11,6 +11,15 @@ import lombok.Setter;
 @Setter
 public class Campo {
 
+  private long id;
+  private TipoCampo tipo;
+
+  private String pregunta;
+
+  private boolean obligatorio;
+
+  private List<Opcion> opciones;
+
   /**
    * Campo class constructor.
    */
@@ -21,13 +30,6 @@ public class Campo {
     this.opciones = new ArrayList<Opcion>();
   }
 
-  private TipoCampo tipo;
-
-  private String pregunta;
-
-  private boolean obligatorio;
-
-  private List<Opcion> opciones;
 
   public void agregarOpciones(Opcion... opciones) {
     Collections.addAll(this.opciones, opciones);

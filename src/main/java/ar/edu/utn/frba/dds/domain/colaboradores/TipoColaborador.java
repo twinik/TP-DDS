@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class TipoColaborador {
+    private long id;
     private TipoPersona tipo;
     private List<FormaColaboracion> formasPosiblesColaboracion;
 }
