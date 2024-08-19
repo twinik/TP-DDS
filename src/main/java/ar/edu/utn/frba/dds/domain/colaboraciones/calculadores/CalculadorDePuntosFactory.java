@@ -9,7 +9,6 @@ public class CalculadorDePuntosFactory {
       case DONACION_VIANDA -> new CalculadorPuntosDonacionVianda();
       case REGISTRO_PERSONA -> new CalculadorPuntosAltaPersona();
       case REDISTRIBUCION_VIANDA -> new CalculadorPuntosRedistribucionVianda();
-      case OFERTA_PRODUCTO -> new CalculadorPuntosOfertaProducto();
       case COLOCACION_HELADERA -> new CalculadorPuntosColocacionHeladera();
       default -> null;
     };
