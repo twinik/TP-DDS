@@ -1,12 +1,15 @@
 package ar.edu.utn.frba.dds.domain.colaboradores;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * FormaColaboracion enum permite representar las formas de colaboracion que puede tener un colaborador.
  */
-public enum FormaColaboracion {
-  DONACION_VIANDA,
-  DONACION_DINERO,
-  COLOCACION_HELADERA,
-  REDISTRIBUCION_VIANDA,
-  REGISTRO_PERSONA
+
+@Getter
+@AllArgsConstructor
+public class FormaColaboracion {
+  private long id;
+  private String nombre;
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,10 @@ public class Colaborador {
   private long id;
 
   private Usuario usuario;
+
+  private TipoDocumento tipoDocumento;
+
+  private Integer documento;
 
   private TipoColaborador tipoColaborador;
 

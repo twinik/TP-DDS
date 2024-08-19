@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosColocacionHeladera;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
@@ -19,15 +20,15 @@ public class ColocacionHeladeras extends Colaboracion {
   /**
    * Constructor por defecto.
    */
-  public ColocacionHeladeras() {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.COLOCACION_HELADERA);
+  public ColocacionHeladeras(CalculadorPuntosColocacionHeladera calculador) {
+    this.calculadorDePuntos = calculador;
   }
 
   /**
    * Constructor con parametros.
    */
-  public ColocacionHeladeras(Colaborador colaborador, Heladera heladera) {
-    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.COLOCACION_HELADERA), heladera.getFechaPuestaFuncionamiento());
+  public ColocacionHeladeras(Colaborador colaborador, CalculadorPuntosColocacionHeladera calculador,Heladera heladera) {
+    super(colaborador, calculador, heladera.getFechaPuestaFuncionamiento());
     this.heladera = heladera;
   }
 

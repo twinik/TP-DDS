@@ -30,7 +30,7 @@ class CanjeProductoTest {
   @BeforeEach
   void setUp() {
     comprador = new Colaborador();
-    comprador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_HUMANA, null));
+    comprador.setTipoColaborador(new TipoColaborador(1, TipoPersona.PERSONA_HUMANA, null));
     comprador.setPuntosGanados((float) 0);
     ofertaCanjeada = new OfertaProducto(comprador, LocalDate.now(), new Producto(), PUNTOS_NECESARIOS, CategoriaOferta.ELECTRONICA);
   }

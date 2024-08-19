@@ -7,16 +7,20 @@ import static org.mockito.Mockito.mock;
 ;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
+import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.emailSending.SendGridMailSender;
+import ar.edu.utn.frba.dds.repositories.IFormasColaboracionRespository;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 class CargadorDeColaboracionesTest {
   private CargaColaboracionCsvReader csvReader;
@@ -24,20 +28,26 @@ class CargadorDeColaboracionesTest {
   private CargadorDeColaboraciones cargador;
 
   private ColaboradoresRepository repositorio;
+  private IFormasColaboracionRespository formasColaboracionRespository;
   @BeforeEach
   void setUp() throws IOException {
     csvReader = new CargaColaboracionCsvReader();
     mailSender = mock(SendGridMailSender.class);
     doNothing().when(mailSender).enviarMail(any());
     repositorio = new ColaboradoresRepository();
-    cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/domain/assets/cargacolaboraciones.csv", csvReader, mailSender,repositorio);
+    formasColaboracionRespository = mock(IFormasColaboracionRespository.class);
+    when(formasColaboracionRespository.buscar("DONACION_DINERO")).thenReturn(Optional.of(new FormaColaboracion(1, "DONACION_DINERO")));
+    when(formasColaboracionRespository.buscar("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion(2, "DONACION_VIANDA")));
+    when(formasColaboracionRespository.buscar("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion(3, "REGISTRO_PERSONA")));
+    when(formasColaboracionRespository.buscar("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion(4, "REDISTRIBUCION_VIANDA")));
+    cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/domain/assets/cargacolaboraciones.csv", csvReader, mailSender,repositorio,formasColaboracionRespository);
   }
 
   @Test
   void pruebaJsonToDonacionDinero() throws IOException {
     String json = "{\"monto\": 10000, \"frecuencia\": \"DIARIA\", \"fecha\": \"09/12/2018\"}";
     CargaColaboracion carga = new CargaColaboracion();
-    carga.setFormaColaboracion("DINERO");
+    carga.setFormaColaboracion("DONACION_DINERO");
     carga.setJsonColaboracion(json);
     DonacionDinero donacion = (DonacionDinero) CargaToColaboracionMapper.colaboracionFromCarga(carga);
     assertEquals(10000, donacion.getMonto());

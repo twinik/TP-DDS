@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosAltaPersona;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
@@ -24,8 +25,8 @@ public class PuntosViandasDistribuidasTest {
     @BeforeEach
     void test_init(){
         colaborador = new Colaborador();
-        donacion_1 = new RedistribucionViandas(colaborador, heladera_1, heladera_2, LocalDate.of(2023, 2 ,4),new MotivoRedistribucionVianda("Llegaron viandas nuevas"),10);
-        donacion_2 = new RedistribucionViandas(colaborador, heladera_1, heladera_2, LocalDate.of(2023, 4 ,3),new MotivoRedistribucionVianda("Llegaron viandas nuevas"),5);
+        donacion_1 = new RedistribucionViandas(colaborador, heladera_1, heladera_2, LocalDate.of(2023, 2 ,4),new MotivoRedistribucionVianda("Llegaron viandas nuevas"),10, new CalculadorPuntosRedistribucionVianda());
+        donacion_2 = new RedistribucionViandas(colaborador, heladera_1, heladera_2, LocalDate.of(2023, 4 ,3),new MotivoRedistribucionVianda("Llegaron viandas nuevas"),5, new CalculadorPuntosRedistribucionVianda());
     }
 
     @Test

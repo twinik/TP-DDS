@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosColocacionHeladera;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +19,7 @@ public class HeladeraTest {
   @BeforeEach
   void test_init() {
     colaborador = new Colaborador();
-    donacion = new ColocacionHeladeras(colaborador,new Heladera(LocalDate.of(2023, 10, 1)));
+    donacion = new ColocacionHeladeras(colaborador, new CalculadorPuntosColocacionHeladera(),new Heladera(LocalDate.of(2023, 10, 1)));
     colaborador.setHeladerasColocadas(new ArrayList<>());
     donacion.efectuar();
   }

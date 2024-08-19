@@ -1,10 +1,8 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -29,8 +27,8 @@ public class RedistribucionViandas extends Colaboracion {
   /**
    * Constructor con parametros.
    */
-  public RedistribucionViandas(Heladera heladeraOrigen, Heladera heladeraDestino, LocalDate fecha, MotivoRedistribucionVianda motivo, Integer cantidad) {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.REDISTRIBUCION_VIANDA);
+  public RedistribucionViandas(Heladera heladeraOrigen, Heladera heladeraDestino, LocalDate fecha, MotivoRedistribucionVianda motivo, Integer cantidad,CalculadorPuntosRedistribucionVianda calculador) {
+    this.calculadorDePuntos = calculador;
     this.heladeraOrigen = heladeraOrigen;
     this.heladeraDestino = heladeraDestino;
     this.fecha = fecha;
@@ -41,16 +39,16 @@ public class RedistribucionViandas extends Colaboracion {
   /**
    * Constructor con parametros.
    */
-  public RedistribucionViandas(Colaborador colaborador, Heladera heladeraOrigen, Heladera heladeraDestino, LocalDate fecha, MotivoRedistribucionVianda motivo, Integer cantidad) {
-    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.REDISTRIBUCION_VIANDA), fecha);
+  public RedistribucionViandas(Colaborador colaborador, Heladera heladeraOrigen, Heladera heladeraDestino, LocalDate fecha, MotivoRedistribucionVianda motivo, Integer cantidad,CalculadorPuntosRedistribucionVianda calculador) {
+    super(colaborador, calculador, fecha);
     this.heladeraOrigen = heladeraOrigen;
     this.heladeraDestino = heladeraDestino;
     this.motivo = motivo;
     this.cantidad = cantidad;
   }
 
-  public RedistribucionViandas() {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.REDISTRIBUCION_VIANDA);
+  public RedistribucionViandas(CalculadorPuntosRedistribucionVianda calculador) {
+    this.calculadorDePuntos = calculador;
   }
 
   /**

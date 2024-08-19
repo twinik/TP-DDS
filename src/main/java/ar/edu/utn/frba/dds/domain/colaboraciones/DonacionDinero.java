@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionDinero;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDate;
@@ -24,16 +25,16 @@ public class DonacionDinero extends Colaboracion {
   /**
    * Constructor por defecto.
    */
-  public DonacionDinero() {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_DINERO);
+  public DonacionDinero(CalculadorPuntosDonacionDinero calculador) {
+    this.calculadorDePuntos = calculador;
   }
 
   /**
    * Constructor con parametros.
    */
   public DonacionDinero(Colaborador colaborador,
-                        Float monto, FrecuenciaDonacion frecuencia, LocalDate fecha) {
-    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_DINERO), fecha);
+                        Float monto, FrecuenciaDonacion frecuencia, LocalDate fecha, CalculadorPuntosDonacionDinero calculador) {
+    super(colaborador, calculador, fecha);
     this.monto = monto;
     this.frecuencia = frecuencia;
   }

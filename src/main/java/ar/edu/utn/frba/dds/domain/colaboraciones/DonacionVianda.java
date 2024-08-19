@@ -17,15 +17,15 @@ public class DonacionVianda extends Colaboracion {
   /**
    * Constructor por defecto.
    */
-  public DonacionVianda() {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_VIANDA);
+  public DonacionVianda(CalculadorPuntosDonacionVianda calculador) {
+    this.calculadorDePuntos = calculador;
   }
 
   /**
    * Constructor con parametros.
    */
-  public DonacionVianda(Vianda vianda, Colaborador colaborador) {
-    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_VIANDA), vianda.getFechaDonacion());
+  public DonacionVianda(Vianda vianda, Colaborador colaborador,CalculadorPuntosDonacionVianda calculador) {
+    super(colaborador, calculador, vianda.getFechaDonacion());
     this.vianda = vianda;
   }
 

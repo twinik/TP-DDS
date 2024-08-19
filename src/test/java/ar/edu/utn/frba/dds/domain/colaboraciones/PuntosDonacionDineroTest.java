@@ -1,9 +1,12 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionDinero;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,11 +19,12 @@ public class PuntosDonacionDineroTest {
     DonacionDinero donacion;
     CalculadorDePuntos calculador;
 
+    FormaColaboracion dinero = new FormaColaboracion(1,"DONACION_DINERO");
 
     @BeforeEach
     void test_init(){
         colaborador = new Colaborador();
-        donacion = new DonacionDinero(colaborador, 2000F, FrecuenciaDonacion.MENSUAL, LocalDate.of(2024, 4, 5));
+        donacion = new DonacionDinero(colaborador, 2000F, FrecuenciaDonacion.MENSUAL, LocalDate.of(2024, 4, 5), (CalculadorPuntosDonacionDinero) CalculadorDePuntosFactory.create(dinero));
         calculador = new CalculadorPuntosDonacionDinero();
         donacion.setCalculadorDePuntos(calculador);
     }

@@ -28,17 +28,17 @@ public class CargaToColaboracionMapper {
         .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
         .create();
 
-    switch (FormaColaboracionMapper.obtenerFormaColaboracion(carga.getFormaColaboracion())) {
-      case DONACION_DINERO -> {
+    switch (carga.getFormaColaboracion()) {
+      case "DONACION_DINERO" -> {
         return gson.fromJson(carga.getJsonColaboracion(), DonacionDinero.class);
       }
-      case DONACION_VIANDA -> {
+      case "DONACION_VIANDA" -> {
         return gson.fromJson(carga.getJsonColaboracion(), DonacionVianda.class);
       }
-      case REDISTRIBUCION_VIANDA -> {
+      case "REDISTRIBUCION_VIANDA" -> {
         return gson.fromJson(carga.getJsonColaboracion(), RedistribucionViandas.class);
       }
-      case REGISTRO_PERSONA -> {
+      case "REGISTRO_PERSONA" -> {
         return gson.fromJson(carga.getJsonColaboracion(), AltaPersonaVulnerable.class);
       }
       default -> throw new RuntimeException("Forma de Colaboracion Invalida");
