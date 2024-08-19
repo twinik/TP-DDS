@@ -24,11 +24,13 @@ public class BrokerSubscriber {
       MqttConnectOptions connOpts = new MqttConnectOptions();
       connOpts.setAutomaticReconnect(true);
       connOpts.setCleanSession(true);
+      connOpts.setKeepAliveInterval(0);
 
       sampleClient.setCallback(new MqttCallback() {
         @Override
         public void connectionLost(Throwable throwable) {
           System.out.println("Mqtt Connection Lost!");
+//          System.out.println(throwable.toString());
         }
         @Override
         public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {}
