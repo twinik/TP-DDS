@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class Campo {
 
-  private long id;
+  private Long id;
   private TipoCampo tipo;
 
   private String pregunta;

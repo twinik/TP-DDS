@@ -18,7 +18,7 @@ import java.util.*;
 @AllArgsConstructor
 public class PersonaVulnerable {
 
-  private long id;
+  private Long id;
   private String nombre;
   private Date fechaNacimiento;
   private Date fechaRegistro;

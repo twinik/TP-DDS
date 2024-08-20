@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
  */
 @Data
 public class VisitaTecnico {
+    private Long id;
     private Tecnico tecnico;
     private LocalDateTime timestamp;
     private String descripcion;

@@ -16,13 +16,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Vianda {
-
-
-  private long id;
+  private Long id;
 
   private String comida;
 
-  private Date fechaCaducidad;
+  private LocalDate fechaCaducidad;
 
   private LocalDate fechaDonacion;
 
@@ -35,7 +33,7 @@ public class Vianda {
   private Float peso;
 
   private boolean entregada;
-  public Vianda(String comida, Date fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Integer calorias, Float peso, boolean entregada) {
+  public Vianda(String comida, LocalDate fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Integer calorias, Float peso, boolean entregada) {
     this.comida = comida;
     this.fechaCaducidad = fechaCaducidad;
     this.fechaDonacion = fechaDonacion;

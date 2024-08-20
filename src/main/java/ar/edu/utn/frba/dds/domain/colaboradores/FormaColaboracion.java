@@ -10,6 +10,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class FormaColaboracion {
-  private long id;
+  private Long id;
   private String nombre;
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class SensorMovimiento {
-  private long id;
+  private Long id;
   private Heladera heladera;
   public void alertarRobo() {
     this.heladera.inhabilitar();

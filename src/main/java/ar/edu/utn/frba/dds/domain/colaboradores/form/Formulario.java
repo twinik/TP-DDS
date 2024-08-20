@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Formulario {
 
   private List<Campo> campos;
-  private long id;
+  private Long id;
 
   public Formulario() {
     this.campos = new ArrayList<Campo>();

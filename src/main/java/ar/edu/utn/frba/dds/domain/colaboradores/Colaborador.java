@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Colaborador {
 
-  private long id;
+  private Long id;
 
   private Usuario usuario;
 
@@ -74,5 +74,5 @@ public class Colaborador {
 
 }
 
-//el colaborador a lo largo del tiempo podria tener distintas tartehas
+//el colaborador a lo largo del tiempo podria tener distintas tarjetas
 //podria tener una lista de tarjetas con el dia que se dio de alta y de baja

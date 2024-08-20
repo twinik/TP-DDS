@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class IFormasColaboracionRespositoryImpl implements IFormasColaboracionRespository {
+public class FormasColaboracionRespository implements IFormasColaboracionRespository {
 
   private List<FormaColaboracion> formas;
 
-  public IFormasColaboracionRespositoryImpl() {
+  public FormasColaboracionRespository() {
     this.formas = new ArrayList<>();
   }
 

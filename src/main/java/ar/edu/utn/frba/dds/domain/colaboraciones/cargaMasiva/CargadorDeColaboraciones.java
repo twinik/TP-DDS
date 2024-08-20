@@ -1,8 +1,9 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.Colaboracion;
 import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
+import ar.edu.utn.frba.dds.domain.colaboraciones.IPuntajeCalculable;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntos;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.util.*;
 import ar.edu.utn.frba.dds.repositories.IFormasColaboracionRespository;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,11 +38,12 @@ public class CargadorDeColaboraciones {
   private ColaboradoresRepository colaboradorRepository;
   private IFormasColaboracionRespository formasColaboracionRespository;
   private ConfigReader config;
+  private ICalculadorPuntos calculadorPuntos;
 
   /**
    * Constructor con parametros.
    */
-  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradoresRepository respository,IFormasColaboracionRespository formasColaboracionRespository) throws IOException {
+  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradoresRepository respository,IFormasColaboracionRespository formasColaboracionRespository, ICalculadorPuntos calculadorPuntos) throws IOException {
     this.config = new ConfigReader("config.properties");
     this.csvReader = csvReader;
     this.mailSender = mailAdapter;
@@ -48,42 +51,35 @@ public class CargadorDeColaboraciones {
     this.separator = config.getProperty("separator");
     this.colaboradorRepository = respository;
     this.formasColaboracionRespository = formasColaboracionRespository;
+    this.calculadorPuntos = calculadorPuntos;
   }
 
   /**
    * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
    */
-  public List<Colaboracion> cargarColaboraciones() throws IOException {
+  public List<IPuntajeCalculable> cargarColaboraciones() throws IOException {
     List<Object> registros = csvReader.readCsv(filePath, separator);
-    ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
+    ArrayList<IPuntajeCalculable> colaboraciones = new ArrayList<>();
     Colaborador colaborador = null;
 
     for (Object reg : registros) {
       CargaColaboracion carga = (CargaColaboracion) reg;
-      Colaboracion colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga);
+
       Optional<Colaborador> colaboradorOption = colaboradorRepository.buscar(
           new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
           carga.getDocumento());
-
-
       colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
 
-      colaboracion.setColaborador(colaborador);
+      IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
+
       Optional<FormaColaboracion> forma = formasColaboracionRespository.buscar(carga.getFormaColaboracion());
       if(forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
-      colaboracion.setCalculadorDePuntos(CalculadorDePuntosFactory.create(forma.get()));
 
       for (int i = 0; i < carga.getCantidad(); i++) {
         colaboraciones.add(colaboracion);
-        colaboracion.efectuar();
+        this.calculadorPuntos.sumarPuntosPara(colaborador, colaboracion);
       }
 
-    }
-    // medio raro, se puede cambiar pero habria que hacer algo asi
-    if (colaborador != null) {
-      for (ColocacionHeladeras colocacion : colaborador.getHeladerasColocadas()) {
-        colaborador.sumarPuntos(colocacion.getCalculadorDePuntos().calcularPuntos(colocacion));
-      }
     }
     return colaboraciones;
   }

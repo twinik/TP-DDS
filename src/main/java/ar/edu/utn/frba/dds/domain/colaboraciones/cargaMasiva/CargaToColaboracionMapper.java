@@ -1,10 +1,11 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.AltaPersonaVulnerable;
-import ar.edu.utn.frba.dds.domain.colaboraciones.Colaboracion;
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
+import ar.edu.utn.frba.dds.domain.colaboraciones.IPuntajeCalculable;
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.helpers.LocalDateTimeTypeAdapter;
 import ar.edu.utn.frba.dds.helpers.LocalDateTypeAdapter;
 import ar.edu.utn.frba.dds.domain.utils.FormaColaboracionMapper;
@@ -21,7 +22,7 @@ public class CargaToColaboracionMapper {
   /**
    * colaboracionFromCarga mapea una carga a una colaboracion.
    */
-  public static Colaboracion colaboracionFromCarga(CargaColaboracion carga) {
+  public static IPuntajeCalculable colaboracionFromCarga(CargaColaboracion carga, Colaborador colaborador) {
 
     Gson gson = new GsonBuilder()
         .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
@@ -30,16 +31,24 @@ public class CargaToColaboracionMapper {
 
     switch (carga.getFormaColaboracion()) {
       case "DONACION_DINERO" -> {
-        return gson.fromJson(carga.getJsonColaboracion(), DonacionDinero.class);
+        DonacionDinero c = gson.fromJson(carga.getJsonColaboracion(), DonacionDinero.class);
+        c.setColaborador(colaborador);
+        return c;
       }
       case "DONACION_VIANDA" -> {
-        return gson.fromJson(carga.getJsonColaboracion(), DonacionVianda.class);
+        DonacionVianda c = gson.fromJson(carga.getJsonColaboracion(), DonacionVianda.class);
+        c.setColaborador(colaborador);
+        return c;
       }
       case "REDISTRIBUCION_VIANDA" -> {
-        return gson.fromJson(carga.getJsonColaboracion(), RedistribucionViandas.class);
+        RedistribucionViandas c = gson.fromJson(carga.getJsonColaboracion(), RedistribucionViandas.class);
+        c.setColaborador(colaborador);
+        return c;
       }
       case "REGISTRO_PERSONA" -> {
-        return gson.fromJson(carga.getJsonColaboracion(), AltaPersonaVulnerable.class);
+        AltaPersonaVulnerable c = gson.fromJson(carga.getJsonColaboracion(), AltaPersonaVulnerable.class);
+        c.setColaborador(colaborador);
+        return c;
       }
       default -> throw new RuntimeException("Forma de Colaboracion Invalida");
     }

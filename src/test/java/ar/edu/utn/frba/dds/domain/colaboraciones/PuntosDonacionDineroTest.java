@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntos;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionDinero;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionVianda;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
@@ -17,21 +14,21 @@ import java.time.LocalDate;
 public class PuntosDonacionDineroTest {
     Colaborador colaborador;
     DonacionDinero donacion;
-    CalculadorDePuntos calculador;
+    ICalculadorPuntos calculador;
 
-    FormaColaboracion dinero = new FormaColaboracion(1,"DONACION_DINERO");
+    FormaColaboracion dinero = new FormaColaboracion(1L,"DONACION_DINERO");
 
     @BeforeEach
     void test_init(){
         colaborador = new Colaborador();
-        donacion = new DonacionDinero(colaborador, 2000F, FrecuenciaDonacion.MENSUAL, LocalDate.of(2024, 4, 5), (CalculadorPuntosDonacionDinero) CalculadorDePuntosFactory.create(dinero));
-        calculador = new CalculadorPuntosDonacionDinero();
-        donacion.setCalculadorDePuntos(calculador);
+        donacion = new DonacionDinero();
+        donacion.setFrecuencia(FrecuenciaDonacion.MENSUAL);
+        donacion.setMonto(2000F);
     }
 
     @Test
     @DisplayName("Se dono 2000 pesos y se obtuvieron 1000 puntos")
     void validarPuntosAcumuladosDonacionDinero() {
-        Assertions.assertEquals(1000F, calculador.calcularPuntos(donacion));
+        Assertions.assertEquals(1000F, donacion.calcularPuntaje());
     }
 }

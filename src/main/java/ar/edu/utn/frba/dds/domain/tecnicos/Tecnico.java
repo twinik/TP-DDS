@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Tecnico {
-  private long id;
+  private Long id;
   private String nombre;
   private String apellido;
   private String nroDocumento;
