@@ -15,11 +15,21 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Suscripcion {
+
+    private Long id;
     private Colaborador colaborador;
     private NotificationStrategy notificacionStrategy;
     private ITipoSuscripcion tipoSuscripcion;
     private int numero;
     private MedioDeContacto medioDeContacto;
+
+    public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion, int numero, MedioDeContacto medioDeContacto) {
+        this.colaborador = colaborador;
+        this.notificacionStrategy = notificacionStrategy;
+        this.tipoSuscripcion = tipoSuscripcion;
+        this.numero = numero;
+        this.medioDeContacto = medioDeContacto;
+    }
 
     public void avisarEvento(Heladera heladera) {
         tipoSuscripcion.notificar(heladera, this);

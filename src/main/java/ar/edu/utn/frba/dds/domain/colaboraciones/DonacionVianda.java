@@ -1,44 +1,36 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionVianda;
+
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.time.LocalDate;
 
 /**
  * DonacionVianda class representa una colaboracion de un colaborador.
  * Consiste en donar viandas.
  */
-public class DonacionVianda extends Colaboracion {
+@NoArgsConstructor
+@Getter
+@Setter
+public class DonacionVianda implements IPuntajeCalculable {
+  private Long id;
+  private Colaborador colaborador;
+  private LocalDate fecha;
   private Vianda vianda;
+  private static final Float PUNTATE_POR_DONACION = 1.5f;
 
-  /**
-   * Constructor por defecto.
-   */
-  public DonacionVianda() {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_VIANDA);
-  }
-
-  /**
-   * Constructor con parametros.
-   */
-  public DonacionVianda(Vianda vianda, Colaborador colaborador) {
-    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_VIANDA), vianda.getFechaDonacion());
+  public DonacionVianda(Colaborador colaborador, LocalDate fecha, Vianda vianda) {
+    this.colaborador = colaborador;
+    this.fecha = fecha;
     this.vianda = vianda;
   }
 
-  public Vianda getVianda() {
-    return vianda;
-  }
-
-  /**
-   * Metodo efectuar que se encarga de sumar puntos al colaborador.
-   */
   @Override
-  public void efectuar() {
-    super.efectuar();
+  public Float calcularPuntaje() {
+    return PUNTATE_POR_DONACION;
   }
-
 }

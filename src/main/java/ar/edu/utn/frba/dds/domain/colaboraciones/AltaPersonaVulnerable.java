@@ -1,13 +1,12 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosAltaPersona;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -17,35 +16,26 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AltaPersonaVulnerable extends Colaboracion {
+@AllArgsConstructor
+@NoArgsConstructor
+public class AltaPersonaVulnerable implements IPuntajeCalculable{
+  private Long id;
+  private Colaborador colaborador;
+  private LocalDate fecha;
+  private static final Float puntajePorAlta = 2f;
   private PersonaVulnerable persona;
   private Tarjeta tarjeta;
 
   /**
    * Constructor con parametros.
    */
-  public AltaPersonaVulnerable(Colaborador colaborador,
-                               PersonaVulnerable persona,
-                               Tarjeta tarjeta,
-                               LocalDate fecha) {
-    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.REGISTRO_PERSONA), fecha);
-    this.persona = persona;
-    this.tarjeta = tarjeta;
-  }
-
-  /**
-   * Constructor por defecto.
-   */
-  public AltaPersonaVulnerable() {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.REGISTRO_PERSONA);
+  @Override
+  public Float calcularPuntaje() {
+    return puntajePorAlta;
   }
 
   /**
    * Metodo efectuar que se encarga de sumar puntos al colaborador.
    */
-  @Override
-  public void efectuar() {
-    super.efectuar();
-  }
 
 }

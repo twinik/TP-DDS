@@ -19,7 +19,7 @@ import java.util.Optional;
 @Setter
 @AllArgsConstructor
 public class AperturaHeladera {
-    private long id;
+    private Long id;
     private SolicitudAperturaHeladera solicitud;
     private LocalDateTime timestamp;
     private Heladera heladera;

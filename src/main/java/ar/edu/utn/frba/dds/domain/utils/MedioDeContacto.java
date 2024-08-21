@@ -9,6 +9,12 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class MedioDeContacto {
+  private Long id;
   private CanalContacto canal;
   private String contacto;
+
+  public MedioDeContacto(CanalContacto canal, String contacto) {
+    this.canal = canal;
+    this.contacto = contacto;
+  }
 }

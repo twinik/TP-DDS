@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.cronjobs;
 
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 
@@ -10,7 +11,7 @@ public class HeladerasCronJob {
   public static void main(String[] args) {
     IColaboradoresRepository colaboradoresRepository = (IColaboradoresRepository) ServiceLocator.get("colaboradoresRepository");
     colaboradoresRepository.buscarTodos().
-        forEach(colaborador -> colaborador.sumarPuntos(colaborador.getHeladerasColocadas().size() * 5.0f));
+        forEach(colaborador -> colaborador.sumarPuntos(colaborador.getHeladerasColocadas().size() * ColocacionHeladeras.PUNTOS_POR_MES));
   }
 
 }

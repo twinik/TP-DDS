@@ -11,14 +11,16 @@ import lombok.Setter;
 @Setter
 public class RespuestaFormulario {
 
+  private Formulario formulario;
+
+  private List<RespuestaACampo> respuestas;
+
+
   public RespuestaFormulario(Formulario formulario) {
     this.formulario = formulario;
     this.respuestas = new ArrayList<RespuestaACampo>();
   }
 
-  private Formulario formulario;
-
-  private List<RespuestaACampo> respuestas;
 
   public void agregarRespuestasACampo(RespuestaACampo... respuestas) {
     Collections.addAll(this.respuestas, respuestas);

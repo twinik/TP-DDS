@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import static java.util.stream.Collectors.toList;
+
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.util.*;
@@ -12,7 +14,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class IngresoVianda {
-  private long id;
+  private Long id;
   private Date fechaDonacion;
   private Colaborador colaborador;
   private boolean entregada;
@@ -20,7 +22,7 @@ public class IngresoVianda {
   private Heladera heladera;
 
   public List<DonacionVianda> donar() {
-    return this.viandas.stream().map(vianda -> new DonacionVianda(vianda, this.colaborador)).toList();
+    return this.viandas.stream().map(vianda -> new DonacionVianda(this.colaborador, vianda.getFechaDonacion(), vianda)).toList();
   }
 
 }

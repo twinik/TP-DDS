@@ -46,15 +46,15 @@ public class AperturaHeladeraBroker {
     c.setDireccion(new Direccion("hola",534,1,434));
     IHeladerasRepository heladerasRepository = (IHeladerasRepository) ServiceLocator.get("heladerasRepository");
     Heladera heladera = new Heladera(LocalDate.now());
-    heladera.setId(2);
+    heladera.setId(2L);
     heladera.setNombre("heladerita");
     heladerasRepository.guardar(heladera);
     ITarjetasColaboradorRepository tarjetasColaboradorRepository = (ITarjetasColaboradorRepository) ServiceLocator.get("tarjetasColaboradorRepository");
     TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c,"3",LocalDate.now());
-    tarjetaColaborador.setId(3);
+    tarjetaColaborador.setId(3L);
     tarjetasColaboradorRepository.guardar(tarjetaColaborador);
     ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = (ISolicitudesAperturaHeladeraRepository) ServiceLocator.get("solicitudesAperturaHeladeraRepository");
-    SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(4,c,"un motivo", LocalDateTime.now(),heladera);
+    SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(4L,c,"un motivo", LocalDateTime.now(),heladera);
     solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
     try {
       suscribirseAAperturasHeladeras();

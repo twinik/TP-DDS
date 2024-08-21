@@ -1,14 +1,14 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorDePuntosFactory;
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosDonacionDinero;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDate;
 import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -16,34 +16,19 @@ import lombok.Getter;
  * Consiste en donar dinero.
  */
 @Getter
+@Setter
 @AllArgsConstructor
-public class DonacionDinero extends Colaboracion {
+@NoArgsConstructor
+public class DonacionDinero implements IPuntajeCalculable {
+  private static final Float COEFICIENTE_DONACION_DINERO = .5f;
+  private Long id;
+  private Colaborador colaborador;
+  private LocalDate fecha;
   private Float monto;
   private FrecuenciaDonacion frecuencia;
 
-  /**
-   * Constructor por defecto.
-   */
-  public DonacionDinero() {
-    this.calculadorDePuntos = CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_DINERO);
-  }
-
-  /**
-   * Constructor con parametros.
-   */
-  public DonacionDinero(Colaborador colaborador,
-                        Float monto, FrecuenciaDonacion frecuencia, LocalDate fecha) {
-    super(colaborador, CalculadorDePuntosFactory.create(FormaColaboracion.DONACION_DINERO), fecha);
-    this.monto = monto;
-    this.frecuencia = frecuencia;
-  }
-
-  /**
-   * Metodo efectuar que se encarga de sumar puntos al colaborador.
-   */
   @Override
-  public void efectuar() {
-    super.efectuar();
+  public Float calcularPuntaje() {
+    return COEFICIENTE_DONACION_DINERO * this.monto;
   }
-
 }

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Incidente {
-  private long id;
+  private Long id;
   private Heladera heladera;
   private LocalDateTime timestamp;
   private TecnicosHelper tecnicosHelper;

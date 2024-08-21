@@ -19,7 +19,7 @@ public class ColaboradoresRepository implements IColaboradoresRepository {
 
   @Override
   public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, Integer documento) {
-    return this.colaboradores.stream().filter(c -> c.getUsuario().getDocumento().equals(documento) && c.getUsuario().getTipoDocumento().equals(tipoDocumento)).findFirst();
+    return this.colaboradores.stream().filter(c -> c.getDocumento().equals(documento) && c.getTipoDocumento().equals(tipoDocumento)).findFirst();
   }
   @Override
   public Optional<Colaborador> buscar(long id) {

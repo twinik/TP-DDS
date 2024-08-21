@@ -11,6 +11,7 @@ import lombok.Getter;
  */
 @Getter
 public class UsoTarjeta {
+  private Long id;
   private LocalDateTime fechaUso;
   private Heladera heladera;
 

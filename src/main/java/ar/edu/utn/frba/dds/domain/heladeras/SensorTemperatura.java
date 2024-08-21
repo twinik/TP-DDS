@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SensorTemperatura {
-  private long id;
+  private Long id;
   private Heladera heladera;
 
   public void registrarTemperatura(Float temp) {

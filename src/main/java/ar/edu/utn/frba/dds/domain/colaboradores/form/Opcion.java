@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Opcion {
-
+  private Long id;
   private String opcion;
-
 }

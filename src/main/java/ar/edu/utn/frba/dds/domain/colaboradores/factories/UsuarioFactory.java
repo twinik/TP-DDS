@@ -8,7 +8,7 @@ import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
  */
 
 public class UsuarioFactory {
-  public static Usuario createUsuario(String mail, TipoDocumento tipoDoc, Integer documento, String clave) {
-    return new Usuario(mail, tipoDoc, documento, clave);
+  public static Usuario createUsuario(String mail, String clave) {
+    return new Usuario(mail, clave);
   }
 }

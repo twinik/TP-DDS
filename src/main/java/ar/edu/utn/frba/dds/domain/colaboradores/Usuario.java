@@ -15,10 +15,6 @@ public class Usuario {
 
   private String email;
 
-  private TipoDocumento tipoDocumento;
-
-  private Integer documento;
-
   private String clave;
 
 }

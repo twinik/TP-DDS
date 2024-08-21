@@ -1,13 +1,11 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
-
-import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntosOfertaProducto;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.colaboradores.TipoPersona;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * OfertaProducto class representa una colaboracion de un colaborador.
@@ -15,7 +13,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
+@Setter
 public class OfertaProducto {
+  private Long id;
   private Colaborador colaborador;
   private LocalDate fechaCreacion;
   private Producto producto;

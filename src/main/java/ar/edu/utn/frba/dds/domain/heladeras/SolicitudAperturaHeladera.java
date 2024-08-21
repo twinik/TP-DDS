@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
 @Getter
 @AllArgsConstructor
 public class SolicitudAperturaHeladera {
-    private long id;
+    private Long id;
     private Colaborador colaborador;
     private String motivo;
     private LocalDateTime timestamp;
@@ -32,7 +32,7 @@ public class SolicitudAperturaHeladera {
         String clientId     = configReader.getProperty("CLIENT_ID");
         ZonedDateTime zdt = ZonedDateTime.of(this.timestamp, ZoneId.systemDefault());
         String timestampEnMilis = Long.toString(zdt.toInstant().toEpochMilli());
-        String content      = String.join(";", this.colaborador.getUsuario().getTipoDocumento().toString(), this.colaborador.getUsuario().getDocumento().toString(), timestampEnMilis);
+        String content      = String.join(";", this.colaborador.getId().toString(), timestampEnMilis);
 
         BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);
         brokerPublisher.publicar(content);
@@ -40,10 +40,10 @@ public class SolicitudAperturaHeladera {
 
     public static void main(String[] args) {
         Colaborador colab = new Colaborador();
-        colab.setUsuario(new Usuario("jorge@mail", TipoDocumento.DNI,1111,"contrasenia"));
+        colab.setUsuario(new Usuario("jorge@mail","contrasenia"));
         Heladera heladera = new Heladera(LocalDate.now());
         heladera.setNombre("heladera_de_thomi");
-        SolicitudAperturaHeladera soli =  new SolicitudAperturaHeladera(0,colab,"un motivo",LocalDateTime.now(),heladera);
+        SolicitudAperturaHeladera soli =  new SolicitudAperturaHeladera(0L,colab,"un motivo",LocalDateTime.now(),heladera);
       try {
         soli.publicarSolicitudABroker();
       } catch (IOException e) {

@@ -11,11 +11,13 @@ import lombok.Setter;
 @Setter
 public class Formulario {
 
+  private List<Campo> campos;
+  private Long id;
+
   public Formulario() {
     this.campos = new ArrayList<Campo>();
   }
 
-  private List<Campo> campos;
 
   public void agregarCampos(Campo... campos) {
     Collections.addAll(this.campos, campos);

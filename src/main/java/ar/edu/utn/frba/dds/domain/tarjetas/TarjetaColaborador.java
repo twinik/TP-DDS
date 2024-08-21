@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class TarjetaColaborador {
-  private long id;
+  private Long id;
   private String codigo;
   private Colaborador colaborador;
   private boolean activa;

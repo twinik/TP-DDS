@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Colaborador {
 
-  private long id;
+  private Long id;
 
   private Usuario usuario;
+
+  private TipoDocumento tipoDocumento;
+
+  private Integer documento;
 
   private TipoColaborador tipoColaborador;
 
@@ -69,5 +74,5 @@ public class Colaborador {
 
 }
 
-//el colaborador a lo largo del tiempo podria tener distintas tartehas
+//el colaborador a lo largo del tiempo podria tener distintas tarjetas
 //podria tener una lista de tarjetas con el dia que se dio de alta y de baja
