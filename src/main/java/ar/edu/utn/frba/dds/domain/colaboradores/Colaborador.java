@@ -12,34 +12,48 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
 
 /**
  * Colaborador class permite representar un colaborador.
  */
+
+@Entity
+@Table(name = "colaborador")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Colaborador {
 
+  @Id
+  @GeneratedValue
   private Long id;
 
+  @Transient
   private Usuario usuario;
 
+  @Enumerated(EnumType.STRING)
   private TipoDocumento tipoDocumento;
 
+  @Column(columnDefinition = "INTEGER(11)")
   private Integer documento;
 
+  @Transient
   private TipoColaborador tipoColaborador;
 
+  @Transient
   private RespuestaFormulario respuestas;
 
   private Float puntosGanados = 0f;
 
+  @Transient
   private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
+  @Transient
   private Direccion direccion;
 
+  @Transient
   private List<MedioDeContacto> medioContacto;
 
   private String nombre;
@@ -48,8 +62,11 @@ public class Colaborador {
 
   private String rubro;
 
+  @Column
   private String razonSocial;
 
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private TipoPersonaJuridica tipoPersonaJuridica;
 
   public void sumarPuntos(Float puntos) {
