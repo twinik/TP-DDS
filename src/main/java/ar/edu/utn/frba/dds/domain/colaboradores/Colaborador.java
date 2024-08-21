@@ -30,43 +30,51 @@ public class Colaborador {
   @GeneratedValue
   private Long id;
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "usuario_id",referencedColumnName = "id", nullable = false)
   private Usuario usuario;
 
   @Enumerated(EnumType.STRING)
   private TipoDocumento tipoDocumento;
 
-  @Column(columnDefinition = "INTEGER(11)")
+  @Column(length = 11)
   private Integer documento;
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "tipo_colaborador_id")
   private TipoColaborador tipoColaborador;
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "respuesta_formulario_id",referencedColumnName = "id")
   private RespuestaFormulario respuestas;
 
+  @Column(name = "puntosGanados", columnDefinition = "DECIMAL")
   private Float puntosGanados = 0f;
 
   @Transient
   private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "direccion_id", referencedColumnName = "id")
   private Direccion direccion;
 
   @Transient
   private List<MedioDeContacto> medioContacto;
 
+  @Column(name = "nombre")
   private String nombre;
 
+  @Column(name = "apellido")
   private String apellido;
 
+  @Column(name = "rubro")
   private String rubro;
 
-  @Column
+  @Column(name = "razonSocial")
   private String razonSocial;
 
-  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private TipoPersonaJuridica tipoPersonaJuridica;
 
   public void sumarPuntos(Float puntos) {

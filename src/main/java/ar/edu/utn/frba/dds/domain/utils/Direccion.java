@@ -2,7 +2,13 @@ package ar.edu.utn.frba.dds.domain.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Direccion class permite representar una direccion.
@@ -10,11 +16,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@Entity
+@Table(name = "direccion")
+@NoArgsConstructor
 public class Direccion {
+    @Id
+    @GeneratedValue
     private Long id;
+    @Column(name = "calle", nullable = false)
     private String calle;
+    @Column(name = "altura", nullable = false)
     private Integer altura;
+    @Column(name = "piso")
     private Integer piso;
+    @Column(name = "codigoPostal")
     private Integer codigoPostal;
 
     public Direccion(String calle, Integer altura, Integer piso, Integer codigoPostal) {
