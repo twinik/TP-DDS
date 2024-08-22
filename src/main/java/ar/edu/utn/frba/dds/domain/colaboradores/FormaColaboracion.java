@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -21,9 +22,9 @@ import javax.persistence.Table;
 @Table(name = "forma_colaboracion")
 public class FormaColaboracion {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "nombre")
+  @Column(name = "nombre", unique = true)
   private String nombre;
 }

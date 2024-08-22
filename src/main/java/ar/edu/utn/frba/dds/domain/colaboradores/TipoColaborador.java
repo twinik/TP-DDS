@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,6 +31,7 @@ public class TipoColaborador {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipoPersona")
     private TipoPersona tipo;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

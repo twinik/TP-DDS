@@ -4,8 +4,21 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,17 +29,34 @@ import java.util.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@Entity
+@Table(name = "persona_vulnerable")
+@NoArgsConstructor
 public class PersonaVulnerable {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(name = "nombre", nullable = false)
   private String nombre;
+  @Column(name = "fechaNaciminiento")
   private Date fechaNacimiento;
+  @Column(name = "fechaRegistro")
   private Date fechaRegistro;
+  @Column(name = "poseeDomicilio")
   private boolean poseeDomicilio;
+  @Column(name = "domicilio")
   private String domicilio;
+  @Enumerated(EnumType.STRING)
   private TipoDocumento tipoDocumento;
+  // TODO: REVISAR DNI COMO STRING ACA Y COMO INT EN COLABORADOR
+  @Column(name = "nroDocumento")
   private String nroDocumento;
+  @ManyToOne
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
   private Colaborador colaborador;
+  @OneToMany(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tutor_id",referencedColumnName = "id")
   private List<PersonaVulnerable> tutorados;
 
 

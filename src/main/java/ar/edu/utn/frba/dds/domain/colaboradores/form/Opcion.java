@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Opcion class permite representar una opcion de un campo de un formulario.
@@ -18,6 +19,7 @@ import javax.persistence.Id;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "opcion")
 public class Opcion {
 
   @Id

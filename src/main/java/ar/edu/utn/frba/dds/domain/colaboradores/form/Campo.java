@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Campo class permite representar un campo de un formulario.
@@ -20,6 +21,7 @@ import javax.persistence.OneToMany;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "campo")
 public class Campo {
 
   @Id

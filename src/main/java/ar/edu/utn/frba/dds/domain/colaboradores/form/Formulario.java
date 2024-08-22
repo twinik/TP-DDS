@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Formulario class permite representar un formulario.
@@ -16,6 +17,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Getter
 @Setter
+@Table(name = "formulario")
 public class Formulario {
 
   @Id
