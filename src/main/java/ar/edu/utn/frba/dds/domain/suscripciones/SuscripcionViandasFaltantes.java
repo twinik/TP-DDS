@@ -13,7 +13,7 @@ public class SuscripcionViandasFaltantes implements ITipoSuscripcion {
         int viandasFaltantes = heladera.getCapacidadViandas() - heladera.getViandas().size();
         if(viandasFaltantes <= suscripcion.getNumero()){
             String message = MensajeViandasFaltantesFactory.generarMensaje(viandasFaltantes,heladera);
-            suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(), message);
+            suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(), message);
         }
     }
 

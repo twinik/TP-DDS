@@ -5,9 +5,13 @@ import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import ar.edu.utn.frba.dds.domain.notifications.Contactable;
+import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +28,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Colaborador {
+public class Colaborador implements Contactable {
 
   @Id
   @GeneratedValue
@@ -97,6 +101,20 @@ public class Colaborador {
     return String.format("%s %s",this.nombre,this.apellido);
   }
 
+  @Override
+  public String email() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto,CanalContacto.EMAIL);
+  }
+
+  @Override
+  public String telefonoCompleto() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto,CanalContacto.WHATSAPP);
+  }
+
+  @Override
+  public String telegramId() {
+   return MedioContactoHelper.getValorContacto(this.medioContacto,CanalContacto.TELEGRAM);
+  }
 }
 
 //el colaborador a lo largo del tiempo podria tener distintas tarjetas

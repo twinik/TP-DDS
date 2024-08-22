@@ -31,8 +31,7 @@ public class SuscripcionVIandasFaltantesTest {
     NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
     doNothing().when(strategy).notificar(any(),any());
     sucripcion = new Suscripcion(new Colaborador(),
-        strategy,new SuscripcionViandasFaltantes(),2,
-        new MedioDeContacto(CanalContacto.EMAIL,"mail"));
+        strategy,new SuscripcionViandasFaltantes(),2);
 
     List<Vianda> viandas = new ArrayList<>();
 
@@ -57,8 +56,7 @@ public class SuscripcionVIandasFaltantesTest {
     NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
     doNothing().when(strategy).notificar(any(),any());
     sucripcion = new Suscripcion(new Colaborador(),
-        strategy,new SuscripcionViandasFaltantes(),2,
-        new MedioDeContacto(CanalContacto.EMAIL,"mail"));
+        strategy,new SuscripcionViandasFaltantes(),2);
 
     List<Vianda> viandas = new ArrayList<>();
 

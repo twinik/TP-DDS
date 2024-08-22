@@ -15,7 +15,7 @@ public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
 
   public void notificar(Heladera heladera, Suscripcion suscripcion) {
     if (!heladera.isActiva()) {
-      suscripcion.getNotificacionStrategy().notificar(suscripcion.getMedioDeContacto(),
+      suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(),
           GenerarMensajeHeladerasRecomendadas(heladera));
     }
   }

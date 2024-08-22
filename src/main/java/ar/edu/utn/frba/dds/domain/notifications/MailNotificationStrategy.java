@@ -17,14 +17,14 @@ public class MailNotificationStrategy implements NotificationStrategy {
     private MailSenderAdapter mailSenderAdapter;
 
     /**
-     * @param medioContacto
+     * @param contactable
      */
     @Override
-    public void notificar(MedioDeContacto medioContacto, String message) {
+    public void notificar(Contactable contactable, String message) {
         ConfigReader config = new ConfigReader("config.properties");
         try {
             mailSenderAdapter.enviarMail(MyMailFactory.createMail(config.getProperty("MAIL-DIR")
-                , medioContacto.getContacto(),config.getProperty("ASUNTO_MENSAJE_TENICO"),message));
+                , contactable.email(), config.getProperty("ASUNTO_MENSAJE_TENICO"),message));
         } catch (IOException e) {
             throw new CrearMailException(e);
         }

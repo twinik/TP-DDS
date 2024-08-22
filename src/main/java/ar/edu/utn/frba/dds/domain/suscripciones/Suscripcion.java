@@ -21,14 +21,12 @@ public class Suscripcion {
     private NotificationStrategy notificacionStrategy;
     private ITipoSuscripcion tipoSuscripcion;
     private int numero;
-    private MedioDeContacto medioDeContacto;
 
-    public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion, int numero, MedioDeContacto medioDeContacto) {
+    public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion, int numero) {
         this.colaborador = colaborador;
         this.notificacionStrategy = notificacionStrategy;
         this.tipoSuscripcion = tipoSuscripcion;
         this.numero = numero;
-        this.medioDeContacto = medioDeContacto;
     }
 
     public void avisarEvento(Heladera heladera) {

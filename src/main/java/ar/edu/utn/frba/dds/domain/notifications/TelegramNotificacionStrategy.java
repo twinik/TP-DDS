@@ -12,8 +12,8 @@ public class TelegramNotificacionStrategy implements NotificationStrategy {
 
     private TelegramSenderAdapter telegramSenderAdapter;
 
-    public void notificar(MedioDeContacto medioContacto, String message) {
-        telegramSenderAdapter.enviarTelegram(message,medioContacto.getContacto());
+    public void notificar(Contactable contactable, String message) {
+        telegramSenderAdapter.enviarTelegram(message, contactable.telegramId());
     }
 
 

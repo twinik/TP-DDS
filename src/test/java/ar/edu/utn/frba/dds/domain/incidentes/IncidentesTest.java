@@ -59,7 +59,7 @@ public class IncidentesTest {
     Alerta alerta = Alerta.of(heladera, this.fecha,helper,factory,TipoAlerta.FRAUDE);
     alerta.reportar();
     this.output = "Hola jorge se rompio la heladera unaHeladera a las " + fecha.toString() + " y necesitamos que por favor venga a repararla";
-    verify(strategy,times(1)).notificar(this.medio,this.output);
+    verify(strategy,times(1)).notificar(this.tecnico,this.output);
 
   }
 }

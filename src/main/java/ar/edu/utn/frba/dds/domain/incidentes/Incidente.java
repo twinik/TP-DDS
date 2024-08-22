@@ -37,7 +37,7 @@ public class Incidente {
     String message = MensajeTecnicosIncidenteFactory.generarMensaje(tecnicoAContactar, heladera, timestamp);
     tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
       NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
-      strategy.notificar(medio, message);
+      strategy.notificar(tecnicoAContactar, message);
     });
   }
 
