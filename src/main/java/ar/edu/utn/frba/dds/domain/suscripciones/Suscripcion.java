@@ -25,7 +25,7 @@ public class Suscripcion {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 

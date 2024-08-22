@@ -48,13 +48,14 @@ public class Heladera {
   private LocalDate fechaPuestaFuncionamiento;
 
   @OneToMany
-  @JoinColumn(name = "vianda_id")
+  @JoinColumn(name = "heladera_id")
   private List<Vianda> viandas;
 
   @OneToOne
   @JoinColumn(name = "modelo_id", referencedColumnName = "id")
   private ModeloHeladera modelo;
 
+  // TODO persistimos RegistroTemperatura? Segun enunciado no es necesario
   @Transient
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
 
@@ -65,8 +66,7 @@ public class Heladera {
   @JoinColumn(name = "suscripcion_id", referencedColumnName = "id")
   private List<Suscripcion> suscripciones = new ArrayList<>();
 
-  @OneToMany
-  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+  @Transient
   private List<Heladera> heladerasCercanas = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {

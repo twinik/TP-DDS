@@ -33,11 +33,11 @@ public class Vianda {
   @Column(name = "fecha_donacion", columnDefinition = "DATE")
   private LocalDate fechaDonacion;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
   private Colaborador colaborador;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private Heladera heladera;
 
