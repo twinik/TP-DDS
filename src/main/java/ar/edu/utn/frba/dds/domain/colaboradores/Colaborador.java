@@ -52,10 +52,10 @@ public class Colaborador implements Contactable {
   @JoinColumn(name = "respuesta_formulario_id",referencedColumnName = "id")
   private RespuestaFormulario respuestas;
 
-  @Column(name = "puntosGanados", columnDefinition = "DECIMAL")
+  @Column(name = "puntosGanados")
   private Float puntosGanados = 0f;
 
-  @Transient
+  @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
   @OneToOne
@@ -78,7 +78,7 @@ public class Colaborador implements Contactable {
   @Column(name = "razonSocial")
   private String razonSocial;
 
-  @Column(nullable = false)
+  @Column(name = "tipo_persona_juridica")
   @Enumerated(EnumType.STRING)
   private TipoPersonaJuridica tipoPersonaJuridica;
 

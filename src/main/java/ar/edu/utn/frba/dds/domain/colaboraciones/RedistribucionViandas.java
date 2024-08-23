@@ -8,6 +8,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -15,18 +25,38 @@ import lombok.Setter;
  * Representa el movimiento de una vianda entre heladeras.
  */
 
+@Entity
+@Table(name = "redistribucion_viandas")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RedistribucionViandas implements IPuntajeCalculable {
 
+  @Id
+  @GeneratedValue
   private Long id;
+
+  @ManyToOne
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
+
+  @Column(name = "fecha_redistribucion", columnDefinition = "DATE",nullable = false)
   private LocalDate fecha;
+
+  @OneToOne
+  @JoinColumn (name = "heladera_origen", referencedColumnName = "id", nullable = false)
   private Heladera heladeraOrigen;
+
+  @OneToOne
+  @JoinColumn (name = "heladera_destino", referencedColumnName = "id", nullable = false)
   private Heladera heladeraDestino;
+
+ @ManyToOne
+ @JoinColumn(name = "motivo_id",referencedColumnName = "id")
   private MotivoRedistribucionVianda motivo;
+
+  @Column(name = "cantidad")
   private Integer cantidad;
 
   @Override

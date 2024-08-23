@@ -56,16 +56,18 @@ public class Heladera {
   private ModeloHeladera modelo;
 
   // TODO persistimos RegistroTemperatura? Segun enunciado no es necesario
-  @Transient
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
 
-  @Transient
+  @OneToMany(mappedBy = "heladera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
 
   @OneToMany
   @JoinColumn(name = "suscripcion_id", referencedColumnName = "id")
   private List<Suscripcion> suscripciones = new ArrayList<>();
 
+  // TODO: DEJAR PARA PENSAR UN POQUITO
   @Transient
   private List<Heladera> heladerasCercanas = new ArrayList<>();
 
