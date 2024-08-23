@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.tarjetas.TarjetaColaborador;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -28,6 +29,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class AperturaHeladera {
     @Id
     @GeneratedValue
