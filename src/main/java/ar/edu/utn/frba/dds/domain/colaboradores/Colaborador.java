@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import ar.edu.utn.frba.dds.domain.notifications.Contactable;
@@ -64,7 +65,7 @@ public class Colaborador implements Contactable {
 
   @OneToMany
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-  private List<MedioDeContacto> medioContacto;
+  private List<MedioDeContacto> medioContacto = new ArrayList<>();
 
   @Column(name = "nombre")
   private String nombre;
@@ -101,6 +102,11 @@ public class Colaborador implements Contactable {
   public String getNombreYapellido(){
     return String.format("%s %s",this.nombre,this.apellido);
   }
+
+  public void agregarMedioContacto(MedioDeContacto ...medio){
+    this.medioContacto.addAll(Arrays.stream(medio).toList());
+  }
+
 
   @Override
   public String email() {
