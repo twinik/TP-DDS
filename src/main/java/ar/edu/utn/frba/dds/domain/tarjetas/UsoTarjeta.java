@@ -22,7 +22,7 @@ public class UsoTarjeta {
   @GeneratedValue
   private Long id;
 
-  @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP") //TODO converter LOCALDATE TIME
+  @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
   private LocalDateTime fechaUso;
 
   @OneToOne
