@@ -14,9 +14,10 @@ import javax.persistence.Table;
 /**
  * Formulario class permite representar un formulario.
  */
-@Entity
+
 @Getter
 @Setter
+@Entity
 @Table(name = "formulario")
 public class Formulario {
 

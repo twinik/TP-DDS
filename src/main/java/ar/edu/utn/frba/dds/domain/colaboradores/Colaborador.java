@@ -62,7 +62,8 @@ public class Colaborador implements Contactable {
   @JoinColumn(name = "direccion_id", referencedColumnName = "id")
   private Direccion direccion;
 
-  @Transient
+  @OneToMany
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
   private List<MedioDeContacto> medioContacto;
 
   @Column(name = "nombre")

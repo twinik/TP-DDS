@@ -34,8 +34,11 @@ public class Tarjeta {
   @Column(name = "activa")
   private boolean activa;
 
+
+
   @Convert(converter = FrecuenciaUsoAttributeConverter.class)
-  @Column(name = "frecuencia_permitida", columnDefinition = "VARCHAR", length = 80)
+  @Column(name = "frecuencia_permitida")
+//  @Transient
   private FrecuenciaUso frecuenciaPermitida;
 
   @OneToMany
@@ -46,13 +49,13 @@ public class Tarjeta {
   @JoinColumn(name = "duenio_id", referencedColumnName = "id")
   private PersonaVulnerable duenio;
 
-  @Column(name = "fecha_adjudicacion", nullable = false)
+  @Column(name = "fecha_adjudicacion",columnDefinition = "DATE",  nullable = false)
   private LocalDate fechaAdjudicacion;
 
   @Column(name = "cantidad_usos_dia")
   private Integer cantidadUsosDia;
 
-  @Column(name = "fecha_baja")
+  @Column(name = "fecha_baja", columnDefinition = "DATE")
   private LocalDate fechaBaja = null;
   // CRON JOB string (todos los dias a las 00:00hs): "0 0 0 1/1 * ? *"
 
