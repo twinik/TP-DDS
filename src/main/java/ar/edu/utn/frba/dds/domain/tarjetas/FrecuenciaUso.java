@@ -5,5 +5,4 @@ package ar.edu.utn.frba.dds.domain.tarjetas;
  */
 public interface FrecuenciaUso {
   boolean permiteUsar(Tarjeta tarjeta);
-
 }

@@ -39,7 +39,7 @@ public class AperturaHeladera {
     @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id")
     private SolicitudAperturaHeladera solicitud;
 
-    @Column(name = "timestamp", columnDefinition = "DATETIME")
+    @Column(name = "timestamp", columnDefinition = "TIMESTAMP")
     private LocalDateTime timestamp;
 
     @ManyToOne
