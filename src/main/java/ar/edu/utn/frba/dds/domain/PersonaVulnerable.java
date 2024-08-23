@@ -57,7 +57,7 @@ public class PersonaVulnerable {
     private TipoDocumento tipoDocumento;
     // TODO: REVISAR DNI COMO STRING ACA Y COMO INT EN COLABORADOR
 
-    @Column(name = "nro_documento")
+    @Column(name = "nro_documento", columnDefinition = "varchar(11)")
     private String nroDocumento;
 
     @ManyToOne

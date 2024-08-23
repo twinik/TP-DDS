@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class CargaColaboracion {
   private String tipoDocumento;
-  private Integer documento;
+  private String documento;
   private String nombre;
   private String apellido;
   private String mail;
