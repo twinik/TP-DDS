@@ -7,22 +7,46 @@ import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Registra una solicud de apertura por parte del colaborador
  */
+@Entity
+@Table(name = "solicitud_apertura_heladera")
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class SolicitudAperturaHeladera {
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
+
+    @Column(name = "motivo", columnDefinition = "TEXT")
     private String motivo;
+
+    @Column(name = "timestamp", columnDefinition = "DATETIME")
     private LocalDateTime timestamp;
+
+    @ManyToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
     public void publicarSolicitudABroker() throws IOException {

@@ -10,22 +10,44 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
 
 /**
  * Tecnico class permite representar un tecnico.
  */
+@Entity
+@Table(name = "tecnico")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Tecnico implements Contactable {
+
+  @Id
+  @GeneratedValue
   private Long id;
+
+  @Column(name = "nombre", nullable = false)
   private String nombre;
+
+  @Column(name = "apellido", nullable = false)
   private String apellido;
+
+  @Column(name = "nro_documento", nullable = false)
   private String nroDocumento;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipo_documento")
   private TipoDocumento tipoDocumento;
+
+  @OneToMany
+  @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
   private List<MedioDeContacto> medioContacto;
+
+  @OneToOne
+  @JoinColumn(name = "area_de_cobertura_id", referencedColumnName = "id")
   private AreaDeCobertura areaDeCobertura;
+
   @Override
   public String email() {
     return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.EMAIL);

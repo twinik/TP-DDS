@@ -6,20 +6,36 @@ import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
 import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
 
 /**
  * Representa una suscripcion de la cual un colaborador va a recibir notificaciones
  */
+@Entity
+@Table(name = "suscripcion")
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 public class Suscripcion {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
+
+    @Transient
     private NotificationStrategy notificacionStrategy;
+
+    @Transient
     private ITipoSuscripcion tipoSuscripcion;
+
+    @Column(name = "numero")
     private int numero;
 
     public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion, int numero) {

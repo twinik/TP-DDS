@@ -8,27 +8,67 @@ import java.time.LocalDateTime;
 import java.util.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
 
 /**
  * Heladera class permite representar una heladera.
  */
+@Entity
+@Table(name = "heladera")
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Heladera {
+
+  @Id
+  @GeneratedValue
   private Long id;
+
+  @OneToOne
+  @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
   private Ubicacion ubicacion;
+
+  @OneToOne
+  @JoinColumn(name = "direccion_id", referencedColumnName = "id")
   private Direccion direccion;
+
+  @Column(name = "activa")
   private boolean activa = true;
+
+  @Column(name = "nombre")
   private String nombre;
+
+  @Column(name = "capacidad_viandas")
   private Integer capacidadViandas;
+
+  @Column(name = "fecha_puesta_funcionamiento", columnDefinition = "DATE")
   private LocalDate fechaPuestaFuncionamiento;
+
+  @OneToMany
+  @JoinColumn(name = "heladera_id")
   private List<Vianda> viandas;
+
+  @OneToOne
+  @JoinColumn(name = "modelo_id", referencedColumnName = "id")
   private ModeloHeladera modelo;
+
+  // TODO persistimos RegistroTemperatura? Segun enunciado no es necesario
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
+
+  @OneToMany(mappedBy = "heladera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
+
+  @OneToMany
+  @JoinColumn(name = "suscripcion_id", referencedColumnName = "id")
   private List<Suscripcion> suscripciones = new ArrayList<>();
+
+  // TODO: DEJAR PARA PENSAR UN POQUITO
+  @Transient
   private List<Heladera> heladerasCercanas = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {

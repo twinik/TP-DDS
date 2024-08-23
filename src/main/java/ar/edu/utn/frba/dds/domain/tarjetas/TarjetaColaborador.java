@@ -6,7 +6,9 @@ import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
 import ar.edu.utn.frba.dds.messageFactory.MensajeExcepcionDireccionTarjetaFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +16,36 @@ import java.util.List;
 /**
  * representa una tarjeta que usa el colaborador para acceder a las heladeras
  */
+@Entity
+@Table(name = "tarjeta_colaborador")
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class TarjetaColaborador {
+
+  @Id
+  @GeneratedValue
   private Long id;
+
+  @Column(name = "codigo")
   private String codigo;
+
+  @OneToOne
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
   private Colaborador colaborador;
+
+  @Column(name = "activa")
   private boolean activa;
+
+  @Column(name = "fecha_alta", columnDefinition = "DATE")
   private LocalDate fechaAlta;
+
+  @Column(name = "fecha_baja", columnDefinition = "DATE")
   private LocalDate fechaBaja;
+
+  @OneToMany
+  @JoinColumn(name = "tarjeta_id")
   private List<AperturaHeladera> usos;
 
   public TarjetaColaborador(String codigo, Colaborador colaborador, boolean activa, LocalDate fechaAlta, LocalDate fechaBaja, List<AperturaHeladera> usos) {

@@ -27,7 +27,7 @@ public class CargaColaboracionCsvReader implements CSVReaderAdapter {
         CargaColaboracion cargaColaboracion = new CargaColaboracion();
         try {
           cargaColaboracion.setTipoDocumento(values[0]);
-          cargaColaboracion.setDocumento(Integer.valueOf(values[1]));
+          cargaColaboracion.setDocumento(values[1]);
           cargaColaboracion.setNombre(values[2]);
           cargaColaboracion.setApellido(values[3]);
           cargaColaboracion.setMail(values[4]);

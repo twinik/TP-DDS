@@ -2,15 +2,33 @@ package ar.edu.utn.frba.dds.domain.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 /**
  * Ubicacion class permite representar una ubicacion.
  */
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Entity
+@Table(name = "ubicacion")
 public class Ubicacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "latitud", nullable = false)
     private Float latitud;
+
+    @Column(name = "longitud", nullable = false)
     private Float longitud;
+
+    public Ubicacion(Float latitud, Float longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
 
     public float calcularDistanciaHasta(Ubicacion ubicacion) {
         float radioTierra = 6371; // en kilometros
