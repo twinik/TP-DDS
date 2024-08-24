@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.cronjobs;
 
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.RegistroTemperatura;
 import ar.edu.utn.frba.dds.domain.heladeras.VerificadorConexionHeladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
@@ -11,10 +10,8 @@ import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
-import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class FallaConexionCronJob {

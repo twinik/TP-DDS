@@ -8,22 +8,7 @@ import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
-import ar.edu.utn.frba.dds.repositories.imp.AlertasRepository;
-import ar.edu.utn.frba.dds.repositories.imp.AperturasHeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
-import ar.edu.utn.frba.dds.repositories.imp.DonacionesVIandaRepository;
-import ar.edu.utn.frba.dds.repositories.imp.FallasTecnicasRepository;
-import ar.edu.utn.frba.dds.repositories.imp.FormasColaboracionRespository;
-import ar.edu.utn.frba.dds.repositories.imp.HeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.imp.PersonaVulnerableRepository;
-import ar.edu.utn.frba.dds.repositories.imp.RedistribucionesViandaRepository;
-import ar.edu.utn.frba.dds.repositories.imp.SensoresMovimientoRepository;
-import ar.edu.utn.frba.dds.repositories.imp.SensoresTemperaturaRepository;
-import ar.edu.utn.frba.dds.repositories.imp.SolcitudesAperturaHeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.imp.TarjetaRepository;
-import ar.edu.utn.frba.dds.repositories.imp.TarjetasColaboradorRepository;
-import ar.edu.utn.frba.dds.repositories.imp.TecnicosRepository;
-import ar.edu.utn.frba.dds.repositories.imp.ViandasRepository;
+import ar.edu.utn.frba.dds.repositories.imp.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +54,13 @@ public class ServiceLocator {
                 (IAlertasRepository) get("alertasRepository")));
         case "calculadorPuntos" -> add("calculadorPuntos", new CalculadorPuntos());
         case "recomendadorHeladeras" -> add("recomendadorHeladeras", new RecomendadorHeladeras());
+        case "usuariosRepository" -> add("usuariosRepository", new UsuariosRepository());
+        case "suscripcionesRepository" -> add("suscripcionesRepository", new SuscripcionesRepository());
+        case "usosTarjetaRepository" -> add("usosTarjetaRepository", new UsosTarjetaRepository());
+        case "registrosTemperaturaRepository" -> add("registrosTemperaturaRepository", new RegistrosTemperaturaRepository());
+        case "respuestasCampoRepository" -> add("respuestasCampoRepository", new RespuestasCampoRepository());
+        case "respuestasFormularioRepository" -> add("respuestasFormularioRepository", new RespuestasFormularioRepository());
+        case "visitasTecnicoRepository" -> add("visitasTecnicoRepository", new VisitasTecnicoRepository());
       }
 
     }
