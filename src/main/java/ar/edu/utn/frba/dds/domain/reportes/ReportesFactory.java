@@ -1,11 +1,7 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
 import ar.edu.utn.frba.dds.domain.pdfs.ItextPdfGenerator;
-import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
-import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
-import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
-import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
-import ar.edu.utn.frba.dds.repositories.IViandasRepository;
+import ar.edu.utn.frba.dds.repositories.*;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

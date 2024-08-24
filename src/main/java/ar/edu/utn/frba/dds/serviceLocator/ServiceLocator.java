@@ -54,12 +54,12 @@ public class ServiceLocator {
                 (IAlertasRepository) get("alertasRepository")));
         case "calculadorPuntos" -> add("calculadorPuntos", new CalculadorPuntos());
         case "recomendadorHeladeras" -> add("recomendadorHeladeras", new RecomendadorHeladeras());
-        case "usuariosRepository" -> add("usuariosRepository", new UsuariosRepository());
-        case "suscripcionesRepository" -> add("suscripcionesRepository", new SuscripcionesRepository());
-        case "usosTarjetaRepository" -> add("usosTarjetaRepository", new UsosTarjetaRepository());
         case "registrosTemperaturaRepository" -> add("registrosTemperaturaRepository", new RegistrosTemperaturaRepository());
         case "respuestasCampoRepository" -> add("respuestasCampoRepository", new RespuestasCampoRepository());
         case "respuestasFormularioRepository" -> add("respuestasFormularioRepository", new RespuestasFormularioRepository());
+        case "suscripcionesRepository" -> add("suscripcionesRepository", new SuscripcionesRepository());
+        case "usosTarjetaRepository" -> add("usosTarjetaRepository", new UsosTarjetaRepository());
+        case "usuariosRepository" -> add("usuariosRepository", new UsuariosRepository());
         case "visitasTecnicoRepository" -> add("visitasTecnicoRepository", new VisitasTecnicoRepository());
       }
 

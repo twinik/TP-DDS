@@ -1,8 +1,6 @@
 package ar.edu.utn.frba.dds.repositories;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
-import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import java.util.List;
 import java.util.Optional;
 
