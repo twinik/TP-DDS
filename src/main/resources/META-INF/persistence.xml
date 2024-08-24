@@ -8,11 +8,10 @@
     <persistence-unit name="simple-persistence-unit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dds-grupo7" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dds-grupo7?serverTimezone=America/Argentina/Buenos_Aires" />
             <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="12345678" />
 
@@ -27,7 +26,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
 
     </persistence-unit>
