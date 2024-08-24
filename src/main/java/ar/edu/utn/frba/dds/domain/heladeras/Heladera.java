@@ -55,7 +55,6 @@ public class Heladera {
   @JoinColumn(name = "modelo_id", referencedColumnName = "id")
   private ModeloHeladera modelo;
 
-  // TODO persistimos RegistroTemperatura? Segun enunciado no es necesario
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
@@ -67,8 +66,10 @@ public class Heladera {
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private List<Suscripcion> suscripciones = new ArrayList<>();
 
-  // TODO: DEJAR PARA PENSAR UN POQUITO
-  @Transient
+  // TODO: QUIZAS DELEGAR A UNA CLASE CON ATRIBUTO DISTANCIA O YA ES MUCHO
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "cercania_heladera", inverseJoinColumns = @JoinColumn(name = "heladera2_id",referencedColumnName = "id"),
+  joinColumns = @JoinColumn(name = "heldera1_id",referencedColumnName = "id"))
   private List<Heladera> heladerasCercanas = new ArrayList<>();
 
   public Heladera(LocalDate fecha) {

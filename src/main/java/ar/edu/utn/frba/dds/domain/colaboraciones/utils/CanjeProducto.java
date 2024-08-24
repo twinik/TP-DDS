@@ -28,25 +28,25 @@ public class CanjeProducto {
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "colaborador_id")
+  @JoinColumn(name = "colaborador_id",referencedColumnName = "id")
   private Colaborador comprador;
 
   @ManyToOne
-  @JoinColumn(name = "oferta_producto_id")
+  @JoinColumn(name = "oferta_producto_id",referencedColumnName = "id")
   private OfertaProducto ofertaCanjeada;
 
   @Column(name = "fecha_canje", columnDefinition = "DATETIME")
   private LocalDateTime fechaCanje;
 
   @Column(name = "puntos_gastados")
-  private float puntosGastados;
+  private Float puntosGastados;
 
   /**
    * Constructor con parametros.
    */
   public CanjeProducto(Colaborador comprador,
                        OfertaProducto ofertaCanjeada,
-                       LocalDateTime fechaCanje, float puntosGastados) {
+                       LocalDateTime fechaCanje, Float puntosGastados) {
     this.comprador = comprador;
     this.ofertaCanjeada = ofertaCanjeada;
     this.fechaCanje = fechaCanje;
