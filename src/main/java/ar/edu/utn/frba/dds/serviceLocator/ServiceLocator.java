@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntos;
+import ar.edu.utn.frba.dds.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
@@ -65,6 +66,7 @@ public class ServiceLocator {
                 (IFallasTecnicasRepository) get("fallasTecnicasRepository"),
                 (IAlertasRepository) get("alertasRepository")));
         case "calculadorPuntos" -> add("calculadorPuntos", new CalculadorPuntos());
+        case "recomendadorHeladeras" -> add("recomendadorHeladeras", new RecomendadorHeladeras());
       }
 
     }

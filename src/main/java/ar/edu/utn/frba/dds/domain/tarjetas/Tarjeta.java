@@ -34,11 +34,8 @@ public class Tarjeta {
   @Column(name = "activa")
   private boolean activa;
 
-
-
   @Convert(converter = FrecuenciaUsoAttributeConverter.class)
   @Column(name = "frecuencia_permitida")
-//  @Transient
   private FrecuenciaUso frecuenciaPermitida;
 
   @OneToMany

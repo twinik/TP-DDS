@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.incidentes;
 
+import ar.edu.utn.frba.dds.converters.NotificationStrategyAttributeConverter;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
 import ar.edu.utn.frba.dds.messageFactory.MensajeTecnicosIncidenteFactory;
@@ -10,6 +11,7 @@ import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,13 +35,17 @@ public class Incidente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   @ManyToOne
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;
+
   @Column(name = "timestamp",columnDefinition = "TIMESTAMP")
   private LocalDateTime timestamp;
+
   @Transient
   private TecnicosHelper tecnicosHelper;
+
   @Transient
   private NotificationStrategyFactory notificationStrategyFactory;
 
