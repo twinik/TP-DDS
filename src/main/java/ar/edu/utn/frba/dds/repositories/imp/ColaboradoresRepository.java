@@ -26,8 +26,6 @@ public class ColaboradoresRepository implements IColaboradoresRepository {
     return this.colaboradores.stream().filter(c -> c.getId() == id).findFirst();
   }
 
-
-
   @Override
   public List<Colaborador> buscarTodos() {
     return colaboradores;
