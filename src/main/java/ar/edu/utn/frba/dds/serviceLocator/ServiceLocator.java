@@ -15,6 +15,7 @@ import ar.edu.utn.frba.dds.repositories.imp.DonacionesVIandaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.FallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.FormasColaboracionRespository;
 import ar.edu.utn.frba.dds.repositories.imp.HeladeraRepository;
+import ar.edu.utn.frba.dds.repositories.imp.PersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.repositories.imp.RedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.SensoresMovimientoRepository;
 import ar.edu.utn.frba.dds.repositories.imp.SensoresTemperaturaRepository;
@@ -59,6 +60,7 @@ public class ServiceLocator {
         case "sensoresTemperaturaRepository" ->
             add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
         case "formasColaboracionRepository" -> add("formasColaboracionRepository", new FormasColaboracionRespository());
+        case "personasVulnerablesRepository" -> add("personasVulnerablesRepository", new PersonaVulnerableRepository());
         case "reportesFactory" ->
             add("reportesFactory", new ReportesFactory((IViandasRepository) get("viandasRepository"),
                 (IDonacionesViandaRepository) get("donacionesViandaRepository"),
