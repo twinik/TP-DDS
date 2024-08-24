@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.serviceLocator;
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.domain.reportes.ReportesFactory;
-import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
@@ -15,6 +14,7 @@ import ar.edu.utn.frba.dds.repositories.imp.DonacionesVIandaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.FallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.FormasColaboracionRespository;
 import ar.edu.utn.frba.dds.repositories.imp.HeladeraRepository;
+import ar.edu.utn.frba.dds.repositories.imp.MotivoRedistribucionRepository;
 import ar.edu.utn.frba.dds.repositories.imp.PersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.repositories.imp.RedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.imp.SensoresMovimientoRepository;
@@ -61,6 +61,7 @@ public class ServiceLocator {
             add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
         case "formasColaboracionRepository" -> add("formasColaboracionRepository", new FormasColaboracionRespository());
         case "personasVulnerablesRepository" -> add("personasVulnerablesRepository", new PersonaVulnerableRepository());
+        case "motivosRedistribucionRepository" -> add("motivosRedistribucionRepository", new MotivoRedistribucionRepository());
         case "reportesFactory" ->
             add("reportesFactory", new ReportesFactory((IViandasRepository) get("viandasRepository"),
                 (IDonacionesViandaRepository) get("donacionesViandaRepository"),

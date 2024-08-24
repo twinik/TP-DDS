@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
-import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
