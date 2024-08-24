@@ -64,7 +64,7 @@ public class Heladera {
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
 
   @OneToMany
-  @JoinColumn(name = "suscripcion_id", referencedColumnName = "id")
+  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private List<Suscripcion> suscripciones = new ArrayList<>();
 
   // TODO: DEJAR PARA PENSAR UN POQUITO

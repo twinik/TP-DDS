@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * colección de la otra heladera (de su cercana), así ambas se conocen y listo. No?
  */
 @AllArgsConstructor
-public class CaluladorHeladerasCercanas {
+public class CalculadorHeladerasCercanas {
   private IHeladerasRepository heladerasRepository;
   private int limite;
 

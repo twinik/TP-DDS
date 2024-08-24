@@ -13,7 +13,6 @@ import javax.persistence.Converter;
 public class NotificationStrategyAttributeConverter implements AttributeConverter<NotificationStrategy,String> {
   @Override
   public String convertToDatabaseColumn(NotificationStrategy notificationStrategy) {
-    NotificationStrategyFactory factory = new NotificationStrategyFactory();
     if(notificationStrategy instanceof MailNotificationStrategy) return "EMAIL";
     if(notificationStrategy instanceof TelegramNotificacionStrategy) return "TELEGRAM";
     if(notificationStrategy instanceof WhatsappSenderStrategy) return "WHATSAPP";

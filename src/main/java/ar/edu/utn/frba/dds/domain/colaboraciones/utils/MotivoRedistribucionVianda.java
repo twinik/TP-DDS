@@ -22,6 +22,7 @@ public class MotivoRedistribucionVianda {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   @Column(name = "motivo_descripcion",columnDefinition = "TEXT")
   private String motivo;
 

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.suscripciones;
 
 import ar.edu.utn.frba.dds.converters.FrecuenciaUsoAttributeConverter;
+import ar.edu.utn.frba.dds.converters.NotificationStrategyAttributeConverter;
 import ar.edu.utn.frba.dds.converters.TipoSuscripcionAttributeConverter;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
@@ -22,7 +23,6 @@ import javax.persistence.*;
 @Setter
 @Getter
 public class Suscripcion {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -31,7 +31,7 @@ public class Suscripcion {
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 
-    @Convert(converter = NotificationStrategy.class)
+    @Convert(converter = NotificationStrategyAttributeConverter.class)
     @Column(name = "notification_strategy")
     private NotificationStrategy notificacionStrategy;
 
