@@ -31,5 +31,3 @@ target/**
 
 # MAC
 **/.DS_Store
-
-persistence.xml
