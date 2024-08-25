@@ -26,6 +26,14 @@ public class ServiceLocator {
   public static Object get(String nombre) {
     if (!existeService(nombre)) {
       switch (nombre) {
+        case "reportesFactory" ->
+            add("reportesFactory", new ReportesFactory((IViandasRepository) get("viandasRepository"),
+                (IDonacionesViandaRepository) get("donacionesViandaRepository"),
+                (IRedistribucionesViandaRepository) get("redistribucionesViandaRepository"),
+                (IFallasTecnicasRepository) get("fallasTecnicasRepository"),
+                (IAlertasRepository) get("alertasRepository")));
+        case "calculadorPuntos" -> add("calculadorPuntos", new CalculadorPuntos());
+        case "recomendadorHeladeras" -> add("recomendadorHeladeras", new RecomendadorHeladeras());
         case "colaboradoresRepository" -> add("colaboradoresRepository", new ColaboradoresRepository());
         case "heladerasRepository" -> add("heladerasRepository", new HeladeraRepository());
         case "donacionesViandaRepository" -> add("donacionesViandaRepository", new DonacionesVIandaRepository());
@@ -46,14 +54,6 @@ public class ServiceLocator {
             add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
         case "formasColaboracionRepository" -> add("formasColaboracionRepository", new FormasColaboracionRespository());
         case "personasVulnerablesRepository" -> add("personasVulnerablesRepository", new PersonaVulnerableRepository());
-        case "reportesFactory" ->
-            add("reportesFactory", new ReportesFactory((IViandasRepository) get("viandasRepository"),
-                (IDonacionesViandaRepository) get("donacionesViandaRepository"),
-                (IRedistribucionesViandaRepository) get("redistribucionesViandaRepository"),
-                (IFallasTecnicasRepository) get("fallasTecnicasRepository"),
-                (IAlertasRepository) get("alertasRepository")));
-        case "calculadorPuntos" -> add("calculadorPuntos", new CalculadorPuntos());
-        case "recomendadorHeladeras" -> add("recomendadorHeladeras", new RecomendadorHeladeras());
         case "registrosTemperaturaRepository" -> add("registrosTemperaturaRepository", new RegistrosTemperaturaRepository());
         case "respuestasCampoRepository" -> add("respuestasCampoRepository", new RespuestasCampoRepository());
         case "respuestasFormularioRepository" -> add("respuestasFormularioRepository", new RespuestasFormularioRepository());
@@ -65,14 +65,13 @@ public class ServiceLocator {
         case "modelosHeladeraRepository" -> add("modelosHeladeraRepository", new ModeloHeladeraRepository());
         case "ofertasProductoRepository" -> add("ofertasProductoRepository", new OfertaProductoRepository());
         case "opcionesRepository" -> add("opcionesRepository", new OpcionRepository());
+        case "productosRepository" -> add("productosRepository", new ProductoRepository());
       }
     }
-
     return services.get(nombre);
   }
 
   private static boolean existeService(String nombre) {
     return services.containsKey(nombre);
   }
-
 }
