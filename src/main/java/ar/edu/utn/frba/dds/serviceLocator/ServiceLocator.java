@@ -63,6 +63,7 @@ public class ServiceLocator {
         case "visitasTecnicoRepository" -> add("visitasTecnicoRepository", new VisitasTecnicoRepository());
         case "mediosDeContactoRepository" -> add("mediosDeContactoRepository", new MedioContactoRepository());
         case "modelosHeladeraRepository" -> add("modelosHeladeraRepository", new ModeloHeladeraRepository());
+        case "ofertasProductoRepository" -> add("ofertasProductoRepository", new OfertaProductoRepository());
       }
     }
 
