@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.repositories.imp;
+package ar.edu.utn.frba.dds.repositories;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.form.Formulario;
 import ar.edu.utn.frba.dds.domain.tecnicos.AreaDeCobertura;

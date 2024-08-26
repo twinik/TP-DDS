@@ -1,12 +1,12 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.form.Formulario;
-import ar.edu.utn.frba.dds.domain.tecnicos.AreaDeCobertura;
+import ar.edu.utn.frba.dds.repositories.IFormularioRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FormularioRepository implements  IFormularioRepository{
+public class FormularioRepository implements IFormularioRepository {
     @Override
     public Optional<Formulario> buscar(long id) {
         return Optional.empty();
