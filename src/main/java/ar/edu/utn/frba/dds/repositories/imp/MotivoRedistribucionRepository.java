@@ -21,17 +21,18 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 
     @Override
     public Optional<MotivoRedistribucionVianda> buscar(Long id) {
-        Query query = EntityManagerHelper.getEntityManager().
-            // ACA VA EL NOMBRE DE LA CLASE NO DE LA TABLA
-            createQuery("from MotivoRedistribucionVianda where id=:idParam");
-        query.setParameter("idParam",id);
-        try{
-            MotivoRedistribucionVianda resultado = (MotivoRedistribucionVianda) query.getSingleResult();
-            return Optional.ofNullable(resultado);
-        }
-        catch (NoResultException e){
-            return Optional.empty();
-        }
+//        Query query = EntityManagerHelper.getEntityManager().
+//            // ACA VA EL NOMBRE DE LA CLASE NO DE LA TABLA
+//            createQuery("from MotivoRedistribucionVianda where id=:idParam");
+//        query.setParameter("idParam",id);
+//        try{
+//            MotivoRedistribucionVianda resultado = (MotivoRedistribucionVianda) query.getSingleResult();
+//            return Optional.ofNullable(resultado);
+//        }
+//        catch (NoResultException e){
+//            return Optional.empty();
+       // }
+        return Optional.ofNullable(EntityManagerHelper.getEntityManager().find(MotivoRedistribucionVianda.class, id));
     }
 
     @Override
