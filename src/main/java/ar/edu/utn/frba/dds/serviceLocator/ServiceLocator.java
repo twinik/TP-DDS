@@ -37,21 +37,17 @@ public class ServiceLocator {
         case "colaboradoresRepository" -> add("colaboradoresRepository", new ColaboradoresRepository());
         case "heladerasRepository" -> add("heladerasRepository", new HeladeraRepository());
         case "donacionesViandaRepository" -> add("donacionesViandaRepository", new DonacionesVIandaRepository());
-        case "redistribucionesViandaRepository" ->
-            add("redistribucionesViandaRepository", new RedistribucionesViandaRepository());
+        case "redistribucionesViandaRepository" -> add("redistribucionesViandaRepository", new RedistribucionesViandaRepository());
         case "alertasRepository" -> add("alertasRepository", new AlertasRepository());
         case "fallasTecnicasRepository" -> add("fallasTecnicasRepository", new FallasTecnicasRepository());
         case "tarjetasRepository" -> add("tarjetasRepository", new TarjetaRepository());
         case "viandasRepository" -> add("viandasRepository", new ViandasRepository());
-        case "solicitudesAperturaHeladeraRepository" ->
-            add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
-        case "tarjetasColaboradorRepository" ->
-            add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
+        case "solicitudesAperturaHeladeraRepository" -> add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
+        case "tarjetasColaboradorRepository" -> add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
         case "aperturasHeladeraRepository" -> add("aperturasHeladeraRepository", new AperturasHeladeraRepository());
         case "tecnicosRepository" -> add("tecnicosRepository", new TecnicosRepository());
         case "sensoresMovimientoRepository" -> add("sensoresMovimientoRepository", new SensoresMovimientoRepository());
-        case "sensoresTemperaturaRepository" ->
-            add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
+        case "sensoresTemperaturaRepository" -> add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
         case "formasColaboracionRepository" -> add("formasColaboracionRepository", new FormasColaboracionRespository());
         case "personasVulnerablesRepository" -> add("personasVulnerablesRepository", new PersonaVulnerableRepository());
         case "registrosTemperaturaRepository" -> add("registrosTemperaturaRepository", new RegistrosTemperaturaRepository());
@@ -70,6 +66,7 @@ public class ServiceLocator {
         case "areaDeCoberturaRepository" -> add("areaDeCoberturaRepository", new AreaDeCoberturaRepository());
         case "campoRepository" -> add("campoRepository", new CampoRepository());
         case "colocacionHeladeraRepository" -> add ("colocacionHeladeraRepository", new ColocacionHeladeraRepository());
+        case "direccionRepository" -> add ("direccionRepository", new DireccionRepository());
       }
     }
     return services.get(nombre);
