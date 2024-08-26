@@ -68,6 +68,7 @@ public class ServiceLocator {
         case "colocacionHeladeraRepository" -> add ("colocacionHeladeraRepository", new ColocacionHeladeraRepository());
         case "direccionRepository" -> add ("direccionRepository", new DireccionRepository());
         case "altaPersonaVulnerableRepository" -> add ("altaPersonaVulnerableRepository", new AltaPersonaVulnerableRepository());
+        case "donacionDineroRepository" -> add ("donacionDineroRepository", new DonacionDineroRepository());
       }
     }
     return services.get(nombre);
