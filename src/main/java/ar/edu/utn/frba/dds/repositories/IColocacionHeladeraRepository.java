@@ -1,18 +1,19 @@
 package ar.edu.utn.frba.dds.repositories;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.repositories.imp.ColocacionHeladeraRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IColocacionHeladeraRepository {
-    Optional<ColocacionHeladeraRepository> buscar(long id);
+    Optional<ColocacionHeladeras> buscar(long id);
 
-    List<ColocacionHeladeraRepository> buscarTodos();
+    List<ColocacionHeladeras> buscarTodos();
 
-    void guardar(ColocacionHeladeraRepository colocacionHeladera);
+    void guardar(ColocacionHeladeras colocacionHeladera);
 
-    void actualizar(ColocacionHeladeraRepository colocacionHeladera);
+    void actualizar(ColocacionHeladeras colocacionHeladera);
 
-    void eliminar(ColocacionHeladeraRepository colocacionHeladera);
+    void eliminar(ColocacionHeladeras colocacionHeladera);
 }

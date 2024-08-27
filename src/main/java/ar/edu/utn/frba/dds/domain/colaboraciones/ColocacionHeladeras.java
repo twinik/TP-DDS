@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
@@ -30,7 +31,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "colocacion_heladera")
-public class ColocacionHeladeras implements IPuntajeCalculable {
+public class ColocacionHeladeras extends EntidadPersistente implements IPuntajeCalculable {
   public static final Float PUNTOS_POR_MES = 5.0f;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
