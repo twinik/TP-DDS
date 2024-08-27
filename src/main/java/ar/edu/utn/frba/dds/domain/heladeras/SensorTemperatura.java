@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import com.itextpdf.text.pdf.PRIndirectReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "sensor_temperatura")
-public class SensorTemperatura {
+public class SensorTemperatura extends EntidadPersistente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
