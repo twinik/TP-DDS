@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.tecnicos;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaDeCobertura {
+public class AreaDeCobertura extends EntidadPersistente {
 
   @Id
   @GeneratedValue
