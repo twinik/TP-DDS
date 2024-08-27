@@ -39,41 +39,38 @@ function obtenerDistancia(
   return R * c;
 }
 
-app.get(
-  "/api/recomendacion-locacion-donacion",
-  (req: Request, res: Response) => {
-    const lat = parseFloat(req.query.lat as string);
-    const lon = parseFloat(req.query.lon as string);
-    const limite = parseInt(req.query.limite as string) || 5;
-    const distanciaMaxEnKM =
-      parseFloat(req.query.distanciaMaxEnKM as string) || 2;
+app.get("/locaciones-donacion", (req: Request, res: Response) => {
+  const lat = parseFloat(req.query.lat as string);
+  const lon = parseFloat(req.query.lon as string);
+  const limite = parseInt(req.query.limite as string) || 5;
+  const distanciaMaxEnKM =
+    parseFloat(req.query.distanciaMaxEnKM as string) || 2;
 
-    if (isNaN(lat) || isNaN(lon)) {
-      return res
-        .status(400)
-        .json({ error: "Faltan parámetros de latitud o longitud válidos" });
-    }
-
-    const recomendaciones = comunidades
-      .map((comunidad) => {
-        const distancia = obtenerDistancia(
-          lat,
-          lon,
-          comunidad.lat,
-          comunidad.lon
-        );
-        return {
-          ...comunidad,
-          distanciaEnKM: parseFloat(distancia.toFixed(2)),
-        };
-      })
-      .sort((a, b) => a.distanciaEnKM - b.distanciaEnKM)
-      .filter((comunidad) => comunidad.distanciaEnKM <= distanciaMaxEnKM)
-      .slice(0, limite);
-
-    res.json({ recomendaciones });
+  if (isNaN(lat) || isNaN(lon)) {
+    return res
+      .status(400)
+      .json({ error: "Faltan parámetros de latitud o longitud válidos" });
   }
-);
+
+  const lugares = comunidades
+    .map((comunidad) => {
+      const distancia = obtenerDistancia(
+        lat,
+        lon,
+        comunidad.lat,
+        comunidad.lon
+      );
+      return {
+        ...comunidad,
+        distanciaEnKM: parseFloat(distancia.toFixed(2)),
+      };
+    })
+    .sort((a, b) => a.distanciaEnKM - b.distanciaEnKM)
+    .filter((comunidad) => comunidad.distanciaEnKM <= distanciaMaxEnKM)
+    .slice(0, limite);
+
+  res.json({ lugares });
+});
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
