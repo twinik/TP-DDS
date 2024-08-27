@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.excepciones.NoAutorizadoParaAbrirHeladeraException;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
@@ -28,12 +29,8 @@ import javax.persistence.Table;
 @Table(name = "apertura_heladera")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class AperturaHeladera {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class AperturaHeladera extends EntidadPersistente {
 
     @OneToOne
     @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id")

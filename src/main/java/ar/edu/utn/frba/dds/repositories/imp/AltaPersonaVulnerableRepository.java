@@ -20,7 +20,8 @@ public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRe
 
     @Override
     public List<AltaPersonaVulnerable> buscarTodos() {
-        return entityManager().createQuery("from AltaPersonaVulnerable",AltaPersonaVulnerable.class)
+        return entityManager().createQuery("from AltaPersonaVulnerable where activo=:activo",AltaPersonaVulnerable.class).
+                setParameter("activo",true)
                 .getResultList();
     }
 
@@ -45,7 +46,7 @@ public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRe
 
     @Override
     public void eliminar(AltaPersonaVulnerable altaPersonaVulnerable) {
-        //altaPersonaVulnerable.setActivo(false);
+        altaPersonaVulnerable.setActivo(false);
         withTransaction(() -> entityManager().merge(altaPersonaVulnerable));
     }
 /*

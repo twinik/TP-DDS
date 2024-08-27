@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
@@ -28,11 +29,7 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AltaPersonaVulnerable implements IPuntajeCalculable{
-
-  @Id
-  @GeneratedValue
-  private Long id;
+public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntajeCalculable {
 
   @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)

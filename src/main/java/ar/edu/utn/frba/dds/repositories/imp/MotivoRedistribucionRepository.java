@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -86,11 +88,7 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 
         repositorio.eliminar(m1);
         m2.setMotivo("lo cambio");
-      try {
-        Thread.sleep(60 * 1000);
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
       repositorio.actualizar(m2);
 
         Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(1L);
