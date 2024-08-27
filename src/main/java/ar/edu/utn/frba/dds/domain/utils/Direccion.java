@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.utils;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "direccion")
 @NoArgsConstructor
-public class Direccion {
+public class Direccion extends EntidadPersistente {
     @Id
     @GeneratedValue
     private Long id;
