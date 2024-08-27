@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.tarjetas;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
@@ -22,7 +23,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TarjetaColaborador {
+public class TarjetaColaborador extends EntidadPersistente {
 
   @Id
   @GeneratedValue
