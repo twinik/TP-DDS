@@ -34,4 +34,6 @@ target/**
 
 persistence.xml
 
+# API Recomendador Donaciones
 node_modules
+recomendador-donacion-api/dist
