@@ -63,7 +63,7 @@ public class Colaborador implements Contactable {
     @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private Direccion direccion;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private List<MedioDeContacto> medioContacto = new ArrayList<>();
 

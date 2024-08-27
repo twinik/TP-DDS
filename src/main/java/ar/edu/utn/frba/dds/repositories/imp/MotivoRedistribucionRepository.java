@@ -4,19 +4,19 @@ import ar.edu.utn.frba.dds.db.EntityManagerHelper;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.repositories.IMotivoRedistribucionRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepository {
+public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepository, WithSimplePersistenceUnit {
 
-    private List<MotivoRedistribucionVianda> motivosRedistribucion;
 
     public MotivoRedistribucionRepository() {
-        this.motivosRedistribucion = new ArrayList<>();
     }
 
     @Override
@@ -32,36 +32,47 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 //        catch (NoResultException e){
 //            return Optional.empty();
        // }
-        return Optional.ofNullable(EntityManagerHelper.getEntityManager().find(MotivoRedistribucionVianda.class, id));
+        return Optional.ofNullable(entityManager().find(MotivoRedistribucionVianda.class,id));
     }
 
     @Override
     public List<MotivoRedistribucionVianda> buscarTodos() {
-        return EntityManagerHelper.getEntityManager().createQuery("from MotivoRedistribucionVianda",MotivoRedistribucionVianda.class).getResultList();
+        return entityManager().createQuery("from MotivoRedistribucionVianda where activo=:activo",MotivoRedistribucionVianda.class).
+            setParameter("activo",true)
+            .getResultList();
     }
 
     @Override
     public void guardar(MotivoRedistribucionVianda motivosRedistribucion) {
-        EntityManagerHelper.beginTransaction();
-        EntityManagerHelper.getEntityManager().persist(motivosRedistribucion);
-        EntityManagerHelper.commit();
+        withTransaction(() -> entityManager().persist(motivosRedistribucion));
+    }
+    public void guardar(MotivoRedistribucionVianda ...motivosRedistribucion) {
+
+        withTransaction(() -> {
+            for (MotivoRedistribucionVianda motivo : motivosRedistribucion){
+                entityManager().persist(motivo);
+            }
+        });
     }
 
     @Override
     public void actualizar(MotivoRedistribucionVianda motivo) {
-        EntityManagerHelper.beginTransaction();
-        EntityManagerHelper.getEntityManager().merge(motivo);
-        EntityManagerHelper.commit();
+        withTransaction(() -> entityManager().merge(motivo));
+//        EntityManagerHelper.beginTransaction();
+//        EntityManagerHelper.getEntityManager().merge(motivo);
+//        EntityManagerHelper.commit();
     }
 
     @Override
     public void eliminar(MotivoRedistribucionVianda motivo) {
         // ponele
-        EntityManagerHelper.beginTransaction();
-        EntityManager em = EntityManagerHelper.getEntityManager();
-        em.remove(
-            em.contains(motivo) ? motivo : em.merge(motivo));
-        EntityManagerHelper.commit();
+//        EntityManagerHelper.beginTransaction();
+//        EntityManager em = EntityManagerHelper.getEntityManager();
+//        em.remove(
+//            em.contains(motivo) ? motivo : em.merge(motivo));
+//        EntityManagerHelper.commit();
+        motivo.setActivo(false);
+        withTransaction(() -> entityManager().merge(motivo));
     }
 
     public static void main(String[] args) {
@@ -75,7 +86,12 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 
         repositorio.eliminar(m1);
         m2.setMotivo("lo cambio");
-        repositorio.actualizar(m2);
+      try {
+        Thread.sleep(60 * 1000);
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+      repositorio.actualizar(m2);
 
         Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(1L);
         //System.out.println(hidratado.get().getMotivo());
