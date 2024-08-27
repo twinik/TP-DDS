@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
 import ar.edu.utn.frba.dds.brokers.BrokerPublisher;
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
@@ -30,7 +31,7 @@ import javax.persistence.Transient;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SolicitudAperturaHeladera {
+public class SolicitudAperturaHeladera extends EntidadPersistente {
     @Id
     @GeneratedValue
     private Long id;
