@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nombre": "Comunidad A",
+    "lat": -34.6037,
+    "lon": -58.3816
+  },
+  {
+    "id": 2,
+    "nombre": "Comunidad B",
+    "lat": -34.6158,
+    "lon": -58.4351
+  },
+  {
+    "id": 3,
+    "nombre": "Comunidad C",
+    "lat": -34.6094,
+    "lon": -58.3925
+  }
+]
