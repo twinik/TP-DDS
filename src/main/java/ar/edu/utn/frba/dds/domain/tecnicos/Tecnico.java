@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.tecnicos;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.notifications.Contactable;
 import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
@@ -21,7 +22,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tecnico implements Contactable {
+public class Tecnico extends EntidadPersistente implements Contactable{
 
   @Id
   @GeneratedValue
