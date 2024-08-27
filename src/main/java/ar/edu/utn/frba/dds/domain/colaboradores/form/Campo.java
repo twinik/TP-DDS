@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain.colaboradores.form;
 
 import java.util.*;
+
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +24,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Table(name = "campo")
-public class Campo {
+public class Campo extends EntidadPersistente {
 
   @Id
   @GeneratedValue
