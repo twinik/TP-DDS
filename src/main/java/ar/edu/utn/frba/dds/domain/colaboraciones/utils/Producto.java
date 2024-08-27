@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.utils;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "producto")
-public class Producto {
+public class Producto extends EntidadPersistente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
