@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.tarjetas;
 
 import ar.edu.utn.frba.dds.converters.FrecuenciaUsoAttributeConverter;
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
 import java.time.LocalDate;
 import java.util.*;
@@ -19,7 +20,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tarjeta {
+public class Tarjeta extends EntidadPersistente {
 
   @Id
   @GeneratedValue
