@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
@@ -31,7 +32,7 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RedistribucionViandas implements IPuntajeCalculable {
+public class RedistribucionViandas extends EntidadPersistente implements IPuntajeCalculable {
 
   @Id
   @GeneratedValue
