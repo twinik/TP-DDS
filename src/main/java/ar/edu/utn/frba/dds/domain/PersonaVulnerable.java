@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ import java.util.*;
 @Entity
 @Table(name = "persona_vulnerable")
 @NoArgsConstructor
-public class PersonaVulnerable {
+public class PersonaVulnerable extends EntidadPersistente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
