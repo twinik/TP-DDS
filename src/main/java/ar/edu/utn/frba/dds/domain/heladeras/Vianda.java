@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDate;
 import java.util.Date;
@@ -18,7 +19,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vianda {
+public class Vianda extends EntidadPersistente {
 
   @Id
   @GeneratedValue
