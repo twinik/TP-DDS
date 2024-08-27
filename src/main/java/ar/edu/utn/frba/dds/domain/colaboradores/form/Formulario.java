@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain.colaboradores.form;
 
 import java.util.*;
+
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.Column;
@@ -19,7 +21,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "formulario")
-public class Formulario {
+public class Formulario extends EntidadPersistente {
 
   @Id
   @GeneratedValue
