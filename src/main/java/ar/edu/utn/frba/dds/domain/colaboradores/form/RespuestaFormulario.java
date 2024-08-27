@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.domain.colaboradores.form;
 
 import java.util.*;
+
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +25,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RespuestaFormulario {
+public class RespuestaFormulario extends EntidadPersistente {
 
   @Id
   @GeneratedValue
