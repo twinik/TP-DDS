@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
@@ -21,7 +22,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Heladera {
+public class Heladera extends EntidadPersistente {
 
   @Id
   @GeneratedValue
