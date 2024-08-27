@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 
@@ -28,7 +29,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DonacionVianda implements IPuntajeCalculable {
+public class DonacionVianda extends EntidadPersistente implements IPuntajeCalculable {
   @Id
   @GeneratedValue
   private Long id;
