@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "nombre": "Comunidad A",
+    "lat": 12,
+    "lon": 12
+  },
+  {
+    "id": 2,
+    "nombre": "Comunidad B",
+    "lat": 20,
+    "lon": 20
+  },
+  {
+    "id": 3,
+    "nombre": "Comunidad C",
+    "lat": 30,
+    "lon": 30
+  },
+  {
+    "id": 4,
+    "nombre": "Comunidad D",
+    "lat": 40,
+    "lon": 40
+  },
+  {
+    "id": 5,
+    "nombre": "Comunidad E",
+    "lat": 50,
+    "lon": 50
+  },
+  {
+    "id": 6,
+    "nombre": "Comunidad F",
+    "lat": 60,
+    "lon": 60
+  },
+  {
+    "id": 7,
+    "nombre": "Comunidad G",
+    "lat": 70,
+    "lon": 70
+  },
+  {
+    "id": 8,
+    "nombre": "Comunidad H",
+    "lat": 80,
+    "lon": 80
+  },
+  {
+    "id": 9,
+    "nombre": "Comunidad I",
+    "lat": 90,
+    "lon": 90
+  },
+  {
+    "id": 10,
+    "nombre": "Comunidad J",
+    "lat": 100,
+    "lon": 100
+  }
+]

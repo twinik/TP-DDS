@@ -1,6 +1,6 @@
-import express, { Request, Response } from 'express';
-import path from 'path';
-import fs from 'fs';
+import express, { Request, Response } from "express";
+import path from "path";
+import fs from "fs";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,40 +13,60 @@ interface Comunidad {
 }
 
 function cargarComunidades(): Comunidad[] {
-  const rutaArchivo = path.join(__dirname, 'data', 'comunidades.json');
-  const datosBrutos = fs.readFileSync(rutaArchivo, 'utf-8');
+  const rutaArchivo = path.join(__dirname, "data", "comunidades.json");
+  const datosBrutos = fs.readFileSync(rutaArchivo, "utf-8");
   return JSON.parse(datosBrutos) as Comunidad[];
 }
 
 const comunidades = cargarComunidades();
 
-function obtenerDistancia(lat1: number, lon1: number, lat2: number, lon2: number): number {
+function obtenerDistancia(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
   const R = 6371;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
 
-app.get('/api/recomendacion', (req: Request, res: Response) => {
-  const lat = parseFloat(req.query.lat as string);
-  const lon = parseFloat(req.query.lon as string);
+app.get(
+  "/api/recomendacion-locacion-donacion",
+  (req: Request, res: Response) => {
+    const lat = parseFloat(req.query.lat as string);
+    const lon = parseFloat(req.query.lon as string);
 
-  if (isNaN(lat) || isNaN(lon)) {
-    return res.status(400).json({ error: 'Faltan parámetros de latitud o longitud válidos' });
+    if (isNaN(lat) || isNaN(lon)) {
+      return res
+        .status(400)
+        .json({ error: "Faltan parámetros de latitud o longitud válidos" });
+    }
+
+    const recomendaciones = comunidades
+      .map((comunidad) => {
+        const distancia = obtenerDistancia(
+          lat,
+          lon,
+          comunidad.lat,
+          comunidad.lon
+        );
+        return { ...comunidad, distancia: distancia.toFixed(2) };
+      })
+      .sort((a, b) => parseFloat(a.distancia) - parseFloat(b.distancia))
+      .slice(0, 3);
+
+    res.json({ recomendaciones });
   }
-
-  const recomendaciones = comunidades.map(comunidad => {
-    const distancia = obtenerDistancia(lat, lon, comunidad.lat, comunidad.lon);
-    return { ...comunidad, distancia: distancia.toFixed(2) };
-  }).sort((a, b) => parseFloat(a.distancia) - parseFloat(b.distancia));
-
-  res.json({ recomendaciones });
-});
+);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
