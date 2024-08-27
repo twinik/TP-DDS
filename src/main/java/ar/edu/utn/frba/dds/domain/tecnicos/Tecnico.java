@@ -24,10 +24,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Tecnico extends EntidadPersistente implements Contactable{
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @Column(name = "nombre", nullable = false)
   private String nombre;
 

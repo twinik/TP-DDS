@@ -26,10 +26,6 @@ import javax.persistence.Table;
 @Table(name = "campo")
 public class Campo extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @Enumerated(EnumType.STRING)
   private TipoCampo tipo;
 

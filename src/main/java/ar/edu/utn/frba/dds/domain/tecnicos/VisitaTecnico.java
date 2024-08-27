@@ -25,9 +25,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class VisitaTecnico extends EntidadPersistente {
-    @Id
-    @GeneratedValue
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id", nullable = false)

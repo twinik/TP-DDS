@@ -19,15 +19,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "suscripcion")
-@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 public class Suscripcion extends EntidadPersistente {
-    @Id
-    @GeneratedValue
-    private Long id;
-
     @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;

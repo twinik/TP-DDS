@@ -18,12 +18,7 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 @Getter
 @Setter
-@AllArgsConstructor
 public class Usuario extends EntidadPersistente {
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @Column(name = "email")
   private String email;
 

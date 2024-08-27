@@ -27,15 +27,12 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "colocacion_heladera")
 public class ColocacionHeladeras extends EntidadPersistente implements IPuntajeCalculable {
   public static final Float PUNTOS_POR_MES = 5.0f;
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+
   @ManyToOne
   @JoinColumn(name = "colaoborador_id",referencedColumnName = "id",nullable = false)
   private Colaborador colaborador;

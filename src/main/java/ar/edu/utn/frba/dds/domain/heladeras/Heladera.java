@@ -24,10 +24,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Heladera extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @OneToOne
   @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
   private Ubicacion ubicacion;

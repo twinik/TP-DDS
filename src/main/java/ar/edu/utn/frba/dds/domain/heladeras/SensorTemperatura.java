@@ -24,9 +24,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sensor_temperatura")
 public class SensorTemperatura extends EntidadPersistente {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   @ManyToOne
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;

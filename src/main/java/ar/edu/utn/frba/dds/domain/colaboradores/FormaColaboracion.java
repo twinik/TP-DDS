@@ -22,9 +22,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "forma_colaboracion")
 public class FormaColaboracion extends EntidadPersistente {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
 
   @Column(name = "nombre", unique = true)
   private String nombre;

@@ -23,10 +23,6 @@ import javax.persistence.Table;
 @Table(name = "formulario")
 public class Formulario extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @OneToMany
   @JoinColumn(name = "formulario_id", referencedColumnName = "id")
   private List<Campo> campos;

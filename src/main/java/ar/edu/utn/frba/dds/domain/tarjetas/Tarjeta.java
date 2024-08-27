@@ -22,10 +22,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Tarjeta extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @Column(name = "codigo")
   private String codigo;
 

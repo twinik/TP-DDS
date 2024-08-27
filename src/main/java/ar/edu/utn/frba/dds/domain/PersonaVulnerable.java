@@ -29,15 +29,11 @@ import java.util.*;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity
 @Table(name = "persona_vulnerable")
 @NoArgsConstructor
 public class PersonaVulnerable extends EntidadPersistente {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;

@@ -19,10 +19,6 @@ import javax.persistence.*;
 @Getter
 public class UsoTarjeta extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
   private LocalDateTime fechaUso;
 

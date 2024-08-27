@@ -16,14 +16,10 @@ import javax.persistence.Table;
  * Clase: RegistroTemperatura: guarda la hora y la temperatura registrada en ese instante
  */
 @Getter
-@AllArgsConstructor
 @Entity
 @Table(name = "registro_temperatura")
 @NoArgsConstructor
 public class RegistroTemperatura extends EntidadPersistente {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   @Column(name = "fecha_hora",columnDefinition = "TIMESTAMP", nullable = false)
   LocalDateTime fechaHora;
   @Column(name = "temp_registrada", nullable = false)

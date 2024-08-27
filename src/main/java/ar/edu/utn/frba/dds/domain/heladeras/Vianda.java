@@ -17,13 +17,8 @@ import javax.persistence.*;
 @Table(name = "vianda")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Vianda extends EntidadPersistente {
-
-  @Id
-  @GeneratedValue
-  private Long id;
 
   @Column(name = "comida")
   private String comida;

@@ -33,11 +33,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RedistribucionViandas extends EntidadPersistente implements IPuntajeCalculable {
-
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;

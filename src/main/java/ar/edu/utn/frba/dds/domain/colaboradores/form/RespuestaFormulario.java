@@ -26,11 +26,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Setter
 @NoArgsConstructor
 public class RespuestaFormulario extends EntidadPersistente {
-
-  @Id
-  @GeneratedValue
-  private Integer id;
-
   @ManyToOne
   @JoinColumn(name = "formulario_id",referencedColumnName = "id")
   private Formulario formulario;

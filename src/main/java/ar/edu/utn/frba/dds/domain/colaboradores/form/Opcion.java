@@ -23,10 +23,6 @@ import javax.persistence.Table;
 @Table(name = "opcion")
 public class Opcion extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @Column(name = "opcion", columnDefinition = "TEXT")
   private String opcion;
 }

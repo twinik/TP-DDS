@@ -21,13 +21,8 @@ import java.util.List;
 @Table(name = "tarjeta_colaborador")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class TarjetaColaborador extends EntidadPersistente {
-
-  @Id
-  @GeneratedValue
-  private Long id;
 
   @Column(name = "codigo")
   private String codigo;

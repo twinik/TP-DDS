@@ -28,10 +28,6 @@ import javax.persistence.Table;
 @Table(name = "respuesta_campo")
 public class RespuestaACampo extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @ManyToOne
   @JoinColumn(name = "campo_id", referencedColumnName = "id")
   private Campo campo;

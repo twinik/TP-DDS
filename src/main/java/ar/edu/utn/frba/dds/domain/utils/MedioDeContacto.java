@@ -11,14 +11,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "medio_de_contacto")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class MedioDeContacto extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "canal")

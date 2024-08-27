@@ -30,10 +30,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OfertaProducto extends EntidadPersistente {
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;

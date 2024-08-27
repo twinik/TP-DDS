@@ -32,9 +32,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Colaborador extends EntidadPersistente implements Contactable {
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
     @OneToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)

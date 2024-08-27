@@ -16,14 +16,10 @@ import javax.persistence.Table;
  */
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity
 @Table(name = "direccion")
 @NoArgsConstructor
 public class Direccion extends EntidadPersistente {
-    @Id
-    @GeneratedValue
-    private Long id;
     @Column(name = "calle", nullable = false)
     private String calle;
     @Column(name = "altura", nullable = false)

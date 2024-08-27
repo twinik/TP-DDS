@@ -15,14 +15,10 @@ import javax.persistence.Table;
  * Producto class representa un producto.
  */
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "producto")
 public class Producto extends EntidadPersistente {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   @Column(name = "nombre")
   private String nombre;
   @Column(name = "url_foto",columnDefinition = "TEXT")

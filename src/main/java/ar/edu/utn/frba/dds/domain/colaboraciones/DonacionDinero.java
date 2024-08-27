@@ -34,10 +34,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class DonacionDinero extends EntidadPersistente implements IPuntajeCalculable {
   private static final Float COEFICIENTE_DONACION_DINERO = .5f;
-
-  @Id
-  @GeneratedValue
-  private Long id;
+  
 
   @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)

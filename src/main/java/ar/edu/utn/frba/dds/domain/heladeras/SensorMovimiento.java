@@ -22,9 +22,6 @@ import javax.persistence.Table;
 @Table(name = "sensor_movimiento")
 public class SensorMovimiento extends EntidadPersistente {
   // TODO: PREGUNTAR CARDINALIDAD EN LOS SENSORES IGUAL ES LO MISMO
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   @ManyToOne
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;

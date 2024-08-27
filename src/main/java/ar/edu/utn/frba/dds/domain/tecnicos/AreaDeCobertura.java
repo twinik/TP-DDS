@@ -17,10 +17,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class AreaDeCobertura extends EntidadPersistente {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
   @OneToOne
   @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
   private Ubicacion referencia;

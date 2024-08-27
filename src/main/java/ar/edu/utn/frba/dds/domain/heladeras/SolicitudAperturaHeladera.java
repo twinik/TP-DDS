@@ -32,9 +32,6 @@ import javax.persistence.Transient;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SolicitudAperturaHeladera extends EntidadPersistente {
-    @Id
-    @GeneratedValue
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
@@ -68,7 +65,7 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
         colab.setUsuario(new Usuario("jorge@mail","contrasenia"));
         Heladera heladera = new Heladera(LocalDate.now());
         heladera.setNombre("heladera_de_thomi");
-        SolicitudAperturaHeladera soli =  new SolicitudAperturaHeladera(0L,colab,"un motivo",LocalDateTime.now(),heladera);
+        SolicitudAperturaHeladera soli =  new SolicitudAperturaHeladera(colab,"un motivo",LocalDateTime.now(),heladera);
       try {
         soli.publicarSolicitudABroker();
       } catch (IOException e) {
