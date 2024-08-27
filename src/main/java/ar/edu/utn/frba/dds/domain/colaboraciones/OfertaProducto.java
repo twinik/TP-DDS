@@ -1,4 +1,5 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
@@ -28,7 +29,7 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OfertaProducto {
+public class OfertaProducto extends EntidadPersistente {
   @Id
   @GeneratedValue
   private Long id;
