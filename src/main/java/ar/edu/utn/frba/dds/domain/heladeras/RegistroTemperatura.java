@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "registro_temperatura")
 @NoArgsConstructor
-public class RegistroTemperatura {
+public class RegistroTemperatura extends EntidadPersistente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
