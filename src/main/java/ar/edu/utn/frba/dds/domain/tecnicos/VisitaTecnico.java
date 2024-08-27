@@ -1,4 +1,5 @@
 package ar.edu.utn.frba.dds.domain.tecnicos;
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Incidente;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ import java.time.LocalDateTime;
 @Table(name = "visita_tecnico")
 @Getter
 @Setter
-public class VisitaTecnico {
+public class VisitaTecnico extends EntidadPersistente {
     @Id
     @GeneratedValue
     private Long id;
