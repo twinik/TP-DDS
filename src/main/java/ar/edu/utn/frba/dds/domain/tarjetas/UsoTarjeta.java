@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.tarjetas;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class UsoTarjeta {
+public class UsoTarjeta extends EntidadPersistente {
 
   @Id
   @GeneratedValue
