@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDate;
@@ -31,7 +32,7 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DonacionDinero implements IPuntajeCalculable {
+public class DonacionDinero extends EntidadPersistente implements IPuntajeCalculable {
   private static final Float COEFICIENTE_DONACION_DINERO = .5f;
 
   @Id
