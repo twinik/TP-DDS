@@ -26,7 +26,7 @@ function obtenerDistancia(
   lat2: number,
   lon2: number
 ): number {
-  const R = 6371;
+  const R = 6371; // Radio de la Tierra en km
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLon = ((lon2 - lon1) * Math.PI) / 180;
   const a =
@@ -44,6 +44,9 @@ app.get(
   (req: Request, res: Response) => {
     const lat = parseFloat(req.query.lat as string);
     const lon = parseFloat(req.query.lon as string);
+    const limite = parseInt(req.query.limite as string) || 5;
+    const distanciaMaxEnKM =
+      parseFloat(req.query.distanciaMaxEnKM as string) || 2;
 
     if (isNaN(lat) || isNaN(lon)) {
       return res
@@ -59,10 +62,14 @@ app.get(
           comunidad.lat,
           comunidad.lon
         );
-        return { ...comunidad, distancia: distancia.toFixed(2) };
+        return {
+          ...comunidad,
+          distanciaEnKM: parseFloat(distancia.toFixed(2)),
+        };
       })
-      .sort((a, b) => parseFloat(a.distancia) - parseFloat(b.distancia))
-      .slice(0, 3);
+      .sort((a, b) => a.distanciaEnKM - b.distanciaEnKM)
+      .filter((comunidad) => comunidad.distanciaEnKM <= distanciaMaxEnKM)
+      .slice(0, limite);
 
     res.json({ recomendaciones });
   }

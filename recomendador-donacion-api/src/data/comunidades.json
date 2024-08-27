@@ -2,61 +2,61 @@
   {
     "id": 1,
     "nombre": "Comunidad A",
-    "lat": 12,
-    "lon": 12
+    "lat": -34.61178,
+    "lon": -58.417308
   },
   {
     "id": 2,
     "nombre": "Comunidad B",
-    "lat": 20,
-    "lon": 20
+    "lat": -34.613466,
+    "lon": -58.419659
   },
   {
     "id": 3,
     "nombre": "Comunidad C",
-    "lat": 30,
-    "lon": 30
+    "lat": -34.582345,
+    "lon": -58.43329
   },
   {
     "id": 4,
     "nombre": "Comunidad D",
-    "lat": 40,
-    "lon": 40
+    "lat": -34.609897,
+    "lon": -58.386682
   },
   {
     "id": 5,
     "nombre": "Comunidad E",
-    "lat": 50,
-    "lon": 50
+    "lat": -34.630202,
+    "lon": -58.471633
   },
   {
     "id": 6,
     "nombre": "Comunidad F",
-    "lat": 60,
-    "lon": 60
+    "lat": -34.59868,
+    "lon": -58.373928
   },
   {
     "id": 7,
     "nombre": "Comunidad G",
-    "lat": 70,
-    "lon": 70
+    "lat": -34.617104,
+    "lon": -58.362669
   },
   {
     "id": 8,
     "nombre": "Comunidad H",
-    "lat": 80,
-    "lon": 80
+    "lat": -34.634981,
+    "lon": -58.41324
   },
   {
     "id": 9,
     "nombre": "Comunidad I",
-    "lat": 90,
-    "lon": 90
+    "lat": -34.609234,
+    "lon": -58.445187
   },
   {
     "id": 10,
     "nombre": "Comunidad J",
-    "lat": 100,
-    "lon": 100
+    "lat": -34.583449,
+    "lon": -58.418373
   }
 ]
