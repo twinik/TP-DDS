@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboradores;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
@@ -29,7 +30,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Colaborador implements Contactable {
+public class Colaborador extends EntidadPersistente implements Contactable {
 
     @Id
     @GeneratedValue
