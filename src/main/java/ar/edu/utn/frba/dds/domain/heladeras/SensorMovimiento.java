@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "sensor_movimiento")
-public class SensorMovimiento {
+public class SensorMovimiento extends EntidadPersistente {
   // TODO: PREGUNTAR CARDINALIDAD EN LOS SENSORES IGUAL ES LO MISMO
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
