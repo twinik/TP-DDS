@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboradores;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Usuario {
+public class Usuario extends EntidadPersistente {
   @Id
   @GeneratedValue
   private Long id;
