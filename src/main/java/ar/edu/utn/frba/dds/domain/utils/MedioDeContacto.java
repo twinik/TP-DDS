@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.utils;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class MedioDeContacto {
+public class MedioDeContacto extends EntidadPersistente {
 
   @Id
   @GeneratedValue
