@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboradores;
 
 import java.util.List;
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,11 +26,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "tipo_colaborador")
-public class TipoColaborador {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class TipoColaborador  extends EntidadPersistente {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoPersona")
     private TipoPersona tipo;

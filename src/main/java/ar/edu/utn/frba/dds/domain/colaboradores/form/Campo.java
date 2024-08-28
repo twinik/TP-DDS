@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,7 +36,7 @@ public class Campo extends EntidadPersistente {
   @Column(name = "obligatorio")
   private boolean obligatorio;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "campo_id",referencedColumnName = "id")
   private List<Opcion> opciones;
 

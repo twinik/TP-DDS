@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntajeCalculable {
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
@@ -39,12 +40,12 @@ public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntaj
   private LocalDate fecha;
   private static final Float puntajePorAlta = 2f;
 
-  @OneToOne
-  @JoinColumn (name = "persona_vulnerable_id", referencedColumnName = "id", nullable = false)
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn (name = "persona_vulnerable_id", referencedColumnName = "id", nullable = false,unique = true)
   private PersonaVulnerable persona;
 
-  @OneToOne
-  @JoinColumn (name = "tarjeta_id", referencedColumnName = "id")
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn (name = "tarjeta_id", referencedColumnName = "id", unique = true)
   private Tarjeta tarjeta;
 
   /**

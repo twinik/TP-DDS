@@ -33,8 +33,8 @@ import javax.persistence.*;
 public class Colaborador extends EntidadPersistente implements Contactable {
 
 
-    @OneToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
     private Usuario usuario;
 
     @Enumerated(EnumType.STRING)
@@ -43,12 +43,12 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     @Column(columnDefinition = "varchar(11)")
     private String documento;
 
-    @OneToOne
-    @JoinColumn(name = "tipo_colaborador_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id", unique = true)
     private TipoColaborador tipoColaborador;
 
-    @OneToOne
-    @JoinColumn(name = "respuesta_formulario_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "respuesta_formulario_id", referencedColumnName = "id",unique = true)
     private RespuestaFormulario respuestas;
 
     @Column(name = "puntosGanados")
@@ -57,8 +57,7 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "direccion_id", referencedColumnName = "id")
+    @Embedded
     private Direccion direccion;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

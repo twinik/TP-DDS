@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +29,7 @@ import javax.persistence.Table;
 @Table(name = "respuesta_campo")
 public class RespuestaACampo extends EntidadPersistente {
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "campo_id", referencedColumnName = "id")
   private Campo campo;
 

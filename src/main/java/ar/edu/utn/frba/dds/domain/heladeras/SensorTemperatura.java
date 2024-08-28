@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sensor_temperatura")
 public class SensorTemperatura extends EntidadPersistente {
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;
 

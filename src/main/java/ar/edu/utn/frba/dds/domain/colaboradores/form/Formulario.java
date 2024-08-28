@@ -5,6 +5,7 @@ import java.util.*;
 import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ import javax.persistence.Table;
 @Table(name = "formulario")
 public class Formulario extends EntidadPersistente {
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "formulario_id", referencedColumnName = "id")
   private List<Campo> campos;
 

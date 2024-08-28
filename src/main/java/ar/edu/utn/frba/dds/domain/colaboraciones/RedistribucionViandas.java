@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,22 +34,22 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RedistribucionViandas extends EntidadPersistente implements IPuntajeCalculable {
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
   @Column(name = "fecha_redistribucion", columnDefinition = "DATE",nullable = false)
   private LocalDate fecha;
 
-  @OneToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn (name = "heladera_origen", referencedColumnName = "id", nullable = false)
   private Heladera heladeraOrigen;
 
-  @OneToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn (name = "heladera_destino", referencedColumnName = "id", nullable = false)
   private Heladera heladeraDestino;
 
- @ManyToOne
+ @ManyToOne(cascade = CascadeType.ALL)
  @JoinColumn(name = "motivo_id",referencedColumnName = "id")
   private MotivoRedistribucionVianda motivo;
 

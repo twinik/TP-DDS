@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ import java.time.LocalDateTime;
 @DiscriminatorValue("falla_tecnica")
 @NoArgsConstructor
 public class FallaTecnica extends Incidente {
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "colaborador_id",referencedColumnName = "id")
     private Colaborador colaborador;
     @Column(name = "descripcion",columnDefinition = "TEXT")

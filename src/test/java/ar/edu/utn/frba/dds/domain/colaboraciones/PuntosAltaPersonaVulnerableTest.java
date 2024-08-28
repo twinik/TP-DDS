@@ -26,7 +26,7 @@ public class PuntosAltaPersonaVulnerableTest {
     Tarjeta tarjeta_1, tarjeta_2;
 
     private ICalculadorPuntos calculadorPuntos;
-    FormaColaboracion persona = new FormaColaboracion(2L,"REGISTRO_PERSONA");
+    FormaColaboracion persona = new FormaColaboracion("REGISTRO_PERSONA");
 
     @BeforeEach
     void test_init(){

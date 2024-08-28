@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,14 +20,13 @@ import java.time.LocalDateTime;
 /**
  * VisitaTecnico class representa una visita de un tecnico a una heladera
  */
-@Data
 @Entity
 @Table(name = "visita_tecnico")
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VisitaTecnico extends EntidadPersistente {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id", nullable = false)
     private Tecnico tecnico;
 
@@ -42,7 +42,7 @@ public class VisitaTecnico extends EntidadPersistente {
     @Column(name = "esta_solucionado")
     private boolean solucionado;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "incidente_id", referencedColumnName = "id", nullable = false)
     private Incidente incidente;
 }

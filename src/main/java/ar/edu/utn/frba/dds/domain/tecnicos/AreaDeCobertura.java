@@ -10,15 +10,13 @@ import javax.persistence.*;
 /**
  * AreaDeCobertura class permite representar el area de cobertura de un tecnico.
  */
-@Entity
-@Table(name = "area_de_cobertura")
+@Embeddable
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaDeCobertura extends EntidadPersistente {
+public class AreaDeCobertura {
 
-  @OneToOne
-  @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
+  @Embedded
   private Ubicacion referencia;
 
   @Column(name = "radio_de_cobertura_en_km")

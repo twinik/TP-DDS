@@ -19,6 +19,7 @@ import ar.edu.utn.frba.dds.domain.emailSending.MyMailFactory;
 import ar.edu.utn.frba.dds.domain.colaboradores.factories.UsuarioFactory;
 import java.io.IOException;
 import java.util.*;
+import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.repositories.IFormasColaboracionRespository;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradoresRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
@@ -35,7 +36,7 @@ public class CargadorDeColaboraciones {
   private MailSenderAdapter mailSender;
   private String filePath;
   private String separator;
-  private ColaboradoresRepository colaboradorRepository;
+  private IColaboradoresRepository colaboradorRepository;
   private IFormasColaboracionRespository formasColaboracionRespository;
   private ConfigReader config;
   private ICalculadorPuntos calculadorPuntos;
@@ -43,7 +44,7 @@ public class CargadorDeColaboraciones {
   /**
    * Constructor con parametros.
    */
-  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, ColaboradoresRepository respository,IFormasColaboracionRespository formasColaboracionRespository, ICalculadorPuntos calculadorPuntos) throws IOException {
+  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, IColaboradoresRepository respository,IFormasColaboracionRespository formasColaboracionRespository, ICalculadorPuntos calculadorPuntos) throws IOException {
     this.config = new ConfigReader("config.properties");
     this.csvReader = csvReader;
     this.mailSender = mailAdapter;
@@ -72,7 +73,7 @@ public class CargadorDeColaboraciones {
 
       IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
 
-      Optional<FormaColaboracion> forma = formasColaboracionRespository.buscar(carga.getFormaColaboracion());
+      Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscar(carga.getFormaColaboracion());
       if(forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
 
       for (int i = 0; i < carga.getCantidad(); i++) {

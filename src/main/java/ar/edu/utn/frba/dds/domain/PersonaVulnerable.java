@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -56,11 +57,11 @@ public class PersonaVulnerable extends EntidadPersistente {
     @Column(name = "nro_documento", columnDefinition = "varchar(11)")
     private String nroDocumento;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private List<PersonaVulnerable> tutorados;
 

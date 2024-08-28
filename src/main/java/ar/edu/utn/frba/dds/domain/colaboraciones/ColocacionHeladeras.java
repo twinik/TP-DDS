@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,13 +34,13 @@ import javax.persistence.Table;
 public class ColocacionHeladeras extends EntidadPersistente implements IPuntajeCalculable {
   public static final Float PUNTOS_POR_MES = 5.0f;
 
-  @ManyToOne
+  @ManyToOne()
   @JoinColumn(name = "colaoborador_id",referencedColumnName = "id",nullable = false)
   private Colaborador colaborador;
   @Column(name = "fecha",nullable = false)
   private LocalDate fecha;
-  @OneToOne
-  @JoinColumn(name = "heladera_id",referencedColumnName = "id",nullable = false)
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "heladera_id",referencedColumnName = "id",nullable = false, unique = true)
   private Heladera heladera;
 
   public ColocacionHeladeras(Colaborador colaborador, LocalDate fecha, Heladera heladera) {

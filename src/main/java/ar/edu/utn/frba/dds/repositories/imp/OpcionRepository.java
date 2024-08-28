@@ -10,6 +10,7 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
 import java.util.Optional;
 
+// TODO QUIZAS BORRAR
 public class OpcionRepository implements IOpcionRepository, WithSimplePersistenceUnit {
   @Override
   public Optional<Opcion> buscar(Long id) {

@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,14 +31,14 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OfertaProducto extends EntidadPersistente {
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
   @Column(name = "fecha_creacion", columnDefinition = "DATE",nullable = false)
   private LocalDate fechaCreacion;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn (name = "producto_id", referencedColumnName = "id", nullable = false)
   private Producto producto;
 

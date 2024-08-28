@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.DiscriminatorColumn;
@@ -41,7 +42,7 @@ public class Incidente {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;
 

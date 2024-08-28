@@ -22,8 +22,8 @@ public class PuntosViandasDistribuidasTest {
     @BeforeEach
     void test_init(){
         colaborador = new Colaborador();
-        donacion_1 = new RedistribucionViandas(1000L, colaborador, LocalDate.of(2023, 2 ,4), heladera_1, heladera_2,new MotivoRedistribucionVianda("Llegaron viandas nuevas"),10);
-        donacion_2 = new RedistribucionViandas(1001L, colaborador, LocalDate.of(2023, 4 ,3), heladera_1, heladera_2,new MotivoRedistribucionVianda("Llegaron viandas nuevas"),5);
+        donacion_1 = new RedistribucionViandas( colaborador, LocalDate.of(2023, 2 ,4), heladera_1, heladera_2,new MotivoRedistribucionVianda("Llegaron viandas nuevas"),10);
+        donacion_2 = new RedistribucionViandas(colaborador, LocalDate.of(2023, 4 ,3), heladera_1, heladera_2,new MotivoRedistribucionVianda("Llegaron viandas nuevas"),5);
         calculadorPuntos = new CalculadorPuntos();
     }
 

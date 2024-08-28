@@ -27,8 +27,8 @@ public class TarjetaColaborador extends EntidadPersistente {
   @Column(name = "codigo")
   private String codigo;
 
-  @OneToOne
-  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", unique = true)
   private Colaborador colaborador;
 
   @Column(name = "activa")
@@ -40,8 +40,8 @@ public class TarjetaColaborador extends EntidadPersistente {
   @Column(name = "fecha_baja", columnDefinition = "DATE")
   private LocalDate fechaBaja;
 
-  @OneToMany
-  @JoinColumn(name = "tarjeta_id")
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
   private List<AperturaHeladera> usos;
 
   public TarjetaColaborador(String codigo, Colaborador colaborador, boolean activa, LocalDate fechaAlta, LocalDate fechaBaja, List<AperturaHeladera> usos) {

@@ -35,12 +35,12 @@ public class Tarjeta extends EntidadPersistente {
   @Column(name = "frecuencia_permitida")
   private FrecuenciaUso frecuenciaPermitida;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
   private List<UsoTarjeta> usos;
 
-  @OneToOne
-  @JoinColumn(name = "duenio_id", referencedColumnName = "id")
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "duenio_id", referencedColumnName = "id",unique = true)
   private PersonaVulnerable duenio;
 
   @Column(name = "fecha_adjudicacion",columnDefinition = "DATE",  nullable = false)

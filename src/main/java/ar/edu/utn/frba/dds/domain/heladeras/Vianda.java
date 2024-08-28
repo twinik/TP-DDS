@@ -29,11 +29,11 @@ public class Vianda extends EntidadPersistente {
   @Column(name = "fecha_donacion", columnDefinition = "DATE")
   private LocalDate fechaDonacion;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
   private Colaborador colaborador;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private Heladera heladera;
 

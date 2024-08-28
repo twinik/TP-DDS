@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ import javax.persistence.Transient;
 @NoArgsConstructor
 public class SolicitudAperturaHeladera extends EntidadPersistente {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 
@@ -43,7 +44,7 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     @Column(name = "timestamp", columnDefinition = "DATETIME")
     private LocalDateTime timestamp;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 

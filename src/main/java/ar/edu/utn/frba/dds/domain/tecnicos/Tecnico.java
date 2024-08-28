@@ -37,12 +37,11 @@ public class Tecnico extends EntidadPersistente implements Contactable{
   @Column(name = "tipo_documento")
   private TipoDocumento tipoDocumento;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
   private List<MedioDeContacto> medioContacto;
 
-  @OneToOne
-  @JoinColumn(name = "area_de_cobertura_id", referencedColumnName = "id")
+  @Embedded
   private AreaDeCobertura areaDeCobertura;
 
   @Override

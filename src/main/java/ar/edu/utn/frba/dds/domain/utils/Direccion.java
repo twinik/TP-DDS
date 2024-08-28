@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,20 +17,19 @@ import javax.persistence.Table;
  */
 @Getter
 @Setter
-@Entity
-@Table(name = "direccion")
+@Embeddable
 @NoArgsConstructor
-public class Direccion extends EntidadPersistente {
-    @Column(name = "calle", nullable = false)
+public class Direccion{
+    @Column(name = "calle")
     private String calle;
-    @Column(name = "altura", nullable = false)
+    @Column(name = "altura")
     private Integer altura;
     @Column(name = "piso")
     private Integer piso;
     @Column(name = "codigoPostal")
-    private Integer codigoPostal;
+    private String codigoPostal;
 
-    public Direccion(String calle, Integer altura, Integer piso, Integer codigoPostal) {
+    public Direccion(String calle, Integer altura, Integer piso, String codigoPostal) {
         this.calle = calle;
         this.altura = altura;
         this.piso = piso;

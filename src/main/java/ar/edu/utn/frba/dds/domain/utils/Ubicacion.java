@@ -8,21 +8,14 @@ import javax.persistence.*;
 /**
  * Ubicacion class permite representar una ubicacion.
  */
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity
-@Table(name = "ubicacion")
+@Embeddable
 public class Ubicacion {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "latitud", nullable = false)
+    @Column(name = "latitud")
     private Float latitud;
 
-    @Column(name = "longitud", nullable = false)
+    @Column(name = "longitud")
     private Float longitud;
 
     public Ubicacion(Float latitud, Float longitud) {

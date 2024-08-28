@@ -63,10 +63,8 @@ public class ServiceLocator {
         case "opcionesRepository" -> add("opcionesRepository", new OpcionRepository());
         case "productosRepository" -> add("productosRepository", new ProductoRepository());
         case "motivosRedistribucionRepository" -> add("motivosRedistribucionRepository", new MotivoRedistribucionRepository());
-        case "areaDeCoberturaRepository" -> add("areaDeCoberturaRepository", new AreaDeCoberturaRepository());
         case "campoRepository" -> add("campoRepository", new CampoRepository());
         case "colocacionHeladeraRepository" -> add ("colocacionHeladeraRepository", new ColocacionHeladeraRepository());
-        case "direccionRepository" -> add ("direccionRepository", new DireccionRepository());
         case "altaPersonaVulnerableRepository" -> add ("altaPersonaVulnerableRepository", new AltaPersonaVulnerableRepository());
         case "donacionDineroRepository" -> add ("donacionDineroRepository", new DonacionDineroRepository());
         case "formularioRepostiry" -> add ("formularioRepostiry", new FormularioRepository());

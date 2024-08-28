@@ -2,8 +2,11 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,13 +14,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 public class HeladeraRepository implements IHeladerasRepository, WithSimplePersistenceUnit {
 
-  private List<Heladera> heladeras;
-
-  public HeladeraRepository() {
-    this.heladeras = new ArrayList<>();
-  }
 
   @Override
   public Optional<Heladera> buscar(long id) {
@@ -65,19 +64,19 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 //        .collect(Collectors.toList());
 //  }
 
-  /*public static void main(String[] args) {
-        Heladera m = new Heladera("otro");
-        Heladera m1 = new Heladera("uno");
-        Heladera m2 = new Heladera("hola");
+  public static void main(String[] args) {
+        Heladera h = new Heladera();
         IHeladerasRepository repositorio = (IHeladerasRepository) ServiceLocator.get("heladerasRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
+        repositorio.guardar(h);
+    h.setModelo(new ModeloHeladera("filgo",22,33));
+    repositorio.actualizar(h);
+//        repositorio.guardar(m1);
+//        repositorio.guardar(m2);
 
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
+//        repositorio.eliminar(m1);
+//        m2.setMotivo("lo cambio");
+//        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
+//      repositorio.actualizar(m2);
 
         Optional<Heladera> heladera1 = repositorio.buscar(1L);
         //System.out.println(hidratado.get().getMotivo());
@@ -85,5 +84,5 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 
         List<Heladera> lista = repositorio.buscarTodos();
 
-    }*/
+    }
 }

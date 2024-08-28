@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,15 +30,15 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class DonacionVianda extends EntidadPersistente implements IPuntajeCalculable {
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
-  @Column(name = "fecha_donacion_dinero", columnDefinition = "DATE",nullable = false)
+  @Column(name = "fecha_donacion_dinero", columnDefinition = "DATE", nullable = false)
   private LocalDate fecha;
 
-  @OneToOne
-  @JoinColumn (name = "vianda_id", referencedColumnName = "id", nullable = false)
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "vianda_id", referencedColumnName = "id", nullable = false, unique = true)
   private Vianda vianda;
 
   private static final Float PUNTATE_POR_DONACION = 1.5f;

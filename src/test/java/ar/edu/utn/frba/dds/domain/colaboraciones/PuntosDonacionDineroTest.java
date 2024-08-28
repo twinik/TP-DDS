@@ -16,7 +16,7 @@ public class PuntosDonacionDineroTest {
     DonacionDinero donacion;
     ICalculadorPuntos calculador;
 
-    FormaColaboracion dinero = new FormaColaboracion(1L,"DONACION_DINERO");
+    FormaColaboracion dinero = new FormaColaboracion("DONACION_DINERO");
 
     @BeforeEach
     void test_init(){

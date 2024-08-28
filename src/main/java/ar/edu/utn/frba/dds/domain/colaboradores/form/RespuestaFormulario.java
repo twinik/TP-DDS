@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,11 +27,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Setter
 @NoArgsConstructor
 public class RespuestaFormulario extends EntidadPersistente {
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "formulario_id",referencedColumnName = "id")
   private Formulario formulario;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "respuesta_formulario_id",referencedColumnName = "id")
   private List<RespuestaACampo> respuestas;
 

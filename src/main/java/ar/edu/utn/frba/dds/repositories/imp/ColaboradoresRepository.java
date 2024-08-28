@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,17 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
 
   @Override
   public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
-    return this.colaboradores.stream().filter(c -> c.getDocumento().equals(documento) && c.getTipoDocumento().equals(tipoDocumento)).findFirst(); //Queda o se va???
+    //return this.colaboradores.stream().filter(c -> c.getDocumento().equals(documento) && c.getTipoDocumento().equals(tipoDocumento)).findFirst(); //Queda o se va??
+    try{
+      Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
+          .setParameter("tipoDocumento",tipoDocumento)
+          .setParameter("documento",documento).getSingleResult();
+      return Optional.ofNullable(c);
+    }
+    catch (NoResultException e){
+      return Optional.empty();
+    }
+
   }
   @Override
   public Optional<Colaborador> buscar(long id) {

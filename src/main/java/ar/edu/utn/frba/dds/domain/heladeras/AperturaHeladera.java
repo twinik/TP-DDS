@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Optional;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,8 +33,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class AperturaHeladera extends EntidadPersistente {
 
-    @OneToOne
-    @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id",unique = true)
     private SolicitudAperturaHeladera solicitud;
 
     @Column(name = "timestamp", columnDefinition = "TIMESTAMP")

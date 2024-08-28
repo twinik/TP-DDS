@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ import javax.persistence.Table;
 @Table(name = "sensor_movimiento")
 public class SensorMovimiento extends EntidadPersistente {
   // TODO: PREGUNTAR CARDINALIDAD EN LOS SENSORES IGUAL ES LO MISMO
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;
   public void alertarRobo() {

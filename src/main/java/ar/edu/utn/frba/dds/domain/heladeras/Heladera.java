@@ -24,12 +24,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Heladera extends EntidadPersistente {
 
-  @OneToOne
-  @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
+  @Embedded
   private Ubicacion ubicacion;
 
-  @OneToOne
-  @JoinColumn(name = "direccion_id", referencedColumnName = "id")
+  @Embedded
   private Direccion direccion;
 
   @Column(name = "activa")
@@ -44,11 +42,10 @@ public class Heladera extends EntidadPersistente {
   @Column(name = "fecha_puesta_funcionamiento", columnDefinition = "DATE")
   private LocalDate fechaPuestaFuncionamiento;
 
-  @OneToMany
-  @JoinColumn(name = "heladera_id")
+  @OneToMany(mappedBy = "heladera",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Vianda> viandas;
 
-  @OneToOne
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "modelo_id", referencedColumnName = "id")
   private ModeloHeladera modelo;
 
@@ -59,7 +56,7 @@ public class Heladera extends EntidadPersistente {
   @OneToMany(mappedBy = "heladera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private List<Suscripcion> suscripciones = new ArrayList<>();
 

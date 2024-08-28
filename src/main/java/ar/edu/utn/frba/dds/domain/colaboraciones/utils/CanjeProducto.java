@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,11 +28,11 @@ public class CanjeProducto {
   @GeneratedValue
   private Long id;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "colaborador_id",referencedColumnName = "id")
   private Colaborador comprador;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "oferta_producto_id",referencedColumnName = "id")
   private OfertaProducto ofertaCanjeada;
 
