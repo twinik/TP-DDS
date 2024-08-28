@@ -1,42 +1,30 @@
 import { Request, Response } from "express";
-import { obtenerComunidades } from "../services/comunidadService";
-import { calcularDistancia } from "../utils/distanceCalculator";
+import { obtenerComunidadesCercanas } from "../services/comunidadService";
 
 export async function obtenerLugares(req: Request, res: Response) {
-	const lat = parseFloat(req.query.lat as string);
-	const lon = parseFloat(req.query.lon as string);
-	const limite = parseInt(req.query.limite as string) || 5;
-	const distanciaMaxEnKM =
-		parseFloat(req.query.distanciaMaxEnKM as string) || 0;
+  const lat = parseFloat(req.query.lat as string);
+  const lon = parseFloat(req.query.lon as string);
+  const limite = parseInt(req.query.limite as string) || 5;
+  const distanciaMaxEnKM =
+    parseFloat(req.query.distanciaMaxEnKM as string) || 100;
 
-	if (isNaN(lat) || isNaN(lon)) {
-		return res
-			.status(400)
-			.json({ error: "Faltan parámetros de latitud o longitud válidos" });
-	}
+  if (isNaN(lat) || isNaN(lon)) {
+    return res
+      .status(400)
+      .json({ error: "Faltan parámetros de latitud o longitud válidos" });
+  }
 
-	const comunidades = await obtenerComunidades();
+  try {
+    const lugares = await obtenerComunidadesCercanas(
+      lat,
+      lon,
+      distanciaMaxEnKM,
+      limite
+    );
 
-	const lugares = comunidades
-		.map(comunidad => {
-			const distancia = calcularDistancia(
-				lat,
-				lon,
-				comunidad.lat,
-				comunidad.lon
-			);
-			return {
-				...comunidad,
-				distanciaEnKM: parseFloat(distancia.toFixed(2))
-			};
-		})
-		.filter(comunidad =>
-			distanciaMaxEnKM == 0
-				? true
-				: comunidad.distanciaEnKM <= distanciaMaxEnKM
-		)
-		.sort((a, b) => a.distanciaEnKM - b.distanciaEnKM)
-		.slice(0, limite);
-
-	res.json({ lugares });
+    res.json({ lugares });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener comunidades cercanas" });
+  }
 }
