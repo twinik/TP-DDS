@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { obtenerComunidades } from "../services/comunidadService";
 import { calcularDistancia } from "../utils/distanceCalculator";
 
-export function obtenerLugares(req: Request, res: Response) {
+export async function obtenerLugares(req: Request, res: Response) {
 	const lat = parseFloat(req.query.lat as string);
 	const lon = parseFloat(req.query.lon as string);
 	const limite = parseInt(req.query.limite as string) || 5;
@@ -15,7 +15,7 @@ export function obtenerLugares(req: Request, res: Response) {
 			.json({ error: "Faltan parámetros de latitud o longitud válidos" });
 	}
 
-	const comunidades = obtenerComunidades();
+	const comunidades = await obtenerComunidades();
 
 	const lugares = comunidades
 		.map(comunidad => {
