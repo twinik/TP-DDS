@@ -35,6 +35,7 @@ const router = Router();
  *         schema:
  *           type: number
  *           format: float
+ *           default: 100
  *         required: false
  *         description: Distancia máxima en kilómetros desde el punto de referencia
  *     responses:
