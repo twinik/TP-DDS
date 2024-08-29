@@ -34,7 +34,7 @@ public class DonacionVianda extends EntidadPersistente implements IPuntajeCalcul
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
-  @Column(name = "fecha_donacion_dinero", columnDefinition = "DATE", nullable = false)
+  @Column(name = "fecha", columnDefinition = "DATE", nullable = false)
   private LocalDate fecha;
 
   @OneToOne(cascade = CascadeType.ALL)

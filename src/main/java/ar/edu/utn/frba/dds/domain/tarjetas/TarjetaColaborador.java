@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 public class TarjetaColaborador extends EntidadPersistente {
 
-  @Column(name = "codigo")
+  @Column(name = "codigo", unique = true)
   private String codigo;
 
   @OneToOne(cascade = CascadeType.ALL)

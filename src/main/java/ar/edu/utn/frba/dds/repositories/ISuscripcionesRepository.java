@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public interface ISuscripcionesRepository {
 
-    Optional<Suscripcion> buscar(long id);
+    Optional<Suscripcion> buscar(Long id);
 
     List<Suscripcion> buscarTodos();
 

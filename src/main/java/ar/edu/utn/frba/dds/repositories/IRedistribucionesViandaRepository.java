@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public interface IRedistribucionesViandaRepository {
 
-  Optional<RedistribucionViandas> buscar(long id);
+  Optional<RedistribucionViandas> buscar(Long id);
 
   List<RedistribucionViandas> buscarTodos();
 

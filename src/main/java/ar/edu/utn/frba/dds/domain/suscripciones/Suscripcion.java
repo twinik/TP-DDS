@@ -45,6 +45,12 @@ public class Suscripcion extends EntidadPersistente {
         this.numero = numero;
     }
 
+    public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion) {
+        this.colaborador = colaborador;
+        this.notificacionStrategy = notificacionStrategy;
+        this.tipoSuscripcion = tipoSuscripcion;
+    }
+
     public void avisarEvento(Heladera heladera) {
         tipoSuscripcion.notificar(heladera, this);
     }

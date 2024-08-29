@@ -11,14 +11,8 @@ import java.util.Optional;
 
 public class ViandasRepository implements IViandasRepository, WithSimplePersistenceUnit {
 
-  private List<Vianda> viandas;
-
-  public ViandasRepository() {
-    viandas = new ArrayList<>();
-  }
-
   @Override
-  public Optional<Vianda> buscar(long id) {
+  public Optional<Vianda> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(Vianda.class,id));
   }
 

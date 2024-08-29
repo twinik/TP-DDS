@@ -12,7 +12,7 @@ public class RespuestasCampoRepository implements IRespuestasCampoRepository, Wi
 
 
   @Override
-  public Optional<RespuestaACampo> buscar(long id) {
+  public Optional<RespuestaACampo> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(RespuestaACampo.class,id));
   }
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class VisitasTecnicoRepository implements IVisitasTecnicoRepository, WithSimplePersistenceUnit {
   @Override
-  public Optional<VisitaTecnico> buscar(long id) {
+  public Optional<VisitaTecnico> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(VisitaTecnico.class,id));
   }
 

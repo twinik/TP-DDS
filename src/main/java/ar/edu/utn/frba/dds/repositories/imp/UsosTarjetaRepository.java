@@ -12,7 +12,7 @@ public class UsosTarjetaRepository implements IUsosTarjetaRepository, WithSimple
 
 
   @Override
-  public Optional<UsoTarjeta> buscar(long id) {
+  public Optional<UsoTarjeta> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(UsoTarjeta.class,id));
   }
 

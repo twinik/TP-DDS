@@ -61,7 +61,7 @@ public class Heladera extends EntidadPersistente {
   private List<Suscripcion> suscripciones = new ArrayList<>();
 
   // TODO: QUIZAS DELEGAR A UNA CLASE CON ATRIBUTO DISTANCIA O YA ES MUCHO
-  @ManyToMany(fetch = FetchType.LAZY)
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(name = "cercania_heladera", inverseJoinColumns = @JoinColumn(name = "heladera2_id",referencedColumnName = "id"),
   joinColumns = @JoinColumn(name = "heldera1_id",referencedColumnName = "id"))
   private List<Heladera> heladerasCercanas = new ArrayList<>();

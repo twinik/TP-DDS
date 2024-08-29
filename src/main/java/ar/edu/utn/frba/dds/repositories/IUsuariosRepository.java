@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUsuariosRepository {
-    Optional<Usuario> buscar(long id);
+    Optional<Usuario> buscar(Long id);
 
     List<Usuario> buscarTodos();
 

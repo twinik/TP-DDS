@@ -13,14 +13,8 @@ import static ar.edu.utn.frba.dds.db.EntityManagerHelper.entityManager;
 
 public class AperturasHeladeraRepository implements IAperturasHeladeraRepository, WithSimplePersistenceUnit {
 
-  private List<AperturaHeladera> aperturas;
-
-  public AperturasHeladeraRepository() {
-    this.aperturas = new ArrayList<>();
-  }
-
   @Override
-  public Optional<AperturaHeladera> buscar(long id) {
+  public Optional<AperturaHeladera> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(AperturaHeladera.class,id));
   }
 

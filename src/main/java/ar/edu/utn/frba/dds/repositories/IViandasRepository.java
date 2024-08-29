@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IViandasRepository {
-  Optional<Vianda> buscar(long id);
+  Optional<Vianda> buscar(Long id);
 
   List<Vianda> buscarTodos();
 

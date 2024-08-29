@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.incidentes;
 
 import ar.edu.utn.frba.dds.converters.NotificationStrategyAttributeConverter;
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
 import ar.edu.utn.frba.dds.messageFactory.MensajeTecnicosIncidenteFactory;
@@ -37,11 +38,7 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "incidente")
 @DiscriminatorColumn(name = "tipo_incidente")
-public class Incidente {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
+public class Incidente extends EntidadPersistente {
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;

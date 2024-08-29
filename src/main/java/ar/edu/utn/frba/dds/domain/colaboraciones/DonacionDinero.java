@@ -41,10 +41,10 @@ public class DonacionDinero extends EntidadPersistente implements IPuntajeCalcul
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
-  @Column(name = "fecha_donacion_dinero", columnDefinition = "DATE",nullable = false)
+  @Column(name = "fecha", columnDefinition = "DATE", nullable = false)
   private LocalDate fecha;
 
-  @Column(name = "monto_donacion",nullable = false)
+  @Column(name = "monto_donacion", nullable = false)
   private Float monto;
 
   @Enumerated(EnumType.STRING)

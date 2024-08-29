@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IAltaPersonaVulnerableRepository {
-    Optional<AltaPersonaVulnerable> buscar(long id);
+    Optional<AltaPersonaVulnerable> buscar(Long id);
 
     List<AltaPersonaVulnerable> buscarTodos();
 

@@ -11,14 +11,9 @@ import java.util.Optional;
 
 public class RedistribucionesViandaRepository implements IRedistribucionesViandaRepository, WithSimplePersistenceUnit {
 
-  private List<RedistribucionViandas> redistribucionViandas;
-
-  public RedistribucionesViandaRepository() {
-    this.redistribucionViandas = new ArrayList<>();
-  }
 
   @Override
-  public Optional<RedistribucionViandas> buscar(long id) {
+  public Optional<RedistribucionViandas> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(RedistribucionViandas.class,id));
   }
 

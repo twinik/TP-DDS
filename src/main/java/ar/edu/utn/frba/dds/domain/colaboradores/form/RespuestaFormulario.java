@@ -33,11 +33,10 @@ public class RespuestaFormulario extends EntidadPersistente {
 
   @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "respuesta_formulario_id",referencedColumnName = "id")
-  private List<RespuestaACampo> respuestas;
+  private List<RespuestaACampo> respuestas = new ArrayList<>();
 
   public RespuestaFormulario(Formulario formulario) {
     this.formulario = formulario;
-    this.respuestas = new ArrayList<RespuestaACampo>();
   }
 
 

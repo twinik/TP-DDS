@@ -11,7 +11,7 @@ import java.util.Optional;
 public class RespuestasFormularioRepository implements IRespuestasFormularioRepository, WithSimplePersistenceUnit {
 
   @Override
-  public Optional<RespuestaFormulario> buscar(long id) {
+  public Optional<RespuestaFormulario> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(RespuestaFormulario.class,id));
   }
 

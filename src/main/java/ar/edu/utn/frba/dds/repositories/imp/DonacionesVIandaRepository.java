@@ -18,7 +18,7 @@ public class DonacionesVIandaRepository implements IDonacionesViandaRepository, 
   }
 
   @Override
-  public Optional<DonacionVianda> buscar(long id) {
+  public Optional<DonacionVianda> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(DonacionVianda.class,id));
   }
 
