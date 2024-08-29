@@ -34,7 +34,7 @@ public class Tecnico extends EntidadPersistente implements Contactable{
   private String nroDocumento;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipo_documento")
+  @Column(name = "tipo_documento", nullable = false)
   private TipoDocumento tipoDocumento;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

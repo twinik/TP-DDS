@@ -35,12 +35,14 @@ public class ColocacionHeladeras extends EntidadPersistente implements IPuntajeC
   public static final Float PUNTOS_POR_MES = 5.0f;
 
   @ManyToOne()
-  @JoinColumn(name = "colaoborador_id",referencedColumnName = "id",nullable = false)
+  @JoinColumn(name = "colaborador_id",referencedColumnName = "id",nullable = false)
   private Colaborador colaborador;
-  @Column(name = "fecha",nullable = false)
+
+  @Column(name = "fecha",nullable = false, columnDefinition = "DATE")
   private LocalDate fecha;
+
   @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "heladera_id",referencedColumnName = "id",nullable = false, unique = true)
+  @JoinColumn(name = "heladera_id",referencedColumnName = "id", nullable = false, unique = true)
   private Heladera heladera;
 
   public ColocacionHeladeras(Colaborador colaborador, LocalDate fecha, Heladera heladera) {

@@ -22,7 +22,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Tarjeta extends EntidadPersistente {
 
-  @Column(name = "codigo")
+  @Column(name = "codigo", unique = true)
   private String codigo;
 
   @Column(name = "nro_usos")

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.utils;
 
+import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDateTime;
@@ -23,11 +24,7 @@ import javax.persistence.Table;
 @Table(name = "canje_producto")
 @Getter
 @NoArgsConstructor
-public class CanjeProducto {
-  @Id
-  @GeneratedValue
-  private Long id;
-
+public class CanjeProducto extends EntidadPersistente {
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "colaborador_id",referencedColumnName = "id")
   private Colaborador comprador;

@@ -32,7 +32,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Colaborador extends EntidadPersistente implements Contactable {
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
     private Usuario usuario;

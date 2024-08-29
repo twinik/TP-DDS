@@ -26,8 +26,8 @@ public class SensorMovimiento extends EntidadPersistente {
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;
+
   public void alertarRobo() {
     this.heladera.inhabilitar();
   }
-
 }

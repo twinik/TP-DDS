@@ -37,7 +37,7 @@ public class RespuestaFormulario extends EntidadPersistente {
 
   public RespuestaFormulario(Formulario formulario) {
     this.formulario = formulario;
-    this.respuestas = new ArrayList<RespuestaACampo>();
+    this.respuestas = new ArrayList<>();
   }
 
 
