@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.repositories.ISuscripcionesRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import java.util.Optional;
 
 public class MainPruebaSuscripcion {
 
@@ -30,6 +31,8 @@ public class MainPruebaSuscripcion {
     Suscripcion nueva = new Suscripcion(c,factory.create(CanalContacto.TELEGRAM), new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));
 
     suscripcionesRepository.guardar(nueva);
+
+    Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(1L);
 
   }
 

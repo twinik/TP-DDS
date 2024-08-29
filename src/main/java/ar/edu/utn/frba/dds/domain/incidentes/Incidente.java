@@ -32,7 +32,6 @@ import java.time.LocalDateTime;
  * Representa un incidente
  */
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

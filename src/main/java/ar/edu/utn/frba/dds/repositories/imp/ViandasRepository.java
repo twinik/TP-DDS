@@ -4,11 +4,13 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionViand
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@NoArgsConstructor
 public class ViandasRepository implements IViandasRepository, WithSimplePersistenceUnit {
 
   @Override

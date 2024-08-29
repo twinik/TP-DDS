@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionViand
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.repositories.IUsuariosRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 /**
  * IAlertasRepository interface permite interactuar con las alertas.
  */
+@NoArgsConstructor
 public class UsuariosRepository implements IUsuariosRepository, WithSimplePersistenceUnit {
 
   @Override

@@ -4,10 +4,12 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionViand
 import ar.edu.utn.frba.dds.domain.tarjetas.UsoTarjeta;
 import ar.edu.utn.frba.dds.repositories.IUsosTarjetaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
+@NoArgsConstructor
 public class UsosTarjetaRepository implements IUsosTarjetaRepository, WithSimplePersistenceUnit {
 
 

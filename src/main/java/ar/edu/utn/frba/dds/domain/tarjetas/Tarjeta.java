@@ -43,7 +43,7 @@ public class Tarjeta extends EntidadPersistente {
   @JoinColumn(name = "duenio_id", referencedColumnName = "id",unique = true)
   private PersonaVulnerable duenio;
 
-  @Column(name = "fecha_adjudicacion",columnDefinition = "DATE",  nullable = false)
+  @Column(name = "fecha_adjudicacion",columnDefinition = "DATE")
   private LocalDate fechaAdjudicacion;
 
   @Column(name = "cantidad_usos_dia")
