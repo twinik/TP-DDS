@@ -66,7 +66,7 @@ public class TarjetaRepository implements ITarjetasRepository, WithSimplePersist
 
   @Override
   public void eliminar(Tarjeta tarjeta) {
-    tarjeta.setActivo(false);
+    tarjeta.borrarLogico();
     withTransaction(() -> entityManager().merge(tarjeta));
   }
 

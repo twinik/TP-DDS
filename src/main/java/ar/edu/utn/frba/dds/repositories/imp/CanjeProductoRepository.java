@@ -32,7 +32,7 @@ public class CanjeProductoRepository implements ICanjeProductoRepository, WithSi
 
   @Override
   public void eliminar(CanjeProducto canje) {
-    canje.setActivo(false);
+    canje.borrarLogico();
     withTransaction(() -> entityManager().merge(canje));
   }
 }

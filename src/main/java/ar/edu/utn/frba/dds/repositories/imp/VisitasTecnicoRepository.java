@@ -43,7 +43,7 @@ public class VisitasTecnicoRepository implements IVisitasTecnicoRepository, With
 
   @Override
   public void eliminar(VisitaTecnico visitaTecnico) {
-    visitaTecnico.setActivo(false);
+    visitaTecnico.borrarLogico();
     withTransaction(() -> entityManager().merge(visitaTecnico));
   }
 

@@ -56,7 +56,7 @@ public class FormasColaboracionRespository implements IFormasColaboracionResposi
 
   @Override
   public void eliminar(FormaColaboracion forma) {
-    forma.setActivo(false);
+    forma.borrarLogico();
     withTransaction(() -> entityManager().merge(forma));
   }
 

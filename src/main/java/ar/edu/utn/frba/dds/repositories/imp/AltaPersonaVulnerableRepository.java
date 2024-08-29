@@ -46,7 +46,7 @@ public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRe
 
   @Override
   public void eliminar(AltaPersonaVulnerable altaPersonaVulnerable) {
-    altaPersonaVulnerable.setActivo(false);
+    altaPersonaVulnerable.borrarLogico();
     withTransaction(() -> entityManager().merge(altaPersonaVulnerable));
   }
 /*

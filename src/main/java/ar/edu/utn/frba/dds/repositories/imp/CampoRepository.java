@@ -42,7 +42,7 @@ public class CampoRepository implements ICampoRepository, WithSimplePersistenceU
 
     @Override
     public void eliminar(Campo campo) {
-        campo.setActivo(false);
+        campo.borrarLogico();
         withTransaction(() -> entityManager().merge(campo));
     }
 

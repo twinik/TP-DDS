@@ -45,7 +45,7 @@ public class SensoresMovimientoRepository implements ISensorMovimientoRepository
 
   @Override
   public void eliminar(SensorMovimiento sensorMovimiento) {
-    sensorMovimiento.setActivo(false);
+    sensorMovimiento.borrarLogico();
     withTransaction(() -> entityManager().merge(sensorMovimiento));
   }
 

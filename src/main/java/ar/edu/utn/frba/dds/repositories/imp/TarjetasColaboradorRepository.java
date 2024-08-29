@@ -62,7 +62,7 @@ public class TarjetasColaboradorRepository implements ITarjetasColaboradorReposi
 
   @Override
   public void eliminar(TarjetaColaborador tarjeta) {
-    tarjeta.setActivo(false);
+    tarjeta.borrarLogico();
     withTransaction(() -> entityManager().merge(tarjeta));
   }
 

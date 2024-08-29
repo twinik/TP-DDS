@@ -44,7 +44,7 @@ public class MedioContactoRepository implements IMedioContactoRepository, WithSi
 
   @Override
   public void eliminar(MedioDeContacto visitaTecnico) {
-    visitaTecnico.setActivo(false);
+    visitaTecnico.borrarLogico();
     withTransaction(() -> entityManager().merge(visitaTecnico));
   }
 

@@ -1,12 +1,17 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
+import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
+import ar.edu.utn.frba.dds.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import javax.persistence.NoResultException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,29 +67,26 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
 
   @Override
   public void eliminar(Colaborador colaborador) {
-    colaborador.setActivo(false);
+    colaborador.borrarLogico();
     withTransaction(() -> entityManager().merge(colaborador));
   }
 
-  /*public static void main(String[] args) {
-        Colaborador m = new colaborador("otro");
-        Colaborador m1 = new colaborador("uno");
-        Colaborador m2 = new colaborador("hola");
-        IColaboradoresRepository repositorio = (IColaboradoresRepository) ServiceLocator.get("colaboradorrRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<Colaborador> colaborador1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Colaborador> colaborador2 = repositorio.buscar(2L);
-
-        List<Colaborador> lista = repositorio.buscarTodos();
-
-    }*/
+//  public static void main(String[] args) {
+//        Colaborador m = new Colaborador();
+//
+//        ColaboradoresRepository repo = new ColaboradoresRepository();
+//        m.setUsuario(new Usuario("hola","chau"));
+//
+//
+//        DonacionDinero d = new DonacionDinero(m, LocalDate.now(),100f, FrecuenciaDonacion.ANUAL);
+//
+//        repo.guardar(m);
+//
+//        Optional<Colaborador> colaborador1 = repo.buscar(1L);
+//        //System.out.println(hidratado.get().getMotivo());
+//        Optional<Colaborador> colaborador2 = repo.buscar(2L);
+//
+//        List<Colaborador> lista = repo.buscarTodos();
+//
+//    }
 }

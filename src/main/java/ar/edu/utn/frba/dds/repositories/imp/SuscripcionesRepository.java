@@ -48,7 +48,7 @@ public class SuscripcionesRepository implements ISuscripcionesRepository, WithSi
 
   @Override
   public void eliminar(Suscripcion suscripcion) {
-    suscripcion.setActivo(false);
+    suscripcion.borrarLogico();
     withTransaction(() -> entityManager().merge(suscripcion));
   }
 

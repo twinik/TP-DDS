@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Setter
 @Getter
 public abstract class EntidadPersistente {
   @Id
@@ -33,6 +32,10 @@ public abstract class EntidadPersistente {
 //  @JoinColumn(name = "usuario_id",referencedColumnName = "id")
 //  @Transient
 //  protected Usuario usuario;
+
+  public void borrarLogico(){
+    this.activo = false;
+  }
 
   @PreUpdate
   protected void onUpdate(){

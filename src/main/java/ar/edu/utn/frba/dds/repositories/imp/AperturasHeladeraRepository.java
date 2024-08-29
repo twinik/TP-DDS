@@ -46,7 +46,7 @@ public class AperturasHeladeraRepository implements IAperturasHeladeraRepository
 
   @Override
   public void eliminar(AperturaHeladera aperturaHeladera) {
-    aperturaHeladera.setActivo(false);
+    aperturaHeladera.borrarLogico();
     withTransaction(() -> entityManager().merge(aperturaHeladera));
   }
 }
