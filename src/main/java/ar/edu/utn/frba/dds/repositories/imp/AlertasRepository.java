@@ -16,7 +16,7 @@ public class AlertasRepository implements IAlertasRepository {
 
 
   @Override
-  public Optional<Alerta> buscar(long id) {
+  public Optional<Alerta> buscar(Long id) {
     return this.alertas.stream().filter(a -> a.getId() == id).findFirst();
   }
 

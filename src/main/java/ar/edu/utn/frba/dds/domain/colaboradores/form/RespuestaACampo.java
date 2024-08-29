@@ -36,10 +36,10 @@ public class RespuestaACampo extends EntidadPersistente {
   @Column(columnDefinition = "TEXT")
   private String respuesta;
 
-  @ManyToMany(fetch = FetchType.LAZY)
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(name = "opciones_x_respuesta", inverseJoinColumns = @JoinColumn(name = "opcion_elegida_id",referencedColumnName = "id"),
   joinColumns = @JoinColumn(name = "respuesta_a_campo_id",referencedColumnName = "id"))
-  private List<Opcion> opcionesElegidas;
+  private List<Opcion> opcionesElegidas = new ArrayList<>();
 
   /**
    * RespuestaACampo class constructor.
@@ -47,7 +47,6 @@ public class RespuestaACampo extends EntidadPersistente {
   public RespuestaACampo(Campo campo, String respuesta) {
     this.campo = campo;
     this.respuesta = respuesta;
-    this.opcionesElegidas = new ArrayList<Opcion>();
   }
 
   public void agregarOpcionesElegidas(Opcion... opciones) {

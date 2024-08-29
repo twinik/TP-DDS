@@ -8,7 +8,7 @@ import java.util.Optional;
  * IRegistrosTemperaturaRepository interface permite interactuar con las Registros de Temperatura.
  */
 public interface IRegistrosTemperaturaRepository {
-  Optional<RegistroTemperatura> buscar(long id);
+  Optional<RegistroTemperatura> buscar(Long id);
 
   List<RegistroTemperatura> buscarTodos();
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICampoRepository {
-    Optional<Campo> buscar(long id);
+    Optional<Campo> buscar(Long id);
 
     List<Campo> buscarTodos();
 

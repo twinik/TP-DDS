@@ -5,25 +5,29 @@ import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.repositories.ITarjetasRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class TarjetaRepository implements ITarjetasRepository, WithSimplePersistenceUnit {
 
-  private List<Tarjeta> tarjetas;
-
-  public TarjetaRepository() {
-    this.tarjetas = new ArrayList<>();
-  }
 
   @Override
   public Optional<Tarjeta> buscar(String codigo) {
-    return this.tarjetas.stream().filter(t -> t.getCodigo().equals(codigo)).findFirst(); //Este va o no?
+    try{
+      Tarjeta t = (Tarjeta) entityManager().createQuery("from Tarjeta where codigo=:codigo")
+          .setParameter("codigo",codigo)
+          .getSingleResult();
+      return Optional.ofNullable(t);
+    }
+    catch (NoResultException e){
+      return Optional.empty();
+    }
   }
 
   @Override
-  public Optional<Tarjeta> buscar(long id) {
+  public Optional<Tarjeta> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(Tarjeta.class,id));
   }
 

@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -19,7 +20,7 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 
 
   @Override
-  public Optional<Heladera> buscar(long id) {
+  public Optional<Heladera> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(Heladera.class,id));
   }
 
@@ -69,6 +70,10 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
         IHeladerasRepository repositorio = (IHeladerasRepository) ServiceLocator.get("heladerasRepository");
         repositorio.guardar(h);
     h.setModelo(new ModeloHeladera("filgo",22,33));
+    Heladera otra = new Heladera(LocalDate.now());
+    h.agregarHeladeraCercana(otra);
+    otra.setModelo(new ModeloHeladera("jorge",10,50));
+    //repositorio.guardar(otra);
     repositorio.actualizar(h);
 //        repositorio.guardar(m1);
 //        repositorio.guardar(m2);
