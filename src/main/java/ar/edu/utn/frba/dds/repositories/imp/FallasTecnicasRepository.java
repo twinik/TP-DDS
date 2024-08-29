@@ -43,7 +43,7 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
 
   @Override
   public void eliminar(FallaTecnica fallaTecnica) {
-    fallaTecnica.setActivo(false);
+    fallaTecnica.borrarLogico();
     withTransaction(() -> entityManager().merge(fallaTecnica));
   }
 

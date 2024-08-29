@@ -39,7 +39,7 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
 
   @Override
   public void eliminar(Alerta alerta) {
-    alerta.setActivo(false);
+    alerta.borrarLogico();
     withTransaction(() -> entityManager().merge(alerta));
   }
 

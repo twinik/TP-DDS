@@ -45,7 +45,7 @@ public class UsosTarjetaRepository implements IUsosTarjetaRepository, WithSimple
 
   @Override
   public void eliminar(UsoTarjeta usoTarjeta) {
-    usoTarjeta.setActivo(false);
+    usoTarjeta.borrarLogico();
     withTransaction(() -> entityManager().merge(usoTarjeta));
   }
 

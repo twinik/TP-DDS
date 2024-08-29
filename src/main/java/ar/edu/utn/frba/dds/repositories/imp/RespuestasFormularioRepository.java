@@ -42,7 +42,7 @@ public class RespuestasFormularioRepository implements IRespuestasFormularioRepo
 
   @Override
   public void eliminar(RespuestaFormulario respuestaFormulario) {
-    respuestaFormulario.setActivo(false);
+    respuestaFormulario.borrarLogico();
     withTransaction(() -> entityManager().merge(respuestaFormulario));
   }
 

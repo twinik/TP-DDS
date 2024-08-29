@@ -43,7 +43,7 @@ public class ProductoRepository implements IProductoRepository, WithSimplePersis
 
   @Override
   public void eliminar(Producto producto) {
-    producto.setActivo(false);
+    producto.borrarLogico();
     withTransaction(() -> entityManager().merge(producto));
   }
 

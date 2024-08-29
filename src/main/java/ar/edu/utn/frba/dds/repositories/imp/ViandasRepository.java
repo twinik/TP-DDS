@@ -45,7 +45,7 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
 
   @Override
   public void eliminar(Vianda vianda) {
-    vianda.setActivo(false);
+    vianda.borrarLogico();
     withTransaction(() -> entityManager().merge(vianda));
   }
 

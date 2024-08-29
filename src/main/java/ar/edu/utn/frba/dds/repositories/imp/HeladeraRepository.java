@@ -52,7 +52,7 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 
   @Override
   public void eliminar(Heladera heladera) {
-    heladera.setActivo(false);
+    heladera.borrarLogico();
     withTransaction(() -> entityManager().merge(heladera));
   }
 

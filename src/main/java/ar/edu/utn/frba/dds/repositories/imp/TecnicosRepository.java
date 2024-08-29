@@ -61,7 +61,7 @@ public class TecnicosRepository implements ITecnicosRepository, WithSimplePersis
 
   @Override
   public void eliminar(Tecnico tecnico) {
-    tecnico.setActivo(false);
+    tecnico.borrarLogico();
     withTransaction(() -> entityManager().merge(tecnico));
   }
 

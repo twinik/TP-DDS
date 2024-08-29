@@ -43,7 +43,7 @@ public class RegistrosTemperaturaRepository implements IRegistrosTemperaturaRepo
 
   @Override
   public void eliminar(RegistroTemperatura registroTemperatura) {
-    registroTemperatura.setActivo(false);
+    registroTemperatura.borrarLogico();
     withTransaction(() -> entityManager().merge(registroTemperatura));
   }
 

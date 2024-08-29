@@ -73,7 +73,7 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 //        em.remove(
 //            em.contains(motivo) ? motivo : em.merge(motivo));
 //        EntityManagerHelper.commit();
-        motivo.setActivo(false);
+        motivo.borrarLogico();
         withTransaction(() -> entityManager().merge(motivo));
     }
 
@@ -88,7 +88,6 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 
         repositorio.eliminar(m1);
         m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
       repositorio.actualizar(m2);
 
         Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(1L);

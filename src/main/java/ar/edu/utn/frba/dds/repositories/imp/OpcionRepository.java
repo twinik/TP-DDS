@@ -44,7 +44,7 @@ public class OpcionRepository implements IOpcionRepository, WithSimplePersistenc
 
   @Override
   public void eliminar(Opcion opcion) {
-    opcion.setActivo(false);
+    opcion.borrarLogico();
     withTransaction(() -> entityManager().merge(opcion));
   }
 

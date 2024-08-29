@@ -43,7 +43,7 @@ public class DonacionDineroRepository implements IDonacionDineroRepository, With
 
     @Override
     public void eliminar(DonacionDinero donacionDinero) {
-        donacionDinero.setActivo(false);
+        donacionDinero.borrarLogico();
         withTransaction(() -> entityManager().merge(donacionDinero));
     }
 

@@ -48,7 +48,7 @@ public class UsuariosRepository implements IUsuariosRepository, WithSimplePersis
 
   @Override
   public void eliminar(Usuario usuario) {
-    usuario.setActivo(false);
+    usuario.borrarLogico();
     withTransaction(() -> entityManager().merge(usuario));
   }
 

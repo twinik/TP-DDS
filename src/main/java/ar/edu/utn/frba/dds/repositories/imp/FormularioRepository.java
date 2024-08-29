@@ -43,7 +43,7 @@ public class FormularioRepository implements IFormularioRepository, WithSimplePe
 
     @Override
     public void eliminar(Formulario formulario) {
-        formulario.setActivo(false);
+        formulario.borrarLogico();
         withTransaction(() -> entityManager().merge(formulario));
     }
 
