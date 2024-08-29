@@ -10,14 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class SensoresTemperaturaRepository implements ISensorTemperaturaRepository, WithSimplePersistenceUnit {
-  private List<SensorTemperatura> sensorTemperatura;
-
-  public SensoresTemperaturaRepository() {
-    this.sensorTemperatura = new ArrayList<>();
-  }
 
   @Override
-  public Optional<SensorTemperatura> buscar(long id) {
+  public Optional<SensorTemperatura> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(SensorTemperatura.class,id));
   }
 

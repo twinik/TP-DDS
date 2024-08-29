@@ -1,12 +1,13 @@
 package ar.edu.utn.frba.dds.repositories;
 
 import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
+import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import java.util.List;
 import java.util.Optional;
 
 public interface ITecnicosRepository {
-  Optional<Tecnico> buscar(String codigo);
-  Optional<Tecnico> buscar(long id);
+  Optional<Tecnico> buscar(TipoDocumento tipoDocumento, String documento);
+  Optional<Tecnico> buscar(Long id);
 
   List<Tecnico> buscarTodos();
 

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class SuscripcionesRepository implements ISuscripcionesRepository, WithSimplePersistenceUnit {
 
   @Override
-  public Optional<Suscripcion> buscar(long id) {
+  public Optional<Suscripcion> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(Suscripcion.class,id));
   }
 

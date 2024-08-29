@@ -1,62 +1,30 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
+import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AlertasRepository implements IAlertasRepository {
 
-  private List<Alerta> alertas;
 
-  public AlertasRepository() {
-    alertas = new ArrayList<>();
-  }
-
+@NoArgsConstructor
+public class AlertasRepository implements IAlertasRepository, WithSimplePersistenceUnit {
 
   @Override
-  public Optional<Alerta> buscar(long id) {
-    return this.alertas.stream().filter(a -> a.getId() == id).findFirst();
+  public Optional<Alerta> buscar(Long id) {
+    return Optional.ofNullable(entityManager().find(Alerta.class, id));
   }
 
   @Override
   public List<Alerta> buscarTodos() {
-    return this.alertas;
-  }
-
-  @Override
-  public void guardar(Alerta alerta) {
-    this.alertas.add(alerta);
-  }
-
-  @Override
-  public void actualizar(Alerta alerta) {
-
-  }
-
-  @Override
-  public void eliminar(Alerta alerta) {
-
-  }
-}
-/*public class AlertasRepository implements IAlertasRepository, WithSimplePersistenceUnit {
-
-  private List<Alerta> alertas;
-
-  public AlertasRepository() {
-    alertas = new ArrayList<>();
-  }
-
-
-  @Override
-  public Optional<Alerta> buscar(long id) { //Alerta no tiene ID, ver que se hace
-   return Optional.ofNullable(entityManager().find(Alerta.class,id));
-  }
-
-  @Override
-  public List<Alerta> buscarTodos() {
-    return entityManager().createQuery("from Alerta",Alerta.class).getResultList();
+    return entityManager().createQuery("from Alerta where activo=:activo", Alerta.class)
+        .setParameter("activo", true)
+        .getResultList();
   }
 
   @Override
@@ -64,15 +32,6 @@ public class AlertasRepository implements IAlertasRepository {
     withTransaction(() -> entityManager().persist(alerta));
   }
 
-  public void guardar(Alerta ...alerta) {
-
-    withTransaction(() -> {
-      for (Alerta tipoAlerta : alerta){
-        entityManager().persist(tipoAlerta);
-      }
-    });
-  }
-
   @Override
   public void actualizar(Alerta alerta) {
     withTransaction(() -> entityManager().merge(alerta));
@@ -80,11 +39,12 @@ public class AlertasRepository implements IAlertasRepository {
 
   @Override
   public void eliminar(Alerta alerta) {
-    //alerta.setActivo(false);
+    alerta.setActivo(false);
     withTransaction(() -> entityManager().merge(alerta));
   }
 
   public static void main(String[] args) {
+
     Alerta m = new Alerta(TipoAlerta.TEMPERATURA);
     Alerta m1 = new Alerta(TipoAlerta.FRAUDE);
     Alerta m2 = new Alerta(TipoAlerta.FALLA_CONEXION);
@@ -94,12 +54,7 @@ public class AlertasRepository implements IAlertasRepository {
     repositorio.guardar(m2);
 
     repositorio.eliminar(m1);
-    try {
-      Thread.sleep(60 * 1000);
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-    repositorio.actualizar(m2);
+
 
     Optional<Alerta> alerta1 = repositorio.buscar(1L); //Alerta no tiene ID, ver que se hace
     //System.out.println(hidratado.get().getMotivo());
@@ -109,4 +64,4 @@ public class AlertasRepository implements IAlertasRepository {
 
   }
 
-}*/
+}

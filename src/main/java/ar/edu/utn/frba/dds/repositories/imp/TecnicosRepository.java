@@ -1,29 +1,36 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
+import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@NoArgsConstructor
 public class TecnicosRepository implements ITecnicosRepository, WithSimplePersistenceUnit {
 
-  private ArrayList<Tecnico> tecnicos;
-
-  public TecnicosRepository() {
-    tecnicos = new ArrayList<>();
-  }
-
   @Override
-  public Optional<Tecnico> buscar(String codigo) { //Este va o no?
-    // PONELE
-    return this.tecnicos.stream().filter(t -> t.getNroDocumento().equals(codigo)).findFirst();
+  public Optional<Tecnico> buscar(TipoDocumento tipoDocumento, String documento) {
+    //return this.colaboradores.stream().filter(c -> c.getDocumento().equals(documento) && c.getTipoDocumento().equals(tipoDocumento)).findFirst(); //Queda o se va??
+    try{
+      Tecnico t = (Tecnico) entityManager().createQuery("from Tecnico where tipoDocumento=:tipoDocumento and nroDocumento=:documento")
+          .setParameter("tipoDocumento",tipoDocumento)
+          .setParameter("documento",documento).getSingleResult();
+      return Optional.ofNullable(t);
+    }
+    catch (NoResultException e){
+      return Optional.empty();
+    }
+
   }
 
-  public Optional<Tecnico> buscar(long id) {
+  public Optional<Tecnico> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(Tecnico.class,id));
   }
 

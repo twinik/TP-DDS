@@ -12,7 +12,7 @@ public class RegistrosTemperaturaRepository implements IRegistrosTemperaturaRepo
 
 
   @Override
-  public Optional<RegistroTemperatura> buscar(long id) {
+  public Optional<RegistroTemperatura> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(RegistroTemperatura.class,id));
   }
 

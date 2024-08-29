@@ -1,29 +1,38 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
+import ar.edu.utn.frba.dds.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
+import ar.edu.utn.frba.dds.domain.tarjetas.FrecuenciaDiaria;
 import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.repositories.ITarjetasRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@NoArgsConstructor
 public class TarjetaRepository implements ITarjetasRepository, WithSimplePersistenceUnit {
 
-  private List<Tarjeta> tarjetas;
-
-  public TarjetaRepository() {
-    this.tarjetas = new ArrayList<>();
-  }
 
   @Override
   public Optional<Tarjeta> buscar(String codigo) {
-    return this.tarjetas.stream().filter(t -> t.getCodigo().equals(codigo)).findFirst(); //Este va o no?
+    try{
+      Tarjeta t = (Tarjeta) entityManager().createQuery("from Tarjeta where codigo=:codigo")
+          .setParameter("codigo",codigo)
+          .getSingleResult();
+      return Optional.ofNullable(t);
+    }
+    catch (NoResultException e){
+      return Optional.empty();
+    }
   }
 
   @Override
-  public Optional<Tarjeta> buscar(long id) {
+  public Optional<Tarjeta> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(Tarjeta.class,id));
   }
 
@@ -61,25 +70,18 @@ public class TarjetaRepository implements ITarjetasRepository, WithSimplePersist
     withTransaction(() -> entityManager().merge(tarjeta));
   }
 
-  /*public static void main(String[] args) {
-        Tarjeta m = new Tarjeta("otro");
-        Tarjeta m1 = new Tarjeta("uno");
-        Tarjeta m2 = new Tarjeta("hola");
+  public static void main(String[] args) {
+        PersonaVulnerable p = new PersonaVulnerable();
+        p.setNombre("juancito");
+        Tarjeta m = new Tarjeta("uncodigo",2,new FrecuenciaDiaria(),p,null,3);
         ITarjetasRepository repositorio = (ITarjetasRepository) ServiceLocator.get("tarjetasRepository");
         repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
 
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
 
         Optional<Tarjeta> tarjeta1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
         Optional<Tarjeta> tarjeta2 = repositorio.buscar(2L);
 
         List<Tarjeta> lista = repositorio.buscarTodos();
 
-    }*/
+    }
 }

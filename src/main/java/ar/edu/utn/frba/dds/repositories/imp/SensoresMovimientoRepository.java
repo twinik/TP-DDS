@@ -11,32 +11,28 @@ import java.util.Optional;
 
 public class SensoresMovimientoRepository implements ISensorMovimientoRepository, WithSimplePersistenceUnit {
 
-  private List<SensorMovimiento> sensorMovimientos;
-
-  public SensoresMovimientoRepository() {
-    this.sensorMovimientos = new ArrayList<>();
-  }
 
   @Override
-  public Optional<SensorMovimiento> buscar(long id) {
-    return Optional.ofNullable(entityManager().find(SensorMovimiento.class,id));
+  public Optional<SensorMovimiento> buscar(Long id) {
+    return Optional.ofNullable(entityManager().find(SensorMovimiento.class, id));
   }
 
   @Override
   public List<SensorMovimiento> buscarTodos() {
-    return entityManager().createQuery("from SensorMovimiento where activo=:activo",SensorMovimiento.class).
-            setParameter("activo",true)
-            .getResultList();
+    return entityManager().createQuery("from SensorMovimiento where activo=:activo", SensorMovimiento.class).
+        setParameter("activo", true)
+        .getResultList();
   }
 
   @Override
   public void guardar(SensorMovimiento sensorMovimiento) {
     withTransaction(() -> entityManager().persist(sensorMovimiento));
   }
-  public void guardar(SensorMovimiento ...sensorMovimiento) {
+
+  public void guardar(SensorMovimiento... sensorMovimiento) {
 
     withTransaction(() -> {
-      for (SensorMovimiento sensor : sensorMovimiento){
+      for (SensorMovimiento sensor : sensorMovimiento) {
         entityManager().persist(sensor);
       }
     });

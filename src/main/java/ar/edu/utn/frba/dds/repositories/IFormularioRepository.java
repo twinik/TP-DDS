@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IFormularioRepository {
-    Optional<Formulario> buscar(long id);
+    Optional<Formulario> buscar(Long id);
 
     List<Formulario> buscarTodos();
 

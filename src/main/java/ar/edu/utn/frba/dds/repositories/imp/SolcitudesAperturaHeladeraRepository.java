@@ -11,15 +11,9 @@ import java.util.Optional;
 
 public class SolcitudesAperturaHeladeraRepository implements ISolicitudesAperturaHeladeraRepository, WithSimplePersistenceUnit {
 
-  private List<SolicitudAperturaHeladera> solcitudes;
-
-
-  public SolcitudesAperturaHeladeraRepository() {
-    this.solcitudes = new ArrayList<>();
-  }
 
   @Override
-  public Optional<SolicitudAperturaHeladera> buscar(long id) {
+  public Optional<SolicitudAperturaHeladera> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(SolicitudAperturaHeladera.class,id));
   }
 

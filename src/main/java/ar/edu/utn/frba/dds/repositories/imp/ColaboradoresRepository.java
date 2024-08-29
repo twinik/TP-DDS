@@ -15,15 +15,9 @@ import java.util.Optional;
  * ColaboradorRepository class permite interactuar con los colaboradores.
  */
 public class ColaboradoresRepository implements IColaboradoresRepository, WithSimplePersistenceUnit {
-  private List<Colaborador> colaboradores;
-
-  public ColaboradoresRepository() {
-    colaboradores = new ArrayList<>();
-  }
 
   @Override
   public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
-    //return this.colaboradores.stream().filter(c -> c.getDocumento().equals(documento) && c.getTipoDocumento().equals(tipoDocumento)).findFirst(); //Queda o se va??
     try{
       Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
           .setParameter("tipoDocumento",tipoDocumento)
@@ -36,7 +30,7 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
 
   }
   @Override
-  public Optional<Colaborador> buscar(long id) {
+  public Optional<Colaborador> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(Colaborador.class,id));
   }
 

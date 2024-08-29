@@ -4,13 +4,15 @@ import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionViand
 import ar.edu.utn.frba.dds.domain.tecnicos.VisitaTecnico;
 import ar.edu.utn.frba.dds.repositories.IVisitasTecnicoRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
+@NoArgsConstructor
 public class VisitasTecnicoRepository implements IVisitasTecnicoRepository, WithSimplePersistenceUnit {
   @Override
-  public Optional<VisitaTecnico> buscar(long id) {
+  public Optional<VisitaTecnico> buscar(Long id) {
     return Optional.ofNullable(entityManager().find(VisitaTecnico.class,id));
   }
 

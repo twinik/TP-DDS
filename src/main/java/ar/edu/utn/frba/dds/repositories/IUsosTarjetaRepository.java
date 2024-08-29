@@ -8,7 +8,7 @@ import java.util.Optional;
  * IUsosTarjetaRepository interface permite interactuar con los Usos de las Tarjetas.
  */
 public interface IUsosTarjetaRepository {
-    Optional<UsoTarjeta> buscar(long id);
+    Optional<UsoTarjeta> buscar(Long id);
 
     List<UsoTarjeta> buscarTodos();
 
