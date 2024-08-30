@@ -13,7 +13,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 /**
  * reporta todas las fallas de una heladera.
@@ -21,16 +26,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public class ReporteFallasHeladera implements IReporte {
+@Entity
+@DiscriminatorValue("falla_heladeras")
+@NoArgsConstructor
+public class ReporteFallasHeladera extends Reporte {
 
-  private String rutaArchivo;
-
+  @Transient
   private final String tituloReporte = "Cantidad de fallas por heladera - Semana ";
+  @Transient
   private IPDFGeneratorAdapter pdfGenerator;
 
+  @Transient
   private IFallasTecnicasRepository fallasTecnicasRepository;
 
+  @Transient
   private IAlertasRepository alertasRepository;
+
+  public ReporteFallasHeladera(String rutaArchivo, IPDFGeneratorAdapter pdfGenerator, IFallasTecnicasRepository fallasTecnicasRepository, IAlertasRepository alertasRepository) {
+    super(rutaArchivo);
+    this.pdfGenerator = pdfGenerator;
+    this.fallasTecnicasRepository = fallasTecnicasRepository;
+    this.alertasRepository = alertasRepository;
+  }
 
   public void generarPDF() {
     LocalDateTime hoy = LocalDateTime.now();

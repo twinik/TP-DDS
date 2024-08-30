@@ -5,10 +5,12 @@ import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -21,17 +23,23 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ReporteViandasPorColaborador implements IReporte {
-
-  private String rutaArchivo;
+@Entity
+@DiscriminatorValue("viandas_x_colab")
+public class ReporteViandasPorColaborador extends Reporte {
+  @Transient
   private final String tituloReporte = "Viandas donadas por colaborador - Semana ";
-
+  @Transient
   private IPDFGeneratorAdapter pdfGenerator;
-
+  @Transient
   private IViandasRepository viandasRepository;
 
+
+  public ReporteViandasPorColaborador(String rutaArchivo, IPDFGeneratorAdapter pdfGenerator, IViandasRepository viandasRepository) {
+    super(rutaArchivo);
+    this.pdfGenerator = pdfGenerator;
+    this.viandasRepository = viandasRepository;
+  }
 
   public void generarPDF() {
     LocalDate hoy = LocalDate.now();

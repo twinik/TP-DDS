@@ -77,6 +77,7 @@ public class ServiceLocator {
             add("altaPersonaVulnerableRepository", new AltaPersonaVulnerableRepository());
         case "donacionDineroRepository" -> add("donacionDineroRepository", new DonacionDineroRepository());
         case "formulariosRepository" -> add("formulariosRepository", new FormularioRepository());
+        case "reportesRepository" -> add("reportesRepository",new ReportesRepository());
         default -> throw new IllegalArgumentException("nombre invalido");
       }
     }
