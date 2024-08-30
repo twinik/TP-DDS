@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.repositories.ITarjetasRepository;
 
 public class TarjetasCronJob {
   public static void main(String[] args) {
-    ITarjetasRepository repository = (ITarjetasRepository) ServiceLocator.get("tarjetasRepository");
+    ITarjetasRepository repository = ServiceLocator.get("tarjetasRepository", ITarjetasRepository.class);
     if (repository != null) {
       repository.buscarTodos().stream().filter(Tarjeta::isActiva).forEach(Tarjeta::resetearUsosDiarios);
     }

@@ -13,8 +13,8 @@ import java.util.Optional;
 
 public class MainPruebaFormularios {
   public static void main(String[] args) {
-    IFormularioRepository formularioRepository = (IFormularioRepository) ServiceLocator.get("formulariosRepository");
-    IRespuestasFormularioRepository respuestasFormularioRepository = (IRespuestasFormularioRepository) ServiceLocator.get("respuestasFormularioRepository");
+    IFormularioRepository formularioRepository = ServiceLocator.get("formulariosRepository", IFormularioRepository.class);
+    IRespuestasFormularioRepository respuestasFormularioRepository = ServiceLocator.get("respuestasFormularioRepository", IRespuestasFormularioRepository.class);
     Formulario nuevo = new Formulario();
     nuevo.agregarCampos(new Campo(TipoCampo.LIBRE,"quien sos",true),
         new Campo(TipoCampo.LIBRE,"te gusta el helado",false));

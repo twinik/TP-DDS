@@ -33,10 +33,10 @@ public class AperturaHeladeraBroker {
     String clientId = configReader.getProperty("CLIENT_ID");
 
     AperturaHeladeraListener receptor = new AperturaHeladeraListener();
-    receptor.setHeladerasRepository((IHeladerasRepository) ServiceLocator.get("heladerasRepository"));
-    receptor.setTarjetasColaboradorRepository((ITarjetasColaboradorRepository) ServiceLocator.get("tarjetasColaboradorRepository"));
-    receptor.setAperturasHeladeraRepository((IAperturasHeladeraRepository) ServiceLocator.get("aperturasHeladeraRepository"));
-    receptor.setSolicitudesAperturaHeladeraRepository((ISolicitudesAperturaHeladeraRepository) ServiceLocator.get("solicitudesAperturaHeladeraRepository"));
+    receptor.setHeladerasRepository(ServiceLocator.get("heladerasRepository",IHeladerasRepository.class));
+    receptor.setTarjetasColaboradorRepository(ServiceLocator.get("tarjetasColaboradorRepository",ITarjetasColaboradorRepository.class));
+    receptor.setAperturasHeladeraRepository(ServiceLocator.get("aperturasHeladeraRepository",IAperturasHeladeraRepository.class));
+    receptor.setSolicitudesAperturaHeladeraRepository(ServiceLocator.get("solicitudesAperturaHeladeraRepository",ISolicitudesAperturaHeladeraRepository.class));
 
     BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
     brokerSubscriber.listen();
@@ -44,16 +44,16 @@ public class AperturaHeladeraBroker {
   public static void main(String[] args) {
     Colaborador c = new Colaborador();
     c.setDireccion(new Direccion("hola",534,1,"434"));
-    IHeladerasRepository heladerasRepository = (IHeladerasRepository) ServiceLocator.get("heladerasRepository");
+    IHeladerasRepository heladerasRepository = ServiceLocator.get("heladerasRepository",IHeladerasRepository.class);
     Heladera heladera = new Heladera(LocalDate.now());
    // heladera.setId(2L);
     heladera.setNombre("heladerita");
     heladerasRepository.guardar(heladera);
-    ITarjetasColaboradorRepository tarjetasColaboradorRepository = (ITarjetasColaboradorRepository) ServiceLocator.get("tarjetasColaboradorRepository");
+    ITarjetasColaboradorRepository tarjetasColaboradorRepository = ServiceLocator.get("tarjetasColaboradorRepository",ITarjetasColaboradorRepository.class);
     TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c,"3",LocalDate.now());
     ///tarjetaColaborador.setId(3L);
     tarjetasColaboradorRepository.guardar(tarjetaColaborador);
-    ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = (ISolicitudesAperturaHeladeraRepository) ServiceLocator.get("solicitudesAperturaHeladeraRepository");
+    ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = ServiceLocator.get("solicitudesAperturaHeladeraRepository",ISolicitudesAperturaHeladeraRepository.class);
     SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(c,"un motivo", LocalDateTime.now(),heladera);
     solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
     try {

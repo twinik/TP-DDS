@@ -29,7 +29,7 @@ public class TipoSuscripcionAttributeConverter implements AttributeConverter<ITi
   public ITipoSuscripcion convertToEntityAttribute(String s) {
     switch (s){
       case "SUSCRIPCION_DESPERFECTO" -> {
-        return new SuscripcionDesperfectoHeladera((RecomendadorHeladeras) ServiceLocator.get("RecomendadorHeladeras"));
+        return new SuscripcionDesperfectoHeladera(ServiceLocator.get("RecomendadorHeladeras", RecomendadorHeladeras.class));
       }
       case "SUSCRIPCION_VIANDAS_RESTANTES" -> {
         return new SuscripcionViandasRestantes();

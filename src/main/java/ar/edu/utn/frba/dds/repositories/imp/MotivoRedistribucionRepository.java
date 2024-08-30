@@ -81,7 +81,7 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
         MotivoRedistribucionVianda m = new MotivoRedistribucionVianda("otro");
         MotivoRedistribucionVianda m1 = new MotivoRedistribucionVianda("uno");
         MotivoRedistribucionVianda m2 = new MotivoRedistribucionVianda("hola");
-        IMotivoRedistribucionRepository repositorio = (IMotivoRedistribucionRepository) ServiceLocator.get("motivosRedistribucionRepository");
+        IMotivoRedistribucionRepository repositorio = ServiceLocator.get("motivosRedistribucionRepository", IMotivoRedistribucionRepository.class);
         repositorio.guardar(m);
         repositorio.guardar(m1);
         repositorio.guardar(m2);

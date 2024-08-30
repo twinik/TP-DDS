@@ -74,7 +74,7 @@ public class TarjetaRepository implements ITarjetasRepository, WithSimplePersist
         PersonaVulnerable p = new PersonaVulnerable();
         p.setNombre("juancito");
         Tarjeta m = new Tarjeta("uncodigo",2,new FrecuenciaDiaria(),p,null,3);
-        ITarjetasRepository repositorio = (ITarjetasRepository) ServiceLocator.get("tarjetasRepository");
+        ITarjetasRepository repositorio = ServiceLocator.get("tarjetasRepository", ITarjetasRepository.class);
         repositorio.guardar(m);
 
 

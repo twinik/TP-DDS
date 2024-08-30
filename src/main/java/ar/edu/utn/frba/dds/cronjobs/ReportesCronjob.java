@@ -13,7 +13,7 @@ import java.util.List;
 public class ReportesCronjob {
   public static void main(String[] args) {
 
-    ReportesFactory reportesFactory = (ReportesFactory) ServiceLocator.get("reportesFactory");
+    ReportesFactory reportesFactory = ServiceLocator.get("reportesFactory",ReportesFactory.class);
 
     List<IReporte> reportes = new ArrayList<>();
     reportes.add(reportesFactory.create(VIANDA_X_COLAB));

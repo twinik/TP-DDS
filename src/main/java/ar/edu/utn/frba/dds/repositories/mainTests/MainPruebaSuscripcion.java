@@ -17,8 +17,8 @@ public class MainPruebaSuscripcion {
 
   public static void main(String[] args) {
 
-    IColaboradoresRepository colaboradoresRepository = (IColaboradoresRepository) ServiceLocator.get("colaboradoresRepository");
-    ISuscripcionesRepository suscripcionesRepository = (ISuscripcionesRepository) ServiceLocator.get("suscripcionesRepository");
+    IColaboradoresRepository colaboradoresRepository = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
+    ISuscripcionesRepository suscripcionesRepository = ServiceLocator.get("suscripcionesRepository", ISuscripcionesRepository.class);
 
     Colaborador c = new Colaborador();
     c.setUsuario(new Usuario("fdf","dfdf"));

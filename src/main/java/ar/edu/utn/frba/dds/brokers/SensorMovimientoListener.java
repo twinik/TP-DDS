@@ -28,10 +28,10 @@ public class SensorMovimientoListener implements IMqttMessageListener {
 
     if (sensorMovimientoOpt.isPresent()) {
       Heladera heladera = sensorMovimientoOpt.get().getHeladera();
-      Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), new TecnicosHelper((ITecnicosRepository) ServiceLocator.get("tecnicosRepository"))
+      Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), new TecnicosHelper(ServiceLocator.get("tecnicosRepository",ITecnicosRepository.class))
           , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
       alerta.reportar();
-      IAlertasRepository repository = (IAlertasRepository) ServiceLocator.get("alertasRepository");
+      IAlertasRepository repository = ServiceLocator.get("alertasRepository",IAlertasRepository.class);
       repository.guardar(alerta);
     }
   }

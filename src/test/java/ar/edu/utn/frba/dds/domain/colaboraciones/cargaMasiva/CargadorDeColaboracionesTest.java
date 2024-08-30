@@ -2,11 +2,8 @@ package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -48,7 +45,7 @@ class CargadorDeColaboracionesTest {
     when(formasColaboracionRespository.buscar("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion( "DONACION_VIANDA")));
     when(formasColaboracionRespository.buscar("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion( "REGISTRO_PERSONA")));
     when(formasColaboracionRespository.buscar("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion( "REDISTRIBUCION_VIANDA")));
-    cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/domain/assets/cargacolaboraciones.csv", csvReader, mailSender,repositorio,formasColaboracionRespository, (ICalculadorPuntos) ServiceLocator.get("calculadorPuntos"));
+    cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/domain/assets/cargacolaboraciones.csv", csvReader, mailSender,repositorio,formasColaboracionRespository, ServiceLocator.get("calculadorPuntos",ICalculadorPuntos.class));
   }
 
   @Test

@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.*;
+import net.bytebuddy.implementation.bytecode.Throw;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,32 +28,38 @@ public class ServiceLocator {
     if (!existeService(nombre)) {
       switch (nombre) {
         case "reportesFactory" ->
-            add("reportesFactory", new ReportesFactory((IViandasRepository) get("viandasRepository"),
-                (IDonacionesViandaRepository) get("donacionesViandaRepository"),
-                (IRedistribucionesViandaRepository) get("redistribucionesViandaRepository"),
-                (IFallasTecnicasRepository) get("fallasTecnicasRepository"),
-                (IAlertasRepository) get("alertasRepository")));
+            add("reportesFactory", new ReportesFactory(get("viandasRepository", IViandasRepository.class),
+                get("donacionesViandaRepository", IDonacionesViandaRepository.class),
+                get("redistribucionesViandaRepository", IRedistribucionesViandaRepository.class),
+                get("fallasTecnicasRepository", IFallasTecnicasRepository.class),
+                get("alertasRepository", IAlertasRepository.class)));
         case "calculadorPuntos" -> add("calculadorPuntos", new CalculadorPuntos());
         case "recomendadorHeladeras" -> add("recomendadorHeladeras", new RecomendadorHeladeras());
         case "colaboradoresRepository" -> add("colaboradoresRepository", new ColaboradoresRepository());
         case "heladerasRepository" -> add("heladerasRepository", new HeladeraRepository());
         case "donacionesViandaRepository" -> add("donacionesViandaRepository", new DonacionesVIandaRepository());
-        case "redistribucionesViandaRepository" -> add("redistribucionesViandaRepository", new RedistribucionesViandaRepository());
+        case "redistribucionesViandaRepository" ->
+            add("redistribucionesViandaRepository", new RedistribucionesViandaRepository());
         case "alertasRepository" -> add("alertasRepository", new AlertasRepository());
         case "fallasTecnicasRepository" -> add("fallasTecnicasRepository", new FallasTecnicasRepository());
         case "tarjetasRepository" -> add("tarjetasRepository", new TarjetaRepository());
         case "viandasRepository" -> add("viandasRepository", new ViandasRepository());
-        case "solicitudesAperturaHeladeraRepository" -> add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
-        case "tarjetasColaboradorRepository" -> add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
+        case "solicitudesAperturaHeladeraRepository" ->
+            add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
+        case "tarjetasColaboradorRepository" ->
+            add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
         case "aperturasHeladeraRepository" -> add("aperturasHeladeraRepository", new AperturasHeladeraRepository());
         case "tecnicosRepository" -> add("tecnicosRepository", new TecnicosRepository());
         case "sensoresMovimientoRepository" -> add("sensoresMovimientoRepository", new SensoresMovimientoRepository());
-        case "sensoresTemperaturaRepository" -> add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
+        case "sensoresTemperaturaRepository" ->
+            add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
         case "formasColaboracionRepository" -> add("formasColaboracionRepository", new FormasColaboracionRespository());
         case "personasVulnerablesRepository" -> add("personasVulnerablesRepository", new PersonaVulnerableRepository());
-        case "registrosTemperaturaRepository" -> add("registrosTemperaturaRepository", new RegistrosTemperaturaRepository());
+        case "registrosTemperaturaRepository" ->
+            add("registrosTemperaturaRepository", new RegistrosTemperaturaRepository());
         case "respuestasCampoRepository" -> add("respuestasCampoRepository", new RespuestasCampoRepository());
-        case "respuestasFormularioRepository" -> add("respuestasFormularioRepository", new RespuestasFormularioRepository());
+        case "respuestasFormularioRepository" ->
+            add("respuestasFormularioRepository", new RespuestasFormularioRepository());
         case "suscripcionesRepository" -> add("suscripcionesRepository", new SuscripcionesRepository());
         case "usosTarjetaRepository" -> add("usosTarjetaRepository", new UsosTarjetaRepository());
         case "usuariosRepository" -> add("usuariosRepository", new UsuariosRepository());
@@ -62,16 +69,29 @@ public class ServiceLocator {
         case "ofertasProductoRepository" -> add("ofertasProductoRepository", new OfertaProductoRepository());
         case "opcionesRepository" -> add("opcionesRepository", new OpcionRepository());
         case "productosRepository" -> add("productosRepository", new ProductoRepository());
-        case "motivosRedistribucionRepository" -> add("motivosRedistribucionRepository", new MotivoRedistribucionRepository());
+        case "motivosRedistribucionRepository" ->
+            add("motivosRedistribucionRepository", new MotivoRedistribucionRepository());
         case "campoRepository" -> add("campoRepository", new CampoRepository());
-        case "colocacionHeladeraRepository" -> add ("colocacionHeladeraRepository", new ColocacionHeladeraRepository());
-        case "altaPersonaVulnerableRepository" -> add ("altaPersonaVulnerableRepository", new AltaPersonaVulnerableRepository());
-        case "donacionDineroRepository" -> add ("donacionDineroRepository", new DonacionDineroRepository());
-        case "formulariosRepository" -> add ("formulariosRepository", new FormularioRepository());
+        case "colocacionHeladeraRepository" -> add("colocacionHeladeraRepository", new ColocacionHeladeraRepository());
+        case "altaPersonaVulnerableRepository" ->
+            add("altaPersonaVulnerableRepository", new AltaPersonaVulnerableRepository());
+        case "donacionDineroRepository" -> add("donacionDineroRepository", new DonacionDineroRepository());
+        case "formulariosRepository" -> add("formulariosRepository", new FormularioRepository());
+        default -> throw new IllegalArgumentException("nombre invalido");
       }
     }
     return services.get(nombre);
   }
+
+  @SuppressWarnings("unchecked")
+  public static <T> T get(String nombre, Class<T> tipo) {
+    Object service = get(nombre);
+    if (tipo.isInstance(service)) {
+      return (T) service;
+    }
+    throw new IllegalArgumentException("tipo de clase invalido");
+  }
+
 
   private static boolean existeService(String nombre) {
     return services.containsKey(nombre);

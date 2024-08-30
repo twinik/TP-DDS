@@ -48,7 +48,7 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
     Alerta m = new Alerta(TipoAlerta.TEMPERATURA);
     Alerta m1 = new Alerta(TipoAlerta.FRAUDE);
     Alerta m2 = new Alerta(TipoAlerta.FALLA_CONEXION);
-    IAlertasRepository repositorio = (IAlertasRepository) ServiceLocator.get("alertasRepository");
+    IAlertasRepository repositorio = ServiceLocator.get("alertasRepository", IAlertasRepository.class);
     repositorio.guardar(m);
     repositorio.guardar(m1);
     repositorio.guardar(m2);

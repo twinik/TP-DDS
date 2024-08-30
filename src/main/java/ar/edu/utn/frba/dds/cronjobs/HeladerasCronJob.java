@@ -9,7 +9,7 @@ import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 public class HeladerasCronJob {
 
   public static void main(String[] args) {
-    IColaboradoresRepository colaboradoresRepository = (IColaboradoresRepository) ServiceLocator.get("colaboradoresRepository");
+    IColaboradoresRepository colaboradoresRepository = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
     colaboradoresRepository.buscarTodos().
         forEach(colaborador -> colaborador.sumarPuntos(colaborador.getHeladerasColocadas().size() * ColocacionHeladeras.PUNTOS_POR_MES));
   }
