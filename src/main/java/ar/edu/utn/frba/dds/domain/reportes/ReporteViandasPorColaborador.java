@@ -43,10 +43,7 @@ public class ReporteViandasPorColaborador extends Reporte {
 
   public void generarPDF() {
     LocalDate hoy = LocalDate.now();
-    List<Vianda> viandasDonadasEstaSemana = viandasRepository.buscarTodos()
-        .stream()
-        .filter(v -> DateHelper.esLaMismaSemana(v.getFechaDonacion(), hoy))
-        .toList();
+    List<Vianda> viandasDonadasEstaSemana = viandasRepository.buscarTodosMismaSemana(LocalDate.now());
 
     Map<Colaborador, Long> viandasPorColaborador = viandasDonadasEstaSemana
         .stream().collect(Collectors.groupingBy(Vianda::getColaborador, Collectors.counting()));
@@ -65,5 +62,6 @@ public class ReporteViandasPorColaborador extends Reporte {
         .append(String.format("%s ha donado %d vianda(s)\n", colab.getNombreYapellido(), cant)));
     return stringBuilder.toString();
   }
+
 
 }

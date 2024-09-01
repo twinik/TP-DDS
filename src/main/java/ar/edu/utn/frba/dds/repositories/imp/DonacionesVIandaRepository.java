@@ -2,20 +2,17 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
+import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class DonacionesVIandaRepository implements IDonacionesViandaRepository, WithSimplePersistenceUnit {
-
-  private List<DonacionVianda> donaciones;
-
-  public DonacionesVIandaRepository() {
-    this.donaciones = new ArrayList<>();
-  }
 
   @Override
   public Optional<DonacionVianda> buscar(Long id) {
@@ -27,6 +24,18 @@ public class DonacionesVIandaRepository implements IDonacionesViandaRepository, 
     return entityManager().createQuery("from DonacionVianda where activo=:activo",DonacionVianda.class).
             setParameter("activo",true)
             .getResultList();
+  }
+
+  @Override
+  public List<DonacionVianda> buscarTodosMismaSemana(LocalDate fecha) {
+    LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
+    LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
+    return entityManager().createQuery("from DonacionVianda where activo=:activo and fecha between " +
+            ":principioSemana and :finSemana", DonacionVianda.class).
+        setParameter("activo",true)
+        .setParameter("principioSemana",principioDeSemana)
+        .setParameter("finSemana",finDeSemana)
+        .getResultList();
   }
 
   @Override

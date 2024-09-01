@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.repositories;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
+import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +13,8 @@ public interface IDonacionesViandaRepository {
   Optional<DonacionVianda> buscar(Long id);
 
   List<DonacionVianda> buscarTodos();
+
+  List<DonacionVianda> buscarTodosMismaSemana(LocalDate fecha);
 
   void guardar(DonacionVianda donacionVianda);
 

@@ -53,23 +53,17 @@ public class ReporteViandasPorHeladera extends Reporte {
 
     Map<Heladera, Long> viandasColocadasPorHeladera =
         donacionesViandaRepository
-            .buscarTodos()
-            .stream()
-            .filter(donacion -> DateHelper.esLaMismaSemana(LocalDate.now(),donacion.getFecha()))
+            .buscarTodosMismaSemana(LocalDate.now()).stream()
             .collect(Collectors.groupingBy(donacion -> donacion.getVianda().getHeladera(), Collectors.counting()));
 
     viandasColocadasPorHeladera
         .putAll(redistribucionesViandaRepository
-            .buscarTodos()
-            .stream()
-            .filter(redistribucionViandas -> DateHelper.esLaMismaSemana(LocalDate.now(),redistribucionViandas.getFecha()))
+            .buscarTodosMismaSemana(LocalDate.now()).stream()
             .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraDestino, Collectors.summingLong(RedistribucionViandas::getCantidad))));
 
     Map<Heladera, Long> viandasRetiradasPorHeladera =
         redistribucionesViandaRepository
-            .buscarTodos()
-            .stream()
-            .filter(redistribucionViandas -> DateHelper.esLaMismaSemana(LocalDate.now(),redistribucionViandas.getFecha()))
+            .buscarTodosMismaSemana(LocalDate.now()).stream()
             .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraOrigen, Collectors.counting()));
 
     String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));

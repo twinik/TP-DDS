@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -54,16 +55,12 @@ public class ReporteFallasHeladera extends Reporte {
 
     Map<Heladera, Long> alertasPorHeladera =
         alertasRepository
-            .buscarTodos()
-            .stream()
-            .filter(a -> DateHelper.esLaMismaSemana(a.getTimestamp(), hoy))
+            .buscarTodosMismaSemana(LocalDate.now()).stream()
             .collect(Collectors.groupingBy(Alerta::getHeladera, Collectors.counting()));
 
     Map<Heladera, Long> fallasTecnicasPorHeladera =
         fallasTecnicasRepository
-            .buscarTodos()
-            .stream()
-            .filter(f -> DateHelper.esLaMismaSemana(f.getTimestamp(), hoy))
+            .buscarTodosMismaSemana(LocalDate.now()).stream()
             .collect(Collectors.groupingBy(FallaTecnica::getHeladera, Collectors.counting()));
 
     alertasPorHeladera.forEach(((heladera, cant) -> fallasTecnicasPorHeladera.merge(heladera, cant, Long::sum)));

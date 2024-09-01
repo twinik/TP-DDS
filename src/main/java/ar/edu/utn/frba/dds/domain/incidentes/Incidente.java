@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -34,6 +35,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Entity
+@Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "incidente")
 @DiscriminatorColumn(name = "tipo_incidente")
@@ -44,6 +46,10 @@ public class Incidente extends EntidadPersistente {
 
   @Column(name = "timestamp",columnDefinition = "TIMESTAMP")
   private LocalDateTime timestamp;
+
+  // DESNORMALIZACION PARA PERFORMANCE
+  @Column(name = "solucionado")
+  private boolean solucionado = false;
 
   @Transient
   private TecnicosHelper tecnicosHelper;
@@ -66,6 +72,10 @@ public class Incidente extends EntidadPersistente {
       NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
       strategy.notificar(tecnicoAContactar, message);
     });
+  }
+
+  public void marcarSolucionado(){
+    this.solucionado = true;
   }
 
 }

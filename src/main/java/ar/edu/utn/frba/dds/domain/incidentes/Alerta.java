@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

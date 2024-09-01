@@ -1,12 +1,16 @@
 package ar.edu.utn.frba.dds.helpers;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 
 /**
@@ -61,4 +65,23 @@ public class DateHelper {
   public static LocalDateTime localDateTimeFromTimestamp(long timestamp) {
     return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC);
   }
+
+  public static LocalDate principioDeSemana(LocalDate fecha){
+    return fecha.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+  }
+
+  public static LocalDateTime principioDeSemana(LocalDateTime fecha){
+    return fecha.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
+        .with(LocalTime.MIN);
+  }
+
+  public static LocalDate finDeSemana(LocalDate fecha){
+    return fecha.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY));
+  }
+
+  public static LocalDateTime finDeSemana(LocalDateTime fecha){
+    return fecha.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY))
+        .with(LocalTime.MAX);
+  }
+
 }

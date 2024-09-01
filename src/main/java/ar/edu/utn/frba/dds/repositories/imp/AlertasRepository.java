@@ -1,15 +1,18 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
+import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 
 @NoArgsConstructor
@@ -24,6 +27,19 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
   public List<Alerta> buscarTodos() {
     return entityManager().createQuery("from Alerta where activo=:activo", Alerta.class)
         .setParameter("activo", true)
+        .getResultList();
+  }
+
+  @Override
+  public List<Alerta> buscarTodosMismaSemana(LocalDate fecha) {
+    LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
+    LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());
+    return entityManager().createQuery("from Alerta where activo=:activo and timestamp between " +
+            ":principioSemana and :finSemana and solucionado=:solucionado", Alerta.class).
+        setParameter("activo", true)
+        .setParameter("solucionado",false)
+        .setParameter("principioSemana", principioDeSemana)
+        .setParameter("finSemana", finDeSemana)
         .getResultList();
   }
 

@@ -2,9 +2,12 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
+import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +25,18 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
     return entityManager().createQuery("from RedistribucionViandas where activo=:activo",RedistribucionViandas.class).
             setParameter("activo",true)
             .getResultList();
+  }
+
+  @Override
+  public List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha) {
+    LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
+    LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
+    return entityManager().createQuery("from RedistribucionViandas where activo=:activo and fecha between " +
+            ":principioSemana and :finSemana", RedistribucionViandas.class).
+        setParameter("activo",true)
+        .setParameter("principioSemana",principioDeSemana)
+        .setParameter("finSemana",finDeSemana)
+        .getResultList();
   }
 
   @Override

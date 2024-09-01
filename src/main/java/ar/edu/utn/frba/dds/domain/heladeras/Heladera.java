@@ -43,7 +43,7 @@ public class Heladera extends EntidadPersistente {
   private LocalDate fechaPuestaFuncionamiento;
 
   @OneToMany(mappedBy = "heladera",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<Vianda> viandas;
+  private List<Vianda> viandas = new ArrayList<>();
 
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "modelo_id", referencedColumnName = "id")

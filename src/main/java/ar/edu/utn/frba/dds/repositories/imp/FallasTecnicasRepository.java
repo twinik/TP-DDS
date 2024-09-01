@@ -1,14 +1,17 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,19 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
   public List<FallaTecnica> buscarTodos() {
     return entityManager().createQuery("from FallaTecnica where activo=:activo", FallaTecnica.class)
         .setParameter("activo", true)
+        .getResultList();
+  }
+
+  @Override
+  public List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha) {
+    LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
+    LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());
+    return entityManager().createQuery("from FallaTecnica where activo=:activo and timestamp between " +
+            ":principioSemana and :finSemana and solucionado=:solucionado", FallaTecnica.class).
+        setParameter("activo",true)
+        .setParameter("solucionado",false)
+        .setParameter("principioSemana",principioDeSemana)
+        .setParameter("finSemana",finDeSemana)
         .getResultList();
   }
 

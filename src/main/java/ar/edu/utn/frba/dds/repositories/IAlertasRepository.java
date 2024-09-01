@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.repositories;
 
+import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +13,8 @@ public interface IAlertasRepository {
   Optional<Alerta> buscar(Long id);
 
   List<Alerta> buscarTodos();
+
+  List<Alerta> buscarTodosMismaSemana(LocalDate fecha);
 
   void guardar(Alerta alerta);
 
