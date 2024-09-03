@@ -323,185 +323,49 @@
 				</a>
 			</div>
 			<div class="p-10 mx-auto max-w-7xl">
-				<h1 class="title1 mb-8">Alta de persona vulnerable</h1>
+				<h1 class="title1 mb-8">Alta Modelo Heladera</h1>
 
 				<form class="content-center max-w-md mx-auto">
 					<label
-						for="nombre"
+						for="modelo"
 						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>Nombre</label
+						>Modelo</label
 					>
 					<input
 						type="text"
-						id="nombre"
+						id="modelo"
 						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="Nombre"
+						placeholder="Modelo"
 						required
 					/>
-
 					<label
-						for="tipo-documento"
+						for="tempMin"
 						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>Tipo de documento</label
-					>
-					<select
-						id="tipo-documento"
-						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-					>
-						<option value="dni">DNI</option>
-						<option value="pasaporte">Pasaporte</option>
-						<option value="cedula-azul">Cédula azul</option>
-					</select>
-
-					<label
-						for="documento"
-						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>Número de documento</label
+						>Temperatura Minima (°C)</label
 					>
 					<input
 						type="number"
-						id="documento"
+						id="tempMin"
 						aria-describedby="helper-text-explanation"
 						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="Documento"
+						placeholder="0"
 						required
 						min="1"
 					/>
-
 					<label
-						for="default-datepicker"
+						for="tempMax"
 						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>Fecha de nacimiento</label
+						>Temperatura Maxima (°C)</label
 					>
 					<input
+						type="number"
+						id="tempMax"
+						aria-describedby="helper-text-explanation"
+						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						placeholder="0"
 						required
-						datepicker
-						datepicker-autohide
-						datepicker-format="dd/mm/yyyy"
-						autoSelectToday="1"
-						id="default-datepicker"
-						type="text"
-						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="Fecha de nacimiento"
+						min="1"
 					/>
-
-					<label
-						for="posee-domicilio"
-						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>¿Posee un domicilio?</label
-					>
-					<fieldset id="posee-domicilio">
-						<div class="flex items-center mb-2">
-							<input
-								id="con-domicilio"
-								type="radio"
-								name="posee-domicilio"
-								value="si"
-								required
-								class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-							/>
-							<label
-								for="con-domicilio"
-								class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-							>
-								Sí
-							</label>
-						</div>
-						<div class="flex items-center mb-5">
-							<input
-								id="sin-domicilio"
-								type="radio"
-								name="posee-domicilio"
-								value="no"
-								required
-								class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-							/>
-							<label
-								for="sin-domicilio"
-								class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-							>
-								No
-							</label>
-						</div>
-					</fieldset>
-
-					<div
-						class="relative z-0 w-full mb-5 group text-left"
-						style="display: none"
-						id="divDomicilio"
-					>
-						<label
-							for="domicilio"
-							class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Domicilio</label
-						>
-						<input
-							type="text"
-							id="domicilio"
-							class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="Domicilio"
-						/>
-					</div>
-
-					<label
-						for="tiene-tutorados"
-						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>¿Tiene menores a su cargo?</label
-					>
-					<fieldset id="tiene-tutorados">
-						<div class="flex items-center mb-2">
-							<input
-								id="tiene-tutorados"
-								type="radio"
-								name="tiene-tutorados"
-								value="si"
-								required
-								class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-							/>
-							<label
-								for="tiene-tutorados"
-								class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-							>
-								Sí
-							</label>
-						</div>
-						<div class="flex items-center mb-5">
-							<input
-								id="no-tiene-tutorados"
-								type="radio"
-								name="tiene-tutorados"
-								value="no"
-								required
-								class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-							/>
-							<label
-								for="no-tiene-tutorados"
-								class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-							>
-								No
-							</label>
-						</div>
-					</fieldset>
-
-					<div
-						class="relative z-0 w-full mt-2 mb-5 group text-left"
-						style="display: none"
-						id="divCantMenores"
-					>
-						<label
-							for="cant-menores"
-							class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Cantidad de menores a cargo</label
-						>
-						<input
-							type="number"
-							id="cant-menores"
-							aria-describedby="helper-text-explanation"
-							class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="Cantidad de menores a cargo"
-							min="1"
-						/>
-					</div>
 
 					<button
 						type="submit"
