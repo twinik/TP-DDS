@@ -34,14 +34,14 @@ import javax.persistence.Table;
 public class ColocacionHeladeras extends EntidadPersistente implements IPuntajeCalculable {
   public static final Float PUNTOS_POR_MES = 5.0f;
 
-  @ManyToOne()
+  @ManyToOne
   @JoinColumn(name = "colaborador_id",referencedColumnName = "id",nullable = false)
   private Colaborador colaborador;
 
   @Column(name = "fecha",nullable = false, columnDefinition = "DATE")
   private LocalDate fecha;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn(name = "heladera_id",referencedColumnName = "id", nullable = false, unique = true)
   private Heladera heladera;
 

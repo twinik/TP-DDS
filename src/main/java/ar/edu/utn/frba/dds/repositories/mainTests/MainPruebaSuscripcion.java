@@ -34,6 +34,8 @@ public class MainPruebaSuscripcion {
 
     Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(1L);
 
+    suscripcionesRepository.eliminar(hidratada.get());
+
   }
 
 

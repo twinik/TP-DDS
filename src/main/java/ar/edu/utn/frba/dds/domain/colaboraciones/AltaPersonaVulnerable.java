@@ -30,7 +30,9 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntajeCalculable {
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  // TODO revisar REPO quizas un on delete cascade con activo...
+
+  @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
@@ -38,11 +40,11 @@ public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntaj
   private LocalDate fecha;
   private static final Float puntajePorAlta = 2f;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn (name = "persona_vulnerable_id", referencedColumnName = "id", nullable = false, unique = true)
   private PersonaVulnerable persona;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn (name = "tarjeta_id", referencedColumnName = "id", unique = true)
   private Tarjeta tarjeta;
 

@@ -34,22 +34,22 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RedistribucionViandas extends EntidadPersistente implements IPuntajeCalculable {
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
   @Column(name = "fecha_redistribucion", columnDefinition = "DATE",nullable = false)
   private LocalDate fecha;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn (name = "heladera_origen", referencedColumnName = "id", nullable = false)
   private Heladera heladeraOrigen;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn (name = "heladera_destino", referencedColumnName = "id", nullable = false)
   private Heladera heladeraDestino;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "motivo_id",referencedColumnName = "id")
   private MotivoRedistribucionVianda motivo;
 

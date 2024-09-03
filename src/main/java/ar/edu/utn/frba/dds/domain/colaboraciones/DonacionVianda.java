@@ -30,14 +30,14 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class DonacionVianda extends EntidadPersistente implements IPuntajeCalculable {
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
   @Column(name = "fecha", columnDefinition = "DATE", nullable = false)
   private LocalDate fecha;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn(name = "vianda_id", referencedColumnName = "id", nullable = false, unique = true)
   private Vianda vianda;
 

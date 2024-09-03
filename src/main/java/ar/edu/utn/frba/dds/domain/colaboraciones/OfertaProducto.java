@@ -31,14 +31,14 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OfertaProducto extends EntidadPersistente {
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
   @Column(name = "fecha_creacion", columnDefinition = "DATE",nullable = false)
   private LocalDate fechaCreacion;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn (name = "producto_id", referencedColumnName = "id", nullable = false)
   private Producto producto;
 

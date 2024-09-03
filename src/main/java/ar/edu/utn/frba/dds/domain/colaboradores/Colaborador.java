@@ -32,7 +32,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Colaborador extends EntidadPersistente implements Contactable {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
     private Usuario usuario;
 
@@ -42,7 +42,7 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     @Column(columnDefinition = "varchar(11)")
     private String documento;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id", unique = true)
     private TipoColaborador tipoColaborador;
 
@@ -53,13 +53,13 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     @Column(name = "puntosGanados")
     private Float puntosGanados = 0f;
 
-    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
     @Embedded
     private Direccion direccion;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private List<MedioDeContacto> medioContacto = new ArrayList<>();
 

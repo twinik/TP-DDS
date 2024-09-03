@@ -31,7 +31,7 @@ public class TipoColaborador  extends EntidadPersistente {
     @Column(name = "tipoPersona")
     private TipoPersona tipo;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tipo_colaborador_x_forma_colaboracion", inverseJoinColumns = @JoinColumn(name = "forma_colaboracion_id",referencedColumnName = "id"),
         joinColumns = @JoinColumn(name = "tipo_colaborador_id",referencedColumnName = "id"))
     private List<FormaColaboracion> formasPosiblesColaboracion;

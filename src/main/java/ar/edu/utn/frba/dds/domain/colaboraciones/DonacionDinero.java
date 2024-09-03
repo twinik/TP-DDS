@@ -37,7 +37,7 @@ public class DonacionDinero extends EntidadPersistente implements IPuntajeCalcul
   private static final Float COEFICIENTE_DONACION_DINERO = .5f;
   
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
   private Colaborador colaborador;
 
