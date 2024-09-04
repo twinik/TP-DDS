@@ -388,45 +388,62 @@
 						min="1"
 					/>
 
-					<label
-						for="Cuil"
+					<div id="mediosContactoContainer">
+						<label
+							for="medio-contacto-1"
+							class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+							>Canal de Contacto 1</label
+						>
+						<select
+							id="medio-contacto-1"
+							class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						>
+							<option value="Whatsapp">Whatsapp</option>
+							<option value="Mail">Mail</option>
+							<option value="Telegram">Telegram</option>
+						</select>
+						<label
+							for="contacto-1"
+							class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+							>Contacto 1</label
+						>
+						<input
+							type="number"
+							id="contacto-1"
+							aria-describedby="helper-text-explanation"
+							class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							placeholder="Nro de telefono o Email"
+							required
+							min="1"
+						/>
+					</div>
+					<button class="mb-4 text-sm" onclick="nuevoMedioContacto()">
+						Agregar medio de contacto +
+					</button>
+
+					<span
 						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>Numero de Cuil</label
+						>Punto Central de Referencia</span
+					>
+					<div
+						id="map"
+						style="height: 300px; width: 100%; z-index: 50"
+						class="mb-5"
+					></div>
+
+					<input type="hidden" name="latitud" id="latitud" />
+					<input type="hidden" name="longitud" id="longitud" />
+
+					<label
+						for="radio-de-cobertura"
+						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+						>Radio de Cobertura (Km)</label
 					>
 					<input
 						type="number"
-						id="Cuil"
-						aria-describedby="helper-text-explanation"
+						id="radio-de-cobertura"
 						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="Cuil"
-						required
-						min="1"
-					/>
-
-					<label
-						for="medio-contacto"
-						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>Medio de Contacto</label
-					>
-					<select
-						id="medio-contacto"
-						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-					>
-						<option value="Whatsapp">Whatsapp</option>
-						<option value="Mail">Mail</option>
-						<option value="Telegram">Telegram</option>
-					</select>
-
-					<label
-						for="area-de-cobertura"
-						class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>Area de Coertura</label
-					>
-					<input
-						type="number"
-						id="area-de-cobertura"
-						class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						placeholder="area-de-cobertura"
+						placeholder="1"
 						required
 					/>
 
@@ -447,5 +464,6 @@
 			crossorigin=""
 		></script>
 		<script src="js/mapa-seleccionar-ubicacion.js"></script>
+		<script src="js/input-contactos.js"></script>
 	</body>
 </html>
