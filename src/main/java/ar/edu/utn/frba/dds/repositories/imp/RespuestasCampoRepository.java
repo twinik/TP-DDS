@@ -11,41 +11,42 @@ import java.util.Optional;
 public class RespuestasCampoRepository implements IRespuestasCampoRepository, WithSimplePersistenceUnit {
 
 
-  @Override
-  public Optional<RespuestaACampo> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(RespuestaACampo.class,id));
-  }
+    @Override
+    public Optional<RespuestaACampo> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(RespuestaACampo.class, id));
+    }
 
-  @Override
-  public List<RespuestaACampo> buscarTodos() {
-    return entityManager().createQuery("from RespuestaACampo where activo=:activo",RespuestaACampo.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<RespuestaACampo> buscarTodos() {
+        return entityManager().createQuery("from RespuestaACampo where activo=:activo", RespuestaACampo.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(RespuestaACampo respuestaACampo) {
-    withTransaction(() -> entityManager().persist(respuestaACampo));
-  }
-  public void guardar(RespuestaACampo ...respuestaACampo) {
+    @Override
+    public void guardar(RespuestaACampo respuestaACampo) {
+        withTransaction(() -> entityManager().persist(respuestaACampo));
+    }
 
-    withTransaction(() -> {
-      for (RespuestaACampo respuesta : respuestaACampo){
-        entityManager().persist(respuesta);
-      }
-    });
-  }
+    public void guardar(RespuestaACampo... respuestaACampo) {
 
-  @Override
-  public void actualizar(RespuestaACampo respuestaACampo) {
-    withTransaction(() -> entityManager().merge(respuestaACampo));
-  }
+        withTransaction(() -> {
+            for (RespuestaACampo respuesta : respuestaACampo) {
+                entityManager().persist(respuesta);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(RespuestaACampo respuestaACampo) {
-    respuestaACampo.borrarLogico();
-    withTransaction(() -> entityManager().merge(respuestaACampo));
-  }
+    @Override
+    public void actualizar(RespuestaACampo respuestaACampo) {
+        withTransaction(() -> entityManager().merge(respuestaACampo));
+    }
+
+    @Override
+    public void eliminar(RespuestaACampo respuestaACampo) {
+        respuestaACampo.borrarLogico();
+        withTransaction(() -> entityManager().merge(respuestaACampo));
+    }
 
   /*public static void main(String[] args) {
         RespuestaACampo m = new RespuestaACampo("otro");

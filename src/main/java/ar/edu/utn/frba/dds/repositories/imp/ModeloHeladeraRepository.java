@@ -11,41 +11,42 @@ import java.util.List;
 import java.util.Optional;
 
 public class ModeloHeladeraRepository implements IModeloHeladeraRepository, WithSimplePersistenceUnit {
-  @Override
-  public Optional<ModeloHeladera> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(ModeloHeladera.class,id));
-  }
+    @Override
+    public Optional<ModeloHeladera> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(ModeloHeladera.class, id));
+    }
 
-  @Override
-  public List<ModeloHeladera> buscarTodos() {
-    return entityManager().createQuery("from ModeloHeladera where activo=:activo",ModeloHeladera.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<ModeloHeladera> buscarTodos() {
+        return entityManager().createQuery("from ModeloHeladera where activo=:activo", ModeloHeladera.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(ModeloHeladera modeloHeladera) {
-    withTransaction(() -> entityManager().persist(modeloHeladera));
-  }
-  public void guardar(ModeloHeladera ...modeloHeladera) {
+    @Override
+    public void guardar(ModeloHeladera modeloHeladera) {
+        withTransaction(() -> entityManager().persist(modeloHeladera));
+    }
 
-    withTransaction(() -> {
-      for (ModeloHeladera modelo : modeloHeladera){
-        entityManager().persist(modelo);
-      }
-    });
-  }
+    public void guardar(ModeloHeladera... modeloHeladera) {
 
-  @Override
-  public void actualizar(ModeloHeladera modeloHeladera) {
-    withTransaction(() -> entityManager().merge(modeloHeladera));
-  }
+        withTransaction(() -> {
+            for (ModeloHeladera modelo : modeloHeladera) {
+                entityManager().persist(modelo);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(ModeloHeladera modeloHeladera) {
-    modeloHeladera.borrarLogico();
-    withTransaction(() -> entityManager().merge(modeloHeladera));
-  }
+    @Override
+    public void actualizar(ModeloHeladera modeloHeladera) {
+        withTransaction(() -> entityManager().merge(modeloHeladera));
+    }
+
+    @Override
+    public void eliminar(ModeloHeladera modeloHeladera) {
+        modeloHeladera.borrarLogico();
+        withTransaction(() -> entityManager().merge(modeloHeladera));
+    }
 
   /*public static void main(String[] args) {
         ModeloHeladera m = new ModeloHeladera("otro");

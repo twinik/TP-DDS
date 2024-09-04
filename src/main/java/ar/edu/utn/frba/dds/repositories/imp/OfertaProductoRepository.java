@@ -11,41 +11,42 @@ import java.util.List;
 import java.util.Optional;
 
 public class OfertaProductoRepository implements IOfertaProductoRepository, WithSimplePersistenceUnit {
-  @Override
-  public Optional<OfertaProducto> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(OfertaProducto.class,id));
-  }
+    @Override
+    public Optional<OfertaProducto> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(OfertaProducto.class, id));
+    }
 
-  @Override
-  public List<OfertaProducto> buscarTodos() {
-    return entityManager().createQuery("from OfertaProducto where activo=:activo",OfertaProducto.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<OfertaProducto> buscarTodos() {
+        return entityManager().createQuery("from OfertaProducto where activo=:activo", OfertaProducto.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(OfertaProducto ofertaProducto) {
-    withTransaction(() -> entityManager().persist(ofertaProducto));
-  }
-  public void guardar(OfertaProducto ...ofertaProducto) {
+    @Override
+    public void guardar(OfertaProducto ofertaProducto) {
+        withTransaction(() -> entityManager().persist(ofertaProducto));
+    }
 
-    withTransaction(() -> {
-      for (OfertaProducto oferta : ofertaProducto){
-        entityManager().persist(oferta);
-      }
-    });
-  }
+    public void guardar(OfertaProducto... ofertaProducto) {
 
-  @Override
-  public void actualizar(OfertaProducto ofertaProducto) {
-    withTransaction(() -> entityManager().merge(ofertaProducto));
-  }
+        withTransaction(() -> {
+            for (OfertaProducto oferta : ofertaProducto) {
+                entityManager().persist(oferta);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(OfertaProducto ofertaProducto) {
-    ofertaProducto.borrarLogico();
-    withTransaction(() -> entityManager().merge(ofertaProducto));
-  }
+    @Override
+    public void actualizar(OfertaProducto ofertaProducto) {
+        withTransaction(() -> entityManager().merge(ofertaProducto));
+    }
+
+    @Override
+    public void eliminar(OfertaProducto ofertaProducto) {
+        ofertaProducto.borrarLogico();
+        withTransaction(() -> entityManager().merge(ofertaProducto));
+    }
 
   /*public static void main(String[] args) {
         OfertaProducto m = new OfertaProducto("otro");

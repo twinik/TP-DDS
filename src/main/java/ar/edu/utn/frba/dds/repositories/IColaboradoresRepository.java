@@ -9,14 +9,15 @@ import java.util.Optional;
  * IColaboradorRepository interface permite interactuar con los colaboradores.
  */
 public interface IColaboradoresRepository {
-  Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento);
-  Optional<Colaborador> buscar(Long id);
+    Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento);
 
-  List<Colaborador> buscarTodos();
+    Optional<Colaborador> buscar(Long id);
 
-  void guardar(Colaborador colaborador);
+    List<Colaborador> buscarTodos();
 
-  void actualizar(Colaborador colaborador);
+    void guardar(Colaborador colaborador);
 
-  void eliminar(Colaborador colaborador);
+    void actualizar(Colaborador colaborador);
+
+    void eliminar(Colaborador colaborador);
 }

@@ -21,55 +21,55 @@ import java.util.Optional;
  */
 public class ColaboradoresRepository implements IColaboradoresRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
-    try{
-      Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
-          .setParameter("tipoDocumento",tipoDocumento)
-          .setParameter("documento",documento).getSingleResult();
-      return Optional.ofNullable(c);
+    @Override
+    public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
+        try {
+            Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
+                    .setParameter("tipoDocumento", tipoDocumento)
+                    .setParameter("documento", documento).getSingleResult();
+            return Optional.ofNullable(c);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+
     }
-    catch (NoResultException e){
-      return Optional.empty();
+
+    @Override
+    public Optional<Colaborador> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(Colaborador.class, id));
     }
 
-  }
-  @Override
-  public Optional<Colaborador> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(Colaborador.class,id));
-  }
+    @Override
+    public List<Colaborador> buscarTodos() {
+        return entityManager().createQuery("from Colaborador where activo=:activo", Colaborador.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public List<Colaborador> buscarTodos() {
-    return entityManager().createQuery("from Colaborador where activo=:activo",Colaborador.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public void guardar(Colaborador colaborador) {
+        withTransaction(() -> entityManager().persist(colaborador));
+    }
 
-  @Override
-  public void guardar(Colaborador colaborador) {
-    withTransaction(() -> entityManager().persist(colaborador));
-  }
+    public void guardar(Colaborador... colaborador) {
 
-  public void guardar(Colaborador ...colaborador) {
+        withTransaction(() -> {
+            for (Colaborador colab : colaborador) {
+                entityManager().persist(colab);
+            }
+        });
+    }
 
-    withTransaction(() -> {
-      for (Colaborador colab : colaborador){
-        entityManager().persist(colab);
-      }
-    });
-  }
+    @Override
+    public void actualizar(Colaborador colaborador) {
+        withTransaction(() -> entityManager().merge(colaborador));
+    }
 
-  @Override
-  public void actualizar(Colaborador colaborador) {
-    withTransaction(() -> entityManager().merge(colaborador));
-  }
-
-  @Override
-  public void eliminar(Colaborador colaborador) {
-    colaborador.borrarLogico();
-    withTransaction(() -> entityManager().merge(colaborador));
-  }
+    @Override
+    public void eliminar(Colaborador colaborador) {
+        colaborador.borrarLogico();
+        withTransaction(() -> entityManager().merge(colaborador));
+    }
 
 //  public static void main(String[] args) {
 //        Colaborador m = new Colaborador();

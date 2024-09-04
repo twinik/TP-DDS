@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IHeladerasRepository {
-  Optional<Heladera> buscar(Long id);
+    Optional<Heladera> buscar(Long id);
 
-  List<Heladera> buscarTodos();
+    List<Heladera> buscarTodos();
 
-  void guardar(Heladera heladera);
+    void guardar(Heladera heladera);
 
-  void actualizar(Heladera heladera);
+    void actualizar(Heladera heladera);
 
-  void eliminar(Heladera heladera);
+    void eliminar(Heladera heladera);
 
 }

@@ -16,30 +16,30 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter
-public class TipoSuscripcionAttributeConverter implements AttributeConverter<ITipoSuscripcion,String> {
-  @Override
-  public String convertToDatabaseColumn(ITipoSuscripcion tipoSuscripcion) {
-    if(tipoSuscripcion instanceof SuscripcionDesperfectoHeladera) return "SUSCRIPCION_DESPERFECTO";
-    if(tipoSuscripcion instanceof SuscripcionViandasRestantes) return "SUSCRIPCION_VIANDAS_RESTANTES";
-    if(tipoSuscripcion instanceof SuscripcionViandasFaltantes) return "SUSCRIPCION_VIANDAS_FALTANTES";
-    return null;
-  }
-
-  @Override
-  public ITipoSuscripcion convertToEntityAttribute(String s) {
-    switch (s){
-      case "SUSCRIPCION_DESPERFECTO" -> {
-        return new SuscripcionDesperfectoHeladera(ServiceLocator.get("recomendadorHeladeras", RecomendadorHeladeras.class));
-      }
-      case "SUSCRIPCION_VIANDAS_RESTANTES" -> {
-        return new SuscripcionViandasRestantes();
-      }
-      case "SUSCRIPCION_VIANDAS_FALTANTES" -> {
-        return new SuscripcionViandasFaltantes();
-      }
-      default -> {
+public class TipoSuscripcionAttributeConverter implements AttributeConverter<ITipoSuscripcion, String> {
+    @Override
+    public String convertToDatabaseColumn(ITipoSuscripcion tipoSuscripcion) {
+        if (tipoSuscripcion instanceof SuscripcionDesperfectoHeladera) return "SUSCRIPCION_DESPERFECTO";
+        if (tipoSuscripcion instanceof SuscripcionViandasRestantes) return "SUSCRIPCION_VIANDAS_RESTANTES";
+        if (tipoSuscripcion instanceof SuscripcionViandasFaltantes) return "SUSCRIPCION_VIANDAS_FALTANTES";
         return null;
-      }
     }
-  }
+
+    @Override
+    public ITipoSuscripcion convertToEntityAttribute(String s) {
+        switch (s) {
+            case "SUSCRIPCION_DESPERFECTO" -> {
+                return new SuscripcionDesperfectoHeladera(ServiceLocator.get("recomendadorHeladeras", RecomendadorHeladeras.class));
+            }
+            case "SUSCRIPCION_VIANDAS_RESTANTES" -> {
+                return new SuscripcionViandasRestantes();
+            }
+            case "SUSCRIPCION_VIANDAS_FALTANTES" -> {
+                return new SuscripcionViandasFaltantes();
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
 }

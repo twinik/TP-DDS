@@ -12,13 +12,13 @@ import java.util.Optional;
 public class DonacionDineroRepository implements IDonacionDineroRepository, WithSimplePersistenceUnit {
     @Override
     public Optional<DonacionDinero> buscar(Long id) {
-        return Optional.ofNullable(entityManager().find(DonacionDinero.class,id));
+        return Optional.ofNullable(entityManager().find(DonacionDinero.class, id));
     }
 
     @Override
     public List<DonacionDinero> buscarTodos() {
-        return entityManager().createQuery("from DonacionDinero where activo=:activo",DonacionDinero.class).
-                setParameter("activo",true)
+        return entityManager().createQuery("from DonacionDinero where activo=:activo", DonacionDinero.class).
+                setParameter("activo", true)
                 .getResultList();
     }
 
@@ -27,10 +27,10 @@ public class DonacionDineroRepository implements IDonacionDineroRepository, With
         withTransaction(() -> entityManager().persist(donacionDinero));
     }
 
-    public void guardar(DonacionDinero ...donacionDinero) {
+    public void guardar(DonacionDinero... donacionDinero) {
 
         withTransaction(() -> {
-            for (DonacionDinero donacion : donacionDinero){
+            for (DonacionDinero donacion : donacionDinero) {
                 entityManager().persist(donacion);
             }
         });

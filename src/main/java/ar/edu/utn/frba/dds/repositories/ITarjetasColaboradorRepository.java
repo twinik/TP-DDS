@@ -6,14 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ITarjetasColaboradorRepository {
-  Optional<TarjetaColaborador> buscar(String codigo);
-  Optional<TarjetaColaborador> buscar(Long id);
+    Optional<TarjetaColaborador> buscar(String codigo);
 
-  List<TarjetaColaborador> buscarTodos();
+    Optional<TarjetaColaborador> buscar(Long id);
 
-  void guardar(TarjetaColaborador tarjeta);
+    List<TarjetaColaborador> buscarTodos();
 
-  void actualizar(TarjetaColaborador tarjeta);
+    void guardar(TarjetaColaborador tarjeta);
 
-  void eliminar(TarjetaColaborador tarjeta);
+    void actualizar(TarjetaColaborador tarjeta);
+
+    void eliminar(TarjetaColaborador tarjeta);
 }

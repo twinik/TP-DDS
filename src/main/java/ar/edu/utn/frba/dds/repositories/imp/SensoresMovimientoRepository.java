@@ -12,42 +12,42 @@ import java.util.Optional;
 public class SensoresMovimientoRepository implements ISensorMovimientoRepository, WithSimplePersistenceUnit {
 
 
-  @Override
-  public Optional<SensorMovimiento> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(SensorMovimiento.class, id));
-  }
+    @Override
+    public Optional<SensorMovimiento> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(SensorMovimiento.class, id));
+    }
 
-  @Override
-  public List<SensorMovimiento> buscarTodos() {
-    return entityManager().createQuery("from SensorMovimiento where activo=:activo", SensorMovimiento.class).
-        setParameter("activo", true)
-        .getResultList();
-  }
+    @Override
+    public List<SensorMovimiento> buscarTodos() {
+        return entityManager().createQuery("from SensorMovimiento where activo=:activo", SensorMovimiento.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(SensorMovimiento sensorMovimiento) {
-    withTransaction(() -> entityManager().persist(sensorMovimiento));
-  }
+    @Override
+    public void guardar(SensorMovimiento sensorMovimiento) {
+        withTransaction(() -> entityManager().persist(sensorMovimiento));
+    }
 
-  public void guardar(SensorMovimiento... sensorMovimiento) {
+    public void guardar(SensorMovimiento... sensorMovimiento) {
 
-    withTransaction(() -> {
-      for (SensorMovimiento sensor : sensorMovimiento) {
-        entityManager().persist(sensor);
-      }
-    });
-  }
+        withTransaction(() -> {
+            for (SensorMovimiento sensor : sensorMovimiento) {
+                entityManager().persist(sensor);
+            }
+        });
+    }
 
-  @Override
-  public void actualizar(SensorMovimiento sensorMovimiento) {
-    withTransaction(() -> entityManager().merge(sensorMovimiento));
-  }
+    @Override
+    public void actualizar(SensorMovimiento sensorMovimiento) {
+        withTransaction(() -> entityManager().merge(sensorMovimiento));
+    }
 
-  @Override
-  public void eliminar(SensorMovimiento sensorMovimiento) {
-    sensorMovimiento.borrarLogico();
-    withTransaction(() -> entityManager().merge(sensorMovimiento));
-  }
+    @Override
+    public void eliminar(SensorMovimiento sensorMovimiento) {
+        sensorMovimiento.borrarLogico();
+        withTransaction(() -> entityManager().merge(sensorMovimiento));
+    }
 
   /*public static void main(String[] args) {
         SensorMovimiento m = new SensorMovimiento("otro");

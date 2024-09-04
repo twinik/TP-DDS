@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IViandasRepository {
-  Optional<Vianda> buscar(Long id);
+    Optional<Vianda> buscar(Long id);
 
-  List<Vianda> buscarTodos();
+    List<Vianda> buscarTodos();
 
-  List<Vianda> buscarTodosMismaSemana(LocalDate fecha);
+    List<Vianda> buscarTodosMismaSemana(LocalDate fecha);
 
-  void guardar(Vianda vianda);
+    void guardar(Vianda vianda);
 
-  void actualizar(Vianda vianda);
+    void actualizar(Vianda vianda);
 
-  void eliminar(Vianda vianda);
+    void eliminar(Vianda vianda);
 }

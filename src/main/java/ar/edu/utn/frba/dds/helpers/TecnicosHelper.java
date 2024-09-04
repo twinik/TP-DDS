@@ -9,25 +9,25 @@ import java.util.List;
 
 @AllArgsConstructor
 public class TecnicosHelper {
-  ITecnicosRepository tecnicosRepository;
+    ITecnicosRepository tecnicosRepository;
 
-  public Tecnico findTecnicoMasCercano(Ubicacion ubicacion) {
-    List<Tecnico> tecnicos = tecnicosRepository.buscarTodos();
+    public Tecnico findTecnicoMasCercano(Ubicacion ubicacion) {
+        List<Tecnico> tecnicos = tecnicosRepository.buscarTodos();
 
-    Tecnico tecnicoMasCercano = null;
-    float distanciaMinima = Float.MAX_VALUE;    //necesito un valor muy grande para al empezar a comparar me tome el primer valor
+        Tecnico tecnicoMasCercano = null;
+        float distanciaMinima = Float.MAX_VALUE;    //necesito un valor muy grande para al empezar a comparar me tome el primer valor
 
-    for (Tecnico tecnico : tecnicos) {
-      AreaDeCobertura areaDeCobertura = tecnico.getAreaDeCobertura();
-      if (areaDeCobertura.contieneUbicacion(ubicacion)) {
-        float distancia = areaDeCobertura.getReferencia().calcularDistanciaHasta(ubicacion);
-        if (distancia < distanciaMinima) {
-          tecnicoMasCercano = tecnico;
-          distanciaMinima = distancia;
+        for (Tecnico tecnico : tecnicos) {
+            AreaDeCobertura areaDeCobertura = tecnico.getAreaDeCobertura();
+            if (areaDeCobertura.contieneUbicacion(ubicacion)) {
+                float distancia = areaDeCobertura.getReferencia().calcularDistanciaHasta(ubicacion);
+                if (distancia < distanciaMinima) {
+                    tecnicoMasCercano = tecnico;
+                    distanciaMinima = distancia;
+                }
+            }
         }
-      }
-    }
 
-    return tecnicoMasCercano;
-  }
+        return tecnicoMasCercano;
+    }
 }

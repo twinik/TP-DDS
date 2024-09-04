@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IIncidenteRepository {
-  Optional<Incidente> buscar(Long id);
+    Optional<Incidente> buscar(Long id);
 
-  List<Incidente> buscarTodos();
+    List<Incidente> buscarTodos();
 
-  void guardar(Incidente incidente);
+    void guardar(Incidente incidente);
 
-  void actualizar(Incidente incidente);
+    void actualizar(Incidente incidente);
 
-  void eliminar(Incidente incidente);
+    void eliminar(Incidente incidente);
 }

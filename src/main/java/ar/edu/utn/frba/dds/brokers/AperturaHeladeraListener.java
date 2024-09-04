@@ -17,23 +17,23 @@ import java.util.Optional;
 
 @Setter
 public class AperturaHeladeraListener implements IMqttMessageListener {
-  IHeladerasRepository heladerasRepository;
-  ITarjetasColaboradorRepository tarjetasColaboradorRepository;
-  IAperturasHeladeraRepository aperturasHeladeraRepository;
-  ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
+    IHeladerasRepository heladerasRepository;
+    ITarjetasColaboradorRepository tarjetasColaboradorRepository;
+    IAperturasHeladeraRepository aperturasHeladeraRepository;
+    ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
 
-  @Override
-  public void messageArrived(String s, MqttMessage mqttMessage) {
-    AperturaHeladeraBrokerDTO aperturaDto = AperturaHeladeraBrokerDTO.fromString(mqttMessage.toString());
-    Optional<Heladera> heladeraOpt = heladerasRepository.buscar(aperturaDto.getIdHeladera());
-    Optional<TarjetaColaborador> tarjetaOpt = tarjetasColaboradorRepository.buscar(aperturaDto.getIdTarjetaColaborador());
-    Optional<SolicitudAperturaHeladera> solicitudAperturaHeladeraOpt = solicitudesAperturaHeladeraRepository.buscar(aperturaDto.getIdSolicitudApertura());
-    if (heladeraOpt.isEmpty() || tarjetaOpt.isEmpty() || solicitudAperturaHeladeraOpt.isEmpty()) {
-      return;
+    @Override
+    public void messageArrived(String s, MqttMessage mqttMessage) {
+        AperturaHeladeraBrokerDTO aperturaDto = AperturaHeladeraBrokerDTO.fromString(mqttMessage.toString());
+        Optional<Heladera> heladeraOpt = heladerasRepository.buscar(aperturaDto.getIdHeladera());
+        Optional<TarjetaColaborador> tarjetaOpt = tarjetasColaboradorRepository.buscar(aperturaDto.getIdTarjetaColaborador());
+        Optional<SolicitudAperturaHeladera> solicitudAperturaHeladeraOpt = solicitudesAperturaHeladeraRepository.buscar(aperturaDto.getIdSolicitudApertura());
+        if (heladeraOpt.isEmpty() || tarjetaOpt.isEmpty() || solicitudAperturaHeladeraOpt.isEmpty()) {
+            return;
+        }
+        Heladera heladera = heladeraOpt.get();
+        SolicitudAperturaHeladera solicitudAperturaHeladera = solicitudAperturaHeladeraOpt.get();
+        AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladera, DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
+        aperturasHeladeraRepository.guardar(aperturaHeladera);
     }
-    Heladera heladera = heladeraOpt.get();
-    SolicitudAperturaHeladera solicitudAperturaHeladera = solicitudAperturaHeladeraOpt.get();
-    AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladera, DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
-    aperturasHeladeraRepository.guardar(aperturaHeladera);
-  }
 }

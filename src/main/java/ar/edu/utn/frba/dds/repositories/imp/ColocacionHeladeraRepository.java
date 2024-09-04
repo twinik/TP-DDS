@@ -11,13 +11,13 @@ import java.util.Optional;
 public class ColocacionHeladeraRepository implements IColocacionHeladeraRepository, WithSimplePersistenceUnit {
     @Override
     public Optional<ColocacionHeladeras> buscar(Long id) {
-        return Optional.ofNullable(entityManager().find(ColocacionHeladeras.class,id));
+        return Optional.ofNullable(entityManager().find(ColocacionHeladeras.class, id));
     }
 
     @Override
     public List<ColocacionHeladeras> buscarTodos() {
-        return entityManager().createQuery("from ColocacionHeladeras where activo=:activo",ColocacionHeladeras.class).
-                setParameter("activo",true)
+        return entityManager().createQuery("from ColocacionHeladeras where activo=:activo", ColocacionHeladeras.class).
+                setParameter("activo", true)
                 .getResultList();
     }
 
@@ -26,10 +26,10 @@ public class ColocacionHeladeraRepository implements IColocacionHeladeraReposito
         withTransaction(() -> entityManager().persist(colocacionHeladera));
     }
 
-    public void guardar(ColocacionHeladeras ...colocacionHeladera) {
+    public void guardar(ColocacionHeladeras... colocacionHeladera) {
 
         withTransaction(() -> {
-            for (ColocacionHeladeras colocacion : colocacionHeladera){
+            for (ColocacionHeladeras colocacion : colocacionHeladera) {
                 entityManager().persist(colocacion);
             }
         });

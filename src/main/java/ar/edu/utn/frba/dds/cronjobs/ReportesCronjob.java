@@ -14,19 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportesCronjob {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    // PARA QUE FUNCIONE BIEN HAY QUE CORRERLO TODOS LOS SABADOS A ULTIMA HORA
+        // PARA QUE FUNCIONE BIEN HAY QUE CORRERLO TODOS LOS SABADOS A ULTIMA HORA
 
-    ReportesFactory reportesFactory = ServiceLocator.get("reportesFactory",ReportesFactory.class);
-    IReportesRepository repository = ServiceLocator.get("reportesRepository",IReportesRepository.class);
-    List<Reporte> reportes = new ArrayList<>();
-    reportes.add(reportesFactory.create(VIANDA_X_COLAB, LocalDate.now()));
-    reportes.add(reportesFactory.create(VIANDA_X_HELADERA, LocalDate.now()));
-    reportes.add(reportesFactory.create(FALLAS_HELADERA, LocalDate.now()));
-    reportes.forEach(Reporte::generarPDF);
+        ReportesFactory reportesFactory = ServiceLocator.get("reportesFactory", ReportesFactory.class);
+        IReportesRepository repository = ServiceLocator.get("reportesRepository", IReportesRepository.class);
+        List<Reporte> reportes = new ArrayList<>();
+        reportes.add(reportesFactory.create(VIANDA_X_COLAB, LocalDate.now()));
+        reportes.add(reportesFactory.create(VIANDA_X_HELADERA, LocalDate.now()));
+        reportes.add(reportesFactory.create(FALLAS_HELADERA, LocalDate.now()));
+        reportes.forEach(Reporte::generarPDF);
 
-    repository.guardar(reportes);
+        repository.guardar(reportes);
 
-  }
+    }
 }

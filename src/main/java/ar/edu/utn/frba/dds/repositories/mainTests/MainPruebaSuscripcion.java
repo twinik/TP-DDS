@@ -17,35 +17,35 @@ import java.util.Optional;
 
 public class MainPruebaSuscripcion {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    IColaboradoresRepository colaboradoresRepository = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
-    ISuscripcionesRepository suscripcionesRepository = ServiceLocator.get("suscripcionesRepository", ISuscripcionesRepository.class);
-    IHeladerasRepository helaRepo = ServiceLocator.get("heladerasRepository", IHeladerasRepository.class);
-    Colaborador c = new Colaborador();
-    c.setUsuario(new Usuario("fdf","dfdf"));
+        IColaboradoresRepository colaboradoresRepository = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
+        ISuscripcionesRepository suscripcionesRepository = ServiceLocator.get("suscripcionesRepository", ISuscripcionesRepository.class);
+        IHeladerasRepository helaRepo = ServiceLocator.get("heladerasRepository", IHeladerasRepository.class);
+        Colaborador c = new Colaborador();
+        c.setUsuario(new Usuario("fdf", "dfdf"));
 
-    colaboradoresRepository.guardar(c);
+        colaboradoresRepository.guardar(c);
 
-    colaboradoresRepository.buscar(1L);
+        colaboradoresRepository.buscar(1L);
 
-    NotificationStrategyFactory factory = new NotificationStrategyFactory();
-    Suscripcion nueva = new Suscripcion(c,factory.create(CanalContacto.TELEGRAM), new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));
+        NotificationStrategyFactory factory = new NotificationStrategyFactory();
+        Suscripcion nueva = new Suscripcion(c, factory.create(CanalContacto.TELEGRAM), new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));
 
-    Heladera h = new Heladera();
-    h.setNombre("un_nombre");
+        Heladera h = new Heladera();
+        h.setNombre("un_nombre");
 
-    helaRepo.guardar(h);
+        helaRepo.guardar(h);
 
-    h.agregarSuscripcion(nueva);
+        h.agregarSuscripcion(nueva);
 
-    suscripcionesRepository.guardar(nueva);
+        suscripcionesRepository.guardar(nueva);
 
-    Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(1L);
+        Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(1L);
 
-   //suscripcionesRepository.eliminar(hidratada.get());
+        //suscripcionesRepository.eliminar(hidratada.get());
 
-  }
+    }
 
 
 }

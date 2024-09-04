@@ -12,14 +12,13 @@ import java.util.List;
  */
 public class ValidadorFactory {
 
-  /**
-   *
-   * @return un validador de claves configurado segun el estandar owasp
-   */
-  public static ValidadorClaves create() {
-    List<Validacion> estrategias = new ArrayList<>();
-    estrategias.add(new ValidacionLargoClaves());
-    estrategias.add(new ValidacionListaClavesNuevo());
-    return new ValidadorClaves(estrategias);
-  }
+    /**
+     * @return un validador de claves configurado segun el estandar owasp
+     */
+    public static ValidadorClaves create() {
+        List<Validacion> estrategias = new ArrayList<>();
+        estrategias.add(new ValidacionLargoClaves());
+        estrategias.add(new ValidacionListaClavesNuevo());
+        return new ValidadorClaves(estrategias);
+    }
 }

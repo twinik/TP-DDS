@@ -15,27 +15,27 @@ import java.io.IOException;
 import java.util.List;
 
 public class FallaConexionCronJob {
-  public static void main(String[] args) {
-    int limite_minutos;
-    IHeladerasRepository heladerasRepository = ServiceLocator.get("heladerasRepository", IHeladerasRepository.class);
-    IAlertasRepository alertasRepository = ServiceLocator.get("alertasRepository", IAlertasRepository.class);
-    List<Heladera> heladeras = heladerasRepository.buscarTodos();
-    try {
-      limite_minutos = Integer.parseInt(new ConfigReader("config.properties").getProperty("MINUTOS_TOLERANCIA_CONEXION"));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    VerificadorConexionHeladera verifcador = new VerificadorConexionHeladera();
-    for (Heladera h : heladeras) {
+    public static void main(String[] args) {
+        int limite_minutos;
+        IHeladerasRepository heladerasRepository = ServiceLocator.get("heladerasRepository", IHeladerasRepository.class);
+        IAlertasRepository alertasRepository = ServiceLocator.get("alertasRepository", IAlertasRepository.class);
+        List<Heladera> heladeras = heladerasRepository.buscarTodos();
+        try {
+            limite_minutos = Integer.parseInt(new ConfigReader("config.properties").getProperty("MINUTOS_TOLERANCIA_CONEXION"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        VerificadorConexionHeladera verifcador = new VerificadorConexionHeladera();
+        for (Heladera h : heladeras) {
 
-      if (verifcador.huboFallaConexion(h, limite_minutos)) { // Agregar desde el archivo de config (ya esta)
-        Alerta alerta = Alerta.of(h, new TecnicosHelper(ServiceLocator.get("tecnicosRepository",ITecnicosRepository.class))
-            ,new NotificationStrategyFactory(), TipoAlerta.FALLA_CONEXION);
-        alerta.reportar();
-        alertasRepository.guardar(alerta);
-      }
+            if (verifcador.huboFallaConexion(h, limite_minutos)) { // Agregar desde el archivo de config (ya esta)
+                Alerta alerta = Alerta.of(h, new TecnicosHelper(ServiceLocator.get("tecnicosRepository", ITecnicosRepository.class))
+                        , new NotificationStrategyFactory(), TipoAlerta.FALLA_CONEXION);
+                alerta.reportar();
+                alertasRepository.guardar(alerta);
+            }
+        }
     }
-  }
 }
 
 //A partir de la 18, clase verificador falla conexion. verificarfallaconexion(), con esos metodos puedo testearlos TOP.

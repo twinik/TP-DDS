@@ -19,25 +19,25 @@ import java.util.Optional;
 
 @Setter
 public class SensorTemperaturaListener implements IMqttMessageListener {
-  ISensorTemperaturaRepository sensorTemperaturaRepository;
+    ISensorTemperaturaRepository sensorTemperaturaRepository;
 
-  @Override
-  public void messageArrived(String s, MqttMessage mqttMessage) {
-    SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(mqttMessage.toString());
-    Optional<SensorTemperatura> sensorTemperaturaOpt = sensorTemperaturaRepository.buscar(sensorDto.getIdSensor());
+    @Override
+    public void messageArrived(String s, MqttMessage mqttMessage) {
+        SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(mqttMessage.toString());
+        Optional<SensorTemperatura> sensorTemperaturaOpt = sensorTemperaturaRepository.buscar(sensorDto.getIdSensor());
 
-    if (sensorTemperaturaOpt.isPresent()) {
-      SensorTemperatura sensorTemperatura = sensorTemperaturaOpt.get();
-      sensorTemperatura.registrarTemperatura(sensorDto.getTemperatura());
+        if (sensorTemperaturaOpt.isPresent()) {
+            SensorTemperatura sensorTemperatura = sensorTemperaturaOpt.get();
+            sensorTemperatura.registrarTemperatura(sensorDto.getTemperatura());
 
-      Heladera heladera = sensorTemperatura.getHeladera();
-      if (!heladera.temperaturaEsAdecuada()) {
-        Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), new TecnicosHelper(ServiceLocator.get("tecnicosRepository",ITecnicosRepository.class))
-            , new NotificationStrategyFactory(), TipoAlerta.TEMPERATURA);
-        alerta.reportar();
-        IAlertasRepository repository = ServiceLocator.get("alertasRepository",IAlertasRepository.class);
-        repository.guardar(alerta);
-      }
+            Heladera heladera = sensorTemperatura.getHeladera();
+            if (!heladera.temperaturaEsAdecuada()) {
+                Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), new TecnicosHelper(ServiceLocator.get("tecnicosRepository", ITecnicosRepository.class))
+                        , new NotificationStrategyFactory(), TipoAlerta.TEMPERATURA);
+                alerta.reportar();
+                IAlertasRepository repository = ServiceLocator.get("alertasRepository", IAlertasRepository.class);
+                repository.guardar(alerta);
+            }
+        }
     }
-  }
 }

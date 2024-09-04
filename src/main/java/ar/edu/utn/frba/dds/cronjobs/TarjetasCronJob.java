@@ -5,10 +5,10 @@ import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.repositories.ITarjetasRepository;
 
 public class TarjetasCronJob {
-  public static void main(String[] args) {
-    ITarjetasRepository repository = ServiceLocator.get("tarjetasRepository", ITarjetasRepository.class);
-    if (repository != null) {
-      repository.buscarTodos().stream().filter(Tarjeta::isTarjetaActiva).forEach(Tarjeta::resetearUsosDiarios);
+    public static void main(String[] args) {
+        ITarjetasRepository repository = ServiceLocator.get("tarjetasRepository", ITarjetasRepository.class);
+        if (repository != null) {
+            repository.buscarTodos().stream().filter(Tarjeta::isTarjetaActiva).forEach(Tarjeta::resetearUsosDiarios);
+        }
     }
-  }
 }

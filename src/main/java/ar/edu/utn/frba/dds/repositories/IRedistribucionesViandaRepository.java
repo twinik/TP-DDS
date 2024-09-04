@@ -11,15 +11,15 @@ import java.util.Optional;
  */
 public interface IRedistribucionesViandaRepository {
 
-  Optional<RedistribucionViandas> buscar(Long id);
+    Optional<RedistribucionViandas> buscar(Long id);
 
-  List<RedistribucionViandas> buscarTodos();
+    List<RedistribucionViandas> buscarTodos();
 
-  List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha);
+    List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha);
 
-  void guardar(RedistribucionViandas redistribucionViandas);
+    void guardar(RedistribucionViandas redistribucionViandas);
 
-  void actualizar(RedistribucionViandas redistribucionViandas);
+    void actualizar(RedistribucionViandas redistribucionViandas);
 
-  void eliminar(RedistribucionViandas redistribucionViandas);
+    void eliminar(RedistribucionViandas redistribucionViandas);
 }

@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IReportesRepository {
-  Optional<Reporte> buscar(Long id);
+    Optional<Reporte> buscar(Long id);
 
-  List<Reporte> buscarTodos();
+    List<Reporte> buscarTodos();
 
-  void guardar(Reporte reporte);
+    void guardar(Reporte reporte);
 
-  void guardar(List<Reporte> reportes);
+    void guardar(List<Reporte> reportes);
 
-  void actualizar(Reporte reporte);
+    void actualizar(Reporte reporte);
 
-  void eliminar(Reporte reporte);
+    void eliminar(Reporte reporte);
 }

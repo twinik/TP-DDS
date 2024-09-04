@@ -11,13 +11,13 @@ import java.util.Optional;
 public class CampoRepository implements ICampoRepository, WithSimplePersistenceUnit {
     @Override
     public Optional<Campo> buscar(Long id) {
-        return Optional.ofNullable(entityManager().find(Campo.class,id));
+        return Optional.ofNullable(entityManager().find(Campo.class, id));
     }
 
     @Override
     public List<Campo> buscarTodos() {
-        return entityManager().createQuery("from Campo where activo=:activo",Campo.class).
-                setParameter("activo",true)
+        return entityManager().createQuery("from Campo where activo=:activo", Campo.class).
+                setParameter("activo", true)
                 .getResultList();
     }
 
@@ -26,10 +26,10 @@ public class CampoRepository implements ICampoRepository, WithSimplePersistenceU
         withTransaction(() -> entityManager().persist(campo));
     }
 
-    public void guardar(Campo ...campo) {
+    public void guardar(Campo... campo) {
 
         withTransaction(() -> {
-            for (Campo camp : campo){
+            for (Campo camp : campo) {
                 entityManager().persist(camp);
             }
         });

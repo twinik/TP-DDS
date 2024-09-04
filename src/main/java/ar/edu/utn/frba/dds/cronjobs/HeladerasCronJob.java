@@ -8,23 +8,25 @@ import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 
 public class HeladerasCronJob {
 
-  public static void main(String[] args) {
-    IColaboradoresRepository colaboradoresRepository = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
-    colaboradoresRepository.buscarTodos().
-        forEach(colaborador -> colaborador.sumarPuntos(colaborador.getHeladerasColocadas().size() * ColocacionHeladeras.PUNTOS_POR_MES));
-  }
+    public static void main(String[] args) {
+        IColaboradoresRepository colaboradoresRepository = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
+        colaboradoresRepository.buscarTodos().
+                forEach(colaborador -> colaborador.sumarPuntos(colaborador.getHeladerasColocadas().size() * ColocacionHeladeras.PUNTOS_POR_MES));
+    }
 
 }
 
 
-//public class HeladerasCronJob {
-//
-//  public static void main(String[] args) {
-//    IColaboradoresRepository colaboradoresRepository = (IColaboradoresRepository) ServiceLocator.get("ColaboradoresRepository");
-//    colaboradoresRepository.buscarTodos().
-//        forEach(colaborador -> colaborador.
-//            sumarPuntos(colaborador.getHeladerasColocadas().stream().
-//                filter(c-> c.getFecha().getDayOfMonth() == LocalDate.now().getDayOfMonth()).count() * 5.0f));
-//  }
-//
-//}
+/*
+public class HeladerasCronJob {
+
+  public static void main(String[] args) {
+    IColaboradoresRepository colaboradoresRepository = (IColaboradoresRepository) ServiceLocator.get("ColaboradoresRepository");
+    colaboradoresRepository.buscarTodos().
+        forEach(colaborador -> colaborador.
+            sumarPuntos(colaborador.getHeladerasColocadas().stream().
+                filter(c-> c.getFecha().getDayOfMonth() == LocalDate.now().getDayOfMonth()).count() * 5.0f));
+  }
+
+}
+*/

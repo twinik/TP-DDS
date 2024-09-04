@@ -11,41 +11,42 @@ import java.util.Optional;
 
 public class SensoresTemperaturaRepository implements ISensorTemperaturaRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<SensorTemperatura> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(SensorTemperatura.class,id));
-  }
+    @Override
+    public Optional<SensorTemperatura> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(SensorTemperatura.class, id));
+    }
 
-  @Override
-  public List<SensorTemperatura> buscarTodos() {
-    return entityManager().createQuery("from SensorTemperatura where activo=:activo",SensorTemperatura.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<SensorTemperatura> buscarTodos() {
+        return entityManager().createQuery("from SensorTemperatura where activo=:activo", SensorTemperatura.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(SensorTemperatura sensorTemperatura) {
-    withTransaction(() -> entityManager().persist(sensorTemperatura));
-  }
-  public void guardar(SensorTemperatura ...sensorTemperatura) {
+    @Override
+    public void guardar(SensorTemperatura sensorTemperatura) {
+        withTransaction(() -> entityManager().persist(sensorTemperatura));
+    }
 
-    withTransaction(() -> {
-      for (SensorTemperatura sensor : sensorTemperatura){
-        entityManager().persist(sensor);
-      }
-    });
-  }
+    public void guardar(SensorTemperatura... sensorTemperatura) {
 
-  @Override
-  public void actualizar(SensorTemperatura sensorTemperatura) {
-    withTransaction(() -> entityManager().merge(sensorTemperatura));
-  }
+        withTransaction(() -> {
+            for (SensorTemperatura sensor : sensorTemperatura) {
+                entityManager().persist(sensor);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(SensorTemperatura sensorTemperatura) {
-    sensorTemperatura.borrarLogico();
-    withTransaction(() -> entityManager().merge(sensorTemperatura));
-  }
+    @Override
+    public void actualizar(SensorTemperatura sensorTemperatura) {
+        withTransaction(() -> entityManager().merge(sensorTemperatura));
+    }
+
+    @Override
+    public void eliminar(SensorTemperatura sensorTemperatura) {
+        sensorTemperatura.borrarLogico();
+        withTransaction(() -> entityManager().merge(sensorTemperatura));
+    }
 
   /*public static void main(String[] args) {
         SensorTemperatura m = new SensorTemperatura("otro");

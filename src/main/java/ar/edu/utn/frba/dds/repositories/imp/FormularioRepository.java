@@ -11,13 +11,13 @@ import java.util.Optional;
 public class FormularioRepository implements IFormularioRepository, WithSimplePersistenceUnit {
     @Override
     public Optional<Formulario> buscar(Long id) {
-        return Optional.ofNullable(entityManager().find(Formulario.class,id));
+        return Optional.ofNullable(entityManager().find(Formulario.class, id));
     }
 
     @Override
     public List<Formulario> buscarTodos() {
-        return entityManager().createQuery("from Formulario where activo=:activo",Formulario.class).
-                setParameter("activo",true)
+        return entityManager().createQuery("from Formulario where activo=:activo", Formulario.class).
+                setParameter("activo", true)
                 .getResultList();
     }
 
@@ -26,10 +26,10 @@ public class FormularioRepository implements IFormularioRepository, WithSimplePe
         withTransaction(() -> entityManager().persist(formulario));
     }
 
-    public void guardar(Formulario ...formulario) {
+    public void guardar(Formulario... formulario) {
 
         withTransaction(() -> {
-            for (Formulario form : formulario){
+            for (Formulario form : formulario) {
                 entityManager().persist(form);
             }
         });

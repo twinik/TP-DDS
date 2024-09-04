@@ -22,66 +22,66 @@ import java.util.Optional;
 public class FallasTecnicasRepository implements IFallasTecnicasRepository, WithSimplePersistenceUnit {
 
 
-  @Override
-  public Optional<FallaTecnica> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(FallaTecnica.class, id));
-  }
+    @Override
+    public Optional<FallaTecnica> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(FallaTecnica.class, id));
+    }
 
-  @Override
-  public List<FallaTecnica> buscarTodos() {
-    return entityManager().createQuery("from FallaTecnica where activo=:activo", FallaTecnica.class)
-        .setParameter("activo", true)
-        .getResultList();
-  }
+    @Override
+    public List<FallaTecnica> buscarTodos() {
+        return entityManager().createQuery("from FallaTecnica where activo=:activo", FallaTecnica.class)
+                .setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public List<FallaTecnica> buscarPorHeladera(Heladera heladera) {
-    return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera=:heladera and solucionado=:solucionado", FallaTecnica.class)
-        .setParameter("activo", true)
-        .setParameter("heladera", heladera)
-        .setParameter("solucionado", false)
-        .getResultList();
-  }
+    @Override
+    public List<FallaTecnica> buscarPorHeladera(Heladera heladera) {
+        return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera=:heladera and solucionado=:solucionado", FallaTecnica.class)
+                .setParameter("activo", true)
+                .setParameter("heladera", heladera)
+                .setParameter("solucionado", false)
+                .getResultList();
+    }
 
-  @Override
-  public List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha) {
-    LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
-    LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());
-    return entityManager().createQuery("from FallaTecnica where activo=:activo and timestamp between " +
-            ":principioSemana and :finSemana and solucionado=:solucionado", FallaTecnica.class).
-        setParameter("activo",true)
-        .setParameter("solucionado",false)
-        .setParameter("principioSemana",principioDeSemana)
-        .setParameter("finSemana",finDeSemana)
-        .getResultList();
-  }
+    @Override
+    public List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha) {
+        LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
+        LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());
+        return entityManager().createQuery("from FallaTecnica where activo=:activo and timestamp between " +
+                        ":principioSemana and :finSemana and solucionado=:solucionado", FallaTecnica.class).
+                setParameter("activo", true)
+                .setParameter("solucionado", false)
+                .setParameter("principioSemana", principioDeSemana)
+                .setParameter("finSemana", finDeSemana)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(FallaTecnica fallaTecnica) {
-    withTransaction(() -> entityManager().persist(fallaTecnica));
-  }
+    @Override
+    public void guardar(FallaTecnica fallaTecnica) {
+        withTransaction(() -> entityManager().persist(fallaTecnica));
+    }
 
-  @Override
-  public void actualizar(FallaTecnica fallaTecnica) {
-    withTransaction(() -> entityManager().merge(fallaTecnica));
-  }
+    @Override
+    public void actualizar(FallaTecnica fallaTecnica) {
+        withTransaction(() -> entityManager().merge(fallaTecnica));
+    }
 
-  @Override
-  public void eliminar(FallaTecnica fallaTecnica) {
-    fallaTecnica.borrarLogico();
-    withTransaction(() -> entityManager().merge(fallaTecnica));
-  }
+    @Override
+    public void eliminar(FallaTecnica fallaTecnica) {
+        fallaTecnica.borrarLogico();
+        withTransaction(() -> entityManager().merge(fallaTecnica));
+    }
 
-  public static void main(String[] args) {
-    Colaborador c = new Colaborador();
-    c.setUsuario(new Usuario("123","123"));
-    FallaTecnica f1 = new FallaTecnica(new Heladera(), LocalDateTime.now(),new TecnicosHelper(new TecnicosRepository()),
-        new NotificationStrategyFactory(),c,"hola","rerer");
+    public static void main(String[] args) {
+        Colaborador c = new Colaborador();
+        c.setUsuario(new Usuario("123", "123"));
+        FallaTecnica f1 = new FallaTecnica(new Heladera(), LocalDateTime.now(), new TecnicosHelper(new TecnicosRepository()),
+                new NotificationStrategyFactory(), c, "hola", "rerer");
 
-    FallasTecnicasRepository repo = new FallasTecnicasRepository();
-    repo.guardar(f1);
+        FallasTecnicasRepository repo = new FallasTecnicasRepository();
+        repo.guardar(f1);
 
-    Optional<FallaTecnica> f3 = repo.buscar(1L);
+        Optional<FallaTecnica> f3 = repo.buscar(1L);
 
-  }
+    }
 }

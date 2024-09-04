@@ -15,53 +15,54 @@ import java.util.Optional;
 public class RedistribucionesViandaRepository implements IRedistribucionesViandaRepository, WithSimplePersistenceUnit {
 
 
-  @Override
-  public Optional<RedistribucionViandas> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(RedistribucionViandas.class,id));
-  }
+    @Override
+    public Optional<RedistribucionViandas> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(RedistribucionViandas.class, id));
+    }
 
-  @Override
-  public List<RedistribucionViandas> buscarTodos() {
-    return entityManager().createQuery("from RedistribucionViandas where activo=:activo",RedistribucionViandas.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<RedistribucionViandas> buscarTodos() {
+        return entityManager().createQuery("from RedistribucionViandas where activo=:activo", RedistribucionViandas.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha) {
-    LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
-    LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
-    return entityManager().createQuery("from RedistribucionViandas where activo=:activo and fecha between " +
-            ":principioSemana and :finSemana", RedistribucionViandas.class).
-        setParameter("activo",true)
-        .setParameter("principioSemana",principioDeSemana)
-        .setParameter("finSemana",finDeSemana)
-        .getResultList();
-  }
+    @Override
+    public List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha) {
+        LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
+        LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
+        return entityManager().createQuery("from RedistribucionViandas where activo=:activo and fecha between " +
+                        ":principioSemana and :finSemana", RedistribucionViandas.class).
+                setParameter("activo", true)
+                .setParameter("principioSemana", principioDeSemana)
+                .setParameter("finSemana", finDeSemana)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(RedistribucionViandas redistribucionViandas) {
-    withTransaction(() -> entityManager().persist(redistribucionViandas));
-  }
-  public void guardar(RedistribucionViandas ...redistribucionViandas) {
+    @Override
+    public void guardar(RedistribucionViandas redistribucionViandas) {
+        withTransaction(() -> entityManager().persist(redistribucionViandas));
+    }
 
-    withTransaction(() -> {
-      for (RedistribucionViandas motivo : redistribucionViandas){
-        entityManager().persist(motivo);
-      }
-    });
-  }
+    public void guardar(RedistribucionViandas... redistribucionViandas) {
 
-  @Override
-  public void actualizar(RedistribucionViandas redistribucionViandas) {
-    withTransaction(() -> entityManager().merge(redistribucionViandas));
-  }
+        withTransaction(() -> {
+            for (RedistribucionViandas motivo : redistribucionViandas) {
+                entityManager().persist(motivo);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(RedistribucionViandas redistribucionViandas) {
-    redistribucionViandas.borrarLogico();
-    withTransaction(() -> entityManager().merge(redistribucionViandas));
-  }
+    @Override
+    public void actualizar(RedistribucionViandas redistribucionViandas) {
+        withTransaction(() -> entityManager().merge(redistribucionViandas));
+    }
+
+    @Override
+    public void eliminar(RedistribucionViandas redistribucionViandas) {
+        redistribucionViandas.borrarLogico();
+        withTransaction(() -> entityManager().merge(redistribucionViandas));
+    }
 
   /*public static void main(String[] args) {
         RedistribucionViandas m = new RedistribucionViandas("otro");

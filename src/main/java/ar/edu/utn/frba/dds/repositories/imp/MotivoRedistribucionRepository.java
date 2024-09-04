@@ -33,25 +33,26 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 //        }
 //        catch (NoResultException e){
 //            return Optional.empty();
-       // }
-        return Optional.ofNullable(entityManager().find(MotivoRedistribucionVianda.class,id));
+        // }
+        return Optional.ofNullable(entityManager().find(MotivoRedistribucionVianda.class, id));
     }
 
     @Override
     public List<MotivoRedistribucionVianda> buscarTodos() {
-        return entityManager().createQuery("from MotivoRedistribucionVianda where activo=:activo",MotivoRedistribucionVianda.class).
-            setParameter("activo",true)
-            .getResultList();
+        return entityManager().createQuery("from MotivoRedistribucionVianda where activo=:activo", MotivoRedistribucionVianda.class).
+                setParameter("activo", true)
+                .getResultList();
     }
 
     @Override
     public void guardar(MotivoRedistribucionVianda motivosRedistribucion) {
         withTransaction(() -> entityManager().persist(motivosRedistribucion));
     }
-    public void guardar(MotivoRedistribucionVianda ...motivosRedistribucion) {
+
+    public void guardar(MotivoRedistribucionVianda... motivosRedistribucion) {
 
         withTransaction(() -> {
-            for (MotivoRedistribucionVianda motivo : motivosRedistribucion){
+            for (MotivoRedistribucionVianda motivo : motivosRedistribucion) {
                 entityManager().persist(motivo);
             }
         });
@@ -88,7 +89,7 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 
         repositorio.eliminar(m1);
         m2.setMotivo("lo cambio");
-      repositorio.actualizar(m2);
+        repositorio.actualizar(m2);
 
         Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(1L);
         //System.out.println(hidratado.get().getMotivo());

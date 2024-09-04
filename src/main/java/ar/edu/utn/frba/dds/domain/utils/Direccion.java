@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Setter
 @Embeddable
 @NoArgsConstructor
-public class Direccion{
+public class Direccion {
     @Column(name = "calle")
     private String calle;
     @Column(name = "altura")

@@ -11,41 +11,42 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductoRepository implements IProductoRepository, WithSimplePersistenceUnit {
-  @Override
-  public Optional<Producto> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(Producto.class,id));
-  }
+    @Override
+    public Optional<Producto> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(Producto.class, id));
+    }
 
-  @Override
-  public List<Producto> buscarTodos() {
-    return entityManager().createQuery("from Producto where activo=:activo",Producto.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<Producto> buscarTodos() {
+        return entityManager().createQuery("from Producto where activo=:activo", Producto.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(Producto producto) {
-    withTransaction(() -> entityManager().persist(producto));
-  }
-  public void guardar(Producto ...producto) {
+    @Override
+    public void guardar(Producto producto) {
+        withTransaction(() -> entityManager().persist(producto));
+    }
 
-    withTransaction(() -> {
-      for (Producto prod : producto){
-        entityManager().persist(prod);
-      }
-    });
-  }
+    public void guardar(Producto... producto) {
 
-  @Override
-  public void actualizar(Producto producto) {
-    withTransaction(() -> entityManager().merge(producto));
-  }
+        withTransaction(() -> {
+            for (Producto prod : producto) {
+                entityManager().persist(prod);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(Producto producto) {
-    producto.borrarLogico();
-    withTransaction(() -> entityManager().merge(producto));
-  }
+    @Override
+    public void actualizar(Producto producto) {
+        withTransaction(() -> entityManager().merge(producto));
+    }
+
+    @Override
+    public void eliminar(Producto producto) {
+        producto.borrarLogico();
+        withTransaction(() -> entityManager().merge(producto));
+    }
 
   /*public static void main(String[] args) {
         Producto m = new Producto("otro");

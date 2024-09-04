@@ -6,14 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ITecnicosRepository {
-  Optional<Tecnico> buscar(TipoDocumento tipoDocumento, String documento);
-  Optional<Tecnico> buscar(Long id);
+    Optional<Tecnico> buscar(TipoDocumento tipoDocumento, String documento);
 
-  List<Tecnico> buscarTodos();
+    Optional<Tecnico> buscar(Long id);
 
-  void guardar(Tecnico tecnico);
+    List<Tecnico> buscarTodos();
 
-  void actualizar(Tecnico tecnico);
+    void guardar(Tecnico tecnico);
 
-  void eliminar(Tecnico tecnico);
+    void actualizar(Tecnico tecnico);
+
+    void eliminar(Tecnico tecnico);
 }

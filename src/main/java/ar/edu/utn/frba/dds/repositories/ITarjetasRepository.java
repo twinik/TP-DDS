@@ -9,14 +9,15 @@ import java.util.Optional;
  * IColaboradorRepository interface permite interactuar con las tarjetas de las personas vulnerables.
  */
 public interface ITarjetasRepository {
-  Optional<Tarjeta> buscar(String codigo);
-  Optional<Tarjeta> buscar(Long id);
+    Optional<Tarjeta> buscar(String codigo);
 
-  List<Tarjeta> buscarTodos();
+    Optional<Tarjeta> buscar(Long id);
 
-  void guardar(Tarjeta tarjeta);
+    List<Tarjeta> buscarTodos();
 
-  void actualizar(Tarjeta tarjeta);
+    void guardar(Tarjeta tarjeta);
 
-  void eliminar(Tarjeta tarjeta);
+    void actualizar(Tarjeta tarjeta);
+
+    void eliminar(Tarjeta tarjeta);
 }

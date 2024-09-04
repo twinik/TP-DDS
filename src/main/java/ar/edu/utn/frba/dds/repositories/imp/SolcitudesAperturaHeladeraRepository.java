@@ -12,41 +12,42 @@ import java.util.Optional;
 public class SolcitudesAperturaHeladeraRepository implements ISolicitudesAperturaHeladeraRepository, WithSimplePersistenceUnit {
 
 
-  @Override
-  public Optional<SolicitudAperturaHeladera> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(SolicitudAperturaHeladera.class,id));
-  }
+    @Override
+    public Optional<SolicitudAperturaHeladera> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(SolicitudAperturaHeladera.class, id));
+    }
 
-  @Override
-  public List<SolicitudAperturaHeladera> buscarTodos() {
-    return entityManager().createQuery("from SolicitudAperturaHeladera where activo=:activo",SolicitudAperturaHeladera.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<SolicitudAperturaHeladera> buscarTodos() {
+        return entityManager().createQuery("from SolicitudAperturaHeladera where activo=:activo", SolicitudAperturaHeladera.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(SolicitudAperturaHeladera solicitudAperturaHeladera) {
-    withTransaction(() -> entityManager().persist(solicitudAperturaHeladera));
-  }
-  public void guardar(SolicitudAperturaHeladera ...solicitudAperturaHeladera) {
+    @Override
+    public void guardar(SolicitudAperturaHeladera solicitudAperturaHeladera) {
+        withTransaction(() -> entityManager().persist(solicitudAperturaHeladera));
+    }
 
-    withTransaction(() -> {
-      for (SolicitudAperturaHeladera solicitud : solicitudAperturaHeladera){
-        entityManager().persist(solicitud);
-      }
-    });
-  }
+    public void guardar(SolicitudAperturaHeladera... solicitudAperturaHeladera) {
 
-  @Override
-  public void actualizar(SolicitudAperturaHeladera solicitudAperturaHeladera) {
-    withTransaction(() -> entityManager().merge(solicitudAperturaHeladera));
-  }
+        withTransaction(() -> {
+            for (SolicitudAperturaHeladera solicitud : solicitudAperturaHeladera) {
+                entityManager().persist(solicitud);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(SolicitudAperturaHeladera solicitudAperturaHeladera) {
-    solicitudAperturaHeladera.borrarLogico();
-    withTransaction(() -> entityManager().merge(solicitudAperturaHeladera));
-  }
+    @Override
+    public void actualizar(SolicitudAperturaHeladera solicitudAperturaHeladera) {
+        withTransaction(() -> entityManager().merge(solicitudAperturaHeladera));
+    }
+
+    @Override
+    public void eliminar(SolicitudAperturaHeladera solicitudAperturaHeladera) {
+        solicitudAperturaHeladera.borrarLogico();
+        withTransaction(() -> entityManager().merge(solicitudAperturaHeladera));
+    }
 
   /*public static void main(String[] args) {
         SolicitudAperturaHeladera m = new SolicitudAperturaHeladera("otro");

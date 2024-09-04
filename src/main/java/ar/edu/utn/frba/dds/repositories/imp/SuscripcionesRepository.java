@@ -16,41 +16,42 @@ import java.util.Optional;
  */
 public class SuscripcionesRepository implements ISuscripcionesRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<Suscripcion> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(Suscripcion.class,id));
-  }
+    @Override
+    public Optional<Suscripcion> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(Suscripcion.class, id));
+    }
 
-  @Override
-  public List<Suscripcion> buscarTodos() {
-    return entityManager().createQuery("from Suscripcion where activo=:activo",Suscripcion.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<Suscripcion> buscarTodos() {
+        return entityManager().createQuery("from Suscripcion where activo=:activo", Suscripcion.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(Suscripcion suscripcion) {
-    withTransaction(() -> entityManager().persist(suscripcion));
-  }
-  public void guardar(Suscripcion ...suscripcion) {
+    @Override
+    public void guardar(Suscripcion suscripcion) {
+        withTransaction(() -> entityManager().persist(suscripcion));
+    }
 
-    withTransaction(() -> {
-      for (Suscripcion sus : suscripcion){
-        entityManager().persist(sus);
-      }
-    });
-  }
+    public void guardar(Suscripcion... suscripcion) {
 
-  @Override
-  public void actualizar(Suscripcion suscripcion) {
-    withTransaction(() -> entityManager().merge(suscripcion));
-  }
+        withTransaction(() -> {
+            for (Suscripcion sus : suscripcion) {
+                entityManager().persist(sus);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(Suscripcion suscripcion) {
-    suscripcion.borrarLogico();
-    withTransaction(() -> entityManager().merge(suscripcion));
-  }
+    @Override
+    public void actualizar(Suscripcion suscripcion) {
+        withTransaction(() -> entityManager().merge(suscripcion));
+    }
+
+    @Override
+    public void eliminar(Suscripcion suscripcion) {
+        suscripcion.borrarLogico();
+        withTransaction(() -> entityManager().merge(suscripcion));
+    }
 
   /*public static void main(String[] args) {
         Suscripcion m = new Suscripcion("otro");

@@ -16,15 +16,15 @@ import javax.persistence.*;
 public class MedioDeContacto extends EntidadPersistente {
 
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "canal")
-  private CanalContacto canal;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "canal")
+    private CanalContacto canal;
 
-  @Column(name = "contacto")
-  private String contacto;
+    @Column(name = "contacto")
+    private String contacto;
 
-  public MedioDeContacto(CanalContacto canal, String contacto) {
-    this.canal = canal;
-    this.contacto = contacto;
-  }
+    public MedioDeContacto(CanalContacto canal, String contacto) {
+        this.canal = canal;
+        this.contacto = contacto;
+    }
 }

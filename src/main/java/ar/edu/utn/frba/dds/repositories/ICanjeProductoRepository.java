@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICanjeProductoRepository {
-  Optional<CanjeProducto> buscar(Long id);
+    Optional<CanjeProducto> buscar(Long id);
 
-  List<CanjeProducto> buscarTodos();
+    List<CanjeProducto> buscarTodos();
 
-  void guardar(CanjeProducto canje);
+    void guardar(CanjeProducto canje);
 
-  void actualizar(CanjeProducto canje);
+    void actualizar(CanjeProducto canje);
 
-  void eliminar(CanjeProducto canje);
+    void eliminar(CanjeProducto canje);
 }

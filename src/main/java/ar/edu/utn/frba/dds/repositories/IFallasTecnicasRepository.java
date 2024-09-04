@@ -12,17 +12,17 @@ import java.util.Optional;
  * IAlertasRepository interface permite interactuar con las alertas.
  */
 public interface IFallasTecnicasRepository {
-  Optional<FallaTecnica> buscar(Long id);
+    Optional<FallaTecnica> buscar(Long id);
 
-  List<FallaTecnica> buscarTodos();
+    List<FallaTecnica> buscarTodos();
 
-  List<FallaTecnica> buscarPorHeladera(Heladera heladera);
+    List<FallaTecnica> buscarPorHeladera(Heladera heladera);
 
-  List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha);
+    List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha);
 
-  void guardar(FallaTecnica fallaTecnica);
+    void guardar(FallaTecnica fallaTecnica);
 
-  void actualizar(FallaTecnica fallaTecnica);
+    void actualizar(FallaTecnica fallaTecnica);
 
-  void eliminar(FallaTecnica fallaTecnica);
+    void eliminar(FallaTecnica fallaTecnica);
 }

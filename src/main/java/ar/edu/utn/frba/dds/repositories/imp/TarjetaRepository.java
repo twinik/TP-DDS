@@ -18,62 +18,61 @@ import java.util.Optional;
 public class TarjetaRepository implements ITarjetasRepository, WithSimplePersistenceUnit {
 
 
-  @Override
-  public Optional<Tarjeta> buscar(String codigo) {
-    try{
-      Tarjeta t = (Tarjeta) entityManager().createQuery("from Tarjeta where codigo=:codigo")
-          .setParameter("codigo",codigo)
-          .getSingleResult();
-      return Optional.ofNullable(t);
+    @Override
+    public Optional<Tarjeta> buscar(String codigo) {
+        try {
+            Tarjeta t = (Tarjeta) entityManager().createQuery("from Tarjeta where codigo=:codigo")
+                    .setParameter("codigo", codigo)
+                    .getSingleResult();
+            return Optional.ofNullable(t);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
-    catch (NoResultException e){
-      return Optional.empty();
+
+    @Override
+    public Optional<Tarjeta> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(Tarjeta.class, id));
     }
-  }
 
-  @Override
-  public Optional<Tarjeta> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(Tarjeta.class,id));
-  }
+    @Override
+    public List<Tarjeta> buscarTodos() {
+        return entityManager().createQuery("from Tarjeta where activo=:activo", Tarjeta.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public List<Tarjeta> buscarTodos() {
-    return entityManager().createQuery("from Tarjeta where activo=:activo",Tarjeta.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public void guardar(Tarjeta tarjeta) {
+        withTransaction(() -> entityManager().persist(tarjeta));
+    }
 
-  @Override
-  public void guardar(Tarjeta tarjeta) {
-    withTransaction(() -> entityManager().persist(tarjeta));
-  }
+    public void guardar(Tarjeta... tarjeta) {
 
-  public void guardar(Tarjeta ...tarjeta) {
+        withTransaction(() -> {
+            for (Tarjeta card : tarjeta) {
+                entityManager().persist(card);
+            }
+        });
+    }
 
-    withTransaction(() -> {
-      for (Tarjeta card : tarjeta){
-        entityManager().persist(card);
-      }
-    });
-  }
-
-  @Override
-  public void actualizar(Tarjeta tarjeta) {
-    // nada
-    //withTransaction(() -> entityManager().merge(tarjeta));
-  }
+    @Override
+    public void actualizar(Tarjeta tarjeta) {
+        // nada
+        //withTransaction(() -> entityManager().merge(tarjeta));
+    }
 
 
-  @Override
-  public void eliminar(Tarjeta tarjeta) {
-    tarjeta.borrarLogico();
-    withTransaction(() -> entityManager().merge(tarjeta));
-  }
+    @Override
+    public void eliminar(Tarjeta tarjeta) {
+        tarjeta.borrarLogico();
+        withTransaction(() -> entityManager().merge(tarjeta));
+    }
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
         PersonaVulnerable p = new PersonaVulnerable();
         p.setNombre("juancito");
-        Tarjeta m = new Tarjeta("uncodigo",2,new FrecuenciaDiaria(),p,null,3);
+        Tarjeta m = new Tarjeta("uncodigo", 2, new FrecuenciaDiaria(), p, null, 3);
         ITarjetasRepository repositorio = ServiceLocator.get("tarjetasRepository", ITarjetasRepository.class);
         repositorio.guardar(m);
 

@@ -7,9 +7,9 @@ import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
  */
 public class FormaColaboracionMapper {
 
-  /**
-   * obtenerFormaColaboracion method permite obtener una forma de colaboracion.
-   */
+    /**
+     * obtenerFormaColaboracion method permite obtener una forma de colaboracion.
+     */
 //  public static FormaColaboracion obtenerFormaColaboracion(String formaColaboracion) {
 //    return switch (formaColaboracion) {
 //      case "DINERO" -> FormaColaboracion.DONACION_DINERO;

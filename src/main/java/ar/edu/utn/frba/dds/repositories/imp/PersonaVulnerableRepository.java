@@ -9,41 +9,42 @@ import java.util.List;
 import java.util.Optional;
 
 public class PersonaVulnerableRepository implements IPersonaVulnerableRepository, WithSimplePersistenceUnit {
-  @Override
-  public Optional<PersonaVulnerable> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(PersonaVulnerable.class,id));
-  }
+    @Override
+    public Optional<PersonaVulnerable> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(PersonaVulnerable.class, id));
+    }
 
-  @Override
-  public List<PersonaVulnerable> buscarTodos() {
-    return entityManager().createQuery("from PersonaVulnerable where activo=:activo",PersonaVulnerable.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<PersonaVulnerable> buscarTodos() {
+        return entityManager().createQuery("from PersonaVulnerable where activo=:activo", PersonaVulnerable.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(PersonaVulnerable persona) {
-    withTransaction(() -> entityManager().persist(persona));
-  }
-  public void guardar(PersonaVulnerable ...persona) {
+    @Override
+    public void guardar(PersonaVulnerable persona) {
+        withTransaction(() -> entityManager().persist(persona));
+    }
 
-    withTransaction(() -> {
-      for (PersonaVulnerable perVu : persona){
-        entityManager().persist(perVu);
-      }
-    });
-  }
+    public void guardar(PersonaVulnerable... persona) {
 
-  @Override
-  public void actualizar(PersonaVulnerable persona) {
-    withTransaction(() -> entityManager().merge(persona));
-  }
+        withTransaction(() -> {
+            for (PersonaVulnerable perVu : persona) {
+                entityManager().persist(perVu);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(PersonaVulnerable persona) {
-    persona.borrarLogico();
-    withTransaction(() -> entityManager().merge(persona));
-  }
+    @Override
+    public void actualizar(PersonaVulnerable persona) {
+        withTransaction(() -> entityManager().merge(persona));
+    }
+
+    @Override
+    public void eliminar(PersonaVulnerable persona) {
+        persona.borrarLogico();
+        withTransaction(() -> entityManager().merge(persona));
+    }
 
   /* public static void main(String[] args) {
         PersonaVulnerable m = new PersonaVulnerable("otro");

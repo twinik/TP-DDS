@@ -8,13 +8,13 @@ import java.util.Optional;
  * IPersonaVulenerableRepository interface permite interactuar con las alertas.
  */
 public interface IPersonaVulnerableRepository {
-  Optional<PersonaVulnerable> buscar(Long id);
+    Optional<PersonaVulnerable> buscar(Long id);
 
-  List<PersonaVulnerable> buscarTodos();
+    List<PersonaVulnerable> buscarTodos();
 
-  void guardar(PersonaVulnerable persona);
+    void guardar(PersonaVulnerable persona);
 
-  void actualizar(PersonaVulnerable persona);
+    void actualizar(PersonaVulnerable persona);
 
-  void eliminar(PersonaVulnerable persona);
+    void eliminar(PersonaVulnerable persona);
 }

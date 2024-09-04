@@ -15,54 +15,55 @@ import java.util.Optional;
 @NoArgsConstructor
 public class ViandasRepository implements IViandasRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<Vianda> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(Vianda.class,id));
-  }
+    @Override
+    public Optional<Vianda> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(Vianda.class, id));
+    }
 
-  @Override
-  public List<Vianda> buscarTodos() {
-    return entityManager().createQuery("from Vianda where activo=:activo",Vianda.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<Vianda> buscarTodos() {
+        return entityManager().createQuery("from Vianda where activo=:activo", Vianda.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public List<Vianda> buscarTodosMismaSemana(LocalDate fecha){
-    LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
-    LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
-    return entityManager().createQuery("from Vianda where activo=:activo and fechaDonacion between " +
-            ":principioSemana and :finSemana and entregada=:entregada",Vianda.class).
-        setParameter("activo",true)
-        .setParameter("entregada",true)
-        .setParameter("principioSemana",principioDeSemana)
-        .setParameter("finSemana",finDeSemana)
-        .getResultList();
-  }
+    @Override
+    public List<Vianda> buscarTodosMismaSemana(LocalDate fecha) {
+        LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
+        LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
+        return entityManager().createQuery("from Vianda where activo=:activo and fechaDonacion between " +
+                        ":principioSemana and :finSemana and entregada=:entregada", Vianda.class).
+                setParameter("activo", true)
+                .setParameter("entregada", true)
+                .setParameter("principioSemana", principioDeSemana)
+                .setParameter("finSemana", finDeSemana)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(Vianda vianda) {
-    withTransaction(() -> entityManager().persist(vianda));
-  }
-  public void guardar(Vianda ...vianda) {
+    @Override
+    public void guardar(Vianda vianda) {
+        withTransaction(() -> entityManager().persist(vianda));
+    }
 
-    withTransaction(() -> {
-      for (Vianda via : vianda){
-        entityManager().persist(via);
-      }
-    });
-  }
+    public void guardar(Vianda... vianda) {
 
-  @Override
-  public void actualizar(Vianda vianda) {
-    withTransaction(() -> entityManager().merge(vianda));
-  }
+        withTransaction(() -> {
+            for (Vianda via : vianda) {
+                entityManager().persist(via);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(Vianda vianda) {
-    vianda.borrarLogico();
-    withTransaction(() -> entityManager().merge(vianda));
-  }
+    @Override
+    public void actualizar(Vianda vianda) {
+        withTransaction(() -> entityManager().merge(vianda));
+    }
+
+    @Override
+    public void eliminar(Vianda vianda) {
+        vianda.borrarLogico();
+        withTransaction(() -> entityManager().merge(vianda));
+    }
 
   /*public static void main(String[] args) {
         Vianda m = new Vianda("otro");

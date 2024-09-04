@@ -16,41 +16,42 @@ import java.util.Optional;
 @NoArgsConstructor
 public class UsuariosRepository implements IUsuariosRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<Usuario> buscar(Long id) {
-    return Optional.ofNullable(entityManager().find(Usuario.class,id));
-  }
+    @Override
+    public Optional<Usuario> buscar(Long id) {
+        return Optional.ofNullable(entityManager().find(Usuario.class, id));
+    }
 
-  @Override
-  public List<Usuario> buscarTodos() {
-    return entityManager().createQuery("from Usuario where activo=:activo",Usuario.class).
-            setParameter("activo",true)
-            .getResultList();
-  }
+    @Override
+    public List<Usuario> buscarTodos() {
+        return entityManager().createQuery("from Usuario where activo=:activo", Usuario.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(Usuario usuario) {
-    withTransaction(() -> entityManager().persist(usuario));
-  }
-  public void guardar(Usuario ...usuario) {
+    @Override
+    public void guardar(Usuario usuario) {
+        withTransaction(() -> entityManager().persist(usuario));
+    }
 
-    withTransaction(() -> {
-      for (Usuario user : usuario){
-        entityManager().persist(user);
-      }
-    });
-  }
+    public void guardar(Usuario... usuario) {
 
-  @Override
-  public void actualizar(Usuario usuario) {
-    withTransaction(() -> entityManager().merge(usuario));
-  }
+        withTransaction(() -> {
+            for (Usuario user : usuario) {
+                entityManager().persist(user);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(Usuario usuario) {
-    usuario.borrarLogico();
-    withTransaction(() -> entityManager().merge(usuario));
-  }
+    @Override
+    public void actualizar(Usuario usuario) {
+        withTransaction(() -> entityManager().merge(usuario));
+    }
+
+    @Override
+    public void eliminar(Usuario usuario) {
+        usuario.borrarLogico();
+        withTransaction(() -> entityManager().merge(usuario));
+    }
 
   /* public static void main(String[] args) {
         Usuario m = new Usuario("otro");
