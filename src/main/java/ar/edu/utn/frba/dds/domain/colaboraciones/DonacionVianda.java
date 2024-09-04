@@ -41,7 +41,7 @@ public class DonacionVianda extends EntidadPersistente implements IPuntajeCalcul
   @JoinColumn(name = "vianda_id", referencedColumnName = "id", nullable = false, unique = true)
   private Vianda vianda;
 
-  private static final Float PUNTATE_POR_DONACION = 1.5f;
+  private static final Float PUNTAJE_POR_DONACION = 1.5f;
 
   public DonacionVianda(Colaborador colaborador, LocalDate fecha, Vianda vianda) {
     this.colaborador = colaborador;
@@ -51,6 +51,6 @@ public class DonacionVianda extends EntidadPersistente implements IPuntajeCalcul
 
   @Override
   public Float calcularPuntaje() {
-    return PUNTATE_POR_DONACION;
+    return PUNTAJE_POR_DONACION;
   }
 }

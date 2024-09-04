@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
@@ -24,6 +25,14 @@ public class DonacionesVIandaRepository implements IDonacionesViandaRepository, 
     return entityManager().createQuery("from DonacionVianda where activo=:activo",DonacionVianda.class).
             setParameter("activo",true)
             .getResultList();
+  }
+
+  @Override
+  public List<DonacionVianda> buscarPorColaborador(Colaborador c) {
+    return entityManager().createQuery("from DonacionVianda  where activo=:activo and colaborador=:colaborador")
+        .setParameter("activo",true)
+        .setParameter("colaborador",c)
+        .getResultList();
   }
 
   @Override

@@ -25,7 +25,9 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "colaborador")
+@Table(name = "colaborador",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"tipo_documento", "documento"})
+)
 @Getter
 @Setter
 @AllArgsConstructor
@@ -37,9 +39,10 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     private Usuario usuario;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_documento")
     private TipoDocumento tipoDocumento;
 
-    @Column(columnDefinition = "varchar(11)")
+    @Column(name = "documento", columnDefinition = "varchar(11)")
     private String documento;
 
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 public class Usuario extends EntidadPersistente {
-  @Column(name = "email")
+  @Column(name = "email", unique = true)
   private String email;
 
   @Column(name = "clave")
