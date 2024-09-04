@@ -23,7 +23,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 public class Suscripcion extends EntidadPersistente {
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 

@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
 import ar.edu.utn.frba.dds.messageFactory.MensajeExcepcionDireccionTarjetaFactory;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,12 +26,12 @@ public class TarjetaColaborador extends EntidadPersistente {
   @Column(name = "codigo", unique = true)
   private String codigo;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", unique = true)
   private Colaborador colaborador;
 
-  @Column(name = "activa")
-  private boolean activa;
+  @Column(name = "tarjeta_activa")
+  private boolean tarjetaActiva;
 
   @Column(name = "fecha_alta", columnDefinition = "DATE")
   private LocalDate fechaAlta;
@@ -40,14 +39,14 @@ public class TarjetaColaborador extends EntidadPersistente {
   @Column(name = "fecha_baja", columnDefinition = "DATE")
   private LocalDate fechaBaja;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
   @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
   private List<AperturaHeladera> usos;
 
   public TarjetaColaborador(String codigo, Colaborador colaborador, boolean activa, LocalDate fechaAlta, LocalDate fechaBaja, List<AperturaHeladera> usos) {
     this.codigo = codigo;
     this.colaborador = colaborador;
-    this.activa = activa;
+    this.tarjetaActiva = activa;
     this.fechaAlta = fechaAlta;
     this.fechaBaja = fechaBaja;
     this.usos = usos;

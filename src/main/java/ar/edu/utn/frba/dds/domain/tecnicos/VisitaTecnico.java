@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class VisitaTecnico extends EntidadPersistente {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id", nullable = false)
     private Tecnico tecnico;
 
@@ -42,7 +42,7 @@ public class VisitaTecnico extends EntidadPersistente {
     @Column(name = "esta_solucionado")
     private boolean solucionado;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "incidente_id", referencedColumnName = "id", nullable = false)
     private Incidente incidente;
 }

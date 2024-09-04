@@ -40,7 +40,7 @@ import java.time.LocalDateTime;
 @Table(name = "incidente")
 @DiscriminatorColumn(name = "tipo_incidente")
 public class Incidente extends EntidadPersistente {
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;
 

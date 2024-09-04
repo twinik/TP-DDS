@@ -27,11 +27,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Setter
 @NoArgsConstructor
 public class RespuestaFormulario extends EntidadPersistente {
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "formulario_id",referencedColumnName = "id")
   private Formulario formulario;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
   @JoinColumn(name = "respuesta_formulario_id",referencedColumnName = "id")
   private List<RespuestaACampo> respuestas = new ArrayList<>();
 

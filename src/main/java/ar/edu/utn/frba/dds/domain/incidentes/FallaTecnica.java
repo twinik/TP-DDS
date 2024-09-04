@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @DiscriminatorValue("falla_tecnica")
 @NoArgsConstructor
 public class FallaTecnica extends Incidente {
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "colaborador_id",referencedColumnName = "id")
     private Colaborador colaborador;
     @Column(name = "descripcion",columnDefinition = "TEXT")

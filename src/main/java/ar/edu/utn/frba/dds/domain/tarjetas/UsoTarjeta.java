@@ -22,7 +22,7 @@ public class UsoTarjeta extends EntidadPersistente {
   @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
   private LocalDateTime fechaUso;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private Heladera heladera;
 

@@ -57,11 +57,11 @@ public class PersonaVulnerable extends EntidadPersistente {
     @Column(name = "nro_documento", columnDefinition = "varchar(11)")
     private String nroDocumento;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private List<PersonaVulnerable> tutorados;
 

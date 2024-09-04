@@ -36,7 +36,7 @@ public class Campo extends EntidadPersistente {
   @Column(name = "obligatorio")
   private boolean obligatorio;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
   @JoinColumn(name = "campo_id",referencedColumnName = "id")
   private List<Opcion> opciones;
 

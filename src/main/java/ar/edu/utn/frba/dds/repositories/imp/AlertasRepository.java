@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
@@ -40,6 +41,16 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
         .setParameter("solucionado",false)
         .setParameter("principioSemana", principioDeSemana)
         .setParameter("finSemana", finDeSemana)
+        .getResultList();
+  }
+
+  @Override
+  public List<Alerta> buscarAlertasHeladera(Heladera heladera) {
+    return entityManager().createQuery("from Alerta where activo=:activo" +
+            " and Heladera=:heladera and solucionado=:no_solucionado", Alerta.class)
+        .setParameter("activo", true)
+        .setParameter("heladera",heladera)
+        .setParameter("no_solucionado",false)
         .getResultList();
   }
 

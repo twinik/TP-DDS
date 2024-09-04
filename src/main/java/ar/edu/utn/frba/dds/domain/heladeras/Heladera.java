@@ -30,8 +30,8 @@ public class Heladera extends EntidadPersistente {
   @Embedded
   private Direccion direccion;
 
-  @Column(name = "activa")
-  private boolean activa = true;
+  @Column(name = "heladera_activa")
+  private boolean heladeraActiva = true;
 
   @Column(name = "nombre")
   private String nombre;
@@ -42,26 +42,26 @@ public class Heladera extends EntidadPersistente {
   @Column(name = "fecha_puesta_funcionamiento", columnDefinition = "DATE")
   private LocalDate fechaPuestaFuncionamiento;
 
-  @OneToMany(mappedBy = "heladera",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "heladera", fetch = FetchType.LAZY)
   private List<Vianda> viandas = new ArrayList<>();
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "modelo_id", referencedColumnName = "id")
   private ModeloHeladera modelo;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.LAZY)
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
 
-  @OneToMany(mappedBy = "heladera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "heladera", fetch = FetchType.LAZY)
   private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private List<Suscripcion> suscripciones = new ArrayList<>();
 
   // TODO: QUIZAS DELEGAR A UNA CLASE CON ATRIBUTO DISTANCIA O YA ES MUCHO
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "cercania_heladera", inverseJoinColumns = @JoinColumn(name = "heladera2_id",referencedColumnName = "id"),
   joinColumns = @JoinColumn(name = "heldera1_id",referencedColumnName = "id"))
   private List<Heladera> heladerasCercanas = new ArrayList<>();
@@ -119,7 +119,7 @@ public class Heladera extends EntidadPersistente {
   }
 
   public void inhabilitar() {
-    this.activa = false;
+    this.heladeraActiva = false;
     avisarObservers();
   }
 

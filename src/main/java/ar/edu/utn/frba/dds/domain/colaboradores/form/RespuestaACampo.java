@@ -29,14 +29,14 @@ import javax.persistence.Table;
 @Table(name = "respuesta_campo")
 public class RespuestaACampo extends EntidadPersistente {
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "campo_id", referencedColumnName = "id")
   private Campo campo;
 
   @Column(columnDefinition = "TEXT")
   private String respuesta;
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "opciones_x_respuesta", inverseJoinColumns = @JoinColumn(name = "opcion_elegida_id",referencedColumnName = "id"),
   joinColumns = @JoinColumn(name = "respuesta_a_campo_id",referencedColumnName = "id"))
   private List<Opcion> opcionesElegidas = new ArrayList<>();

@@ -18,7 +18,7 @@ public class CalculadorHeladerasCercanas {
 
   public List<Heladera> getHeladerasCercanasA(Heladera heladera){
     return heladerasRepository.buscarTodos().stream()
-        .filter(Heladera::isActiva)
+        .filter(Heladera::isHeladeraActiva)
         .sorted(Comparator.comparing(h -> h.getUbicacion().calcularDistanciaHasta(heladera.getUbicacion())))
         .limit(this.limite)
         .collect(Collectors.toList());

@@ -33,7 +33,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class AperturaHeladera extends EntidadPersistente {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id",unique = true)
     private SolicitudAperturaHeladera solicitud;
 

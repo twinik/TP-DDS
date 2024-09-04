@@ -10,8 +10,6 @@ import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
-import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -35,7 +33,7 @@ public class SuscripcionDesperfectoTest {
 
 
     Heladera heladera = new Heladera(LocalDate.now());
-    heladera.setActiva(true);
+    heladera.setHeladeraActiva(true);
     heladera.agregarSuscripcion(sucripcion);
     heladera.inhabilitar();
 

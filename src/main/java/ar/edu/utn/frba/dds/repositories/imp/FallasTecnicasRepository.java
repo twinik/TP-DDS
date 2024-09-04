@@ -35,6 +35,15 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
   }
 
   @Override
+  public List<FallaTecnica> buscarPorHeladera(Heladera heladera) {
+    return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera=:heladera and solucionado=:solucionado", FallaTecnica.class)
+        .setParameter("activo", true)
+        .setParameter("heladera", heladera)
+        .setParameter("solucionado", false)
+        .getResultList();
+  }
+
+  @Override
   public List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha) {
     LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
     LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());

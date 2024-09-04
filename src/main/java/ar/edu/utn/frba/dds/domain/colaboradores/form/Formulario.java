@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @Table(name = "formulario")
 public class Formulario extends EntidadPersistente {
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
   @JoinColumn(name = "formulario_id", referencedColumnName = "id")
   private List<Campo> campos;
 

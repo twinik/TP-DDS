@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Getter
 public abstract class EntidadPersistente {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue
   protected Long id;
   @Column(name = "created_at", columnDefinition = "TIMESTAMP")
   protected LocalDateTime crated_at;

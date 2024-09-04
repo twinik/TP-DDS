@@ -28,18 +28,18 @@ public class Tarjeta extends EntidadPersistente {
   @Column(name = "nro_usos")
   private Integer nroUsos;
 
-  @Column(name = "activa")
-  private boolean activa;
+  @Column(name = "tarjeta_activa")
+  private boolean tarjetaActiva;
 
   @Convert(converter = FrecuenciaUsoAttributeConverter.class)
   @Column(name = "frecuencia_permitida")
   private FrecuenciaUso frecuenciaPermitida;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
   @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
   private List<UsoTarjeta> usos;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "duenio_id", referencedColumnName = "id",unique = true)
   private PersonaVulnerable duenio;
 
@@ -60,7 +60,7 @@ public class Tarjeta extends EntidadPersistente {
     this.codigo = codigo;
     this.nroUsos = nroUsos;
     this.frecuenciaPermitida = frecuenciaPermitida;
-    this.activa = true;
+    this.tarjetaActiva = true;
     this.usos = new ArrayList<>();
     this.duenio = duenio;
     this.fechaAdjudicacion = fechaAdjudicacion;
@@ -77,7 +77,7 @@ public class Tarjeta extends EntidadPersistente {
   }
 
   boolean permiteUsar() {
-    return this.activa && frecuenciaPermitida.permiteUsar(this);
+    return this.tarjetaActiva && frecuenciaPermitida.permiteUsar(this);
   }
 
   public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, LocalDate fechaAdjudicacion, Integer cantidadUsosDia) {

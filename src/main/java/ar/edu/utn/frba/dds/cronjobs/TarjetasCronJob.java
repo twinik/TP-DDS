@@ -8,7 +8,7 @@ public class TarjetasCronJob {
   public static void main(String[] args) {
     ITarjetasRepository repository = ServiceLocator.get("tarjetasRepository", ITarjetasRepository.class);
     if (repository != null) {
-      repository.buscarTodos().stream().filter(Tarjeta::isActiva).forEach(Tarjeta::resetearUsosDiarios);
+      repository.buscarTodos().stream().filter(Tarjeta::isTarjetaActiva).forEach(Tarjeta::resetearUsosDiarios);
     }
   }
 }

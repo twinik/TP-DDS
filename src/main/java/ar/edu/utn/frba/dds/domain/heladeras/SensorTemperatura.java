@@ -25,7 +25,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sensor_temperatura")
 public class SensorTemperatura extends EntidadPersistente {
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "heladera_id",referencedColumnName = "id")
   private Heladera heladera;
 

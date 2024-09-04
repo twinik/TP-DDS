@@ -34,7 +34,7 @@ import javax.persistence.Transient;
 @NoArgsConstructor
 public class SolicitudAperturaHeladera extends EntidadPersistente {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 
@@ -44,7 +44,7 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     @Column(name = "timestamp", columnDefinition = "DATETIME")
     private LocalDateTime timestamp;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
