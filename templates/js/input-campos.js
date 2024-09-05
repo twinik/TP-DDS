@@ -1,8 +1,12 @@
-var medioContactoIndex = 1;
+let camposIndex = 1;
+let indicesDisponibles = [];
+
+const opcionesIndex = {};
+const indicesOpcionesDisponibles = {};
 
 const getNewCampoHtml = index => {
     return `<div id="campo-${index}">
-        <strong class="mt-5">Campo ${index}</strong>
+        <strong class="mt-5 mb-5">Campo ${index}</strong>
         <label for="tipo-campo-${index}"
             class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >Tipo de campo</label
@@ -35,19 +39,12 @@ const getNewCampoHtml = index => {
             <div id="opciones-campo-${index}">
                 <div id="opcion-1-campo-${index}">
                     <label for="opcion-1-campo-${index}-input"
-                        class="mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opción
+                        class="mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opción 1
                     </label>
                     <div class="flex flex-row">
                         <input type="text" id="opcion-1-campo-${index}-input"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Valor opción" />
-
-                        <div class="flex items-center mx-2">
-                            <input id="correcta-opcion-1-campo-${index}" type="checkbox" value="es-correcta-opcion-1-campo-${index}"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="correcta-opcion-1-campo-${index}"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Correcta</label>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -69,80 +66,85 @@ const getNewCampoHtml = index => {
 };
 
 const nuevoCampo = () => {
-    medioContactoIndex++;
-    console.log(medioContactoIndex);
-    let cont = document.getElementById("camposContainer");
-    let newElement = getNewCampoHtml(medioContactoIndex);
-    cont.innerHTML += newElement;
+    let nuevoIndex;
+
+    if (indicesDisponibles.length > 0) {
+        nuevoIndex = indicesDisponibles.shift();
+    } else {
+        nuevoIndex = ++camposIndex;
+    }
+
+    opcionesIndex[nuevoIndex] = 1;
+    indicesOpcionesDisponibles[nuevoIndex] = [];
+
+    const newElement = document.createElement('div');
+    newElement.innerHTML = getNewCampoHtml(nuevoIndex);
+
+    const cont = document.getElementById("camposContainer");
+    cont.appendChild(newElement);
 };
 
 const eliminarCampo = (index) => {
     const campoElement = document.getElementById(`campo-${index}`);
     if (campoElement) {
         campoElement.remove();
-        medioContactoIndex--;
+        indicesDisponibles.push(index);
+        indicesDisponibles.sort((a, b) => a - b);
+
+        delete opcionesIndex[index];
+        delete indicesOpcionesDisponibles[index];
     }
 }
 
 const mostrarOpciones = (campoIndex) => {
     const tipoCampo = document.getElementById(`tipo-campo-${campoIndex}`).value;
     const opcionesContainer = document.getElementById(`opciones-container-${campoIndex}`);
-
     if (tipoCampo === 'multiple-choice' || tipoCampo === 'single-choice') {
         opcionesContainer.style.display = 'block';
     } else {
         opcionesContainer.style.display = 'none';
     }
-
     manejarCheckboxChange(campoIndex);
 }
 
 const agregarOpcion = (campoIndex) => {
+    if (!opcionesIndex[campoIndex]) {
+        opcionesIndex[campoIndex] = 1;
+        indicesOpcionesDisponibles[campoIndex] = [];
+    }
+
+    let nuevoOpcionIndex;
+    if (indicesOpcionesDisponibles[campoIndex].length > 0) {
+        nuevoOpcionIndex = indicesOpcionesDisponibles[campoIndex].shift();
+    } else {
+        nuevoOpcionIndex = ++opcionesIndex[campoIndex];
+    }
+
     const opcionesDiv = document.getElementById(`opciones-campo-${campoIndex}`);
-    const numeroOpciones = opcionesDiv.children.length + 1;
     const nuevaOpcionDiv = document.createElement('div');
-    nuevaOpcionDiv.id = `opcion-${numeroOpciones}-campo-${campoIndex}`;
+    nuevaOpcionDiv.id = `opcion-${nuevoOpcionIndex}-campo-${campoIndex}`;
 
     const label = document.createElement('label');
-    label.setAttribute('for', `opcion-${numeroOpciones}-campo-${campoIndex}-input`);
+    label.setAttribute('for', `opcion-${nuevoOpcionIndex}-campo-${campoIndex}-input`);
     label.className = "mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white";
-    label.textContent = `Opción`;
+    label.textContent = `Opción ${nuevoOpcionIndex}`;
 
     const contenedorFlex = document.createElement('div');
-    contenedorFlex.className = "flex items-center";  // Asegura la alineación vertical
+    contenedorFlex.className = "flex items-center";
 
     const nuevaOpcionInput = document.createElement('input');
     nuevaOpcionInput.type = 'text';
-    nuevaOpcionInput.id = `opcion-${numeroOpciones}-campo-${campoIndex}-input`;
+    nuevaOpcionInput.id = `opcion-${nuevoOpcionIndex}-campo-${campoIndex}-input`;
     nuevaOpcionInput.className = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
     nuevaOpcionInput.placeholder = `Valor opción`;
-
-    const checkboxCorrectaDiv = document.createElement('div');
-    checkboxCorrectaDiv.className = "flex items-center mx-2";
-
-    const checkboxCorrecta = document.createElement('input');
-    checkboxCorrecta.type = 'checkbox';
-    checkboxCorrecta.id = `correcta-opcion-${numeroOpciones}-campo-${campoIndex}`;
-    checkboxCorrecta.value = `es-correcta-opcion-${numeroOpciones}-campo-${campoIndex}`;
-    checkboxCorrecta.className = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600";
-    checkboxCorrecta.addEventListener('change', () => manejarCheckboxChange(campoIndex));
-
-    const labelCorrecta = document.createElement('label');
-    labelCorrecta.setAttribute('for', `correcta-opcion-${numeroOpciones}-campo-${campoIndex}`);
-    labelCorrecta.className = "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300";
-    labelCorrecta.textContent = "Correcta";
-
-    checkboxCorrectaDiv.appendChild(checkboxCorrecta);
-    checkboxCorrectaDiv.appendChild(labelCorrecta);
 
     const botonEliminar = document.createElement('button');
     botonEliminar.type = 'button';
     botonEliminar.className = "ms-2 text-red-500";
     botonEliminar.textContent = "Eliminar";
-    botonEliminar.onclick = () => eliminarOpcion(campoIndex, numeroOpciones);
+    botonEliminar.onclick = () => eliminarOpcion(campoIndex, nuevoOpcionIndex);
 
     contenedorFlex.appendChild(nuevaOpcionInput);
-    contenedorFlex.appendChild(checkboxCorrectaDiv);
     contenedorFlex.appendChild(botonEliminar);
 
     nuevaOpcionDiv.appendChild(label);
@@ -151,22 +153,11 @@ const agregarOpcion = (campoIndex) => {
     opcionesDiv.appendChild(nuevaOpcionDiv);
 }
 
-const manejarCheckboxChange = (campoIndex) => {
-    const tipoCampo = document.getElementById(`tipo-campo-${campoIndex}`).value;
-    const checkboxes = document.querySelectorAll(`#opciones-campo-${campoIndex} input[type="checkbox"]`);
-
-    if (tipoCampo === 'single-choice') {
-        checkboxes.forEach(checkbox => {
-            if (checkbox !== event.target) {
-                checkbox.checked = false;
-            }
-        });
-    }
-}
-
 const eliminarOpcion = (campoIndex, opcionIndex) => {
     const opcionDiv = document.getElementById(`opcion-${opcionIndex}-campo-${campoIndex}`);
     if (opcionDiv) {
         opcionDiv.remove();
+        indicesOpcionesDisponibles[campoIndex].push(opcionIndex);
+        indicesOpcionesDisponibles[campoIndex].sort((a, b) => a - b);
     }
 }
