@@ -54,14 +54,10 @@ public class ReporteFallasHeladera extends Reporte {
     LocalDateTime hoy = LocalDateTime.now();
 
     Map<Heladera, Long> alertasPorHeladera =
-        alertasRepository
-            .buscarTodosMismaSemana(LocalDate.now()).stream()
-            .collect(Collectors.groupingBy(Alerta::getHeladera, Collectors.counting()));
+        alertasRepository.buscarAlertasAgrupadasPorHeladera(hoy.toLocalDate());
 
     Map<Heladera, Long> fallasTecnicasPorHeladera =
-        fallasTecnicasRepository
-            .buscarTodosMismaSemana(LocalDate.now()).stream()
-            .collect(Collectors.groupingBy(FallaTecnica::getHeladera, Collectors.counting()));
+        fallasTecnicasRepository.buscarFallasAgrupadasPorHeladera(hoy.toLocalDate());
 
     alertasPorHeladera.forEach(((heladera, cant) -> fallasTecnicasPorHeladera.merge(heladera, cant, Long::sum)));
 

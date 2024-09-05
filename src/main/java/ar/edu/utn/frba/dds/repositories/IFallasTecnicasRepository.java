@@ -5,7 +5,9 @@ import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -19,6 +21,8 @@ public interface IFallasTecnicasRepository {
     List<FallaTecnica> buscarPorHeladera(Heladera heladera);
 
     List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha);
+
+    Map<Heladera, Long> buscarFallasAgrupadasPorHeladera(LocalDate fecha);
 
     void guardar(FallaTecnica fallaTecnica);
 

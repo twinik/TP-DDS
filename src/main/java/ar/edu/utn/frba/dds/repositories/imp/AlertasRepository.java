@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
@@ -13,7 +14,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @NoArgsConstructor
@@ -52,6 +55,23 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
                 .setParameter("heladera", heladera)
                 .setParameter("no_solucionado", false)
                 .getResultList();
+    }
+
+    @Override
+    public Map<Heladera, Long> buscarAlertasAgrupadasPorHeladera(LocalDate fecha) {
+        LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
+        LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());
+        List<Object[]> results = entityManager().createQuery(
+                "select a.heladera, count(a) from Alerta a where a.activo = :activo" + " and a.timestamp between :principioSemana and :finSemana group by a.heladera order by a.heladera.id", Object[].class)
+            .setParameter("activo", true)
+            .setParameter("principioSemana", principioDeSemana)
+            .setParameter("finSemana", finDeSemana)
+            .getResultList();
+
+        return results.stream().collect(Collectors.toMap(
+            result -> (Heladera) result[0],
+            result -> (Long) result[1]
+        ));
     }
 
     @Override

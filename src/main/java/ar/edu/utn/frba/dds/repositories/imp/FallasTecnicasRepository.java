@@ -15,7 +15,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 
@@ -54,6 +56,23 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
                 .setParameter("principioSemana", principioDeSemana)
                 .setParameter("finSemana", finDeSemana)
                 .getResultList();
+    }
+
+    @Override
+    public Map<Heladera, Long> buscarFallasAgrupadasPorHeladera(LocalDate fecha) {
+        LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
+        LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha).atStartOfDay();
+        List<Object[]> results = entityManager().createQuery(
+                "select f.heladera, count(a) from FallaTecnica f where f.activo = :activo" + " and f.timestamp between :principioSemana and :finSemana group by f.heladera order by f.heladera.id", Object[].class)
+            .setParameter("activo", true)
+            .setParameter("principioSemana", principioDeSemana)
+            .setParameter("finSemana", finDeSemana)
+            .getResultList();
+
+        return results.stream().collect(Collectors.toMap(
+            result -> (Heladera) result[0],
+            result -> (Long) result[1]
+        ));
     }
 
     @Override

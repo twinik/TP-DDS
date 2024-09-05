@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.repositories;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -18,6 +18,7 @@ public interface IAlertasRepository {
     List<Alerta> buscarTodosMismaSemana(LocalDate fecha);
 
     List<Alerta> buscarAlertasHeladera(Heladera heladera);
+    Map<Heladera,Long> buscarAlertasAgrupadasPorHeladera(LocalDate fecha);
 
     void guardar(Alerta alerta);
 
