@@ -18,7 +18,7 @@ public class OfertaProductoRepository implements IOfertaProductoRepository, With
 
     @Override
     public List<OfertaProducto> buscarTodos() {
-        return entityManager().createQuery("from OfertaProducto where activo=:activo", OfertaProducto.class).
+        return entityManager().createQuery("from OfertaProducto where activo=:activo and colaborador.activo=:activo", OfertaProducto.class).
                 setParameter("activo", true)
                 .getResultList();
     }

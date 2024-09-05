@@ -23,7 +23,7 @@ public class SuscripcionesRepository implements ISuscripcionesRepository, WithSi
 
     @Override
     public List<Suscripcion> buscarTodos() {
-        return entityManager().createQuery("from Suscripcion where activo=:activo", Suscripcion.class).
+        return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.activo=:activo", Suscripcion.class).
                 setParameter("activo", true)
                 .getResultList();
     }
