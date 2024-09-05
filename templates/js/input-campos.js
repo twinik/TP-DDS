@@ -1,27 +1,24 @@
 var medioContactoIndex = 1;
 
-const getNewCampoHtml = index => {
-	return `<span class="mt-5">Campo ${index}</span>
-        <label
-            for="tipo-campo-${index}"
+/* const getNewCampoHtml = index => {
+    return `<span class="mt-5">Campo ${index}</span>
+        <label for="tipo-campo-${index}"
             class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >Tipo de campo</label
         >
         <select
             id="tipo-campo-${index}"
+            onchange="mostrarOpciones(${index})"
             class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-            <option value="multiple-choice">
-                Multiple choice
-            </option>
-            <option value="choice">Single Choice</option>
             <option value="texto-libre">Texto libre</option>
-            <option value="numerico">Numerico</option>
+            <option value="multiple-choice">Opción múltiple</option>
+            <option value="single-choice">Opción única</option>
+            <option value="numerico">Númerico</option>
             <option value="fecha">Fecha</option>
         </select>
 
-        <label
-            for="pregunta-${index}"
+        <label for="pregunta-${index}"
             class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >Enunciado</label
         >
@@ -33,23 +30,212 @@ const getNewCampoHtml = index => {
             required
         />
 
-        <label
-            for="obligatorio-campo-${index}"
-            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-5"
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-1 items-center mt-5 mb-5">
+                <input id="obligatorio-campo-${index}" type="checkbox" value="obligatorio"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="obligatorio-campo-${index}"
+                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Obligatorio</label>
+            </div>
+
+            <button type="button" onclick="eliminarCampo(${index})" class="flex-1 pr-0 text-red-500">Eliminar
+                campo</button>
+        </div>
+
+        <div id="opciones-container-${index}" style="display: none;">
+            <div id="opciones-campo-${index}">
+                <div id="opcion-1-campo-${index}">
+                    <label for="opcion-1-campo-${index}-input"
+                        class="mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opción
+                    </label>
+                    <div class="flex flex-row">
+                        <input type="text" id="opcion-1-campo-${index}-input"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Valor de opción" />
+
+                            <div class="flex items-center mx-2">
+                                <input id="correcta-opcion-1-campo-${index}" type="checkbox" value="es-correcta-opcion-1-campo-${index}"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="correcta-opcion-1-campo-${index}"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Correcta</label>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" onclick="agregarOpcion(${index})" class="mt-5">Agregar otra opción +</button>
+        </div>`;
+}; */
+
+const getNewCampoHtml = index => {
+    return `<div id="campo-${index}">
+        <strong class="mt-5">Campo ${index}</strong>
+        <label for="tipo-campo-${index}"
+            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Tipo de campo</label
         >
-            Obligatorio
-            <input
-                type="checkbox"
-                id="obligatorio-campo-${index}"
-                class="rounded-md p-2"
-            />
-        </label>`;
+        <select
+            id="tipo-campo-${index}"
+            onchange="mostrarOpciones(${index})"
+            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+            <option value="texto-libre">Texto libre</option>
+            <option value="multiple-choice">Opción múltiple</option>
+            <option value="single-choice">Opción única</option>
+            <option value="numerico">Númerico</option>
+            <option value="fecha">Fecha</option>
+        </select>
+
+        <label for="pregunta-${index}"
+            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Enunciado</label
+        >
+        <input
+            type="text"
+            id="pregunta-${index}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Pregunta"
+            required
+        />
+
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-1 items-center mt-5 mb-5">
+                <input id="obligatorio-campo-${index}" type="checkbox" value="obligatorio"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="obligatorio-campo-${index}"
+                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Obligatorio</label>
+            </div>
+
+            <button type="button" onclick="eliminarCampo(${index})" class="flex-1 pr-0 text-red-500">Eliminar
+                campo</button>
+        </div>
+
+        <div id="opciones-container-${index}" style="display: none;">
+            <div id="opciones-campo-${index}">
+                <div id="opcion-1-campo-${index}">
+                    <label for="opcion-1-campo-${index}-input"
+                        class="mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opción
+                    </label>
+                    <div class="flex flex-row">
+                        <input type="text" id="opcion-1-campo-${index}-input"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Valor de opción" />
+
+                        <div class="flex items-center mx-2">
+                            <input id="correcta-opcion-1-campo-${index}" type="checkbox" value="es-correcta-opcion-1-campo-${index}"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="correcta-opcion-1-campo-${index}"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Correcta</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" onclick="agregarOpcion(${index})" class="mt-5">Agregar otra opción +</button>
+        </div>
+    </div>`;
 };
 
+
 const nuevoCampo = () => {
-	medioContactoIndex++;
-	console.log(medioContactoIndex);
-	let cont = document.getElementById("camposContainer");
-	let newElement = getNewCampoHtml(medioContactoIndex);
-	cont.innerHTML += newElement;
+    medioContactoIndex++;
+    console.log(medioContactoIndex);
+    let cont = document.getElementById("camposContainer");
+    let newElement = getNewCampoHtml(medioContactoIndex);
+    cont.innerHTML += newElement;
 };
+
+const eliminarCampo = (index) => {
+    const campoElement = document.getElementById(`campo-${index}`);
+    if (campoElement) {
+        campoElement.remove();
+        medioContactoIndex--;
+    }
+}
+
+
+
+const mostrarOpciones = (campoIndex) => {
+    const tipoCampo = document.getElementById(`tipo-campo-${campoIndex}`).value;
+    const opcionesContainer = document.getElementById(`opciones-container-${campoIndex}`);
+
+    if (tipoCampo === 'multiple-choice' || tipoCampo === 'single-choice') {
+        opcionesContainer.style.display = 'block';
+    } else {
+        opcionesContainer.style.display = 'none';
+    }
+
+    manejarCheckboxChange(campoIndex);
+}
+
+const agregarOpcion = (campoIndex) => {
+    const opcionesDiv = document.getElementById(`opciones-campo-${campoIndex}`);
+    const numeroOpciones = opcionesDiv.children.length + 1;
+    const nuevaOpcionDiv = document.createElement('div');
+    nuevaOpcionDiv.id = `opcion-${numeroOpciones}-campo-${campoIndex}`;
+
+    const label = document.createElement('label');
+    label.setAttribute('for', `opcion-${numeroOpciones}-campo-${campoIndex}-input`);
+    label.className = "mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white";
+    label.textContent = `Opción`;
+
+    const contenedorFlex = document.createElement('div');
+    contenedorFlex.className = "flex items-center";  // Asegura la alineación vertical
+
+    const nuevaOpcionInput = document.createElement('input');
+    nuevaOpcionInput.type = 'text';
+    nuevaOpcionInput.id = `opcion-${numeroOpciones}-campo-${campoIndex}-input`;
+    nuevaOpcionInput.className = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+    nuevaOpcionInput.placeholder = `Valor opción`;
+
+    const checkboxCorrectaDiv = document.createElement('div');
+    checkboxCorrectaDiv.className = "flex items-center mx-2";
+
+    const checkboxCorrecta = document.createElement('input');
+    checkboxCorrecta.type = 'checkbox';
+    checkboxCorrecta.id = `correcta-opcion-${numeroOpciones}-campo-${campoIndex}`;
+    checkboxCorrecta.value = `es-correcta-opcion-${numeroOpciones}-campo-${campoIndex}`;
+    checkboxCorrecta.className = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600";
+    checkboxCorrecta.addEventListener('change', () => manejarCheckboxChange(campoIndex));
+
+    const labelCorrecta = document.createElement('label');
+    labelCorrecta.setAttribute('for', `correcta-opcion-${numeroOpciones}-campo-${campoIndex}`);
+    labelCorrecta.className = "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300";
+    labelCorrecta.textContent = "Correcta";
+
+    checkboxCorrectaDiv.appendChild(checkboxCorrecta);
+    checkboxCorrectaDiv.appendChild(labelCorrecta);
+
+    const botonEliminar = document.createElement('button');
+    botonEliminar.type = 'button';
+    botonEliminar.className = "ms-2 text-red-500";
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.onclick = () => eliminarOpcion(campoIndex, numeroOpciones);
+
+    contenedorFlex.appendChild(nuevaOpcionInput);
+    contenedorFlex.appendChild(checkboxCorrectaDiv);
+    contenedorFlex.appendChild(botonEliminar);
+
+    nuevaOpcionDiv.appendChild(label);
+    nuevaOpcionDiv.appendChild(contenedorFlex);
+
+    opcionesDiv.appendChild(nuevaOpcionDiv);
+}
+
+const manejarCheckboxChange = (campoIndex) => {
+    const tipoCampo = document.getElementById(`tipo-campo-${campoIndex}`).value;
+    const checkboxes = document.querySelectorAll(`#opciones-campo-${campoIndex} input[type="checkbox"]`);
+
+    if (tipoCampo === 'single-choice') {
+        checkboxes.forEach(checkbox => {
+            if (checkbox !== event.target) {
+                checkbox.checked = false;
+            }
+        });
+    }
+}
+
+const eliminarOpcion = (campoIndex, opcionIndex) => {
+    const opcionDiv = document.getElementById(`opcion-${opcionIndex}-campo-${campoIndex}`);
+    if (opcionDiv) {
+        opcionDiv.remove();
+    }
+}
