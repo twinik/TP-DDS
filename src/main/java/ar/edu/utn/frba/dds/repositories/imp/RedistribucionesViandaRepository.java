@@ -32,7 +32,7 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         return entityManager().createQuery("from RedistribucionViandas where activo=:activo and fecha between " +
-                        ":principioSemana and :finSemana", RedistribucionViandas.class).
+                        ":principioSemana and :finSemana and colaborador.activo=:activo", RedistribucionViandas.class).
                 setParameter("activo", true)
                 .setParameter("principioSemana", principioDeSemana)
                 .setParameter("finSemana", finDeSemana)
