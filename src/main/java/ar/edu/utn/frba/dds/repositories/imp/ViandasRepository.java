@@ -47,7 +47,7 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                        "select v.colaborador, count(v) from Vianda v where v.activo = :activo" + " and v.fechaDonacion between :principioSemana and :finSemana group by v.colaborador order by v.colaborador.id", Object[].class)
+                        "select v.colaborador, count(v) from Vianda v where v.activo = :activo" + " and v.fechaDonacion between :principioSemana and :finSemana group by v.colaborador order by count(v) asc", Object[].class)
                 .setParameter("activo", true)
                 .setParameter("principioSemana", principioDeSemana)
                 .setParameter("finSemana", finDeSemana)

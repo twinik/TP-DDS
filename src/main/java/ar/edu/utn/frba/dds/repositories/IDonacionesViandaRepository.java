@@ -18,7 +18,7 @@ public interface IDonacionesViandaRepository {
 
     List<DonacionVianda> buscarPorColaborador(Colaborador c);
 
-    Map<Heladera, Long> buscarDonacionesAgrupadasPorColaborador(LocalDate fecha);
+    Map<Heladera, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha);
 
     List<DonacionVianda> buscarTodosMismaSemana(LocalDate fecha);
 

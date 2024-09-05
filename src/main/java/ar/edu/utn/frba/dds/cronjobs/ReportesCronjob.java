@@ -17,10 +17,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * genera los reportes semanales con estadisticas
+ * PARA QUE FUNCIONE BIEN HAY QUE CORRERLO TODOS LOS SABADOS A ULTIMA HORA
+ */
 public class ReportesCronjob {
     public static void main(String[] args) {
 
-        // PARA QUE FUNCIONE BIEN HAY QUE CORRERLO TODOS LOS SABADOS A ULTIMA HORA
 //
 //        Colaborador c1 = new Colaborador();
 //        c1.setUsuario(new Usuario("fdkfkdf","fdifndk"));
