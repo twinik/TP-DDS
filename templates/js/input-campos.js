@@ -2,7 +2,7 @@ var medioContactoIndex = 1;
 
 const getNewCampoHtml = index => {
     return `<div id="campo-${index}">
-        <strong class="mt-5">Campo ${index}</strong>
+        <strong class="mt-5 mb-5">Campo ${index}</strong>
         <label for="tipo-campo-${index}"
             class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >Tipo de campo</label
@@ -41,13 +41,6 @@ const getNewCampoHtml = index => {
                         <input type="text" id="opcion-1-campo-${index}-input"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Valor opción" />
-
-                        <div class="flex items-center mx-2">
-                            <input id="correcta-opcion-1-campo-${index}" type="checkbox" value="es-correcta-opcion-1-campo-${index}"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="correcta-opcion-1-campo-${index}"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Correcta</label>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -106,34 +99,16 @@ const agregarOpcion = (campoIndex) => {
     const label = document.createElement('label');
     label.setAttribute('for', `opcion-${numeroOpciones}-campo-${campoIndex}-input`);
     label.className = "mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white";
-    label.textContent = `Opción`;
+    label.textContent = `Opción ${numeroOpciones}`;
 
     const contenedorFlex = document.createElement('div');
-    contenedorFlex.className = "flex items-center";  // Asegura la alineación vertical
+    contenedorFlex.className = "flex items-center";
 
     const nuevaOpcionInput = document.createElement('input');
     nuevaOpcionInput.type = 'text';
     nuevaOpcionInput.id = `opcion-${numeroOpciones}-campo-${campoIndex}-input`;
     nuevaOpcionInput.className = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
     nuevaOpcionInput.placeholder = `Valor opción`;
-
-    const checkboxCorrectaDiv = document.createElement('div');
-    checkboxCorrectaDiv.className = "flex items-center mx-2";
-
-    const checkboxCorrecta = document.createElement('input');
-    checkboxCorrecta.type = 'checkbox';
-    checkboxCorrecta.id = `correcta-opcion-${numeroOpciones}-campo-${campoIndex}`;
-    checkboxCorrecta.value = `es-correcta-opcion-${numeroOpciones}-campo-${campoIndex}`;
-    checkboxCorrecta.className = "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600";
-    checkboxCorrecta.addEventListener('change', () => manejarCheckboxChange(campoIndex));
-
-    const labelCorrecta = document.createElement('label');
-    labelCorrecta.setAttribute('for', `correcta-opcion-${numeroOpciones}-campo-${campoIndex}`);
-    labelCorrecta.className = "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300";
-    labelCorrecta.textContent = "Correcta";
-
-    checkboxCorrectaDiv.appendChild(checkboxCorrecta);
-    checkboxCorrectaDiv.appendChild(labelCorrecta);
 
     const botonEliminar = document.createElement('button');
     botonEliminar.type = 'button';
@@ -142,7 +117,7 @@ const agregarOpcion = (campoIndex) => {
     botonEliminar.onclick = () => eliminarOpcion(campoIndex, numeroOpciones);
 
     contenedorFlex.appendChild(nuevaOpcionInput);
-    contenedorFlex.appendChild(checkboxCorrectaDiv);
+    //contenedorFlex.appendChild(checkboxCorrectaDiv);
     contenedorFlex.appendChild(botonEliminar);
 
     nuevaOpcionDiv.appendChild(label);
