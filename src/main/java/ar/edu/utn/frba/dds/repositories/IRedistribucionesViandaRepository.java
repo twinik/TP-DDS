@@ -1,9 +1,10 @@
 package ar.edu.utn.frba.dds.repositories;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -15,7 +16,9 @@ public interface IRedistribucionesViandaRepository {
 
     List<RedistribucionViandas> buscarTodos();
 
-    List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha);
+    Map<String,Long> buscarViandasColocadasPorHeladera(LocalDate fecha);
+
+    Map<String, Long> buscarViandasRetiradasPorHeladera(LocalDate fecha);
 
     void guardar(RedistribucionViandas redistribucionViandas);
 

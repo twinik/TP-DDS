@@ -1,11 +1,8 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
-import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.repositories.ISuscripcionesRepository;
-import ar.edu.utn.frba.dds.repositories.IUsuariosRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.util.List;
@@ -27,6 +24,15 @@ public class SuscripcionesRepository implements ISuscripcionesRepository, WithSi
                 setParameter("activo", true)
                 .getResultList();
     }
+
+    @Override
+    public List<Suscripcion> buscarTodosPorColaborador(Long colaborador_id){
+        return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.id =:colaborador_id", Suscripcion.class).
+            setParameter("activo", true)
+            .setParameter("colaborador_id",colaborador_id)
+            .getResultList();
+    }
+
 
     @Override
     public void guardar(Suscripcion suscripcion) {

@@ -1,16 +1,16 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RedistribucionesViandaRepository implements IRedistribucionesViandaRepository, WithSimplePersistenceUnit {
 
@@ -28,15 +28,39 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
     }
 
     @Override
-    public List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha) {
+    public Map<String, Long> buscarViandasColocadasPorHeladera(LocalDate fecha) {
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
-        return entityManager().createQuery("from RedistribucionViandas where activo=:activo and fecha between " +
-                        ":principioSemana and :finSemana", RedistribucionViandas.class).
-                setParameter("activo", true)
-                .setParameter("principioSemana", principioDeSemana)
-                .setParameter("finSemana", finDeSemana)
-                .getResultList();
+        List<Object[]> results = entityManager().createQuery(
+                "select r.heladeraDestino.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
+                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraDestino.nombre order by sum(r.cantidad) asc", Object[].class)
+            .setParameter("activo", true)
+            .setParameter("principioSemana", principioDeSemana)
+            .setParameter("finSemana", finDeSemana)
+            .getResultList();
+
+        return results.stream().collect(Collectors.toMap(
+            result -> (String) result[0],
+            result -> (Long) result[1]
+        ));
+    }
+
+    @Override
+    public Map<String, Long> buscarViandasRetiradasPorHeladera(LocalDate fecha) {
+        LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
+        LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
+        List<Object[]> results = entityManager().createQuery(
+                "select r.heladeraOrigen.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
+                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraOrigen.nombre order by sum(r.cantidad) asc", Object[].class)
+            .setParameter("activo", true)
+            .setParameter("principioSemana", principioDeSemana)
+            .setParameter("finSemana", finDeSemana)
+            .getResultList();
+
+        return results.stream().collect(Collectors.toMap(
+            result -> (String) result[0],
+            result -> (Long) result[1]
+        ));
     }
 
     @Override

@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
@@ -14,9 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * ReporteViandasPorHeladera class representa un reporte de viandas por heladera.
@@ -78,18 +75,14 @@ public class ReporteViandasPorHeladera extends Reporte {
     LocalDate hoy = LocalDate.now();
 
     // Use the new method to get the donations grouped by collaborator
-    Map<Heladera, Long> viandasColocadasPorHeladera = donacionesViandaRepository.buscarDonacionesAgrupadasPorColaborador(hoy);
-
-    List<RedistribucionViandas> redistribucionesEstaSemana = redistribucionesViandaRepository
-            .buscarTodosMismaSemana(LocalDate.now());
+    Map<String, Long> viandasColocadasPorHeladera = donacionesViandaRepository.buscarDonacionesAgrupadasPorHeladera(hoy);
 
     viandasColocadasPorHeladera
-            .putAll(redistribucionesEstaSemana.stream()
-                    .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraDestino, Collectors.summingLong(RedistribucionViandas::getCantidad))));
+            .putAll(redistribucionesViandaRepository.buscarViandasColocadasPorHeladera(hoy));
 
-    Map<Heladera, Long> viandasRetiradasPorHeladera =
-            redistribucionesEstaSemana.stream()
-                    .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraOrigen, Collectors.counting()));
+
+  // TODO ACA NO SE POR QUE HABIA UN COUNT EN VEZ DE UN SUM ??
+    Map<String, Long> viandasRetiradasPorHeladera = redistribucionesViandaRepository.buscarViandasRetiradasPorHeladera(hoy);
 
 
     String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -100,12 +93,12 @@ public class ReporteViandasPorHeladera extends Reporte {
     pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, entradasInformeColocadas + "\n" + entradasInformeRetiradas);
 }
 
-  private String generarEntradasInforme(Map<Heladera, Long> viandasPorHeladera, String tipo) {
+  private String generarEntradasInforme(Map<String, Long> viandasPorHeladera, String tipo) {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n");
     stringBuilder.append(String.format("Viandas %s:\n", tipo));
     viandasPorHeladera.forEach((heladera, cantidad) -> stringBuilder
-        .append(String.format("Heladera: %s cantidad de viandas: %d\n", heladera.getNombre(), cantidad)));
+        .append(String.format("Heladera: %s cantidad de viandas: %d\n", heladera, cantidad)));
     return stringBuilder.toString();
   }
 }

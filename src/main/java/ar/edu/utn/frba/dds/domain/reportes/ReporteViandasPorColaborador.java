@@ -58,18 +58,18 @@ public class ReporteViandasPorColaborador extends Reporte {
 
     public void generarPDF() {
         LocalDate hoy = LocalDate.now();
-        Map<Colaborador, Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);
+        Map<String,Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);
 
         String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
         pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
     }
 
-    private String generarEntradasInforme(Map<Colaborador, Long> viandasPorColaborador) {
+    private String generarEntradasInforme(Map<String, Long> viandasPorColaborador) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");
-        viandasPorColaborador.forEach((colab, cant) -> stringBuilder
-                .append(String.format("%s ha donado %d vianda(s)\n", colab.getNombreYapellido(), cant)));
+        viandasPorColaborador.forEach((nom_completo, cant) -> stringBuilder
+                .append(String.format("%s ha donado %d vianda(s)\n", nom_completo, cant)));
         return stringBuilder.toString();
     }
 

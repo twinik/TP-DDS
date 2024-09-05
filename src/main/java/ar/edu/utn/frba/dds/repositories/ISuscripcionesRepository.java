@@ -13,7 +13,9 @@ public interface ISuscripcionesRepository {
 
     List<Suscripcion> buscarTodos();
 
-    void guardar(Suscripcion suscripcion);
+  List<Suscripcion> buscarTodosPorColaborador(Long colaborador_id);
+
+  void guardar(Suscripcion suscripcion);
 
     void actualizar(Suscripcion suscripcion);
 
