@@ -31,18 +31,6 @@ const getNewCampoHtml = index => {
             required
         />
 
-        <div class="flex flex-row justify-between">
-            <div class="flex flex-1 items-center mt-5 mb-5">
-                <input id="obligatorio-campo-${index}" type="checkbox" value="obligatorio"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="obligatorio-campo-${index}"
-                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Obligatorio</label>
-            </div>
-
-            <button type="button" onclick="eliminarCampo(${index})" class="flex-1 pr-0 text-red-500">Eliminar
-                campo</button>
-        </div>
-
         <div id="opciones-container-${index}" style="display: none;">
             <div id="opciones-campo-${index}">
                 <div id="opcion-1-campo-${index}">
@@ -52,7 +40,7 @@ const getNewCampoHtml = index => {
                     <div class="flex flex-row">
                         <input type="text" id="opcion-1-campo-${index}-input"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Valor de opción" />
+                            placeholder="Valor opción" />
 
                         <div class="flex items-center mx-2">
                             <input id="correcta-opcion-1-campo-${index}" type="checkbox" value="es-correcta-opcion-1-campo-${index}"
@@ -64,6 +52,18 @@ const getNewCampoHtml = index => {
                 </div>
             </div>
             <button type="button" onclick="agregarOpcion(${index})" class="mt-5">Agregar otra opción +</button>
+        </div>
+
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-1 items-center mt-5 mb-5">
+                <input id="obligatorio-campo-${index}" type="checkbox" value="obligatorio"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="obligatorio-campo-${index}"
+                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Obligatorio</label>
+            </div>
+
+            <button type="button" onclick="eliminarCampo(${index})" class="flex-1 pr-0 text-red-500">Eliminar
+                campo</button>
         </div>
     </div>`;
 };
