@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.heladeras.RegistroTemperatura;
 import ar.edu.utn.frba.dds.repositories.IRegistrosTemperaturaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -22,7 +22,6 @@ public class RegistrosTemperaturaRepository implements IRegistrosTemperaturaRepo
                 setParameter("activo", true)
                 .getResultList();
     }
-
     @Override
     public void guardar(RegistroTemperatura registroTemperatura) {
         withTransaction(() -> entityManager().persist(registroTemperatura));
