@@ -1,16 +1,12 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -39,33 +35,21 @@ public class DonacionesVIandaRepository implements IDonacionesViandaRepository, 
     }
 
     @Override
-    public Map<Heladera, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha) {
+    public Map<String , Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha) {
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                        "select d.heladera, count(d) from DonacionVianda d where d.activo = :activo" + " and d.fecha between :principioSemana and :finSemana" +
-                            " and d.heladera.activo=:activo group by d.heladera order by d.heladera.id", Object[].class)
+                        "select d.heladera.nombre, count(d) from DonacionVianda d where d.activo = :activo" + " and d.fecha between :principioSemana and :finSemana" +
+                            " and d.heladera.activo=:activo group by d.heladera.nombre order by d.heladera.id", Object[].class)
                 .setParameter("activo", true)
                 .setParameter("principioSemana", principioDeSemana)
                 .setParameter("finSemana", finDeSemana)
                 .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-                result -> (Heladera) result[0],
+                result -> (String) result[0],
                 result -> (Long) result[1]
         ));
-    }
-
-    @Override
-    public List<DonacionVianda> buscarTodosMismaSemana(LocalDate fecha) {
-        LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
-        LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
-        return entityManager().createQuery("from DonacionVianda where activo=:activo and fecha between " +
-                        ":principioSemana and :finSemana", DonacionVianda.class).
-                setParameter("activo", true)
-                .setParameter("principioSemana", principioDeSemana)
-                .setParameter("finSemana", finDeSemana)
-                .getResultList();
     }
 
     @Override

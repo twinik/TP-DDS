@@ -75,14 +75,14 @@ public class ReporteViandasPorHeladera extends Reporte {
     LocalDate hoy = LocalDate.now();
 
     // Use the new method to get the donations grouped by collaborator
-    Map<Heladera, Long> viandasColocadasPorHeladera = donacionesViandaRepository.buscarDonacionesAgrupadasPorHeladera(hoy);
+    Map<String, Long> viandasColocadasPorHeladera = donacionesViandaRepository.buscarDonacionesAgrupadasPorHeladera(hoy);
 
     viandasColocadasPorHeladera
             .putAll(redistribucionesViandaRepository.buscarViandasColocadasPorHeladera(hoy));
 
 
   // TODO ACA NO SE POR QUE HABIA UN COUNT EN VEZ DE UN SUM ??
-    Map<Heladera, Long> viandasRetiradasPorHeladera = redistribucionesViandaRepository.buscarViandasRetiradasPorHeladera(hoy);
+    Map<String, Long> viandasRetiradasPorHeladera = redistribucionesViandaRepository.buscarViandasRetiradasPorHeladera(hoy);
 
 
     String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -93,12 +93,12 @@ public class ReporteViandasPorHeladera extends Reporte {
     pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, entradasInformeColocadas + "\n" + entradasInformeRetiradas);
 }
 
-  private String generarEntradasInforme(Map<Heladera, Long> viandasPorHeladera, String tipo) {
+  private String generarEntradasInforme(Map<String, Long> viandasPorHeladera, String tipo) {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n");
     stringBuilder.append(String.format("Viandas %s:\n", tipo));
     viandasPorHeladera.forEach((heladera, cantidad) -> stringBuilder
-        .append(String.format("Heladera: %s cantidad de viandas: %d\n", heladera.getNombre(), cantidad)));
+        .append(String.format("Heladera: %s cantidad de viandas: %d\n", heladera, cantidad)));
     return stringBuilder.toString();
   }
 }

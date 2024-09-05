@@ -37,40 +37,27 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
     }
 
     @Override
-    public List<FallaTecnica> buscarPorHeladera(Heladera heladera) {
-        return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera=:heladera and solucionado=:solucionado", FallaTecnica.class)
+    public List<FallaTecnica> buscarPorHeladera(Long heladera_id) {
+        return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera.id=:heladera_id and solucionado=:solucionado", FallaTecnica.class)
                 .setParameter("activo", true)
-                .setParameter("heladera", heladera)
+                .setParameter("heladera_id", heladera_id)
                 .setParameter("solucionado", false)
                 .getResultList();
     }
 
     @Override
-    public List<FallaTecnica> buscarTodosMismaSemana(LocalDate fecha) {
-        LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
-        LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());
-        return entityManager().createQuery("from FallaTecnica where activo=:activo and timestamp between " +
-                        ":principioSemana and :finSemana and solucionado=:solucionado", FallaTecnica.class).
-                setParameter("activo", true)
-                .setParameter("solucionado", false)
-                .setParameter("principioSemana", principioDeSemana)
-                .setParameter("finSemana", finDeSemana)
-                .getResultList();
-    }
-
-    @Override
-    public Map<Heladera, Long> buscarFallasAgrupadasPorHeladera(LocalDate fecha) {
+    public Map<String, Long> buscarFallasAgrupadasPorHeladera(LocalDate fecha) {
         LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
         LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha).atStartOfDay();
         List<Object[]> results = entityManager().createQuery(
-                "select f.heladera, count(f) from FallaTecnica f where f.activo = :activo" + " and f.timestamp between :principioSemana and :finSemana group by f.heladera order by f.heladera.id", Object[].class)
+                "select f.heladera.nombre, count(f) from FallaTecnica f where f.activo = :activo" + " and f.timestamp between :principioSemana and :finSemana group by f.heladera.nombre order by f.heladera.id", Object[].class)
             .setParameter("activo", true)
             .setParameter("principioSemana", principioDeSemana)
             .setParameter("finSemana", finDeSemana)
             .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-            result -> (Heladera) result[0],
+            result -> (String) result[0],
             result -> (Long) result[1]
         ));
     }

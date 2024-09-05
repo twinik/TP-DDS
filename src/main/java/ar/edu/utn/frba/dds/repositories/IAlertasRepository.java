@@ -14,11 +14,8 @@ public interface IAlertasRepository {
     Optional<Alerta> buscar(Long id);
 
     List<Alerta> buscarTodos();
-
-    List<Alerta> buscarTodosMismaSemana(LocalDate fecha);
-
-    List<Alerta> buscarAlertasHeladera(Heladera heladera);
-    Map<Heladera,Long> buscarAlertasAgrupadasPorHeladera(LocalDate fecha);
+    List<Alerta> buscarAlertasHeladera(Long heladera_id);
+    Map<String,Long> buscarAlertasAgrupadasPorHeladera(LocalDate fecha);
 
     void guardar(Alerta alerta);
 

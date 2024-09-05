@@ -31,31 +31,23 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
     }
 
     @Override
-    public List<Vianda> buscarTodosMismaSemana(LocalDate fecha) {
+    public Map<String, Long> buscarViandasAgrupadasPorColaborador(LocalDate fecha) {
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
-        return entityManager().createQuery("from Vianda where activo=:activo and fechaDonacion between " +
-                        ":principioSemana and :finSemana", Vianda.class).
-                setParameter("activo", true)
-                .setParameter("principioSemana", principioDeSemana)
-                .setParameter("finSemana", finDeSemana)
-                .getResultList();
-    }
 
-    @Override
-    public Map<Colaborador, Long> buscarViandasAgrupadasPorColaborador(LocalDate fecha) {
-        LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
-        LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                        "select v.colaborador, count(v) from Vianda v where v.activo = :activo" + " and v.fechaDonacion between :principioSemana and :finSemana group by v.colaborador order by count(v) asc", Object[].class)
-                .setParameter("activo", true)
-                .setParameter("principioSemana", principioDeSemana)
-                .setParameter("finSemana", finDeSemana)
-                .getResultList();
+                "select concat(v.colaborador.nombre,' ',v.colaborador.apellido), count(v) from Vianda v " +
+                    "where v.activo = :activo and v.fechaDonacion between :principioSemana and :finSemana " +
+                    "group by concat(v.colaborador.nombre,' ',v.colaborador.apellido) " +
+                    "order by count(v) asc", Object[].class)
+            .setParameter("activo", true)
+            .setParameter("principioSemana", principioDeSemana)
+            .setParameter("finSemana", finDeSemana)
+            .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-                result -> (Colaborador) result[0],
-                result -> (Long) result[1]
+            result -> (String) result[0],
+            result -> (Long) result[1]
         ));
     }
 

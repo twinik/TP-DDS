@@ -28,49 +28,37 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
     }
 
     @Override
-    public List<RedistribucionViandas> buscarTodosMismaSemana(LocalDate fecha) {
-        LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
-        LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
-        return entityManager().createQuery("from RedistribucionViandas where activo=:activo and fecha between " +
-                        ":principioSemana and :finSemana and heladeraDestino.activo=:activo", RedistribucionViandas.class).
-                setParameter("activo", true)
-                .setParameter("principioSemana", principioDeSemana)
-                .setParameter("finSemana", finDeSemana)
-                .getResultList();
-    }
-
-    @Override
-    public Map<Heladera, Long> buscarViandasColocadasPorHeladera(LocalDate fecha) {
+    public Map<String, Long> buscarViandasColocadasPorHeladera(LocalDate fecha) {
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                "select r.heladeraDestino, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
-                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraDestino order by sum(r.cantidad) asc", Object[].class)
+                "select r.heladeraDestino.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
+                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraDestino.nombre order by sum(r.cantidad) asc", Object[].class)
             .setParameter("activo", true)
             .setParameter("principioSemana", principioDeSemana)
             .setParameter("finSemana", finDeSemana)
             .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-            result -> (Heladera) result[0],
+            result -> (String) result[0],
             result -> (Long) result[1]
         ));
     }
 
     @Override
-    public Map<Heladera, Long> buscarViandasRetiradasPorHeladera(LocalDate fecha) {
+    public Map<String, Long> buscarViandasRetiradasPorHeladera(LocalDate fecha) {
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                "select r.heladeraOrigen, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
-                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraOrigen order by sum(r.cantidad) asc", Object[].class)
+                "select r.heladeraOrigen.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
+                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraOrigen.nombre order by sum(r.cantidad) asc", Object[].class)
             .setParameter("activo", true)
             .setParameter("principioSemana", principioDeSemana)
             .setParameter("finSemana", finDeSemana)
             .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-            result -> (Heladera) result[0],
+            result -> (String) result[0],
             result -> (Long) result[1]
         ));
     }

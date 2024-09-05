@@ -53,10 +53,10 @@ public class ReporteFallasHeladera extends Reporte {
   public void generarPDF() {
     LocalDateTime hoy = LocalDateTime.now();
 
-    Map<Heladera, Long> alertasPorHeladera =
+    Map<String, Long> alertasPorHeladera =
         alertasRepository.buscarAlertasAgrupadasPorHeladera(hoy.toLocalDate());
 
-    Map<Heladera, Long> fallasTecnicasPorHeladera =
+    Map<String, Long> fallasTecnicasPorHeladera =
         fallasTecnicasRepository.buscarFallasAgrupadasPorHeladera(hoy.toLocalDate());
 
     alertasPorHeladera.forEach(((heladera, cant) -> fallasTecnicasPorHeladera.merge(heladera, cant, Long::sum)));
@@ -66,11 +66,11 @@ public class ReporteFallasHeladera extends Reporte {
     pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(alertasPorHeladera));
   }
 
-  private String generarEntradasInforme(Map<Heladera, Long> incidnetesPorHeladera) {
+  private String generarEntradasInforme(Map<String, Long> incidnetesPorHeladera) {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n");
-    incidnetesPorHeladera.forEach((h, cant) -> stringBuilder
-        .append(String.format("Heladera: %s cantidad de fallas: %d", h.getNombre(), cant)));
+    incidnetesPorHeladera.forEach((nombre, cant) -> stringBuilder
+        .append(String.format("Heladera: %s cantidad de fallas: %d", nombre, cant)));
     return stringBuilder.toString();
   }
 
