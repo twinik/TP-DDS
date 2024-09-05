@@ -27,41 +27,51 @@ import java.util.stream.Collectors;
 @Entity
 @DiscriminatorValue("viandas_x_colab")
 public class ReporteViandasPorColaborador extends Reporte {
-  @Transient
-  private final String tituloReporte = "Viandas donadas por colaborador - Semana ";
-  @Transient
-  private IPDFGeneratorAdapter pdfGenerator;
-  @Transient
-  private IViandasRepository viandasRepository;
+    @Transient
+    private final String tituloReporte = "Viandas donadas por colaborador - Semana ";
+    @Transient
+    private IPDFGeneratorAdapter pdfGenerator;
+    @Transient
+    private IViandasRepository viandasRepository;
 
 
-  public ReporteViandasPorColaborador(String rutaArchivo, IPDFGeneratorAdapter pdfGenerator, IViandasRepository viandasRepository) {
-    super(rutaArchivo);
-    this.pdfGenerator = pdfGenerator;
-    this.viandasRepository = viandasRepository;
-  }
+    public ReporteViandasPorColaborador(String rutaArchivo, IPDFGeneratorAdapter pdfGenerator, IViandasRepository viandasRepository) {
+        super(rutaArchivo);
+        this.pdfGenerator = pdfGenerator;
+        this.viandasRepository = viandasRepository;
+    }
 
-  public void generarPDF() {
-    LocalDate hoy = LocalDate.now();
-    List<Vianda> viandasDonadasEstaSemana = viandasRepository.buscarTodosMismaSemana(LocalDate.now());
+/*    public void generarPDF() {
+        LocalDate hoy = LocalDate.now();
+        List<Vianda> viandasDonadasEstaSemana = viandasRepository.buscarTodosMismaSemana(LocalDate.now());
 
-    Map<Colaborador, Long> viandasPorColaborador = viandasDonadasEstaSemana
-        .stream().collect(Collectors.groupingBy(Vianda::getColaborador, Collectors.counting()));
+        Map<Colaborador, Long> viandasPorColaborador = viandasDonadasEstaSemana
+                .stream().collect(Collectors.groupingBy(Vianda::getColaborador, Collectors.counting()));
 
-    String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-    pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
+        pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
 
 
-  }
+    }
+*/
 
-  private String generarEntradasInforme(Map<Colaborador, Long> viandasPorColaborador) {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("\n");
-    viandasPorColaborador.forEach((colab, cant) -> stringBuilder
-        .append(String.format("%s ha donado %d vianda(s)\n", colab.getNombreYapellido(), cant)));
-    return stringBuilder.toString();
-  }
+    public void generarPDF() {
+        LocalDate hoy = LocalDate.now();
+        Map<Colaborador, Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);
+
+        String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
+    }
+
+    private String generarEntradasInforme(Map<Colaborador, Long> viandasPorColaborador) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n");
+        viandasPorColaborador.forEach((colab, cant) -> stringBuilder
+                .append(String.format("%s ha donado %d vianda(s)\n", colab.getNombreYapellido(), cant)));
+        return stringBuilder.toString();
+    }
 
 
 }

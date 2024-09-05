@@ -2,9 +2,10 @@ package ar.edu.utn.frba.dds.repositories;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -16,6 +17,8 @@ public interface IDonacionesViandaRepository {
     List<DonacionVianda> buscarTodos();
 
     List<DonacionVianda> buscarPorColaborador(Colaborador c);
+
+    Map<Heladera, Long> buscarDonacionesAgrupadasPorColaborador(LocalDate fecha);
 
     List<DonacionVianda> buscarTodosMismaSemana(LocalDate fecha);
 

@@ -47,7 +47,7 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
     @Override
     public List<Alerta> buscarAlertasHeladera(Heladera heladera) {
         return entityManager().createQuery("from Alerta where activo=:activo" +
-                        " and Heladera=:heladera and solucionado=:no_solucionado", Alerta.class)
+                        " and heladera=:heladera and solucionado=:no_solucionado", Alerta.class)
                 .setParameter("activo", true)
                 .setParameter("heladera", heladera)
                 .setParameter("no_solucionado", false)

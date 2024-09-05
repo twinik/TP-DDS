@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.repositories;
 
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface IViandasRepository {
@@ -11,6 +13,8 @@ public interface IViandasRepository {
     List<Vianda> buscarTodos();
 
     List<Vianda> buscarTodosMismaSemana(LocalDate fecha);
+
+    Map<Colaborador, Long> buscarViandasAgrupadasPorColaborador(LocalDate fecha);
 
     void guardar(Vianda vianda);
 

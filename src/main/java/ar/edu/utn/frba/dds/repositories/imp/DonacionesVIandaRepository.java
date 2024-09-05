@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.repositories.imp;
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
@@ -11,7 +12,9 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DonacionesVIandaRepository implements IDonacionesViandaRepository, WithSimplePersistenceUnit {
 
@@ -29,10 +32,27 @@ public class DonacionesVIandaRepository implements IDonacionesViandaRepository, 
 
     @Override
     public List<DonacionVianda> buscarPorColaborador(Colaborador c) {
-        return entityManager().createQuery("from DonacionVianda  where activo=:activo and colaborador=:colaborador")
+        return entityManager().createQuery("from DonacionVianda where activo=:activo and colaborador=:colaborador", DonacionVianda.class)
                 .setParameter("activo", true)
                 .setParameter("colaborador", c)
                 .getResultList();
+    }
+
+    @Override
+    public Map<Heladera, Long> buscarDonacionesAgrupadasPorColaborador(LocalDate fecha) {
+        LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
+        LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
+        List<Object[]> results = entityManager().createQuery(
+                        "select d.heladera, count(d) from DonacionVianda d where d.activo = :activo" + " and d.fecha between :principioSemana and :finSemana group by d.heladera order by d.heladera.id", Object[].class)
+                .setParameter("activo", true)
+                .setParameter("principioSemana", principioDeSemana)
+                .setParameter("finSemana", finDeSemana)
+                .getResultList();
+
+        return results.stream().collect(Collectors.toMap(
+                result -> (Heladera) result[0],
+                result -> (Long) result[1]
+        ));
     }
 
     @Override

@@ -3,13 +3,8 @@ package ar.edu.utn.frba.dds.domain.reportes;
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
-import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +12,11 @@ import lombok.Setter;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ReporteViandasPorHeladera class representa un reporte de viandas por heladera.
@@ -48,7 +48,7 @@ public class ReporteViandasPorHeladera extends Reporte {
   /**
    * Genera un reporte en formato PDF con la cantidad de viandas colocadas y retiradas por heladera.
    */
-  public void generarPDF() {
+/*  public void generarPDF() {
     LocalDate hoy = LocalDate.now();
 
     Map<Heladera, Long> viandasColocadasPorHeladera =
@@ -72,7 +72,33 @@ public class ReporteViandasPorHeladera extends Reporte {
     String entradasInformeRetiradas = this.generarEntradasInforme(viandasRetiradasPorHeladera, "Retiradas");
 
     pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, entradasInformeColocadas + "\n" + entradasInformeRetiradas);
-  }
+  }*/
+
+  public void generarPDF() {
+    LocalDate hoy = LocalDate.now();
+
+    // Use the new method to get the donations grouped by collaborator
+    Map<Heladera, Long> viandasColocadasPorHeladera = donacionesViandaRepository.buscarDonacionesAgrupadasPorColaborador(hoy);
+
+    List<RedistribucionViandas> redistribucionesEstaSemana = redistribucionesViandaRepository
+            .buscarTodosMismaSemana(LocalDate.now());
+
+    viandasColocadasPorHeladera
+            .putAll(redistribucionesEstaSemana.stream()
+                    .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraDestino, Collectors.summingLong(RedistribucionViandas::getCantidad))));
+
+    Map<Heladera, Long> viandasRetiradasPorHeladera =
+            redistribucionesEstaSemana.stream()
+                    .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraOrigen, Collectors.counting()));
+
+
+    String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+    String entradasInformeColocadas = this.generarEntradasInforme(viandasColocadasPorHeladera,"Colocadas");
+    String entradasInformeRetiradas = this.generarEntradasInforme(viandasRetiradasPorHeladera, "Retiradas");
+
+    pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, entradasInformeColocadas + "\n" + entradasInformeRetiradas);
+}
 
   private String generarEntradasInforme(Map<Heladera, Long> viandasPorHeladera, String tipo) {
     StringBuilder stringBuilder = new StringBuilder();

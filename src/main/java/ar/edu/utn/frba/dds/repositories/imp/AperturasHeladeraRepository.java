@@ -1,15 +1,12 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
+import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.repositories.IAperturasHeladeraRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
-import static ar.edu.utn.frba.dds.db.EntityManagerHelper.entityManager;
 
 public class AperturasHeladeraRepository implements IAperturasHeladeraRepository, WithSimplePersistenceUnit {
 
@@ -22,6 +19,14 @@ public class AperturasHeladeraRepository implements IAperturasHeladeraRepository
     public List<AperturaHeladera> buscarTodos() {
         return entityManager().createQuery("from AperturaHeladera where activo=:activo", AperturaHeladera.class).
                 setParameter("activo", true)
+                .getResultList();
+    }
+
+    @Override
+    public List<AperturaHeladera> buscarPorHeladera(Heladera Heladera) {
+        return entityManager().createQuery("from AperturaHeladera where activo=:activo and heladera=:heladera", AperturaHeladera.class)
+                .setParameter("activo", true)
+                .setParameter("heladera", Heladera)
                 .getResultList();
     }
 
