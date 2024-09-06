@@ -9,7 +9,6 @@ import ar.edu.utn.frba.dds.repositories.IFallasTecnicasRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import ar.edu.utn.frba.dds.repositories.imp.*;
-import net.bytebuddy.implementation.bytecode.Throw;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +39,7 @@ public class ServiceLocator {
                         add("colocacionHeladeraRepository", new ColocacionHeladeraRepository());
                 case "donacionDineroRepository" -> add("donacionDineroRepository", new DonacionDineroRepository());
                 case "donacionesViandaRepository" ->
-                        add("donacionesViandaRepository", new DonacionesVIandaRepository());
+                        add("donacionesViandaRepository", new DonacionesViandaRepository());
                 case "fallasTecnicasRepository" -> add("fallasTecnicasRepository", new FallasTecnicasRepository());
                 case "formasColaboracionRepository" ->
                         add("formasColaboracionRepository", new FormasColaboracionRespository());

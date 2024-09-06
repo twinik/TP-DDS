@@ -49,7 +49,7 @@ public class RedistribucionViandas extends EntidadPersistente implements IPuntaj
   @JoinColumn (name = "heladera_destino", referencedColumnName = "id", nullable = false)
   private Heladera heladeraDestino;
 
-  @ManyToOne
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
   @JoinColumn(name = "motivo_id",referencedColumnName = "id")
   private MotivoRedistribucionVianda motivo;
 

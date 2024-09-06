@@ -50,7 +50,7 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
     LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
     LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha.atStartOfDay());
     List<Object[]> results = entityManager().createQuery(
-            "select a.heladera.nombre, count(a) from Alerta a where a.activo = :activo" + " and a.timestamp between :principioSemana and :finSemana group by a.heladera.nombre order by a.heladera.id", Object[].class)
+            "select a.heladera.nombre, count(a) from Alerta a where a.activo = :activo" + " and a.timestamp between :principioSemana and :finSemana group by a.heladera.nombre order by count(a)", Object[].class)
         .setParameter("activo", true)
         .setParameter("principioSemana", principioDeSemana)
         .setParameter("finSemana", finDeSemana)

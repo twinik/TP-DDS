@@ -50,7 +50,7 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
         LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
         LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha).atStartOfDay();
         List<Object[]> results = entityManager().createQuery(
-                "select f.heladera.nombre, count(f) from FallaTecnica f where f.activo = :activo" + " and f.timestamp between :principioSemana and :finSemana group by f.heladera.nombre order by f.heladera.id", Object[].class)
+                "select f.heladera.nombre, count(f) from FallaTecnica f where f.activo = :activo" + " and f.timestamp between :principioSemana and :finSemana group by f.heladera.nombre order by count(f)", Object[].class)
             .setParameter("activo", true)
             .setParameter("principioSemana", principioDeSemana)
             .setParameter("finSemana", finDeSemana)

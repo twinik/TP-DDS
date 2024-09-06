@@ -22,6 +22,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class DonacionVianda extends EntidadPersistente implements IPuntajeCalculable {
   @ManyToOne
   @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)

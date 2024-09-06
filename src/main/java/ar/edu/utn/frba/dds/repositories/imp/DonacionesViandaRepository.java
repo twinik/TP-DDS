@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class DonacionesVIandaRepository implements IDonacionesViandaRepository, WithSimplePersistenceUnit {
+public class DonacionesViandaRepository implements IDonacionesViandaRepository, WithSimplePersistenceUnit {
 
     @Override
     public Optional<DonacionVianda> buscar(Long id) {
@@ -40,7 +39,7 @@ public class DonacionesVIandaRepository implements IDonacionesViandaRepository, 
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
                         "select d.heladera.nombre, count(d) from DonacionVianda d where d.activo = :activo" + " and d.fecha between :principioSemana and :finSemana" +
-                            " and d.heladera.activo=:activo group by d.heladera.nombre order by d.heladera.id", Object[].class)
+                            " and d.heladera.activo=:activo group by d.heladera.nombre order by count(d)", Object[].class)
                 .setParameter("activo", true)
                 .setParameter("principioSemana", principioDeSemana)
                 .setParameter("finSemana", finDeSemana)

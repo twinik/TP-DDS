@@ -80,8 +80,6 @@ public class ReporteViandasPorHeladera extends Reporte {
     viandasColocadasPorHeladera
             .putAll(redistribucionesViandaRepository.buscarViandasColocadasPorHeladera(hoy));
 
-
-  // TODO ACA NO SE POR QUE HABIA UN COUNT EN VEZ DE UN SUM ??
     Map<String, Long> viandasRetiradasPorHeladera = redistribucionesViandaRepository.buscarViandasRetiradasPorHeladera(hoy);
 
 
