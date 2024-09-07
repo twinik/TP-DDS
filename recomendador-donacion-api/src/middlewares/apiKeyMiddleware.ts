@@ -9,13 +9,24 @@ export async function apiKeyMiddleware(
 ) {
 	const key: string | undefined = req.headers.authorization;
 
-	if (!key) {
-		res.status(403).json({ error: "No credentials were sent!" });
-	}
+	// if (!key) {
+	// 	res.status(403).json({ error: "No credentials were sent!" });
+	// }
 
-	if (await validarApiKey(key!)) {
-		next();
-	} else {
-		res.status(403).json({ error: "Invalid API Key!" });
+	// if (await validarApiKey(key!)) {
+	// 	next();
+	// } else {
+	// 	res.status(403).json({ error: "Invalid API Key!" });
+	// }
+
+	if(key){
+		if (await validarApiKey(key!)) {
+			next();
+		} else {
+			res.status(403).json({ error: "Invalid API Key!" });
+		}
+	}
+	else{
+		res.status(401).json({ error: "No credentials were sent!" });
 	}
 }

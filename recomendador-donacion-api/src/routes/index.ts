@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /locaciones-donacion:
+ * /api/locaciones-donacion:
  *   get:
  *     summary: Obtiene comunidades cercanas para donaciones
  *     description: Devuelve las comunidades más cercanas a una ubicación dada, dentro de un rango de distancia y con un límite de resultados.
@@ -82,26 +82,46 @@ const router = Router();
  *               properties:
  *                 error:
  *                   type: string
- *                   example: Faltan parámetros de latitud o longitud válidos
- *  components:
- *       securitySchemes:
- *          apiKeyAuth:
- *           type: apiKey
- *           in: header
- *           name: Authorization
- *           description: "API Key requerida en el header 'Authorization'. Ejemplo: 'Authorization:{apiKey}'"
+ *                   example: "Faltan parámetros de latitud o longitud válidos"
+ *       401:
+ *         description: Credenciales no enviadas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "No credentials were sent!"
+ *       403:
+ *         description: API Key inválida
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Invalid API Key!"
+ * components:
+ *   securitySchemes:
+ *     apiKeyAuth:
+ *       type: apiKey
+ *       in: header
+ *       name: Authorization
+ *       description: "API Key requerida en el header 'Authorization'. Ejemplo: 'Authorization: {apiKey}'"
  */
 router.get("/locaciones-donacion", apiKeyMiddleware, obtenerLugares);
 
 /**
  * @swagger
- * /key:
+ * /api/key:
  *   get:
  *     summary: Devuelve una API Key
- *     description: Devuelve una API Key que deberá ser guardada y enviada en el header del request para utilizar el servicio de recomendacion
+ *     description: Devuelve una API Key que deberá ser guardada y enviada en el header del request para utilizar el servicio de recomendación
  *     responses:
  *       200:
- *         description:
+ *         description: API Key generada exitosamente
  *         content:
  *           application/json:
  *             schema:
@@ -109,7 +129,10 @@ router.get("/locaciones-donacion", apiKeyMiddleware, obtenerLugares);
  *               properties:
  *                 key:
  *                   type: string
+ *                   example: "abc123xyz456"
  */
 router.get("/key", obtenerApiKey);
+
+
 
 export { router };
