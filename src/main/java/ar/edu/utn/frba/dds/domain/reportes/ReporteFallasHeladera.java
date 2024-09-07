@@ -63,14 +63,14 @@ public class ReporteFallasHeladera extends Reporte {
 
     String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-    pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(alertasPorHeladera));
+    pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(fallasTecnicasPorHeladera));
   }
 
   private String generarEntradasInforme(Map<String, Long> incidnetesPorHeladera) {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n");
     incidnetesPorHeladera.forEach((nombre, cant) -> stringBuilder
-        .append(String.format("Heladera: %s cantidad de fallas: %d", nombre, cant)));
+        .append(String.format("Heladera: %s cantidad de fallas: %d\n", nombre, cant)));
     return stringBuilder.toString();
   }
 

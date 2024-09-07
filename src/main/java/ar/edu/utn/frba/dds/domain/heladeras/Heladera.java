@@ -33,7 +33,7 @@ public class Heladera extends EntidadPersistente {
   @Column(name = "heladera_activa")
   private boolean heladeraActiva = true;
 
-  @Column(name = "nombre")
+  @Column(name = "nombre", unique = true)
   private String nombre;
 
   @Column(name = "capacidad_viandas")
