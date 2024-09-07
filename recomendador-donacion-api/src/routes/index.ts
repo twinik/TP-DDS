@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { obtenerLugares } from "../controllers/donacionController";
+import { obtenerApiKey } from "../controllers/apiKeyController";
+import { apiKeyMiddleware } from "../middlewares/apiKeyMiddleware";
 
 const router = Router();
 
@@ -9,6 +11,8 @@ const router = Router();
  *   get:
  *     summary: Obtiene comunidades cercanas para donaciones
  *     description: Devuelve las comunidades más cercanas a una ubicación dada, dentro de un rango de distancia y con un límite de resultados.
+ *     security:
+ *          - apiKeyAuth: []
  *     parameters:
  *       - in: query
  *         name: lat
@@ -79,7 +83,33 @@ const router = Router();
  *                 error:
  *                   type: string
  *                   example: Faltan parámetros de latitud o longitud válidos
+ *  components:
+ *       securitySchemes:
+ *          apiKeyAuth:
+ *           type: apiKey
+ *           in: header
+ *           name: Authorization
+ *           description: "API Key requerida en el header 'Authorization'. Ejemplo: 'Authorization:{apiKey}'"
  */
-router.get("/locaciones-donacion", obtenerLugares);
+router.get("/locaciones-donacion", apiKeyMiddleware, obtenerLugares);
+
+/**
+ * @swagger
+ * /key:
+ *   get:
+ *     summary: Devuelve una API Key
+ *     description: Devuelve una API Key que deberá ser guardada y enviada en el header del request para utilizar el servicio de recomendacion
+ *     responses:
+ *       200:
+ *         description:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 key:
+ *                   type: string
+ */
+router.get("/key", obtenerApiKey);
 
 export { router };

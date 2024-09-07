@@ -22,6 +22,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "generate-api-key": "^1.0.2",
     "mysql2": "^3.11.0",
     "reflect-metadata": "^0.2.2",
     "swagger-jsdoc": "^6.2.8",
