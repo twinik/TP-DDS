@@ -11,18 +11,18 @@ import java.util.List;
  */
 @AllArgsConstructor
 public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
-  private RecomendadorHeladeras recomendadorHeladeras;
+    private RecomendadorHeladeras recomendadorHeladeras;
 
-  public void notificar(Heladera heladera, Suscripcion suscripcion) {
-    if (!heladera.isHeladeraActiva()) {
-      suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(),
-          GenerarMensajeHeladerasRecomendadas(heladera));
+    public void notificar(Heladera heladera, Suscripcion suscripcion) {
+        if (!heladera.isHeladeraActiva()) {
+            suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(),
+                    GenerarMensajeHeladerasRecomendadas(heladera));
+        }
     }
-  }
 
-  private String GenerarMensajeHeladerasRecomendadas(Heladera heladera) {
-    List<Heladera> heladeras = recomendadorHeladeras.recomendarCombinacionHeladeras(heladera);
-    return  MensajeHeladerasRecomendadasFactory.GenerarMensaje(heladeras);
-  }
+    private String GenerarMensajeHeladerasRecomendadas(Heladera heladera) {
+        List<Heladera> heladeras = recomendadorHeladeras.recomendarCombinacionHeladeras(heladera);
+        return MensajeHeladerasRecomendadasFactory.GenerarMensaje(heladeras);
+    }
 
 }

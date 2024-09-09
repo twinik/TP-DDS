@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.repositories;
 
-import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.domain.tarjetas.TarjetaColaborador;
 import java.util.List;
 import java.util.Optional;

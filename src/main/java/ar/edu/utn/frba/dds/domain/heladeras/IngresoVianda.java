@@ -13,15 +13,15 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class IngresoVianda {
-  private Long id;
-  private Date fechaDonacion;
-  private Colaborador colaborador;
-  private boolean entregada;
-  private List<Vianda> viandas;
-  private Heladera heladera;
+    private Long id;
+    private Date fechaDonacion;
+    private Colaborador colaborador;
+    private boolean entregada;
+    private List<Vianda> viandas;
+    private Heladera heladera;
 
-  public List<DonacionVianda> donar() {
-    return this.viandas.stream().map(vianda -> new DonacionVianda(this.colaborador, vianda.getFechaDonacion(), vianda)).toList();
-  }
+    public List<DonacionVianda> donar() {
+        return this.viandas.stream().map(vianda -> new DonacionVianda(this.colaborador, vianda.getFechaDonacion(), vianda)).toList();
+    }
 
 }

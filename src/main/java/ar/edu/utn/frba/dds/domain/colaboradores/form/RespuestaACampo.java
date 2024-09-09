@@ -19,28 +19,28 @@ import java.util.List;
 @Table(name = "respuesta_campo")
 public class RespuestaACampo extends EntidadPersistente {
 
-  @ManyToOne
-  @JoinColumn(name = "campo_id", referencedColumnName = "id")
-  private Campo campo;
+    @ManyToOne
+    @JoinColumn(name = "campo_id", referencedColumnName = "id")
+    private Campo campo;
 
-  @Column(columnDefinition = "TEXT")
-  private String respuesta;
+    @Column(columnDefinition = "TEXT")
+    private String respuesta;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "opciones_x_respuesta", inverseJoinColumns = @JoinColumn(name = "opcion_elegida_id",referencedColumnName = "id"),
-  joinColumns = @JoinColumn(name = "respuesta_a_campo_id",referencedColumnName = "id"))
-  private List<Opcion> opcionesElegidas = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "opciones_x_respuesta", inverseJoinColumns = @JoinColumn(name = "opcion_elegida_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "respuesta_a_campo_id", referencedColumnName = "id"))
+    private List<Opcion> opcionesElegidas = new ArrayList<>();
 
-  /**
-   * RespuestaACampo class constructor.
-   */
-  public RespuestaACampo(Campo campo, String respuesta) {
-    this.campo = campo;
-    this.respuesta = respuesta;
-  }
+    /**
+     * RespuestaACampo class constructor.
+     */
+    public RespuestaACampo(Campo campo, String respuesta) {
+        this.campo = campo;
+        this.respuesta = respuesta;
+    }
 
-  public void agregarOpcionesElegidas(Opcion... opciones) {
-    Collections.addAll(this.opcionesElegidas, opciones);
-  }
+    public void agregarOpcionesElegidas(Opcion... opciones) {
+        Collections.addAll(this.opcionesElegidas, opciones);
+    }
 
 }

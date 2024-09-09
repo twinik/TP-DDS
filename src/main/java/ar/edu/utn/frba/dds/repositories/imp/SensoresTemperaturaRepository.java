@@ -1,11 +1,8 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.heladeras.SensorTemperatura;
 import ar.edu.utn.frba.dds.repositories.ISensorTemperaturaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

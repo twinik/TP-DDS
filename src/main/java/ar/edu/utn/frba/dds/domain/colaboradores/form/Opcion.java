@@ -21,6 +21,6 @@ import javax.persistence.Table;
 @Table(name = "opcion")
 public class Opcion extends EntidadPersistente {
 
-  @Column(name = "opcion", columnDefinition = "TEXT")
-  private String opcion;
+    @Column(name = "opcion", columnDefinition = "TEXT")
+    private String opcion;
 }

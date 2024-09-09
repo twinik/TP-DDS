@@ -53,7 +53,7 @@ public class ReporteViandasPorColaborador extends Reporte {
 
     public void generarPDF() {
         LocalDate hoy = LocalDate.now();
-        Map<String,Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);
+        Map<String, Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);
 
         String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 

@@ -23,32 +23,32 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DonacionVianda extends EntidadPersistente implements IPuntajeCalculable {
-  @ManyToOne
-  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
-  private Colaborador colaborador;
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
+    private Colaborador colaborador;
 
-  @Column(name = "fecha", columnDefinition = "DATE", nullable = false)
-  private LocalDate fecha;
+    @Column(name = "fecha", columnDefinition = "DATE", nullable = false)
+    private LocalDate fecha;
 
-  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-  @JoinColumn(name = "vianda_id", referencedColumnName = "id", nullable = false, unique = true)
-  private Vianda vianda;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "vianda_id", referencedColumnName = "id", nullable = false, unique = true)
+    private Vianda vianda;
 
-  //DESNORMALIZACION POR PERFORMANCE BOEEEEEEEEEEEE
-  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-  private Heladera heladera;
+    //DESNORMALIZACION POR PERFORMANCE BOEEEEEEEEEEEE
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    private Heladera heladera;
 
-  private static final Float PUNTAJE_POR_DONACION = 1.5f;
+    private static final Float PUNTAJE_POR_DONACION = 1.5f;
 
-  public DonacionVianda(Colaborador colaborador, LocalDate fecha, Vianda vianda) {
-    this.colaborador = colaborador;
-    this.fecha = fecha;
-    this.vianda = vianda;
-  }
+    public DonacionVianda(Colaborador colaborador, LocalDate fecha, Vianda vianda) {
+        this.colaborador = colaborador;
+        this.fecha = fecha;
+        this.vianda = vianda;
+    }
 
-  @Override
-  public Float calcularPuntaje() {
-    return PUNTAJE_POR_DONACION;
-  }
+    @Override
+    public Float calcularPuntaje() {
+        return PUNTAJE_POR_DONACION;
+    }
 }

@@ -7,7 +7,6 @@ import ar.edu.utn.frba.dds.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.domain.suscripciones.SuscripcionDesperfectoHeladera;
-import ar.edu.utn.frba.dds.domain.suscripciones.SuscripcionViandasFaltantes;
 import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;

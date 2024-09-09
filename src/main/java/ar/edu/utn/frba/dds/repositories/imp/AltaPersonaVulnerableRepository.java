@@ -1,14 +1,8 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.AltaPersonaVulnerable;
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.repositories.IAltaPersonaVulnerableRepository;
-import ar.edu.utn.frba.dds.repositories.IMotivoRedistribucionRepository;
-import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import java.util.List;
 import java.util.Optional;
 

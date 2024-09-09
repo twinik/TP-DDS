@@ -25,7 +25,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "colaborador",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"tipo_documento", "documento"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"tipo_documento", "documento"})
 )
 @Getter
 @Setter
@@ -33,7 +33,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Colaborador extends EntidadPersistente implements Contactable {
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
     private Usuario usuario;
 
@@ -44,24 +44,24 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     @Column(name = "documento", columnDefinition = "varchar(11)")
     private String documento;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id", unique = true)
     private TipoColaborador tipoColaborador;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "respuesta_formulario_id", referencedColumnName = "id",unique = true)
+    @JoinColumn(name = "respuesta_formulario_id", referencedColumnName = "id", unique = true)
     private RespuestaFormulario respuestas;
 
     @Column(name = "puntosGanados")
     private Float puntosGanados = 0f;
 
-    @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
     @Embedded
     private Direccion direccion;
 
-    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private List<MedioDeContacto> medioContacto = new ArrayList<>();
 

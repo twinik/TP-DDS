@@ -11,13 +11,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class PuntosAltaPersonaVulnerableTest {
     AltaPersonaVulnerable donacion_1, donacion_2;
@@ -29,10 +25,10 @@ public class PuntosAltaPersonaVulnerableTest {
     FormaColaboracion persona = new FormaColaboracion("REGISTRO_PERSONA");
 
     @BeforeEach
-    void test_init(){
+    void test_init() {
         colaborador = new Colaborador();
-        personaVulnerable_1 = new PersonaVulnerable("Ernesto", new GregorianCalendar(1990, Calendar.AUGUST, 4).getTime(),  new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), true, "Caballito", TipoDocumento.DNI, "45419968", colaborador, null);
-        personaVulnerable_2 = new PersonaVulnerable("Jaime", new GregorianCalendar(1995, Calendar.AUGUST, 8).getTime(),  new GregorianCalendar(2005, Calendar.AUGUST, 2).getTime(), true, "Monte Grande", TipoDocumento.DNI, "45419967", colaborador, null);
+        personaVulnerable_1 = new PersonaVulnerable("Ernesto", new GregorianCalendar(1990, Calendar.AUGUST, 4).getTime(), new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), true, "Caballito", TipoDocumento.DNI, "45419968", colaborador, null);
+        personaVulnerable_2 = new PersonaVulnerable("Jaime", new GregorianCalendar(1995, Calendar.AUGUST, 8).getTime(), new GregorianCalendar(2005, Calendar.AUGUST, 2).getTime(), true, "Monte Grande", TipoDocumento.DNI, "45419967", colaborador, null);
         donacion_1 = new AltaPersonaVulnerable();
         donacion_1.setColaborador(colaborador);
         donacion_1.setPersona(personaVulnerable_1);

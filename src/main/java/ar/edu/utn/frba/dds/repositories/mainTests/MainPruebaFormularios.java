@@ -1,11 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.mainTests;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.form.Campo;
-import ar.edu.utn.frba.dds.domain.colaboradores.form.Formulario;
-import ar.edu.utn.frba.dds.domain.colaboradores.form.Opcion;
-import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
-import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
-import ar.edu.utn.frba.dds.domain.colaboradores.form.TipoCampo;
+import ar.edu.utn.frba.dds.domain.colaboradores.form.*;
 import ar.edu.utn.frba.dds.repositories.IFormularioRepository;
 import ar.edu.utn.frba.dds.repositories.IRespuestasFormularioRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;

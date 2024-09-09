@@ -12,7 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * 
+ *
  */
 @Getter
 @Setter
@@ -22,15 +22,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class FallaTecnica extends Incidente {
     @ManyToOne
-    @JoinColumn(name = "colaborador_id",referencedColumnName = "id")
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
-    @Column(name = "descripcion",columnDefinition = "TEXT")
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
-    @Column(name = "url_foto",columnDefinition = "TEXT")
+    @Column(name = "url_foto", columnDefinition = "TEXT")
     private String urlFoto;
 
-    public FallaTecnica(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper,NotificationStrategyFactory notificationStrategyFactory, Colaborador colaborador, String descripcion, String urlFoto) {
-        super(heladera, timestamp,tecnicosHelper,notificationStrategyFactory);
+    public FallaTecnica(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, Colaborador colaborador, String descripcion, String urlFoto) {
+        super(heladera, timestamp, tecnicosHelper, notificationStrategyFactory);
         this.colaborador = colaborador;
         this.descripcion = descripcion;
         this.urlFoto = urlFoto;

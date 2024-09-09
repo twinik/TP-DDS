@@ -34,12 +34,12 @@ public class DonacionesViandaRepository implements IDonacionesViandaRepository, 
     }
 
     @Override
-    public Map<String , Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha) {
+    public Map<String, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha) {
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
                         "select d.heladera.nombre, count(d) from DonacionVianda d where d.activo = :activo" + " and d.fecha between :principioSemana and :finSemana" +
-                            " and d.heladera.activo=:activo group by d.heladera.nombre order by count(d)", Object[].class)
+                                " and d.heladera.activo=:activo group by d.heladera.nombre order by count(d)", Object[].class)
                 .setParameter("activo", true)
                 .setParameter("principioSemana", principioDeSemana)
                 .setParameter("finSemana", finDeSemana)

@@ -1,22 +1,12 @@
 package ar.edu.utn.frba.dds.domain.suscripciones;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.startsWith;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.*;
 
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
-import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,54 +17,51 @@ import java.util.List;
 public class SuscripcionVIandasRestantesTest {
 
 
+    @Test
+    @DisplayName("pruebo que notifique cuando corresponde")
+    void mandarNotificacion() {
+        Suscripcion sucripcion;
+        NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
+        doNothing().when(strategy).notificar(any(), any());
+        sucripcion = new Suscripcion(new Colaborador(),
+                strategy, new SuscripcionViandasRestantes(), 2);
 
+        List<Vianda> viandas = new ArrayList<>();
 
+        Vianda vianda1 = new Vianda();
+        viandas.add(vianda1);
+        viandas.add(new Vianda());
+        viandas.add(new Vianda());
 
-  @Test
-  @DisplayName("pruebo que notifique cuando corresponde")
-  void mandarNotificacion(){
-    Suscripcion sucripcion;
-    NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-    doNothing().when(strategy).notificar(any(),any());
-    sucripcion = new Suscripcion(new Colaborador(),
-        strategy,new SuscripcionViandasRestantes(),2);
+        Heladera heladera = new Heladera(LocalDate.now());
+        heladera.setViandas(viandas);
+        heladera.agregarSuscripcion(sucripcion);
+        heladera.quitarVianda(vianda1);
 
-    List<Vianda> viandas = new ArrayList<>();
+        verify(strategy, times(1)).notificar(any(), any());
+    }
 
-    Vianda vianda1 = new Vianda();
-    viandas.add(vianda1);
-    viandas.add(new Vianda());
-    viandas.add(new Vianda());
+    @Test
+    @DisplayName("pruebo que no notifique cuando corresopnda")
+    void noMandaNada() {
+        Suscripcion sucripcion;
+        NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
+        doNothing().when(strategy).notificar(any(), any());
+        sucripcion = new Suscripcion(new Colaborador(),
+                strategy, new SuscripcionViandasRestantes(), 1);
 
-    Heladera heladera = new Heladera(LocalDate.now());
-    heladera.setViandas(viandas);
-    heladera.agregarSuscripcion(sucripcion);
-    heladera.quitarVianda(vianda1);
+        List<Vianda> viandas = new ArrayList<>();
 
-    verify(strategy,times(1)).notificar(any(),any());
-  }
+        Vianda vianda1 = new Vianda();
+        viandas.add(vianda1);
+        viandas.add(new Vianda());
+        viandas.add(new Vianda());
 
-  @Test
-  @DisplayName("pruebo que no notifique cuando corresopnda")
-  void noMandaNada(){
-    Suscripcion sucripcion;
-    NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-    doNothing().when(strategy).notificar(any(),any());
-    sucripcion = new Suscripcion(new Colaborador(),
-        strategy,new SuscripcionViandasRestantes(),1);
+        Heladera heladera = new Heladera(LocalDate.now());
+        heladera.setViandas(viandas);
+        heladera.agregarSuscripcion(sucripcion);
+        heladera.quitarVianda(vianda1);
 
-    List<Vianda> viandas = new ArrayList<>();
-
-    Vianda vianda1 = new Vianda();
-    viandas.add(vianda1);
-    viandas.add(new Vianda());
-    viandas.add(new Vianda());
-
-    Heladera heladera = new Heladera(LocalDate.now());
-    heladera.setViandas(viandas);
-    heladera.agregarSuscripcion(sucripcion);
-    heladera.quitarVianda(vianda1);
-
-    verify(strategy,times(0)).notificar(any(),any());
-  }
+        verify(strategy, times(0)).notificar(any(), any());
+    }
 }

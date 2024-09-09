@@ -15,18 +15,18 @@ import javax.persistence.Table;
 @Getter
 @Setter
 public class Usuario extends EntidadPersistente {
-  @Column(name = "email", unique = true)
-  private String email;
+    @Column(name = "email", unique = true)
+    private String email;
 
-  @Column(name = "clave")
-  private String clave;
+    @Column(name = "clave")
+    private String clave;
 
-  public Usuario(String email, String clave) {
-    this.email = email;
-    this.clave = clave;
-  }
+    public Usuario(String email, String clave) {
+        this.email = email;
+        this.clave = clave;
+    }
 
-  public Usuario() {
+    public Usuario() {
 
-  }
+    }
 }

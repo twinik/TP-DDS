@@ -17,7 +17,7 @@ public class WhatsappSenderStrategy implements NotificationStrategy {
 
 
     public void notificar(Contactable contactable, String message) {
-        whatsappSenderAdapter.enviarWhatsapp(message,contactable.telefonoCompleto());
+        whatsappSenderAdapter.enviarWhatsapp(message, contactable.telefonoCompleto());
     }
 
 }

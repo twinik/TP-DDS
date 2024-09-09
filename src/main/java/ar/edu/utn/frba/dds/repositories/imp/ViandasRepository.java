@@ -32,18 +32,18 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
 
         List<Object[]> results = entityManager().createQuery(
-                "select concat(v.colaborador.nombre,' ',v.colaborador.apellido,' (id: ', v.colaborador.id, ')'), count(v) from Vianda v " +
-                    "where v.activo = :activo and v.fechaDonacion between :principioSemana and :finSemana " +
-                    "group by concat(v.colaborador.nombre,' ',v.colaborador.apellido,' (id: ', v.colaborador.id, ')') " +
-                    "order by count(v) asc", Object[].class)
-            .setParameter("activo", true)
-            .setParameter("principioSemana", principioDeSemana)
-            .setParameter("finSemana", finDeSemana)
-            .getResultList();
+                        "select concat(v.colaborador.nombre,' ',v.colaborador.apellido,' (id: ', v.colaborador.id, ')'), count(v) from Vianda v " +
+                                "where v.activo = :activo and v.fechaDonacion between :principioSemana and :finSemana " +
+                                "group by concat(v.colaborador.nombre,' ',v.colaborador.apellido,' (id: ', v.colaborador.id, ')') " +
+                                "order by count(v) asc", Object[].class)
+                .setParameter("activo", true)
+                .setParameter("principioSemana", principioDeSemana)
+                .setParameter("finSemana", finDeSemana)
+                .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-            result -> (String) result[0],
-            result -> (Long) result[1]
+                result -> (String) result[0],
+                result -> (Long) result[1]
         ));
     }
 

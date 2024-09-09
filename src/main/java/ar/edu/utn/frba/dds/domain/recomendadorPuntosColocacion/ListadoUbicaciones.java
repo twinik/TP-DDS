@@ -11,5 +11,5 @@ import java.util.ArrayList;
 @Getter
 @Setter
 public class ListadoUbicaciones {
-  ArrayList<Ubicacion> listadoUbicaciones;
+    ArrayList<Ubicacion> listadoUbicaciones;
 }

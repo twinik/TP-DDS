@@ -1,14 +1,10 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
-import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.repositories.ITarjetasColaboradorRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.NoResultException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

@@ -10,17 +10,17 @@ import java.io.IOException;
 
 @NoArgsConstructor
 public class NotificationStrategyFactory {
-  public NotificationStrategy create(CanalContacto canalContacto) {
-    try {
-      return switch (canalContacto) {
-        case EMAIL -> new MailNotificationStrategy(new SendGridMailSender());
-        case WHATSAPP -> new WhatsappSenderStrategy(new TwilioWhatsappSender());
-        case TELEGRAM -> new TelegramNotificacionStrategy(new BotTelegramSender());
-        default -> throw new InvalidNotificationStrategyException();
-      };
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
+    public NotificationStrategy create(CanalContacto canalContacto) {
+        try {
+            return switch (canalContacto) {
+                case EMAIL -> new MailNotificationStrategy(new SendGridMailSender());
+                case WHATSAPP -> new WhatsappSenderStrategy(new TwilioWhatsappSender());
+                case TELEGRAM -> new TelegramNotificacionStrategy(new BotTelegramSender());
+                default -> throw new InvalidNotificationStrategyException();
+            };
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
-    return null;
-  }
 }

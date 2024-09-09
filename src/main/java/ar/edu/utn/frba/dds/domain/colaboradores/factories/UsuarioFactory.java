@@ -7,7 +7,7 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
  */
 
 public class UsuarioFactory {
-  public static Usuario createUsuario(String mail, String clave) {
-    return new Usuario(mail, clave);
-  }
+    public static Usuario createUsuario(String mail, String clave) {
+        return new Usuario(mail, clave);
+    }
 }

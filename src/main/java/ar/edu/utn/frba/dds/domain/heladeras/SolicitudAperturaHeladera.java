@@ -43,12 +43,12 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
 
     public void publicarSolicitudABroker() throws IOException {
         ConfigReader configReader = new ConfigReader("config.properties");
-        String topic        = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER_TOPIC") + "/" + this.heladera.getNombre(); // cada heladera se va a suscribir a su topic
-        String broker       = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER");
-        String clientId     = configReader.getProperty("CLIENT_ID");
+        String topic = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER_TOPIC") + "/" + this.heladera.getNombre(); // cada heladera se va a suscribir a su topic
+        String broker = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER");
+        String clientId = configReader.getProperty("CLIENT_ID");
         ZonedDateTime zdt = ZonedDateTime.of(this.timestamp, ZoneId.systemDefault());
         String timestampEnMilis = Long.toString(zdt.toInstant().toEpochMilli());
-        String content      = String.join(";", this.colaborador.getId().toString(), timestampEnMilis);
+        String content = String.join(";", this.colaborador.getId().toString(), timestampEnMilis);
 
         BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);
         brokerPublisher.publicar(content);
@@ -56,14 +56,14 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
 
     public static void main(String[] args) {
         Colaborador colab = new Colaborador();
-        colab.setUsuario(new Usuario("jorge@mail","contrasenia"));
+        colab.setUsuario(new Usuario("jorge@mail", "contrasenia"));
         Heladera heladera = new Heladera(LocalDate.now());
         heladera.setNombre("heladera_de_thomi");
-        SolicitudAperturaHeladera soli =  new SolicitudAperturaHeladera(colab,"un motivo",LocalDateTime.now(),heladera);
-      try {
-        soli.publicarSolicitudABroker();
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
+        SolicitudAperturaHeladera soli = new SolicitudAperturaHeladera(colab, "un motivo", LocalDateTime.now(), heladera);
+        try {
+            soli.publicarSolicitudABroker();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

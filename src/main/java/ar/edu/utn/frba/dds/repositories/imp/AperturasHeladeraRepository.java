@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.repositories.IAperturasHeladeraRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,11 +1,9 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -32,16 +30,16 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                "select r.heladeraDestino.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
-                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraDestino.nombre order by sum(r.cantidad) asc", Object[].class)
-            .setParameter("activo", true)
-            .setParameter("principioSemana", principioDeSemana)
-            .setParameter("finSemana", finDeSemana)
-            .getResultList();
+                        "select r.heladeraDestino.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
+                                " and r.fecha between :principioSemana and :finSemana group by r.heladeraDestino.nombre order by sum(r.cantidad) asc", Object[].class)
+                .setParameter("activo", true)
+                .setParameter("principioSemana", principioDeSemana)
+                .setParameter("finSemana", finDeSemana)
+                .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-            result -> (String) result[0],
-            result -> (Long) result[1]
+                result -> (String) result[0],
+                result -> (Long) result[1]
         ));
     }
 
@@ -50,16 +48,16 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                "select r.heladeraOrigen.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
-                    " and r.fecha between :principioSemana and :finSemana group by r.heladeraOrigen.nombre order by sum(r.cantidad) asc", Object[].class)
-            .setParameter("activo", true)
-            .setParameter("principioSemana", principioDeSemana)
-            .setParameter("finSemana", finDeSemana)
-            .getResultList();
+                        "select r.heladeraOrigen.nombre, sum(r.cantidad) from RedistribucionViandas r where r.activo = :activo" +
+                                " and r.fecha between :principioSemana and :finSemana group by r.heladeraOrigen.nombre order by sum(r.cantidad) asc", Object[].class)
+                .setParameter("activo", true)
+                .setParameter("principioSemana", principioDeSemana)
+                .setParameter("finSemana", finDeSemana)
+                .getResultList();
 
         return results.stream().collect(Collectors.toMap(
-            result -> (String) result[0],
-            result -> (Long) result[1]
+                result -> (String) result[0],
+                result -> (Long) result[1]
         ));
     }
 

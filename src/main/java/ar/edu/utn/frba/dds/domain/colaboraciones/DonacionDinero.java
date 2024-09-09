@@ -22,24 +22,24 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DonacionDinero extends EntidadPersistente implements IPuntajeCalculable {
-  private static final Float COEFICIENTE_DONACION_DINERO = .5f;
-  
+    private static final Float COEFICIENTE_DONACION_DINERO = .5f;
 
-  @ManyToOne
-  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
-  private Colaborador colaborador;
 
-  @Column(name = "fecha", columnDefinition = "DATE", nullable = false)
-  private LocalDate fecha;
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
+    private Colaborador colaborador;
 
-  @Column(name = "monto_donacion", nullable = false)
-  private Float monto;
+    @Column(name = "fecha", columnDefinition = "DATE", nullable = false)
+    private LocalDate fecha;
 
-  @Enumerated(EnumType.STRING)
-  private FrecuenciaDonacion frecuencia;
+    @Column(name = "monto_donacion", nullable = false)
+    private Float monto;
 
-  @Override
-  public Float calcularPuntaje() {
-    return COEFICIENTE_DONACION_DINERO * this.monto;
-  }
+    @Enumerated(EnumType.STRING)
+    private FrecuenciaDonacion frecuencia;
+
+    @Override
+    public Float calcularPuntaje() {
+        return COEFICIENTE_DONACION_DINERO * this.monto;
+    }
 }

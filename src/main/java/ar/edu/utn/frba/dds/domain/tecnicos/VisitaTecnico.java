@@ -20,7 +20,7 @@ public class VisitaTecnico extends EntidadPersistente {
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id", nullable = false)
     private Tecnico tecnico;
 
-    @Column(name = "fecha_donacion_dinero", columnDefinition = "TIMESTAMP",nullable = false)
+    @Column(name = "fecha_donacion_dinero", columnDefinition = "TIMESTAMP", nullable = false)
     private LocalDateTime timestamp;
 
     @Column(name = "descripcion", columnDefinition = "TEXT")

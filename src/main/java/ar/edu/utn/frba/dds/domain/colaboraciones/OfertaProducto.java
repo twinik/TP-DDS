@@ -22,29 +22,29 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OfertaProducto extends EntidadPersistente {
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
-  private Colaborador colaborador;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
+    private Colaborador colaborador;
 
-  @Column(name = "fecha_creacion", columnDefinition = "DATE",nullable = false)
-  private LocalDate fechaCreacion;
+    @Column(name = "fecha_creacion", columnDefinition = "DATE", nullable = false)
+    private LocalDate fechaCreacion;
 
-  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-  @JoinColumn (name = "producto_id", referencedColumnName = "id", nullable = false)
-  private Producto producto;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "producto_id", referencedColumnName = "id", nullable = false)
+    private Producto producto;
 
-  @Column(name = "puntos_necesarios",  nullable = false)
-  private Float puntosNecesarios;
+    @Column(name = "puntos_necesarios", nullable = false)
+    private Float puntosNecesarios;
 
-  @Enumerated(EnumType.STRING)
-  private CategoriaOferta categoria;
-  
-  /**
-   * Metodo puedeSerCanjeadoPor que se encarga de verificar.
-   * si el colaborador puede canjear el producto.
-   */
-  public boolean puedeSerCanjeadoPor(Colaborador colaborador) {
-    return colaborador.getPuntosGanados() >= this.puntosNecesarios;
-  }
+    @Enumerated(EnumType.STRING)
+    private CategoriaOferta categoria;
+
+    /**
+     * Metodo puedeSerCanjeadoPor que se encarga de verificar.
+     * si el colaborador puede canjear el producto.
+     */
+    public boolean puedeSerCanjeadoPor(Colaborador colaborador) {
+        return colaborador.getPuntosGanados() >= this.puntosNecesarios;
+    }
 
 }

@@ -20,12 +20,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sensor_temperatura")
 public class SensorTemperatura extends EntidadPersistente {
-  @ManyToOne
-  @JoinColumn(name = "heladera_id",referencedColumnName = "id")
-  private Heladera heladera;
+    @ManyToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    private Heladera heladera;
 
-  public void registrarTemperatura(Float temp) {
-    heladera.registrarTemperatura(temp);
-  }
+    public void registrarTemperatura(Float temp) {
+        heladera.registrarTemperatura(temp);
+    }
 
 }

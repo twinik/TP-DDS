@@ -15,13 +15,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "producto")
 public class Producto extends EntidadPersistente {
-  @Column(name = "nombre")
-  private String nombre;
-  @Column(name = "url_foto",columnDefinition = "TEXT")
-  private String urlFoto;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "url_foto", columnDefinition = "TEXT")
+    private String urlFoto;
 
-  public Producto(String nombre, String urlFoto) {
-    this.nombre = nombre;
-    this.urlFoto = urlFoto;
-  }
+    public Producto(String nombre, String urlFoto) {
+        this.nombre = nombre;
+        this.urlFoto = urlFoto;
+    }
 }

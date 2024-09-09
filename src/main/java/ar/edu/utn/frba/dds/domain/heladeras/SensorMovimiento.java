@@ -18,12 +18,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sensor_movimiento")
 public class SensorMovimiento extends EntidadPersistente {
-  // TODO: PREGUNTAR CARDINALIDAD EN LOS SENSORES IGUAL ES LO MISMO
-  @ManyToOne
-  @JoinColumn(name = "heladera_id",referencedColumnName = "id")
-  private Heladera heladera;
+    @ManyToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    private Heladera heladera;
 
-  public void alertarRobo() {
-    this.heladera.inhabilitar();
-  }
+    public void alertarRobo() {
+        this.heladera.inhabilitar();
+    }
 }

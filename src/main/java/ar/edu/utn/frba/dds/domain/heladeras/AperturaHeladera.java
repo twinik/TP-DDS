@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class AperturaHeladera extends EntidadPersistente {
 
     @OneToOne
-    @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id",unique = true)
+    @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id", unique = true)
     private SolicitudAperturaHeladera solicitud;
 
     @Column(name = "timestamp", columnDefinition = "TIMESTAMP")
@@ -34,7 +34,7 @@ public class AperturaHeladera extends EntidadPersistente {
         this.heladera = heladera;
     }
 
-    public static AperturaHeladera of(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera){
-        return new AperturaHeladera(solicitud,timestamp,heladera);
+    public static AperturaHeladera of(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera) {
+        return new AperturaHeladera(solicitud, timestamp, heladera);
     }
 }

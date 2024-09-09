@@ -21,5 +21,6 @@ import javax.persistence.*;
 public abstract class Reporte extends EntidadPersistente {
     @Column(name = "ruta_archivo")
     protected String rutaArchivo;
+
     public abstract void generarPDF();
 }

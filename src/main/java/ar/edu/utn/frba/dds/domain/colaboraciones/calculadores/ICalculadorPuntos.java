@@ -8,5 +8,5 @@ import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
  * CalculadorDePuntos interface permite calcular los puntos de una colaboracion.
  */
 public interface ICalculadorPuntos {
-  void sumarPuntosPara(Colaborador colaborador, IPuntajeCalculable... colaboraciones);
+    void sumarPuntosPara(Colaborador colaborador, IPuntajeCalculable... colaboraciones);
 }

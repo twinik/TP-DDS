@@ -49,7 +49,7 @@ public class PersonaVulnerable extends EntidadPersistente {
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")
     private List<PersonaVulnerable> tutorados;
 

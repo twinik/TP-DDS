@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 public class VerificadorConexionHeladera {
-  public boolean huboFallaConexion(Heladera heladera, int minutosUltimaConexion){
-    RegistroTemperatura ultimoRegistro = heladera.getRegistroTemperaturas().get(heladera.getRegistroTemperaturas().size()-1);
-    return DateHelper.minutosEntre(ultimoRegistro.getFechaHora(), LocalDateTime.now()) > minutosUltimaConexion;
-  }
+    public boolean huboFallaConexion(Heladera heladera, int minutosUltimaConexion) {
+        RegistroTemperatura ultimoRegistro = heladera.getRegistroTemperaturas().get(heladera.getRegistroTemperaturas().size() - 1);
+        return DateHelper.minutosEntre(ultimoRegistro.getFechaHora(), LocalDateTime.now()) > minutosUltimaConexion;
+    }
 
 }

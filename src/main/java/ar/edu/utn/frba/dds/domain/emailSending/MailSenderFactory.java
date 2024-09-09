@@ -7,10 +7,10 @@ import java.io.IOException;
  */
 public class MailSenderFactory {
 
-  /**
-   * Factory Method, crea un SendGridMailSender por default
-   */
-  public static MailSenderAdapter createMailSender() throws IOException {
-    return new SendGridMailSender();
-  }
+    /**
+     * Factory Method, crea un SendGridMailSender por default
+     */
+    public static MailSenderAdapter createMailSender() throws IOException {
+        return new SendGridMailSender();
+    }
 }

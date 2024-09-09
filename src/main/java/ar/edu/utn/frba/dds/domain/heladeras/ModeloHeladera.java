@@ -19,12 +19,12 @@ import javax.persistence.Table;
 public class ModeloHeladera extends EntidadPersistente {
 
 
-  @Column(name = "modelo")
-  private String modelo;
+    @Column(name = "modelo")
+    private String modelo;
 
-  @Column(name = "temperatura_min")
-  private float tempMin;
+    @Column(name = "temperatura_min")
+    private float tempMin;
 
-  @Column(name = "temperatura_max")
-  private float tempMax;
+    @Column(name = "temperatura_max")
+    private float tempMax;
 }

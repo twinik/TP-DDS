@@ -18,17 +18,17 @@ import java.time.LocalDateTime;
 @Getter
 public class UsoTarjeta extends EntidadPersistente {
 
-  @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
-  private LocalDateTime fechaUso;
+    @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
+    private LocalDateTime fechaUso;
 
-  @ManyToOne
-  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-  private Heladera heladera;
+    @ManyToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    private Heladera heladera;
 
-  public UsoTarjeta(Tarjeta tarjeta, LocalDateTime fechaUso, Heladera heladera) {
-    this.fechaUso = fechaUso;
-    this.heladera = heladera;
-    tarjeta.agregarUsos();
-  }
+    public UsoTarjeta(Tarjeta tarjeta, LocalDateTime fechaUso, Heladera heladera) {
+        this.fechaUso = fechaUso;
+        this.heladera = heladera;
+        tarjeta.agregarUsos();
+    }
 
 }

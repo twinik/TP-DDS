@@ -21,34 +21,34 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "colocacion_heladera")
 public class ColocacionHeladeras extends EntidadPersistente implements IPuntajeCalculable {
-  public static final Float PUNTOS_POR_MES = 5.0f;
+    public static final Float PUNTOS_POR_MES = 5.0f;
 
-  @ManyToOne
-  @JoinColumn(name = "colaborador_id",referencedColumnName = "id",nullable = false)
-  private Colaborador colaborador;
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
+    private Colaborador colaborador;
 
-  @Column(name = "fecha",nullable = false, columnDefinition = "DATE")
-  private LocalDate fecha;
+    @Column(name = "fecha", nullable = false, columnDefinition = "DATE")
+    private LocalDate fecha;
 
-  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-  @JoinColumn(name = "heladera_id",referencedColumnName = "id", nullable = false, unique = true)
-  private Heladera heladera;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id", nullable = false, unique = true)
+    private Heladera heladera;
 
-  public ColocacionHeladeras(Colaborador colaborador, LocalDate fecha, Heladera heladera) {
-    this.colaborador = colaborador;
-    this.fecha = fecha;
-    this.heladera = heladera;
-  }
+    public ColocacionHeladeras(Colaborador colaborador, LocalDate fecha, Heladera heladera) {
+        this.colaborador = colaborador;
+        this.fecha = fecha;
+        this.heladera = heladera;
+    }
 
-  /**
-   * Metodo getMesesActiva que devuelve la cantidad de meses que la heladera lleva activa.
-   */
-  public Integer getMesesActiva() {
-    return DateHelper.mesesEntre(this.heladera.getFechaPuestaFuncionamiento(), LocalDate.now());
-  }
+    /**
+     * Metodo getMesesActiva que devuelve la cantidad de meses que la heladera lleva activa.
+     */
+    public Integer getMesesActiva() {
+        return DateHelper.mesesEntre(this.heladera.getFechaPuestaFuncionamiento(), LocalDate.now());
+    }
 
-  @Override
-  public Float calcularPuntaje() {
-    return PUNTOS_POR_MES * this.getMesesActiva();
-  }
+    @Override
+    public Float calcularPuntaje() {
+        return PUNTOS_POR_MES * this.getMesesActiva();
+    }
 }

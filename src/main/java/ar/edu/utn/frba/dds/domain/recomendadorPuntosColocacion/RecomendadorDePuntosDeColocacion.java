@@ -11,13 +11,13 @@ import lombok.Setter;
 @Getter
 public class RecomendadorDePuntosDeColocacion {
 
-  private RecomendadorDePuntosAdapter recomendadorDePuntosAdapter;
+    private RecomendadorDePuntosAdapter recomendadorDePuntosAdapter;
 
-  /**
-   * Recomienda una ubicacion.
-   */
-  public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
-    return recomendadorDePuntosAdapter.recomendarUbicacion(punto, radio);
-  }
+    /**
+     * Recomienda una ubicacion.
+     */
+    public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
+        return recomendadorDePuntosAdapter.recomendarUbicacion(punto, radio);
+    }
 
 }

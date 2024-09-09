@@ -25,11 +25,11 @@ public class SuscripcionesRepository implements ISuscripcionesRepository, WithSi
     }
 
     @Override
-    public List<Suscripcion> buscarTodosPorColaborador(Long colaborador_id){
+    public List<Suscripcion> buscarTodosPorColaborador(Long colaborador_id) {
         return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.id =:colaborador_id", Suscripcion.class).
-            setParameter("activo", true)
-            .setParameter("colaborador_id",colaborador_id)
-            .getResultList();
+                setParameter("activo", true)
+                .setParameter("colaborador_id", colaborador_id)
+                .getResultList();
     }
 
 

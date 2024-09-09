@@ -1,12 +1,13 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CargaColaboracionCsvReaderTest {
 
@@ -29,9 +30,9 @@ class CargaColaboracionCsvReaderTest {
     @Test
     @DisplayName("Lectura de archivo csv")
     void readCsv() {
-      List<Object> registros = cargaColaboracionCsvReader.readCsv(path, separator);
-      assertFalse(registros.isEmpty(), "La lista de registros no debería estar vacía");
-      assertEquals(7, registros.size(), "La lista de registros debería tener 7 elementos");
+        List<Object> registros = cargaColaboracionCsvReader.readCsv(path, separator);
+        assertFalse(registros.isEmpty(), "La lista de registros no debería estar vacía");
+        assertEquals(7, registros.size(), "La lista de registros debería tener 7 elementos");
     }
 
 }

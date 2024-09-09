@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.repositories;
 
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import java.util.List;
 import java.util.Optional;

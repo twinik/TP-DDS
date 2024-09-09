@@ -1,8 +1,6 @@
 package ar.edu.utn.frba.dds.repositories;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
-import ar.edu.utn.frba.dds.domain.tecnicos.AreaDeCobertura;
-
 import java.util.List;
 import java.util.Optional;
 

@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import java.io.IOException;
 
 /**
- * 
+ *
  */
 @AllArgsConstructor
 public class MailNotificationStrategy implements NotificationStrategy {
@@ -22,7 +22,7 @@ public class MailNotificationStrategy implements NotificationStrategy {
         ConfigReader config = new ConfigReader("config.properties");
         try {
             mailSenderAdapter.enviarMail(MyMailFactory.createMail(config.getProperty("MAIL-DIR")
-                , contactable.email(), config.getProperty("ASUNTO_MENSAJE_TENICO"),message));
+                    , contactable.email(), config.getProperty("ASUNTO_MENSAJE_TENICO"), message));
         } catch (IOException e) {
             throw new CrearMailException(e);
         }

@@ -8,43 +8,38 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.time.LocalDate;
-import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class TarjetaTest {
 
-  private Tarjeta tarjeta;
-  private PersonaVulnerable duenioMock;
+    private Tarjeta tarjeta;
+    private PersonaVulnerable duenioMock;
 
-  @BeforeEach
-  public void setUp() {
-    duenioMock = Mockito.mock(PersonaVulnerable.class);
-    FrecuenciaUso frecuenciaDiaria = new FrecuenciaDiaria();
-    FrecuenciaDiaria.setMaximosUsosBase(4);
-    tarjeta = Tarjeta.of(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), 5, frecuenciaDiaria, duenioMock, 10);
-  }
+    @BeforeEach
+    public void setUp() {
+        duenioMock = Mockito.mock(PersonaVulnerable.class);
+        FrecuenciaUso frecuenciaDiaria = new FrecuenciaDiaria();
+        FrecuenciaDiaria.setMaximosUsosBase(4);
+        tarjeta = Tarjeta.of(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), 5, frecuenciaDiaria, duenioMock, 10);
+    }
 
-  @Test
-  @DisplayName("Test de inicialización correcta")
-  public void testInicializacionCorrecta() {
-    Assertions.assertEquals(5, tarjeta.getNroUsos());
-    Assertions.assertInstanceOf(FrecuenciaDiaria.class, tarjeta.getFrecuenciaPermitida());
-    Assertions.assertNotNull(tarjeta.getUsos());
-    Assertions.assertEquals(0, tarjeta.getUsos().size());
-    Assertions.assertEquals(duenioMock, tarjeta.getDuenio());
-    Assertions.assertEquals(10, tarjeta.getCantidadUsosDia());
-  }
+    @Test
+    @DisplayName("Test de inicialización correcta")
+    public void testInicializacionCorrecta() {
+        Assertions.assertEquals(5, tarjeta.getNroUsos());
+        Assertions.assertInstanceOf(FrecuenciaDiaria.class, tarjeta.getFrecuenciaPermitida());
+        Assertions.assertNotNull(tarjeta.getUsos());
+        Assertions.assertEquals(0, tarjeta.getUsos().size());
+        Assertions.assertEquals(duenioMock, tarjeta.getDuenio());
+        Assertions.assertEquals(10, tarjeta.getCantidadUsosDia());
+    }
 
-  @Test
-  @DisplayName("Test de permitir uso")
-  public void testPermitirUso() {
-    Mockito.when(duenioMock.cantidadMenores()).thenReturn(0);
-    tarjeta.setCantidadUsosDia(0);
-    Assertions.assertTrue(tarjeta.permiteUsar());
+    @Test
+    @DisplayName("Test de permitir uso")
+    public void testPermitirUso() {
+        Mockito.when(duenioMock.cantidadMenores()).thenReturn(0);
+        tarjeta.setCantidadUsosDia(0);
+        Assertions.assertTrue(tarjeta.permiteUsar());
 
-    tarjeta.setCantidadUsosDia(5);
-    Assertions.assertFalse(tarjeta.permiteUsar());
-  }
+        tarjeta.setCantidadUsosDia(5);
+        Assertions.assertFalse(tarjeta.permiteUsar());
+    }
 }

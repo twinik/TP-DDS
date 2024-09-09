@@ -18,18 +18,18 @@ import java.util.List;
 @Table(name = "formulario")
 public class Formulario extends EntidadPersistente {
 
-  @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
-  @JoinColumn(name = "formulario_id", referencedColumnName = "id")
-  private List<Campo> campos;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "formulario_id", referencedColumnName = "id")
+    private List<Campo> campos;
 
 
-  public Formulario() {
-    this.campos = new ArrayList<Campo>();
-  }
+    public Formulario() {
+        this.campos = new ArrayList<Campo>();
+    }
 
 
-  public void agregarCampos(Campo... campos) {
-    Collections.addAll(this.campos, campos);
-  }
+    public void agregarCampos(Campo... campos) {
+        Collections.addAll(this.campos, campos);
+    }
 
 }
