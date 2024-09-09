@@ -120,16 +120,29 @@ router.get("/locaciones-donacion", apiKeyMiddleware, obtenerLugares)
  *     summary: Devuelve una API Key
  *     description: Devuelve una API Key que deberá ser guardada y enviada en el header del request para utilizar el servicio de recomendación
  *     responses:
- *       200:
+ *       201:
  *         description: API Key generada exitosamente
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
+ *                 mensaje:
+ *                   type: string
+ *                   example: "API key generada con éxito"
  *                 key:
  *                   type: string
  *                   example: "abc123xyz456"
+ *       500:
+ *         description: Error al generar la API Key
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Hubo un error al generar la API key"
  */
 router.get("/key", obtenerApiKey)
 
