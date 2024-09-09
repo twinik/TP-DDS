@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "solicitud_apertura_heladera")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SolicitudAperturaHeladera extends EntidadPersistente {

@@ -92,6 +92,7 @@ public class Colaborador extends EntidadPersistente implements Contactable {
 
     public void agregarColocacionHeladera(ColocacionHeladeras colocacion) {
         this.heladerasColocadas.add(colocacion);
+        colocacion.setColaborador(this);
     }
 
     public void completarCampo(RespuestaACampo respuesta) {

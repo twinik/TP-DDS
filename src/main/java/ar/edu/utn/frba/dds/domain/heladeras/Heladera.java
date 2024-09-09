@@ -84,6 +84,7 @@ public class Heladera extends EntidadPersistente {
 
   public void agregarVianda(Vianda vianda) {
     this.viandas.add(vianda);
+    vianda.setHeladera(this);
     avisarObservers();
   }
 
@@ -92,6 +93,7 @@ public class Heladera extends EntidadPersistente {
     avisarObservers();
   }
 
+  // TODO cuando llegue el momento ver como funciona esto
   public void agregarHeladeraCercana(Heladera... heladeras){
       this.heladerasCercanas.addAll(Arrays.stream(heladeras).toList());
   }
@@ -101,6 +103,10 @@ public class Heladera extends EntidadPersistente {
     this.suscripciones.addAll(Arrays.stream(suscripciones).toList());
   }
 
+  public void agregarSoliApertura(SolicitudAperturaHeladera soli){
+    this.solicitudesApertura.add(soli);
+    soli.setHeladera(this);
+  }
   /**
    * Metodo que registra la temperatura de la heladera.
    */
