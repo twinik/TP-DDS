@@ -1,16 +1,12 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
 import ar.edu.utn.frba.dds.db.EntidadPersistente;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 /**
  * Clase: RegistroTemperatura: guarda la hora y la temperatura registrada en ese instante

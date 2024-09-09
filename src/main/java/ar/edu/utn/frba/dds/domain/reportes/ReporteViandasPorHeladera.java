@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.repositories.IRedistribucionesViandaRepository;

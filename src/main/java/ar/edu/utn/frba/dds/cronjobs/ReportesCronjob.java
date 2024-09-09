@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.cronjobs;
 
 
-import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.FALLAS_HELADERA;
-import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.VIANDA_X_COLAB;
-import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.VIANDA_X_HELADERA;
+import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.*;
 
 import ar.edu.utn.frba.dds.domain.reportes.Reporte;
 import ar.edu.utn.frba.dds.domain.reportes.ReportesFactory;

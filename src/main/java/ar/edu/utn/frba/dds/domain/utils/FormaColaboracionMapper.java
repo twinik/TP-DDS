@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.domain.utils;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.FormaColaboracion;
-
 /**
  * FormaColaboracionMapper class permite mapear una forma de colaboracion.
  */

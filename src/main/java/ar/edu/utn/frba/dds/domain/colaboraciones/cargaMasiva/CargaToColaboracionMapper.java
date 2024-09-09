@@ -1,14 +1,9 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.AltaPersonaVulnerable;
-import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionDinero;
-import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.domain.colaboraciones.IPuntajeCalculable;
-import ar.edu.utn.frba.dds.domain.colaboraciones.RedistribucionViandas;
+import ar.edu.utn.frba.dds.domain.colaboraciones.*;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.helpers.LocalDateTimeTypeAdapter;
 import ar.edu.utn.frba.dds.helpers.LocalDateTypeAdapter;
-import ar.edu.utn.frba.dds.domain.utils.FormaColaboracionMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.time.LocalDate;

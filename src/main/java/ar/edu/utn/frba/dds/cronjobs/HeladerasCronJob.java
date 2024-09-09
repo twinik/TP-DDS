@@ -2,8 +2,8 @@ package ar.edu.utn.frba.dds.cronjobs;
 
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
-import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 
 
 public class HeladerasCronJob {

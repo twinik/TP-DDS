@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.cronjobs;
 
-import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.repositories.ITarjetasRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 
 public class TarjetasCronJob {
     public static void main(String[] args) {

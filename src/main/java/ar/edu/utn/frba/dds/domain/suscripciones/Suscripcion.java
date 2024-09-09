@@ -1,14 +1,11 @@
 package ar.edu.utn.frba.dds.domain.suscripciones;
 
-import ar.edu.utn.frba.dds.converters.FrecuenciaUsoAttributeConverter;
 import ar.edu.utn.frba.dds.converters.NotificationStrategyAttributeConverter;
 import ar.edu.utn.frba.dds.converters.TipoSuscripcionAttributeConverter;
 import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

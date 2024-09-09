@@ -4,7 +4,6 @@ package ar.edu.utn.frba.dds.repositories.imp;
 import ar.edu.utn.frba.dds.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.repositories.ISuscripcionesRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import java.util.List;
 import java.util.Optional;
 

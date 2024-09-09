@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboraciones.cargaMasiva;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 
 /**
  * CSVReaderAdapter interface permite leer un archivo CSV.

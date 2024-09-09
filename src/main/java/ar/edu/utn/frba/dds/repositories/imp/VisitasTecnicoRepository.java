@@ -1,11 +1,9 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.tecnicos.VisitaTecnico;
 import ar.edu.utn.frba.dds.repositories.IVisitasTecnicoRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 import java.util.Optional;
 

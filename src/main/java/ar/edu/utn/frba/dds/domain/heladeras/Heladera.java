@@ -4,14 +4,16 @@ import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Heladera class permite representar una heladera.

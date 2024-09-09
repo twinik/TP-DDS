@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion;
 
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
-import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.ArrayList;
 
 /**
  * Representa el listado de ubicaciones.

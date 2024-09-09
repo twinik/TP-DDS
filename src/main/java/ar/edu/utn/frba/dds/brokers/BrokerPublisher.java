@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.brokers;
 
-import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import lombok.AllArgsConstructor;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;

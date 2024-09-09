@@ -1,19 +1,14 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class HeladeraRepository implements IHeladerasRepository, WithSimplePersistenceUnit {

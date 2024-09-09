@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.domain.emailSending.SendGridMailSender;
 import ar.edu.utn.frba.dds.domain.excepciones.InvalidNotificationStrategyException;
 import ar.edu.utn.frba.dds.domain.telegramSender.BotTelegramSender;
 import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.whatsappSender.TwilioWhatsappSender;
 import lombok.NoArgsConstructor;
 import java.io.IOException;

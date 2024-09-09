@@ -5,13 +5,13 @@ import ar.edu.utn.frba.dds.domain.notifications.Contactable;
 import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
-import java.util.List;
 import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Tecnico class permite representar un tecnico.

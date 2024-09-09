@@ -1,16 +1,10 @@
 package ar.edu.utn.frba.dds.converters;
 
 import ar.edu.utn.frba.dds.domain.heladeras.RecomendadorHeladeras;
-import ar.edu.utn.frba.dds.domain.notifications.MailNotificationStrategy;
-import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategy;
-import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
-import ar.edu.utn.frba.dds.domain.notifications.TelegramNotificacionStrategy;
-import ar.edu.utn.frba.dds.domain.notifications.WhatsappSenderStrategy;
 import ar.edu.utn.frba.dds.domain.suscripciones.ITipoSuscripcion;
 import ar.edu.utn.frba.dds.domain.suscripciones.SuscripcionDesperfectoHeladera;
 import ar.edu.utn.frba.dds.domain.suscripciones.SuscripcionViandasFaltantes;
 import ar.edu.utn.frba.dds.domain.suscripciones.SuscripcionViandasRestantes;
-import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

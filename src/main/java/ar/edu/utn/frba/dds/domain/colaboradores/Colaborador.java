@@ -4,14 +4,10 @@ import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaACampo;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.RespuestaFormulario;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import ar.edu.utn.frba.dds.domain.notifications.Contactable;
 import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import lombok.AllArgsConstructor;
@@ -19,6 +15,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Colaborador class permite representar un colaborador.

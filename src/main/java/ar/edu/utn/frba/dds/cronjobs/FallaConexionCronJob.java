@@ -8,9 +8,9 @@ import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
 import java.io.IOException;
 import java.util.List;
 

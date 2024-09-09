@@ -1,13 +1,13 @@
 package ar.edu.utn.frba.dds.domain.telegramSender;
 
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
-import java.io.IOException;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import java.io.IOException;
 
 /**
  * Permite enviar un mensaje de Telegram.

@@ -4,7 +4,9 @@ import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Clase: Modelo Heladera, cada heladera viene definida con estos parametros

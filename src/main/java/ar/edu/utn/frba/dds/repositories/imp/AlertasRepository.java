@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
-import ar.edu.utn.frba.dds.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
@@ -12,7 +9,6 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

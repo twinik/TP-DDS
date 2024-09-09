@@ -1,8 +1,5 @@
 package ar.edu.utn.frba.dds.domain.reportes;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.heladeras.Vianda;
-import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.domain.pdfs.IPDFGeneratorAdapter;
 import ar.edu.utn.frba.dds.repositories.IViandasRepository;
 import lombok.Getter;
@@ -13,9 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Reporta las viandas donadas por un colaborador

@@ -2,13 +2,11 @@ package ar.edu.utn.frba.dds.domain.heladeras;
 
 import ar.edu.utn.frba.dds.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import java.time.LocalDate;
-import java.util.Date;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Vianda class permite representar una vianda.

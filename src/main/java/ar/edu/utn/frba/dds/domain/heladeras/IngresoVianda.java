@@ -1,12 +1,11 @@
 package ar.edu.utn.frba.dds.domain.heladeras;
 
-import static java.util.stream.Collectors.toList;
-
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import java.util.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import java.util.Date;
+import java.util.List;
 
 /**
  * IngresoVianda class permite representar un ingreso de vianda.

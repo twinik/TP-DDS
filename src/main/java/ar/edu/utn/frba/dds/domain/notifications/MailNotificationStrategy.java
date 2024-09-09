@@ -1,10 +1,8 @@
 package ar.edu.utn.frba.dds.domain.notifications;
 
 import ar.edu.utn.frba.dds.domain.emailSending.MailSenderAdapter;
-import ar.edu.utn.frba.dds.domain.emailSending.MyEmail;
 import ar.edu.utn.frba.dds.domain.emailSending.MyMailFactory;
 import ar.edu.utn.frba.dds.domain.excepciones.CrearMailException;
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import lombok.AllArgsConstructor;
 import java.io.IOException;

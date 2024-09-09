@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.domain.recomendadorPuntosColocacion;
 
 import ar.edu.utn.frba.dds.domain.excepciones.FallaAlConsumirApiException;
-import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;

@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.utils.CanjeProducto;
-import ar.edu.utn.frba.dds.domain.colaboradores.form.Campo;
 import ar.edu.utn.frba.dds.repositories.ICanjeProductoRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;

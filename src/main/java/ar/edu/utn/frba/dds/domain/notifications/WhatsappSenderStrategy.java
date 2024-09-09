@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.domain.notifications;
 
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.domain.whatsappSender.WhatsappSenderAdapter;
 import lombok.AllArgsConstructor;
 

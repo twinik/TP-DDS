@@ -1,12 +1,8 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.OfertaProducto;
-import ar.edu.utn.frba.dds.domain.colaboraciones.utils.MotivoRedistribucionVianda;
-import ar.edu.utn.frba.dds.domain.heladeras.ModeloHeladera;
-import ar.edu.utn.frba.dds.repositories.IModeloHeladeraRepository;
 import ar.edu.utn.frba.dds.repositories.IOfertaProductoRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import java.util.List;
 import java.util.Optional;
 

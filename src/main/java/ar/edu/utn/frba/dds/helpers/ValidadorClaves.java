@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.helpers;
 
 import ar.edu.utn.frba.dds.helpers.validaciones.Validacion;
+import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lombok.Getter;
 
 /**
  * Representa el validador de las contrasenias.
