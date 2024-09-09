@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { obtenerLugares } from "../controllers/donacionController";
-import { obtenerApiKey } from "../controllers/apiKeyController";
-import { apiKeyMiddleware } from "../middlewares/apiKeyMiddleware";
+import { Router } from "express"
+import { obtenerLugares } from "../controllers/donacionController"
+import { obtenerApiKey } from "../controllers/apiKeyController"
+import { apiKeyMiddleware } from "../middlewares/apiKeyMiddleware"
 
-const router = Router();
+const router = Router()
 
 /**
  * @swagger
@@ -111,7 +111,7 @@ const router = Router();
  *       name: Authorization
  *       description: "API Key requerida en el header 'Authorization'. Ejemplo: 'Authorization: {apiKey}'"
  */
-router.get("/locaciones-donacion", apiKeyMiddleware, obtenerLugares);
+router.get("/locaciones-donacion", apiKeyMiddleware, obtenerLugares)
 
 /**
  * @swagger
@@ -131,8 +131,6 @@ router.get("/locaciones-donacion", apiKeyMiddleware, obtenerLugares);
  *                   type: string
  *                   example: "abc123xyz456"
  */
-router.get("/key", obtenerApiKey);
+router.get("/key", obtenerApiKey)
 
-
-
-export { router };
+export { router }
