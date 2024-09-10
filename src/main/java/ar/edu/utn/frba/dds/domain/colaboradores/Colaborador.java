@@ -48,10 +48,6 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id", unique = true)
     private TipoColaborador tipoColaborador;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "respuesta_formulario_id", referencedColumnName = "id", unique = true)
-    private RespuestaFormulario respuestas;
-
     @Column(name = "puntosGanados")
     private Float puntosGanados = 0f;
 
@@ -92,10 +88,6 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     public void agregarColocacionHeladera(ColocacionHeladeras colocacion) {
         this.heladerasColocadas.add(colocacion);
         colocacion.setColaborador(this);
-    }
-
-    public void completarCampo(RespuestaACampo respuesta) {
-        this.respuestas.agregarRespuestasACampo(respuesta);
     }
 
     public String getNombreYapellido() {

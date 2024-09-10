@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.colaboradores.form;
 
 import ar.edu.utn.frba.dds.db.EntidadPersistente;
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,11 @@ import java.util.List;
 @NoArgsConstructor
 public class RespuestaFormulario extends EntidadPersistente {
     @ManyToOne
-    @JoinColumn(name = "formulario_id", referencedColumnName = "id")
+    @JoinColumn(name = "colaborador_id",referencedColumnName = "id", nullable = false)
+    private Colaborador colaborador;
+
+    @ManyToOne
+    @JoinColumn(name = "formulario_id", referencedColumnName = "id", nullable = false)
     private Formulario formulario;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})

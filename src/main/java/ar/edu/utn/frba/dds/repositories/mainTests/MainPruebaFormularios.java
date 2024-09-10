@@ -1,6 +1,9 @@
 package ar.edu.utn.frba.dds.repositories.mainTests;
 
+import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.domain.colaboradores.form.*;
+import ar.edu.utn.frba.dds.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.repositories.IFormularioRepository;
 import ar.edu.utn.frba.dds.repositories.IRespuestasFormularioRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
@@ -8,6 +11,11 @@ import java.util.Optional;
 
 public class MainPruebaFormularios {
     public static void main(String[] args) {
+        Colaborador c=  new Colaborador();
+        c.setNombre("horge");
+        c.setApellido("fdfdf");
+        c.setUsuario(new Usuario("fdknfdknf","dkfndknfkdnafa"));
+        ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class).guardar(c);
         IFormularioRepository formularioRepository = ServiceLocator.get("formulariosRepository", IFormularioRepository.class);
         IRespuestasFormularioRepository respuestasFormularioRepository = ServiceLocator.get("respuestasFormularioRepository", IRespuestasFormularioRepository.class);
         Formulario nuevo = new Formulario();
@@ -18,9 +26,10 @@ public class MainPruebaFormularios {
         nuevo.agregarCampos(compuesto);
         formularioRepository.guardar(nuevo);
         RespuestaFormulario unaRespuesta = new RespuestaFormulario();
+        unaRespuesta.setColaborador(c);
         RespuestaACampo unaOpcion = new RespuestaACampo();
         unaRespuesta.agregarRespuestasACampo(unaOpcion);
-        Optional<Formulario> hidratado = formularioRepository.buscar(1L);
+        Optional<Formulario> hidratado = formularioRepository.buscar(nuevo.getId());
         if (hidratado.isEmpty()) {
             System.exit(1);
         }
@@ -30,6 +39,7 @@ public class MainPruebaFormularios {
         unaOpcion.agregarOpcionesElegidas(campo3.getOpciones().get(0));
 
         RespuestaFormulario otraRespuesta = new RespuestaFormulario();
+        otraRespuesta.setColaborador(c);
         RespuestaACampo laOtraOpcion = new RespuestaACampo();
 
         otraRespuesta.agregarRespuestasACampo(laOtraOpcion);
