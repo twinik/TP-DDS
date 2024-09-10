@@ -78,9 +78,9 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 //        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
 //      repositorio.actualizar(m2);
 
-        Optional<Heladera> heladera1 = repositorio.buscar(1L);
+        Optional<Heladera> heladera1 = repositorio.buscar(h.getId());
         //System.out.println(hidratado.get().getMotivo());
-        Optional<Heladera> heladera2 = repositorio.buscar(2L);
+        Optional<Heladera> heladera2 = repositorio.buscar(otra.getId());
 
         List<Heladera> lista = repositorio.buscarTodos();
 

@@ -83,9 +83,9 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
         m2.setMotivo("lo cambio");
         repositorio.actualizar(m2);
 
-        Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(1L);
+        Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(m.getId());
         //System.out.println(hidratado.get().getMotivo());
-        Optional<MotivoRedistribucionVianda> hidratado2 = repositorio.buscar(2L);
+        Optional<MotivoRedistribucionVianda> hidratado2 = repositorio.buscar(m1.getId());
 
         List<MotivoRedistribucionVianda> lista = repositorio.buscarTodos();
 

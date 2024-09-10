@@ -29,7 +29,7 @@ public class MainPruebaSuscripcion {
         colaboradoresRepository.buscar(1L);
 
         NotificationStrategyFactory factory = new NotificationStrategyFactory();
-        Suscripcion nueva = new Suscripcion(c, factory.create(CanalContacto.TELEGRAM), new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));
+        Suscripcion nueva = new Suscripcion(c, null, new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));
 
         Heladera h = new Heladera();
         h.setNombre("un_nombre");
@@ -40,7 +40,7 @@ public class MainPruebaSuscripcion {
 
         suscripcionesRepository.guardar(nueva);
 
-        Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(1L);
+        Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(nueva.getId());
 
         //suscripcionesRepository.eliminar(hidratada.get());
 

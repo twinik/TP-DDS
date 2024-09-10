@@ -85,7 +85,7 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
         FallasTecnicasRepository repo = new FallasTecnicasRepository();
         repo.guardar(f1);
 
-        Optional<FallaTecnica> f3 = repo.buscar(1L);
+        Optional<FallaTecnica> f3 = repo.buscar(f1.getId());
 
     }
 }
