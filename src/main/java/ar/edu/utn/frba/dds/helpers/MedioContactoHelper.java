@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.helpers;
 
-import ar.edu.utn.frba.dds.domain.utils.CanalContacto;
-import ar.edu.utn.frba.dds.domain.utils.MedioDeContacto;
+import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
+import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import java.util.List;
 import java.util.Optional;
 

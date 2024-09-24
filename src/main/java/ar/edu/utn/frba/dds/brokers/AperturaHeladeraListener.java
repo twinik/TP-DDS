@@ -1,15 +1,15 @@
 package ar.edu.utn.frba.dds.brokers;
 
 import ar.edu.utn.frba.dds.brokers.dtos.AperturaHeladeraBrokerDTO;
-import ar.edu.utn.frba.dds.domain.heladeras.AperturaHeladera;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.SolicitudAperturaHeladera;
-import ar.edu.utn.frba.dds.domain.tarjetas.TarjetaColaborador;
+import ar.edu.utn.frba.dds.models.domain.heladeras.AperturaHeladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
-import ar.edu.utn.frba.dds.repositories.IAperturasHeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
-import ar.edu.utn.frba.dds.repositories.ISolicitudesAperturaHeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.ITarjetasColaboradorRepository;
+import ar.edu.utn.frba.dds.models.repositories.IAperturasHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;

@@ -1,15 +1,15 @@
 package ar.edu.utn.frba.dds.brokers;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.SolicitudAperturaHeladera;
-import ar.edu.utn.frba.dds.domain.tarjetas.TarjetaColaborador;
-import ar.edu.utn.frba.dds.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
+import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
-import ar.edu.utn.frba.dds.repositories.IAperturasHeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
-import ar.edu.utn.frba.dds.repositories.ISolicitudesAperturaHeladeraRepository;
-import ar.edu.utn.frba.dds.repositories.ITarjetasColaboradorRepository;
+import ar.edu.utn.frba.dds.models.repositories.IAperturasHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.io.IOException;
 import java.time.LocalDate;

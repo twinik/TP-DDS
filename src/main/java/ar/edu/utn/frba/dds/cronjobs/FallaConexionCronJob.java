@@ -1,15 +1,15 @@
 package ar.edu.utn.frba.dds.cronjobs;
 
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.VerificadorConexionHeladera;
-import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
-import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
-import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.VerificadorConexionHeladera;
+import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
+import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
+import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
-import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
-import ar.edu.utn.frba.dds.repositories.IHeladerasRepository;
-import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
+import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.io.IOException;
 import java.util.List;

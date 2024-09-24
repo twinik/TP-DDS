@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.helpers;
 
-import ar.edu.utn.frba.dds.domain.tecnicos.AreaDeCobertura;
-import ar.edu.utn.frba.dds.domain.tecnicos.Tecnico;
-import ar.edu.utn.frba.dds.domain.utils.Ubicacion;
-import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
+import ar.edu.utn.frba.dds.models.domain.tecnicos.AreaDeCobertura;
+import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
+import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
+import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
