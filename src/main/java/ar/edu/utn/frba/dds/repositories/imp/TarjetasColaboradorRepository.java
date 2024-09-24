@@ -13,7 +13,7 @@ import java.util.Optional;
 public class TarjetasColaboradorRepository implements ITarjetasColaboradorRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<TarjetaColaborador> buscar(String codigo) {
+    public Optional<TarjetaColaborador> buscarPorCodigo(String codigo) {
         try {
             TarjetaColaborador t = (TarjetaColaborador) entityManager().createQuery("from TarjetaColaborador where codigo=:codigo")
                     .setParameter("codigo", codigo)
@@ -25,7 +25,7 @@ public class TarjetasColaboradorRepository implements ITarjetasColaboradorReposi
     }
 
     @Override
-    public Optional<TarjetaColaborador> buscar(Long id) {
+    public Optional<TarjetaColaborador> buscar(String id) {
         return Optional.ofNullable(entityManager().find(TarjetaColaborador.class, id));
     }
 

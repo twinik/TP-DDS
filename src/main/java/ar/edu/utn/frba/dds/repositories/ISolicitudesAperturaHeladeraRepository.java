@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ISolicitudesAperturaHeladeraRepository {
-    Optional<SolicitudAperturaHeladera> buscar(Long id);
+    Optional<SolicitudAperturaHeladera> buscar(String id);
 
     List<SolicitudAperturaHeladera> buscarTodos();
 

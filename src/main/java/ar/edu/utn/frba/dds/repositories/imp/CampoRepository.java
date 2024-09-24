@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class CampoRepository implements ICampoRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<Campo> buscar(Long id) {
+    public Optional<Campo> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Campo.class, id));
     }
 

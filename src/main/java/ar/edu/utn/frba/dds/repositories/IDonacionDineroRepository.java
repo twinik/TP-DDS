@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDonacionDineroRepository {
-    Optional<DonacionDinero> buscar(Long id);
+    Optional<DonacionDinero> buscar(String id);
 
     List<DonacionDinero> buscarTodos();
 

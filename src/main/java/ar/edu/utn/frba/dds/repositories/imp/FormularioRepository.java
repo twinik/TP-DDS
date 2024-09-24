@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class FormularioRepository implements IFormularioRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<Formulario> buscar(Long id) {
+    public Optional<Formulario> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Formulario.class, id));
     }
 

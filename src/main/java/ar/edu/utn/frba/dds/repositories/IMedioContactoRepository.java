@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IMedioContactoRepository {
-    Optional<MedioDeContacto> buscar(Long id);
+    Optional<MedioDeContacto> buscar(String id);
 
     List<MedioDeContacto> buscarTodos();
 

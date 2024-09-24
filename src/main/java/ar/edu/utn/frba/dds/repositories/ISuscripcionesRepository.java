@@ -9,11 +9,11 @@ import java.util.Optional;
  */
 public interface ISuscripcionesRepository {
 
-    Optional<Suscripcion> buscar(Long id);
+    Optional<Suscripcion> buscar(String id);
 
     List<Suscripcion> buscarTodos();
 
-    List<Suscripcion> buscarTodosPorColaborador(Long colaborador_id);
+    List<Suscripcion> buscarTodosPorColaborador(String colaborador_id);
 
     void guardar(Suscripcion suscripcion);
 

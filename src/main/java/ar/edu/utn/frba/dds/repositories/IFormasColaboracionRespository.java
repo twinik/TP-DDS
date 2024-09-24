@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IFormasColaboracionRespository {
-    Optional<FormaColaboracion> buscar(Long id);
+    Optional<FormaColaboracion> buscar(String id);
 
-    Optional<FormaColaboracion> buscar(String nombre);
+    Optional<FormaColaboracion> buscarPorNombre(String nombre);
 
     List<FormaColaboracion> buscarTodos();
 

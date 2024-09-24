@@ -14,7 +14,7 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
 
 
     @Override
-    public Optional<RedistribucionViandas> buscar(Long id) {
+    public Optional<RedistribucionViandas> buscar(String id) {
         return Optional.ofNullable(entityManager().find(RedistribucionViandas.class, id));
     }
 

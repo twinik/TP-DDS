@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class PersonaVulnerableRepository implements IPersonaVulnerableRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<PersonaVulnerable> buscar(Long id) {
+    public Optional<PersonaVulnerable> buscar(String id) {
         return Optional.ofNullable(entityManager().find(PersonaVulnerable.class, id));
     }
 

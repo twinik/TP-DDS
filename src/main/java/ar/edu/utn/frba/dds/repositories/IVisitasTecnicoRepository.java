@@ -8,7 +8,7 @@ import java.util.Optional;
  * IVisitasTecnicoRepository interface permite interactuar con las visitas de un tecnico.
  */
 public interface IVisitasTecnicoRepository {
-    Optional<VisitaTecnico> buscar(Long id);
+    Optional<VisitaTecnico> buscar(String id);
 
     List<VisitaTecnico> buscarTodos();
 

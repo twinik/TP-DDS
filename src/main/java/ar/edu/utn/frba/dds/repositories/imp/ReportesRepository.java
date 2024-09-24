@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class ReportesRepository implements IReportesRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<Reporte> buscar(Long id) {
+    public Optional<Reporte> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Reporte.class, id));
     }
 

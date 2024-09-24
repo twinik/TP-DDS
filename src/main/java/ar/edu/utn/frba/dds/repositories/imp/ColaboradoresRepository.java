@@ -27,7 +27,7 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
     }
 
     @Override
-    public Optional<Colaborador> buscar(Long id) {
+    public Optional<Colaborador> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Colaborador.class, id));
     }
 

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ITecnicosRepository {
     Optional<Tecnico> buscar(TipoDocumento tipoDocumento, String documento);
 
-    Optional<Tecnico> buscar(Long id);
+    Optional<Tecnico> buscar(String id);
 
     List<Tecnico> buscarTodos();
 

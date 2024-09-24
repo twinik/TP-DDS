@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class ColocacionHeladeraRepository implements IColocacionHeladeraRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<ColocacionHeladeras> buscar(Long id) {
+    public Optional<ColocacionHeladeras> buscar(String id) {
         return Optional.ofNullable(entityManager().find(ColocacionHeladeras.class, id));
     }
 

@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 public interface IRedistribucionesViandaRepository {
 
-    Optional<RedistribucionViandas> buscar(Long id);
+    Optional<RedistribucionViandas> buscar(String id);
 
     List<RedistribucionViandas> buscarTodos();
 

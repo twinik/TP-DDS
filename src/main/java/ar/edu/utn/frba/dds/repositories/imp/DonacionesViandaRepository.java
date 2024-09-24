@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.repositories.imp;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.repositories.IDonacionesViandaRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 public class DonacionesViandaRepository implements IDonacionesViandaRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<DonacionVianda> buscar(Long id) {
+    public Optional<DonacionVianda> buscar(String id) {
         return Optional.ofNullable(entityManager().find(DonacionVianda.class, id));
     }
 
@@ -26,7 +25,7 @@ public class DonacionesViandaRepository implements IDonacionesViandaRepository, 
     }
 
     @Override
-    public List<DonacionVianda> buscarPorColaborador(Long colaborador_id) {
+    public List<DonacionVianda> buscarPorColaborador(String colaborador_id) {
         return entityManager().createQuery("from DonacionVianda where activo=:activo and colaborador.id=:colaborador_id", DonacionVianda.class)
                 .setParameter("activo", true)
                 .setParameter("colaborador_id", colaborador_id)

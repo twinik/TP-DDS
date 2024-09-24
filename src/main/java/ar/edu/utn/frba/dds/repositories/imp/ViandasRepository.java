@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class ViandasRepository implements IViandasRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<Vianda> buscar(Long id) {
+    public Optional<Vianda> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Vianda.class, id));
     }
 

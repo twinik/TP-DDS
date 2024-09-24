@@ -13,7 +13,7 @@ import java.util.Optional;
 public class SuscripcionesRepository implements ISuscripcionesRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<Suscripcion> buscar(Long id) {
+    public Optional<Suscripcion> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Suscripcion.class, id));
     }
 
@@ -25,7 +25,7 @@ public class SuscripcionesRepository implements ISuscripcionesRepository, WithSi
     }
 
     @Override
-    public List<Suscripcion> buscarTodosPorColaborador(Long colaborador_id) {
+    public List<Suscripcion> buscarTodosPorColaborador(String colaborador_id) {
         return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.id =:colaborador_id", Suscripcion.class).
                 setParameter("activo", true)
                 .setParameter("colaborador_id", colaborador_id)

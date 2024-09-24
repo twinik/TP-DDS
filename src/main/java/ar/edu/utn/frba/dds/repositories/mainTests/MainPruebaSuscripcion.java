@@ -26,7 +26,7 @@ public class MainPruebaSuscripcion {
 
         colaboradoresRepository.guardar(c);
 
-        colaboradoresRepository.buscar(1L);
+        colaboradoresRepository.buscar(c.getId());
 
         NotificationStrategyFactory factory = new NotificationStrategyFactory();
         Suscripcion nueva = new Suscripcion(c, null, new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));

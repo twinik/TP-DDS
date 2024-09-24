@@ -14,7 +14,7 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
     }
 
     @Override
-    public Optional<MotivoRedistribucionVianda> buscar(Long id) {
+    public Optional<MotivoRedistribucionVianda> buscar(String id) {
 //        Query query = EntityManagerHelper.getEntityManager().
 //            // ACA VA EL NOMBRE DE LA CLASE NO DE LA TABLA
 //            createQuery("from MotivoRedistribucionVianda where id=:idParam");

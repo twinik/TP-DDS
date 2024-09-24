@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IColocacionHeladeraRepository {
-    Optional<ColocacionHeladeras> buscar(Long id);
+    Optional<ColocacionHeladeras> buscar(String id);
 
     List<ColocacionHeladeras> buscarTodos();
 

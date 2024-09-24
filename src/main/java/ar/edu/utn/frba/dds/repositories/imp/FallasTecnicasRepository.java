@@ -23,7 +23,7 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
 
 
     @Override
-    public Optional<FallaTecnica> buscar(Long id) {
+    public Optional<FallaTecnica> buscar(String id) {
         return Optional.ofNullable(entityManager().find(FallaTecnica.class, id));
     }
 

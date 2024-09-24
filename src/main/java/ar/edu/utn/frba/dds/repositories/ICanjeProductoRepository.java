@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICanjeProductoRepository {
-    Optional<CanjeProducto> buscar(Long id);
+    Optional<CanjeProducto> buscar(String id);
 
     List<CanjeProducto> buscarTodos();
 

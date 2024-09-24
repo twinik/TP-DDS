@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class AlertasRepository implements IAlertasRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<Alerta> buscar(Long id) {
+    public Optional<Alerta> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Alerta.class, id));
     }
 
@@ -32,7 +32,7 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
 
 
     @Override
-    public List<Alerta> buscarAlertasHeladera(Long heladera_id) {
+    public List<Alerta> buscarAlertasHeladera(String heladera_id) {
         return entityManager().createQuery("from Alerta where activo=:activo" +
                         " and heladera.id=:heladera_id and solucionado=:no_solucionado", Alerta.class)
                 .setParameter("activo", true)
@@ -86,10 +86,9 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
 
         repositorio.eliminar(m1);
 
-
-        Optional<Alerta> alerta1 = repositorio.buscar(1L); //Alerta no tiene ID, ver que se hace
+        Optional<Alerta> alerta1 = repositorio.buscar(m.getId()); //Alerta no tiene ID, ver que se hace
         //System.out.println(hidratado.get().getMotivo());
-        Optional<Alerta> alerta2 = repositorio.buscar(2L); //Alerta no tiene ID, ver que se hace
+        Optional<Alerta> alerta2 = repositorio.buscar(m1.getId()); //Alerta no tiene ID, ver que se hace
 
         List<Alerta> lista = repositorio.buscarTodos();
 

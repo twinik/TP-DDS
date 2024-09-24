@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class DonacionDineroRepository implements IDonacionDineroRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<DonacionDinero> buscar(Long id) {
+    public Optional<DonacionDinero> buscar(String id) {
         return Optional.ofNullable(entityManager().find(DonacionDinero.class, id));
     }
 

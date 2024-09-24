@@ -10,7 +10,7 @@ public class SolicitudesAperturaHeladeraRepository implements ISolicitudesApertu
 
 
     @Override
-    public Optional<SolicitudAperturaHeladera> buscar(Long id) {
+    public Optional<SolicitudAperturaHeladera> buscar(String id) {
         return Optional.ofNullable(entityManager().find(SolicitudAperturaHeladera.class, id));
     }
 

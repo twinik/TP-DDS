@@ -9,7 +9,7 @@ import java.util.Optional;
 // TODO QUIZAS BORRAR
 public class OpcionRepository implements IOpcionRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<Opcion> buscar(Long id) {
+    public Optional<Opcion> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Opcion.class, id));
     }
 

@@ -16,7 +16,7 @@ public class TarjetaRepository implements ITarjetasRepository, WithSimplePersist
 
 
     @Override
-    public Optional<Tarjeta> buscar(String codigo) {
+    public Optional<Tarjeta> buscarPorCodigo(String codigo) {
         try {
             Tarjeta t = (Tarjeta) entityManager().createQuery("from Tarjeta where codigo=:codigo")
                     .setParameter("codigo", codigo)
@@ -28,7 +28,7 @@ public class TarjetaRepository implements ITarjetasRepository, WithSimplePersist
     }
 
     @Override
-    public Optional<Tarjeta> buscar(Long id) {
+    public Optional<Tarjeta> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Tarjeta.class, id));
     }
 
@@ -74,8 +74,8 @@ public class TarjetaRepository implements ITarjetasRepository, WithSimplePersist
         repositorio.guardar(m);
 
 
-        Optional<Tarjeta> tarjeta1 = repositorio.buscar(1L);
-        Optional<Tarjeta> tarjeta2 = repositorio.buscar(2L);
+        Optional<Tarjeta> tarjeta1 = repositorio.buscar(m.getId());
+        Optional<Tarjeta> tarjeta2 = repositorio.buscar(m.getId());
 
         List<Tarjeta> lista = repositorio.buscarTodos();
 

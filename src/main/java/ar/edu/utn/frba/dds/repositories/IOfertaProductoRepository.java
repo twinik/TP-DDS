@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IOfertaProductoRepository {
-    Optional<OfertaProducto> buscar(Long id);
+    Optional<OfertaProducto> buscar(String id);
 
     List<OfertaProducto> buscarTodos();
 

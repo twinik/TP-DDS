@@ -10,7 +10,7 @@ public class SensoresMovimientoRepository implements ISensorMovimientoRepository
 
 
     @Override
-    public Optional<SensorMovimiento> buscar(Long id) {
+    public Optional<SensorMovimiento> buscar(String id) {
         return Optional.ofNullable(entityManager().find(SensorMovimiento.class, id));
     }
 

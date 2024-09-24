@@ -16,7 +16,7 @@ public class FormasColaboracionRespository implements IFormasColaboracionResposi
     }
 
     @Override
-    public Optional<FormaColaboracion> buscar(Long id) {
+    public Optional<FormaColaboracion> buscarPorNombre(String id) {
         return Optional.ofNullable(entityManager().find(FormaColaboracion.class, id));
     }
 

@@ -10,7 +10,7 @@ import java.util.Optional;
  * IAlertasRepository interface permite interactuar con las alertas.
  */
 public interface IFallasTecnicasRepository {
-    Optional<FallaTecnica> buscar(Long id);
+    Optional<FallaTecnica> buscar(String id);
 
     List<FallaTecnica> buscarTodos();
 

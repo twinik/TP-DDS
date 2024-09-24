@@ -26,7 +26,7 @@ public class TecnicosRepository implements ITecnicosRepository, WithSimplePersis
 
     }
 
-    public Optional<Tecnico> buscar(Long id) {
+    public Optional<Tecnico> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Tecnico.class, id));
     }
 

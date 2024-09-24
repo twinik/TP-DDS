@@ -71,7 +71,7 @@ public class CargadorDeColaboraciones {
 
             IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
 
-            Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscar(carga.getFormaColaboracion());
+            Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
             if (forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
 
             for (int i = 0; i < carga.getCantidad(); i++) {

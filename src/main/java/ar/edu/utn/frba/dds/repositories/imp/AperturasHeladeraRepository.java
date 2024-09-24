@@ -10,7 +10,7 @@ import java.util.Optional;
 public class AperturasHeladeraRepository implements IAperturasHeladeraRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<AperturaHeladera> buscar(Long id) {
+    public Optional<AperturaHeladera> buscar(String id) {
         return Optional.ofNullable(entityManager().find(AperturaHeladera.class, id));
     }
 

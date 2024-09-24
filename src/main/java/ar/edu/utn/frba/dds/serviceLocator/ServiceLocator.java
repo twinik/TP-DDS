@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.CalculadorPuntos;
+import ar.edu.utn.frba.dds.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.repositories.*;
@@ -27,8 +28,8 @@ public class ServiceLocator {
       else if (clase.equals(IAltaPersonaVulnerableRepository.class))
         add(clase, new AltaPersonaVulnerableRepository());
       else if (clase.equals(IAperturasHeladeraRepository.class))
-        add(clase, new AltaPersonaVulnerableRepository());
-      else if (clase.equals(CalculadorPuntos.class))
+        add(clase, new AperturasHeladeraRepository());
+      else if (clase.equals(ICalculadorPuntos.class))
         add(clase, new CalculadorPuntos());
       else if (clase.equals(ICampoRepository.class))
         add(clase, new CampoRepository());
@@ -104,7 +105,7 @@ public class ServiceLocator {
         add(clase, new ViandasRepository());
       else if (clase.equals(IVisitasTecnicoRepository.class))
         add(clase, new VisitasTecnicoRepository());
-      else throw new IllegalArgumentException("no se provee servicio para esa clase");
+      else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
 //
 //
 //

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IMotivoRedistribucionRepository {
-    Optional<MotivoRedistribucionVianda> buscar(Long id);
+    Optional<MotivoRedistribucionVianda> buscar(String id);
 
     List<MotivoRedistribucionVianda> buscarTodos();
 

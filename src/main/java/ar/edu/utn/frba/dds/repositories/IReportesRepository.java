@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IReportesRepository {
-    Optional<Reporte> buscar(Long id);
+    Optional<Reporte> buscar(String id);
 
     List<Reporte> buscarTodos();
 

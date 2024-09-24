@@ -9,7 +9,7 @@ import java.util.Optional;
 public class SensoresTemperaturaRepository implements ISensorTemperaturaRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<SensorTemperatura> buscar(Long id) {
+    public Optional<SensorTemperatura> buscar(String id) {
         return Optional.ofNullable(entityManager().find(SensorTemperatura.class, id));
     }
 

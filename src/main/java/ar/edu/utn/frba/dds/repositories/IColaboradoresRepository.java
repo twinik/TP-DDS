@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface IColaboradoresRepository {
     Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento);
 
-    Optional<Colaborador> buscar(Long id);
+    Optional<Colaborador> buscar(String id);
 
     List<Colaborador> buscarTodos();
 

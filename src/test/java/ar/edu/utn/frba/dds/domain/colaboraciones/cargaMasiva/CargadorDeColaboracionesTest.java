@@ -36,10 +36,10 @@ class CargadorDeColaboracionesTest {
         doNothing().when(mailSender).enviarMail(any());
         repositorio = new ColaboradoresRepository();
         formasColaboracionRespository = mock(IFormasColaboracionRespository.class);
-        when(formasColaboracionRespository.buscar("DONACION_DINERO")).thenReturn(Optional.of(new FormaColaboracion("DONACION_DINERO")));
-        when(formasColaboracionRespository.buscar("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("DONACION_VIANDA")));
-        when(formasColaboracionRespository.buscar("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion("REGISTRO_PERSONA")));
-        when(formasColaboracionRespository.buscar("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("REDISTRIBUCION_VIANDA")));
+        when(formasColaboracionRespository.buscarPorNOmbre("DONACION_DINERO")).thenReturn(Optional.of(new FormaColaboracion("DONACION_DINERO")));
+        when(formasColaboracionRespository.buscarPorNOmbre("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("DONACION_VIANDA")));
+        when(formasColaboracionRespository.buscarPorNOmbre("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion("REGISTRO_PERSONA")));
+        when(formasColaboracionRespository.buscarPorNOmbre("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("REDISTRIBUCION_VIANDA")));
         cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/domain/assets/cargacolaboraciones.csv", csvReader, mailSender, repositorio, formasColaboracionRespository, ServiceLocator.get(ICalculadorPuntos.class));
     }
 

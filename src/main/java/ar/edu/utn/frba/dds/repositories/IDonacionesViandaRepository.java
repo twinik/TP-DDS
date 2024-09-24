@@ -10,11 +10,11 @@ import java.util.Optional;
  * IColaboradorRepository interface permite interactuar con los donacions de viandas
  */
 public interface IDonacionesViandaRepository {
-    Optional<DonacionVianda> buscar(Long id);
+    Optional<DonacionVianda> buscar(String id);
 
     List<DonacionVianda> buscarTodos();
 
-    List<DonacionVianda> buscarPorColaborador(Long colaborador_id);
+    List<DonacionVianda> buscarPorColaborador(String colaborador_id);
 
     Map<String, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha);
 

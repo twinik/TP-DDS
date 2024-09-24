@@ -15,7 +15,7 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 
 
     @Override
-    public Optional<Heladera> buscar(Long id) {
+    public Optional<Heladera> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Heladera.class, id));
     }
 

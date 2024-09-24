@@ -15,7 +15,7 @@ import java.util.Optional;
 public class UsuariosRepository implements IUsuariosRepository, WithSimplePersistenceUnit {
 
     @Override
-    public Optional<Usuario> buscar(Long id) {
+    public Optional<Usuario> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Usuario.class, id));
     }
 

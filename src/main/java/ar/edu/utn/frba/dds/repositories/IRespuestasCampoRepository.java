@@ -8,7 +8,7 @@ import java.util.Optional;
  * IRespuestasCampoRepository interface permite interactuar con las Respuestas de un Campo.
  */
 public interface IRespuestasCampoRepository {
-    Optional<RespuestaACampo> buscar(Long id);
+    Optional<RespuestaACampo> buscar(String id);
 
     List<RespuestaACampo> buscarTodos();
 

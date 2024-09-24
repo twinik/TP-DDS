@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IIncidenteRepository {
-    Optional<Incidente> buscar(Long id);
+    Optional<Incidente> buscar(String id);
 
     List<Incidente> buscarTodos();
 

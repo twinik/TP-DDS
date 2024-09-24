@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class MedioContactoRepository implements IMedioContactoRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<MedioDeContacto> buscar(Long id) {
+    public Optional<MedioDeContacto> buscar(String id) {
         return Optional.ofNullable(entityManager().find(MedioDeContacto.class, id));
     }
 

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<AltaPersonaVulnerable> buscar(Long id) {
+    public Optional<AltaPersonaVulnerable> buscar(String id) {
         return Optional.ofNullable(entityManager().find(AltaPersonaVulnerable.class, id));
     }
 

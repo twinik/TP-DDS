@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class ProductoRepository implements IProductoRepository, WithSimplePersistenceUnit {
     @Override
-    public Optional<Producto> buscar(Long id) {
+    public Optional<Producto> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Producto.class, id));
     }
 
