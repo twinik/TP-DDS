@@ -26,10 +26,10 @@ public class DonacionesViandaRepository implements IDonacionesViandaRepository, 
     }
 
     @Override
-    public List<DonacionVianda> buscarPorColaborador(Colaborador c) {
-        return entityManager().createQuery("from DonacionVianda where activo=:activo and colaborador=:colaborador", DonacionVianda.class)
+    public List<DonacionVianda> buscarPorColaborador(Long colaborador_id) {
+        return entityManager().createQuery("from DonacionVianda where activo=:activo and colaborador.id=:colaborador_id", DonacionVianda.class)
                 .setParameter("activo", true)
-                .setParameter("colaborador", c)
+                .setParameter("colaborador_id", colaborador_id)
                 .getResultList();
     }
 

@@ -15,7 +15,7 @@ public class SensorMovimientoBroker {
         String clientId = configReader.getProperty("CLIENT_ID");
 
         SensorMovimientoListener receptor = new SensorMovimientoListener();
-        receptor.setSensorMovimientoRepository(ServiceLocator.get("sensoresMovimientoRepository", ISensorMovimientoRepository.class));
+        receptor.setSensorMovimientoRepository(ServiceLocator.get(ISensorMovimientoRepository.class));
 
         BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
         brokerSubscriber.listen();

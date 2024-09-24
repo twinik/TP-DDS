@@ -90,7 +90,7 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
         RedistribucionViandas m = new RedistribucionViandas("otro");
         RedistribucionViandas m1 = new RedistribucionViandas("uno");
         RedistribucionViandas m2 = new RedistribucionViandas("hola");
-        IRedistribucionesViandaRepository repositorio = (IRedistribucionesViandaRepository) ServiceLocator.get("redistribucionesViandaRepository");
+        IRedistribucionesViandaRepository repositorio = ServiceLocator.get(IRedistribucionesViandaRepository.class);
         repositorio.guardar(m);
         repositorio.guardar(m1);
         repositorio.guardar(m2);

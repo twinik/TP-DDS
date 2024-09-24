@@ -18,7 +18,7 @@ public class TestReporte {
         ReporteViandasPorColaborador reporte = new ReporteViandasPorColaborador();
         IPDFGeneratorAdapter generador = Mockito.mock(IPDFGeneratorAdapter.class);
         reporte.setPdfGenerator(generador);
-        reporte.setViandasRepository(ServiceLocator.get("viandasRepository", IViandasRepository.class));
+        reporte.setViandasRepository(ServiceLocator.get(IViandasRepository.class));
         doNothing().when(generador).generarPdf(any(), any(), any());
         reporte.generarPDF();
         verify(generador, times(1)).generarPdf(any(), any(), any());

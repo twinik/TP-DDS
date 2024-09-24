@@ -25,7 +25,7 @@ public class TipoSuscripcionAttributeConverter implements AttributeConverter<ITi
         if(s == null) return null;
         switch (s) {
             case "SUSCRIPCION_DESPERFECTO" -> {
-                return new SuscripcionDesperfectoHeladera(ServiceLocator.get("recomendadorHeladeras", RecomendadorHeladeras.class));
+                return new SuscripcionDesperfectoHeladera(ServiceLocator.get(RecomendadorHeladeras.class));
             }
             case "SUSCRIPCION_VIANDAS_RESTANTES" -> {
                 return new SuscripcionViandasRestantes();

@@ -39,10 +39,10 @@ public class MainReportesTest {
         c3.setNombre("otro");
         c3.setApellido("tipo");
 
-        IColaboradoresRepository colab = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
-        IHeladerasRepository heladeras = ServiceLocator.get("heladerasRepository", IHeladerasRepository.class);
-        IViandasRepository viandas = ServiceLocator.get("viandasRepository", IViandasRepository.class);
-        IDonacionesViandaRepository donacionesRepo = ServiceLocator.get("donacionesViandaRepository", IDonacionesViandaRepository.class);
+        IColaboradoresRepository colab = ServiceLocator.get(IColaboradoresRepository.class);
+        IHeladerasRepository heladeras = ServiceLocator.get(IHeladerasRepository.class);
+        IViandasRepository viandas = ServiceLocator.get(IViandasRepository.class);
+        IDonacionesViandaRepository donacionesRepo = ServiceLocator.get(IDonacionesViandaRepository.class);
 
         colab.guardar(c1);
         colab.guardar(c2);
@@ -76,7 +76,7 @@ public class MainReportesTest {
 
         RedistribucionViandas redistribucionViandas = new RedistribucionViandas(c1, LocalDate.now(), h, h2, new MotivoRedistribucionVianda("prueba"), 2);
 
-        ServiceLocator.get("redistribucionesViandaRepository", IRedistribucionesViandaRepository.class).guardar(redistribucionViandas);
+        ServiceLocator.get(IRedistribucionesViandaRepository.class).guardar(redistribucionViandas);
 
         FallaTecnica falla1 = new FallaTecnica(c1, "falla 1", "foto");
         falla1.setHeladera(h);
@@ -91,14 +91,14 @@ public class MainReportesTest {
         alerta1.setHeladera(h2);
         alerta1.setTimestamp(LocalDateTime.now());
 
-        ServiceLocator.get("fallasTecnicasRepository", IFallasTecnicasRepository.class).guardar(falla1);
-        ServiceLocator.get("fallasTecnicasRepository", IFallasTecnicasRepository.class).guardar(falla2);
-        ServiceLocator.get("fallasTecnicasRepository", IFallasTecnicasRepository.class).guardar(falla3);
-        ServiceLocator.get("alertasRepository", IAlertasRepository.class).guardar(alerta1);
+        ServiceLocator.get(IFallasTecnicasRepository.class).guardar(falla1);
+        ServiceLocator.get(IFallasTecnicasRepository.class).guardar(falla2);
+        ServiceLocator.get(IFallasTecnicasRepository.class).guardar(falla3);
+        ServiceLocator.get(IAlertasRepository.class).guardar(alerta1);
 
 
-        ReportesFactory reportesFactory = ServiceLocator.get("reportesFactory", ReportesFactory.class);
-        IReportesRepository repository = ServiceLocator.get("reportesRepository", IReportesRepository.class);
+        ReportesFactory reportesFactory = ServiceLocator.get(ReportesFactory.class);
+        IReportesRepository repository = ServiceLocator.get(IReportesRepository.class);
         List<Reporte> reportes = new ArrayList<>();
         reportes.add(reportesFactory.create(VIANDA_X_COLAB, LocalDate.now()));
         reportes.add(reportesFactory.create(VIANDA_X_HELADERA, LocalDate.now()));

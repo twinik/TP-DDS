@@ -14,8 +14,8 @@ import java.util.List;
 public class MainDonacionesPuntaje {
     public static void main(String[] args) {
 
-        IColaboradoresRepository repoColab = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
-        IDonacionesViandaRepository repoDonacionesVianda = ServiceLocator.get("donacionesViandaRepository", IDonacionesViandaRepository.class);
+        IColaboradoresRepository repoColab = ServiceLocator.get(IColaboradoresRepository.class);
+        IDonacionesViandaRepository repoDonacionesVianda = ServiceLocator.get(IDonacionesViandaRepository.class);
 
         Colaborador c = new Colaborador();
         c.setUsuario(new Usuario("email@email.com", "clave"));
@@ -31,10 +31,10 @@ public class MainDonacionesPuntaje {
             repoDonacionesVianda.guardar(d);
         }
 
-        List<DonacionVianda> donaciones = repoDonacionesVianda.buscarPorColaborador(c);
+        List<DonacionVianda> donaciones = repoDonacionesVianda.buscarPorColaborador(c.getId());
 
         for (DonacionVianda d : donaciones) {
-            ServiceLocator.get("calculadorPuntos", CalculadorPuntos.class).sumarPuntosPara(c, d);
+            ServiceLocator.get(CalculadorPuntos.class).sumarPuntosPara(c, d);
         }
 
         repoColab.actualizar(c);

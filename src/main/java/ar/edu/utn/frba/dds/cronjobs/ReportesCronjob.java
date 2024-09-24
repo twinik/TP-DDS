@@ -18,8 +18,8 @@ import java.util.List;
 public class ReportesCronjob {
     public static void main(String[] args) {
 
-        ReportesFactory reportesFactory = ServiceLocator.get("reportesFactory", ReportesFactory.class);
-        IReportesRepository repository = ServiceLocator.get("reportesRepository", IReportesRepository.class);
+        ReportesFactory reportesFactory = ServiceLocator.get(ReportesFactory.class);
+        IReportesRepository repository = ServiceLocator.get(IReportesRepository.class);
         List<Reporte> reportes = new ArrayList<>();
         reportes.add(reportesFactory.create(VIANDA_X_COLAB, LocalDate.now()));
         reportes.add(reportesFactory.create(VIANDA_X_HELADERA, LocalDate.now()));

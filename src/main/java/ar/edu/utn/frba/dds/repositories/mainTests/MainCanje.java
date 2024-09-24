@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 public class MainCanje {
 
     public static void main(String[] args) {
-        IOfertaProductoRepository ofertasRepo = ServiceLocator.get("ofertasProductoRepository", IOfertaProductoRepository.class);
-        IColaboradoresRepository colabRepo = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
-        ICanjeProductoRepository repo = ServiceLocator.get("canjesRepository", ICanjeProductoRepository.class);
+        IOfertaProductoRepository ofertasRepo = ServiceLocator.get(IOfertaProductoRepository.class);
+        IColaboradoresRepository colabRepo = ServiceLocator.get(IColaboradoresRepository.class);
+        ICanjeProductoRepository repo = ServiceLocator.get(ICanjeProductoRepository.class);
         Colaborador c = new Colaborador();
         c.setRazonSocial("empresita");
         c.setUsuario(new Usuario("fdkfdf", "fkdmmfd"));

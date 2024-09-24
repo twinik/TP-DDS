@@ -62,7 +62,7 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 
     public static void main(String[] args) {
         Heladera h = new Heladera();
-        IHeladerasRepository repositorio = ServiceLocator.get("heladerasRepository", IHeladerasRepository.class);
+        IHeladerasRepository repositorio = ServiceLocator.get(IHeladerasRepository.class);
         repositorio.guardar(h);
         h.setModelo(new ModeloHeladera("filgo", 22, 33));
         Heladera otra = new Heladera(LocalDate.now());

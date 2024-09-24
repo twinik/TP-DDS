@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.repositories;
 
 import ar.edu.utn.frba.dds.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ public interface IDonacionesViandaRepository {
 
     List<DonacionVianda> buscarTodos();
 
-    List<DonacionVianda> buscarPorColaborador(Colaborador c);
+    List<DonacionVianda> buscarPorColaborador(Long colaborador_id);
 
     Map<String, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha);
 

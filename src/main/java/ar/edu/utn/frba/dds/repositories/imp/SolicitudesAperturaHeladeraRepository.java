@@ -6,7 +6,7 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
 import java.util.Optional;
 
-public class SolcitudesAperturaHeladeraRepository implements ISolicitudesAperturaHeladeraRepository, WithSimplePersistenceUnit {
+public class SolicitudesAperturaHeladeraRepository implements ISolicitudesAperturaHeladeraRepository, WithSimplePersistenceUnit {
 
 
     @Override

@@ -32,10 +32,10 @@ public class SensorTemperaturaListener implements IMqttMessageListener {
 
             Heladera heladera = sensorTemperatura.getHeladera();
             if (!heladera.temperaturaEsAdecuada()) {
-                Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), new TecnicosHelper(ServiceLocator.get("tecnicosRepository", ITecnicosRepository.class))
+                Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), new TecnicosHelper(ServiceLocator.get(ITecnicosRepository.class))
                         , new NotificationStrategyFactory(), TipoAlerta.TEMPERATURA);
                 alerta.reportar();
-                IAlertasRepository repository = ServiceLocator.get("alertasRepository", IAlertasRepository.class);
+                IAlertasRepository repository = ServiceLocator.get(IAlertasRepository.class);
                 repository.guardar(alerta);
             }
         }

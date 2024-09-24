@@ -9,7 +9,7 @@ import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 public class MainColaboradorConstraints {
 
     public static void main(String[] args) {
-//        IColaboradoresRepository repo = ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class);
+//        IColaboradoresRepository repo = ServiceLocator.get(IColaboradoresRepository.class);
 //
 //        Colaborador c1 = new Colaborador();
 //        Colaborador c2 = new Colaborador();

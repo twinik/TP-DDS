@@ -15,9 +15,9 @@ public class MainPruebaFormularios {
         c.setNombre("horge");
         c.setApellido("fdfdf");
         c.setUsuario(new Usuario("fdknfdknf","dkfndknfkdnafa"));
-        ServiceLocator.get("colaboradoresRepository", IColaboradoresRepository.class).guardar(c);
-        IFormularioRepository formularioRepository = ServiceLocator.get("formulariosRepository", IFormularioRepository.class);
-        IRespuestasFormularioRepository respuestasFormularioRepository = ServiceLocator.get("respuestasFormularioRepository", IRespuestasFormularioRepository.class);
+        ServiceLocator.get(IColaboradoresRepository.class).guardar(c);
+        IFormularioRepository formularioRepository = ServiceLocator.get(IFormularioRepository.class);
+        IRespuestasFormularioRepository respuestasFormularioRepository = ServiceLocator.get(IRespuestasFormularioRepository.class);
         Formulario nuevo = new Formulario();
         nuevo.agregarCampos(new Campo(TipoCampo.LIBRE, "quien sos", true),
                 new Campo(TipoCampo.LIBRE, "te gusta el helado", false));

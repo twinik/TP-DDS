@@ -76,7 +76,7 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
         Vianda m = new Vianda("otro");
         Vianda m1 = new Vianda("uno");
         Vianda m2 = new Vianda("hola");
-        IViandasRepository repositorio = (IViandasRepository) ServiceLocator.get("viandasRepository");
+        IViandasRepository repositorio = ServiceLocator.get(IViandasRepository.class);
         repositorio.guardar(m);
         repositorio.guardar(m1);
         repositorio.guardar(m2);
