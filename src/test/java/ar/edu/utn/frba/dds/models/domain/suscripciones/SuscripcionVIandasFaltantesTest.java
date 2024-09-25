@@ -7,8 +7,6 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategy;
-import ar.edu.utn.frba.dds.models.domain.suscripciones.Suscripcion;
-import ar.edu.utn.frba.dds.models.domain.suscripciones.SuscripcionViandasFaltantes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -1,10 +1,6 @@
 package ar.edu.utn.frba.dds.models.converters;
 
-import ar.edu.utn.frba.dds.models.domain.notifications.MailNotificationStrategy;
-import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategy;
-import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
-import ar.edu.utn.frba.dds.models.domain.notifications.TelegramNotificacionStrategy;
-import ar.edu.utn.frba.dds.models.domain.notifications.WhatsappSenderStrategy;
+import ar.edu.utn.frba.dds.models.domain.notifications.*;
 import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

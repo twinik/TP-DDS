@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.models.repositories.imp;
 
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
-import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;

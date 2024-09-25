@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva;
 
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.PasswordGenerator;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.IPuntajeCalculable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
@@ -13,8 +15,6 @@ import ar.edu.utn.frba.dds.models.domain.emailSending.MyMailFactory;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CsvInvalidoException;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
-import ar.edu.utn.frba.dds.helpers.ConfigReader;
-import ar.edu.utn.frba.dds.helpers.PasswordGenerator;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
 import lombok.Getter;

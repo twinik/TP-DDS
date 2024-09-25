@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.models.domain.helpers;
 
+import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
-import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

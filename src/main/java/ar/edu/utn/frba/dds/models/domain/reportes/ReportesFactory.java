@@ -1,11 +1,7 @@
 package ar.edu.utn.frba.dds.models.domain.reportes;
 
 import ar.edu.utn.frba.dds.models.domain.pdfs.ItextPdfGenerator;
-import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
-import ar.edu.utn.frba.dds.models.repositories.IDonacionesViandaRepository;
-import ar.edu.utn.frba.dds.models.repositories.IFallasTecnicasRepository;
-import ar.edu.utn.frba.dds.models.repositories.IRedistribucionesViandaRepository;
-import ar.edu.utn.frba.dds.models.repositories.IViandasRepository;
+import ar.edu.utn.frba.dds.models.repositories.*;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 

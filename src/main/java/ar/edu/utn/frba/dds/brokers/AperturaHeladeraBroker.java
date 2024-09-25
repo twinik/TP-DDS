@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.brokers;
 
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
-import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.models.repositories.IAperturasHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepository;

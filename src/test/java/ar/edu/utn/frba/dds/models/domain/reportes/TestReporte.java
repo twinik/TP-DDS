@@ -4,7 +4,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import ar.edu.utn.frba.dds.models.domain.pdfs.IPDFGeneratorAdapter;
-import ar.edu.utn.frba.dds.models.domain.reportes.ReporteViandasPorColaborador;
 import ar.edu.utn.frba.dds.models.repositories.IViandasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import org.junit.jupiter.api.DisplayName;

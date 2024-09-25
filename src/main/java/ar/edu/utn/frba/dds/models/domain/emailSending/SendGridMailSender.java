@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.models.domain.emailSending;
 
-import ar.edu.utn.frba.dds.models.domain.excepciones.CrearMailException;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.models.domain.excepciones.CrearMailException;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;

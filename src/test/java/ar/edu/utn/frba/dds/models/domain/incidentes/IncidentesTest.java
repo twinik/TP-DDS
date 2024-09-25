@@ -5,15 +5,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
-import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategy;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
-import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

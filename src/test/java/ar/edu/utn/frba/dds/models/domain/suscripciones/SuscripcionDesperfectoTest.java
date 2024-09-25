@@ -8,8 +8,6 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategy;
-import ar.edu.utn.frba.dds.models.domain.suscripciones.Suscripcion;
-import ar.edu.utn.frba.dds.models.domain.suscripciones.SuscripcionDesperfectoHeladera;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

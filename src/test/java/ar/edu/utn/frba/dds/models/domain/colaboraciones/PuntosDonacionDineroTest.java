@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones;
 
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;

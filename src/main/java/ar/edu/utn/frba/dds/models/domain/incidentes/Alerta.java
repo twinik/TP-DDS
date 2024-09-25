@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.models.domain.incidentes;
 
+import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
-import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;

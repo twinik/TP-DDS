@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.helpers.DateHelper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

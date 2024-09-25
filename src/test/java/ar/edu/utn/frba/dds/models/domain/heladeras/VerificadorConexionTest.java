@@ -1,8 +1,5 @@
 package ar.edu.utn.frba.dds.models.domain.heladeras;
 
-import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.models.domain.heladeras.RegistroTemperatura;
-import ar.edu.utn.frba.dds.models.domain.heladeras.VerificadorConexionHeladera;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

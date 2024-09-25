@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones;
 
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;

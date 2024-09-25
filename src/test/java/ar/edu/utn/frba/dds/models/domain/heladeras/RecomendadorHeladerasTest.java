@@ -2,9 +2,6 @@ package ar.edu.utn.frba.dds.models.domain.heladeras;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
-import ar.edu.utn.frba.dds.models.domain.heladeras.Vianda;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;

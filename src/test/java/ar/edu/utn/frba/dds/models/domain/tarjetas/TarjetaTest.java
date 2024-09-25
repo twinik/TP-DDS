@@ -1,10 +1,7 @@
 package ar.edu.utn.frba.dds.models.domain.tarjetas;
 
-import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.helpers.GeneradorDeCodigosHelper;
-import ar.edu.utn.frba.dds.models.domain.tarjetas.FrecuenciaDiaria;
-import ar.edu.utn.frba.dds.models.domain.tarjetas.FrecuenciaUso;
-import ar.edu.utn.frba.dds.models.domain.tarjetas.Tarjeta;
+import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.models.domain.tecnicos;
 
+import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.notifications.Contactable;
 import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
-import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
