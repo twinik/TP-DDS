@@ -22,6 +22,19 @@ import java.util.stream.Collectors;
 public class FallasTecnicasRepository implements IFallasTecnicasRepository, WithSimplePersistenceUnit {
 
 
+    public static void main(String[] args) {
+        Colaborador c = new Colaborador();
+        c.setUsuario(new Usuario("123", "123"));
+        FallaTecnica f1 = new FallaTecnica(new Heladera(), LocalDateTime.now(), new TecnicosHelper(new TecnicosRepository()),
+                new NotificationStrategyFactory(), c, "hola", "rerer");
+
+        FallasTecnicasRepository repo = new FallasTecnicasRepository();
+        repo.guardar(f1);
+
+        Optional<FallaTecnica> f3 = repo.buscar(f1.getId());
+
+    }
+
     @Override
     public Optional<FallaTecnica> buscar(String id) {
         return Optional.ofNullable(entityManager().find(FallaTecnica.class, id));
@@ -74,18 +87,5 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
     public void eliminar(FallaTecnica fallaTecnica) {
         fallaTecnica.borrarLogico();
         withTransaction(() -> entityManager().merge(fallaTecnica));
-    }
-
-    public static void main(String[] args) {
-        Colaborador c = new Colaborador();
-        c.setUsuario(new Usuario("123", "123"));
-        FallaTecnica f1 = new FallaTecnica(new Heladera(), LocalDateTime.now(), new TecnicosHelper(new TecnicosRepository()),
-                new NotificationStrategyFactory(), c, "hola", "rerer");
-
-        FallasTecnicasRepository repo = new FallasTecnicasRepository();
-        repo.guardar(f1);
-
-        Optional<FallaTecnica> f3 = repo.buscar(f1.getId());
-
     }
 }

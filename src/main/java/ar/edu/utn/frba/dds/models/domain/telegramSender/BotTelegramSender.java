@@ -29,22 +29,6 @@ public class BotTelegramSender extends TelegramLongPollingBot implements Telegra
         }
     }
 
-    @Override
-    public String getBotUsername() {
-        return this.BOT_USERNAME;
-    }
-
-    @Override
-    public String getBotToken() {
-        return this.BOT_TOKEN;
-    }
-
-    @Override
-    public void onUpdateReceived(Update update) {
-        // No se implementa
-    }
-
-
     /**
      * Método principal para enviar un mensaje de Telegram.
      */
@@ -66,6 +50,20 @@ public class BotTelegramSender extends TelegramLongPollingBot implements Telegra
         }
     }
 
+    @Override
+    public String getBotUsername() {
+        return this.BOT_USERNAME;
+    }
+
+    @Override
+    public String getBotToken() {
+        return this.BOT_TOKEN;
+    }
+
+    @Override
+    public void onUpdateReceived(Update update) {
+        // No se implementa
+    }
 
     public void enviarTelegram(String mensaje, String usuarioId) {
         SendMessage message = new SendMessage();

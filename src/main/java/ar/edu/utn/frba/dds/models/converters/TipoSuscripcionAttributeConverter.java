@@ -13,7 +13,7 @@ import javax.persistence.Converter;
 public class TipoSuscripcionAttributeConverter implements AttributeConverter<ITipoSuscripcion, String> {
     @Override
     public String convertToDatabaseColumn(ITipoSuscripcion tipoSuscripcion) {
-        if(tipoSuscripcion == null) return null;
+        if (tipoSuscripcion == null) return null;
         if (tipoSuscripcion instanceof SuscripcionDesperfectoHeladera) return "SUSCRIPCION_DESPERFECTO";
         if (tipoSuscripcion instanceof SuscripcionViandasRestantes) return "SUSCRIPCION_VIANDAS_RESTANTES";
         if (tipoSuscripcion instanceof SuscripcionViandasFaltantes) return "SUSCRIPCION_VIANDAS_FALTANTES";
@@ -22,7 +22,7 @@ public class TipoSuscripcionAttributeConverter implements AttributeConverter<ITi
 
     @Override
     public ITipoSuscripcion convertToEntityAttribute(String s) {
-        if(s == null) return null;
+        if (s == null) return null;
         switch (s) {
             case "SUSCRIPCION_DESPERFECTO" -> {
                 return new SuscripcionDesperfectoHeladera(ServiceLocator.get(RecomendadorHeladeras.class));

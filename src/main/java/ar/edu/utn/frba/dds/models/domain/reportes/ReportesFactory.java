@@ -8,16 +8,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ReportesFactory {
 
-    private IViandasRepository viandasRepository;
-    private IDonacionesViandaRepository donacionesViandaRepository;
-    private IRedistribucionesViandaRepository redistribucionesViandaRepository;
-
-    private IFallasTecnicasRepository fallasTecnicasRepository;
-    private IAlertasRepository alertasRepository;
-
     private static final String RUTA_VIANDAS_X_COLAB = "reporte-viandas-colab";
     private static final String RUTA_VIANDAS_X_HELADERA = "reporte-viandas-heladera";
     private static final String RUTA_FALLAS_X_HELADERA = "reporte-fallas-heladera";
+    private IViandasRepository viandasRepository;
+    private IDonacionesViandaRepository donacionesViandaRepository;
+    private IRedistribucionesViandaRepository redistribucionesViandaRepository;
+    private IFallasTecnicasRepository fallasTecnicasRepository;
+    private IAlertasRepository alertasRepository;
 
     private String generarStringRuta(String nombre, LocalDate fecha) {
         return nombre + '-' + fecha.toString() + ".pdf";

@@ -68,19 +68,6 @@ public class Tarjeta extends EntidadPersistente {
         this.cantidadUsosDia = cantidadUsosDia;
     }
 
-    public void agregarUsos() {
-        this.cantidadUsosDia++;
-        this.nroUsos++;
-    }
-
-    public void resetearUsosDiarios() {
-        this.cantidadUsosDia = 0;
-    }
-
-    public boolean permiteUsar() {
-        return this.tarjetaActiva && frecuenciaPermitida.permiteUsar(this);
-    }
-
     public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, LocalDate fechaAdjudicacion, Integer cantidadUsosDia) {
         return new Tarjeta(codigo, nroUsos, frecuenciaPermitida, duenio, fechaAdjudicacion, cantidadUsosDia);
     }
@@ -95,5 +82,18 @@ public class Tarjeta extends EntidadPersistente {
 
     public static Tarjeta of(String codigo, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio) {
         return Tarjeta.of(codigo, 0, frecuenciaPermitida, duenio);
+    }
+
+    public void agregarUsos() {
+        this.cantidadUsosDia++;
+        this.nroUsos++;
+    }
+
+    public void resetearUsosDiarios() {
+        this.cantidadUsosDia = 0;
+    }
+
+    public boolean permiteUsar() {
+        return this.tarjetaActiva && frecuenciaPermitida.permiteUsar(this);
     }
 }

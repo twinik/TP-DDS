@@ -13,6 +13,27 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
     public MotivoRedistribucionRepository() {
     }
 
+    public static void main(String[] args) {
+        MotivoRedistribucionVianda m = new MotivoRedistribucionVianda("otro");
+        MotivoRedistribucionVianda m1 = new MotivoRedistribucionVianda("uno");
+        MotivoRedistribucionVianda m2 = new MotivoRedistribucionVianda("hola");
+        IMotivoRedistribucionRepository repositorio = ServiceLocator.get(IMotivoRedistribucionRepository.class);
+        repositorio.guardar(m);
+        repositorio.guardar(m1);
+        repositorio.guardar(m2);
+
+        repositorio.eliminar(m1);
+        m2.setMotivo("lo cambio");
+        repositorio.actualizar(m2);
+
+        Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(m.getId());
+        //System.out.println(hidratado.get().getMotivo());
+        Optional<MotivoRedistribucionVianda> hidratado2 = repositorio.buscar(m1.getId());
+
+        List<MotivoRedistribucionVianda> lista = repositorio.buscarTodos();
+
+    }
+
     @Override
     public Optional<MotivoRedistribucionVianda> buscar(String id) {
 //        Query query = EntityManagerHelper.getEntityManager().
@@ -68,27 +89,6 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 //        EntityManagerHelper.commit();
         motivo.borrarLogico();
         withTransaction(() -> entityManager().merge(motivo));
-    }
-
-    public static void main(String[] args) {
-        MotivoRedistribucionVianda m = new MotivoRedistribucionVianda("otro");
-        MotivoRedistribucionVianda m1 = new MotivoRedistribucionVianda("uno");
-        MotivoRedistribucionVianda m2 = new MotivoRedistribucionVianda("hola");
-        IMotivoRedistribucionRepository repositorio = ServiceLocator.get(IMotivoRedistribucionRepository.class);
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        repositorio.actualizar(m2);
-
-        Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(m.getId());
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<MotivoRedistribucionVianda> hidratado2 = repositorio.buscar(m1.getId());
-
-        List<MotivoRedistribucionVianda> lista = repositorio.buscarTodos();
-
     }
 
 }

@@ -15,8 +15,8 @@ public class PuntosDonacionViandaTest {
     Colaborador colaborador;
     Heladera heladera;
     DonacionVianda donacion_1, donacion_2;
-    private ICalculadorPuntos calculadorPuntos;
     Vianda vianda_1, vianda_2;
+    private ICalculadorPuntos calculadorPuntos;
 
     @BeforeEach
     void test_init() {

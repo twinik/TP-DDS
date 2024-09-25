@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.models.repositories.mainTests;
 
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Vianda;
@@ -34,7 +35,7 @@ public class MainDonacionesPuntaje {
         List<DonacionVianda> donaciones = repoDonacionesVianda.buscarPorColaborador(c.getId());
 
         for (DonacionVianda d : donaciones) {
-            ServiceLocator.get(CalculadorPuntos.class).sumarPuntosPara(c, d);
+            ServiceLocator.get(ICalculadorPuntos.class).sumarPuntosPara(c, d);
         }
 
         repoColab.actualizar(c);

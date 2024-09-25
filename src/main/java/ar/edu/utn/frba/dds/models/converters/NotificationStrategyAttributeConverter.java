@@ -9,7 +9,7 @@ import javax.persistence.Converter;
 public class NotificationStrategyAttributeConverter implements AttributeConverter<NotificationStrategy, String> {
     @Override
     public String convertToDatabaseColumn(NotificationStrategy notificationStrategy) {
-        if(notificationStrategy == null) return null;
+        if (notificationStrategy == null) return null;
         if (notificationStrategy instanceof MailNotificationStrategy) return "EMAIL";
         if (notificationStrategy instanceof TelegramNotificacionStrategy) return "TELEGRAM";
         if (notificationStrategy instanceof WhatsappSenderStrategy) return "WHATSAPP";
@@ -18,7 +18,7 @@ public class NotificationStrategyAttributeConverter implements AttributeConverte
 
     @Override
     public NotificationStrategy convertToEntityAttribute(String s) {
-        if(s == null) return null;
+        if (s == null) return null;
         NotificationStrategyFactory factory = new NotificationStrategyFactory();
         switch (s) {
             case "EMAIL" -> {

@@ -11,10 +11,10 @@ import java.util.Optional;
 
 public class MainPruebaFormularios {
     public static void main(String[] args) {
-        Colaborador c=  new Colaborador();
+        Colaborador c = new Colaborador();
         c.setNombre("horge");
         c.setApellido("fdfdf");
-        c.setUsuario(new Usuario("fdknfdknf","dkfndknfkdnafa"));
+        c.setUsuario(new Usuario("fdknfdknf", "dkfndknfkdnafa"));
         ServiceLocator.get(IColaboradoresRepository.class).guardar(c);
         IFormularioRepository formularioRepository = ServiceLocator.get(IFormularioRepository.class);
         IRespuestasFormularioRepository respuestasFormularioRepository = ServiceLocator.get(IRespuestasFormularioRepository.class);

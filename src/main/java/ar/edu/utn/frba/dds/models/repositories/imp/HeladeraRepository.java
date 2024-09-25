@@ -14,6 +14,32 @@ import java.util.Optional;
 public class HeladeraRepository implements IHeladerasRepository, WithSimplePersistenceUnit {
 
 
+    public static void main(String[] args) {
+        Heladera h = new Heladera();
+        IHeladerasRepository repositorio = ServiceLocator.get(IHeladerasRepository.class);
+        repositorio.guardar(h);
+        h.setModelo(new ModeloHeladera("filgo", 22, 33));
+        Heladera otra = new Heladera(LocalDate.now());
+        h.agregarHeladeraCercana(otra);
+        otra.setModelo(new ModeloHeladera("jorge", 10, 50));
+        //repositorio.guardar(otra);
+        repositorio.actualizar(h);
+//        repositorio.guardar(m1);
+//        repositorio.guardar(m2);
+
+//        repositorio.eliminar(m1);
+//        m2.setMotivo("lo cambio");
+//        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
+//      repositorio.actualizar(m2);
+
+        Optional<Heladera> heladera1 = repositorio.buscar(h.getId());
+        //System.out.println(hidratado.get().getMotivo());
+        Optional<Heladera> heladera2 = repositorio.buscar(otra.getId());
+
+        List<Heladera> lista = repositorio.buscarTodos();
+
+    }
+
     @Override
     public Optional<Heladera> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Heladera.class, id));
@@ -45,12 +71,6 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
         withTransaction(() -> entityManager().merge(heladera));
     }
 
-    @Override
-    public void eliminar(Heladera heladera) {
-        heladera.borrarLogico();
-        withTransaction(() -> entityManager().merge(heladera));
-    }
-
 //  @Override
 //  public List<Heladera> heladerasCercanas(Heladera heladera, int limite) {
 //    return heladeras.stream()
@@ -60,29 +80,9 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 //        .collect(Collectors.toList());
 //  }
 
-    public static void main(String[] args) {
-        Heladera h = new Heladera();
-        IHeladerasRepository repositorio = ServiceLocator.get(IHeladerasRepository.class);
-        repositorio.guardar(h);
-        h.setModelo(new ModeloHeladera("filgo", 22, 33));
-        Heladera otra = new Heladera(LocalDate.now());
-        h.agregarHeladeraCercana(otra);
-        otra.setModelo(new ModeloHeladera("jorge", 10, 50));
-        //repositorio.guardar(otra);
-        repositorio.actualizar(h);
-//        repositorio.guardar(m1);
-//        repositorio.guardar(m2);
-
-//        repositorio.eliminar(m1);
-//        m2.setMotivo("lo cambio");
-//        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-//      repositorio.actualizar(m2);
-
-        Optional<Heladera> heladera1 = repositorio.buscar(h.getId());
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Heladera> heladera2 = repositorio.buscar(otra.getId());
-
-        List<Heladera> lista = repositorio.buscarTodos();
-
+    @Override
+    public void eliminar(Heladera heladera) {
+        heladera.borrarLogico();
+        withTransaction(() -> entityManager().merge(heladera));
     }
 }

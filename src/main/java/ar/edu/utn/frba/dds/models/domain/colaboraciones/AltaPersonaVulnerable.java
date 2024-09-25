@@ -26,14 +26,12 @@ public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntaj
 
     // TODO revisar REPO quizas un on delete cascade con activo...
 
+    private static final Float puntajePorAlta = 2f;
     @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
     private Colaborador colaborador;
-
     @Column(name = "fecha_redistribucion", columnDefinition = "DATE", nullable = false)
     private LocalDate fecha;
-    private static final Float puntajePorAlta = 2f;
-
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "persona_vulnerable_id", referencedColumnName = "id", nullable = false, unique = true)
     private PersonaVulnerable persona;

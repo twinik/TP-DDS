@@ -9,12 +9,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class WhatsappSenderStrategy implements NotificationStrategy {
 
-    public WhatsappSenderStrategy() {
-    }
-
-
     public WhatsappSenderAdapter whatsappSenderAdapter;
 
+
+    public WhatsappSenderStrategy() {
+    }
 
     public void notificar(Contactable contactable, String message) {
         whatsappSenderAdapter.enviarWhatsapp(message, contactable.telefonoCompleto());

@@ -18,6 +18,26 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class AlertasRepository implements IAlertasRepository, WithSimplePersistenceUnit {
 
+    public static void main(String[] args) {
+
+        Alerta m = new Alerta(TipoAlerta.TEMPERATURA);
+        Alerta m1 = new Alerta(TipoAlerta.FRAUDE);
+        Alerta m2 = new Alerta(TipoAlerta.FALLA_CONEXION);
+        IAlertasRepository repositorio = ServiceLocator.get(IAlertasRepository.class);
+        repositorio.guardar(m);
+        repositorio.guardar(m1);
+        repositorio.guardar(m2);
+
+        repositorio.eliminar(m1);
+
+        Optional<Alerta> alerta1 = repositorio.buscar(m.getId()); //Alerta no tiene ID, ver que se hace
+        //System.out.println(hidratado.get().getMotivo());
+        Optional<Alerta> alerta2 = repositorio.buscar(m1.getId()); //Alerta no tiene ID, ver que se hace
+
+        List<Alerta> lista = repositorio.buscarTodos();
+
+    }
+
     @Override
     public Optional<Alerta> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Alerta.class, id));
@@ -29,7 +49,6 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
                 .setParameter("activo", true)
                 .getResultList();
     }
-
 
     @Override
     public List<Alerta> buscarAlertasHeladera(String heladera_id) {
@@ -72,26 +91,6 @@ public class AlertasRepository implements IAlertasRepository, WithSimplePersiste
     public void eliminar(Alerta alerta) {
         alerta.borrarLogico();
         withTransaction(() -> entityManager().merge(alerta));
-    }
-
-    public static void main(String[] args) {
-
-        Alerta m = new Alerta(TipoAlerta.TEMPERATURA);
-        Alerta m1 = new Alerta(TipoAlerta.FRAUDE);
-        Alerta m2 = new Alerta(TipoAlerta.FALLA_CONEXION);
-        IAlertasRepository repositorio = ServiceLocator.get(IAlertasRepository.class);
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-
-        Optional<Alerta> alerta1 = repositorio.buscar(m.getId()); //Alerta no tiene ID, ver que se hace
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Alerta> alerta2 = repositorio.buscar(m1.getId()); //Alerta no tiene ID, ver que se hace
-
-        List<Alerta> lista = repositorio.buscarTodos();
-
     }
 
 }

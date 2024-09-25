@@ -10,7 +10,7 @@ public class FrecuenciaUsoAttributeConverter implements AttributeConverter<Frecu
 
     @Override
     public String convertToDatabaseColumn(FrecuenciaUso frecuenciaUso) {
-        if(frecuenciaUso == null) return null;
+        if (frecuenciaUso == null) return null;
         if (frecuenciaUso instanceof FrecuenciaDiaria) {
             return "FRECUENCIA_DIARA";
         }
@@ -19,7 +19,7 @@ public class FrecuenciaUsoAttributeConverter implements AttributeConverter<Frecu
 
     @Override
     public FrecuenciaUso convertToEntityAttribute(String s) {
-        if(s == null) return null;
+        if (s == null) return null;
         switch (s) {
             case "FRECUENCIA_DIARIA" -> {
                 return new FrecuenciaDiaria();

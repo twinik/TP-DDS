@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RespuestaFormulario extends EntidadPersistente {
     @ManyToOne
-    @JoinColumn(name = "colaborador_id",referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
     private Colaborador colaborador;
 
     @ManyToOne

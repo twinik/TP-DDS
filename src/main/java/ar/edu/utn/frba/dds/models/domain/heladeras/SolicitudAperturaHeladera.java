@@ -41,19 +41,6 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
-    public void publicarSolicitudABroker() throws IOException {
-        ConfigReader configReader = new ConfigReader("config.properties");
-        String topic = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER_TOPIC") + "/" + this.heladera.getNombre(); // cada heladera se va a suscribir a su topic
-        String broker = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER");
-        String clientId = configReader.getProperty("CLIENT_ID");
-        ZonedDateTime zdt = ZonedDateTime.of(this.timestamp, ZoneId.systemDefault());
-        String timestampEnMilis = Long.toString(zdt.toInstant().toEpochMilli());
-        String content = String.join(";", this.colaborador.getId().toString(), timestampEnMilis);
-
-        BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);
-        brokerPublisher.publicar(content);
-    }
-
     public static void main(String[] args) {
         Colaborador colab = new Colaborador();
         colab.setUsuario(new Usuario("jorge@mail", "contrasenia"));
@@ -65,5 +52,18 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void publicarSolicitudABroker() throws IOException {
+        ConfigReader configReader = new ConfigReader("config.properties");
+        String topic = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER_TOPIC") + "/" + this.heladera.getNombre(); // cada heladera se va a suscribir a su topic
+        String broker = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER");
+        String clientId = configReader.getProperty("CLIENT_ID");
+        ZonedDateTime zdt = ZonedDateTime.of(this.timestamp, ZoneId.systemDefault());
+        String timestampEnMilis = Long.toString(zdt.toInstant().toEpochMilli());
+        String content = String.join(";", this.colaborador.getId().toString(), timestampEnMilis);
+
+        BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);
+        brokerPublisher.publicar(content);
     }
 }
