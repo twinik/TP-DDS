@@ -1,6 +1,6 @@
-package ar.edu.utn.frba.dds.domain.colaboraciones.utils;
+package ar.edu.utn.frba.dds.models.domain.colaboraciones.utils;
 
-import ar.edu.utn.frba.dds.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.repositories.imp.ColaboradorRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
