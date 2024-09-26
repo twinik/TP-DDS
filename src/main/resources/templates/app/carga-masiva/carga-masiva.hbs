@@ -1,0 +1,96 @@
+{{#partial "contenido"}}
+    <div class="pageContainer">
+        <div class="p-10 mx-auto max-w-4xl">
+            <h1 class="title1 mb-12">Carga masiva de colaboraciones</h1>
+
+            <!--Carga masiva-->
+            <form class="rounded-xl border-2 shadow-lg">
+                <h2 class="mt-5 mb-5">Formato del archivo a subir:</h2>
+                <span class="text-xs"
+                >El archivo debe contener los siguientes campos, en este
+						orden, separados por una coma (,):</span
+                >
+                <p class="px-3 w-full text-xs mb-5">
+                    tipoDocumento - documento - nombre - apellido - mail -
+                    fechaColaboracion - formaColaboracion - cantidad -
+                    jsonColaboracion
+                </p>
+                <button id="downloadExampleBtn" class="text-sm mb-5 mt-2">
+                    Descargar ejemplo
+                </button>
+
+                <!--Upload file-->
+                <div>
+                    <label
+                            for="dropzone-file"
+                            class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl"
+                    >
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-8 h-8 text-gray-500 dark:text-gray-400"
+                        >
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                            />
+                        </svg>
+
+                        <h2
+                                class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200"
+                        >
+                            Subir archivo
+                        </h2>
+
+                        <p
+                                class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400"
+                        >
+                            Ingrese un archivo .csv con las colaboraciones a
+                            cargar
+                        </p>
+
+                        <input
+                                id="dropzone-file"
+                                type="file"
+                                class="hidden"
+                        />
+                    </label>
+                </div>
+                <!--Upload file-->
+
+                <a
+                        href="#"
+                        class="mt-5 mb-5 inline-flex items-center boton"
+                >
+                    Confirmar
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document
+                .getElementById("downloadExampleBtn")
+                .addEventListener("click", function () {
+                    // Convert the data to CSV format
+                    const csvContent =
+                            "data:text/csv;charset=utf-8," +
+                            'LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}\nLC,12345,\nJohnas,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,2,{"vianda":{"fechaDonacion":"12/12/2023"}}\nDNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,REDISTRIBUCION_VIANDA,1,{"fecha":"12/12/2023"}\nDNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,REGISTRO_PERSONA,3,{"fecha":"12/12/2023"}\nLC,12345,Johnas,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,10,{"vianda":{"fechaDonacion":"12/12/2023"}}\nLE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,1,{"vianda":{"fechaDonacion":"12/12/2023"}}\nLE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}';
+
+                    // Create a temporary link element
+                    const downloadLink = document.createElement("a");
+                    downloadLink.href = encodeURI(csvContent);
+                    downloadLink.download = "data.csv";
+
+                    // Programmatically click the link to trigger the download
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                });
+    </script>
+{{/partial}}
+{{> templates/app/base}}

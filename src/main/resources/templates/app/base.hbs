@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+    <title>
+        Mejora del Acceso Alimentario en Contextos de Vulnerabilidad Socioeconómica
+    </title>
+    <link rel="stylesheet" href="/css/index.css"/>
+    <link rel="stylesheet" href="/css/heladeras.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+    {{#block "links"}}{{/block}}
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+{{> templates/app/navbar}}
+<div class="pageContainer">
+    <div class="p-10 mx-auto max-w-4xl">
+        {{#block "btn-volver"}}{{/block}}
+        {{#block "contenido"}}{{/block}}
+    </div>
+</div>
+
+<!-- Flowbite JS -->
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+{{#block "scripts"}}
+{{/block}}
+</body>
+</html>

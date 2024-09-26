@@ -22,6 +22,7 @@ public class Server {
 
   public static void init() {
     if (app == null) {
+      // TODO: Revisar properties
       Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
       app = Javalin.create(config()).start(port);
 
