@@ -11,42 +11,45 @@ import java.util.Optional;
 public class UsosTarjetaRepository implements IUsosTarjetaRepository, WithSimplePersistenceUnit {
 
 
-    @Override
-    public Optional<UsoTarjeta> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(UsoTarjeta.class, id));
-    }
+  @Override
+  public Optional<UsoTarjeta> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(UsoTarjeta.class, id));
+  }
 
-    @Override
-    public List<UsoTarjeta> buscarTodos() {
-        return entityManager().createQuery("from UsoTarjeta where activo=:activo", UsoTarjeta.class).
-                setParameter("activo", true)
-                .getResultList();
-    }
+  @Override
+  public List<UsoTarjeta> buscarTodos() {
+    return entityManager().createQuery("from UsoTarjeta where activo=:activo", UsoTarjeta.class).
+        setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public void guardar(UsoTarjeta usoTarjeta) {
-        withTransaction(() -> entityManager().persist(usoTarjeta));
-    }
+  @Override
+  public void guardar(UsoTarjeta usoTarjeta) {
+    withTransaction(() -> entityManager().persist(usoTarjeta));
+  }
 
-    public void guardar(UsoTarjeta... usoTarjeta) {
+  public void guardar(UsoTarjeta... usoTarjeta) {
 
-        withTransaction(() -> {
-            for (UsoTarjeta uso : usoTarjeta) {
-                entityManager().persist(uso);
-            }
-        });
-    }
+    withTransaction(() -> {
+      for (UsoTarjeta uso : usoTarjeta) {
+        entityManager().persist(uso);
+      }
+    });
+  }
 
-    @Override
-    public void actualizar(UsoTarjeta usoTarjeta) {
-        withTransaction(() -> entityManager().merge(usoTarjeta));
-    }
+  @Override
+  public void actualizar(UsoTarjeta usoTarjeta) {
+    withTransaction(() -> entityManager().merge(usoTarjeta));
+  }
 
-    @Override
-    public void eliminar(UsoTarjeta usoTarjeta) {
-        usoTarjeta.borrarLogico();
-        withTransaction(() -> entityManager().merge(usoTarjeta));
-    }
+  @Override
+  public void eliminar(UsoTarjeta usoTarjeta) {
+
+    withTransaction(() -> {
+      usoTarjeta.borrarLogico();
+      entityManager().merge(usoTarjeta);
+    });
+  }
 
   /*public static void main(String[] args) {
         UsoTarjeta m = new UsoTarjeta("otro");
