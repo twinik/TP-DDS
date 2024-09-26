@@ -68,8 +68,11 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
 
     @Override
     public void eliminar(Vianda vianda) {
-        vianda.borrarLogico();
-        withTransaction(() -> entityManager().merge(vianda));
+
+        withTransaction(() -> {
+            vianda.borrarLogico();
+            entityManager().merge(vianda);
+        });
     }
 
   /*public static void main(String[] args) {

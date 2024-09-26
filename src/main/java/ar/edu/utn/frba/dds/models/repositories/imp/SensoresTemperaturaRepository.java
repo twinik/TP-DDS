@@ -41,8 +41,11 @@ public class SensoresTemperaturaRepository implements ISensorTemperaturaReposito
 
     @Override
     public void eliminar(SensorTemperatura sensorTemperatura) {
-        sensorTemperatura.borrarLogico();
-        withTransaction(() -> entityManager().merge(sensorTemperatura));
+
+        withTransaction(() -> {
+            sensorTemperatura.borrarLogico();
+            entityManager().merge(sensorTemperatura);
+        });
     }
 
   /*public static void main(String[] args) {

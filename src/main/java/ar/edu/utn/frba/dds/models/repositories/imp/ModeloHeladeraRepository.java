@@ -40,8 +40,11 @@ public class ModeloHeladeraRepository implements IModeloHeladeraRepository, With
 
     @Override
     public void eliminar(ModeloHeladera modeloHeladera) {
-        modeloHeladera.borrarLogico();
-        withTransaction(() -> entityManager().merge(modeloHeladera));
+
+        withTransaction(() -> {
+            modeloHeladera.borrarLogico();
+            entityManager().merge(modeloHeladera);
+        });
     }
 
   /*public static void main(String[] args) {

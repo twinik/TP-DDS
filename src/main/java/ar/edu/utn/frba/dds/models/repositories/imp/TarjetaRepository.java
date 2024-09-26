@@ -70,13 +70,15 @@ public class TarjetaRepository implements ITarjetasRepository, WithSimplePersist
 
     @Override
     public void actualizar(Tarjeta tarjeta) {
-        // nada
-        //withTransaction(() -> entityManager().merge(tarjeta));
+        withTransaction(() -> entityManager().merge(tarjeta));
     }
 
     @Override
     public void eliminar(Tarjeta tarjeta) {
-        tarjeta.borrarLogico();
-        withTransaction(() -> entityManager().merge(tarjeta));
+
+        withTransaction(() -> {
+            tarjeta.borrarLogico();
+            entityManager().merge(tarjeta);
+        });
     }
 }

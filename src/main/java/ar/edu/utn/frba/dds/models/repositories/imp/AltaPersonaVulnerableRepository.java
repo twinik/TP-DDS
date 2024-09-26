@@ -7,42 +7,44 @@ import java.util.List;
 import java.util.Optional;
 
 public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRepository, WithSimplePersistenceUnit {
-    @Override
-    public Optional<AltaPersonaVulnerable> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(AltaPersonaVulnerable.class, id));
-    }
+  @Override
+  public Optional<AltaPersonaVulnerable> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(AltaPersonaVulnerable.class, id));
+  }
 
-    @Override
-    public List<AltaPersonaVulnerable> buscarTodos() {
-        return entityManager().createQuery("from AltaPersonaVulnerable where activo=:activo", AltaPersonaVulnerable.class).
-                setParameter("activo", true)
-                .getResultList();
-    }
+  @Override
+  public List<AltaPersonaVulnerable> buscarTodos() {
+    return entityManager().createQuery("from AltaPersonaVulnerable where activo=:activo", AltaPersonaVulnerable.class).
+        setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public void guardar(AltaPersonaVulnerable altaPersonaVulnerable) {
-        withTransaction(() -> entityManager().persist(altaPersonaVulnerable));
-    }
+  @Override
+  public void guardar(AltaPersonaVulnerable altaPersonaVulnerable) {
+    withTransaction(() -> entityManager().persist(altaPersonaVulnerable));
+  }
 
-    public void guardar(AltaPersonaVulnerable... altaPersonaVulnerable) {
+  public void guardar(AltaPersonaVulnerable... altaPersonaVulnerable) {
 
-        withTransaction(() -> {
-            for (AltaPersonaVulnerable persona : altaPersonaVulnerable) {
-                entityManager().persist(persona);
-            }
-        });
-    }
+    withTransaction(() -> {
+      for (AltaPersonaVulnerable persona : altaPersonaVulnerable) {
+        entityManager().persist(persona);
+      }
+    });
+  }
 
-    @Override
-    public void actualizar(AltaPersonaVulnerable altaPersonaVulnerable) {
-        withTransaction(() -> entityManager().merge(altaPersonaVulnerable));
-    }
+  @Override
+  public void actualizar(AltaPersonaVulnerable altaPersonaVulnerable) {
+    withTransaction(() -> entityManager().merge(altaPersonaVulnerable));
+  }
 
-    @Override
-    public void eliminar(AltaPersonaVulnerable altaPersonaVulnerable) {
-        altaPersonaVulnerable.borrarLogico();
-        withTransaction(() -> entityManager().merge(altaPersonaVulnerable));
-    }
+  @Override
+  public void eliminar(AltaPersonaVulnerable altaPersonaVulnerable) {
+    withTransaction(() -> {
+      altaPersonaVulnerable.borrarLogico();
+      entityManager().merge(altaPersonaVulnerable);
+    });
+  }
 /*
     public static void main(String[] args) {
         AltaPersonaVulnerable m = new AltaPersonaVulnerable(1);

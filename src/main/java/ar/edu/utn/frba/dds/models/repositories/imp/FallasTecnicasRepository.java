@@ -85,7 +85,10 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
 
     @Override
     public void eliminar(FallaTecnica fallaTecnica) {
-        fallaTecnica.borrarLogico();
-        withTransaction(() -> entityManager().merge(fallaTecnica));
+
+        withTransaction(() -> {
+            fallaTecnica.borrarLogico();
+            entityManager().merge(fallaTecnica);
+        });
     }
 }

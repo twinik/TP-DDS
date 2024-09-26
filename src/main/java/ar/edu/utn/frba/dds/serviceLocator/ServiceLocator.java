@@ -61,6 +61,8 @@ public class ServiceLocator {
                 add(clase, new OfertaProductoRepository());
             else if (clase.equals(IOpcionRepository.class))
                 add(clase, new OpcionRepository());
+            else if(clase.equals(IPermisosRepository.class))
+                add(clase,new PermisosRepository());
             else if (clase.equals(IPersonaVulnerableRepository.class))
                 add(clase, new PersonaVulnerableRepository());
             else if (clase.equals(IProductoRepository.class))
@@ -83,6 +85,8 @@ public class ServiceLocator {
                 add(clase, new RespuestasCampoRepository());
             else if (clase.equals(IRespuestasFormularioRepository.class))
                 add(clase, new RespuestasFormularioRepository());
+            else if (clase.equals(IRolesRepository.class))
+                add(clase,new RolesRepository());
             else if (clase.equals(ISensorMovimientoRepository.class))
                 add(clase, new SensoresMovimientoRepository());
             else if (clase.equals(ISensorTemperaturaRepository.class))

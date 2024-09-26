@@ -59,8 +59,10 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
 
     @Override
     public void eliminar(Colaborador colaborador) {
-        colaborador.borrarLogico();
-        withTransaction(() -> entityManager().merge(colaborador));
+
+        withTransaction(() -> {
+            colaborador.borrarLogico();
+            entityManager().merge(colaborador);});
     }
 
 //  public static void main(String[] args) {

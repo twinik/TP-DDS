@@ -42,8 +42,11 @@ public class RespuestasCampoRepository implements IRespuestasCampoRepository, Wi
 
     @Override
     public void eliminar(RespuestaACampo respuestaACampo) {
-        respuestaACampo.borrarLogico();
-        withTransaction(() -> entityManager().merge(respuestaACampo));
+
+        withTransaction(() -> {
+            respuestaACampo.borrarLogico();
+            entityManager().merge(respuestaACampo);
+        });
     }
 
   /*public static void main(String[] args) {

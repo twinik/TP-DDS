@@ -40,8 +40,10 @@ public class CampoRepository implements ICampoRepository, WithSimplePersistenceU
 
     @Override
     public void eliminar(Campo campo) {
-        campo.borrarLogico();
-        withTransaction(() -> entityManager().merge(campo));
+
+        withTransaction(() -> {
+            campo.borrarLogico();
+            entityManager().merge(campo);});
     }
 
     /* public static void main(String[] args) {

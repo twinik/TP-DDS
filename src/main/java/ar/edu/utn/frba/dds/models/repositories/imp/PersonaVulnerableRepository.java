@@ -40,8 +40,11 @@ public class PersonaVulnerableRepository implements IPersonaVulnerableRepository
 
     @Override
     public void eliminar(PersonaVulnerable persona) {
-        persona.borrarLogico();
-        withTransaction(() -> entityManager().merge(persona));
+
+        withTransaction(() -> {
+            persona.borrarLogico();
+            entityManager().merge(persona);
+        });
     }
 
   /* public static void main(String[] args) {

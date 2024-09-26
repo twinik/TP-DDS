@@ -42,8 +42,10 @@ public class SolicitudesAperturaHeladeraRepository implements ISolicitudesApertu
 
     @Override
     public void eliminar(SolicitudAperturaHeladera solicitudAperturaHeladera) {
-        solicitudAperturaHeladera.borrarLogico();
-        withTransaction(() -> entityManager().merge(solicitudAperturaHeladera));
+
+        withTransaction(() -> {
+            solicitudAperturaHeladera.borrarLogico();
+            entityManager().merge(solicitudAperturaHeladera);});
     }
 
   /*public static void main(String[] args) {

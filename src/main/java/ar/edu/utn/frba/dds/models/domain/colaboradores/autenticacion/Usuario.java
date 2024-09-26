@@ -3,8 +3,14 @@ package ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.ArrayList;
@@ -25,7 +31,9 @@ public class Usuario extends EntidadPersistente {
   @Column(name = "clave")
   private String clave;
 
-  @Transient
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "roles_x_usuario", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id"))
   private List<Rol> roles = new ArrayList<>();
 
   public Usuario(String email, String clave) {

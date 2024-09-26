@@ -71,8 +71,11 @@ public class DonacionesViandaRepository implements IDonacionesViandaRepository, 
 
     @Override
     public void eliminar(DonacionVianda donacionVianda) {
-        donacionVianda.borrarLogico();
-        withTransaction(() -> entityManager().merge(donacionVianda));
+
+        withTransaction(() -> {
+            donacionVianda.borrarLogico();
+            entityManager().merge(donacionVianda);
+        });
     }
 
   /*public static void main(String[] args) {

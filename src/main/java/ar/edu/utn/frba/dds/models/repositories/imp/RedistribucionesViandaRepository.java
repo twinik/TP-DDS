@@ -82,8 +82,11 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
 
     @Override
     public void eliminar(RedistribucionViandas redistribucionViandas) {
-        redistribucionViandas.borrarLogico();
-        withTransaction(() -> entityManager().merge(redistribucionViandas));
+
+        withTransaction(() -> {
+            redistribucionViandas.borrarLogico();
+            entityManager().merge(redistribucionViandas);
+        });
     }
 
   /*public static void main(String[] args) {

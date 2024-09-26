@@ -40,8 +40,11 @@ public class OfertaProductoRepository implements IOfertaProductoRepository, With
 
     @Override
     public void eliminar(OfertaProducto ofertaProducto) {
-        ofertaProducto.borrarLogico();
-        withTransaction(() -> entityManager().merge(ofertaProducto));
+
+        withTransaction(() -> {
+            ofertaProducto.borrarLogico();
+            entityManager().merge(ofertaProducto)
+        ;});
     }
 
   /*public static void main(String[] args) {

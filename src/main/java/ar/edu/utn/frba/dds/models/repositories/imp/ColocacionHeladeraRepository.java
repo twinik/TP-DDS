@@ -40,8 +40,10 @@ public class ColocacionHeladeraRepository implements IColocacionHeladeraReposito
 
     @Override
     public void eliminar(ColocacionHeladeras colocacionHeladera) {
-        colocacionHeladera.borrarLogico();
-        withTransaction(() -> entityManager().merge(colocacionHeladera));
+        withTransaction(() -> {
+            colocacionHeladera.borrarLogico();
+            entityManager().merge(colocacionHeladera);});
+
     }
 
     /* public static void main(String[] args) {

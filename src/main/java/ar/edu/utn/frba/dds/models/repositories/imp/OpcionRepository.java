@@ -8,42 +8,45 @@ import java.util.Optional;
 
 // TODO QUIZAS BORRAR
 public class OpcionRepository implements IOpcionRepository, WithSimplePersistenceUnit {
-    @Override
-    public Optional<Opcion> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(Opcion.class, id));
-    }
+  @Override
+  public Optional<Opcion> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(Opcion.class, id));
+  }
 
-    @Override
-    public List<Opcion> buscarTodos() {
-        return entityManager().createQuery("from Opcion where activo=:activo", Opcion.class).
-                setParameter("activo", true)
-                .getResultList();
-    }
+  @Override
+  public List<Opcion> buscarTodos() {
+    return entityManager().createQuery("from Opcion where activo=:activo", Opcion.class).
+        setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public void guardar(Opcion opcion) {
-        withTransaction(() -> entityManager().persist(opcion));
-    }
+  @Override
+  public void guardar(Opcion opcion) {
+    withTransaction(() -> entityManager().persist(opcion));
+  }
 
-    public void guardar(Opcion... opcion) {
+  public void guardar(Opcion... opcion) {
 
-        withTransaction(() -> {
-            for (Opcion op : opcion) {
-                entityManager().persist(op);
-            }
-        });
-    }
+    withTransaction(() -> {
+      for (Opcion op : opcion) {
+        entityManager().persist(op);
+      }
+    });
+  }
 
-    @Override
-    public void actualizar(Opcion opcion) {
-        withTransaction(() -> entityManager().merge(opcion));
-    }
+  @Override
+  public void actualizar(Opcion opcion) {
+    withTransaction(() -> entityManager().merge(opcion));
+  }
 
-    @Override
-    public void eliminar(Opcion opcion) {
-        opcion.borrarLogico();
-        withTransaction(() -> entityManager().merge(opcion));
-    }
+  @Override
+  public void eliminar(Opcion opcion) {
+
+    withTransaction(() -> {
+      opcion.borrarLogico();
+      entityManager().merge(opcion);
+    });
+  }
 
   /*public static void main(String[] args) {
         Opcion m = new Opcion("otro");
