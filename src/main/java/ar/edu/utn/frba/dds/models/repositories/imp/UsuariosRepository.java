@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.models.repositories.imp;
 
 
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;

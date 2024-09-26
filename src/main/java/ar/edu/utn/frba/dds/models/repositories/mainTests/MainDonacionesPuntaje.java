@@ -1,10 +1,9 @@
 package ar.edu.utn.frba.dds.models.repositories.mainTests;
 
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IDonacionesViandaRepository;

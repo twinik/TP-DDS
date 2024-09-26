@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.models.domain.colaboradores.form;
 
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;

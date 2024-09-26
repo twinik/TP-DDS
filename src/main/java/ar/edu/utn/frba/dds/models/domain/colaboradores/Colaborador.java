@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.domain.colaboradores;
 import ar.edu.utn.frba.dds.helpers.MedioContactoHelper;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.ColocacionHeladeras;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.notifications.Contactable;
 import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;

@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Vianda;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;

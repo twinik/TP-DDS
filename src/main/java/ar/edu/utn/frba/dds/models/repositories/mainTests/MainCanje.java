@@ -4,7 +4,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CanjeProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.ICanjeProductoRepository;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IOfertaProductoRepository;

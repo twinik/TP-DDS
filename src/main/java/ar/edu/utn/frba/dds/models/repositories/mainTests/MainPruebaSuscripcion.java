@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.models.repositories.mainTests;
 
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;

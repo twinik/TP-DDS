@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.models.repositories;
 
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import java.util.List;
 import java.util.Optional;
 

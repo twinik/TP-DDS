@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.IPuntajeCalculable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.factories.ColaboradorFactory;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.factories.UsuarioFactory;
 import ar.edu.utn.frba.dds.models.domain.emailSending.MailSenderAdapter;

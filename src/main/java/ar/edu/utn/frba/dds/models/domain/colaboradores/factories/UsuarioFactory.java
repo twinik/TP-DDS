@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.models.domain.colaboradores.factories;
 
-import ar.edu.utn.frba.dds.models.domain.colaboradores.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 
 /**
  * UsuarioFactory class se encarga de crear usuarios.
