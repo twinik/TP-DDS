@@ -1,16 +1,16 @@
 package ar.edu.utn.frba.dds.brokers;
 
 import ar.edu.utn.frba.dds.brokers.dtos.SensorMovimientoBrokerDto;
-import ar.edu.utn.frba.dds.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.domain.heladeras.SensorMovimiento;
-import ar.edu.utn.frba.dds.domain.incidentes.Alerta;
-import ar.edu.utn.frba.dds.domain.incidentes.TipoAlerta;
-import ar.edu.utn.frba.dds.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
-import ar.edu.utn.frba.dds.repositories.IAlertasRepository;
-import ar.edu.utn.frba.dds.repositories.ISensorMovimientoRepository;
-import ar.edu.utn.frba.dds.repositories.ITecnicosRepository;
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.SensorMovimiento;
+import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
+import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
+import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
+import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.models.repositories.ISensorMovimientoRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;

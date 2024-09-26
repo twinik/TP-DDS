@@ -13,8 +13,8 @@ import java.util.Scanner;
  * ValidacionListaClavesNuevo class permite representar una validacion de lista de claves.
  */
 public class ValidacionListaClavesNuevo extends Validacion {
-    private List<String> peoresContrasenias = new ArrayList<>();
     private final ConfigReader config;
+    private List<String> peoresContrasenias = new ArrayList<>();
 
     /**
      * Constructor.

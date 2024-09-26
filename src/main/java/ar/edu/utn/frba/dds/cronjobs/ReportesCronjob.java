@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.cronjobs;
 
 
-import static ar.edu.utn.frba.dds.domain.reportes.TipoReporte.*;
+import static ar.edu.utn.frba.dds.models.domain.reportes.TipoReporte.*;
 
-import ar.edu.utn.frba.dds.domain.reportes.Reporte;
-import ar.edu.utn.frba.dds.domain.reportes.ReportesFactory;
-import ar.edu.utn.frba.dds.repositories.IReportesRepository;
+import ar.edu.utn.frba.dds.models.domain.reportes.Reporte;
+import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
+import ar.edu.utn.frba.dds.models.repositories.IReportesRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.time.LocalDate;
 import java.util.ArrayList;

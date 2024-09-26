@@ -1,0 +1,80 @@
+{{#partial "links"}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+{{/partial}}
+
+{{#partial "btn-volver"}}
+    <div class="flex">
+        <a href="colaborar.html">
+            <button
+                    class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                Volver
+            </button>
+        </a>
+    </div>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <h1 class="title1 mb-8">Crear formulario</h1>
+
+    <form class="content-center max-w-md mx-auto">
+        <div id="camposContainer">
+            <strong>Campo 1</strong>
+
+            <label for="tipo-campo-1"
+                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de
+                campo</label>
+            <select id="tipo-campo-1" onchange="mostrarOpciones(1)"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="texto-libre">Texto libre</option>
+                <option value="multiple-choice">Opción múltiple</option>
+                <option value="single-choice">Opción única</option>
+                <option value="numerico">Númerico</option>
+                <option value="fecha">Fecha</option>
+            </select>
+
+            <label for="pregunta-1"
+                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enunciado</label>
+            <input type="text" id="pregunta-1"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Pregunta" required/>
+
+            <div id="opciones-container-1" style="display: none;">
+                <div id="opciones-campo-1">
+                    <div id="opcion-1-campo-1">
+                        <label for="opcion-1-campo-1-input"
+                               class="mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opción
+                            1
+                        </label>
+                        <div class="flex flex-row">
+                            <input type="text" id="opcion-1-campo-1-input"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="Valor opción"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="agregarOpcion(1)" class="mt-5">Agregar otra opción +</button>
+            </div>
+
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-1 items-center mt-5 mb-5">
+                    <input id="obligatorio-campo-1" type="checkbox" value="obligatorio"
+                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="obligatorio-campo-1"
+                           class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Obligatorio</label>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="mt-6" onclick="nuevoCampo()" type="button">
+            Agregar campo +
+        </button>
+
+        <button type="submit"
+                class="mt-6 content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
+            Crear formulario
+        </button>
+    </form>
+{{/partial}}
+{{> templates/app/base }}

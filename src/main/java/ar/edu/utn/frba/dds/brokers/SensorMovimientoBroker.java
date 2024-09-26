@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.brokers;
 
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
-import ar.edu.utn.frba.dds.repositories.ISensorMovimientoRepository;
+import ar.edu.utn.frba.dds.models.repositories.ISensorMovimientoRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.io.IOException;
 
