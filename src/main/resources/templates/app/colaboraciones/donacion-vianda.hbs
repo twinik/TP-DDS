@@ -1,0 +1,167 @@
+{{#partial "btn-volver"}}
+    <div class="flex">
+        <a href="/colaborar">
+            <button
+                    class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            >
+                Volver
+            </button>
+        </a>
+    </div>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <div class="p-10 mx-auto max-w-7xl">
+        <h1 class="title1 mb-8">Donación de vianda</h1>
+
+        <form class="content-center max-w-md mx-auto">
+            <label
+                    for="descripcion-vianda"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Descripción de la vianda</label
+            >
+            <input
+                    type="text"
+                    id="descripcion-vianda"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Descripción"
+                    required
+            />
+
+            <label
+                    for="caducidad"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Fecha de caducidad</label
+            >
+            <input
+                    required
+                    datepicker
+                    datepicker-autohide
+                    datepicker-format="dd/mm/yyyy"
+                    autoSelectToday="1"
+                    id="caducidad"
+                    type="text"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Fecha de caducidad"
+            />
+
+            <label
+                    for="default-datepicker"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Fecha de donación</label
+            >
+            <input
+                    required
+                    datepicker
+                    datepicker-autohide
+                    datepicker-format="dd/mm/yyyy"
+                    autoSelectToday="1"
+                    id="default-datepicker"
+                    type="text"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Fecha de donación"
+            />
+
+            <label
+                    for="calorias"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Calorías</label
+            >
+            <input
+                    type="number"
+                    id="calorias"
+                    aria-describedby="helper-text-explanation"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Calorías"
+                    required
+                    min="1"
+            />
+
+            <label
+                    for="peso"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Peso de la vianda (kg)</label
+            >
+            <input
+                    type="number"
+                    id="peso"
+                    aria-describedby="helper-text-explanation"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Peso (kg)"
+                    required
+                    min="1"
+            />
+
+            <label
+                    for="map"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Seleccione la heladera donde realiza la donacion</label
+            >
+            <div
+                    id="map"
+                    style="height: 300px; width: 100%; z-index: 50"
+                    class="mb-5"
+            ></div>
+            <div id="marker-template" style="display: none">
+                <div class="flex flex-col popup-content">
+                    <div class="popup-title"></div>
+                    <div
+                            class="popup-button"
+                            onclick="clickOnPopup(this)"
+                    >
+                        Seleccionar
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-row">
+						<span
+                                class="mr-1 text-left block mb-2 text-sm dark:text-white"
+                        >Heladera seleccionada: </span
+                        ><span
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    id="heladeraSeleccionada"
+            ></span>
+                <input
+                        type="hidden"
+                        name="idHeladera"
+                        id="idHeladera"
+                />
+            </div>
+
+            <button
+                    type="submit"
+                    class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
+            >
+                Registrar donación
+            </button>
+        </form>
+    </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+    ></script>
+    <script src="/js/heladeras-seleccion.js"></script>
+    <script>
+        function clickOnPopup(element) {
+            const btns = document.querySelectorAll(".popup-button");
+            console.log(btns);
+            const heladeraSelectedText = document.getElementById(
+                    "heladeraSeleccionada"
+            );
+            const heladeraSelectedHidden =
+                    document.getElementById("idHeladera");
+            const id = element.id.split("-")[1];
+            heladeraSelectedHidden.val;
+            heladeraSelectedHidden.value = id;
+            heladeraSelectedText.innerHTML = markers.find(
+                    e => e.id == id
+            ).title;
+        }
+    </script>
+{{/partial}}
+
+{{> templates/app/base}}
