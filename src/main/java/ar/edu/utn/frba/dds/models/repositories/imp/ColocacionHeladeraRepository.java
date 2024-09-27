@@ -42,7 +42,8 @@ public class ColocacionHeladeraRepository implements IColocacionHeladeraReposito
     public void eliminar(ColocacionHeladeras colocacionHeladera) {
         withTransaction(() -> {
             colocacionHeladera.borrarLogico();
-            entityManager().merge(colocacionHeladera);});
+            entityManager().merge(colocacionHeladera);
+        });
 
     }
 

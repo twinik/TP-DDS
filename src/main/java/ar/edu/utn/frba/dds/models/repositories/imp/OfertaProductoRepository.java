@@ -44,7 +44,8 @@ public class OfertaProductoRepository implements IOfertaProductoRepository, With
         withTransaction(() -> {
             ofertaProducto.borrarLogico();
             entityManager().merge(ofertaProducto)
-        ;});
+            ;
+        });
     }
 
   /*public static void main(String[] args) {

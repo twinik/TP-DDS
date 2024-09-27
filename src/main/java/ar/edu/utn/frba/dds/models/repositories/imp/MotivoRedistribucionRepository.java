@@ -10,68 +10,68 @@ import java.util.Optional;
 public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepository, WithSimplePersistenceUnit {
 
 
-  public MotivoRedistribucionRepository() {
-  }
+    public MotivoRedistribucionRepository() {
+    }
 
-  @Override
-  public Optional<MotivoRedistribucionVianda> buscar(String id) {
-    return Optional.ofNullable(entityManager().find(MotivoRedistribucionVianda.class, id));
-  }
+    public static void main(String[] args) {
+        MotivoRedistribucionVianda m = new MotivoRedistribucionVianda("otro");
+        MotivoRedistribucionVianda m1 = new MotivoRedistribucionVianda("uno");
+        MotivoRedistribucionVianda m2 = new MotivoRedistribucionVianda("hola");
+        IMotivoRedistribucionRepository repositorio = ServiceLocator.get(IMotivoRedistribucionRepository.class);
+        repositorio.guardar(m);
+        repositorio.guardar(m1);
+        repositorio.guardar(m2);
 
-  @Override
-  public List<MotivoRedistribucionVianda> buscarTodos() {
-    return entityManager().createQuery("from MotivoRedistribucionVianda where activo=:activo", MotivoRedistribucionVianda.class).
-        setParameter("activo", true)
-        .getResultList();
-  }
+        repositorio.eliminar(m1);
+        m2.setMotivo("lo cambio");
+        repositorio.actualizar(m2);
 
-  @Override
-  public void guardar(MotivoRedistribucionVianda motivosRedistribucion) {
-    withTransaction(() -> entityManager().persist(motivosRedistribucion));
-  }
+        Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(m.getId());
+        //System.out.println(hidratado.get().getMotivo());
+        Optional<MotivoRedistribucionVianda> hidratado2 = repositorio.buscar(m1.getId());
 
-  public void guardar(MotivoRedistribucionVianda... motivosRedistribucion) {
+        List<MotivoRedistribucionVianda> lista = repositorio.buscarTodos();
 
-    withTransaction(() -> {
-      for (MotivoRedistribucionVianda motivo : motivosRedistribucion) {
-        entityManager().persist(motivo);
-      }
-    });
-  }
+    }
 
-  @Override
-  public void actualizar(MotivoRedistribucionVianda motivo) {
-    withTransaction(() -> entityManager().merge(motivo));
-  }
+    @Override
+    public Optional<MotivoRedistribucionVianda> buscar(String id) {
+        return Optional.ofNullable(entityManager().find(MotivoRedistribucionVianda.class, id));
+    }
 
-  @Override
-  public void eliminar(MotivoRedistribucionVianda motivo) {
-    withTransaction(() -> {
-      motivo.borrarLogico();
-      entityManager().merge(motivo);
-    });
-  }
+    @Override
+    public List<MotivoRedistribucionVianda> buscarTodos() {
+        return entityManager().createQuery("from MotivoRedistribucionVianda where activo=:activo", MotivoRedistribucionVianda.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  public static void main(String[] args) {
-    MotivoRedistribucionVianda m = new MotivoRedistribucionVianda("otro");
-    MotivoRedistribucionVianda m1 = new MotivoRedistribucionVianda("uno");
-    MotivoRedistribucionVianda m2 = new MotivoRedistribucionVianda("hola");
-    IMotivoRedistribucionRepository repositorio = ServiceLocator.get(IMotivoRedistribucionRepository.class);
-    repositorio.guardar(m);
-    repositorio.guardar(m1);
-    repositorio.guardar(m2);
+    @Override
+    public void guardar(MotivoRedistribucionVianda motivosRedistribucion) {
+        withTransaction(() -> entityManager().persist(motivosRedistribucion));
+    }
 
-    repositorio.eliminar(m1);
-    m2.setMotivo("lo cambio");
-    repositorio.actualizar(m2);
+    public void guardar(MotivoRedistribucionVianda... motivosRedistribucion) {
 
-    Optional<MotivoRedistribucionVianda> hidratado = repositorio.buscar(m.getId());
-    //System.out.println(hidratado.get().getMotivo());
-    Optional<MotivoRedistribucionVianda> hidratado2 = repositorio.buscar(m1.getId());
+        withTransaction(() -> {
+            for (MotivoRedistribucionVianda motivo : motivosRedistribucion) {
+                entityManager().persist(motivo);
+            }
+        });
+    }
 
-    List<MotivoRedistribucionVianda> lista = repositorio.buscarTodos();
+    @Override
+    public void actualizar(MotivoRedistribucionVianda motivo) {
+        withTransaction(() -> entityManager().merge(motivo));
+    }
 
-  }
+    @Override
+    public void eliminar(MotivoRedistribucionVianda motivo) {
+        withTransaction(() -> {
+            motivo.borrarLogico();
+            entityManager().merge(motivo);
+        });
+    }
 
 
 }

@@ -43,7 +43,8 @@ public class CampoRepository implements ICampoRepository, WithSimplePersistenceU
 
         withTransaction(() -> {
             campo.borrarLogico();
-            entityManager().merge(campo);});
+            entityManager().merge(campo);
+        });
     }
 
     /* public static void main(String[] args) {

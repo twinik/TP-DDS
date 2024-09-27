@@ -7,45 +7,45 @@ import java.util.List;
 import java.util.Optional;
 
 public class DonacionDineroRepository implements IDonacionDineroRepository, WithSimplePersistenceUnit {
-  @Override
-  public Optional<DonacionDinero> buscar(String id) {
-    return Optional.ofNullable(entityManager().find(DonacionDinero.class, id));
-  }
+    @Override
+    public Optional<DonacionDinero> buscar(String id) {
+        return Optional.ofNullable(entityManager().find(DonacionDinero.class, id));
+    }
 
-  @Override
-  public List<DonacionDinero> buscarTodos() {
-    return entityManager().createQuery("from DonacionDinero where activo=:activo", DonacionDinero.class).
-        setParameter("activo", true)
-        .getResultList();
-  }
+    @Override
+    public List<DonacionDinero> buscarTodos() {
+        return entityManager().createQuery("from DonacionDinero where activo=:activo", DonacionDinero.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(DonacionDinero donacionDinero) {
-    withTransaction(() -> entityManager().persist(donacionDinero));
-  }
+    @Override
+    public void guardar(DonacionDinero donacionDinero) {
+        withTransaction(() -> entityManager().persist(donacionDinero));
+    }
 
-  public void guardar(DonacionDinero... donacionDinero) {
+    public void guardar(DonacionDinero... donacionDinero) {
 
-    withTransaction(() -> {
-      for (DonacionDinero donacion : donacionDinero) {
-        entityManager().persist(donacion);
-      }
-    });
-  }
+        withTransaction(() -> {
+            for (DonacionDinero donacion : donacionDinero) {
+                entityManager().persist(donacion);
+            }
+        });
+    }
 
-  @Override
-  public void actualizar(DonacionDinero donacionDinero) {
-    withTransaction(() -> entityManager().merge(donacionDinero));
-  }
+    @Override
+    public void actualizar(DonacionDinero donacionDinero) {
+        withTransaction(() -> entityManager().merge(donacionDinero));
+    }
 
-  @Override
-  public void eliminar(DonacionDinero donacionDinero) {
+    @Override
+    public void eliminar(DonacionDinero donacionDinero) {
 
-    withTransaction(() -> {
-      donacionDinero.borrarLogico();
-      entityManager().merge(donacionDinero);
-    });
-  }
+        withTransaction(() -> {
+            donacionDinero.borrarLogico();
+            entityManager().merge(donacionDinero);
+        });
+    }
 
     /*
     * public static void main(String[] args) {

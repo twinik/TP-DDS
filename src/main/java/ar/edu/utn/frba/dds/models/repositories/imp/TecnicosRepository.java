@@ -12,58 +12,58 @@ import java.util.Optional;
 @NoArgsConstructor
 public class TecnicosRepository implements ITecnicosRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<Tecnico> buscar(TipoDocumento tipoDocumento, String documento) {
-    //return this.colaboradores.stream().filter(c -> c.getDocumento().equals(documento) && c.getTipoDocumento().equals(tipoDocumento)).findFirst(); //Queda o se va??
-    try {
-      Tecnico t = (Tecnico) entityManager().createQuery("from Tecnico where tipoDocumento=:tipoDocumento and nroDocumento=:documento")
-          .setParameter("tipoDocumento", tipoDocumento)
-          .setParameter("documento", documento).getSingleResult();
-      return Optional.ofNullable(t);
-    } catch (NoResultException e) {
-      return Optional.empty();
+    @Override
+    public Optional<Tecnico> buscar(TipoDocumento tipoDocumento, String documento) {
+        //return this.colaboradores.stream().filter(c -> c.getDocumento().equals(documento) && c.getTipoDocumento().equals(tipoDocumento)).findFirst(); //Queda o se va??
+        try {
+            Tecnico t = (Tecnico) entityManager().createQuery("from Tecnico where tipoDocumento=:tipoDocumento and nroDocumento=:documento")
+                    .setParameter("tipoDocumento", tipoDocumento)
+                    .setParameter("documento", documento).getSingleResult();
+            return Optional.ofNullable(t);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+
     }
 
-  }
+    public Optional<Tecnico> buscar(String id) {
+        return Optional.ofNullable(entityManager().find(Tecnico.class, id));
+    }
 
-  public Optional<Tecnico> buscar(String id) {
-    return Optional.ofNullable(entityManager().find(Tecnico.class, id));
-  }
+    @Override
+    public List<Tecnico> buscarTodos() {
+        return entityManager().createQuery("from Tecnico where activo=:activo", Tecnico.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public List<Tecnico> buscarTodos() {
-    return entityManager().createQuery("from Tecnico where activo=:activo", Tecnico.class).
-        setParameter("activo", true)
-        .getResultList();
-  }
+    @Override
+    public void guardar(Tecnico tecnico) {
+        withTransaction(() -> entityManager().persist(tecnico));
+    }
 
-  @Override
-  public void guardar(Tecnico tecnico) {
-    withTransaction(() -> entityManager().persist(tecnico));
-  }
+    public void guardar(Tecnico... tecnico) {
 
-  public void guardar(Tecnico... tecnico) {
+        withTransaction(() -> {
+            for (Tecnico tec : tecnico) {
+                entityManager().persist(tec);
+            }
+        });
+    }
 
-    withTransaction(() -> {
-      for (Tecnico tec : tecnico) {
-        entityManager().persist(tec);
-      }
-    });
-  }
+    @Override
+    public void actualizar(Tecnico tecnico) {
+        withTransaction(() -> entityManager().merge(tecnico));
+    }
 
-  @Override
-  public void actualizar(Tecnico tecnico) {
-    withTransaction(() -> entityManager().merge(tecnico));
-  }
+    @Override
+    public void eliminar(Tecnico tecnico) {
 
-  @Override
-  public void eliminar(Tecnico tecnico) {
-
-    withTransaction(() -> {
-      tecnico.borrarLogico();
-      entityManager().merge(tecnico);
-    });
-  }
+        withTransaction(() -> {
+            tecnico.borrarLogico();
+            entityManager().merge(tecnico);
+        });
+    }
 
   /*public static void main(String[] args) {
         Tecnico m = new Tecnico("otro");

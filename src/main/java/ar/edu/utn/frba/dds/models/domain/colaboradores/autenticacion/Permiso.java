@@ -14,6 +14,6 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @Entity
 public class Permiso extends EntidadPersistente {
-  @Column(name = "descripcion", nullable = false)
-  private String descripcion;
+    @Column(name = "descripcion", nullable = false)
+    private String descripcion;
 }

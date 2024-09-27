@@ -15,6 +15,21 @@ import java.util.Optional;
 public class SensoresMovimientoRepository implements ISensorMovimientoRepository, WithSimplePersistenceUnit {
 
 
+    public static void main(String[] args) {
+        IRolesRepository repo = ServiceLocator.get(IRolesRepository.class);
+        Rol r1 = new Rol();
+        r1.agregarPermisos(new Permiso("hola"), new Permiso("permite_hacer"));
+        Rol r2 = new Rol();
+        r2.setNombre("rolcito");
+        repo.guardar(r1);
+        repo.guardar(r2);
+        repo.eliminar(r2);
+
+        Usuario u1 = new Usuario();
+        u1.agregarRoles(r1);
+        ServiceLocator.get(IUsuariosRepository.class).guardar(u1);
+    }
+
     @Override
     public Optional<SensorMovimiento> buscar(String id) {
         return Optional.ofNullable(entityManager().find(SensorMovimiento.class, id));
@@ -53,21 +68,6 @@ public class SensoresMovimientoRepository implements ISensorMovimientoRepository
             sensorMovimiento.borrarLogico();
             entityManager().merge(sensorMovimiento);
         });
-    }
-
-    public static void main(String[] args) {
-        IRolesRepository repo = ServiceLocator.get(IRolesRepository.class);
-        Rol r1= new Rol();
-        r1.agregarPermisos(new Permiso("hola"),new Permiso("permite_hacer"));
-        Rol r2 = new Rol();
-        r2.setNombre("rolcito");
-        repo.guardar(r1);
-        repo.guardar(r2);
-        repo.eliminar(r2);
-
-        Usuario u1 = new Usuario();
-        u1.agregarRoles(r1);
-        ServiceLocator.get(IUsuariosRepository.class).guardar(u1);
     }
 
 }

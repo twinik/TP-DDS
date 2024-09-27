@@ -12,58 +12,58 @@ import java.util.Optional;
 
 public class TarjetasColaboradorRepository implements ITarjetasColaboradorRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<TarjetaColaborador> buscarPorCodigo(String codigo) {
-    try {
-      TarjetaColaborador t = (TarjetaColaborador) entityManager().createQuery("from TarjetaColaborador where codigo=:codigo")
-          .setParameter("codigo", codigo)
-          .getSingleResult();
-      return Optional.ofNullable(t);
-    } catch (NoResultException e) {
-      return Optional.empty();
+    @Override
+    public Optional<TarjetaColaborador> buscarPorCodigo(String codigo) {
+        try {
+            TarjetaColaborador t = (TarjetaColaborador) entityManager().createQuery("from TarjetaColaborador where codigo=:codigo")
+                    .setParameter("codigo", codigo)
+                    .getSingleResult();
+            return Optional.ofNullable(t);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
-  }
 
-  @Override
-  public Optional<TarjetaColaborador> buscar(String id) {
-    return Optional.ofNullable(entityManager().find(TarjetaColaborador.class, id));
-  }
+    @Override
+    public Optional<TarjetaColaborador> buscar(String id) {
+        return Optional.ofNullable(entityManager().find(TarjetaColaborador.class, id));
+    }
 
-  @Override
-  public List<TarjetaColaborador> buscarTodos() {
-    return entityManager().createQuery("from TarjetaColaborador where activo=:activo", TarjetaColaborador.class).
-        setParameter("activo", true)
-        .getResultList();
-  }
+    @Override
+    public List<TarjetaColaborador> buscarTodos() {
+        return entityManager().createQuery("from TarjetaColaborador where activo=:activo", TarjetaColaborador.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  @Override
-  public void guardar(TarjetaColaborador tarjeta) {
-    withTransaction(() -> entityManager().persist(tarjeta));
-  }
+    @Override
+    public void guardar(TarjetaColaborador tarjeta) {
+        withTransaction(() -> entityManager().persist(tarjeta));
+    }
 
-  public void guardar(TarjetaColaborador... tarjeta) {
+    public void guardar(TarjetaColaborador... tarjeta) {
 
-    withTransaction(() -> {
-      for (TarjetaColaborador card : tarjeta) {
-        entityManager().persist(card);
-      }
-    });
-  }
+        withTransaction(() -> {
+            for (TarjetaColaborador card : tarjeta) {
+                entityManager().persist(card);
+            }
+        });
+    }
 
 
-  @Override
-  public void actualizar(TarjetaColaborador tarjeta) {
-    withTransaction(() -> entityManager().merge(tarjeta));
-  }
+    @Override
+    public void actualizar(TarjetaColaborador tarjeta) {
+        withTransaction(() -> entityManager().merge(tarjeta));
+    }
 
-  @Override
-  public void eliminar(TarjetaColaborador tarjeta) {
+    @Override
+    public void eliminar(TarjetaColaborador tarjeta) {
 
-    withTransaction(() -> {
-      tarjeta.borrarLogico();
-      entityManager().merge(tarjeta);
-    });
-  }
+        withTransaction(() -> {
+            tarjeta.borrarLogico();
+            entityManager().merge(tarjeta);
+        });
+    }
 
   /*public static void main(String[] args) {
         TarjetaColaborador m = new TarjetaColaborador("otro");

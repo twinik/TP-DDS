@@ -62,7 +62,8 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
 
         withTransaction(() -> {
             colaborador.borrarLogico();
-            entityManager().merge(colaborador);});
+            entityManager().merge(colaborador);
+        });
     }
 
 //  public static void main(String[] args) {

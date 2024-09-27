@@ -5,7 +5,7 @@ package ar.edu.utn.frba.dds.utils;
  */
 public class Initializer {
 
-  public static void init() {
+    public static void init() {
 //    -- Insertar datos de prueba en la tabla colaborador
 //    INSERT INTO colaborador (id, activo, created_at, updated_at, nombre, email)
 //    VALUES
@@ -42,5 +42,5 @@ public class Initializer {
 //        ('3c5ebf19-8b5c-4d3b-b46a-582a8049d602', b'1', NOW(), NOW(), 'Descripción 1', b'1', NOW(), (SELECT id FROM incidente LIMIT 1), (SELECT id FROM tecnico LIMIT 1)),
 //    ('892c887b-1aaf-4104-9011-579d80ae5680', b'1', NOW(), NOW(), 'Descripción 2', b'1', NOW(), (SELECT id FROM incidente LIMIT 1), (SELECT id FROM tecnico LIMIT 1));
 
-  }
+    }
 }
