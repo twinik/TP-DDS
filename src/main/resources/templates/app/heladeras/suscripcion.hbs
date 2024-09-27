@@ -1,0 +1,120 @@
+{{#partial "btn-volver"}}
+    <div class="flex">
+        <a href="/heladeras">
+            <button
+                    class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            >
+                Volver
+            </button>
+        </a>
+    </div>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <div class="p-10 mx-auto max-w-4xl">
+        <h1 class="title1 mb-12">Suscripciones Heladera Medrano</h1>
+        <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+        >
+            <!--Cantidad de viandas restantes-->
+            <form
+                    class="rounded-xl border-2 shadow-lg p-5 flex flex-col items-center"
+            >
+                <h1 class="mt-5 mb-5">
+                    Avisarme cuando solo quede una determinada cantidad
+                    de viandas restantes
+                </h1>
+
+                <input
+                        type="number"
+                        id="viandas"
+                        aria-describedby="helper-text-explanation"
+                        class="mb-5 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Cantidad de viandas"
+                        required
+                        min="1"
+                />
+
+                <select
+                        id="medio-contacto"
+                        class="mb-5 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option value="mail">Mail</option>
+                    <option value="telgram">Telegram</option>
+                    <option value="whatsapp">WhatsApp</option>
+                </select>
+
+                <button
+                        type="submit"
+                        class="content-center max-w-md mx-auto mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                >
+                    Suscribirse
+                </button>
+            </form>
+            <!--Cantidad de viandas restantes-->
+
+            <!--Cantidad de viandas para llenar la heladera-->
+            <form
+                    class="rounded-xl border-2 shadow-lg p-5 flex flex-col items-center"
+            >
+                <h1 class="mt-5 mb-5">
+                    Avisarme cuando solo falte una determinada cantidad
+                    de viandas para llenar la heladera
+                </h1>
+                <input
+                        type="number"
+                        id="viandas"
+                        aria-describedby="helper-text-explanation"
+                        class="mb-5 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Cantidad de viandas"
+                        required
+                        min="1"
+                />
+
+                <select
+                        id="medio-contacto"
+                        class="mb-5 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option value="mail">Mail</option>
+                    <option value="telgram">Telegram</option>
+                    <option value="whatsapp">WhatsApp</option>
+                </select>
+
+                <button
+                        type="submit"
+                        class="content-center max-w-md mx-auto mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                >
+                    Suscribirse
+                </button>
+            </form>
+            <!--Cantidad de viandas par llenar la heladera-->
+
+            <!--Heladera sufre desperfecto-->
+            <form
+                    class="rounded-xl border-2 shadow-lg p-5 flex flex-col items-center"
+            >
+                <h1 class="mt-5 mb-5">
+                    Avisarme cuando la heladera sufre un desperfecto
+                </h1>
+                <select
+                        id="medio-contacto"
+                        class="mb-5 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option value="mail">Mail</option>
+                    <option value="telgram">Telegram</option>
+                    <option value="whatsapp">WhatsApp</option>
+                </select>
+
+                <button
+                        type="submit"
+                        class="content-center max-w-md mx-auto mt-auto px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                >
+                    Suscribirse
+                </button>
+            </form>
+            <!--Heladera sufre desperfecto-->
+        </div>
+    </div>
+{{/partial}}
+
+{{> templates/app/base}}
