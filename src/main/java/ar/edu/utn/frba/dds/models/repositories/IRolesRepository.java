@@ -13,6 +13,7 @@ public interface IRolesRepository {
     List<Rol> buscarTodos();
 
     void guardar(Rol rol);
+    void guardar(Rol ...roles);
 
     void actualizar(Rol rol);
 

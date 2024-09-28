@@ -1,46 +1,159 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.ColocacionHeladeras;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.Producto;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoColaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Rol;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
+import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
+import ar.edu.utn.frba.dds.models.domain.tecnicos.AreaDeCobertura;
+import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
+import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
+import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
+import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
+import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
+import ar.edu.utn.frba.dds.models.repositories.IColocacionHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
+import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IModeloHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IOfertaProductoRepository;
+import ar.edu.utn.frba.dds.models.repositories.IRolesRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
+import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Inicializa datos prueba.
  */
 public class Initializer {
 
-    public static void init() {
-//    -- Insertar datos de prueba en la tabla colaborador
-//    INSERT INTO colaborador (id, activo, created_at, updated_at, nombre, email)
-//    VALUES
-//        ('366e5591-b835-4dde-9574-db75f7595d05', b'1', NOW(), NOW(), 'Nombre 1', 'email1@example.com'),
-//    ('3d9ed909-c3e6-400a-a9e0-4c64d537585e', b'1', NOW(), NOW(), 'Nombre 2', 'email2@example.com');
-//
-//    -- Insertar datos de prueba en la tabla heladera
-//    INSERT INTO heladera (id, activo, created_at, updated_at, descripcion, direccion)
-//    VALUES
-//        ('02c607a1-b7c0-4a65-bdcc-ff20beb2dd92', b'1', NOW(), NOW(), 'Descripción 1', 'Dirección 1'),
-//    ('0f2069f9-cfad-402a-80e0-abe434fad3b2', b'1', NOW(), NOW(), 'Descripción 2', 'Dirección 2');
-//
-//    -- Insertar datos de prueba en la tabla persona_vulnerable
-//    INSERT INTO persona_vulnerable (id, activo, created_at, updated_at, nombre, tipoDocumento, nro_documento)
-//    VALUES
-//        ('e6f1cd96-cea4-457c-8e48-065c3feb69b6', b'1', NOW(), NOW(), 'Nombre 1', 'DNI', '123456781'),
-//    ('12b69067-5b75-46e4-9ca1-ff0ea728dbae', b'1', NOW(), NOW(), 'Nombre 2', 'DNI', '123456782');
-//
-//    -- Insertar datos de prueba en la tabla producto
-//    INSERT INTO producto (id, activo, created_at, updated_at, nombre, url_foto)
-//    VALUES
-//        ('89d3139e-2578-4601-a462-32eab5e122a4', b'1', NOW(), NOW(), 'Nombre 1', 'https://example.com/producto1.jpg'),
-//    ('bdc65343-361e-4921-9339-975dbf1ba2c5', b'1', NOW(), NOW(), 'Nombre 2', 'https://example.com/producto2.jpg');
-//
-//    -- Insertar datos de prueba en la tabla redistribucion_viandas
-//    INSERT INTO redistribucion_viandas (id, activo, created_at, updated_at, cantidad, fecha_redistribucion, colaborador_id, heladera_id)
-//    VALUES
-//        ('a6725d53-c8f7-400a-8ae7-b6de69c1fef6', b'1', NOW(), NOW(), 50, '2024-09-01', (SELECT id FROM colaborador LIMIT 1), (SELECT id FROM heladera LIMIT 1)),
-//    ('a0db2612-00f4-494a-aea3-10057380b59f', b'1', NOW(), NOW(), 51, '2024-09-01', (SELECT id FROM colaborador LIMIT 1), (SELECT id FROM heladera LIMIT 1));
-//
-//    -- Insertar datos de prueba en la tabla visita_tecnico
-//    INSERT INTO visita_tecnico (id, activo, created_at, updated_at, descripcion, esta_solucionado, fecha_donacion_dinero, incidente_id, tecnico_id)
-//    VALUES
-//        ('3c5ebf19-8b5c-4d3b-b46a-582a8049d602', b'1', NOW(), NOW(), 'Descripción 1', b'1', NOW(), (SELECT id FROM incidente LIMIT 1), (SELECT id FROM tecnico LIMIT 1)),
-//    ('892c887b-1aaf-4104-9011-579d80ae5680', b'1', NOW(), NOW(), 'Descripción 2', b'1', NOW(), (SELECT id FROM incidente LIMIT 1), (SELECT id FROM tecnico LIMIT 1));
+  public static void init() {
 
-    }
+    IUsuariosRepository usuariosRepository = ServiceLocator.get(IUsuariosRepository.class);
+    IRolesRepository rolesRepository = ServiceLocator.get(IRolesRepository.class);
+    IFormasColaboracionRespository formasColaboracionRespository = ServiceLocator.get(IFormasColaboracionRespository.class);
+    IColaboradoresRepository colaboradoresRepository = ServiceLocator.get(IColaboradoresRepository.class);
+    IHeladerasRepository heladerasRepository = ServiceLocator.get(IHeladerasRepository.class);
+    IModeloHeladeraRepository modeloHeladeraRepository = ServiceLocator.get(IModeloHeladeraRepository.class);
+    IOfertaProductoRepository ofertaProductoRepository = ServiceLocator.get(IOfertaProductoRepository.class);
+    ITecnicosRepository tecnicosRepository = ServiceLocator.get(ITecnicosRepository.class);
+    IAlertasRepository alertasRepository = ServiceLocator.get(IAlertasRepository.class);
+    IColocacionHeladeraRepository colocacionHeladeraRepository = ServiceLocator.get(IColocacionHeladeraRepository.class);
+
+    Usuario u1 = new Usuario("usuario@mail.com", "contra");
+    Usuario u2 = new Usuario("usuuuario@mail.com", "1234");
+    Usuario u3 = new Usuario("ong@mail.com", "pass");
+    Permiso p1 = new Permiso("colaborar");
+    Permiso p2 = new Permiso("colocar heladeras");
+    Permiso p3 = new Permiso("ofrecer productos");
+    Rol r1 = new Rol();
+    r1.setNombre("colaborador");
+    r1.agregarPermisos(p1);
+    u1.agregarRoles(r1);
+    Rol r2 = new Rol();
+    r2.setNombre("persona juridica");
+    r2.agregarPermisos(p2, p3);
+    u2.agregarRoles(r2);
+    u3.agregarRoles(r2);
+    rolesRepository.guardar(r1, r2);
+    usuariosRepository.guardar(u1);
+    usuariosRepository.guardar(u2);
+    usuariosRepository.guardar(u3);
+    FormaColaboracion donacionDinero = new FormaColaboracion("DONACION_DINERO");
+    FormaColaboracion donacionVianda = new FormaColaboracion("DONACION_VIANDA");
+    FormaColaboracion redistribucionVianda = new FormaColaboracion("REDISTRIBUCION_VIANDA");
+    FormaColaboracion registroPersona = new FormaColaboracion("REGISTRO_PERSONA");
+    FormaColaboracion colocacionHeladeras = new FormaColaboracion("COLOCACION_HELADERA");
+
+    formasColaboracionRespository.guardar(donacionVianda,donacionDinero,redistribucionVianda,registroPersona,colocacionHeladeras);
+
+    TipoColaborador tipo = new TipoColaborador(TipoPersona.PERSONA_HUMANA, new ArrayList<>());
+    tipo.getFormasPosiblesColaboracion().add(donacionDinero);
+    tipo.getFormasPosiblesColaboracion().add(donacionVianda);
+
+    MedioDeContacto wsp = new MedioDeContacto(CanalContacto.WHATSAPP, "+5491132458865");
+    MedioDeContacto telegram = new MedioDeContacto(CanalContacto.TELEGRAM, "+5491132458865");
+    MedioDeContacto email = new MedioDeContacto(CanalContacto.EMAIL, "jorgito@mail.com");
+
+    MedioDeContacto emailEmpresa = new MedioDeContacto(CanalContacto.EMAIL, "mcdonalds@mail.com");
+
+    List<MedioDeContacto> listaContacto = new ArrayList<>();
+    listaContacto.add(wsp);
+    listaContacto.add(email);
+    listaContacto.add(telegram);
+    List<MedioDeContacto> contactoEmpresa = new ArrayList<>();
+    contactoEmpresa.add(emailEmpresa);
+
+    Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 0f, null, new Direccion("medrano", 951, 3, "1405"), listaContacto, "jorge", "lopez", null, null, null);
+    Colaborador sa = new Colaborador(u2, null, null, null, 0f, new ArrayList<>(), new Direccion("lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA);
+    Colaborador ong = new Colaborador(u3, null, null, null, 0f, new ArrayList<>(), new Direccion("bonifacio", 30, 10, "1406"), null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG);
+
+    colaboradoresRepository.guardar(c1);
+    colaboradoresRepository.guardar(sa);
+    colaboradoresRepository.guardar(ong);
+
+    ModeloHeladera modelo1 = new ModeloHeladera("philips", 3, 7);
+
+    modeloHeladeraRepository.guardar(modelo1);
+
+    Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), null, modelo1);
+    Heladera h2 = new Heladera(new Ubicacion(-34.613466f, -58.419659f), new Direccion("lima", 800, null, "1405"), "Heladera-lima-dds", 50, LocalDate.now(), null, modelo1);
+    Heladera h3 = new Heladera(new Ubicacion(-34.582345f, -58.43329f), new Direccion("rivadavia", 5000, null, "1407"), "Heladera-rivadavia-dds", 20, LocalDate.now(), null, modelo1);
+
+    heladerasRepository.guardar(h1);
+    heladerasRepository.guardar(h2);
+    heladerasRepository.guardar(h3);
+
+    ColocacionHeladeras colocoH1 = new ColocacionHeladeras(null, LocalDate.now(), h1);
+    ColocacionHeladeras colocoH2 = new ColocacionHeladeras(null, LocalDate.now(), h2);
+    ColocacionHeladeras colocoH3 = new ColocacionHeladeras(null, LocalDate.now(), h3);
+
+    sa.agregarColocacionHeladera(colocoH3);
+    sa.agregarColocacionHeladera(colocoH1);
+    sa.agregarColocacionHeladera(colocoH2);
+
+    colocacionHeladeraRepository.guardar(colocoH1);
+    colocacionHeladeraRepository.guardar(colocoH2);
+    colocacionHeladeraRepository.guardar(colocoH3);
+
+    Alerta a1 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
+
+    alertasRepository.guardar(a1);
+
+    //TODO: PONER LAS FOTOS ACA
+
+    OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("tostadora filgo", "insertarFoto"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
+    OfertaProducto oferta2 = new OfertaProducto(ong, LocalDate.now(), new Producto("martin fierro", "insertarFoto"), 1000f, CategoriaOferta.OTROS);
+
+    ofertaProductoRepository.guardar(oferta1);
+    ofertaProductoRepository.guardar(oferta2);
+
+
+    Tecnico t1 = new Tecnico("juan", "fernandez", "34564992", TipoDocumento.DNI, new ArrayList<>(), new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
+
+    tecnicosRepository.guardar(t1);
+
+
+  }
+
+  public static void main(String[] args) {
+    Initializer.init();
+  }
 }
