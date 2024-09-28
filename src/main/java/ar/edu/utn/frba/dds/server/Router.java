@@ -1,6 +1,9 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.services.FileUploadService;
 import io.javalin.Javalin;
+import io.javalin.http.UploadedFile;
+import java.io.IOException;
 
 /**
  * EL router es el encargado de las RUTAS.
@@ -54,5 +57,17 @@ public class Router {
         });
 
         app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
+
+        app.post("/upload", ctx -> {
+            UploadedFile uploadedFile = ctx.uploadedFile("file");
+            try {
+                FileUploadService fileUploadService = new FileUploadService();
+                String result = fileUploadService.uploadFile(uploadedFile, "src/main/resources/templates/app/carga-masiva/");
+                ctx.result(result);
+            } catch (IOException e) {
+                e.printStackTrace();
+                ctx.result("Error al subir el archivo: " + e.getMessage());
+            }
+        });
     }
 }
