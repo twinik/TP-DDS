@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.dtos.heladeras;
 
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.util.ArrayList;

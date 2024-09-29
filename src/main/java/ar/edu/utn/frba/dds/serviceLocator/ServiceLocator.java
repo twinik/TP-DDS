@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.models.repositories.*;
 import ar.edu.utn.frba.dds.models.repositories.imp.*;
 import ar.edu.utn.frba.dds.services.HeladerasService;
+import ar.edu.utn.frba.dds.services.OfertasProductoService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +64,8 @@ public class ServiceLocator {
                 add(clase, new MotivoRedistribucionRepository());
             else if (clase.equals(IOfertaProductoRepository.class))
                 add(clase, new OfertaProductoRepository());
+            else if (clase.equals(OfertasProductoService.class))
+                add(clase,new OfertasProductoService(get(IOfertaProductoRepository.class),get(IColaboradoresRepository.class)));
             else if (clase.equals(IOpcionRepository.class))
                 add(clase, new OpcionRepository());
             else if (clase.equals(IPermisosRepository.class))
@@ -118,7 +121,7 @@ public class ServiceLocator {
                 // CONTROLLERS
 
             else if(clase.equals(OfertasProductoController.class))
-                add(clase,new OfertasProductoController(get(IOfertaProductoRepository.class)));
+                add(clase,new OfertasProductoController(get(OfertasProductoService.class)));
 
             else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
 
