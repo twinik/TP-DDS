@@ -15,18 +15,18 @@
         <h1 class="title1 mb-8">Ofrecer producto</h1>
 
         <!--Carga masiva-->
-        <form class="content-center max-w-md mx-auto">
+        <form method="POST" action="/productos" class="content-center max-w-md mx-auto">
             <label for="nombre"
                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del
                 producto/servicio</label>
-            <input type="text" id="nombre"
+            <input name="nombre" type="text" id="nombre"
                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                    placeholder="Nombre" required/>
 
             <label for="puntos"
                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Puntos necesarios
                 para canjear</label>
-            <input type="number" id="puntos" aria-describedby="helper-text-explanation"
+            <input name="puntos" type="number" id="puntos" aria-describedby="helper-text-explanation"
                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                    placeholder="Puntos necesarios" required min="1"/>
 
@@ -46,7 +46,7 @@
                     <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
                         Subir archivo
                     </h2>
-                    <input id="dropzone-file" type="file" class="hidden" required/>
+                    <input name="fotp" id="dropzone-file" type="file" class="hidden" required/>
                 </label>
             </div>
             <!--Upload file-->

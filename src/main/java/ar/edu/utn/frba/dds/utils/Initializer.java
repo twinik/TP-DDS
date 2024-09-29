@@ -38,6 +38,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Inicializa datos prueba.
@@ -139,8 +140,8 @@ public class Initializer {
 
     //TODO: PONER LAS FOTOS ACA
 
-    OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("tostadora filgo", "insertarFoto"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
-    OfertaProducto oferta2 = new OfertaProducto(ong, LocalDate.now(), new Producto("martin fierro", "insertarFoto"), 1000f, CategoriaOferta.OTROS);
+    OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("tostadora filgo", "https://whirlpoolarg.vtexassets.com/arquivos/ids/164249-800-auto?v=638146769908330000&width=800&height=auto&aspect=true"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
+    OfertaProducto oferta2 = new OfertaProducto(ong, LocalDate.now(), new Producto("martin fierro", "https://whirlpoolarg.vtexassets.com/arquivos/ids/164249-800-auto?v=638146769908330000&width=800&height=auto&aspect=true"), 1000f, CategoriaOferta.OTROS);
 
     ofertaProductoRepository.guardar(oferta1);
     ofertaProductoRepository.guardar(oferta2);
@@ -156,4 +157,13 @@ public class Initializer {
   public static void main(String[] args) {
     Initializer.init();
   }
+
+  public static Optional<Colaborador> dameOng(){
+    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter( c -> c.getRazonSocial() !=null).findFirst();
+  }
+
+  public static Optional<Colaborador> dameColaborador(){
+    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter( c -> c.getRazonSocial() ==null).findFirst();
+  }
+
 }

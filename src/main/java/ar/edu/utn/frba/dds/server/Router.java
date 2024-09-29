@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import io.javalin.Javalin;
 import io.javalin.http.UploadedFile;
@@ -35,7 +37,7 @@ public class Router {
         app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
         app.get("/colaborar/distribuir-viandas", ctx -> ctx.render("/app/colaboraciones/distribucion-vianda.hbs"));
         app.get("/colaborar/colocar-heladera", ctx -> ctx.render("/app/colaboraciones/cargo-heladera.hbs"));
-        app.get("/colaborar/ofrecer-producto", ctx -> ctx.render("/app/colaboraciones/ofrecer-productos.hbs"));
+        app.get("/colaborar/ofrecer-producto", ServiceLocator.get(OfertasProductoController.class)::create);
 
         //HELADERAS
         app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
@@ -50,7 +52,8 @@ public class Router {
         app.get("/carga-masiva-colaboraciones", ctx -> ctx.render("/app/carga-masiva/carga-masiva.hbs"));
 
         //PRODUCTOS
-        app.get("/productos", ctx -> ctx.render("/app/productos/productos.hbs"));
+        app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
+        app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
 
         app.get("/", ctx -> {
             ctx.redirect("/quienes-somos");

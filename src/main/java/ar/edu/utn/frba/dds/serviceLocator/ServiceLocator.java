@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
+import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
@@ -109,7 +110,19 @@ public class ServiceLocator {
                 add(clase, new ViandasRepository());
             else if (clase.equals(IVisitasTecnicoRepository.class))
                 add(clase, new VisitasTecnicoRepository());
+
+
+                // CONTROLLERS
+
+            else if(clase.equals(OfertasProductoController.class))
+                add(clase,new OfertasProductoController(get(IOfertaProductoRepository.class)));
+
             else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
+
+
+
+
+
 //
 //
 //
