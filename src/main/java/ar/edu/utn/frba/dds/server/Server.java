@@ -5,9 +5,12 @@ import ar.edu.utn.frba.dds.utils.JavalinRenderer;
 import ar.edu.utn.frba.dds.utils.PrettyProperties;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
+import io.javalin.json.JavalinGson;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -54,6 +57,8 @@ public class Server {
                     return "No se encuentra la página indicada...";
                 }
             }));
+
+            config.jsonMapper(new JavalinGson());
         };
     }
 }

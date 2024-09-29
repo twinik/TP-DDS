@@ -16,62 +16,91 @@ const reportarFallaBtn =
     '<a href="/heladeras/reportar-falla-tecnica" class="popup-button">Reportar Falla</a>';
 
 // Datos de los marcadores
-var markers = [
-    {
-        id: 1,
-        coords: [-34.59853190440259, -58.42009848935327],
-        title: "Heladera UTN Medrano"
-    },
-    {
-        id: 2,
-        coords: [-34.6067, -58.4299],
-        title: "Heladera Parque Centenario"
-    },
-    {
-        id: 3,
-        coords: [-34.6037, -58.4105],
-        title: "Heladera Abasto"
-    },
-    {
-        id: 4,
-        coords: [-34.6189, -58.4244],
-        title: "Heladera Parque Rivadavia",
-        extraContent: inhabilitadaContent,
-        disabled: true
-    },
-    {
-        id: 5,
-        coords: [-34.545278, -58.449722],
-        title: "Heladera Mudomental ChangoMas"
+// var markers = [
+//     {
+//         id: 1,
+//         coords: [-34.59853190440259, -58.42009848935327],
+//         title: "Heladera UTN Medrano"
+//     },
+//     {
+//         id: 2,
+//         coords: [-34.6067, -58.4299],
+//         title: "Heladera Parque Centenario"
+//     },
+//     {
+//         id: 3,
+//         coords: [-34.6037, -58.4105],
+//         title: "Heladera Abasto"
+//     },
+//     {
+//         id: 4,
+//         coords: [-34.6189, -58.4244],
+//         title: "Heladera Parque Rivadavia",
+//         extraContent: inhabilitadaContent,
+//         disabled: true
+//     },
+//     {
+//         id: 5,
+//         coords: [-34.545278, -58.449722],
+//         title: "Heladera Mudomental ChangoMas"
+//     }
+// ];
+
+async function fetchHeladeras() {
+    try {
+        const response = await fetch('/heladeras/mapa');
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        const heladerasArray = await response.json();
+
+        console.log(heladerasArray)
+
+        return heladerasArray.map(h => {
+            if (h.disabled) {
+                return {...h, extraContent: inhabilitadaContent}
+            } else {
+                return h;
+            }
+        });
+    } catch (error) {
+        console.error('Failed to fetch heladeras:', error);
     }
-];
+}
 
-// Función para crear marcadores
-markers.forEach(function (markerData) {
-    var marker = L.marker(markerData.coords).addTo(map);
+// javascript es un asco
+(async function main () {
+    var markers = await fetchHeladeras()
 
-    // Crear el contenido del popup usando el template HTML
-    var popupContent = document.getElementById("marker-template").innerHTML;
-    var div = document.createElement("div");
-    div.innerHTML = popupContent;
-    div.querySelector(".popup-title").innerText = markerData.title;
+    // Función para crear marcadores
+    markers.forEach(function (markerData) {
+        var marker = L.marker(markerData.coords).addTo(map);
 
-    if (markerData.extraContent) {
-        var popupContentDiv = div.querySelector(".popup-content");
-        var extraContentDiv = document.createElement("div");
-        extraContentDiv.innerHTML = markerData.extraContent;
-        popupContentDiv.insertBefore(
-            extraContentDiv,
-            popupContentDiv.querySelector(".popup-button")
-        );
-    }
+        // Crear el contenido del popup usando el template HTML
+        var popupContent = document.getElementById("marker-template").innerHTML;
+        var div = document.createElement("div");
+        div.innerHTML = popupContent;
+        div.querySelector(".popup-title").innerText = markerData.title;
 
-    if (markerData.disabled) {
-        div.querySelector(".popup-content").classList.add("disabled-heladera");
-    } else {
-        popupContentDiv = div.querySelector(".popup-content");
-        popupContentDiv.innerHTML += reportarFallaBtn;
-    }
+        if (markerData.extraContent) {
+            var popupContentDiv = div.querySelector(".popup-content");
+            var extraContentDiv = document.createElement("div");
+            extraContentDiv.innerHTML = markerData.extraContent;
+            popupContentDiv.insertBefore(
+                extraContentDiv,
+                popupContentDiv.querySelector(".popup-button")
+            );
+        }
 
-    marker.bindPopup(div.innerHTML);
-});
+        if (markerData.disabled) {
+            div.querySelector(".popup-content").classList.add("disabled-heladera");
+        } else {
+            popupContentDiv = div.querySelector(".popup-content");
+            popupContentDiv.innerHTML += reportarFallaBtn;
+        }
+
+        marker.bindPopup(div.innerHTML);
+    });
+})();
+

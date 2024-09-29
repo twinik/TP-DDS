@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.models.repositories.*;
 import ar.edu.utn.frba.dds.models.repositories.imp.*;
+import ar.edu.utn.frba.dds.services.HeladerasService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +53,8 @@ public class ServiceLocator {
                 add(clase, new FormularioRepository());
             else if (clase.equals(IHeladerasRepository.class))
                 add(clase, new HeladeraRepository());
+            else if (clase.equals(HeladerasService.class))
+                add(clase, new HeladerasService(get(IHeladerasRepository.class)));
             else if (clase.equals(IMedioContactoRepository.class))
                 add(clase, new MedioContactoRepository());
             else if (clase.equals(IModeloHeladeraRepository.class))

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.server;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FileUploadService;
+import ar.edu.utn.frba.dds.services.HeladerasService;
 import io.javalin.Javalin;
 import io.javalin.http.UploadedFile;
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class Router {
         app.get("/heladeras/suscribirme", ctx -> ctx.render("/app/heladeras/suscripcion.hbs"));
         app.get("/heladeras/reportar-falla-tecnica", ctx -> ctx.render("/app/heladeras/reportar-falla.hbs"));
         app.get("/heladeras/alertas", ctx -> ctx.render("/app/heladeras/listado-alertas.hbs"));
+        app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
 
         //REPORTES
         app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
