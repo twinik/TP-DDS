@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.ofertas.OfertaProductoDto;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.services.FormIncompletoException;
 import ar.edu.utn.frba.dds.services.NoAutorizadoException;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
@@ -46,7 +47,11 @@ public class OfertasProductoController implements ICrudViewsHandler {
   @Override
   public void create(Context context) {
     //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO PARA DAR DE ALTA UNA NUEVA OFERTA
-    context.render("/app/colaboraciones/ofrecer-productos.hbs");
+    // TODO: ya pongo las categorias en el model para que las puedas desplegar
+
+    Map<String, Object> model = new HashMap<>();
+    model.put("categorias", CategoriaOferta.obtenerNombresCategorias());
+    context.render("/app/colaboraciones/ofrecer-productos.hbs",model);
   }
 
   @Override

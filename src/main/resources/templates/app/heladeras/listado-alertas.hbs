@@ -11,6 +11,13 @@
                     Fecha y hora
                 </th>
             </tr>
+            {{#each alertas}}
+                <tr class="border-b">
+                    <td class="p-3 border-x">{{this.heladera.nombre}}</td>
+                    <td class="p-3 border-x">{{this.tipoAlerta}}</td>
+                    <td class="p-3 border-x">{{this.fechaHora}}</td>
+                </tr>
+            {{/each}}
             <tr class="border-b">
                 <td class="p-3 border-x">Heladera Parque Centenario</td>
                 <td class="p-3 border-x">Desconexión</td>

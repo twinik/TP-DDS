@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
+import ar.edu.utn.frba.dds.controllers.IncidentesController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
@@ -7,6 +8,8 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.models.repositories.*;
 import ar.edu.utn.frba.dds.models.repositories.imp.*;
+import ar.edu.utn.frba.dds.services.AlertasService;
+import ar.edu.utn.frba.dds.services.FallasTecnicasService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
 import java.util.HashMap;
@@ -26,7 +29,9 @@ public class ServiceLocator {
     @SuppressWarnings("unchecked")
     public static <T> T get(Class<T> clase) {
         if (!existeService(clase)) {
-            if (clase.equals(IAlertasRepository.class))
+            if(clase.equals(AlertasService.class))
+                add(clase,new AlertasService(get(IAlertasRepository.class)));
+            else if (clase.equals(IAlertasRepository.class))
                 add(clase, new AlertasRepository());
             else if (clase.equals(IAltaPersonaVulnerableRepository.class))
                 add(clase, new AltaPersonaVulnerableRepository());
@@ -46,6 +51,8 @@ public class ServiceLocator {
                 add(clase, new DonacionDineroRepository());
             else if (clase.equals(IDonacionesViandaRepository.class))
                 add(clase, new DonacionesViandaRepository());
+            else if(clase.equals(FallasTecnicasService.class))
+                add(clase,new FallasTecnicasService(get(IFallasTecnicasRepository.class)));
             else if (clase.equals(IFallasTecnicasRepository.class))
                 add(clase, new FallasTecnicasRepository());
             else if (clase.equals(IFormasColaboracionRespository.class))
@@ -120,6 +127,8 @@ public class ServiceLocator {
 
                 // CONTROLLERS
 
+            else if (clase.equals(IncidentesController.class))
+                add(clase, new IncidentesController(get(AlertasService.class),get(FallasTecnicasService.class)));
             else if(clase.equals(OfertasProductoController.class))
                 add(clase,new OfertasProductoController(get(OfertasProductoService.class)));
 

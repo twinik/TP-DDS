@@ -37,10 +37,10 @@ public class OfertasProductoService {
     OfertaProducto ofertaProducto = new OfertaProducto();
     ofertaProducto.setProducto(new Producto(oferta.getNombre(),oferta.getUrlFoto()));
     ofertaProducto.setFechaCreacion(LocalDate.now());
-    ofertaProducto.setPuntosNecesarios(Float.parseFloat(oferta.getPuntosNecesarios()));
+    ofertaProducto.setPuntosNecesarios(oferta.getPuntosNecesarios());
     ofertaProducto.setColaborador(colab.get());
     // ignorar esto
-    ofertaProducto.setCategoria(CategoriaOferta.OTROS);
+    ofertaProducto.setCategoria(CategoriaOferta.valueOf(oferta.getCategoria()));
 
 
     ofertaProductoRepository.guardar(ofertaProducto);
