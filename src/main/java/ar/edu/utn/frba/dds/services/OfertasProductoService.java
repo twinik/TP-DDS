@@ -31,8 +31,7 @@ public class OfertasProductoService {
         throw new NoAutorizadoException("no esta autorizado para realizar esta operacion");
 
 
-    if (oferta.getNombre() == null || oferta.getPuntosNecesarios() == null
-        || oferta.getUrlFoto() == null || oferta.getIdColaborador() == null)
+    if (!oferta.estanCamposLlenos())
       throw new FormIncompletoException("no se proveen todos los campos necesarios");
 
     OfertaProducto ofertaProducto = new OfertaProducto();

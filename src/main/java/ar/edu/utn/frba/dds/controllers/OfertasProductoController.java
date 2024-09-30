@@ -54,7 +54,8 @@ public class OfertasProductoController implements ICrudViewsHandler {
     // obtener de sesion
     String idHardcodeadaColaborador = Initializer.dameOng().get().getId();
 
-    OfertaProductoDto dto = OfertaProductoDto.of(context.formParam("nombre"),context.formParam("puntos"),context.formParam("foto"),idHardcodeadaColaborador);
+
+    OfertaProductoDto dto = OfertaProductoDto.of(context.formParamMap(),idHardcodeadaColaborador);
     try{
       ofertasProductoService.crearOferta(dto);
     }
