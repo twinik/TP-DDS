@@ -2,11 +2,13 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.IncidentesController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import io.javalin.Javalin;
 import io.javalin.http.UploadedFile;
+import org.aopalliance.reflect.Class;
 import java.io.IOException;
 
 /**
@@ -55,7 +57,7 @@ public class Router {
     app.get("/carga-masiva-colaboraciones", ctx -> ctx.render("/app/carga-masiva/carga-masiva.hbs"));
 
     //PRODUCTOS
-    app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
+    app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index) ;
     app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
 
     app.get("/", ctx -> {
