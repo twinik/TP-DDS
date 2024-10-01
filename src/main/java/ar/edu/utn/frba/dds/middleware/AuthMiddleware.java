@@ -6,18 +6,21 @@ import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.NoAutorizadoException;
 import ar.edu.utn.frba.dds.services.UsuarioNoAutenticadoException;
+import ar.edu.utn.frba.dds.utils.PermisosHelper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import java.util.Set;
 
 public class AuthMiddleware {
   public static void apply(Javalin app) {
     app.beforeMatched(ctx -> {
-      Usuario usuario = getUser(ctx);
-
-      if(usuario == null) throw new UsuarioNoAutenticadoException();
-
-      if (!ctx.routeRoles().isEmpty() && ctx.routeRoles().stream().noneMatch(permiso -> usuario.tenesPermiso((Permiso) permiso))) {
-        throw new NoAutorizadoException("no esta autorizado");
+      Set<Permiso> permisos = PermisosHelper.getInstance().buscarPermisosPara(ctx);
+      if(!permisos.isEmpty()){
+        Usuario usuario = getUser(ctx);
+        if(usuario == null) throw new UsuarioNoAutenticadoException();
+        if (permisos.stream().noneMatch(usuario::tenesPermiso)) {
+          throw new NoAutorizadoException("no esta autorizado");
+        }
       }
     });
   }

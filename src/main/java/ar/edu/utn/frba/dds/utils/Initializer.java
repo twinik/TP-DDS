@@ -30,6 +30,7 @@ import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.IModeloHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.IOfertaProductoRepository;
+import ar.edu.utn.frba.dds.models.repositories.IPermisosRepository;
 import ar.edu.utn.frba.dds.models.repositories.IRolesRepository;
 import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
@@ -57,13 +58,20 @@ public class Initializer {
     ITecnicosRepository tecnicosRepository = ServiceLocator.get(ITecnicosRepository.class);
     IAlertasRepository alertasRepository = ServiceLocator.get(IAlertasRepository.class);
     IColocacionHeladeraRepository colocacionHeladeraRepository = ServiceLocator.get(IColocacionHeladeraRepository.class);
+    IPermisosRepository permisosRepository = ServiceLocator.get(IPermisosRepository.class);
 
     Usuario u1 = new Usuario("usuario@mail.com", "contra");
     Usuario u2 = new Usuario("usuuuario@mail.com", "1234");
     Usuario u3 = new Usuario("ong@mail.com", "pass");
     Permiso p1 = new Permiso("colaborar");
-    Permiso p2 = new Permiso("colocar heladeras");
-    Permiso p3 = new Permiso("ofrecer productos");
+    Permiso p2 = new Permiso("colocar-heladeras");
+    Permiso p3 = new Permiso("ofrecer-productos");
+    Permiso p5 = new Permiso("alta-tecnico");
+    Permiso p6 = new Permiso("alta-formulario");
+    Permiso p7 = new Permiso("alta-modelo-heladera");
+
+    permisosRepository.guardar(p5,p6,p7);
+
     Rol r1 = new Rol();
     r1.setNombre("colaborador");
     r1.agregarPermisos(p1);
