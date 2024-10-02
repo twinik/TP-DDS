@@ -45,10 +45,10 @@ public class Router {
 
     //HELADERAS
     app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
-    app.get("/heladeras/suscribirme", ctx -> ctx.render("/app/heladeras/suscripcion.hbs"));
-    app.get("/heladeras/reportar-falla-tecnica", ctx -> ctx.render("/app/heladeras/reportar-falla.hbs"));
-    app.get("/heladeras/alertas",ServiceLocator.get(IncidentesController.class)::index);
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
+    app.get("/heladeras/{id}/suscribirme", ctx -> ctx.render("/app/heladeras/suscripcion.hbs"));
+    app.get("/heladeras/{id}/reportar-falla-tecnica", ctx -> ctx.render("/app/heladeras/reportar-falla.hbs"));
+    app.get("/heladeras/{id}/alertas",ServiceLocator.get(IncidentesController.class)::index);
 
     //REPORTES
     app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));

@@ -10,64 +10,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     minZoom: 5
 }).addTo(map);
 
-const inhabilitadaContent =
-    '<div style="display: flex; flexDirection: row; gap: 5px; alignItems: center"> <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 16 16" fill = "currentColor" width="16" height="16" > <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg > <span style="color: white;">INHABILITADA</span> </div >';
-const reportarFallaBtn =
-    '<a href="/heladeras/reportar-falla-tecnica" class="popup-button">Reportar Falla</a>';
-
-// Datos de los marcadores
-// var markers = [
-//     {
-//         id: 1,
-//         coords: [-34.59853190440259, -58.42009848935327],
-//         title: "Heladera UTN Medrano"
-//     },
-//     {
-//         id: 2,
-//         coords: [-34.6067, -58.4299],
-//         title: "Heladera Parque Centenario"
-//     },
-//     {
-//         id: 3,
-//         coords: [-34.6037, -58.4105],
-//         title: "Heladera Abasto"
-//     },
-//     {
-//         id: 4,
-//         coords: [-34.6189, -58.4244],
-//         title: "Heladera Parque Rivadavia",
-//         extraContent: inhabilitadaContent,
-//         disabled: true
-//     },
-//     {
-//         id: 5,
-//         coords: [-34.545278, -58.449722],
-//         title: "Heladera Mudomental ChangoMas"
-//     }
-// ];
-
-async function fetchHeladeras() {
-    try {
-        const response = await fetch('/heladeras/mapa');
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
-        }
-
-        const heladerasArray = await response.json();
-
-        console.log(heladerasArray)
-
-        return heladerasArray.map(h => {
-            if (h.disabled) {
-                return {...h, extraContent: inhabilitadaContent}
-            } else {
-                return h;
-            }
-        });
-    } catch (error) {
-        console.error('Failed to fetch heladeras:', error);
-    }
-}
 
 // javascript es un asco
 (async function main () {
@@ -77,30 +19,18 @@ async function fetchHeladeras() {
     markers.forEach(function (markerData) {
         var marker = L.marker(markerData.coords).addTo(map);
 
-        // Crear el contenido del popup usando el template HTML
-        var popupContent = document.getElementById("marker-template").innerHTML;
-        var div = document.createElement("div");
-        div.innerHTML = popupContent;
-        div.querySelector(".popup-title").innerText = markerData.title;
+        const inhabilitadaContent =
+            '<div style="display: flex; flexDirection: row; gap: 5px; alignItems: center"> <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 16 16" fill = "currentColor" width="16" height="16" > <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg > <span style="color: white;">INHABILITADA</span> </div >';
+        const reportarFallaBtn =
+            `<a href="/heladeras/${markerData.id}/reportar-falla-tecnica" class="popup-button">Reportar Falla</a>`;
 
-        if (markerData.extraContent) {
-            var popupContentDiv = div.querySelector(".popup-content");
-            var extraContentDiv = document.createElement("div");
-            extraContentDiv.innerHTML = markerData.extraContent;
-            popupContentDiv.insertBefore(
-                extraContentDiv,
-                popupContentDiv.querySelector(".popup-button")
-            );
-        }
+        const markerTemplate= `<div class="popup-content flex flex-col">
+                <div class="popup-title">${markerData.title}</div>
+                ${markerData.disabled ? inhabilitadaContent : reportarFallaBtn}
+                <a href="/heladeras/${markerData.id}/suscribirme" class="popup-button">Suscribirse</a>
+            </div>`
 
-        if (markerData.disabled) {
-            div.querySelector(".popup-content").classList.add("disabled-heladera");
-        } else {
-            popupContentDiv = div.querySelector(".popup-content");
-            popupContentDiv.innerHTML += reportarFallaBtn;
-        }
-
-        marker.bindPopup(div.innerHTML);
+        marker.bindPopup(markerTemplate);
     });
 })();
 
