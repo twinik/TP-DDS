@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDto;
-import ar.edu.utn.frba.dds.services.LoginFailedException;
+import ar.edu.utn.frba.dds.exceptions.LoginFailedException;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -16,8 +16,8 @@ public class LoginController implements ICrudViewsHandler {
     try {
       String id = this.usuarioService.obtenerUsuario(usuario);
       ctx.sessionAttribute("idUsuario", id);
-      // podria ser a otro lado
-      ctx.redirect("/");
+      String path = ctx.queryParam("nextPage") != null ? "/" + ctx.queryParam("nextPage") : "/";
+      ctx.redirect(path);
     } catch (LoginFailedException e) {
       // TODO: mostrar mensaje error
       ctx.redirect("/login");

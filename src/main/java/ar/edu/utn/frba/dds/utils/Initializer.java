@@ -97,6 +97,9 @@ public class Initializer {
     tipo.getFormasPosiblesColaboracion().add(donacionDinero);
     tipo.getFormasPosiblesColaboracion().add(donacionVianda);
 
+    TipoColaborador tipo2 = new TipoColaborador(TipoPersona.PERSONA_JURIDICA, new ArrayList<>());
+    TipoColaborador tipo3 = new TipoColaborador(TipoPersona.PERSONA_JURIDICA, new ArrayList<>());
+
     MedioDeContacto wsp = new MedioDeContacto(CanalContacto.WHATSAPP, "+5491132458865");
     MedioDeContacto telegram = new MedioDeContacto(CanalContacto.TELEGRAM, "+5491132458865");
     MedioDeContacto email = new MedioDeContacto(CanalContacto.EMAIL, "jorgito@mail.com");
@@ -111,8 +114,8 @@ public class Initializer {
     contactoEmpresa.add(emailEmpresa);
 
     Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 0f, null, new Direccion("medrano", 951, 3, "1405"), listaContacto, "jorge", "lopez", null, null, null);
-    Colaborador sa = new Colaborador(u2, null, null, null, 0f, new ArrayList<>(), new Direccion("lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA);
-    Colaborador ong = new Colaborador(u3, null, null, null, 0f, new ArrayList<>(), new Direccion("bonifacio", 30, 10, "1406"), null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG);
+    Colaborador sa = new Colaborador(u2, null, null, tipo2, 0f, new ArrayList<>(), new Direccion("lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA);
+    Colaborador ong = new Colaborador(u3, null, null, tipo3, 0f, new ArrayList<>(), new Direccion("bonifacio", 30, 10, "1406"), null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG);
 
     colaboradoresRepository.guardar(c1);
     colaboradoresRepository.guardar(sa);

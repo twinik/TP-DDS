@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.server.handlers;
 
-import ar.edu.utn.frba.dds.services.NoAutorizadoException;
-import ar.edu.utn.frba.dds.services.UsuarioNoAutenticadoException;
+import ar.edu.utn.frba.dds.exceptions.UsuarioNoAutenticadoException;
 import io.javalin.Javalin;
 
 public class AccesoDenegadoHandler implements IHandler{

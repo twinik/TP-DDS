@@ -33,8 +33,17 @@
             <li class="mb-5">
                 <div class="flex flex-row items-center gap-x-2">
                     <div>
-                        <span>GONZALO TURRI</span><br/>
-                        <span class="text-gray-400">Colaborador</span>
+                        {{#if currentUser}}
+                            <span>{{currentUser.nombre}}</span><br/>
+                            <span class="text-gray-400">{{currentUser.email}}</span>
+                        {{else}}
+                            <a
+                              href="/login"
+                              class="flex items-center p-2 rounded-lg group nav-item w-full"
+                              >
+                                  <span class="ms-3">Iniciar Sesión</span>
+                              </a>
+                        {{/if}}
                     </div>
                 </div>
             </li>
@@ -248,28 +257,30 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Iniciar sesión</span>
                     </a>
                 </li> -->
-            <li style="margin-top: auto !important">
-                <a
-                        href="/login"
-                        class="flex items-center p-2 rounded-lg group nav-item margin-top:auto"
-                >
-                    <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            width="24"
-                    >
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path
-                                fill="#eee"
-                                d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
-                        />
-                    </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">
-						Cerrar sesión
-					</span>
-                </a>
-            </li>
+                {{#if currentUser}}
+                    <li style="margin-top: auto !important">
+                        <a
+                                href="/logout"
+                                class="flex items-center p-2 rounded-lg group nav-item margin-top:auto"
+                        >
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                            >
+                                <path d="M0 0h24v24H0z" fill="none"/>
+                                <path
+                                        fill="#eee"
+                                        d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
+                                />
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">
+                                Cerrar sesión
+                            </span>
+                        </a>
+                    </li>
+                {{/if}}
         </ul>
     </div>
 </aside>

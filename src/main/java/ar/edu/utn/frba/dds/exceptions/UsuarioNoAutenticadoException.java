@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.services;
+package ar.edu.utn.frba.dds.exceptions;
 
 public class UsuarioNoAutenticadoException extends RuntimeException{
 }

@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.server.handlers;
 
-import ar.edu.utn.frba.dds.services.NoAutorizadoException;
+import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
 import io.javalin.Javalin;
 
 public class UsuarioNoAutenticadoHandler implements IHandler{
@@ -9,7 +9,7 @@ public class UsuarioNoAutenticadoHandler implements IHandler{
     app.exception(NoAutorizadoException.class, (e, context) -> {
       context.status(401);
       // TODO: HACER PANTALLA
-      context.render("/app/401.hbs");
+      context.render("/app/403.hbs");
     });
   }
 }

@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.IncidentesController;
 import ar.edu.utn.frba.dds.controllers.LoginController;
+import ar.edu.utn.frba.dds.controllers.LogoutController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.controllers.RegistroController;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
@@ -26,6 +27,7 @@ public class Router {
     //LOGIN
     app.get("/login", ServiceLocator.get(LoginController.class)::index);
     app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
+    app.get("/logout", ServiceLocator.get(LogoutController.class)::handleLogout);
 
     //REGISTRO
     app.get("/registro", ServiceLocator.get(RegistroController.class)::index);

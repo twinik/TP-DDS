@@ -53,6 +53,7 @@ public class Server {
                 try {
                     template = handlebars.compile(
                             "templates/" + path.replace(".hbs", ""));
+                    model.put("currentUser", context.attribute("currentUser"));
                     return template.apply(model);
                 } catch (IOException e) {
                     e.printStackTrace();

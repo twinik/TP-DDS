@@ -2,8 +2,8 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.ofertas.OfertaProductoDto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
-import ar.edu.utn.frba.dds.services.FormIncompletoException;
-import ar.edu.utn.frba.dds.services.NoAutorizadoException;
+import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.Initializer;
