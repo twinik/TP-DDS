@@ -14,14 +14,14 @@ public class HeladeraDto {
   private String id;
   private String nombre;
 
-  public static HeladeraDto fromHeladera (Heladera heladera){
-    return HeladeraDto.builder().
-        id(heladera.getId())
+  public static HeladeraDto fromHeladera(Heladera heladera) {
+    return HeladeraDto.builder()
+        .id(heladera.getId())
         .nombre(heladera.getNombre())
         .build();
   }
 
-  public static HeladeraDto of(Map<String, List<String>> camposFormulario, String idColaborador){
+  public static HeladeraDto of(Map<String, List<String>> camposFormulario, String idColaborador) {
     // TODO
     return null;
   }

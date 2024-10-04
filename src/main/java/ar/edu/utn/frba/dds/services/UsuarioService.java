@@ -11,11 +11,14 @@ public class UsuarioService {
 
   private IUsuariosRepository usuariosRepository;
 
+  public void registrar(UsuarioDto dto) {
+    usuariosRepository.guardar(dto.toEntity());
+  }
+
   public String obtenerUsuario(UsuarioDto dto) {
     Optional<Usuario> user = usuariosRepository.buscar(dto.getEmail(), dto.getClave());
     if (user.isEmpty()) throw new LoginFailedException("usuario o contraseña invalidos");
     return user.get().getId();
   }
-
 
 }

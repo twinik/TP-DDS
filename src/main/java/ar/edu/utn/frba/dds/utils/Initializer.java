@@ -149,7 +149,7 @@ public class Initializer {
 
     //TODO: PONER LAS FOTOS ACA
 
-    OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("tostadora filgo", "https://whirlpoolarg.vtexassets.com/arquivos/ids/164249-800-auto?v=638146769908330000&width=800&height=auto&aspect=true"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
+    OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("Tostadora Liliana", "https://whirlpoolarg.vtexassets.com/arquivos/ids/164249-800-auto?v=638146769908330000&width=800&height=auto&aspect=true"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
     OfertaProducto oferta2 = new OfertaProducto(ong, LocalDate.now(), new Producto("martin fierro", "https://whirlpoolarg.vtexassets.com/arquivos/ids/164249-800-auto?v=638146769908330000&width=800&height=auto&aspect=true"), 1000f, CategoriaOferta.OTROS);
 
     ofertaProductoRepository.guardar(oferta1);

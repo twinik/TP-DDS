@@ -16,6 +16,7 @@ public class IncidentesController implements ICrudViewsHandler {
 
   private AlertasService alertasService;
   private FallasTecnicasService fallasTecnicasService;
+
   @Override
   public void index(Context context) {
 
@@ -25,10 +26,10 @@ public class IncidentesController implements ICrudViewsHandler {
 
     Map<String, Object> model = new HashMap<>();
 
-    model.put("alertas",alertas);
-    model.put("fallas",fallas);
+    model.put("alertas", alertas);
+    model.put("fallas", fallas);
 
-    context.render("/app/heladeras/listado-alertas.hbs",model);
+    context.render("/app/heladeras/listado-alertas.hbs", model);
 
   }
 
