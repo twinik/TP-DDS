@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.dtos;
 
+import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,8 +12,11 @@ public class UsuarioDto {
   private String email;
   private String clave;
 
-  public static UsuarioDto of (Context context){
-    return new UsuarioDto(context.formParam("email"),context.formParam("pass"));
+  public static UsuarioDto of(Context context) {
+    return new UsuarioDto(context.formParam("email"), context.formParam("pass"));
   }
 
+  public Usuario toEntity() {
+    return new Usuario(this.getEmail(), this.getClave());
+  }
 }

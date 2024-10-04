@@ -51,7 +51,7 @@ public class OfertasProductoController implements ICrudViewsHandler {
 
     Map<String, Object> model = new HashMap<>();
     model.put("categorias", CategoriaOferta.obtenerNombresCategorias());
-    context.render("/app/colaboraciones/ofrecer-productos.hbs",model);
+    context.render("/app/colaboraciones/ofrecer-productos.hbs", model);
   }
 
   @Override
@@ -60,14 +60,12 @@ public class OfertasProductoController implements ICrudViewsHandler {
     String idHardcodeadaColaborador = Initializer.dameOng().get().getId();
 
 
-    OfertaProductoDto dto = OfertaProductoDto.of(context.formParamMap(),idHardcodeadaColaborador);
-    try{
+    OfertaProductoDto dto = OfertaProductoDto.of(context.formParamMap(), idHardcodeadaColaborador);
+    try {
       ofertasProductoService.crearOferta(dto);
-    }
-    catch(FormIncompletoException e){
+    } catch (FormIncompletoException e) {
       // TODO: Mostrar pop up error ?
-    }
-    catch (NoAutorizadoException e){
+    } catch (NoAutorizadoException e) {
       context.status(HttpStatus.UNAUTHORIZED);
       return;
     }

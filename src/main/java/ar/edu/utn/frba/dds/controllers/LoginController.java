@@ -11,15 +11,14 @@ import lombok.AllArgsConstructor;
 public class LoginController implements ICrudViewsHandler {
   private UsuarioService usuarioService;
 
-  public void handleLogin(Context ctx){
+  public void handleLogin(Context ctx) {
     UsuarioDto usuario = UsuarioDto.of(ctx);
-    try{
+    try {
       String id = this.usuarioService.obtenerUsuario(usuario);
-      ctx.sessionAttribute("idUsuario",id);
+      ctx.sessionAttribute("idUsuario", id);
       // podria ser a otro lado
       ctx.redirect("/");
-    }
-    catch (LoginFailedException e){
+    } catch (LoginFailedException e) {
       // TODO: mostrar mensaje error
       ctx.redirect("/login");
     }

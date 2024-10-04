@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.serviceLocator;
 import ar.edu.utn.frba.dds.controllers.IncidentesController;
 import ar.edu.utn.frba.dds.controllers.LoginController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
+import ar.edu.utn.frba.dds.controllers.RegistroController;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
@@ -132,6 +133,8 @@ public class ServiceLocator {
         // CONTROLLERS
       else if (clase.equals(LoginController.class))
         add(LoginController.class, new LoginController(get(UsuarioService.class)));
+      else if (clase.equals(RegistroController.class))
+        add(RegistroController.class, new RegistroController(get(UsuarioService.class)));
       else if (clase.equals(IncidentesController.class))
         add(clase, new IncidentesController(get(AlertasService.class), get(FallasTecnicasService.class)));
       else if (clase.equals(OfertasProductoController.class))

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.server;
 import ar.edu.utn.frba.dds.controllers.IncidentesController;
 import ar.edu.utn.frba.dds.controllers.LoginController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
+import ar.edu.utn.frba.dds.controllers.RegistroController;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FileUploadService;
@@ -27,9 +28,11 @@ public class Router {
     app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
 
     //REGISTRO
-    app.get("/registro", ctx -> ctx.render("/auth/registro/registro.hbs"));
+    app.get("/registro", ServiceLocator.get(RegistroController.class)::index);
     app.get("/registro/persona-humana", ctx -> ctx.render("/auth/registro/registro-humano.hbs"));
+    app.post("/registro/persona-humana", ServiceLocator.get(RegistroController.class)::handleRegistroHumano);
     app.get("/registro/persona-juridica", ctx -> ctx.render("/auth/registro/registro-juridico.hbs"));
+    app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
     //ALTA
     app.get("/admin/tecnicos/nuevo", ctx -> ctx.render("/app/admin/alta-tecnico.hbs"));
@@ -50,7 +53,7 @@ public class Router {
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
     app.get("/heladeras/{id}/suscribirme", ctx -> ctx.render("/app/heladeras/suscripcion.hbs"));
     app.get("/heladeras/{id}/reportar-falla-tecnica", ctx -> ctx.render("/app/heladeras/reportar-falla.hbs"));
-    app.get("/heladeras/{id}/alertas",ServiceLocator.get(IncidentesController.class)::index);
+    app.get("/heladeras/{id}/alertas", ServiceLocator.get(IncidentesController.class)::index);
 
     //REPORTES
     app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
@@ -59,7 +62,7 @@ public class Router {
     app.get("/carga-masiva-colaboraciones", ctx -> ctx.render("/app/carga-masiva/carga-masiva.hbs"));
 
     //PRODUCTOS
-    app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index) ;
+    app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
     app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
 
     app.get("/", ctx -> {
