@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,24 @@ public class UsuariosRepository implements IUsuariosRepository, WithSimplePersis
     public Optional<Usuario> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Usuario.class, id));
     }
+
+    @Override
+    public Optional<Usuario> buscar(String email, String contra) {
+        try{
+            return Optional.of(entityManager().createQuery("from Usuario where email=:email and clave=:clave", Usuario.class)
+                .setParameter("email",email)
+                .setParameter("clave",contra)
+                .getSingleResult());
+        }
+        catch (NoResultException e){
+            return Optional.empty();
+        }
+
+    }
+
+
+
+
 
     @Override
     public List<Usuario> buscarTodos() {

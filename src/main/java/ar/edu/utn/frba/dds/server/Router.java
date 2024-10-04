@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.IncidentesController;
+import ar.edu.utn.frba.dds.controllers.LoginController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
@@ -22,7 +23,8 @@ public class Router {
   public static void init(Javalin app) {
 
     //LOGIN
-    app.get("/login", ctx -> ctx.render("/auth/login/inicio-sesion.hbs"));
+    app.get("/login", ServiceLocator.get(LoginController.class)::index);
+    app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
 
     //REGISTRO
     app.get("/registro", ctx -> ctx.render("/auth/registro/registro.hbs"));
