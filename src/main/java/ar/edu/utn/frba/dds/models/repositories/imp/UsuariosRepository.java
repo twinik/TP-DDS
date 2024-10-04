@@ -15,62 +15,59 @@ import java.util.Optional;
 @NoArgsConstructor
 public class UsuariosRepository implements IUsuariosRepository, WithSimplePersistenceUnit {
 
-    @Override
-    public Optional<Usuario> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(Usuario.class, id));
+  @Override
+  public Optional<Usuario> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(Usuario.class, id));
+  }
+
+  @Override
+  public Optional<Usuario> buscar(String email, String contra) {
+    try {
+      return Optional.of(entityManager().createQuery("from Usuario where email=:email and clave=:clave and activo=:activo", Usuario.class)
+          .setParameter("email", email)
+          .setParameter("clave", contra)
+          .setParameter("activo", true)
+          .getSingleResult());
+    } catch (NoResultException e) {
+      return Optional.empty();
     }
 
-    @Override
-    public Optional<Usuario> buscar(String email, String contra) {
-        try{
-            return Optional.of(entityManager().createQuery("from Usuario where email=:email and clave=:clave", Usuario.class)
-                .setParameter("email",email)
-                .setParameter("clave",contra)
-                .getSingleResult());
-        }
-        catch (NoResultException e){
-            return Optional.empty();
-        }
-
-    }
+  }
 
 
+  @Override
+  public List<Usuario> buscarTodos() {
+    return entityManager().createQuery("from Usuario where activo=:activo", Usuario.class).
+        setParameter("activo", true)
+        .getResultList();
+  }
 
+  @Override
+  public void guardar(Usuario usuario) {
+    withTransaction(() -> entityManager().persist(usuario));
+  }
 
+  public void guardar(Usuario... usuario) {
 
-    @Override
-    public List<Usuario> buscarTodos() {
-        return entityManager().createQuery("from Usuario where activo=:activo", Usuario.class).
-                setParameter("activo", true)
-                .getResultList();
-    }
+    withTransaction(() -> {
+      for (Usuario user : usuario) {
+        entityManager().persist(user);
+      }
+    });
+  }
 
-    @Override
-    public void guardar(Usuario usuario) {
-        withTransaction(() -> entityManager().persist(usuario));
-    }
+  @Override
+  public void actualizar(Usuario usuario) {
+    withTransaction(() -> entityManager().merge(usuario));
+  }
 
-    public void guardar(Usuario... usuario) {
-
-        withTransaction(() -> {
-            for (Usuario user : usuario) {
-                entityManager().persist(user);
-            }
-        });
-    }
-
-    @Override
-    public void actualizar(Usuario usuario) {
-        withTransaction(() -> entityManager().merge(usuario));
-    }
-
-    @Override
-    public void eliminar(Usuario usuario) {
-        withTransaction(() -> {
-            usuario.borrarLogico();
-            entityManager().merge(usuario);
-        });
-    }
+  @Override
+  public void eliminar(Usuario usuario) {
+    withTransaction(() -> {
+      usuario.borrarLogico();
+      entityManager().merge(usuario);
+    });
+  }
 
   /* public static void main(String[] args) {
         Usuario m = new Usuario("otro");

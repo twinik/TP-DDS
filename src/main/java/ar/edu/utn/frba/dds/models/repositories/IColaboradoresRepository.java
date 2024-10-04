@@ -13,6 +13,8 @@ public interface IColaboradoresRepository {
 
     Optional<Colaborador> buscar(String id);
 
+    Optional<Colaborador> buscarPorUsuario(String idUsuario);
+
     List<Colaborador> buscarTodos();
 
     void guardar(Colaborador colaborador);
