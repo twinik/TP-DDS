@@ -147,10 +147,8 @@ public class Initializer {
 
     alertasRepository.guardar(a1);
 
-    //TODO: PONER LAS FOTOS ACA
-
-    OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("tostadora filgo", "https://whirlpoolarg.vtexassets.com/arquivos/ids/164249-800-auto?v=638146769908330000&width=800&height=auto&aspect=true"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
-    OfertaProducto oferta2 = new OfertaProducto(ong, LocalDate.now(), new Producto("martin fierro", "https://whirlpoolarg.vtexassets.com/arquivos/ids/164249-800-auto?v=638146769908330000&width=800&height=auto&aspect=true"), 1000f, CategoriaOferta.OTROS);
+    OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("Tostadora Liliana", "/img/AT900_web_01.jpg"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
+    OfertaProducto oferta2 = new OfertaProducto(ong, LocalDate.now(), new Producto("Heladera Whirpool", "/img/164249-800-auto.png"), 1000f, CategoriaOferta.OTROS);
 
     ofertaProductoRepository.guardar(oferta1);
     ofertaProductoRepository.guardar(oferta2);

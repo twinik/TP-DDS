@@ -18,12 +18,11 @@ public class AlertaDto {
 
   public static AlertaDto fromAlerta(Alerta a){
     return AlertaDto.builder()
-        .id(a.getId())
-        .heladera(HeladeraDto.fromHeladera(a.getHeladera()))
-        .fechaHora(a.getTimestamp().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
-        // TODO: mappear a un string sin mayus
-        .tipoAlerta(a.getTipoAlerta().name())
-        .build();
+            .id(a.getId())
+            .heladera(HeladeraDto.fromHeladera(a.getHeladera()))
+            .fechaHora(a.getTimestamp().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
+            .tipoAlerta(a.getTipoAlerta().name().toLowerCase()) // mappear a un string sin mayus
+            .build();
   }
 
   public static AlertaDto of(Map<String, List<String>> camposFormulario){
