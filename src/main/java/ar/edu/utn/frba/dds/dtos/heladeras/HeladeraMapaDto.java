@@ -8,16 +8,16 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-public class HeladeraMapa {
+public class HeladeraMapaDto {
   private String id;
   private List<Float> coords;
   private String title;
   private boolean disabled;
 
-  public static HeladeraMapa fromHeladera(Heladera h) {
+  public static HeladeraMapaDto fromHeladera(Heladera h) {
     List<Float> coords = new ArrayList<>();
     coords.add(h.getUbicacion().getLatitud());
     coords.add(h.getUbicacion().getLongitud());
-    return new HeladeraMapa(h.getId(), coords, h.getNombre(), !h.isHeladeraActiva());
+    return new HeladeraMapaDto(h.getId(), coords, h.getNombre(), !h.isHeladeraActiva());
   }
 }

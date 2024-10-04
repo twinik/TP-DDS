@@ -138,30 +138,18 @@
     </div>
 {{/partial}}
 
+{{#partial "links"}}
+    <link rel="stylesheet" href="/css/heladeras.css"/>
+{{/partial}}
+
 {{#partial "scripts"}}
     <script
             src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""
     ></script>
+    <script src="/js/utils-heladeras.js"></script>
     <script src="/js/heladeras-seleccion.js"></script>
-    <script>
-        function clickOnPopup(element) {
-            const btns = document.querySelectorAll(".popup-button");
-            console.log(btns);
-            const heladeraSelectedText = document.getElementById(
-                    "heladeraSeleccionada"
-            );
-            const heladeraSelectedHidden =
-                    document.getElementById("idHeladera");
-            const id = element.id.split("-")[1];
-            heladeraSelectedHidden.val;
-            heladeraSelectedHidden.value = id;
-            heladeraSelectedText.innerHTML = markers.find(
-                    e => e.id == id
-            ).title;
-        }
-    </script>
 {{/partial}}
 
 {{> templates/app/base}}

@@ -10,51 +10,43 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     minZoom: 5
 }).addTo(map);
 
-// Datos de los marcadores
-var markers = [
-    {
-        id: 1,
-        coords: [-34.59853190440259, -58.42009848935327],
-        title: "Heladera UTN Medrano"
-    },
-    {
-        id: 2,
-        coords: [-34.6067, -58.4299],
-        title: "Heladera Parque Centenario"
-    },
-    {
-        id: 3,
-        coords: [-34.6037, -58.4105],
-        title: "Heladera Abasto"
-    },
-    {
-        id: 4,
-        coords: [-34.6189, -58.4244],
-        title: "Heladera Parque Rivadavia"
-    },
-    {
-        id: 5,
-        coords: [-34.545278, -58.449722],
-        title: "Heladera Mudomental ChangoMas"
-    }
-];
+var markers = [];
 
-// Función para crear marcadores
-markers.forEach(function (markerData) {
-    var marker = L.marker(markerData.coords).addTo(map);
+(async function main () {
+    markers = await fetchHeladeras()
 
-    // Crear el contenido del popup usando el template HTML
-    var popupContent = document.getElementById("marker-template").innerHTML;
-    var div = document.createElement("div");
-    div.innerHTML = popupContent;
-    div.querySelector(".popup-title").innerText = markerData.title;
-    div.querySelector(".popup-button").id = "selectBtn-" + markerData.id;
+    // Función para crear marcadores
+    markers.forEach(function (markerData) {
+        var marker = L.marker(markerData.coords).addTo(map);
 
-    // para la redistribucion de heladeras
-    if (div.querySelector(".popup-destino")) {
-        div.querySelector(".popup-destino").id =
-            "selectBtnDestino-" + markerData.id;
-    }
+        const markerTemplate = `<div class="flex flex-col popup-content">
+                    <div class="popup-title">${markerData.title}</div>
+                    <div
+                            class="popup-button"
+                            id="selectBtn/${markerData.id}"
+                            onclick="clickOnPopup(this)"
+                    >
+                        Seleccionar
+                    </div>
+                </div>`
 
-    marker.bindPopup(div.innerHTML);
-});
+        marker.bindPopup(markerTemplate);
+    });
+})();
+
+function clickOnPopup(element) {
+    const btns = document.querySelectorAll(".popup-button");
+    const heladeraSelectedText = document.getElementById(
+        "heladeraSeleccionada"
+    );
+    const heladeraSelectedHidden =
+        document.getElementById("idHeladera");
+    const id = element.id.split("/")[1];
+    heladeraSelectedHidden.val;
+    heladeraSelectedHidden.value = id;
+    console.log(id)
+    console.log(markers);
+    heladeraSelectedText.innerHTML = markers.find(
+        e => e.id == id
+    ).title;
+}
