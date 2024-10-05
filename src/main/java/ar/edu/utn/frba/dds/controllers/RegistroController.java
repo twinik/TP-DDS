@@ -28,7 +28,7 @@ public class RegistroController implements ICrudViewsHandler {
   public void handleRegistroHumano(Context ctx) {
     try {
       String email = ctx.formParam("email");
-      String clave = ctx.formParam("pass");
+      String clave = ctx.formParam("password");
       String claveConf = ctx.formParam("passConf");
       String nombre = ctx.formParam("nombre");
       String apellido = ctx.formParam("apellido");
@@ -40,8 +40,9 @@ public class RegistroController implements ICrudViewsHandler {
       Direccion direccion = new Direccion(calle, altura, piso, codigoPostal);
 
       // TODO: formasColaboracion y mediosDeContacto
-      List<FormaColaboracion> formasColaboracion = new ArrayList<>();
+      List<FormaColaboracion> formasColaboracion = ctx.formParams("formasColaboracion").stream().map(FormaColaboracion::new).toList();
       List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+      //List<MedioDeContacto> mediosDeContacto = ctx.formParams("mediosDeContacto").stream().map(MedioDeContacto::new).toList();
 
       if (!clave.equals(claveConf)) {
         throw new RegistroFailedException("Las contraseñas no coinciden");
@@ -62,7 +63,7 @@ public class RegistroController implements ICrudViewsHandler {
   public void handleRegistroJuridico(Context ctx) {
     try {
       String email = ctx.formParam("email");
-      String clave = ctx.formParam("pass");
+      String clave = ctx.formParam("password");
       String claveConf = ctx.formParam("passConf");
       String razonSocial = ctx.formParam("razonSocial");
       String tipoOrganizacion = ctx.formParam("tipoOrganizacion");
@@ -74,8 +75,9 @@ public class RegistroController implements ICrudViewsHandler {
       Direccion direccion = new Direccion(calle, altura, piso, codigoPostal);
 
       // TODO: formasColaboracion y mediosDeContacto
-      List<FormaColaboracion> formasColaboracion = new ArrayList<>();
+      List<FormaColaboracion> formasColaboracion = ctx.formParams("formasColaboracion").stream().map(FormaColaboracion::new).toList();
       List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+      //List<MedioDeContacto> mediosDeContacto = ctx.formParams("mediosDeContacto").stream().map(MedioDeContacto::new).toList();
 
       if (!clave.equals(claveConf)) {
         throw new RegistroFailedException("Las contraseñas no coinciden");
