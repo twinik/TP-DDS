@@ -23,7 +23,7 @@ public class Rol extends EntidadPersistente {
     private List<Permiso> permisos = new ArrayList<>();
 
     public boolean tenesPermiso(Permiso permiso) {
-        return this.permisos.contains(permiso);
+        return this.permisos.stream().anyMatch(p -> p.tieneIgualDescripcion(permiso));
     }
 
     public void agregarPermisos(Permiso... permisos) {

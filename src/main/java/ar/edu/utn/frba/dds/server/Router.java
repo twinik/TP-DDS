@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.*;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.services.DonacionDineroService;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import io.javalin.Javalin;
@@ -37,7 +38,8 @@ public class Router {
 
     //COLABORACIONES
     app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
-    app.get("/colaborar/donar-dinero", ctx -> ctx.render("/app/colaboraciones/donacion-dinero.hbs"));
+    app.get("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::create);
+    app.post("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::save);
     app.get("/colaborar/registrar-persona-vulnerable", ctx -> ctx.render("/app/colaboraciones/alta-persona-vulnerable.hbs"));
     app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
     app.get("/colaborar/distribuir-viandas", ctx -> ctx.render("/app/colaboraciones/distribucion-vianda.hbs"));

@@ -63,7 +63,7 @@ public class Initializer {
     Usuario u1 = new Usuario("usuario@mail.com", "contra");
     Usuario u2 = new Usuario("usuuuario@mail.com", "1234");
     Usuario u3 = new Usuario("ong@mail.com", "pass");
-    Permiso p1 = new Permiso("colaborar");
+    Permiso p1 = new Permiso("donar-dinero");
     Permiso p2 = new Permiso("colocar-heladeras");
     Permiso p3 = new Permiso("ofrecer-productos");
     Permiso p5 = new Permiso("alta-tecnico");

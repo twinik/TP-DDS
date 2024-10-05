@@ -17,4 +17,9 @@ import javax.persistence.Entity;
 public class Permiso extends EntidadPersistente implements RouteRole{
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
+
+  public boolean tieneIgualDescripcion(Permiso p){
+      return this.descripcion.equals(p.getDescripcion());
+  }
+
 }

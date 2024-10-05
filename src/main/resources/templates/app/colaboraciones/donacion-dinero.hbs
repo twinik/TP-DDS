@@ -14,7 +14,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Donación de dinero</h1>
 
-        <form class="content-center max-w-sm mx-auto">
+        <form method="post" action="/colaborar/donar-dinero" class="content-center max-w-sm mx-auto">
             <label
                     for="default-datepicker"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -26,6 +26,7 @@
                     datepicker-autohide
                     datepicker-format="dd/mm/yyyy"
                     autoSelectToday="1"
+                    name="fecha"
                     id="default-datepicker"
                     type="text"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -39,6 +40,7 @@
             >
             <input
                     type="number"
+                    name="monto"
                     id="monto-input"
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -74,7 +76,6 @@
                     <input
                             id="periodica"
                             type="radio"
-                            name="periodica"
                             value="si"
                             required
                             class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
@@ -96,11 +97,15 @@
                 >
                 <select
                         id="frecuencia"
+                        name="frec"
                         class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
-                    <option value="diaria">Diaria</option>
-                    <option value="semanal">Semanal</option>
-                    <option value="mensual">Mensual</option>
+                    {{#each frecuenciasDonacion}}
+                        <option value={{this.valor}}>{{this.nombre}}</option>
+                    {{/each}}
+                    <!--                    <option value="diaria">Diaria</option>-->
+                    <!--                    <option value="semanal">Semanal</option>-->
+                    <!--                    <option value="mensual">Mensual</option>-->
                 </select>
             </div>
 

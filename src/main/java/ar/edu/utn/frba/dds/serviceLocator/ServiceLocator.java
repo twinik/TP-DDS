@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
+import ar.edu.utn.frba.dds.controllers.DonacionDineroController;
 import ar.edu.utn.frba.dds.controllers.IncidentesController;
 import ar.edu.utn.frba.dds.controllers.LoginController;
 import ar.edu.utn.frba.dds.controllers.LogoutController;
@@ -12,6 +13,8 @@ import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.models.repositories.*;
 import ar.edu.utn.frba.dds.models.repositories.imp.*;
 import ar.edu.utn.frba.dds.services.AlertasService;
+import ar.edu.utn.frba.dds.services.ColaboradoresService;
+import ar.edu.utn.frba.dds.services.DonacionDineroService;
 import ar.edu.utn.frba.dds.services.FallasTecnicasService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
@@ -49,8 +52,12 @@ public class ServiceLocator {
         add(clase, new CanjeProductoRepository());
       else if (clase.equals(IColaboradoresRepository.class))
         add(clase, new ColaboradoresRepository());
+      else if (clase.equals(ColaboradoresService.class))
+        add(clase, new ColaboradoresService(get(IColaboradoresRepository.class)));
       else if (clase.equals(IColocacionHeladeraRepository.class))
         add(clase, new ColocacionHeladeraRepository());
+      else if (clase.equals(DonacionDineroService.class))
+        add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class),get(ColaboradoresService.class)));
       else if (clase.equals(IDonacionDineroRepository.class))
         add(clase, new DonacionDineroRepository());
       else if (clase.equals(IDonacionesViandaRepository.class))
@@ -132,6 +139,8 @@ public class ServiceLocator {
 
 
         // CONTROLLERS
+      else if (clase.equals(DonacionDineroController.class))
+        add(clase, new DonacionDineroController(get(DonacionDineroService.class)));
       else if (clase.equals(LoginController.class))
         add(LoginController.class, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))
