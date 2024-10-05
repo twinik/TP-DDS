@@ -1,17 +1,11 @@
 package ar.edu.utn.frba.dds.server;
 
-import ar.edu.utn.frba.dds.controllers.IncidentesController;
-import ar.edu.utn.frba.dds.controllers.LoginController;
-import ar.edu.utn.frba.dds.controllers.LogoutController;
-import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
-import ar.edu.utn.frba.dds.controllers.RegistroController;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
+import ar.edu.utn.frba.dds.controllers.*;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import io.javalin.Javalin;
 import io.javalin.http.UploadedFile;
-import org.aopalliance.reflect.Class;
 import java.io.IOException;
 
 /**
@@ -73,7 +67,7 @@ public class Router {
 
     app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
 
-    app.post("/upload", ctx -> {
+    app.post("/upload-carga-masiva", ctx -> {
       UploadedFile uploadedFile = ctx.uploadedFile("file");
       try {
         FileUploadService fileUploadService = new FileUploadService();
@@ -82,6 +76,17 @@ public class Router {
       } catch (IOException e) {
         e.printStackTrace();
         ctx.result("Error al subir el archivo: " + e.getMessage());
+      }
+    });
+
+    app.post("/upload-falla-tecnica", ctx -> {
+      UploadedFile uploadedFile = ctx.uploadedFile("file");
+      try {
+        FileUploadService fileUploadService = new FileUploadService();
+        String result = fileUploadService.uploadFile(uploadedFile, "src/main/resources/templates/app/heladeras/");
+        ctx.result(result);
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     });
   }
