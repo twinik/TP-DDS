@@ -7,8 +7,10 @@ import ar.edu.utn.frba.dds.controllers.LoginController;
 import ar.edu.utn.frba.dds.controllers.LogoutController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.controllers.RegistroController;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
+import ar.edu.utn.frba.dds.models.domain.heladeras.CalculadorHeladerasCercanas;
 import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.models.repositories.*;
@@ -22,6 +24,7 @@ import ar.edu.utn.frba.dds.services.HeladerasService;
 import ar.edu.utn.frba.dds.services.ModelosService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
 import ar.edu.utn.frba.dds.services.UsuarioService;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +50,13 @@ public class ServiceLocator {
         add(clase, new AltaPersonaVulnerableRepository());
       else if (clase.equals(IAperturasHeladeraRepository.class))
         add(clase, new AperturasHeladeraRepository());
+      else if(clase.equals(CalculadorHeladerasCercanas.class)) {
+        try {
+          add(clase,new CalculadorHeladerasCercanas(get(IHeladerasRepository.class),Integer.parseInt(new ConfigReader("config.properties").getProperty("LIMITE_HELADERAS_CERCANAS"))));
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
       else if (clase.equals(ICalculadorPuntos.class))
         add(clase, new CalculadorPuntos());
       else if (clase.equals(ICampoRepository.class))
@@ -58,7 +68,11 @@ public class ServiceLocator {
       else if (clase.equals(ColaboradoresService.class))
         add(clase, new ColaboradoresService(get(IColaboradoresRepository.class)));
       else if (clase.equals(ColocacionHeladerasService.class))
-        add(clase, new ColocacionHeladerasService(get(IColocacionHeladeraRepository.class),get(ColaboradoresService.class),get(ModelosService.class)));
+        add(clase, new ColocacionHeladerasService(get(IColocacionHeladeraRepository.class),
+            get(ColaboradoresService.class),
+            get(ModelosService.class),
+            get(CalculadorHeladerasCercanas.class),
+            get(IHeladerasRepository.class)));
       else if (clase.equals(IColocacionHeladeraRepository.class))
         add(clase, new ColocacionHeladeraRepository());
       else if (clase.equals(DonacionDineroService.class))

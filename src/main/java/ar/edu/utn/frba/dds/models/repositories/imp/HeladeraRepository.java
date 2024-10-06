@@ -14,16 +14,16 @@ import java.util.Optional;
 public class HeladeraRepository implements IHeladerasRepository, WithSimplePersistenceUnit {
 
 
-    public static void main(String[] args) {
-        Heladera h = new Heladera();
-        IHeladerasRepository repositorio = ServiceLocator.get(IHeladerasRepository.class);
-        repositorio.guardar(h);
-        h.setModelo(new ModeloHeladera("filgo", 22, 33));
-        Heladera otra = new Heladera(LocalDate.now());
-        h.agregarHeladeraCercana(otra);
-        otra.setModelo(new ModeloHeladera("jorge", 10, 50));
-        //repositorio.guardar(otra);
-        repositorio.actualizar(h);
+  public static void main(String[] args) {
+    Heladera h = new Heladera();
+    IHeladerasRepository repositorio = ServiceLocator.get(IHeladerasRepository.class);
+    repositorio.guardar(h);
+    h.setModelo(new ModeloHeladera("filgo", 22, 33));
+    Heladera otra = new Heladera(LocalDate.now());
+    h.agregarHeladeraCercana(otra);
+    otra.setModelo(new ModeloHeladera("jorge", 10, 50));
+    //repositorio.guardar(otra);
+    repositorio.actualizar(h);
 //        repositorio.guardar(m1);
 //        repositorio.guardar(m2);
 
@@ -32,44 +32,49 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 //        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
 //      repositorio.actualizar(m2);
 
-        Optional<Heladera> heladera1 = repositorio.buscar(h.getId());
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Heladera> heladera2 = repositorio.buscar(otra.getId());
+    Optional<Heladera> heladera1 = repositorio.buscar(h.getId());
+    //System.out.println(hidratado.get().getMotivo());
+    Optional<Heladera> heladera2 = repositorio.buscar(otra.getId());
 
-        List<Heladera> lista = repositorio.buscarTodos();
+    List<Heladera> lista = repositorio.buscarTodos();
 
-    }
+  }
 
-    @Override
-    public Optional<Heladera> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(Heladera.class, id));
-    }
+  @Override
+  public Optional<Heladera> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(Heladera.class, id));
+  }
 
-    @Override
-    public List<Heladera> buscarTodos() {
-        return entityManager().createQuery("from Heladera where activo=:activo", Heladera.class).
-                setParameter("activo", true)
-                .getResultList();
-    }
+  @Override
+  public List<Heladera> buscarTodos() {
+    return entityManager().createQuery("from Heladera where activo=:activo", Heladera.class).
+        setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public void guardar(Heladera heladera) {
-        withTransaction(() -> entityManager().persist(heladera));
-    }
+  @Override
+  public void guardar(Heladera heladera) {
+    withTransaction(() -> entityManager().persist(heladera));
+  }
 
-    public void guardar(Heladera... heladera) {
+  public void guardar(Heladera... heladera) {
 
-        withTransaction(() -> {
-            for (Heladera hela : heladera) {
-                entityManager().persist(hela);
-            }
-        });
-    }
+    withTransaction(() -> {
+      for (Heladera hela : heladera) {
+        entityManager().persist(hela);
+      }
+    });
+  }
 
-    @Override
-    public void actualizar(Heladera heladera) {
-        withTransaction(() -> entityManager().merge(heladera));
-    }
+  @Override
+  public void actualizar(Heladera heladera) {
+    withTransaction(() -> entityManager().merge(heladera));
+  }
+
+  @Override
+  public void actualizar(List<Heladera> heladeras) {
+    withTransaction(() -> heladeras.forEach(h -> entityManager().merge(h)));
+  }
 
 //  @Override
 //  public List<Heladera> heladerasCercanas(Heladera heladera, int limite) {
@@ -80,12 +85,12 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
 //        .collect(Collectors.toList());
 //  }
 
-    @Override
-    public void eliminar(Heladera heladera) {
+  @Override
+  public void eliminar(Heladera heladera) {
 
-        withTransaction(() -> {
-            heladera.borrarLogico();
-            entityManager().merge(heladera);
-        });
-    }
+    withTransaction(() -> {
+      heladera.borrarLogico();
+      entityManager().merge(heladera);
+    });
+  }
 }

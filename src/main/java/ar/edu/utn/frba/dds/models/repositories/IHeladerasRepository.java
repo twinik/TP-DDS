@@ -13,6 +13,8 @@ public interface IHeladerasRepository {
 
     void actualizar(Heladera heladera);
 
+    void actualizar(List<Heladera> heladeras);
+
     void eliminar(Heladera heladera);
 
 }
