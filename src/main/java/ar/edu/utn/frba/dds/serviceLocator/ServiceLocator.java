@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
+import ar.edu.utn.frba.dds.controllers.ColocacionHeladerasController;
 import ar.edu.utn.frba.dds.controllers.DonacionDineroController;
 import ar.edu.utn.frba.dds.controllers.IncidentesController;
 import ar.edu.utn.frba.dds.controllers.LoginController;
@@ -14,9 +15,11 @@ import ar.edu.utn.frba.dds.models.repositories.*;
 import ar.edu.utn.frba.dds.models.repositories.imp.*;
 import ar.edu.utn.frba.dds.services.AlertasService;
 import ar.edu.utn.frba.dds.services.ColaboradoresService;
+import ar.edu.utn.frba.dds.services.ColocacionHeladerasService;
 import ar.edu.utn.frba.dds.services.DonacionDineroService;
 import ar.edu.utn.frba.dds.services.FallasTecnicasService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
+import ar.edu.utn.frba.dds.services.ModelosService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import java.util.HashMap;
@@ -54,10 +57,12 @@ public class ServiceLocator {
         add(clase, new ColaboradoresRepository());
       else if (clase.equals(ColaboradoresService.class))
         add(clase, new ColaboradoresService(get(IColaboradoresRepository.class)));
+      else if (clase.equals(ColocacionHeladerasService.class))
+        add(clase, new ColocacionHeladerasService(get(IColocacionHeladeraRepository.class),get(ColaboradoresService.class),get(ModelosService.class)));
       else if (clase.equals(IColocacionHeladeraRepository.class))
         add(clase, new ColocacionHeladeraRepository());
       else if (clase.equals(DonacionDineroService.class))
-        add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class),get(ColaboradoresService.class)));
+        add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(IDonacionDineroRepository.class))
         add(clase, new DonacionDineroRepository());
       else if (clase.equals(IDonacionesViandaRepository.class))
@@ -78,6 +83,8 @@ public class ServiceLocator {
         add(clase, new MedioContactoRepository());
       else if (clase.equals(IModeloHeladeraRepository.class))
         add(clase, new ModeloHeladeraRepository());
+      else if (clase.equals(ModelosService.class))
+        add(clase, new ModelosService(get(IModeloHeladeraRepository.class)));
       else if (clase.equals(IMotivoRedistribucionRepository.class))
         add(clase, new MotivoRedistribucionRepository());
       else if (clase.equals(IOfertaProductoRepository.class))
@@ -129,7 +136,7 @@ public class ServiceLocator {
       else if (clase.equals(IUsosTarjetaRepository.class))
         add(clase, new UsosTarjetaRepository());
       else if (clase.equals(UsuarioService.class))
-        add(UsuarioService.class, new UsuarioService(get(IUsuariosRepository.class),get(ColaboradoresService.class)));
+        add(UsuarioService.class, new UsuarioService(get(IUsuariosRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(IUsuariosRepository.class))
         add(clase, new UsuariosRepository());
       else if (clase.equals(IViandasRepository.class))
@@ -139,6 +146,8 @@ public class ServiceLocator {
 
 
         // CONTROLLERS
+      else if (clase.equals(ColocacionHeladerasController.class))
+        add(clase, new ColocacionHeladerasController(get(ColocacionHeladerasService.class),get(ModelosService.class)));
       else if (clase.equals(DonacionDineroController.class))
         add(clase, new DonacionDineroController(get(DonacionDineroService.class)));
       else if (clase.equals(LoginController.class))

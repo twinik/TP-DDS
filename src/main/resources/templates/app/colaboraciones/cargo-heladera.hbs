@@ -14,7 +14,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Colocar heladera</h1>
 
-        <form class="content-center max-w-md mx-auto">
+        <form method="post" action="/colaborar/colocar-heladera" class="content-center max-w-md mx-auto">
             <label
                     for="nombre"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -22,6 +22,7 @@
             >
             <input
                     type="text"
+                    name="nombre"
                     id="nombre"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Nombre"
@@ -34,12 +35,16 @@
             >Modelo</label
             >
             <select
+                    name="modelo"
                     id="modelo"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-                <option value="modelo1">Modelo 1</option>
-                <option value="modelo2">Modelo 2</option>
-                <option value="modelo3">Modelo 3</option>
+                {{#each modelos}}
+                    <option value={{this.id}}>{{this.modelo}}</option>
+                {{/each }}
+<!--                <option value="modelo1">Modelo 1</option>-->
+<!--                <option value="modelo2">Modelo 2</option>-->
+<!--                <option value="modelo3">Modelo 3</option>-->
             </select>
 
             <label
@@ -49,6 +54,7 @@
             >
             <input
                     type="number"
+                    name="capacidad"
                     id="capacidad"
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -67,6 +73,7 @@
                     datepicker
                     datepicker-autohide
                     datepicker-format="dd/mm/yyyy"
+                    name="fecha"
                     id="default-datepicker"
                     type="text"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -95,6 +102,7 @@
             <input
                     type="text"
                     id="calle"
+                    name="calle"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Calle"
                     required
@@ -108,6 +116,7 @@
             <input
                     type="number"
                     id="numero"
+                    name="numero"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Numero"
                     required
@@ -121,8 +130,23 @@
             <input
                     type="number"
                     id="piso"
+                    name="piso"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Piso"
+            />
+
+            <label
+                    for="codPostal"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Código postal</label
+            >
+            <input
+                    type="text"
+                    id="codPostal"
+                    name="codPostal"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Código"
+                    required
             />
 
             <button

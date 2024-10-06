@@ -15,8 +15,8 @@ public class ColaboradoresService {
     return this.colaboradoresRepository.buscarPorUsuario(idUsuario);
   }
 
-  public Optional<Colaborador> obtenerColaborador(String id){
-    return this.colaboradoresRepository.buscar(id);
+  public Optional<Colaborador> obtenerColaborador(String id) {
+    return id == null ? Optional.empty() : this.colaboradoresRepository.buscar(id);
   }
 
 

@@ -121,9 +121,11 @@ public class Initializer {
     colaboradoresRepository.guardar(sa);
     colaboradoresRepository.guardar(ong);
 
-    ModeloHeladera modelo1 = new ModeloHeladera("philips", 3, 7);
+    ModeloHeladera modelo1 = new ModeloHeladera("philips-500", 3, 7);
+    ModeloHeladera modelo2 = new ModeloHeladera("filgo-AX3", 2, 8);
 
     modeloHeladeraRepository.guardar(modelo1);
+    modeloHeladeraRepository.guardar(modelo2);
 
     Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), null, modelo1);
     h1.setHeladeraActiva(false);
