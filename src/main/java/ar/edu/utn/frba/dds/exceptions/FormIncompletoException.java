@@ -4,4 +4,7 @@ public class FormIncompletoException extends RuntimeException{
   public FormIncompletoException(String message) {
     super(message);
   }
+
+  public FormIncompletoException() {
+  }
 }

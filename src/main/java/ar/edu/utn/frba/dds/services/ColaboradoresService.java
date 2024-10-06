@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.services;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioNavbarDto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import lombok.AllArgsConstructor;
@@ -10,11 +11,13 @@ import java.util.Optional;
 public class ColaboradoresService {
   private IColaboradoresRepository colaboradoresRepository;
 
-  public Colaborador colaboradorFromUsuario(String idUsuario) {
-    Optional<Colaborador> colaborador = this.colaboradoresRepository.buscarPorUsuario(idUsuario);
-    // TODO: si quieren agregar una excepcion con nombre propio pero es medio raro este caso
-    if (colaborador.isEmpty()) throw new RuntimeException("no hay colaborador asociado a este usuario");
-    return colaborador.get();
+  public Optional<Colaborador> colaboradorFromUsuario(String idUsuario) {
+    return this.colaboradoresRepository.buscarPorUsuario(idUsuario);
   }
+
+  public Optional<Colaborador> obtenerColaborador(String id){
+    return this.colaboradoresRepository.buscar(id);
+  }
+
 
 }

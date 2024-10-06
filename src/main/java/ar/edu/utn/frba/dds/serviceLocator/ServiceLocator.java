@@ -129,7 +129,7 @@ public class ServiceLocator {
       else if (clase.equals(IUsosTarjetaRepository.class))
         add(clase, new UsosTarjetaRepository());
       else if (clase.equals(UsuarioService.class))
-        add(UsuarioService.class, new UsuarioService(get(IUsuariosRepository.class)));
+        add(UsuarioService.class, new UsuarioService(get(IUsuariosRepository.class),get(ColaboradoresService.class)));
       else if (clase.equals(IUsuariosRepository.class))
         add(clase, new UsuariosRepository());
       else if (clase.equals(IViandasRepository.class))

@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.colaboraciones.DonacionDineroInputDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.FrecuenciaDonacionDineroDto;
+import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.services.ColaboradoresService;
 import ar.edu.utn.frba.dds.services.DonacionDineroService;
@@ -37,11 +39,11 @@ public class DonacionDineroController implements ICrudViewsHandler {
 
   @Override
   public void save(Context context) {
-    DonacionDineroInputDto dto = DonacionDineroInputDto.of(context.formParamMap());
+    DonacionDineroInputDto dto = DonacionDineroInputDto.of(context);
     try {
-      this.donacionDineroService.crearDonacionDinero(dto,context.sessionAttribute("idUsuario"));
-    } catch (RuntimeException e) {
-      context.status(401);
+      this.donacionDineroService.crearDonacionDinero(dto);
+    } catch (FormIncompletoException e) {
+      // TODO: Mostrar pop up error ?
     }
     //TODO: mostrar carteal de creado con exito
     context.redirect("/colaborar");

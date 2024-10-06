@@ -57,17 +57,11 @@ public class OfertasProductoController implements ICrudViewsHandler {
   @Override
   public void save(Context context) {
     // obtener de sesion
-    String idHardcodeadaColaborador = Initializer.dameOng().get().getId();
-
-
-    OfertaProductoDto dto = OfertaProductoDto.of(context.formParamMap(), idHardcodeadaColaborador);
+    OfertaProductoDto dto = OfertaProductoDto.of(context);
     try {
       ofertasProductoService.crearOferta(dto);
     } catch (FormIncompletoException e) {
       // TODO: Mostrar pop up error ?
-    } catch (NoAutorizadoException e) {
-      context.status(HttpStatus.UNAUTHORIZED);
-      return;
     }
     //O BIEN LANZO UNA PANTALLA DE EXITO
     //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS

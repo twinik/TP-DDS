@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.middleware.AppMiddlewares;
 import ar.edu.utn.frba.dds.middleware.AuthMiddleware;
 import ar.edu.utn.frba.dds.server.handlers.AppHandlers;
 import ar.edu.utn.frba.dds.utils.Initializer;
@@ -30,7 +31,7 @@ public class Server {
             // TODO: Revisar properties
             Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
             app = Javalin.create(config()).start(port);
-            AuthMiddleware.apply(app);
+            AppMiddlewares.applyMiddlewares(app);
             AppHandlers.applyHandlers(app);
             Router.init(app);
 

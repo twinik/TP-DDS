@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.dtos.ofertas;
 
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
+import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,13 +30,14 @@ public class OfertaProductoDto {
         .categoria(oferta.getCategoria().name()).build();
   }
 
-  public static OfertaProductoDto of(Map<String, List<String>> camposFormulario, String idColaborador) {
+  public static OfertaProductoDto of(Context context) {
 
     // TODO: conseguir categoria con el form param
     return OfertaProductoDto.builder()
-        .nombre(camposFormulario.get("nombre").get(0))
-        .puntosNecesarios(Float.valueOf(camposFormulario.get("puntos").get(0)))
-        .urlFoto(camposFormulario.get("foto").get(0)).idColaborador(idColaborador)
+        .nombre(context.formParam("nombre"))
+        .puntosNecesarios(Float.valueOf(context.formParam("puntos")))
+        .urlFoto(context.formParam("foto"))
+        .idColaborador(context.sessionAttribute("idColaborador"))
         .categoria(CategoriaOferta.OTROS.name()).build();
   }
 
