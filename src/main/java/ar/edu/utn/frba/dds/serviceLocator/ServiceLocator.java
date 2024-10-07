@@ -2,7 +2,8 @@ package ar.edu.utn.frba.dds.serviceLocator;
 
 import ar.edu.utn.frba.dds.controllers.ColocacionHeladerasController;
 import ar.edu.utn.frba.dds.controllers.DonacionDineroController;
-import ar.edu.utn.frba.dds.controllers.IncidentesController;
+import ar.edu.utn.frba.dds.controllers.FallasTecnicasController;
+import ar.edu.utn.frba.dds.controllers.AlertasController;
 import ar.edu.utn.frba.dds.controllers.LoginController;
 import ar.edu.utn.frba.dds.controllers.LogoutController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
@@ -168,6 +169,8 @@ public class ServiceLocator {
         add(clase, new ColocacionHeladerasController(get(ColocacionHeladerasService.class),get(ModelosService.class)));
       else if (clase.equals(DonacionDineroController.class))
         add(clase, new DonacionDineroController(get(DonacionDineroService.class)));
+      else if (clase.equals(FallasTecnicasController.class))
+        add(clase, new FallasTecnicasController(get(FallasTecnicasService.class)));
       else if (clase.equals(LoginController.class))
         add(clase, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))
@@ -176,8 +179,8 @@ public class ServiceLocator {
         add(clase, new RegistroController(get(UsuarioService.class)));
       else if (clase.equals(SuscripcionesController.class))
         add(clase, new SuscripcionesController());
-      else if (clase.equals(IncidentesController.class))
-        add(clase, new IncidentesController(get(AlertasService.class), get(FallasTecnicasService.class)));
+      else if (clase.equals(AlertasController.class))
+        add(clase, new AlertasController(get(AlertasService.class)));
       else if (clase.equals(OfertasProductoController.class))
         add(clase, new OfertasProductoController(get(OfertasProductoService.class)));
       else throw new IllegalArgumentException("No hay servicio provisto para esa clase");

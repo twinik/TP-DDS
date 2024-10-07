@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.controllers.*;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
-import ar.edu.utn.frba.dds.utils.PermisosHelper;
 import io.javalin.Javalin;
 import io.javalin.http.UploadedFile;
 import java.io.IOException;
@@ -51,7 +50,7 @@ public class Router {
     app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
     app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
-    app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(IncidentesController.class)::createFallaTecnica);
+    app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::create);
     app.post("/heladeras/{id}/reportar-falla-tecnica", ctx -> {
       // TODO: terminar y pasar a un controller
       UploadedFile uploadedFile = ctx.uploadedFile("file");
@@ -63,7 +62,7 @@ public class Router {
         e.printStackTrace();
       }
     });
-    app.get("/heladeras/alertas", ServiceLocator.get(IncidentesController.class)::showAlertas);
+    app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
 
     //REPORTES
     app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
