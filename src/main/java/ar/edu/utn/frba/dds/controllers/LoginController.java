@@ -21,12 +21,17 @@ public class LoginController implements ICrudViewsHandler {
     try {
       LoginDto dto = this.usuarioService.obtenerUsuario(usuario);
       ctx.sessionAttribute("idUsuario", dto.getIdUsuario());
+      UsuarioNavbarDto usuarioNavbarDto;
       if(dto.getIdColaborador() != null) {
         ctx.sessionAttribute("idColaborador",dto.getIdColaborador());
-        UsuarioNavbarDto usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()), dto.getIdColaborador());
-        ctx.sessionAttribute("username", usuarioNavbarDto.getNombre());
-        ctx.sessionAttribute("email", usuarioNavbarDto.getEmail());
+        usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()), dto.getIdColaborador());
       }
+      else{
+        usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()));
+      }
+
+      ctx.sessionAttribute("username", usuarioNavbarDto.getNombre());
+      ctx.sessionAttribute("email", usuarioNavbarDto.getEmail());
       String previousUrl = ctx.sessionAttribute("previousUrl");
       ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));
     } catch (LoginFailedException e) {

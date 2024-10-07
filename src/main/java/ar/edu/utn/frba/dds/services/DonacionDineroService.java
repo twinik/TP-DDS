@@ -20,20 +20,18 @@ public class DonacionDineroService {
   private ICalculadorPuntos calculadorPuntos;
 
   public void crearDonacionDinero(DonacionDineroInputDto dto) {
-    Optional<Colaborador> c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
+    Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
-    if (c.isEmpty()) throw new NoAutorizadoException("no hay colaborador asociado a este id");
-
-    if(!dto.estanCamposLlenos()) throw new FormIncompletoException();
+    if (!dto.estanCamposLlenos()) throw new FormIncompletoException();
 
     DonacionDinero donacion = new DonacionDinero();
-    donacion.setColaborador(c.get());
+    donacion.setColaborador(c);
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     donacion.setFecha(LocalDate.parse(dto.getFecha(), formatter));
     donacion.setMonto(dto.getMonto());
     donacion.setFrecuencia(FrecuenciaDonacion.fromOrdinal(dto.getFrecuenciaDonacion()));
-    this.calculadorPuntos.sumarPuntosPara(c.get(),donacion);
+    this.calculadorPuntos.sumarPuntosPara(c, donacion);
     this.donacionDineroRepository.guardar(donacion);
   }
 }

@@ -15,12 +15,16 @@ public class ColaboradoresService {
     return this.colaboradoresRepository.buscarPorUsuario(idUsuario);
   }
 
-  public Optional<Colaborador> obtenerColaborador(String id) {
-    return id == null ? Optional.empty() : this.colaboradoresRepository.buscar(id);
+  public Colaborador obtenerColaborador(String id) {
+    if (id == null) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
+    Optional<Colaborador> colab = this.colaboradoresRepository.buscar(id);
+    if (colab.isEmpty()) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
+    return colab.get();
   }
 
   public void validarExistenciaColaborador(String id) {
-    if (this.colaboradoresRepository.buscar(id).isEmpty()) throw new RecursoInexistenteException("El colaborador no existe");
+    if (this.colaboradoresRepository.buscar(id).isEmpty())
+      throw new RecursoInexistenteException("El colaborador no existe");
   }
 
 }

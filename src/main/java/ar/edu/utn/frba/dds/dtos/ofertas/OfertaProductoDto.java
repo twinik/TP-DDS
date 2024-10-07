@@ -6,12 +6,14 @@ import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
 @Getter
 @Builder
+@Setter
 public class OfertaProductoDto {
   private String nombre;
   private Float puntosNecesarios;
@@ -36,7 +38,6 @@ public class OfertaProductoDto {
     return OfertaProductoDto.builder()
         .nombre(context.formParam("nombre"))
         .puntosNecesarios(Float.valueOf(context.formParam("puntos")))
-        .urlFoto(context.formParam("foto"))
         .idColaborador(context.sessionAttribute("idColaborador"))
         .categoria(context.formParam("categoria")).build();
   }

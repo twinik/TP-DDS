@@ -69,16 +69,17 @@ public class Initializer {
     Permiso p5 = new Permiso("alta-tecnico");
     Permiso p6 = new Permiso("alta-formulario");
     Permiso p7 = new Permiso("alta-modelo-heladera");
+    Permiso p8 = new Permiso("canjear-productos");
 
     permisosRepository.guardar(p5,p6,p7);
 
     Rol r1 = new Rol();
     r1.setNombre("colaborador");
-    r1.agregarPermisos(p1);
+    r1.agregarPermisos(p1,p8);
     u1.agregarRoles(r1);
     Rol r2 = new Rol();
     r2.setNombre("persona juridica");
-    r2.agregarPermisos(p2, p3);
+    r2.agregarPermisos(p2, p3,p8);
     u2.agregarRoles(r2);
     u3.agregarRoles(r2);
     rolesRepository.guardar(r1, r2);
@@ -113,7 +114,7 @@ public class Initializer {
     List<MedioDeContacto> contactoEmpresa = new ArrayList<>();
     contactoEmpresa.add(emailEmpresa);
 
-    Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 0f, null, new Direccion("medrano", 951, 3, "1405"), listaContacto, "jorge", "lopez", null, null, null);
+    Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 200f, null, new Direccion("medrano", 951, 3, "1405"), listaContacto, "jorge", "lopez", null, null, null);
     Colaborador sa = new Colaborador(u2, null, null, tipo2, 0f, new ArrayList<>(), new Direccion("lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA);
     Colaborador ong = new Colaborador(u3, null, null, tipo3, 0f, new ArrayList<>(), new Direccion("bonifacio", 30, 10, "1406"), null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG);
 

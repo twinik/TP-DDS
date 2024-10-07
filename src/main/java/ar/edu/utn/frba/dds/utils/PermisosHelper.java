@@ -36,6 +36,7 @@ public class PermisosHelper {
       case "/colaborar/ofrecer-producto" -> this.buscarPorNombres("ofrecer-productos");
       case "/colaborar/donar-dinero" ->  this.buscarPorNombres("donar-dinero");
       case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");
+      case "/productos" -> this.buscarPorNombres("canjear-productos");
       default -> new HashSet<>();
     };
   }

@@ -62,7 +62,7 @@ public class Router {
 
     //PRODUCTOS
     app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
-    app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
+    app.post("/ofrecer-productos", ServiceLocator.get(OfertasProductoController.class)::save);
 
     app.get("/", ctx -> {
       ctx.redirect("/quienes-somos");

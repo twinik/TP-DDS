@@ -23,6 +23,7 @@ import ar.edu.utn.frba.dds.services.ColaboradoresService;
 import ar.edu.utn.frba.dds.services.ColocacionHeladerasService;
 import ar.edu.utn.frba.dds.services.DonacionDineroService;
 import ar.edu.utn.frba.dds.services.FallasTecnicasService;
+import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import ar.edu.utn.frba.dds.services.ModelosService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
@@ -54,14 +55,13 @@ public class ServiceLocator {
         add(clase, new AltaPersonaVulnerableRepository());
       else if (clase.equals(IAperturasHeladeraRepository.class))
         add(clase, new AperturasHeladeraRepository());
-      else if(clase.equals(CalculadorHeladerasCercanas.class)) {
+      else if (clase.equals(CalculadorHeladerasCercanas.class)) {
         try {
-          add(clase,new CalculadorHeladerasCercanas(get(IHeladerasRepository.class),Integer.parseInt(new ConfigReader("config.properties").getProperty("LIMITE_HELADERAS_CERCANAS"))));
+          add(clase, new CalculadorHeladerasCercanas(get(IHeladerasRepository.class), Integer.parseInt(new ConfigReader("config.properties").getProperty("LIMITE_HELADERAS_CERCANAS"))));
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
-      }
-      else if (clase.equals(ICalculadorPuntos.class))
+      } else if (clase.equals(ICalculadorPuntos.class))
         add(clase, new CalculadorPuntos());
       else if (clase.equals(ICampoRepository.class))
         add(clase, new CampoRepository());
@@ -80,15 +80,17 @@ public class ServiceLocator {
       else if (clase.equals(IColocacionHeladeraRepository.class))
         add(clase, new ColocacionHeladeraRepository());
       else if (clase.equals(DonacionDineroService.class))
-        add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class), get(ColaboradoresService.class),get(ICalculadorPuntos.class)));
+        add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class)));
       else if (clase.equals(IDonacionDineroRepository.class))
         add(clase, new DonacionDineroRepository());
       else if (clase.equals(IDonacionesViandaRepository.class))
         add(clase, new DonacionesViandaRepository());
       else if (clase.equals(FallasTecnicasService.class))
-        add(clase, new FallasTecnicasService(get(IFallasTecnicasRepository.class)));
+        add(clase, new FallasTecnicasService(get(IFallasTecnicasRepository.class), get(ColaboradoresService.class), get(HeladerasService.class)));
       else if (clase.equals(IFallasTecnicasRepository.class))
         add(clase, new FallasTecnicasRepository());
+      else if (clase.equals(FileUploadService.class))
+        add(clase, new FileUploadService());
       else if (clase.equals(IFormasColaboracionRespository.class))
         add(clase, new FormasColaboracionRespository());
       else if (clase.equals(IFormularioRepository.class))
@@ -108,7 +110,7 @@ public class ServiceLocator {
       else if (clase.equals(IOfertaProductoRepository.class))
         add(clase, new OfertaProductoRepository());
       else if (clase.equals(OfertasProductoService.class))
-        add(clase, new OfertasProductoService(get(IOfertaProductoRepository.class), get(IColaboradoresRepository.class)));
+        add(clase, new OfertasProductoService(get(IOfertaProductoRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(IOpcionRepository.class))
         add(clase, new OpcionRepository());
       else if (clase.equals(IPermisosRepository.class))
@@ -167,11 +169,11 @@ public class ServiceLocator {
 
         // CONTROLLERS
       else if (clase.equals(ColocacionHeladerasController.class))
-        add(clase, new ColocacionHeladerasController(get(ColocacionHeladerasService.class),get(ModelosService.class)));
+        add(clase, new ColocacionHeladerasController(get(ColocacionHeladerasService.class), get(ModelosService.class)));
       else if (clase.equals(DonacionDineroController.class))
         add(clase, new DonacionDineroController(get(DonacionDineroService.class)));
       else if (clase.equals(FallasTecnicasController.class))
-        add(clase, new FallasTecnicasController(get(FallasTecnicasService.class)));
+        add(clase, new FallasTecnicasController(get(FallasTecnicasService.class), get(FileUploadService.class)));
       else if (clase.equals(LoginController.class))
         add(clase, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))
@@ -183,75 +185,8 @@ public class ServiceLocator {
       else if (clase.equals(AlertasController.class))
         add(clase, new AlertasController(get(AlertasService.class)));
       else if (clase.equals(OfertasProductoController.class))
-        add(clase, new OfertasProductoController(get(OfertasProductoService.class)));
+        add(clase, new OfertasProductoController(get(OfertasProductoService.class), get(FileUploadService.class)));
       else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
-
-
-//
-//
-//
-//
-//
-//
-//                case IAlertasRepository.class.getName() -> add("alertasRepository", new AlertasRepository());
-//                case "altaPersonaVulnerableRepository" ->
-//                        add("altaPersonaVulnerableRepository", new AltaPersonaVulnerableRepository());
-//                case "aperturasHeladeraRepository" ->
-//                        add("aperturasHeladeraRepository", new AperturasHeladeraRepository());
-//                case "calculadorPuntos" -> add("calculadorPuntos", new CalculadorPuntos());
-//                case "campoRepository" -> add("campoRepository", new CampoRepository());
-//                case "canjesRepository" -> add("canjesRepository", new CanjeProductoRepository());
-//                case "colaboradoresRepository" -> add("colaboradoresRepository", new ColaboradoresRepository());
-//                case "colocacionHeladeraRepository" ->
-//                        add("colocacionHeladeraRepository", new ColocacionHeladeraRepository());
-//                case "donacionDineroRepository" -> add("donacionDineroRepository", new DonacionDineroRepository());
-//                case "donacionesViandaRepository" ->
-//                        add("donacionesViandaRepository", new DonacionesViandaRepository());
-//                case "fallasTecnicasRepository" -> add("fallasTecnicasRepository", new FallasTecnicasRepository());
-//                case "formasColaboracionRepository" ->
-//                        add("formasColaboracionRepository", new FormasColaboracionRespository());
-//                case "formulariosRepository" -> add("formulariosRepository", new FormularioRepository());
-//                case "heladerasRepository" -> add("heladerasRepository", new HeladeraRepository());
-//                case "mediosDeContactoRepository" -> add("mediosDeContactoRepository", new MedioContactoRepository());
-//                case "modelosHeladeraRepository" -> add("modelosHeladeraRepository", new ModeloHeladeraRepository());
-//                case "motivosRedistribucionRepository" ->
-//                        add("motivosRedistribucionRepository", new MotivoRedistribucionRepository());
-//                case "ofertasProductoRepository" -> add("ofertasProductoRepository", new OfertaProductoRepository());
-//                case "opcionesRepository" -> add("opcionesRepository", new OpcionRepository());
-//                case "personasVulnerablesRepository" ->
-//                        add("personasVulnerablesRepository", new PersonaVulnerableRepository());
-//                case "productosRepository" -> add("productosRepository", new ProductoRepository());
-//                case "recomendadorHeladeras" -> add("recomendadorHeladeras", new RecomendadorHeladeras());
-//                case "redistribucionesViandaRepository" ->
-//                        add("redistribucionesViandaRepository", new RedistribucionesViandaRepository());
-//                case "registrosTemperaturaRepository" ->
-//                        add("registrosTemperaturaRepository", new RegistrosTemperaturaRepository());
-//                case "reportesFactory" ->
-//                        add("reportesFactory", new ReportesFactory(get("viandasRepository", IViandasRepository.class),
-//                                get("donacionesViandaRepository", IDonacionesViandaRepository.class),
-//                                get("redistribucionesViandaRepository", IRedistribucionesViandaRepository.class),
-//                                get("fallasTecnicasRepository", IFallasTecnicasRepository.class),
-//                                get("alertasRepository", IAlertasRepository.class)));
-//                case "reportesRepository" -> add("reportesRepository", new ReportesRepository());
-//                case "respuestasCampoRepository" -> add("respuestasCampoRepository", new RespuestasCampoRepository());
-//                case "respuestasFormularioRepository" ->
-//                        add("respuestasFormularioRepository", new RespuestasFormularioRepository());
-//                case "sensoresMovimientoRepository" ->
-//                        add("sensoresMovimientoRepository", new SensoresMovimientoRepository());
-//                case "sensoresTemperaturaRepository" ->
-//                        add("sensoresTemperaturaRepository", new SensoresTemperaturaRepository());
-//                case "solicitudesAperturaHeladeraRepository" ->
-//                        add("solicitudesAperturaHeladeraRepository", new SolcitudesAperturaHeladeraRepository());
-//                case "suscripcionesRepository" -> add("suscripcionesRepository", new SuscripcionesRepository());
-//                case "tarjetasColaboradorRepository" ->
-//                        add("tarjetasColaboradorRepository", new TarjetasColaboradorRepository());
-//                case "tarjetasRepository" -> add("tarjetasRepository", new TarjetaRepository());
-//                case "tecnicosRepository" -> add("tecnicosRepository", new TecnicosRepository());
-//                case "usosTarjetaRepository" -> add("usosTarjetaRepository", new UsosTarjetaRepository());
-//                case "usuariosRepository" -> add("usuariosRepository", new UsuariosRepository());
-//                case "viandasRepository" -> add("viandasRepository", new ViandasRepository());
-//                case "visitasTecnicoRepository" -> add("visitasTecnicoRepository", new VisitasTecnicoRepository());
-//                default -> throw new IllegalArgumentException("nombre invalido");
 
     }
     return (T) services.get(clase);

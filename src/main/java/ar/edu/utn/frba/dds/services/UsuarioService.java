@@ -31,25 +31,29 @@ public class UsuarioService {
     return resultado;
   }
 
-  public Usuario obtenerUsuario(String idUsuario){
+  public Usuario obtenerUsuario(String idUsuario) {
     Optional<Usuario> user = usuariosRepository.buscar(idUsuario);
     return user.orElse(null);
   }
 
-  public UsuarioNavbarDto getUsuarioNavbar(Usuario u, String idColaborador){
+  public UsuarioNavbarDto getUsuarioNavbar(Usuario u, String idColaborador) {
     UsuarioNavbarDto dto = new UsuarioNavbarDto();
     dto.setEmail(u.getEmail());
 
-    Optional<Colaborador> colaborador = this.colaboradoresService.obtenerColaborador(idColaborador);
-    if (colaborador.isPresent()) {
-      if (colaborador.get().getTipoColaborador().getTipo() == TipoPersona.PERSONA_HUMANA) {
-        dto.setNombre(colaborador.get().getNombreYapellido());
+    Colaborador colaborador = this.colaboradoresService.obtenerColaborador(idColaborador);
+      if (colaborador.getTipoColaborador().getTipo() == TipoPersona.PERSONA_HUMANA) {
+        dto.setNombre(colaborador.getNombreYapellido());
       } else {
-        dto.setNombre(colaborador.get().getRazonSocial());
+        dto.setNombre(colaborador.getRazonSocial());
       }
-    } else {
-      dto.setNombre("Usuario");
-    }
+
+    return dto;
+  }
+
+  public UsuarioNavbarDto getUsuarioNavbar(Usuario u) {
+    UsuarioNavbarDto dto = new UsuarioNavbarDto();
+    dto.setEmail(u.getEmail());
+    dto.setNombre("Usuario");
     return dto;
   }
 

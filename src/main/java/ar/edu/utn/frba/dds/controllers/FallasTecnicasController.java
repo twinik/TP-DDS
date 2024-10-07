@@ -18,6 +18,7 @@ import java.util.Map;
 public class FallasTecnicasController implements ICrudViewsHandler {
 
   FallasTecnicasService service;
+  FileUploadService fileUploadService;
 
   @Override
   public void index(Context context) {
@@ -46,8 +47,7 @@ public class FallasTecnicasController implements ICrudViewsHandler {
     FallaTecnicaDto falla = FallaTecnicaDto.of(context);
     UploadedFile uploadedFile = context.uploadedFile("file");
     try {
-      FileUploadService fileUploadService = new FileUploadService();
-      String result = fileUploadService.uploadFile(uploadedFile);
+      String result = this.fileUploadService.uploadFile(uploadedFile);
       falla.setUrlFoto(result);
     } catch (IOException e) {
       e.printStackTrace();

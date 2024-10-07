@@ -15,8 +15,7 @@ public class HeladerasService {
 
   IHeladerasRepository repoHeladeras;
 
-  public List<HeladeraMapaDto> getHeladerasParaMapa()
-  {
+  public List<HeladeraMapaDto> getHeladerasParaMapa() {
     List<Heladera> heladeras = repoHeladeras.buscarTodos();
     List<HeladeraMapaDto> resultado = heladeras.stream().map(HeladeraMapaDto::fromHeladera).collect(Collectors.toList());
     return resultado;
@@ -27,7 +26,7 @@ public class HeladerasService {
     if (h.isEmpty()) {
       throw new RecursoInexistenteException("La heladera no existe");
     } else {
-      return new HeladeraDto(h.get().getId(), h.get().getNombre());
+      return HeladeraDto.fromHeladera(h.get());
     }
   }
 

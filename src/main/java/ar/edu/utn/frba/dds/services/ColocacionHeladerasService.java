@@ -26,9 +26,7 @@ public class ColocacionHeladerasService {
 
   // TODO: Herencia para las colaboraciones con colaboradoresService ??
   public void crearColocacionHeladera(HeladeraInputDto dto) {
-    Optional<Colaborador> c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
-
-    if (c.isEmpty()) throw new NoAutorizadoException("no hay colaborador asociado a este id");
+    Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
     if (!dto.estanCamposLlenos()) throw new FormIncompletoException();
     // TODO: por ahora creo la heladera aca, no se si es mas adecuado ponerlo en heladerasService
@@ -37,7 +35,7 @@ public class ColocacionHeladerasService {
     colocacionHeladeras.setFecha(LocalDate.parse(dto.getFecha(), formatter));
     if (colocacionHeladeras.getFecha().isAfter(LocalDate.now()))
       throw new FormIncompletoException("fecha invalida ingresada");
-    colocacionHeladeras.setColaborador(c.get());
+    colocacionHeladeras.setColaborador(c);
     Heladera heladera = new Heladera();
     heladera.setNombre(dto.getNombre());
     heladera.setFechaPuestaFuncionamiento(LocalDate.parse(dto.getFecha(), formatter));
@@ -46,7 +44,7 @@ public class ColocacionHeladerasService {
     heladera.setDireccion(new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()));
 
     colocacionHeladeras.setHeladera(heladera);
-    c.get().agregarColocacionHeladera(colocacionHeladeras);
+    c.agregarColocacionHeladera(colocacionHeladeras);
 
     heladera.setHeladerasCercanas(this.calculadorHeladerasCercanas.getHeladerasCercanasA(heladera));
 

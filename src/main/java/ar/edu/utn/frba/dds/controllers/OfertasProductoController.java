@@ -2,15 +2,19 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.ofertas.CategoriaOfertaDto;
 import ar.edu.utn.frba.dds.dtos.ofertas.OfertaProductoDto;
+import ar.edu.utn.frba.dds.dtos.personas.ColaboradorPuntosDto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
+import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.Initializer;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import io.javalin.http.UploadedFile;
 import lombok.AllArgsConstructor;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -19,13 +23,16 @@ import java.util.Map;
 @AllArgsConstructor
 public class OfertasProductoController implements ICrudViewsHandler {
   private OfertasProductoService ofertasProductoService;
+  private FileUploadService fileUploadService;
 
   @Override
   public void index(Context context) {
     //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
-    List<OfertaProductoDto> ofertas = ofertasProductoService.obtenerTodos();
+    List<OfertaProductoDto> ofertas = this.ofertasProductoService.obtenerTodos();
+    ColaboradorPuntosDto puntosdDisponibles = this.ofertasProductoService.obtenerPuntos(context.sessionAttribute("idColaborador"));
     Map<String, Object> model = new HashMap<>();
     model.put("ofertas", ofertas);
+    model.put("puntosDisp", puntosdDisponibles);
     context.render("/app/productos/productos.hbs", model);
   }
 
@@ -60,8 +67,13 @@ public class OfertasProductoController implements ICrudViewsHandler {
   public void save(Context context) {
     // obtener de sesion
     OfertaProductoDto dto = OfertaProductoDto.of(context);
+    UploadedFile uploadedFile = context.uploadedFile("file");
     try {
+      String result = this.fileUploadService.uploadFile(uploadedFile);
+      dto.setUrlFoto(result);
       ofertasProductoService.crearOferta(dto);
+    } catch (IOException e) {
+      e.printStackTrace();
     } catch (FormIncompletoException e) {
       // TODO: Mostrar pop up error ?
     }
