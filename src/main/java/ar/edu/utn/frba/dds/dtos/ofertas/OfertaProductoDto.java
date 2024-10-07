@@ -38,7 +38,7 @@ public class OfertaProductoDto {
         .puntosNecesarios(Float.valueOf(context.formParam("puntos")))
         .urlFoto(context.formParam("foto"))
         .idColaborador(context.sessionAttribute("idColaborador"))
-        .categoria(CategoriaOferta.OTROS.name()).build();
+        .categoria(context.formParam("categoria")).build();
   }
 
   public boolean estanCamposLlenos() {

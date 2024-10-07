@@ -41,7 +41,6 @@ public class OfertasProductoService {
     ofertaProducto.setFechaCreacion(LocalDate.now());
     ofertaProducto.setPuntosNecesarios(oferta.getPuntosNecesarios());
     ofertaProducto.setColaborador(colab.get());
-    // ignorar esto
     ofertaProducto.setCategoria(CategoriaOferta.valueOf(oferta.getCategoria()));
 
 

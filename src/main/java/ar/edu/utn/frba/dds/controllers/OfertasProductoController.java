@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.ofertas.CategoriaOfertaDto;
 import ar.edu.utn.frba.dds.dtos.ofertas.OfertaProductoDto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
@@ -10,6 +11,7 @@ import ar.edu.utn.frba.dds.utils.Initializer;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import lombok.AllArgsConstructor;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +52,7 @@ public class OfertasProductoController implements ICrudViewsHandler {
     // TODO: ya pongo las categorias en el model para que las puedas desplegar
 
     Map<String, Object> model = new HashMap<>();
-    model.put("categorias", CategoriaOferta.obtenerNombresCategorias());
+    model.put("categorias", Arrays.stream(CategoriaOferta.values()).map(CategoriaOfertaDto::of).toList());
     context.render("/app/colaboraciones/ofrecer-productos.hbs", model);
   }
 
