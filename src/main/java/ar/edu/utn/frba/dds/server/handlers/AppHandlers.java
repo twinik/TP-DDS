@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class AppHandlers {
   private final IHandler[] handlers = new IHandler[]{
-      new AccesoDenegadoHandler(), new UsuarioNoAutenticadoHandler()
+      new AccesoDenegadoHandler(), new UsuarioNoAutenticadoHandler(), new RecursoInvalidoHandler()
   };
 
   public static void applyHandlers(Javalin app) {

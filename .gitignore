@@ -38,3 +38,5 @@ persistence.xml
 node_modules
 recomendador-donacion-api/dist
 .env
+
+/uploads

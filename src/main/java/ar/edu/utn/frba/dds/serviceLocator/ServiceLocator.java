@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.controllers.RegistroController;
 import ar.edu.utn.frba.dds.controllers.SuscripcionesController;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.heladeras.CalculadorHeladerasCercanas;
@@ -160,8 +161,8 @@ public class ServiceLocator {
         add(clase, new UsuariosRepository());
       else if (clase.equals(IViandasRepository.class))
         add(clase, new ViandasRepository());
-      else if (clase.equals(IVisitasTecnicoRepository.class))
-        add(clase, new VisitasTecnicoRepository());
+      else if (clase.equals(TecnicosHelper.class))
+        add(clase, new TecnicosHelper(get(ITecnicosRepository.class)));
 
 
         // CONTROLLERS

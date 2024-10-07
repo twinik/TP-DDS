@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraDto;
+import ar.edu.utn.frba.dds.dtos.incidentes.FallaTecnicaDto;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FallasTecnicasService;
 import ar.edu.utn.frba.dds.services.FileUploadService;
@@ -20,7 +21,7 @@ public class FallasTecnicasController implements ICrudViewsHandler {
 
   @Override
   public void index(Context context) {
-
+    // TODO: hacer view para que un admin pueda ver fallas tecnicas
   }
 
   @Override
@@ -48,14 +49,20 @@ public class FallasTecnicasController implements ICrudViewsHandler {
 
   @Override
   public void save(Context context) {
+    FallaTecnicaDto falla = FallaTecnicaDto.of(context);
     UploadedFile uploadedFile = context.uploadedFile("file");
     try {
       FileUploadService fileUploadService = new FileUploadService();
-      String result = fileUploadService.uploadFile(uploadedFile, "src/main/resources/templates/app/heladeras/");
-      context.result(result);
+      String result = fileUploadService.uploadFile(uploadedFile);
+      falla.setUrlFoto(result);
     } catch (IOException e) {
       e.printStackTrace();
     }
+    service.crear(falla);
+    Map<String, String> model = new HashMap<>();
+    model.put("message", "La falla tecnica fue registrada con exito!");
+    context.status(201);
+    context.render("/app/success.hbs", model);
   }
 
   @Override

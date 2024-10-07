@@ -51,17 +51,7 @@ public class Router {
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
     app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
     app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::create);
-    app.post("/heladeras/{id}/reportar-falla-tecnica", ctx -> {
-      // TODO: terminar y pasar a un controller
-      UploadedFile uploadedFile = ctx.uploadedFile("file");
-      try {
-        FileUploadService fileUploadService = new FileUploadService();
-        String result = fileUploadService.uploadFile(uploadedFile, "src/main/resources/templates/app/heladeras/");
-        ctx.result(result);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    });
+    app.post("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::save);
     app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
 
     //REPORTES
@@ -84,7 +74,7 @@ public class Router {
       UploadedFile uploadedFile = ctx.uploadedFile("file");
       try {
         FileUploadService fileUploadService = new FileUploadService();
-        String result = fileUploadService.uploadFile(uploadedFile, "src/main/resources/templates/app/carga-masiva/");
+        String result = fileUploadService.uploadFile(uploadedFile);
         ctx.result(result);
       } catch (IOException e) {
         e.printStackTrace();
