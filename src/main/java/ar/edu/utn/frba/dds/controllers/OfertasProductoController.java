@@ -69,8 +69,10 @@ public class OfertasProductoController implements ICrudViewsHandler {
     OfertaProductoDto dto = OfertaProductoDto.of(context);
     UploadedFile uploadedFile = context.uploadedFile("file");
     try {
-      String result = this.fileUploadService.uploadFile(uploadedFile);
-      dto.setUrlFoto(result);
+      if (uploadedFile != null) {
+        String result = this.fileUploadService.uploadFile(uploadedFile);
+        dto.setUrlFoto(result);
+      }
       ofertasProductoService.crearOferta(dto);
     } catch (IOException e) {
       e.printStackTrace();

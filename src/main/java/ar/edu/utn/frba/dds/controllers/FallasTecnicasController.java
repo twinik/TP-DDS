@@ -47,8 +47,10 @@ public class FallasTecnicasController implements ICrudViewsHandler {
     FallaTecnicaDto falla = FallaTecnicaDto.of(context);
     UploadedFile uploadedFile = context.uploadedFile("file");
     try {
-      String result = this.fileUploadService.uploadFile(uploadedFile);
-      falla.setUrlFoto(result);
+      if(uploadedFile != null ){
+        String result = this.fileUploadService.uploadFile(uploadedFile);
+        falla.setUrlFoto(result);
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
