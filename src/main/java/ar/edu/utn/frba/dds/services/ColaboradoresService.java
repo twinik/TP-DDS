@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.exceptions.RecursoInvalidoException;
+import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ public class ColaboradoresService {
   }
 
   public void validarExistenciaColaborador(String id) {
-    if (this.colaboradoresRepository.buscar(id).isEmpty()) throw new RecursoInvalidoException("El colaborador no existe");
+    if (this.colaboradoresRepository.buscar(id).isEmpty()) throw new RecursoInexistenteException("El colaborador no existe");
   }
 
 }

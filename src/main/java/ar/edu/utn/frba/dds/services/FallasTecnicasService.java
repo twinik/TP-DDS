@@ -24,10 +24,9 @@ public class FallasTecnicasService {
     colaboradoresService.validarExistenciaColaborador(dto.getIdColaborador());
 
     HeladerasService heladerasService = ServiceLocator.get(HeladerasService.class);
-    heladerasService.validarExistenciaHeladera(dto.getHeladeraId());
 
     FallaTecnica falla = new FallaTecnica(
-        heladerasService.obtenerHeladera(dto.getHeladeraId()).get(),
+        heladerasService.obtenerHeladera(dto.getHeladeraId()),
         LocalDateTime.now(),
         ServiceLocator.get(TecnicosHelper.class),
         new NotificationStrategyFactory(),

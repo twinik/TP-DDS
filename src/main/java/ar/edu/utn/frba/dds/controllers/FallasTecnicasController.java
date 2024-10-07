@@ -35,12 +35,6 @@ public class FallasTecnicasController implements ICrudViewsHandler {
 
     HeladeraDto h = ServiceLocator.get(HeladerasService.class).getHeladeraDto(heladeraId);
 
-    if (h == null) {
-      context.status(404);
-      context.render("/app/404.hbs");
-      return;
-    }
-
     Map<String, Object> model = new HashMap<>();
 
     model.put("heladera", h);
