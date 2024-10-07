@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.dtos.LoginDto;
-import ar.edu.utn.frba.dds.dtos.UsuarioDto;
-import ar.edu.utn.frba.dds.dtos.UsuarioNavbarDto;
+import ar.edu.utn.frba.dds.dtos.usuarios.LoginDto;
+import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
+import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioNavbarDto;
 import ar.edu.utn.frba.dds.exceptions.LoginFailedException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;

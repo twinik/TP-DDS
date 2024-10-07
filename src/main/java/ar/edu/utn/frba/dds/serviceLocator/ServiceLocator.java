@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.controllers.LoginController;
 import ar.edu.utn.frba.dds.controllers.LogoutController;
 import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
 import ar.edu.utn.frba.dds.controllers.RegistroController;
+import ar.edu.utn.frba.dds.controllers.SuscripcionesController;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
@@ -23,6 +24,7 @@ import ar.edu.utn.frba.dds.services.FallasTecnicasService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import ar.edu.utn.frba.dds.services.ModelosService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
+import ar.edu.utn.frba.dds.services.SuscripcionesServices;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import java.io.IOException;
 import java.util.HashMap;
@@ -141,6 +143,8 @@ public class ServiceLocator {
         add(clase, new SolicitudesAperturaHeladeraRepository());
       else if (clase.equals(ISuscripcionesRepository.class))
         add(clase, new SuscripcionesRepository());
+      else if (clase.equals(SuscripcionesServices.class))
+        add(clase, new SuscripcionesServices(get(ISuscripcionesRepository.class)));
       else if (clase.equals(ITarjetasColaboradorRepository.class))
         add(clase, new TarjetasColaboradorRepository());
       else if (clase.equals(ITarjetasRepository.class))
@@ -165,11 +169,13 @@ public class ServiceLocator {
       else if (clase.equals(DonacionDineroController.class))
         add(clase, new DonacionDineroController(get(DonacionDineroService.class)));
       else if (clase.equals(LoginController.class))
-        add(LoginController.class, new LoginController(get(UsuarioService.class)));
+        add(clase, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))
-        add(LogoutController.class, new LogoutController());
+        add(clase, new LogoutController());
       else if (clase.equals(RegistroController.class))
-        add(RegistroController.class, new RegistroController(get(UsuarioService.class)));
+        add(clase, new RegistroController(get(UsuarioService.class)));
+      else if (clase.equals(SuscripcionesController.class))
+        add(clase, new SuscripcionesController());
       else if (clase.equals(IncidentesController.class))
         add(clase, new IncidentesController(get(AlertasService.class), get(FallasTecnicasService.class)));
       else if (clase.equals(OfertasProductoController.class))

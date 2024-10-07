@@ -2,9 +2,9 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.*;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
-import ar.edu.utn.frba.dds.services.DonacionDineroService;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
+import ar.edu.utn.frba.dds.utils.PermisosHelper;
 import io.javalin.Javalin;
 import io.javalin.http.UploadedFile;
 import java.io.IOException;
@@ -50,9 +50,20 @@ public class Router {
     //HELADERAS
     app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
-    app.get("/heladeras/{id}/suscribirme", ctx -> ctx.render("/app/heladeras/suscripcion.hbs"));
-    app.get("/heladeras/{id}/reportar-falla-tecnica", ctx -> ctx.render("/app/heladeras/reportar-falla.hbs"));
-    app.get("/heladeras/{id}/alertas", ServiceLocator.get(IncidentesController.class)::index);
+    app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
+    app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(IncidentesController.class)::createFallaTecnica);
+    app.post("/heladeras/{id}/reportar-falla-tecnica", ctx -> {
+      // TODO: terminar y pasar a un controller
+      UploadedFile uploadedFile = ctx.uploadedFile("file");
+      try {
+        FileUploadService fileUploadService = new FileUploadService();
+        String result = fileUploadService.uploadFile(uploadedFile, "src/main/resources/templates/app/heladeras/");
+        ctx.result(result);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
+    app.get("/heladeras/alertas", ServiceLocator.get(IncidentesController.class)::showAlertas);
 
     //REPORTES
     app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
@@ -79,17 +90,6 @@ public class Router {
       } catch (IOException e) {
         e.printStackTrace();
         ctx.result("Error al subir el archivo: " + e.getMessage());
-      }
-    });
-
-    app.post("/upload-falla-tecnica", ctx -> {
-      UploadedFile uploadedFile = ctx.uploadedFile("file");
-      try {
-        FileUploadService fileUploadService = new FileUploadService();
-        String result = fileUploadService.uploadFile(uploadedFile, "src/main/resources/templates/app/heladeras/");
-        ctx.result(result);
-      } catch (IOException e) {
-        e.printStackTrace();
       }
     });
   }

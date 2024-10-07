@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.middleware;
 
-import ar.edu.utn.frba.dds.dtos.UsuarioNavbarDto;
 import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
 import ar.edu.utn.frba.dds.exceptions.UsuarioNoAutenticadoException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
@@ -17,7 +16,6 @@ public class AuthMiddleware implements IMiddleware {
     app.beforeMatched(ctx -> {
       Set<Permiso> permisos = PermisosHelper.getInstance().buscarPermisosPara(ctx);
       Usuario usuario = getUser(ctx);
-      ctx.attribute("currentUser", getUsuarioNavbar(usuario,ctx));
       if (!permisos.isEmpty()) {
         if (usuario == null) {
           ctx.sessionAttribute("previousUrl", ctx.path());
@@ -35,10 +33,5 @@ public class AuthMiddleware implements IMiddleware {
     if (idUsuario == null) return null;
     return ServiceLocator.get(UsuarioService.class).
         obtenerUsuario(idUsuario);
-  }
-
-  private static UsuarioNavbarDto getUsuarioNavbar(Usuario u,Context ctx) {
-    if (u == null) return null;
-    return ServiceLocator.get(UsuarioService.class).getUsuarioNavbar(u,ctx.sessionAttribute("idColaborador"));
   }
 }

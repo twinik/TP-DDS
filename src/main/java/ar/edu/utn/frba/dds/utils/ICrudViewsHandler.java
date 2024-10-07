@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.utils;
 import io.javalin.http.Context;
 
 public interface ICrudViewsHandler {
+
     void index(Context context);
 
     void show(Context context);
