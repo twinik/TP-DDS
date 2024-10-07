@@ -8,6 +8,8 @@ import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -25,14 +27,12 @@ public class LoginController implements ICrudViewsHandler {
         ctx.sessionAttribute("username", usuarioNavbarDto.getNombre());
         ctx.sessionAttribute("email", usuarioNavbarDto.getEmail());
       }
-      // perdon uri no lo vi
-      //String path = ctx.queryParam("nextPage") != null ? "/" + ctx.queryParam("nextPage") : "/";
-     // ctx.redirect(path);
       String previousUrl = ctx.sessionAttribute("previousUrl");
       ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));
     } catch (LoginFailedException e) {
-      // TODO: mostrar mensaje error
-      ctx.redirect("/login");
+      Map<String, String> model = new HashMap<>();
+      model.put("message", "No existe un usuario con ese email o contraseña. Inténtelo nuevamente.");
+      ctx.render("auth/login/inicio-sesion.hbs", model);
     }
   }
 
