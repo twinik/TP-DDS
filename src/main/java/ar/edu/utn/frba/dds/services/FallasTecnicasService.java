@@ -15,8 +15,10 @@ public class FallasTecnicasService {
   }
 
   public void crear(FallaTecnicaDto dto){
-    // TODO:
+    // TODO
     FallaTecnica falla = new FallaTecnica();
+
+    falla.reportar();
 
     this.fallasTecnicasRepository.guardar(falla);
   }

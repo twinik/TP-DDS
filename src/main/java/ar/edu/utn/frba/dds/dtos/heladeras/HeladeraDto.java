@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.dtos.heladeras;
 
 
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.Map;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class HeladeraDto {
   // TODO: completar compos
   private String id;

@@ -1,7 +1,8 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.dtos.LoginDto;
-import ar.edu.utn.frba.dds.dtos.UsuarioDto;
+import ar.edu.utn.frba.dds.dtos.usuarios.LoginDto;
+import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
+import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioNavbarDto;
 import ar.edu.utn.frba.dds.exceptions.LoginFailedException;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -18,7 +19,12 @@ public class LoginController implements ICrudViewsHandler {
     try {
       LoginDto dto = this.usuarioService.obtenerUsuario(usuario);
       ctx.sessionAttribute("idUsuario", dto.getIdUsuario());
-      if(dto.getIdColaborador() != null) ctx.sessionAttribute("idColaborador",dto.getIdColaborador());
+      if(dto.getIdColaborador() != null) {
+        ctx.sessionAttribute("idColaborador",dto.getIdColaborador());
+        UsuarioNavbarDto usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()), dto.getIdColaborador());
+        ctx.sessionAttribute("username", usuarioNavbarDto.getNombre());
+        ctx.sessionAttribute("email", usuarioNavbarDto.getEmail());
+      }
       // perdon uri no lo vi
       //String path = ctx.queryParam("nextPage") != null ? "/" + ctx.queryParam("nextPage") : "/";
      // ctx.redirect(path);

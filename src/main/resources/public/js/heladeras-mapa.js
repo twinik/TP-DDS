@@ -27,7 +27,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         const markerTemplate= `<div class="popup-content flex flex-col">
                 <div class="popup-title">${markerData.title}</div>
                 ${markerData.disabled ? inhabilitadaContent : reportarFallaBtn}
-                <a href="/heladeras/${markerData.id}/suscribirme" class="popup-button">Suscribirse</a>
+                <a href="/heladeras/${markerData.id}/suscribirse" class="popup-button">Suscribirse</a>
             </div>`
 
         marker.bindPopup(markerTemplate);

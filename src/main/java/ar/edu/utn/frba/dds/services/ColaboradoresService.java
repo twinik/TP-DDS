@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.dtos.UsuarioNavbarDto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import lombok.AllArgsConstructor;

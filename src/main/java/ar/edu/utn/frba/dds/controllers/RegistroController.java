@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import static ar.edu.utn.frba.dds.helpers.DateHelper.fechaFromString;
 
-import ar.edu.utn.frba.dds.dtos.UsuarioDto;
+import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaHumanaDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;

@@ -12,7 +12,7 @@
 
 {{#partial "contenido"}}
     <div class="p-10 mx-auto max-w-4xl">
-        <h1 class="title1 mb-12">Suscripciones Heladera Medrano</h1>
+        <h1 class="title1 mb-12">{{heladera.nombre}}</h1>
         <div
                 class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
         >
@@ -43,6 +43,8 @@
                     <option value="telgram">Telegram</option>
                     <option value="whatsapp">WhatsApp</option>
                 </select>
+
+                <input type="hidden" name="heladera-id" value="{{heladera.id}}"/>
 
                 <button
                         type="submit"
@@ -80,6 +82,8 @@
                     <option value="whatsapp">WhatsApp</option>
                 </select>
 
+                <input type="hidden" name="heladera-id" value="{{heladera.id}}"/>
+
                 <button
                         type="submit"
                         class="content-center max-w-md mx-auto mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
@@ -104,6 +108,8 @@
                     <option value="telgram">Telegram</option>
                     <option value="whatsapp">WhatsApp</option>
                 </select>
+
+                <input type="hidden" name="heladera-id" value="{{heladera.id}}"/>
 
                 <button
                         type="submit"

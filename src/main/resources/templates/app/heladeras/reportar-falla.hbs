@@ -13,7 +13,7 @@
 {{#partial "contenido"}}
     <div class="p-5 mx-auto max-w-4xl">
         <h1 class="title1">Reportar Falla Tecnica</h1>
-        <h2 class="title2 mt-10">Heladera Medrano</h2>
+        <h2 class="title2 mt-10">{{heladera.nombre}}</h2>
         <form action="/upload-falla-tecnica" method="post" enctype="multipart/form-data">
             <div class="ml-5 mr-5 mt-5 relative z-0 mb-5 group">
                 <textarea
@@ -55,7 +55,7 @@
                         <input id="dropzone-file" type="file" name="file" class="hidden"/>
                     </label>
                 </div>
-                <!-- --- -->
+                <input type="hidden" name="heladera-id" value="{{heladera.id}}"/>
 
                 <button type="submit" class="mt-auto mb-5 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white botonFormularios rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Reportar Falla
