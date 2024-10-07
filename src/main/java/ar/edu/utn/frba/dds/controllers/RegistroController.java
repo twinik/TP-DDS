@@ -5,6 +5,7 @@ import static ar.edu.utn.frba.dds.helpers.DateHelper.fechaFromString;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaHumanaDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
+import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
@@ -102,7 +103,16 @@ public class RegistroController implements ICrudViewsHandler {
 
   @Override
   public void show(Context context) {
-
+    if (context.pathParam("tipo-persona").equals("humana"))
+      context.render("/auth/registro/registro-humano.hbs");
+    else if (context.pathParam("tipo-persona").equals("juridica"))
+      context.render("/auth/registro/registro-juridico.hbs");
+    else if (context.pathParam("tipo-persona").equals("admin")) {
+      // TODO: registro admin????
+      context.redirect("/");
+    } else {
+      throw new RecursoInexistenteException("no existe registro para este recurso");
+    }
   }
 
   @Override

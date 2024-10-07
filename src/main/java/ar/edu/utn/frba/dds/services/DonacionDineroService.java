@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.services;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.DonacionDineroInputDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.FrecuenciaDonacion;
@@ -27,8 +28,7 @@ public class DonacionDineroService {
     DonacionDinero donacion = new DonacionDinero();
     donacion.setColaborador(c);
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    donacion.setFecha(LocalDate.parse(dto.getFecha(), formatter));
+    donacion.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
     donacion.setMonto(dto.getMonto());
     donacion.setFrecuencia(FrecuenciaDonacion.fromOrdinal(dto.getFrecuenciaDonacion()));
     this.calculadorPuntos.sumarPuntosPara(c, donacion);

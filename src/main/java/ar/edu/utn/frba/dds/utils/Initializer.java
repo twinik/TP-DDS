@@ -63,23 +63,23 @@ public class Initializer {
     Usuario u1 = new Usuario("usuario@mail.com", "contra");
     Usuario u2 = new Usuario("usuuuario@mail.com", "1234");
     Usuario u3 = new Usuario("ong@mail.com", "pass");
-    Permiso p1 = new Permiso("donar-dinero");
-    Permiso p2 = new Permiso("colocar-heladeras");
-    Permiso p3 = new Permiso("ofrecer-productos");
-    Permiso p5 = new Permiso("alta-tecnico");
-    Permiso p6 = new Permiso("alta-formulario");
-    Permiso p7 = new Permiso("alta-modelo-heladera");
-    Permiso p8 = new Permiso("canjear-productos");
+    Permiso p1 = new Permiso("Donar dinero", "donar-dinero");
+    Permiso p2 = new Permiso("Colocar heladeras", "colocar-heladeras");
+    Permiso p3 = new Permiso("Ofrecer productos", "ofrecer-productos");
+    Permiso p5 = new Permiso("Alta tecnico", "alta-tecnico");
+    Permiso p6 = new Permiso("Alta formulario", "alta-formulario");
+    Permiso p7 = new Permiso("Alta modelo heladera", "alta-modelo-heladera");
+    Permiso p8 = new Permiso("Canjear productos", "canjear-productos");
 
-    permisosRepository.guardar(p5,p6,p7);
+    permisosRepository.guardar(p5, p6, p7);
 
     Rol r1 = new Rol();
     r1.setNombre("colaborador");
-    r1.agregarPermisos(p1,p8);
+    r1.agregarPermisos(p1, p8);
     u1.agregarRoles(r1);
     Rol r2 = new Rol();
     r2.setNombre("persona juridica");
-    r2.agregarPermisos(p2, p3,p8);
+    r2.agregarPermisos(p2, p3, p8);
     u2.agregarRoles(r2);
     u3.agregarRoles(r2);
     rolesRepository.guardar(r1, r2);
@@ -92,7 +92,7 @@ public class Initializer {
     FormaColaboracion registroPersona = new FormaColaboracion("REGISTRO_PERSONA");
     FormaColaboracion colocacionHeladeras = new FormaColaboracion("COLOCACION_HELADERA");
 
-    formasColaboracionRespository.guardar(donacionVianda,donacionDinero,redistribucionVianda,registroPersona,colocacionHeladeras);
+    formasColaboracionRespository.guardar(donacionVianda, donacionDinero, redistribucionVianda, registroPersona, colocacionHeladeras);
 
     TipoColaborador tipo = new TipoColaborador(TipoPersona.PERSONA_HUMANA, new ArrayList<>());
     tipo.getFormasPosiblesColaboracion().add(donacionDinero);
@@ -171,12 +171,12 @@ public class Initializer {
     Initializer.init();
   }
 
-  public static Optional<Colaborador> dameOng(){
-    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter( c -> c.getRazonSocial() !=null).findFirst();
+  public static Optional<Colaborador> dameOng() {
+    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter(c -> c.getRazonSocial() != null).findFirst();
   }
 
-  public static Optional<Colaborador> dameColaborador(){
-    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter( c -> c.getRazonSocial() ==null).findFirst();
+  public static Optional<Colaborador> dameColaborador() {
+    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter(c -> c.getRazonSocial() == null).findFirst();
   }
 
 }

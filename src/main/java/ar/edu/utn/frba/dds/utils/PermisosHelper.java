@@ -48,7 +48,7 @@ public class PermisosHelper {
 
   private Set<Permiso> buscarPorNombres(String ...nombres){
     return this.permisosDisponibles.stream().filter(p ->
-            Arrays.stream(nombres).anyMatch(nombre -> p.getDescripcion().equalsIgnoreCase(nombre))
+            Arrays.stream(nombres).anyMatch(nombre -> p.getDesc_interna().equalsIgnoreCase(nombre))
         ).collect(Collectors.toSet());
   }
 
