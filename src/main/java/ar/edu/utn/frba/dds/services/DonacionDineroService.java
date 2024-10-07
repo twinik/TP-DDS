@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.colaboraciones.DonacionDineroInputDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionDinero;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.repositories.IDonacionDineroRepository;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class DonacionDineroService {
   private IDonacionDineroRepository donacionDineroRepository;
   private ColaboradoresService colaboradoresService;
+  private ICalculadorPuntos calculadorPuntos;
 
   public void crearDonacionDinero(DonacionDineroInputDto dto) {
     Optional<Colaborador> c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
@@ -31,7 +33,7 @@ public class DonacionDineroService {
     donacion.setFecha(LocalDate.parse(dto.getFecha(), formatter));
     donacion.setMonto(dto.getMonto());
     donacion.setFrecuencia(FrecuenciaDonacion.fromOrdinal(dto.getFrecuenciaDonacion()));
-
+    this.calculadorPuntos.sumarPuntosPara(c.get(),donacion);
     this.donacionDineroRepository.guardar(donacion);
   }
 }

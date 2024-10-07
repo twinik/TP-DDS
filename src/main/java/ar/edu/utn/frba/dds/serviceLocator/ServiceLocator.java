@@ -78,7 +78,7 @@ public class ServiceLocator {
       else if (clase.equals(IColocacionHeladeraRepository.class))
         add(clase, new ColocacionHeladeraRepository());
       else if (clase.equals(DonacionDineroService.class))
-        add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class), get(ColaboradoresService.class)));
+        add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class), get(ColaboradoresService.class),get(ICalculadorPuntos.class)));
       else if (clase.equals(IDonacionDineroRepository.class))
         add(clase, new DonacionDineroRepository());
       else if (clase.equals(IDonacionesViandaRepository.class))
