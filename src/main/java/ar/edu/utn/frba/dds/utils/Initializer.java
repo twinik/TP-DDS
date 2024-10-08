@@ -45,6 +45,7 @@ public class Initializer {
         Usuario u1 = new Usuario("usuario@mail.com", "contra");
         Usuario u2 = new Usuario("usuuuario@mail.com", "1234");
         Usuario u3 = new Usuario("ong@mail.com", "pass");
+        Usuario u4 = new Usuario("admin@mail.com","admin");
         Permiso p1 = new Permiso("Donar dinero", "donar-dinero");
         Permiso p2 = new Permiso("Colocar heladeras", "colocar-heladeras");
         Permiso p3 = new Permiso("Ofrecer productos", "ofrecer-productos");
@@ -64,10 +65,16 @@ public class Initializer {
         r2.agregarPermisos(p2, p3, p8);
         u2.agregarRoles(r2);
         u3.agregarRoles(r2);
-        rolesRepository.guardar(r1, r2);
+
+        Rol r3 = new Rol();
+        r3.setNombre("admin");
+        r3.agregarPermisos(p5,p6,p7);
+        rolesRepository.guardar(r1, r2,r3);
+        u4.agregarRoles(r3);
         usuariosRepository.guardar(u1);
         usuariosRepository.guardar(u2);
         usuariosRepository.guardar(u3);
+        usuariosRepository.guardar(u4);
         FormaColaboracion donacionDinero = new FormaColaboracion("DONACION_DINERO");
         FormaColaboracion donacionVianda = new FormaColaboracion("DONACION_VIANDA");
         FormaColaboracion redistribucionVianda = new FormaColaboracion("REDISTRIBUCION_VIANDA");

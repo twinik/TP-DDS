@@ -14,13 +14,13 @@ import java.util.Scanner;
  */
 public class ValidacionListaClavesNuevo extends Validacion {
     private final ConfigReader config;
-    private List<String> peoresContrasenias = new ArrayList<>();
+    private final List<String> peoresContrasenias = new ArrayList<>();
 
     /**
      * Constructor.
      */
     public ValidacionListaClavesNuevo() {
-        this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contrasenias"));
+        this.setMotivo(new MotivoNoValido("La clave aparece en la lista de las 10.000 peores contraseñas"));
         this.config = new ConfigReader("config.properties");
         cargarPeoresContrasenias();
     }

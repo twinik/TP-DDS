@@ -42,7 +42,7 @@ public class DonacionDineroController implements ICrudViewsHandler {
         } catch (FormIncompletoException e) {
             // TODO: Mostrar pop up error ?
         }
-        //TODO: mostrar carteal de creado con exito
+        //TODO: mostrar cartel de creado con exito
         context.redirect("/colaborar");
     }
 

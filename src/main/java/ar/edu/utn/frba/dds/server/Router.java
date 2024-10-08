@@ -32,19 +32,27 @@ public class Router {
         app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
         //ALTA
-        app.get("/admin/tecnicos/nuevo", ctx -> ctx.render("/app/admin/alta-tecnico.hbs"));
+        app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
+        app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
         app.get("/admin/formularios/nuevo", ctx -> ctx.render("/app/admin/alta-formulario.hbs"));
         app.get("/admin/modelos-heladeras/nuevo", ctx -> ctx.render("/app/admin/alta-modelo-heladera.hbs"));
 
         //COLABORACIONES
         app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
+
         app.get("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::create);
         app.post("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::save);
-        app.get("/colaborar/registrar-persona-vulnerable", ctx -> ctx.render("/app/colaboraciones/alta-persona-vulnerable.hbs"));
+
+        app.get("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::create);
+        app.post("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::save);
+
         app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
+
         app.get("/colaborar/distribuir-viandas", ctx -> ctx.render("/app/colaboraciones/distribucion-vianda.hbs"));
+
         app.get("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::create);
         app.post("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::save);
+
         app.get("/colaborar/ofrecer-producto", ServiceLocator.get(OfertasProductoController.class)::create);
 
         //HELADERAS

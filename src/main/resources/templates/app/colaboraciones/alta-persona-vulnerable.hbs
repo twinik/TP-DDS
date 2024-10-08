@@ -23,8 +23,23 @@
             <input
                     type="text"
                     id="nombre"
+                    name="nombre"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Nombre"
+                    required
+            />
+
+            <label
+                    for="apellido"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Apellido</label
+            >
+            <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Apellido"
                     required
             />
 
@@ -35,6 +50,7 @@
             >
             <select
                     id="tipo-documento"
+                    name="tipoDocumento"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
                 <option value="dni">DNI</option>
@@ -50,6 +66,7 @@
             <input
                     type="number"
                     id="documento"
+                    name="nroDocumento"
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Documento"
@@ -72,6 +89,7 @@
                     type="text"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Fecha de nacimiento"
+                    name="fechaNacimiento"
             />
 
             <label
@@ -127,6 +145,7 @@
                 <input
                         type="text"
                         id="domicilio"
+                        name="domicilio"
                         class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Domicilio"
                 />
@@ -205,7 +224,7 @@
                     id="cod-tarjeta"
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="ingrese código"
+                    placeholder="Ingrese código"
                     min="1"
             />
             <button
