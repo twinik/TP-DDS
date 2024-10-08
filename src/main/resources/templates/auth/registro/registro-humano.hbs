@@ -11,7 +11,7 @@
     <div class="flex justify-center items-center lg:mt-16 flex-col">
         <h1 class="title1 mb-6" style="color: #eee;">Registro</h1>
         <div class="flex flex-col items-center justify-center">
-            <form class="content-center max-w-md mx-auto">
+            <form method="post" action="/registro/persona-humana" class="content-center max-w-md mx-auto">
                 <div class="grid md:grid-cols-2 md:gap-6">
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="text" name="nombre" id="floating_first_name"
@@ -144,6 +144,7 @@
                         class="w-full mt-4 px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
                     Registrarse
                 </button>
+            </form>
         </div>
     </div>
 {{/partial}}

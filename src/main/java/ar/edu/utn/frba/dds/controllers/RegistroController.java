@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
+import ar.edu.utn.frba.dds.services.ColaboradoresService;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -25,35 +26,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RegistroController implements ICrudViewsHandler {
   private UsuarioService usuarioService;
+  private ColaboradoresService colaboradoresService;
 
   public void handleRegistroHumano(Context ctx) {
+    PersonaHumanaDto nuevaPersonaHumana = PersonaHumanaDto.of(ctx);
+    if (!nuevaPersonaHumana.sonClavesIguales()) throw new RegistroFailedException("Las contrasenias no coinciden");
     try {
-      String email = ctx.formParam("email");
-      String clave = ctx.formParam("password");
-      String claveConf = ctx.formParam("passConf");
-      String nombre = ctx.formParam("nombre");
-      String apellido = ctx.formParam("apellido");
-      LocalDate fechaNacimiento = fechaFromString(ctx.formParam("fechaNacimiento"), "dd/MM/yyyy");
-      String calle = ctx.formParam("calle");
-      Integer altura = Integer.parseInt(ctx.formParam("altura"));
-      Integer piso = Integer.parseInt(ctx.formParam("piso"));
-      String codigoPostal = ctx.formParam("cp");
-      Direccion direccion = new Direccion(calle, altura, piso, codigoPostal);
+
 
       // TODO: formasColaboracion y mediosDeContacto
-      List<FormaColaboracion> formasColaboracion = ctx.formParams("formasColaboracion").stream().map(FormaColaboracion::new).toList();
-      List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+//      List<FormaColaboracion> formasColaboracion = ctx.formParams("formasColaboracion").stream().map(FormaColaboracion::new).toList();
+//      List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
       //List<MedioDeContacto> mediosDeContacto = ctx.formParams("mediosDeContacto").stream().map(MedioDeContacto::new).toList();
 
-      if (!clave.equals(claveConf)) {
-        throw new RegistroFailedException("Las contraseñas no coinciden");
-      }
-
-      PersonaHumanaDto nuevaPersonaHumana = new PersonaHumanaDto(nombre, apellido, fechaNacimiento, direccion, formasColaboracion, mediosDeContacto);
-
-      UsuarioDto nuevoUsuario = new UsuarioDto(email, clave);
-      usuarioService.registrar(nuevoUsuario);
-
+      this.colaboradoresService.regisrar(nuevaPersonaHumana);
       ctx.redirect("/login");
     } catch (RegistroFailedException e) {
       ctx.status(400);
@@ -87,7 +73,7 @@ public class RegistroController implements ICrudViewsHandler {
       PersonaJuridicaDto nuevaPersonaJuridica = new PersonaJuridicaDto(razonSocial, tipoOrganizacion, rubro, direccion, formasColaboracion, mediosDeContacto);
 
       UsuarioDto nuevoUsuario = new UsuarioDto(email, clave);
-      usuarioService.registrar(nuevoUsuario);
+      this.colaboradoresService.registrar(nuevoUsuario);
 
       ctx.redirect("/login");
     } catch (RegistroFailedException e) {

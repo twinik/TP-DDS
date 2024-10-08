@@ -179,7 +179,7 @@ public class ServiceLocator {
       else if (clase.equals(LogoutController.class))
         add(clase, new LogoutController());
       else if (clase.equals(RegistroController.class))
-        add(clase, new RegistroController(get(UsuarioService.class)));
+        add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class)));
       else if (clase.equals(SuscripcionesController.class))
         add(clase, new SuscripcionesController());
       else if (clase.equals(AlertasController.class))

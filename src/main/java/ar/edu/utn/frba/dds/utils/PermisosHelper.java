@@ -46,7 +46,7 @@ public class PermisosHelper {
     this.permisosDisponibles.add(p);
   }
 
-  private Set<Permiso> buscarPorNombres(String ...nombres){
+  public Set<Permiso> buscarPorNombres(String ...nombres){
     return this.permisosDisponibles.stream().filter(p ->
             Arrays.stream(nombres).anyMatch(nombre -> p.getDesc_interna().equalsIgnoreCase(nombre))
         ).collect(Collectors.toSet());
