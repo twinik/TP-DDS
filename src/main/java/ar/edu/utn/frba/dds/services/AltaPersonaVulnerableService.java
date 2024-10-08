@@ -18,10 +18,31 @@ public class AltaPersonaVulnerableService {
   private IPersonaVulnerableRepository personasVulnerablesRepository;
   private ColaboradoresService colaboradoresService;
   private ICalculadorPuntos calculadorPuntos;
+  private Colaborador colaborador;
 
-  public void darAltaPersonaVulnerable(AltaPersonaVulnerableDto dto){
-    Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
+  public void darAltaPersonaVulnerable(AltaPersonaVulnerableDto dto) {
+    this.colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
+    PersonaVulnerable p = obtenerPersonaVulnerable(dto);
+    p.setColaborador(this.colaborador);
+
+    AltaPersonaVulnerable a = new AltaPersonaVulnerable();
+    a.setPersona(p);
+    a.setColaborador(colaborador);
+    a.setFecha(LocalDate.now());
+
+    // TODO Tarjeta
+
+    this.calculadorPuntos.sumarPuntosPara(colaborador, a);
+    this.personasVulnerablesRepository.guardar(p);
+  }
+
+  public void crearPersonaVulnerable(AltaPersonaVulnerableDto dto) {
+    PersonaVulnerable p = obtenerPersonaVulnerable(dto);
+    this.personasVulnerablesRepository.guardar(p);
+  }
+
+  public PersonaVulnerable obtenerPersonaVulnerable(AltaPersonaVulnerableDto dto) {
     PersonaVulnerable p = new PersonaVulnerable();
     p.setNombre(dto.getNombre());
     p.setApellido(dto.getApellido());
@@ -31,17 +52,9 @@ public class AltaPersonaVulnerableService {
     p.setDomicilio(dto.getDomicilio());
     p.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
     p.setNroDocumento(dto.getNroDocumento());
-    p.setColaborador(c);
     //TODO Lista tutorados
 
-    AltaPersonaVulnerable a = new AltaPersonaVulnerable();
-    a.setPersona(p);
-    a.setColaborador(c);
-    a.setFecha(LocalDate.now());
-
-    // TODO Tarjeta
-
-    this.calculadorPuntos.sumarPuntosPara(c, a);
-    this.personasVulnerablesRepository.guardar(p);
+    return p;
   }
+
 }

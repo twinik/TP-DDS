@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class AltaPersonaVulnerableController implements ICrudViewsHandler {
   private AltaPersonaVulnerableService service;
+
   @Override
   public void index(Context context) {
 
@@ -28,13 +29,20 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
   @Override
   public void save(Context context) {
     AltaPersonaVulnerableDto dto = AltaPersonaVulnerableDto.of(context);
-    try {
-      this.service.darAltaPersonaVulnerable(dto);
-    } catch (FormIncompletoException e) {
-      // TODO: Mostrar pop up error ?
+
+    if (dto.getTieneTutorados() == "si") {
+
+      context.redirect("/colaborar/registrar-persona-vulnerable/registrar-tutorados");
+    } else {
+      try {
+        this.service.darAltaPersonaVulnerable(dto);
+      } catch (FormIncompletoException e) {
+        // TODO: Mostrar pop up error ?
+      }
+      //TODO: mostrar cartel de creado con exito
+      context.redirect("/colaborar");
     }
-    //TODO: mostrar cartel de creado con exito
-    context.redirect("/colaborar");
+
   }
 
   @Override

@@ -18,6 +18,7 @@ public class AltaPersonaVulnerableDto {
   private String domicilio;
   private String idColaborador;
   private String codigoTarjeta;
+  private String tieneTutorados;
   private List<AltaPersonaVulnerableDto> tutorados;
 
   public static AltaPersonaVulnerableDto of (Context context){
@@ -31,6 +32,7 @@ public class AltaPersonaVulnerableDto {
         .domicilio(context.formParam("domicilio"))
         .idColaborador(context.sessionAttribute("idColaborador"))
         .codigoTarjeta(context.formParam("codTarjeta"))
+        .tieneTutorados(context.formParam("tieneTutorados"))
         // TODO Lista de tutorados
         .build();
   }
