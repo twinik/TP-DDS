@@ -13,16 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class PersonaHumanaDto {
-    private String nombre;
-    private String apellido;
-    private String fechaNacimiento;
-    private DIreccionDto direccion;
-    private List<FormaColaboracionDto> formasColaboracion;
-    private List<MedioDeContacto> mediosDeContacto;
-    private UsuarioDto usuarioDto;
-    private String claveConf;
+  private String nombre;
+  private String apellido;
+  private String fechaNacimiento;
+  private DIreccionDto direccion;
+  private List<FormaColaboracionDto> formasColaboracion;
+  private List<MedioContactoDto> mediosDeContacto;
+  private UsuarioDto usuarioDto;
+  private String claveConf;
 
-    public static PersonaHumanaDto of(Context context) {
+  public static PersonaHumanaDto of(Context context) {
 //    String email = ctx.formParam("email");
 //    String clave = ctx.formParam("password");
 //    String claveConf = ctx.formParam("passConf");
@@ -34,20 +34,22 @@ public class PersonaHumanaDto {
 //    Integer piso = Integer.parseInt(ctx.formParam("piso"));
 //    String codigoPostal = ctx.formParam("cp");
 //    Direccion direccion = new Direccion(calle, altura, piso, codigoPostal);
-        return PersonaHumanaDto.builder().nombre(context.formParam("nombre"))
-                .apellido(context.formParam("apellido"))
-                .fechaNacimiento(context.formParam("fechaNacimiento"))
-                .direccion(DIreccionDto.builder().calle(context.formParam("calle"))
-                        .numero(Integer.parseInt(context.formParam("altura")))
-                        .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
-                        .codigoPostal(context.formParam("cp")).build())
-                .claveConf(context.formParam("passConf"))
-                .usuarioDto(new UsuarioDto(context.formParam("email"), context.formParam("password")))
-                .build();
-    }
+    return PersonaHumanaDto.builder().nombre(context.formParam("nombre"))
+        .apellido(context.formParam("apellido"))
+        .fechaNacimiento(context.formParam("fechaNacimiento"))
+        .direccion(DIreccionDto.builder().calle(context.formParam("calle"))
+            .numero(Integer.parseInt(context.formParam("altura")))
+            .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
+            .codigoPostal(context.formParam("cp"))
+            .build())
+        .claveConf(context.formParam("passConf"))
+        .usuarioDto(new UsuarioDto(context.formParam("email"), context.formParam("password")))
+        .mediosDeContacto(MedioContactoDto.of(context))
+        .build();
+  }
 
-    public boolean sonClavesIguales() {
-        return this.claveConf.equals(this.usuarioDto.getClave());
-    }
+  public boolean sonClavesIguales() {
+    return this.claveConf.equals(this.usuarioDto.getClave());
+  }
 
 }

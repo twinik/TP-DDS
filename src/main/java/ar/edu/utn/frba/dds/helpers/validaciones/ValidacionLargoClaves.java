@@ -17,7 +17,7 @@ public class ValidacionLargoClaves extends Validacion {
     private boolean esMuyCorta(String contrasena) {
         boolean result = contrasena.length() < LONGITUD_MINIMA;
         if (result) {
-            this.setMotivo(new MotivoNoValido("La contrasena es muy corta, debe tener como minimo "
+            this.setMotivo(new MotivoNoValido("La contraseña es muy corta, debe tener como minimo "
                     + LONGITUD_MINIMA
                     + " caracteres."));
         }
@@ -27,7 +27,7 @@ public class ValidacionLargoClaves extends Validacion {
     private boolean esMuyLarga(String contrasena) {
         boolean result = contrasena.length() > LONGITUD_MAXIMA;
         if (result) {
-            this.setMotivo(new MotivoNoValido("La contrasena es muy larga, debe tener como maximo " + LONGITUD_MAXIMA + " caracteres."));
+            this.setMotivo(new MotivoNoValido("La contraseña es muy larga, debe tener como maximo " + LONGITUD_MAXIMA + " caracteres."));
         }
         return result;
     }

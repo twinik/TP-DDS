@@ -2,7 +2,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Registrar Técnico</h1>
 
-        <form class="content-center max-w-md mx-auto">
+        <form method="post" action="" class="content-center max-w-md mx-auto">
             <label
                     for="nombre"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -10,6 +10,7 @@
             >
             <input
                     type="text"
+                    name="nombre"
                     id="nombre"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Nombre"
@@ -24,6 +25,7 @@
             <input
                     type="text"
                     id="apellido"
+                    name="apellido"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Apellido"
                     required
@@ -36,11 +38,15 @@
             >
             <select
                     id="tipo-documento"
+                    name="tipoDocumento"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-                <option value="DNI">DNI</option>
-                <option value="LC">Libreta Cívica</option>
-                <option value="LE">Libreta de Enrolamiento</option>
+                {{#each tiposDocumento}}
+                    <option value={{this.valor}}>{{this.descripcion}}</option>
+                {{/each}}
+<!--                <option value="DNI">DNI</option>-->
+<!--                <option value="LC">Libreta Cívica</option>-->
+<!--                <option value="LE">Libreta de Enrolamiento</option>-->
             </select>
 
             <label
@@ -51,6 +57,7 @@
             <input
                     type="number"
                     id="documento"
+                    name="documento"
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="documento"
@@ -66,10 +73,11 @@
                 >
                 <select
                         id="medio-contacto-1"
+                        name="canal-1"
                         class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                     <option value="Whatsapp">Whatsapp</option>
-                    <option value="Mail">Mail</option>
+                    <option value="Email">Mail</option>
                     <option value="Telegram">Telegram</option>
                 </select>
                 <label
@@ -78,8 +86,9 @@
                 >Contacto 1</label
                 >
                 <input
-                        type="number"
+                        type="text"
                         id="contacto-1"
+                        name="contacto-1"
                         aria-describedby="helper-text-explanation"
                         class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Nro de telefono o Email"
@@ -87,9 +96,10 @@
                         min="1"
                 />
             </div>
-            <button class="mb-4 text-sm" onclick="nuevoMedioContacto()">
+            <button class="mb-4 text-sm" type="button" onclick="nuevoMedioContacto()">
                 Agregar medio de contacto +
             </button>
+            <input type="hidden" name="cantidad-contactos" id="cantidad-contactos" value="1"/>
 
             <span
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -111,7 +121,9 @@
             >
             <input
                     type="number"
+                    step="0.1"
                     id="radio-de-cobertura"
+                    name="radio"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="1"
                     required

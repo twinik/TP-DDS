@@ -21,18 +21,14 @@ public class ColaboradoresService {
     }
 
     public Colaborador obtenerColaborador(String id) {
+        // TODO: hacerlo con messageFactory
         if (id == null) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
         Optional<Colaborador> colab = this.colaboradoresRepository.buscar(id);
         if (colab.isEmpty()) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
         return colab.get();
     }
 
-    public void validarExistenciaColaborador(String id) {
-        if (this.colaboradoresRepository.buscar(id).isEmpty())
-            throw new RecursoInexistenteException("El colaborador no existe");
-    }
-
-    public void regisrar(PersonaHumanaDto dto) {
+    public void registrar(PersonaHumanaDto dto) {
         Colaborador colaborador = new Colaborador();
         colaborador.setNombre(dto.getNombre());
         colaborador.setApellido(dto.getApellido());

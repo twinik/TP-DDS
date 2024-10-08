@@ -13,6 +13,7 @@ const getNewCampoHtml = index => {
         >
         <select
             id="tipo-campo-${index}"
+            name="tipo-campo-${index}"
             onchange="mostrarOpciones(${index})"
             class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
@@ -30,6 +31,7 @@ const getNewCampoHtml = index => {
         <input
             type="text"
             id="pregunta-${index}"
+            name="pregunta-${index}"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Pregunta"
             required
@@ -42,7 +44,7 @@ const getNewCampoHtml = index => {
                         class="mt-5 text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opción 1
                     </label>
                     <div class="flex flex-row">
-                        <input type="text" id="opcion-1-campo-${index}-input"
+                        <input type="text" id="opcion-1-campo-${index}-input" name="opcion-1-campo-${index}-input"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Valor opción" />
                     </div>
@@ -53,7 +55,7 @@ const getNewCampoHtml = index => {
 
         <div class="flex flex-row justify-between">
             <div class="flex flex-1 items-center mt-5 mb-5">
-                <input id="obligatorio-campo-${index}" type="checkbox" value="obligatorio"
+                <input id="obligatorio-campo-${index}" name="obligatorio-campo-${index}" type="checkbox" value="obligatorio"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="obligatorio-campo-${index}"
                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Obligatorio</label>
@@ -123,6 +125,7 @@ const agregarOpcion = (campoIndex) => {
     const opcionesDiv = document.getElementById(`opciones-campo-${campoIndex}`);
     const nuevaOpcionDiv = document.createElement('div');
     nuevaOpcionDiv.id = `opcion-${nuevoOpcionIndex}-campo-${campoIndex}`;
+    nuevaOpcionDiv.name = `opcion-${nuevoOpcionIndex}-campo-${campoIndex}`;
 
     const label = document.createElement('label');
     label.setAttribute('for', `opcion-${nuevoOpcionIndex}-campo-${campoIndex}-input`);
@@ -135,6 +138,7 @@ const agregarOpcion = (campoIndex) => {
     const nuevaOpcionInput = document.createElement('input');
     nuevaOpcionInput.type = 'text';
     nuevaOpcionInput.id = `opcion-${nuevoOpcionIndex}-campo-${campoIndex}-input`;
+    nuevaOpcionInput.name = `opcion-${nuevoOpcionIndex}-campo-${campoIndex}-input`;
     nuevaOpcionInput.className = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
     nuevaOpcionInput.placeholder = `Valor opción`;
 

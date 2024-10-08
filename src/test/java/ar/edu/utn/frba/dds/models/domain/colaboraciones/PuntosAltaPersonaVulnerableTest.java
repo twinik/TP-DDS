@@ -26,8 +26,8 @@ public class PuntosAltaPersonaVulnerableTest {
     @BeforeEach
     void test_init() {
         colaborador = new Colaborador();
-        personaVulnerable_1 = new PersonaVulnerable("Ernesto", new GregorianCalendar(1990, Calendar.AUGUST, 4).getTime(), new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), true, "Caballito", TipoDocumento.DNI, "45419968", colaborador, null);
-        personaVulnerable_2 = new PersonaVulnerable("Jaime", new GregorianCalendar(1995, Calendar.AUGUST, 8).getTime(), new GregorianCalendar(2005, Calendar.AUGUST, 2).getTime(), true, "Monte Grande", TipoDocumento.DNI, "45419967", colaborador, null);
+        personaVulnerable_1 = new PersonaVulnerable("Ernesto", LocalDate.of(1990,8,4), LocalDate.of(2000,8,4), true, "Caballito", TipoDocumento.DNI, "45419968", colaborador, null);
+        personaVulnerable_2 = new PersonaVulnerable("Jaime", LocalDate.of(1995,8,8), LocalDate.of(2005,8,2), true, "Monte Grande", TipoDocumento.DNI, "45419967", colaborador, null);
         donacion_1 = new AltaPersonaVulnerable();
         donacion_1.setColaborador(colaborador);
         donacion_1.setPersona(personaVulnerable_1);

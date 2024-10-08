@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -27,11 +28,14 @@ public class PersonaVulnerable extends EntidadPersistente {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
+    @Column(name = "apellido", nullable = false)
+    private String apellido;
+
     @Column(name = "fecha_naciminiento")
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @Column(name = "fecha_registro")
-    private Date fechaRegistro;
+    private LocalDate fechaRegistro;
 
     @Column(name = "posee_domicilio")
     private boolean poseeDomicilio;
@@ -54,7 +58,7 @@ public class PersonaVulnerable extends EntidadPersistente {
     private List<PersonaVulnerable> tutorados;
 
 
-    public PersonaVulnerable(String nombre, Date fechaNacimiento, Date fechaRegistro, boolean poseeDomicilio, String domicilio, TipoDocumento tipoDocumento, String nroDocumento, Colaborador colaborador, List<PersonaVulnerable> tutorados) {
+    public PersonaVulnerable(String nombre, LocalDate fechaNacimiento, LocalDate fechaRegistro, boolean poseeDomicilio, String domicilio, TipoDocumento tipoDocumento, String nroDocumento, Colaborador colaborador, List<PersonaVulnerable> tutorados) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaRegistro = fechaRegistro;
