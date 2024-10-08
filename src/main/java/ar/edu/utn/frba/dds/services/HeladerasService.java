@@ -13,29 +13,29 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class HeladerasService {
 
-  IHeladerasRepository repoHeladeras;
+    IHeladerasRepository repoHeladeras;
 
-  public List<HeladeraMapaDto> getHeladerasParaMapa() {
-    List<Heladera> heladeras = repoHeladeras.buscarTodos();
-    List<HeladeraMapaDto> resultado = heladeras.stream().map(HeladeraMapaDto::fromHeladera).collect(Collectors.toList());
-    return resultado;
-  }
-
-  public HeladeraDto getHeladeraDto(String id) {
-    Optional<Heladera> h = repoHeladeras.buscar(id);
-    if (h.isEmpty()) {
-      throw new RecursoInexistenteException("La heladera no existe");
-    } else {
-      return HeladeraDto.fromHeladera(h.get());
+    public List<HeladeraMapaDto> getHeladerasParaMapa() {
+        List<Heladera> heladeras = repoHeladeras.buscarTodos();
+        List<HeladeraMapaDto> resultado = heladeras.stream().map(HeladeraMapaDto::fromHeladera).collect(Collectors.toList());
+        return resultado;
     }
-  }
 
-  public Heladera obtenerHeladera(String id) {
-    Optional<Heladera> h = repoHeladeras.buscar(id);
-    if (h.isEmpty()) {
-      throw new RecursoInexistenteException("La heladera no existe");
-    } else {
-      return h.get();
+    public HeladeraDto getHeladeraDto(String id) {
+        Optional<Heladera> h = repoHeladeras.buscar(id);
+        if (h.isEmpty()) {
+            throw new RecursoInexistenteException("La heladera no existe");
+        } else {
+            return HeladeraDto.fromHeladera(h.get());
+        }
     }
-  }
+
+    public Heladera obtenerHeladera(String id) {
+        Optional<Heladera> h = repoHeladeras.buscar(id);
+        if (h.isEmpty()) {
+            throw new RecursoInexistenteException("La heladera no existe");
+        } else {
+            return h.get();
+        }
+    }
 }

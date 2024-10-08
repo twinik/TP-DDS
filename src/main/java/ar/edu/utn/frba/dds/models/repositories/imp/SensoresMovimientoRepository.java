@@ -18,7 +18,7 @@ public class SensoresMovimientoRepository implements ISensorMovimientoRepository
     public static void main(String[] args) {
         IRolesRepository repo = ServiceLocator.get(IRolesRepository.class);
         Rol r1 = new Rol();
-        r1.agregarPermisos(new Permiso("hola","hola"), new Permiso("permite","permite_hacer"));
+        r1.agregarPermisos(new Permiso("hola", "hola"), new Permiso("permite", "permite_hacer"));
         Rol r2 = new Rol();
         r2.setNombre("rolcito");
         repo.guardar(r1);

@@ -13,18 +13,19 @@ import java.util.List;
 @AllArgsConstructor
 public class AlertasService {
 
-  private IAlertasRepository alertasRepository;
-  public List<AlertaDto> obtenerTodos(){
-    return this.alertasRepository.buscarTodos().stream().map(AlertaDto::fromAlerta).toList();
-  }
+    private IAlertasRepository alertasRepository;
 
-  public void crear(AlertaDto dto){
-    Alerta a = new Alerta();
-    a.setHeladera(HeladeraDto.toHeladera(dto.getHeladera()));
-    a.setTimestamp(LocalDateTime.parse(dto.getFechaHora(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
-    a.setTipoAlerta(TipoAlerta.valueOf(dto.getTipoAlerta().toUpperCase()));
+    public List<AlertaDto> obtenerTodos() {
+        return this.alertasRepository.buscarTodos().stream().map(AlertaDto::fromAlerta).toList();
+    }
 
-    alertasRepository.guardar(a);
-  }
+    public void crear(AlertaDto dto) {
+        Alerta a = new Alerta();
+        a.setHeladera(HeladeraDto.toHeladera(dto.getHeladera()));
+        a.setTimestamp(LocalDateTime.parse(dto.getFechaHora(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        a.setTipoAlerta(TipoAlerta.valueOf(dto.getTipoAlerta().toUpperCase()));
+
+        alertasRepository.guardar(a);
+    }
 
 }

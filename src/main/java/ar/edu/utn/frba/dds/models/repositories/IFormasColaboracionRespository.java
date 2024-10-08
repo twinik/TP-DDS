@@ -13,7 +13,7 @@ public interface IFormasColaboracionRespository {
 
     void guardar(FormaColaboracion forma);
 
-    void guardar(FormaColaboracion ...formas);
+    void guardar(FormaColaboracion... formas);
 
     void actualizar(FormaColaboracion forma);
 

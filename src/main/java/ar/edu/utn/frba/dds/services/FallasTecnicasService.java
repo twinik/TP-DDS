@@ -14,38 +14,38 @@ import java.util.List;
 
 @AllArgsConstructor
 public class FallasTecnicasService {
-  private IFallasTecnicasRepository fallasTecnicasRepository;
-  private ColaboradoresService colaboradoresService;
-  private HeladerasService heladerasService;
+    private IFallasTecnicasRepository fallasTecnicasRepository;
+    private ColaboradoresService colaboradoresService;
+    private HeladerasService heladerasService;
 
-  public List<FallaTecnicaDto> obtenerTodos(){
-    return this.fallasTecnicasRepository.buscarTodos().stream().map(FallaTecnicaDto::fromFalla).toList();
-  }
+    public List<FallaTecnicaDto> obtenerTodos() {
+        return this.fallasTecnicasRepository.buscarTodos().stream().map(FallaTecnicaDto::fromFalla).toList();
+    }
 
-  public void crear(FallaTecnicaDto dto){
+    public void crear(FallaTecnicaDto dto) {
 
 //    colaboradoresService.validarExistenciaColaborador(dto.getIdColaborador());
 
-    // ya te lo valida aca
+        // ya te lo valida aca
 
-    Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
-    Heladera heladera = this.heladerasService.obtenerHeladera(dto.getHeladeraId());
+        Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
+        Heladera heladera = this.heladerasService.obtenerHeladera(dto.getHeladeraId());
 
 
-    FallaTecnica falla = new FallaTecnica(
-        heladera,
-        LocalDateTime.now(),
-        ServiceLocator.get(TecnicosHelper.class),
-        new NotificationStrategyFactory(),
-        colaborador,
-        dto.getDescripcion(),
-        dto.getUrlFoto()
-    );
+        FallaTecnica falla = new FallaTecnica(
+                heladera,
+                LocalDateTime.now(),
+                ServiceLocator.get(TecnicosHelper.class),
+                new NotificationStrategyFactory(),
+                colaborador,
+                dto.getDescripcion(),
+                dto.getUrlFoto()
+        );
 
-    falla.reportar();
+        falla.reportar();
 
-    this.fallasTecnicasRepository.guardar(falla);
-  }
+        this.fallasTecnicasRepository.guardar(falla);
+    }
 
 
 }

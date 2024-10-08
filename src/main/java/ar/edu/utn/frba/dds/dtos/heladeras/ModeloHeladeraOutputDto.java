@@ -7,10 +7,10 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ModeloHeladeraOutputDto {
-  private String id;
-  private String modelo;
+    private String id;
+    private String modelo;
 
-  public static ModeloHeladeraOutputDto fromModelo(ModeloHeladera modeloHeladera){
-    return new ModeloHeladeraOutputDto(modeloHeladera.getId(),modeloHeladera.getModelo());
-  }
+    public static ModeloHeladeraOutputDto fromModelo(ModeloHeladera modeloHeladera) {
+        return new ModeloHeladeraOutputDto(modeloHeladera.getId(), modeloHeladera.getModelo());
+    }
 }

@@ -13,70 +13,70 @@ import java.util.Optional;
  */
 public class ColaboradoresRepository implements IColaboradoresRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
-    try {
-      Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
-          .setParameter("tipoDocumento", tipoDocumento)
-          .setParameter("documento", documento).getSingleResult();
-      return Optional.ofNullable(c);
-    } catch (NoResultException e) {
-      return Optional.empty();
+    @Override
+    public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
+        try {
+            Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
+                    .setParameter("tipoDocumento", tipoDocumento)
+                    .setParameter("documento", documento).getSingleResult();
+            return Optional.ofNullable(c);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+
     }
 
-  }
-
-  @Override
-  public Optional<Colaborador> buscar(String id) {
-    return Optional.ofNullable(entityManager().find(Colaborador.class, id));
-  }
-
-  @Override
-  public Optional<Colaborador> buscarPorUsuario(String idUsuario) {
-    try {
-      return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo", Colaborador.class)
-          .setParameter("idUsuario", idUsuario)
-          .setParameter("activo", true)
-          .getSingleResult());
-    } catch (NoResultException e) {
-      return Optional.empty();
+    @Override
+    public Optional<Colaborador> buscar(String id) {
+        return Optional.ofNullable(entityManager().find(Colaborador.class, id));
     }
-  }
 
-  @Override
-  public List<Colaborador> buscarTodos() {
-    return entityManager().createQuery("from Colaborador where activo=:activo", Colaborador.class).
-        setParameter("activo", true)
-        .getResultList();
-  }
+    @Override
+    public Optional<Colaborador> buscarPorUsuario(String idUsuario) {
+        try {
+            return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo", Colaborador.class)
+                    .setParameter("idUsuario", idUsuario)
+                    .setParameter("activo", true)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
 
-  @Override
-  public void guardar(Colaborador colaborador) {
-    withTransaction(() -> entityManager().persist(colaborador));
-  }
+    @Override
+    public List<Colaborador> buscarTodos() {
+        return entityManager().createQuery("from Colaborador where activo=:activo", Colaborador.class).
+                setParameter("activo", true)
+                .getResultList();
+    }
 
-  public void guardar(Colaborador... colaborador) {
+    @Override
+    public void guardar(Colaborador colaborador) {
+        withTransaction(() -> entityManager().persist(colaborador));
+    }
 
-    withTransaction(() -> {
-      for (Colaborador colab : colaborador) {
-        entityManager().persist(colab);
-      }
-    });
-  }
+    public void guardar(Colaborador... colaborador) {
 
-  @Override
-  public void actualizar(Colaborador colaborador) {
-    withTransaction(() -> entityManager().merge(colaborador));
-  }
+        withTransaction(() -> {
+            for (Colaborador colab : colaborador) {
+                entityManager().persist(colab);
+            }
+        });
+    }
 
-  @Override
-  public void eliminar(Colaborador colaborador) {
+    @Override
+    public void actualizar(Colaborador colaborador) {
+        withTransaction(() -> entityManager().merge(colaborador));
+    }
 
-    withTransaction(() -> {
-      colaborador.borrarLogico();
-      entityManager().merge(colaborador);
-    });
-  }
+    @Override
+    public void eliminar(Colaborador colaborador) {
+
+        withTransaction(() -> {
+            colaborador.borrarLogico();
+            entityManager().merge(colaborador);
+        });
+    }
 
 //  public static void main(String[] args) {
 //        Colaborador m = new Colaborador();

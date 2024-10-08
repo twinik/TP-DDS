@@ -7,11 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class FrecuenciaDonacionDineroDto {
-  private Integer valor;
-  private String nombre;
+    private Integer valor;
+    private String nombre;
 
-  public static FrecuenciaDonacionDineroDto of(FrecuenciaDonacion f){
-    return new FrecuenciaDonacionDineroDto(f.ordinal(),FrecuenciaDonacion.mapearTexto(f));
-  }
+    public static FrecuenciaDonacionDineroDto of(FrecuenciaDonacion f) {
+        return new FrecuenciaDonacionDineroDto(f.ordinal(), FrecuenciaDonacion.mapearTexto(f));
+    }
 
 }

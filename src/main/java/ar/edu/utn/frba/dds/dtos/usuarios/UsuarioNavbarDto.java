@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class UsuarioNavbarDto {
-  private String nombre;
-  private String email;
+    private String nombre;
+    private String email;
 }

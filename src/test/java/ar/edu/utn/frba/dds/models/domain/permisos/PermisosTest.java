@@ -13,11 +13,11 @@ public class PermisosTest {
     public void testVerificarSiUsuarioTienePermisos() {
         Usuario u1 = new Usuario("fddf", "fdfd");
         Rol admin = new Rol();
-        Permiso editar = new Permiso("edicion");
-        Permiso borrar = new Permiso("edicion");
+        Permiso editar = new Permiso("edicion", "editar");
+        Permiso borrar = new Permiso("edicion", "borrar");
         admin.agregarPermisos(editar, borrar);
         u1.agregarRoles(admin);
-        Permiso visualizar = new Permiso("ver cositas");
+        Permiso visualizar = new Permiso("ver cositas", "visualizar");
         Rol veedor = new Rol();
         veedor.agregarPermisos(visualizar);
         Usuario u2 = new Usuario();

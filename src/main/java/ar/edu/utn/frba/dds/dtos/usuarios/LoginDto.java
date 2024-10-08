@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LoginDto {
-  private String idUsuario;
-  private String idColaborador;
+    private String idUsuario;
+    private String idColaborador;
 }

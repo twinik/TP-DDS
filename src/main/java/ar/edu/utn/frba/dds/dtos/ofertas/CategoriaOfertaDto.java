@@ -7,9 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class CategoriaOfertaDto {
-  private String nombre;
+    private String nombre;
 
-  public static CategoriaOfertaDto of(CategoriaOferta c) {
-    return new CategoriaOfertaDto(c.name());
-  }
+    public static CategoriaOfertaDto of(CategoriaOferta c) {
+        return new CategoriaOfertaDto(c.name());
+    }
 }

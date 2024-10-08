@@ -12,7 +12,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 
 // javascript es un asco
-(async function main () {
+(async function main() {
     var markers = await fetchHeladeras()
 
     // Función para crear marcadores
@@ -24,7 +24,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         const reportarFallaBtn =
             `<a href="/heladeras/${markerData.id}/reportar-falla-tecnica" class="popup-button">Reportar Falla</a>`;
 
-        const markerTemplate= `<div class="popup-content flex flex-col">
+        const markerTemplate = `<div class="popup-content flex flex-col">
                 <div class="popup-title">${markerData.title}</div>
                 ${markerData.disabled ? inhabilitadaContent : reportarFallaBtn}
                 <a href="/heladeras/${markerData.id}/suscribirse" class="popup-button">Suscribirse</a>

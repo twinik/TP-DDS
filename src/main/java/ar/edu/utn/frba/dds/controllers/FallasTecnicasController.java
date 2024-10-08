@@ -17,62 +17,62 @@ import java.util.Map;
 @AllArgsConstructor
 public class FallasTecnicasController implements ICrudViewsHandler {
 
-  FallasTecnicasService service;
-  FileUploadService fileUploadService;
+    FallasTecnicasService service;
+    FileUploadService fileUploadService;
 
-  @Override
-  public void index(Context context) {
-    // TODO: hacer view para que un admin pueda ver fallas tecnicas
-  }
-
-  @Override
-  public void show(Context context) {
-
-  }
-
-  @Override
-  public void create(Context context) {
-    String heladeraId = context.pathParam("id");
-
-    HeladeraDto h = ServiceLocator.get(HeladerasService.class).getHeladeraDto(heladeraId);
-
-    Map<String, Object> model = new HashMap<>();
-
-    model.put("heladera", h);
-    context.render("/app/heladeras/reportar-falla.hbs", model);
-  }
-
-  @Override
-  public void save(Context context) {
-    FallaTecnicaDto falla = FallaTecnicaDto.of(context);
-    UploadedFile uploadedFile = context.uploadedFile("file");
-    try {
-      if(uploadedFile != null ){
-        String result = this.fileUploadService.uploadFile(uploadedFile);
-        falla.setUrlFoto(result);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
+    @Override
+    public void index(Context context) {
+        // TODO: hacer view para que un admin pueda ver fallas tecnicas
     }
-    service.crear(falla);
-    Map<String, String> model = new HashMap<>();
-    model.put("message", "La falla tecnica fue registrada con exito!");
-    context.status(201);
-    context.render("/app/success.hbs", model);
-  }
 
-  @Override
-  public void edit(Context context) {
+    @Override
+    public void show(Context context) {
 
-  }
+    }
 
-  @Override
-  public void update(Context context) {
+    @Override
+    public void create(Context context) {
+        String heladeraId = context.pathParam("id");
 
-  }
+        HeladeraDto h = ServiceLocator.get(HeladerasService.class).getHeladeraDto(heladeraId);
 
-  @Override
-  public void delete(Context context) {
+        Map<String, Object> model = new HashMap<>();
 
-  }
+        model.put("heladera", h);
+        context.render("/app/heladeras/reportar-falla.hbs", model);
+    }
+
+    @Override
+    public void save(Context context) {
+        FallaTecnicaDto falla = FallaTecnicaDto.of(context);
+        UploadedFile uploadedFile = context.uploadedFile("file");
+        try {
+            if (uploadedFile != null) {
+                String result = this.fileUploadService.uploadFile(uploadedFile);
+                falla.setUrlFoto(result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        service.crear(falla);
+        Map<String, String> model = new HashMap<>();
+        model.put("message", "La falla tecnica fue registrada con exito!");
+        context.status(201);
+        context.render("/app/success.hbs", model);
+    }
+
+    @Override
+    public void edit(Context context) {
+
+    }
+
+    @Override
+    public void update(Context context) {
+
+    }
+
+    @Override
+    public void delete(Context context) {
+
+    }
 }

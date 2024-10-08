@@ -8,14 +8,14 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class UsuarioDto {
-  private String email;
-  private String clave;
+    private String email;
+    private String clave;
 
-  public static UsuarioDto of(Context context) {
-    return new UsuarioDto(context.formParam("email"), context.formParam("pass"));
-  }
+    public static UsuarioDto of(Context context) {
+        return new UsuarioDto(context.formParam("email"), context.formParam("pass"));
+    }
 
-  public Usuario toEntity() {
-    return new Usuario(this.getEmail(), this.getClave());
-  }
+    public Usuario toEntity() {
+        return new Usuario(this.getEmail(), this.getClave());
+    }
 }

@@ -12,7 +12,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 var markers = [];
 
-(async function main () {
+(async function main() {
     markers = await fetchHeladeras()
 
     // Función para crear marcadores

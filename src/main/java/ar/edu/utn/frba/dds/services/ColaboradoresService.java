@@ -14,40 +14,40 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class ColaboradoresService {
-  private IColaboradoresRepository colaboradoresRepository;
+    private IColaboradoresRepository colaboradoresRepository;
 
-  public Optional<Colaborador> colaboradorFromUsuario(String idUsuario) {
-    return this.colaboradoresRepository.buscarPorUsuario(idUsuario);
-  }
+    public Optional<Colaborador> colaboradorFromUsuario(String idUsuario) {
+        return this.colaboradoresRepository.buscarPorUsuario(idUsuario);
+    }
 
-  public Colaborador obtenerColaborador(String id) {
-    if (id == null) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
-    Optional<Colaborador> colab = this.colaboradoresRepository.buscar(id);
-    if (colab.isEmpty()) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
-    return colab.get();
-  }
+    public Colaborador obtenerColaborador(String id) {
+        if (id == null) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
+        Optional<Colaborador> colab = this.colaboradoresRepository.buscar(id);
+        if (colab.isEmpty()) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
+        return colab.get();
+    }
 
-  public void validarExistenciaColaborador(String id) {
-    if (this.colaboradoresRepository.buscar(id).isEmpty())
-      throw new RecursoInexistenteException("El colaborador no existe");
-  }
+    public void validarExistenciaColaborador(String id) {
+        if (this.colaboradoresRepository.buscar(id).isEmpty())
+            throw new RecursoInexistenteException("El colaborador no existe");
+    }
 
-  public void regisrar(PersonaHumanaDto dto) {
-    Colaborador colaborador = new Colaborador();
-    colaborador.setNombre(dto.getNombre());
-    colaborador.setApellido(dto.getApellido());
-    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
-    colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
-    // TODO: hashear clave
-    Usuario user = new Usuario(dto.getUsuarioDto().getEmail(), dto.getUsuarioDto().getClave());
-    // TODO: roles service dependiendo de las formas de colab
-    user.agregarRoles();
+    public void regisrar(PersonaHumanaDto dto) {
+        Colaborador colaborador = new Colaborador();
+        colaborador.setNombre(dto.getNombre());
+        colaborador.setApellido(dto.getApellido());
+        colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
+        colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+        // TODO: hashear clave
+        Usuario user = new Usuario(dto.getUsuarioDto().getEmail(), dto.getUsuarioDto().getClave());
+        // TODO: roles service dependiendo de las formas de colab
+        user.agregarRoles();
 
-    this.colaboradoresRepository.guardar(colaborador);
-  }
+        this.colaboradoresRepository.guardar(colaborador);
+    }
 
-  public void regisrar(PersonaJuridicaDto dto) {
-    //TODO
-  }
+    public void regisrar(PersonaJuridicaDto dto) {
+        //TODO
+    }
 
 }

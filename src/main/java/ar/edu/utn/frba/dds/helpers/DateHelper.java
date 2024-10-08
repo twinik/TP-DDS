@@ -29,7 +29,7 @@ public class DateHelper {
      */
     public static LocalDate fechaFromString(String fecha, String pattern) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-      return LocalDate.parse(fecha, formatter);
+        return LocalDate.parse(fecha, formatter);
     }
 
     public static int horasEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin) {

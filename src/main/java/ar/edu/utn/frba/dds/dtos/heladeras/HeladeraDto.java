@@ -14,26 +14,26 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 public class HeladeraDto {
-  // TODO: completar compos
-  private String id;
-  private String nombre;
+    // TODO: completar compos
+    private String id;
+    private String nombre;
 
-  public static HeladeraDto fromHeladera (Heladera heladera){
-    return HeladeraDto.builder().
-        id(heladera.getId())
-        .nombre(heladera.getNombre())
-        .build();
-  }
+    public static HeladeraDto fromHeladera(Heladera heladera) {
+        return HeladeraDto.builder().
+                id(heladera.getId())
+                .nombre(heladera.getNombre())
+                .build();
+    }
 
-    public static Heladera toHeladera(HeladeraDto dto){
+    public static Heladera toHeladera(HeladeraDto dto) {
         Heladera heladera = new Heladera();
         heladera.setNombre(dto.getNombre());
         return heladera;
     }
 
-  public static HeladeraDto of(Map<String, List<String>> camposFormulario, String idColaborador){
-    // TODO
-    return null;
-  }
+    public static HeladeraDto of(Map<String, List<String>> camposFormulario, String idColaborador) {
+        // TODO
+        return null;
+    }
 
 }

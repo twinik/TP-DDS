@@ -14,7 +14,7 @@ public interface IPermisosRepository {
 
     void guardar(Permiso permiso);
 
-    void guardar(Permiso ...permisos);
+    void guardar(Permiso... permisos);
 
     void actualizar(Permiso permiso);
 

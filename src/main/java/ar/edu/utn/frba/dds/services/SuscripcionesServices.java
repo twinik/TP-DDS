@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class SuscripcionesServices {
-  ISuscripcionesRepository repo;
+    ISuscripcionesRepository repo;
 
 
 }

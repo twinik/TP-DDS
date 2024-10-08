@@ -7,8 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ColaboradorPuntosDto {
-  private Float puntos;
-  public static ColaboradorPuntosDto fromColaborador(Colaborador c){
-    return new ColaboradorPuntosDto(c.getPuntosGanados());
-  }
+    private Float puntos;
+
+    public static ColaboradorPuntosDto fromColaborador(Colaborador c) {
+        return new ColaboradorPuntosDto(c.getPuntosGanados());
+    }
 }

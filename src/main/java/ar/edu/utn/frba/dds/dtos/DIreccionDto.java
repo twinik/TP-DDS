@@ -6,8 +6,8 @@ import lombok.Getter;
 @Builder
 @Getter
 public class DIreccionDto {
-  private String calle;
-  private Integer numero;
-  private Integer piso;
-  private String codigoPostal;
+    private String calle;
+    private Integer numero;
+    private Integer piso;
+    private String codigoPostal;
 }

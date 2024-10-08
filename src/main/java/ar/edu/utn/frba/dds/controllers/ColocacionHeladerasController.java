@@ -12,50 +12,50 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class ColocacionHeladerasController implements ICrudViewsHandler {
-  private ColocacionHeladerasService colocacionHeladerasService;
-  private ModelosService modelosService;
+    private ColocacionHeladerasService colocacionHeladerasService;
+    private ModelosService modelosService;
 
-  @Override
-  public void index(Context context) {
+    @Override
+    public void index(Context context) {
 
-  }
-
-  @Override
-  public void show(Context context) {
-
-  }
-
-  @Override
-  public void create(Context context) {
-    Map<String,Object> model = new HashMap<>();
-    model.put("modelos",this.modelosService.obtenerModelosDisponibles());
-    context.render("/app/colaboraciones/cargo-heladera.hbs",model);
-  }
-
-  @Override
-  public void save(Context context) {
-    HeladeraInputDto dto = HeladeraInputDto.of(context);
-    try{
-      this.colocacionHeladerasService.crearColocacionHeladera(dto);
-    }catch (FormIncompletoException e){
-      // TODO: Mostrar pop up error ?
     }
-    //TODO: mostrar cartel de creado con exito
-    context.redirect("/heladeras");
-  }
 
-  @Override
-  public void edit(Context context) {
+    @Override
+    public void show(Context context) {
 
-  }
+    }
 
-  @Override
-  public void update(Context context) {
+    @Override
+    public void create(Context context) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("modelos", this.modelosService.obtenerModelosDisponibles());
+        context.render("/app/colaboraciones/cargo-heladera.hbs", model);
+    }
 
-  }
+    @Override
+    public void save(Context context) {
+        HeladeraInputDto dto = HeladeraInputDto.of(context);
+        try {
+            this.colocacionHeladerasService.crearColocacionHeladera(dto);
+        } catch (FormIncompletoException e) {
+            // TODO: Mostrar pop up error ?
+        }
+        //TODO: mostrar cartel de creado con exito
+        context.redirect("/heladeras");
+    }
 
-  @Override
-  public void delete(Context context) {
+    @Override
+    public void edit(Context context) {
 
-  }
+    }
+
+    @Override
+    public void update(Context context) {
+
+    }
+
+    @Override
+    public void delete(Context context) {
+
+    }
 }

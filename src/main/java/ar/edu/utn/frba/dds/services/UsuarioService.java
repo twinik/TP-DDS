@@ -14,47 +14,47 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UsuarioService {
 
-  private IUsuariosRepository usuariosRepository;
-  private ColaboradoresService colaboradoresService;
+    private IUsuariosRepository usuariosRepository;
+    private ColaboradoresService colaboradoresService;
 
-  public void registrar(UsuarioDto dto) {
-    usuariosRepository.guardar(dto.toEntity());
-  }
+    public void registrar(UsuarioDto dto) {
+        usuariosRepository.guardar(dto.toEntity());
+    }
 
-  public LoginDto obtenerUsuario(UsuarioDto dto) {
-    LoginDto resultado = new LoginDto();
-    Optional<Usuario> user = usuariosRepository.buscar(dto.getEmail(), dto.getClave());
-    if (user.isEmpty()) throw new LoginFailedException("usuario o contraseña invalidos");
-    resultado.setIdUsuario(user.get().getId());
-    Optional<Colaborador> colaborador = this.colaboradoresService.colaboradorFromUsuario(user.get().getId());
-    colaborador.ifPresent(value -> resultado.setIdColaborador(value.getId()));
-    return resultado;
-  }
+    public LoginDto obtenerUsuario(UsuarioDto dto) {
+        LoginDto resultado = new LoginDto();
+        Optional<Usuario> user = usuariosRepository.buscar(dto.getEmail(), dto.getClave());
+        if (user.isEmpty()) throw new LoginFailedException("usuario o contraseña invalidos");
+        resultado.setIdUsuario(user.get().getId());
+        Optional<Colaborador> colaborador = this.colaboradoresService.colaboradorFromUsuario(user.get().getId());
+        colaborador.ifPresent(value -> resultado.setIdColaborador(value.getId()));
+        return resultado;
+    }
 
-  public Usuario obtenerUsuario(String idUsuario) {
-    Optional<Usuario> user = usuariosRepository.buscar(idUsuario);
-    return user.orElse(null);
-  }
+    public Usuario obtenerUsuario(String idUsuario) {
+        Optional<Usuario> user = usuariosRepository.buscar(idUsuario);
+        return user.orElse(null);
+    }
 
-  public UsuarioNavbarDto getUsuarioNavbar(Usuario u, String idColaborador) {
-    UsuarioNavbarDto dto = new UsuarioNavbarDto();
-    dto.setEmail(u.getEmail());
+    public UsuarioNavbarDto getUsuarioNavbar(Usuario u, String idColaborador) {
+        UsuarioNavbarDto dto = new UsuarioNavbarDto();
+        dto.setEmail(u.getEmail());
 
-    Colaborador colaborador = this.colaboradoresService.obtenerColaborador(idColaborador);
-      if (colaborador.getTipoColaborador().getTipo() == TipoPersona.PERSONA_HUMANA) {
-        dto.setNombre(colaborador.getNombreYapellido());
-      } else {
-        dto.setNombre(colaborador.getRazonSocial());
-      }
+        Colaborador colaborador = this.colaboradoresService.obtenerColaborador(idColaborador);
+        if (colaborador.getTipoColaborador().getTipo() == TipoPersona.PERSONA_HUMANA) {
+            dto.setNombre(colaborador.getNombreYapellido());
+        } else {
+            dto.setNombre(colaborador.getRazonSocial());
+        }
 
-    return dto;
-  }
+        return dto;
+    }
 
-  public UsuarioNavbarDto getUsuarioNavbar(Usuario u) {
-    UsuarioNavbarDto dto = new UsuarioNavbarDto();
-    dto.setEmail(u.getEmail());
-    dto.setNombre("Usuario");
-    return dto;
-  }
+    public UsuarioNavbarDto getUsuarioNavbar(Usuario u) {
+        UsuarioNavbarDto dto = new UsuarioNavbarDto();
+        dto.setEmail(u.getEmail());
+        dto.setNombre("Usuario");
+        return dto;
+    }
 
 }
