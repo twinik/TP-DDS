@@ -41,10 +41,8 @@ public class Router {
     app.get("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::create);
     app.post("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::save);
 
-    app.get("/responder-formulario/{idFormulario}/colaborador/{idColaborador}",
-        ServiceLocator.get(RespuestaFormularioController.class)::create);
-    app.post("/responder-formulario/{idFormulario}/colaborador/{idColaborador}",
-        ServiceLocator.get(RespuestaFormularioController.class)::save);
+    app.get("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::create);
+    app.post("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::save);
 
     // COLABORACIONES
     app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
@@ -52,14 +50,10 @@ public class Router {
     app.get("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::create);
     app.post("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::save);
 
-    app.get("/colaborar/registrar-persona-vulnerable",
-        ServiceLocator.get(AltaPersonaVulnerableController.class)::create);
-    app.post("/colaborar/registrar-persona-vulnerable",
-        ServiceLocator.get(AltaPersonaVulnerableController.class)::save);
-    app.get("/colaborar/registrar-persona-vulnerable/registrar-tutorados",
-        ServiceLocator.get(AltaPersonaVulnerableController.class)::createTutorados);
-    app.post("/colaborar/registrar-persona-vulnerable/registrar-tutorados",
-        ServiceLocator.get(AltaPersonaVulnerableController.class)::saveTutorados);
+    app.get("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::create);
+    app.post("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::save);
+    app.get("/colaborar/registrar-persona-vulnerable/registrar-tutorados", ServiceLocator.get(AltaPersonaVulnerableController.class)::createTutorados);
+    app.post("/colaborar/registrar-persona-vulnerable/registrar-tutorados", ServiceLocator.get(AltaPersonaVulnerableController.class)::saveTutorados);
 
     app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
 
