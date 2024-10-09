@@ -72,7 +72,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
   public void saveTutorados(Context context) {
     for (int i = 1; i <= Integer.parseInt(context.sessionAttribute("cantMenores")); i++) {
       TutoradoInputDto dto = TutoradoInputDto.of(context, i);
-      this.service.darAltaTutorados(dto);
+      this.service.darAltaTutorados(dto, context.pathParam("id"));
     }
 
     context.sessionAttribute("cantMenores", null);

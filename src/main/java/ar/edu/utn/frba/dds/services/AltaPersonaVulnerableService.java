@@ -14,6 +14,7 @@ import ar.edu.utn.frba.dds.models.repositories.IPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 
@@ -40,9 +41,14 @@ public class AltaPersonaVulnerableService {
     this.altaPersonaVulnerableRepository.guardar(a);
   }
 
-  public void darAltaTutorados(TutoradoInputDto dto) {
+  public void darAltaTutorados(TutoradoInputDto dto, String idPersona) {
     PersonaVulnerable p = obtenerTutorado(dto);
-    this.personasVulnerablesRepository.guardar(p);
+    Optional<PersonaVulnerable> rta = personasVulnerablesRepository.buscar(idPersona);
+    if (rta.isPresent()) {
+      PersonaVulnerable tutor = rta.get();
+      tutor.agregarTutorados(p);
+      this.personasVulnerablesRepository.actualizar(tutor);
+    }
   }
 
   public String crearPersonaVulnerable(AltaPersonaVulnerableDto dto) {
@@ -70,7 +76,9 @@ public class AltaPersonaVulnerableService {
     p.setNombre(dto.getNombre());
     p.setApellido(dto.getApellido());
     p.setFechaNacimiento(fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+    p.setFechaRegistro(LocalDate.now());
     p.setDomicilio(dto.getDomicilio());
+    p.setPoseeDomicilio(dto.getDomicilio() != null);
     p.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
     p.setNroDocumento(dto.getNroDocumento());
     p.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
