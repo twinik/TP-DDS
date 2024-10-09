@@ -89,7 +89,7 @@ public class Initializer {
     FormaColaboracion donacionVianda = new FormaColaboracion("DONACION_VIANDA", "Donación de viandas");
     FormaColaboracion redistribucionVianda = new FormaColaboracion("REDISTRIBUCION_VIANDA", "Redistribución de viandas");
     FormaColaboracion registroPersona = new FormaColaboracion("REGISTRO_PERSONA", "Alta persona vulnerable");
-    FormaColaboracion colocacionHeladeras = new FormaColaboracion("COLOCACION_HELADERA", "Colocación de heladeras");
+    FormaColaboracion colocacionHeladeras = new FormaColaboracion("COLOCACION_HELADERA", "Hacerse cargo de heladeras");
     FormaColaboracion ofrecerProductos = new FormaColaboracion("OFRECER_PRODUCTOS", "Ofrecer productos");
 
     formasColaboracionRespository.guardar(donacionVianda, donacionDinero, redistribucionVianda, registroPersona, colocacionHeladeras, ofrecerProductos);

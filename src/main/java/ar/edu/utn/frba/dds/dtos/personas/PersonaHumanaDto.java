@@ -1,8 +1,7 @@
 package ar.edu.utn.frba.dds.dtos.personas;
 
-import ar.edu.utn.frba.dds.dtos.DIreccionDto;
+import ar.edu.utn.frba.dds.dtos.DireccionDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
-import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +17,7 @@ public class PersonaHumanaDto {
   private String fechaNacimiento;
   private String tipoDocumento;
   private String nroDocumento;
-  private DIreccionDto direccion;
+  private DireccionDto direccion;
   private List<FormaColaboracionDto> formasColaboracion;
   private List<MedioContactoDto> mediosDeContacto;
   private UsuarioDto usuarioDto;
@@ -39,11 +38,16 @@ public class PersonaHumanaDto {
     return PersonaHumanaDto.builder().nombre(context.formParam("nombre"))
         .apellido(context.formParam("apellido"))
         .fechaNacimiento(context.formParam("fechaNacimiento"))
-        .direccion(DIreccionDto.builder().calle(context.formParam("calle"))
+        .direccion((context.formParam("calle") != null && !context.formParam("calle").isBlank() &&
+            context.formParam("altura") != null && !context.formParam("altura").isBlank() &&
+            context.formParam("cp") != null && !context.formParam("cp").isBlank())
+            ? DireccionDto.builder()
+            .calle(context.formParam("calle"))
             .numero(Integer.parseInt(context.formParam("altura")))
             .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
             .codigoPostal(context.formParam("cp"))
-            .build())
+            .build()
+            : null)
         .tipoDocumento(context.formParam("tipoDocumento"))
         .nroDocumento(context.formParam("documento"))
         .claveConf(context.formParam("passConf"))
@@ -55,6 +59,11 @@ public class PersonaHumanaDto {
 
   public boolean sonClavesIguales() {
     return this.claveConf.equals(this.usuarioDto.getClave());
+  }
+
+  public boolean estanCamposLlenos() {
+    return this.nombre != null && this.apellido != null && (this.direccion == null || this.direccion.estanCamposLlenos()) && this.usuarioDto != null &&
+        this.formasColaboracion != null && this.mediosDeContacto != null && this.nroDocumento != null && this.tipoDocumento != null;
   }
 
 }

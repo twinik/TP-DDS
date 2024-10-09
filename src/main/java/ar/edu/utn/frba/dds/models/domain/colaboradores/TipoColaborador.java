@@ -24,4 +24,9 @@ public class TipoColaborador extends EntidadPersistente {
     @JoinTable(name = "tipo_colaborador_x_forma_colaboracion", inverseJoinColumns = @JoinColumn(name = "forma_colaboracion_id", referencedColumnName = "id"),
             joinColumns = @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id"))
     private List<FormaColaboracion> formasPosiblesColaboracion;
+
+    public boolean tenesFormaColaboracion(String nombreInterno){
+        return this.formasPosiblesColaboracion.stream().anyMatch(forma -> forma.getNombreInterno().equals(nombreInterno));
+    }
+
 }

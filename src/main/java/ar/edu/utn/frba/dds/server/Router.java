@@ -104,6 +104,7 @@ public class Router {
     });
 
     app.exception(Exception.class, (e, ctx) -> {
+      e.printStackTrace();
       ctx.status(500);
       ctx.render("/app/500.hbs");
     });
