@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.controllers.AltaPersonaVulnerableController;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.repositories.IPermisosRepository;
@@ -38,12 +39,13 @@ public class PermisosHelper {
 
         //COLABORAR
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
-        case "/colaborar/registrar-persona-vulnerable" -> this.buscarPorNombres("alta-persona-vulnerable");
         case "/colaborar/registrar-persona-vulnerable/registrar-tutorados" -> this.buscarPorNombres("alta-persona-vulnerable");
-        case "/colaborar/donar-vianda" -> this.buscarPorNombres("donar-vianda");
-        case "/colaborar/distribuir-viandas" -> this.buscarPorNombres("distribuir-viandas");
+        case "/colaborar/donar-vianda" -> this.buscarPorNombres("donar-viandas");
+        case "/colaborar/distribuir-viandas" -> this.buscarPorNombres("redistribuir-viandas");
         case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");
         case "/colaborar/ofrecer-producto" -> this.buscarPorNombres("ofrecer-productos");
+        case "/colaborar/registrar-persona-vulnerable"-> this.buscarPorNombres("alta-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" -> this.buscarPorNombres("alta-vulnerable");
 
         //PRODUCTOS
         case "/productos" -> this.buscarPorNombres("canjear-productos");
@@ -58,6 +60,8 @@ public class PermisosHelper {
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
         case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");
         case "/productos" -> this.buscarPorNombres("ofrecer-productos");
+        case "/colaborar/registrar-persona-vulnerable"-> this.buscarPorNombres("alta-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" -> this.buscarPorNombres("alta-vulnerable");
         default -> new HashSet<>();
       };
     }
