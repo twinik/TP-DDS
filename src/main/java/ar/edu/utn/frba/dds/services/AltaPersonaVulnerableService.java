@@ -36,8 +36,9 @@ public class AltaPersonaVulnerableService {
     this.personasVulnerablesRepository.guardar(p);
   }
 
-  public void crearPersonaVulnerable(AltaPersonaVulnerableDto dto) {
+  public String crearPersonaVulnerable(AltaPersonaVulnerableDto dto) {
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
+    return p.getId();
   }
 
   public PersonaVulnerable obtenerPersonaVulnerable(AltaPersonaVulnerableDto dto) {

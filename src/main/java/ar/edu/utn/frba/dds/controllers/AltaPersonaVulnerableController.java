@@ -38,8 +38,8 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
     AltaPersonaVulnerableDto dto = AltaPersonaVulnerableDto.of(context);
 
     if (context.formParam("tiene-tutorados").equals("si")) {
-      this.service.crearPersonaVulnerable(dto);
-      context.redirect("/colaborar/registrar-persona-vulnerable/registrar-tutorados");
+      String idPersona = this.service.crearPersonaVulnerable(dto);
+      context.redirect("/colaborar/registrar-persona-vulnerable/" + idPersona + "/registrar-tutorados");
     } else {
       try {
         this.service.darAltaPersonaVulnerable(dto);
