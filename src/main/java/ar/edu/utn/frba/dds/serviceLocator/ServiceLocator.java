@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.serviceLocator;
 
 import ar.edu.utn.frba.dds.controllers.*;
+import ar.edu.utn.frba.dds.externapi.RecomendacionDonaciones;
+import ar.edu.utn.frba.dds.externapi.RecomendadorDonacionesRetrofitAdapter;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
@@ -180,6 +182,13 @@ public class ServiceLocator {
         add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class)));
       else if (clase.equals(TecnicosController.class))
         add(clase, new TecnicosController(get(TecnicosService.class)));
+      else if (clase.equals(RecomendacionesController.class)) {
+        try {
+          add(clase, new RecomendacionesController(new RecomendacionDonaciones(RecomendadorDonacionesRetrofitAdapter.getInstance())));
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
       else if (clase.equals(SuscripcionesController.class))
         add(clase, new SuscripcionesController());
       else throw new IllegalArgumentException("No hay servicio provisto para esa clase");

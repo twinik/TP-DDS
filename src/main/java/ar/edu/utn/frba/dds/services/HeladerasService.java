@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.services;
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraDto;
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraMapaDto;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
+import ar.edu.utn.frba.dds.externapi.RecomendadorDonacionesRetrofitAdapter;
+import ar.edu.utn.frba.dds.externapi.recomendaciones.Recomendacion;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 public class HeladerasService {
 
     IHeladerasRepository repoHeladeras;
+
 
     public List<HeladeraMapaDto> getHeladerasParaMapa() {
         List<Heladera> heladeras = repoHeladeras.buscarTodos();

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.dtos.heladeras;
 
+import ar.edu.utn.frba.dds.externapi.recomendaciones.Recomendacion;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,5 +20,12 @@ public class HeladeraMapaDto {
         coords.add(h.getUbicacion().getLatitud());
         coords.add(h.getUbicacion().getLongitud());
         return new HeladeraMapaDto(h.getId(), coords, h.getNombre(), !h.isHeladeraActiva());
+    }
+
+    public static HeladeraMapaDto fromRecomendacion(Recomendacion d) {
+        List<Float> coords = new ArrayList<>();
+        coords.add(Float.parseFloat(d.getLatitud()));
+        coords.add(Float.parseFloat(d.getLongitud()));
+        return new HeladeraMapaDto(d.getId(), coords, d.getNombre(), true);
     }
 }
