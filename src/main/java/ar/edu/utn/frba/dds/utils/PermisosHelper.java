@@ -30,12 +30,21 @@ public class PermisosHelper {
   public Set<Permiso> buscarPermisosPara(Context ctx) {
     if (ctx.method().name().equals("GET")) {
       return switch (ctx.matchedPath()) {
+        //ADMIN
         case "/admin/tecnicos/nuevo" -> this.buscarPorNombres("alta-tecnico");
         case "/admin/formularios/nuevo" -> this.buscarPorNombres("alta-formulario");
         case "/admin/modelos-heladeras/nuevo" -> this.buscarPorNombres("alta-modelo-heladera");
-        case "/colaborar/ofrecer-producto" -> this.buscarPorNombres("ofrecer-productos");
+
+        //COLABORAR
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
+        case "/colaborar/registrar-persona-vulnerable" -> this.buscarPorNombres("alta-persona-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable/registrar-tutorados" -> this.buscarPorNombres("alta-persona-vulnerable");
+        case "/colaborar/donar-vianda" -> this.buscarPorNombres("donar-vianda");
+        case "/colaborar/distribuir-viandas" -> this.buscarPorNombres("distribuir-viandas");
         case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");
+        case "/colaborar/ofrecer-producto" -> this.buscarPorNombres("ofrecer-productos");
+
+        //PRODUCTOS
         case "/productos" -> this.buscarPorNombres("canjear-productos");
         default -> new HashSet<>();
       };
@@ -65,6 +74,5 @@ public class PermisosHelper {
         Arrays.stream(nombres).anyMatch(nombre -> p.getDesc_interna().equalsIgnoreCase(nombre))
     ).collect(Collectors.toSet());
   }
-
 
 }

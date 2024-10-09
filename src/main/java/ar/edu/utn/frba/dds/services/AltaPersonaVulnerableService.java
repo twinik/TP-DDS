@@ -38,7 +38,6 @@ public class AltaPersonaVulnerableService {
 
   public void crearPersonaVulnerable(AltaPersonaVulnerableDto dto) {
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
-    this.personasVulnerablesRepository.guardar(p);
   }
 
   public PersonaVulnerable obtenerPersonaVulnerable(AltaPersonaVulnerableDto dto) {
@@ -51,6 +50,7 @@ public class AltaPersonaVulnerableService {
     p.setDomicilio(dto.getDomicilio());
     p.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
     p.setNroDocumento(dto.getNroDocumento());
+
     //TODO Lista tutorados
 
     return p;

@@ -32,7 +32,7 @@ public class AltaPersonaVulnerableDto {
         .domicilio(context.formParam("domicilio"))
         .idColaborador(context.sessionAttribute("idColaborador"))
         .codigoTarjeta(context.formParam("codTarjeta"))
-        .tieneTutorados(context.formParam("tieneTutorados"))
+        .tieneTutorados(context.formParam("tiene-tutorados"))
         // TODO Lista de tutorados
         .build();
   }

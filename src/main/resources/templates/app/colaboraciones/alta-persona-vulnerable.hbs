@@ -53,9 +53,9 @@
                     name="tipoDocumento"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-                <option value="dni">DNI</option>
-                <option value="pasaporte">Pasaporte</option>
-                <option value="cedula-azul">Cédula azul</option>
+                {{#each tiposDocumento}}
+                    <option value={{this.valor}}>{{this.descripcion}}</option>
+                {{/each}}
             </select>
 
             <label
@@ -159,9 +159,9 @@
             <fieldset id="tiene-tutorados">
                 <div class="flex items-center mb-2">
                     <input
-                            id="tiene-tutorados"
+                            id="si-tiene-tutorados"
                             type="radio"
-                            name="tieneTutorados"
+                            name="tiene-tutorados"
                             value="si"
                             required
                             class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
@@ -175,7 +175,6 @@
                 </div>
                 <div class="flex items-center mb-5">
                     <input
-                            name=""
                             id="no-tiene-tutorados"
                             type="radio"
                             name="tiene-tutorados"
