@@ -36,6 +36,8 @@ const getNewCampoHtml = index => {
             placeholder="Pregunta"
             required
         />
+        
+        <input type="hidden" id="cantidad-opciones-campo-${index}" name="cantidad-opciones-campo-${index}" value="1"/>
 
         <div id="opciones-container-${index}" style="display: none;">
             <div id="opciones-campo-${index}">
@@ -84,6 +86,9 @@ const nuevoCampo = () => {
 
     const cont = document.getElementById("camposContainer");
     cont.appendChild(newElement);
+
+    const cantidadCampos = document.getElementById("cantidad-campos");
+    cantidadCampos.value = parseInt(cantidadCampos.value) + 1;
 };
 
 const eliminarCampo = (index) => {
@@ -95,6 +100,9 @@ const eliminarCampo = (index) => {
 
         delete opcionesIndex[index];
         delete indicesOpcionesDisponibles[index];
+
+        const cantidadCampos = document.getElementById("cantidad-campos");
+        cantidadCampos.value = parseInt(cantidadCampos.value) - 1;
     }
 }
 
@@ -155,6 +163,9 @@ const agregarOpcion = (campoIndex) => {
     nuevaOpcionDiv.appendChild(contenedorFlex);
 
     opcionesDiv.appendChild(nuevaOpcionDiv);
+
+    const cantidadOpciones = document.getElementById(`cantidad-opciones-campo-${campoIndex}`);
+    cantidadOpciones.value = parseInt(cantidadOpciones.value) + 1;
 }
 
 const eliminarOpcion = (campoIndex, opcionIndex) => {
@@ -163,5 +174,8 @@ const eliminarOpcion = (campoIndex, opcionIndex) => {
         opcionDiv.remove();
         indicesOpcionesDisponibles[campoIndex].push(opcionIndex);
         indicesOpcionesDisponibles[campoIndex].sort((a, b) => a - b);
+
+        const cantidadOpciones = document.getElementById(`cantidad-opciones-campo-${campoIndex}`);
+        cantidadOpciones.value = parseInt(cantidadOpciones.value) - 1;
     }
 }

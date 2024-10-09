@@ -2,8 +2,8 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Crear formulario</h1>
 
-        <form class="content-center max-w-md mx-auto">
-            <input type="hidden" name="cantidad-campos" value="1"/>
+        <form class="content-center max-w-md mx-auto" action"/" method="POST">
+            <input type="hidden" id="cantidad-campos" name="cantidad-campos" value="1"/>
             <div id="camposContainer">
                 <strong>Campo 1</strong>
 
@@ -25,7 +25,7 @@
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="Pregunta" required/>
 
-                <input type="hidden" name="cantidad-opciones-campo-1" value="1"/>
+                <input type="hidden" id="cantidad-opciones-campo-1" name="cantidad-opciones-campo-1" value="1"/>
 
                 <div id="opciones-container-1" style="display: none;">
                     <div id="opciones-campo-1">

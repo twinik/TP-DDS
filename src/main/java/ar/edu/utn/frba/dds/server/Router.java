@@ -34,7 +34,8 @@ public class Router {
     //ALTA
     app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
     app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
-    app.get("/admin/formularios/nuevo", ctx -> ctx.render("/app/admin/alta-formulario.hbs"));
+    app.get("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::create);
+    app.post("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::save);
     app.get("/admin/modelos-heladeras/nuevo", ctx -> ctx.render("/app/admin/alta-modelo-heladera.hbs"));
 
     //COLABORACIONES

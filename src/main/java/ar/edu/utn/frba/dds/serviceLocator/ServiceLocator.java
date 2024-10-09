@@ -130,6 +130,8 @@ public class ServiceLocator {
         add(clase, new FallasTecnicasService(get(IFallasTecnicasRepository.class), get(ColaboradoresService.class), get(HeladerasService.class)));
       else if (clase.equals(FileUploadService.class))
         add(clase, new FileUploadService());
+      else if (clase.equals(FormulariosService.class))
+        add(clase, new FormulariosService(get(IFormularioRepository.class)));
       else if (clase.equals(HeladerasService.class))
         add(clase, new HeladerasService(get(IHeladerasRepository.class)));
       else if (clase.equals(MedioContactoService.class))
@@ -164,6 +166,8 @@ public class ServiceLocator {
         add(clase, new DonacionDineroController(get(DonacionDineroService.class)));
       else if (clase.equals(FallasTecnicasController.class))
         add(clase, new FallasTecnicasController(get(FallasTecnicasService.class), get(FileUploadService.class)));
+      else if (clase.equals(FormulariosController.class))
+        add(clase, new FormulariosController(get(FormulariosService.class)));
       else if (clase.equals(LoginController.class))
         add(clase, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))
