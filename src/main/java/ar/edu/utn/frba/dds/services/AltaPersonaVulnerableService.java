@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.models.repositories.IAltaPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.models.repositories.IPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.AllArgsConstructor;
@@ -16,12 +17,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class AltaPersonaVulnerableService {
   private IPersonaVulnerableRepository personasVulnerablesRepository;
+  private IAltaPersonaVulnerableRepository altaPersonaVulnerableRepository;
   private ColaboradoresService colaboradoresService;
   private ICalculadorPuntos calculadorPuntos;
 
   public void darAltaPersonaVulnerable(AltaPersonaVulnerableDto dto) {
     Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
-
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
     p.setColaborador(colaborador);
 
@@ -34,10 +35,14 @@ public class AltaPersonaVulnerableService {
 
     this.calculadorPuntos.sumarPuntosPara(colaborador, a);
     this.personasVulnerablesRepository.guardar(p);
+    this.altaPersonaVulnerableRepository.guardar(a);
   }
 
   public String crearPersonaVulnerable(AltaPersonaVulnerableDto dto) {
+    Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
+    p.setColaborador(colaborador);
+    this.personasVulnerablesRepository.guardar(p);
     return p.getId();
   }
 
