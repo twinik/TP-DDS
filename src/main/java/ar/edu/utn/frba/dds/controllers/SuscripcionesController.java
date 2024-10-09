@@ -10,45 +10,45 @@ import java.util.Map;
 
 public class SuscripcionesController implements ICrudViewsHandler {
 
-    @Override
-    public void index(Context context) {
+  @Override
+  public void index(Context context) {
 
-    }
+  }
 
-    @Override
-    public void show(Context context) {
+  @Override
+  public void show(Context context) {
 
-    }
+  }
 
-    @Override
-    public void create(Context context) {
-        String heladeraId = context.pathParam("id");
+  @Override
+  public void create(Context context) {
+    String heladeraId = context.pathParam("id");
 
-        HeladeraDto h = ServiceLocator.get(HeladerasService.class).getHeladeraDto(heladeraId);
+    HeladeraDto h = ServiceLocator.get(HeladerasService.class).getHeladeraDto(heladeraId);
 
-        Map<String, Object> model = new HashMap<>();
+    Map<String, Object> model = new HashMap<>();
 
-        model.put("heladera", h);
-        context.render("/app/heladeras/suscripcion.hbs", model);
-    }
+    model.put("heladera", h);
+    context.render("/app/heladeras/suscripcion.hbs", model);
+  }
 
-    @Override
-    public void save(Context context) {
+  @Override
+  public void save(Context context) {
 
-    }
+  }
 
-    @Override
-    public void edit(Context context) {
+  @Override
+  public void edit(Context context) {
 
-    }
+  }
 
-    @Override
-    public void update(Context context) {
+  @Override
+  public void update(Context context) {
 
-    }
+  }
 
-    @Override
-    public void delete(Context context) {
+  @Override
+  public void delete(Context context) {
 
-    }
+  }
 }

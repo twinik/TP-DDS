@@ -35,7 +35,6 @@ public class AltaPersonaVulnerableDto {
         .codigoTarjeta(context.formParam("codTarjeta"))
         .tieneTutorados(context.formParam("tiene-tutorados"))
         .cantidadTutorados(context.formParam("cantMenores"))
-        // TODO Lista de tutorados
         .build();
   }
 }
