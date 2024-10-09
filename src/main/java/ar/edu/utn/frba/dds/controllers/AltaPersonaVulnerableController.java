@@ -5,9 +5,11 @@ import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.services.AltaPersonaVulnerableService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
+@AllArgsConstructor
 public class AltaPersonaVulnerableController implements ICrudViewsHandler {
   private AltaPersonaVulnerableService service;
 

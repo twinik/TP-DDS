@@ -18,13 +18,12 @@ public class AltaPersonaVulnerableService {
   private IPersonaVulnerableRepository personasVulnerablesRepository;
   private ColaboradoresService colaboradoresService;
   private ICalculadorPuntos calculadorPuntos;
-  private Colaborador colaborador;
 
   public void darAltaPersonaVulnerable(AltaPersonaVulnerableDto dto) {
-    this.colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
+    Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
-    p.setColaborador(this.colaborador);
+    p.setColaborador(colaborador);
 
     AltaPersonaVulnerable a = new AltaPersonaVulnerable();
     a.setPersona(p);

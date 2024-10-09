@@ -13,83 +13,85 @@ import java.io.IOException;
  */
 
 public class Router {
-    /**
-     * Inicio de App.
-     */
-    public static void init(Javalin app) {
+  /**
+   * Inicio de App.
+   */
+  public static void init(Javalin app) {
 
-        //LOGIN
-        app.get("/login", ServiceLocator.get(LoginController.class)::index);
-        app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
-        app.get("/logout", ServiceLocator.get(LogoutController.class)::handleLogout);
+    //LOGIN
+    app.get("/login", ServiceLocator.get(LoginController.class)::index);
+    app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
+    app.get("/logout", ServiceLocator.get(LogoutController.class)::handleLogout);
 
-        //REGISTRO
-        app.get("/registro", ServiceLocator.get(RegistroController.class)::index);
-        app.get("/registro/{tipo-persona}", ServiceLocator.get(RegistroController.class)::show);
-        //app.get("/registro/persona-humana", ctx -> ctx.render("/auth/registro/registro-humano.hbs"));
-        app.post("/registro/persona-humana", ServiceLocator.get(RegistroController.class)::handleRegistroHumano);
-        //app.get("/registro/persona-juridica", ctx -> ctx.render("/auth/registro/registro-juridico.hbs"));
-        app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
+    //REGISTRO
+    app.get("/registro", ServiceLocator.get(RegistroController.class)::index);
+    app.get("/registro/{tipo-persona}", ServiceLocator.get(RegistroController.class)::show);
+    //app.get("/registro/persona-humana", ctx -> ctx.render("/auth/registro/registro-humano.hbs"));
+    app.post("/registro/persona-humana", ServiceLocator.get(RegistroController.class)::handleRegistroHumano);
+    //app.get("/registro/persona-juridica", ctx -> ctx.render("/auth/registro/registro-juridico.hbs"));
+    app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
-        //ALTA
-        app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
-        app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
-        app.get("/admin/formularios/nuevo", ctx -> ctx.render("/app/admin/alta-formulario.hbs"));
-        app.get("/admin/modelos-heladeras/nuevo", ctx -> ctx.render("/app/admin/alta-modelo-heladera.hbs"));
+    //ALTA
+    app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
+    app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
+    app.get("/admin/formularios/nuevo", ctx -> ctx.render("/app/admin/alta-formulario.hbs"));
+    app.get("/admin/modelos-heladeras/nuevo", ctx -> ctx.render("/app/admin/alta-modelo-heladera.hbs"));
 
-        //COLABORACIONES
-        app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
+    //COLABORACIONES
+    app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
 
-        app.get("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::create);
-        app.post("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::save);
+    app.get("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::create);
+    app.post("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::save);
 
-        app.get("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::create);
-        app.post("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::save);
-        app.get("/colaborar/registrar-persona-vulnerable/registrar-tutorados", ctx -> ctx.render("/app/colaboraciones/alta-hijo-vulnerable.hbs"));
 
-        app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
+    app.get("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::create);
+    app.post("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::save);
+    app.get("/colaborar/registrar-persona-vulnerable/registrar-tutorados", ctx -> ctx.render("/app/colaboraciones/alta-hijo-vulnerable.hbs"));
 
-        app.get("/colaborar/distribuir-viandas", ctx -> ctx.render("/app/colaboraciones/distribucion-vianda.hbs"));
 
-        app.get("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::create);
-        app.post("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::save);
+    app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
 
-        app.get("/colaborar/ofrecer-producto", ServiceLocator.get(OfertasProductoController.class)::create);
+    app.get("/colaborar/distribuir-viandas", ctx -> ctx.render("/app/colaboraciones/distribucion-vianda.hbs"));
 
-        //HELADERAS
-        app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
-        app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
-        app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
-        app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::create);
-        app.post("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::save);
-        app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
+    app.get("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::create);
+    app.post("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::save);
 
-        //REPORTES
-        app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
+    app.get("/colaborar/ofrecer-producto", ServiceLocator.get(OfertasProductoController.class)::create);
 
-        //CARGA MASIVA
-        app.get("/carga-masiva-colaboraciones", ctx -> ctx.render("/app/carga-masiva/carga-masiva.hbs"));
+    //HELADERAS
+    app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
+    app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
+    app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
+    app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::create);
+    app.post("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::save);
+    app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
 
-        //PRODUCTOS
-        app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
-        app.post("/ofrecer-productos", ServiceLocator.get(OfertasProductoController.class)::save);
+    //REPORTES
+    app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
 
-        app.get("/", ctx -> {
-            ctx.redirect("/quienes-somos");
-        });
+    //CARGA MASIVA
+    app.get("/carga-masiva-colaboraciones", ctx -> ctx.render("/app/carga-masiva/carga-masiva.hbs"));
 
-        app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
+    //PRODUCTOS
+    app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
+    app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
 
-        app.post("/upload-carga-masiva", ctx -> {
-            UploadedFile uploadedFile = ctx.uploadedFile("file");
-            try {
-                FileUploadService fileUploadService = new FileUploadService();
-                String result = fileUploadService.uploadFile(uploadedFile);
-                ctx.result(result);
-            } catch (IOException e) {
-                e.printStackTrace();
-                ctx.result("Error al subir el archivo: " + e.getMessage());
-            }
-        });
-    }
+    app.get("/", ctx -> {
+      ctx.redirect("/quienes-somos");
+    });
+
+    app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
+
+    app.post("/upload-carga-masiva", ctx -> {
+      UploadedFile uploadedFile = ctx.uploadedFile("file");
+      try {
+        FileUploadService fileUploadService = new FileUploadService();
+        String result = fileUploadService.uploadFile(uploadedFile);
+        ctx.result(result);
+      } catch (IOException e) {
+        e.printStackTrace();
+        ctx.result("Error al subir el archivo: " + e.getMessage());
+      }
+    });
+  }
 }

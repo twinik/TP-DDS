@@ -110,6 +110,8 @@ public class ServiceLocator {
         // SERVICIOS
       else if (clase.equals(AlertasService.class))
         add(clase, new AlertasService(get(IAlertasRepository.class)));
+      else if (clase.equals(AltaPersonaVulnerableService.class))
+        add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class)));
       else if (clase.equals(CalculadorHeladerasCercanas.class)) {
         try {
           add(clase, new CalculadorHeladerasCercanas(get(IHeladerasRepository.class), Integer.parseInt(new ConfigReader("config.properties").getProperty("LIMITE_HELADERAS_CERCANAS"))));
@@ -130,8 +132,8 @@ public class ServiceLocator {
         add(clase, new FileUploadService());
       else if (clase.equals(HeladerasService.class))
         add(clase, new HeladerasService(get(IHeladerasRepository.class)));
-      else if(clase.equals(MedioContactoService.class))
-        add(clase,new MedioContactoService());
+      else if (clase.equals(MedioContactoService.class))
+        add(clase, new MedioContactoService());
       else if (clase.equals(ModelosService.class))
         add(clase, new ModelosService(get(IModeloHeladeraRepository.class)));
       else if (clase.equals(OfertasProductoService.class))
@@ -145,7 +147,7 @@ public class ServiceLocator {
       else if (clase.equals(TecnicosHelper.class))
         add(clase, new TecnicosHelper(get(ITecnicosRepository.class)));
       else if (clase.equals(TecnicosService.class))
-        add(clase, new TecnicosService(get(ITecnicosRepository.class),get(MedioContactoService.class)));
+        add(clase, new TecnicosService(get(ITecnicosRepository.class), get(MedioContactoService.class)));
       else if (clase.equals(TipoDocumentoMapper.class))
         add(clase, new TipoDocumentoMapper());
       else if (clase.equals(UsuarioService.class))
@@ -154,6 +156,8 @@ public class ServiceLocator {
         // CONTROLADORES
       else if (clase.equals(AlertasController.class))
         add(clase, new AlertasController(get(AlertasService.class)));
+      else if (clase.equals(AltaPersonaVulnerableController.class))
+        add(clase, new AltaPersonaVulnerableController(get(AltaPersonaVulnerableService.class)));
       else if (clase.equals(ColocacionHeladerasController.class))
         add(clase, new ColocacionHeladerasController(get(ColocacionHeladerasService.class), get(ModelosService.class)));
       else if (clase.equals(DonacionDineroController.class))
