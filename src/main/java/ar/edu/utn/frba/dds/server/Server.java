@@ -16,75 +16,79 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 public class Server {
-    private static Javalin app = null;
+  private static Javalin app = null;
 
-    public static Javalin app() {
-        if (app == null)
-            throw new RuntimeException("App no inicializada");
-        return app;
+  public static Javalin app() {
+    if (app == null)
+      throw new RuntimeException("App no inicializada");
+    return app;
+  }
+
+  public static void init() {
+    if (app == null) {
+      // TODO: Revisar properties
+      Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
+      app = Javalin.create(config()).start(port);
+      AppMiddlewares.applyMiddlewares(app);
+      AppHandlers.applyHandlers(app);
+      Router.init(app);
+
+      if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
+        Initializer.init();
+      }
     }
+  }
 
-    public static void init() {
-        if (app == null) {
-            // TODO: Revisar properties
-            Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
-            app = Javalin.create(config()).start(port);
-            AppMiddlewares.applyMiddlewares(app);
-            AppHandlers.applyHandlers(app);
-            Router.init(app);
+  private static Consumer<JavalinConfig> config() {
+    return config -> {
+      config.staticFiles.add(staticFiles -> {
+        staticFiles.hostedPath = "/";
+        staticFiles.directory = "/public";
+      });
 
-            if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
-                Initializer.init();
-            }
+      config.staticFiles.add(staticFiles -> {
+        staticFiles.hostedPath = "/uploads";
+        staticFiles.directory = "uploads";
+        staticFiles.location = Location.EXTERNAL;
+      });
+
+      config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
+        Handlebars handlebars = new Handlebars();
+
+        handlebars.registerHelper("switch", (value, options) -> {
+          options.context.data("switchValue", value);
+          return options.fn();
+        });
+
+        handlebars.registerHelper("case", (value, options) -> {
+          Object switchValue = options.context.data("switchValue");
+
+          if (switchValue != null && switchValue.equals(value)) {
+            return options.fn();
+          }
+
+          return options.inverse();
+        });
+
+        Template template = null;
+        try {
+          template = handlebars.compile(
+              "templates/" + path.replace(".hbs", ""));
+          model.put("username", context.sessionAttribute("username"));
+          model.put("email", context.sessionAttribute("email"));
+          model.put("permisoTecnico", context.sessionAttribute("permisoTecnico"));
+          model.put("permisoFormulario", context.sessionAttribute("permisoFormulario"));
+          model.put("permisoModeloHeladera", context.sessionAttribute("permisoModeloHeladera"));
+          model.put("admin", context.sessionAttribute("admin"));
+          return template.apply(model);
+        } catch (IOException e) {
+          e.printStackTrace();
+          context.status(HttpStatus.NOT_FOUND);
+          return "No se encuentra la página indicada...";
         }
-    }
+      }));
 
-    private static Consumer<JavalinConfig> config() {
-        return config -> {
-            config.staticFiles.add(staticFiles -> {
-                staticFiles.hostedPath = "/";
-                staticFiles.directory = "/public";
-            });
-
-            config.staticFiles.add(staticFiles -> {
-                staticFiles.hostedPath = "/uploads";
-                staticFiles.directory = "uploads";
-                staticFiles.location = Location.EXTERNAL;
-            });
-
-            config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
-                Handlebars handlebars = new Handlebars();
-
-                handlebars.registerHelper("switch", (value, options) -> {
-                    options.context.data("switchValue",  value);
-                    return options.fn();
-                });
-
-                handlebars.registerHelper("case", (value, options) -> {
-                    Object switchValue = options.context.data("switchValue");
-
-                    if (switchValue != null && switchValue.equals(value)) {
-                        return options.fn(); // Render the block if case matches the switch
-                    }
-
-                    return options.inverse();
-                });
-
-                Template template = null;
-                try {
-                    template = handlebars.compile(
-                            "templates/" + path.replace(".hbs", ""));
-                    model.put("username", context.sessionAttribute("username"));
-                    model.put("email", context.sessionAttribute("email"));
-                    return template.apply(model);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    context.status(HttpStatus.NOT_FOUND);
-                    return "No se encuentra la página indicada...";
-                }
-            }));
-
-            config.jsonMapper(new JavalinGson());
-        };
-    }
+      config.jsonMapper(new JavalinGson());
+    };
+  }
 }

@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import ar.edu.utn.frba.dds.controllers.RecomendacionesController;
 import io.javalin.Javalin;
+import io.javalin.http.NotFoundResponse;
 import io.javalin.http.UploadedFile;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public class Router {
     // ctx.render("/auth/registro/registro-juridico.hbs"));
     app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
-    // ALTA
+    // ALTA ADMIN
     app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
     app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
     app.get("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::create);
@@ -100,6 +101,16 @@ public class Router {
         e.printStackTrace();
         ctx.result("Error al subir el archivo: " + e.getMessage());
       }
+    });
+
+    app.exception(Exception.class, (e, ctx) -> {
+      ctx.status(500);
+      ctx.render("/app/500.hbs");
+    });
+
+    app.exception(NotFoundResponse.class, (e, ctx) -> {
+      ctx.status(404);
+      ctx.render("/app/404.hbs");
     });
   }
 }

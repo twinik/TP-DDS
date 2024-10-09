@@ -39,13 +39,15 @@ public class PermisosHelper {
 
         //COLABORAR
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
-        case "/colaborar/registrar-persona-vulnerable/registrar-tutorados" -> this.buscarPorNombres("alta-persona-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable/registrar-tutorados" ->
+            this.buscarPorNombres("alta-persona-vulnerable");
         case "/colaborar/donar-vianda" -> this.buscarPorNombres("donar-viandas");
         case "/colaborar/distribuir-viandas" -> this.buscarPorNombres("redistribuir-viandas");
         case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");
         case "/colaborar/ofrecer-producto" -> this.buscarPorNombres("ofrecer-productos");
-        case "/colaborar/registrar-persona-vulnerable"-> this.buscarPorNombres("alta-vulnerable");
-        case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" -> this.buscarPorNombres("alta-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable" -> this.buscarPorNombres("alta-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" ->
+            this.buscarPorNombres("alta-vulnerable");
 
         //PRODUCTOS
         case "/productos" -> this.buscarPorNombres("canjear-productos");
@@ -60,8 +62,9 @@ public class PermisosHelper {
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
         case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");
         case "/productos" -> this.buscarPorNombres("ofrecer-productos");
-        case "/colaborar/registrar-persona-vulnerable"-> this.buscarPorNombres("alta-vulnerable");
-        case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" -> this.buscarPorNombres("alta-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable" -> this.buscarPorNombres("alta-vulnerable");
+        case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" ->
+            this.buscarPorNombres("alta-vulnerable");
         default -> new HashSet<>();
       };
     }
@@ -80,8 +83,8 @@ public class PermisosHelper {
     ).collect(Collectors.toSet());
   }
 
-  public Set<Permiso> fromFormaColaboracion(FormaColaboracion formaColaboracion){
-    return switch (formaColaboracion.getNombreInterno()){
+  public Set<Permiso> fromFormaColaboracion(FormaColaboracion formaColaboracion) {
+    return switch (formaColaboracion.getNombreInterno()) {
       case "DONACION_DINERO" -> this.buscarPorNombres("donar-dinero");
       case "DONACION_VIANDA" -> this.buscarPorNombres("donar-viandas");
       case "REDISTRIBUCION_VIANDA" -> this.buscarPorNombres("redistribuir-viandas");

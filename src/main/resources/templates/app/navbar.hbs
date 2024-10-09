@@ -200,6 +200,34 @@
                             >
                         </a>
                     </li>
+                    <li>
+                        <a
+                                href="/heladeras/puntos-donacion"
+                                class="flex items-center p-2 rounded-lg group nav-item"
+                        >
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    height="24"
+                                    fill="#fff"
+                                    class="size-6"
+                            >
+                                <path
+                                        fill-rule="evenodd"
+                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                        clip-rule="evenodd"
+                                />
+                                <circle cx="7" cy="12" r="1"/>
+                                <circle cx="17" cy="12" r="1"/>
+                                <circle cx="9" cy="17" r="1"/>
+                                <circle cx="15" cy="17" r="1"/>
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap"
+                            >Puntos de donación</span
+                            >
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -265,16 +293,112 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">Reportes</span>
                 </a>
             </li>
-            <!-- <li>
-                    <a href="iniciar_sesion"class="flex items-center p-2 rounded-lg group nav-item">
-                        <svg class="flex-shrink-0 w-5 h-5 transition duration-75 "
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+            {{#if admin}}
+                <li>
+                    <button
+                            type="button"
+                            class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group nav-item"
+                            aria-controls="dropdown-admin"
+                            data-collapse-toggle="dropdown-admin"
+                    >
+                        <svg class="w-6 h-6 text-white" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                  d="M17 10v1.126c.367.095.714.24 1.032.428l.796-.797 1.415 1.415-.797.796c.188.318.333.665.428 1.032H21v2h-1.126c-.095.367-.24.714-.428 1.032l.797.796-1.415 1.415-.796-.797a3.979 3.979 0 0 1-1.032.428V20h-2v-1.126a3.977 3.977 0 0 1-1.032-.428l-.796.797-1.415-1.415.797-.796A3.975 3.975 0 0 1 12.126 16H11v-2h1.126c.095-.367.24-.714.428-1.032l-.797-.796 1.415-1.415.796.797A3.977 3.977 0 0 1 15 11.126V10h2Zm.406 3.578.016.016c.354.358.574.85.578 1.392v.028a2 2 0 0 1-3.409 1.406l-.01-.012a2 2 0 0 1 2.826-2.83ZM5 8a4 4 0 1 1 7.938.703 7.029 7.029 0 0 0-3.235 3.235A4 4 0 0 1 5 8Zm4.29 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h6.101A6.979 6.979 0 0 1 9 15c0-.695.101-1.366.29-2Z"
+                                  clip-rule="evenodd"/>
                         </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Iniciar sesión</span>
-                    </a>
-                </li> -->
+
+                        <span
+                                class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
+                        >Administrador</span
+                        >
+                        <svg
+                                class="w-3 h-3"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 10 6"
+                        >
+                            <path
+                                    stroke="#fff"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m1 1 4 4 4-4"
+                            />
+                        </svg>
+                    </button>
+                    <ul id="dropdown-admin" class="hidden py-2 space-y-2 ml-4">
+                        {{#if permisoTecnico}}
+                            <li>
+                                <a
+                                        href="/admin/tecnicos/nuevo"
+                                        class="flex items-center p-2 rounded-lg group nav-item"
+                                >
+                                    <svg class="w-6 h-6 text-white" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                              d="M9.586 2.586A2 2 0 0 1 11 2h2a2 2 0 0 1 2 2v.089l.473.196.063-.063a2.002 2.002 0 0 1 2.828 0l1.414 1.414a2 2 0 0 1 0 2.827l-.063.064.196.473H20a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-.089l-.196.473.063.063a2.002 2.002 0 0 1 0 2.828l-1.414 1.414a2 2 0 0 1-2.828 0l-.063-.063-.473.196V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.089l-.473-.196-.063.063a2.002 2.002 0 0 1-2.828 0l-1.414-1.414a2 2 0 0 1 0-2.827l.063-.064L4.089 15H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h.09l.195-.473-.063-.063a2 2 0 0 1 0-2.828l1.414-1.414a2 2 0 0 1 2.827 0l.064.063L9 4.089V4a2 2 0 0 1 .586-1.414ZM8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Alta de técnicos</span>
+                                </a>
+                            </li>
+                        {{/if}}
+                        {{#if permisoFormulario}}
+                            <li>
+                                <a
+                                        href="/admin/formularios/nuevo"
+                                        class="flex items-center p-2 rounded-lg group nav-item"
+                                >
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            width="24"
+                                            height="24"
+                                            fill="#fff"
+                                            class="size-6"
+                                    >
+                                        <path
+                                                fill-rule="evenodd"
+                                                d="M5.25 3A2.25 2.25 0 003 5.25v13.5A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V5.25A2.25 2.25 0 0018.75 3H5.25zM6.75 7.5a.75.75 0 000 1.5h10.5a.75.75 0 000-1.5H6.75zm0 4a.75.75 0 000 1.5h10.5a.75.75 0 000-1.5H6.75zm0 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z"
+                                                clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Alta de formularios</span>
+                                </a>
+                            </li>
+                        {{/if}}
+                        {{#if permisoModeloHeladera}}
+                            <li>
+                                <a
+                                        href="/admin/modelos-heladeras/nuevo"
+                                        class="flex items-center p-2 rounded-lg group nav-item"
+                                >
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            width="24"
+                                            height="24"
+                                            fill="#fff"
+                                            class="size-6"
+                                    >
+                                        <path
+                                                fill-rule="evenodd"
+                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
+                                                clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Alta de formularios</span>
+                                </a>
+                            </li>
+                        {{/if}}
+                    </ul>
+                </li>
+            {{/if}}
             {{#if email}}
                 <li style="margin-top: auto !important">
                     <a
