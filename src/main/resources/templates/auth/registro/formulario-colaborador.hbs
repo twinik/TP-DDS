@@ -2,41 +2,87 @@
     <div class="flex justify-center items-center lg:pt-16 flex-col">
         <h1 class="title1 mb-6" style="color: #eee;">{{formulario.nombre}}</h1>
         <div class="flex flex-col items-center justify-center">
-            <form method="POST" action="" class="content-center max-w-md mx-auto">
+            <form method="POST" action="" class="content-center mx-auto w-full max-w-md">
                 {{#each formulario.campos}}
                     <div class="relative z-0 w-full mb-5 group">
-                        <label for="campo_{{this.id}}"
-                               class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                            {{this.pregunta}}
-                        </label>
+                        <label for="campo_{{this.id}}" class="text-left block mb-2 text-sm font-medium text-gray-900 text-white">{{this.pregunta}}</label>
+
                         {{#switch this.tipo}}
                            {{#case "texto-libre"}}
-                                <textarea name="campo_{{this.id}}" id="campo_{{this.id}}"
-                                   class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                   {{#if this.obligatorio}}
-                                        required
-                                   {{/if}}>
-                                </textarea>
+                               <textarea
+                                       name="campo_{{this.id}}"
+                                       id="campo_{{this.id}}"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       {{#if this.obligatorio}}
+                                           required
+                                       {{/if}}></textarea>
                            {{/case}}
-                           {{#case "multiple-choice"}}
-
-                           {{/case}}
-                           {{#case "single-choice"}} <p>single choice</p> {{/case}}
                            {{#case "numerico"}}
-                                <input type="number" name="campo_{{this.id}}" id="campo_{{this.id}}" step="0.01"
-                                     class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                     {{#if this.obligatorio}}
-                                          required
-                                     {{/if}}
-                                />
+                               <input
+                                   type="number"
+                                   name="campo_{{this.id}}"
+                                   id="campo_{{this.id}}"
+                                   step="0.01"
+                                   class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   {{#if this.obligatorio}}
+                                       required
+                                   {{/if}}
+                               />
                            {{/case}}
                            {{#case "fecha"}}
-                            <input datepicker name="campo_{{this.id}}" id="campo_{{this.id}}" type="text" name="fechaNacimiento"
-                               class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               {{#if this.obligatorio}}
-                                  required
-                                {{/if}}
+                               <input
+                                   datepicker
+                                   datepicker-autohide
+                                   datepicker-format="dd/mm/yyyy"
+                                   autoSelectToday="1"
+                                   name="campo_{{this.id}}"
+                                   id="campo_{{this.id}}"
+                                   type="text"
+                                   class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   {{#if this.obligatorio}}
+                                       required
+                                   {{/if}}
                                />
+                           {{/case}}
+                           {{#case "multiple-choice"}}
+                               {{#each this.opciones}}
+                                   <input
+                                           id="opcion_{{this.id}}"
+                                           name="campo_{{../id}}"
+                                           type="checkbox"
+                                           value="{{this.id}}"
+                                           class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                                       {{#if this.obligatorio}}
+                                           required
+                                       {{/if}}
+                                   />
+                                   <label
+                                           for="opcion_{{this.id}}"
+                                           class="block ms-2 text-sm font-medium text-white"
+                                   >
+                                       {{this.texto}}
+                                   </label>
+                               {{/each}}
+                           {{/case}}
+                           {{#case "single-choice"}}
+                                {{#each this.opciones}}
+                                    <input
+                                            id="opcion_{{this.id}}"
+                                            name="campo_{{../id}}"
+                                            type="radio"
+                                            value="{{this.id}}"
+                                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                                            {{#if this.obligatorio}}
+                                                required
+                                            {{/if}}
+                                    />
+                                    <label
+                                            for="opcion_{{this.id}}"
+                                            class="block ms-2 text-sm font-medium text-white"
+                                    >
+                                        {{this.texto}}
+                                    </label>
+                                {{/each}}
                            {{/case}}
                         {{/switch}}
 
