@@ -21,3 +21,17 @@ async function fetchHeladeras() {
         console.error('Failed to fetch heladeras:', error);
     }
 }
+
+async function fetchDonaciones(provincia, localidad) {
+    try {
+        const response = await fetch(`/heladeras/recibir-puntos?provincia=${provincia}&localidad=${localidad}`);
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+        const donaciones = await response.json();
+        console.log('Donaciones:', donaciones);
+        return donaciones;
+    } catch (error) {
+        console.error('Failed to fetch donaciones:', error);
+    }
+}

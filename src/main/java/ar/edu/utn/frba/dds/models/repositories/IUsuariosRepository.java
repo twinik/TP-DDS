@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface IUsuariosRepository {
     Optional<Usuario> buscar(String id);
 
-    Optional<Usuario> buscar(String email, String contra);
+    Optional<Usuario> buscarPorEmail(String email);
 
     List<Usuario> buscarTodos();
 

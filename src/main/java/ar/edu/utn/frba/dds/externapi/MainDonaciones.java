@@ -13,7 +13,7 @@ public class MainDonaciones {
 
         recomendadorDonaciones.setAdapter(adapter);
 
-        String id = "3aa93e52-85b1-11ef-bb7f-9c6b0047e007";
+        String id = "32d292bf-8677-11ef-87fb-9c6b0047e007";
         Recomendacion recomendacion = recomendadorDonaciones.obtenerRecomendacion(id);
 
 

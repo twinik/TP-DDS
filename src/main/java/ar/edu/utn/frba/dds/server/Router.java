@@ -4,7 +4,9 @@ import ar.edu.utn.frba.dds.controllers.*;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
+import ar.edu.utn.frba.dds.controllers.RecomendacionesController;
 import io.javalin.Javalin;
+import io.javalin.http.NotFoundResponse;
 import io.javalin.http.UploadedFile;
 import java.io.IOException;
 
@@ -25,15 +27,14 @@ public class Router {
 
     // REGISTRO
     app.get("/registro", ServiceLocator.get(RegistroController.class)::index);
-    app.get("/registro/{tipo-persona}", ServiceLocator.get(RegistroController.class)::show);
-    // app.get("/registro/persona-humana", ctx ->
-    // ctx.render("/auth/registro/registro-humano.hbs"));
+    app.get("/registro/{tipo-persona}", ServiceLocator.get(RegistroController.class)::create);
+    //app.get("/registro/persona-humana", ctx -> ctx.render("/auth/registro/registro-humano.hbs"));
     app.post("/registro/persona-humana", ServiceLocator.get(RegistroController.class)::handleRegistroHumano);
     // app.get("/registro/persona-juridica", ctx ->
     // ctx.render("/auth/registro/registro-juridico.hbs"));
     app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
-    // ALTA
+    // ALTA ADMIN
     app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
     app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
     app.get("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::create);
@@ -67,6 +68,7 @@ public class Router {
     // HELADERAS
     app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
+    app.get("/heladeras/recibir-puntos", ServiceLocator.get(RecomendacionesController.class)::getDonacionesParaMapa);
     app.get("/heladeras/puntos-donacion", ctx -> ctx.render("/app/heladeras/puntosdonacion.hbs"));
     app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
     app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::create);
@@ -99,6 +101,16 @@ public class Router {
         e.printStackTrace();
         ctx.result("Error al subir el archivo: " + e.getMessage());
       }
+    });
+
+    app.exception(Exception.class, (e, ctx) -> {
+      ctx.status(500);
+      ctx.render("/app/500.hbs");
+    });
+
+    app.exception(NotFoundResponse.class, (e, ctx) -> {
+      ctx.status(404);
+      ctx.render("/app/404.hbs");
     });
   }
 }

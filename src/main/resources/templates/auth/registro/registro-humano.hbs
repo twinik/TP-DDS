@@ -50,18 +50,42 @@
                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirmar
                         contraseña</label>
                 </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="text" name="repeat_password" id="floating_contact"
-                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                           placeholder=" " required/>
-                    <label for="floating_contact"
-                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contacto
-                        1</label>
-                    <span class="text-gray-300 cursor-pointer text-sm">Añadir otro medio de contacto</span>
-                </div>
+<!--                <div class="relative z-0 w-full mb-5 group">-->
+<!--                    <input type="text" name="repeat_password" id="floating_contact"-->
+<!--                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"-->
+<!--                           placeholder=" " required/>-->
+<!--                    <label for="floating_contact"-->
+<!--                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contacto-->
+<!--                        1</label>-->
+<!--                    <span class="text-gray-300 cursor-pointer text-sm">Añadir otro medio de contacto</span>-->
+<!--                </div>-->
                 <input datepicker id="default-datepicker" type="text" name="fechaNacimiento"
                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="Fecha de nacimiento">
+                <div class="relative z-0 w-full mb-5 group">
+                    <label
+                            for="tipo-documento"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Tipo de documento</label>
+                    <select
+                            id="tipo-documento"
+                            name="tipoDocumento"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                        {{#each tiposDocumento}}
+                            <option value={{this.valor}}>{{this.descripcion}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="number" name="documento" id="documento"
+                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                           placeholder="documento" required min="1"/>
+                    <label for="documento"
+                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nro de documento</label>
+                </div>
+
+
                 <div class="relative z-0 w-full mb-5 group">
                     <span style="color: #eee;">Direccion</span>
                     <div class="grid md:grid-cols-2 md:gap-6">
@@ -100,35 +124,38 @@
                 </div>
                 <div class="mb-2 text-gray-500">Formas de colaboracion</div>
                 <div class="grid grid-cols-2">
-                    <div class="flex items-center">
-                        <input id="default-checkbox" type="checkbox" value=""
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox"
-                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Donacion
-                            de dinero</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input id="default-checkbox" type="checkbox" value=""
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox"
-                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Donacion
-                            de viandas</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input id="default-checkbox" type="checkbox" value=""
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox"
-                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Redistribucion de
-                            viandas</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input id="default-checkbox" type="checkbox" value=""
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox"
-                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Alta
-                            persona vulnerable</label>
-                    </div>
+                    {{#each formasColaboracion}}
+                        <div class="flex items-center">
+                            <input id="default-checkbox" name="forma-{{@index}}" type="checkbox" value={{this.id}}
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-checkbox"
+                                   class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">{{this.desc}}</label>
+                        </div>
+                    {{/each}}
+
+                    <!--                    <div class="flex items-center">-->
+                    <!--                        <input id="default-checkbox" type="checkbox" value=""-->
+                    <!--                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+                    <!--                        <label for="default-checkbox"-->
+                    <!--                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Donacion-->
+                    <!--                            de viandas</label>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="flex items-center">-->
+                    <!--                        <input id="default-checkbox" type="checkbox" value=""-->
+                    <!--                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+                    <!--                        <label for="default-checkbox"-->
+                    <!--                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Redistribucion de-->
+                    <!--                            viandas</label>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="flex items-center">-->
+                    <!--                        <input id="default-checkbox" type="checkbox" value=""-->
+                    <!--                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+                    <!--                        <label for="default-checkbox"-->
+                    <!--                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Alta-->
+                    <!--                            persona vulnerable</label>-->
+                    <!--                    </div>-->
                 </div>
+                <input type="hidden" name="cant-formas" id="cant-formas" value={{formasColaboracion.length}} />
                 <div id="mediosContactoContainer">
                     <label
                             for="medio-contacto-1"
@@ -141,7 +168,7 @@
                             class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
                         <option value="Whatsapp">Whatsapp</option>
-                        <option value="Mail">Mail</option>
+                        <option value="Email">Mail</option>
                         <option value="Telegram">Telegram</option>
                     </select>
                     <label

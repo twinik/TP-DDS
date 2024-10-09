@@ -16,6 +16,8 @@ public class PersonaHumanaDto {
   private String nombre;
   private String apellido;
   private String fechaNacimiento;
+  private String tipoDocumento;
+  private String nroDocumento;
   private DIreccionDto direccion;
   private List<FormaColaboracionDto> formasColaboracion;
   private List<MedioContactoDto> mediosDeContacto;
@@ -42,9 +44,12 @@ public class PersonaHumanaDto {
             .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
             .codigoPostal(context.formParam("cp"))
             .build())
+        .tipoDocumento(context.formParam("tipoDocumento"))
+        .nroDocumento(context.formParam("documento"))
         .claveConf(context.formParam("passConf"))
         .usuarioDto(new UsuarioDto(context.formParam("email"), context.formParam("password")))
         .mediosDeContacto(MedioContactoDto.of(context))
+        .formasColaboracion(FormaColaboracionDto.of(context))
         .build();
   }
 
