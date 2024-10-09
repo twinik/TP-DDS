@@ -12,98 +12,105 @@
 
 {{#partial "contenido"}}
     <div class="p-10 mx-auto max-w-7xl">
-        <h1 class="title1 mb-8">Alta de hijo/s de persona vulnerable</h1>
+        <h1 class="title1 mb-8">Alta de tutorado/s de persona vulnerable</h1>
 
-        <form class="content-center max-w-md mx-auto">
-            <div>
-                <label
-                        for="nombre"
-                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Nombre</label
-                >
-                <input
-                        type="text"
-                        id="nombre"
-                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nombre"
-                        required
-                />
+        <form method="post" class="content-center max-w-md mx-auto">
+            {{#each menores}}
+                <div class="mb-10">
+                    <strong class="mb-5 text-lg">Tutorado {{this}}</strong>
+                    <label
+                            for="nombre"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Nombre</label
+                    >
+                    <input
+                            type="text"
+                            id="nombre"
+                            name="nombre-{{this}}"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Nombre"
+                            required
+                    />
 
-                <label
-                        for="apellido"
-                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Apellido</label
-                >
-                <input
-                        type="text"
-                        id="apellido"
-                        name="apellido"
-                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Apellido"
-                        required
-                />
+                    <label
+                            for="apellido"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Apellido</label
+                    >
+                    <input
+                            type="text"
+                            id="apellido"
+                            name="apellido-{{this}}"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Apellido"
+                            required
+                    />
 
-                <label
-                        for="tipo-documento"
-                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Tipo de documento</label
-                >
-                <select
-                        id="tipo-documento"
-                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                    <option value="dni">DNI</option>
-                    <option value="pasaporte">Pasaporte</option>
-                    <option value="cedula-azul">Cédula azul</option>
-                </select>
+                    <label
+                            for="tipo-documento"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Tipo de documento</label
+                    >
+                    <select
+                            id="tipo-documento"
+                            name="tipoDocumento-{{this}}"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                        {{#each tiposDocumento}}
+                            <option value={{this.valor}}>{{this.descripcion}}</option>
+                        {{/each}}
+                    </select>
 
-                <label
-                        for="documento"
-                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Número de documento</label
-                >
-                <input
-                        type="number"
-                        id="documento"
-                        aria-describedby="helper-text-explanation"
-                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Documento"
-                        required
-                        min="1"
-                />
+                    <label
+                            for="documento"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Número de documento</label
+                    >
+                    <input
+                            type="number"
+                            id="documento"
+                            name="nroDocumento-{{this}}"
+                            aria-describedby="helper-text-explanation"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Documento"
+                            required
+                            min="1"
+                    />
 
-                <label
-                        for="default-datepicker"
-                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Fecha de nacimiento</label
-                >
-                <input
-                        required
-                        datepicker
-                        datepicker-autohide
-                        datepicker-format="dd/mm/yyyy"
-                        autoSelectToday="1"
-                        id="default-datepicker"
-                        type="text"
-                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Fecha de nacimiento"
-                />
+                    <label
+                            for="default-datepicker"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Fecha de nacimiento</label
+                    >
+                    <input
+                            required
+                            datepicker
+                            datepicker-autohide
+                            datepicker-format="dd/mm/yyyy"
+                            autoSelectToday="1"
+                            id="default-datepicker-{{this}}"
+                            type="text"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Fecha de nacimiento"
+                            name="fechaNacimiento-{{this}}"
+                    />
 
-                <label
-                        for="cod-tarjeta"
-                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Código de la tarjeta que recibirá la persona</label
-                >
-                <input
-                        name="codTarjeta"
-                        type="text"
-                        id="cod-tarjeta"
-                        aria-describedby="helper-text-explanation"
-                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="ingrese código"
-                        min="1"
-                />
-            </div>
+                    <label
+                            for="cod-tarjeta"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Código de la tarjeta que recibirá la persona</label
+                    >
+                    <input
+                            name="codTarjeta-{{this}}"
+                            type="text"
+                            id="cod-tarjeta"
+                            aria-describedby="helper-text-explanation"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="ingrese código"
+                            min="1"
+                    />
+                </div>
+            {{/each}}
             <button
                     type="submit"
                     class="content-center max-w-md mx-auto w-full mt-6 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
@@ -113,3 +120,5 @@
         </form>
     </div>
 {{/partial}}
+
+{{> templates/app/base}}

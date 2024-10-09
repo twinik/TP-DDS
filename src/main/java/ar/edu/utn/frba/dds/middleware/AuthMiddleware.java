@@ -25,7 +25,7 @@ public class AuthMiddleware implements IMiddleware {
             Usuario usuario = getUser(ctx);
             if (!permisos.isEmpty()) {
                 if (usuario == null) {
-                    ctx.sessionAttribute("previousUrl", ctx.path());
+                    ctx.sessionAttribute("previousUrl", ctx.path()); // TODO y esto que es???
                     throw new UsuarioNoAutenticadoException();
                 }
                 if (permisos.stream().noneMatch(usuario::tenesPermiso)) {

@@ -2,12 +2,15 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.TipoDocumentoDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
+import ar.edu.utn.frba.dds.dtos.colaboraciones.TutoradoInputDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.services.AltaPersonaVulnerableService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,12 +36,26 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
     context.render("/app/colaboraciones/alta-persona-vulnerable.hbs", model);
   }
 
+  public void createTutorados(Context context) {
+    HashMap<String, Object> model = new HashMap<>();
+    model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
+
+    List<Integer> menores = new ArrayList<>();
+    for (int i = 1; i <= Integer.parseInt(context.sessionAttribute("cantMenores")); i++) {
+      menores.add(i);
+    }
+    model.put("menores", menores);
+    context.render("/app/colaboraciones/alta-hijo-vulnerable.hbs", model);
+  }
+
   @Override
   public void save(Context context) {
     AltaPersonaVulnerableDto dto = AltaPersonaVulnerableDto.of(context);
 
     if (context.formParam("tiene-tutorados").equals("si")) {
       String idPersona = this.service.crearPersonaVulnerable(dto);
+      context.sessionAttribute("cantMenores", dto.getCantidadTutorados());
+      context.sessionAttribute("domicilioFamiliaVulnerable", dto.getDomicilio());
       context.redirect("/colaborar/registrar-persona-vulnerable/" + idPersona + "/registrar-tutorados");
     } else {
       try {
@@ -50,6 +67,19 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
         // TODO: Mostrar pop up error ?
       }
     }
+  }
+
+  public void saveTutorados(Context context) {
+    for (int i = 1; i <= Integer.parseInt(context.sessionAttribute("cantMenores")); i++) {
+      TutoradoInputDto dto = TutoradoInputDto.of(context, i);
+      this.service.darAltaTutorados(dto, context.pathParam("id"));
+    }
+
+    context.sessionAttribute("cantMenores", null);
+    context.sessionAttribute("domicilioFamiliaVulnerable", null);
+    Map<String, Object> model = new HashMap<>();
+    model.put("message", "El alta de los tutorados fue registrado con exito");
+    context.render("/app/success.hbs", model);
   }
 
   @Override

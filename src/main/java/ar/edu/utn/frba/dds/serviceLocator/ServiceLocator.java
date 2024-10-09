@@ -113,7 +113,7 @@ public class ServiceLocator {
       else if (clase.equals(AlertasService.class))
         add(clase, new AlertasService(get(IAlertasRepository.class)));
       else if (clase.equals(AltaPersonaVulnerableService.class))
-        add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class)));
+        add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(IAltaPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class)));
       else if (clase.equals(CalculadorHeladerasCercanas.class)) {
         try {
           add(clase, new CalculadorHeladerasCercanas(get(IHeladerasRepository.class), Integer.parseInt(new ConfigReader("config.properties").getProperty("LIMITE_HELADERAS_CERCANAS"))));
@@ -146,6 +146,8 @@ public class ServiceLocator {
         add(clase, new RecomendadorHeladeras());
       else if (clase.equals(ReportesFactory.class))
         add(clase, new ReportesFactory(get(IViandasRepository.class), get(IDonacionesViandaRepository.class), get(IRedistribucionesViandaRepository.class), get(IFallasTecnicasRepository.class), get(IAlertasRepository.class)));
+      else if (clase.equals(RespuestaFormularioService.class))
+        add(clase, new RespuestaFormularioService(get(IRespuestasFormularioRepository.class)));
       else if (clase.equals(SuscripcionesServices.class))
         add(clase, new SuscripcionesServices(get(ISuscripcionesRepository.class)));
       else if (clase.equals(TecnicosHelper.class))
@@ -180,6 +182,8 @@ public class ServiceLocator {
         add(clase, new OfertasProductoController(get(OfertasProductoService.class), get(FileUploadService.class)));
       else if (clase.equals(RegistroController.class))
         add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class)));
+      else if (clase.equals(RespuestaFormularioController.class))
+        add(clase, new RespuestaFormularioController(get(RespuestaFormularioService.class), get(FormulariosService.class)));
       else if (clase.equals(TecnicosController.class))
         add(clase, new TecnicosController(get(TecnicosService.class)));
       else if (clase.equals(RecomendacionesController.class)) {

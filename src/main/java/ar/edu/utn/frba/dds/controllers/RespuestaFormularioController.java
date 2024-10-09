@@ -1,7 +1,8 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.dtos.formularios.AltaFormularioDto;
+import ar.edu.utn.frba.dds.dtos.formularios.ShowFormularioDto;
 import ar.edu.utn.frba.dds.services.FormulariosService;
+import ar.edu.utn.frba.dds.services.RespuestaFormularioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
@@ -9,9 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @AllArgsConstructor
-public class FormulariosController implements ICrudViewsHandler {
+public class RespuestaFormularioController implements ICrudViewsHandler {
 
-  FormulariosService formulariosService;
+  RespuestaFormularioService rtaService;
+  FormulariosService formService;
 
   @Override
   public void index(Context context) {
@@ -25,16 +27,15 @@ public class FormulariosController implements ICrudViewsHandler {
 
   @Override
   public void create(Context context) {
-    context.render("app/admin/alta-formulario.hbs");
+    // TODO chequear que es el colaborador
+    Map<String, Object> model = new HashMap<>();
+    model.put("formulario", ShowFormularioDto.fromFormulario(formService.obtenerFormulario(context.pathParam("idFormulario"))));
+    context.render("auth/registro/formulario-colaborador.hbs", model);
   }
 
   @Override
   public void save(Context context) {
-    AltaFormularioDto dto = AltaFormularioDto.fromContext(context);
-    formulariosService.crearFormulario(dto);
-    Map<String, String> model = new HashMap<>();
-    model.put("message", "El formulario ha sido creado con exito!");
-    context.render("app/success.hbs", model);
+
   }
 
   @Override

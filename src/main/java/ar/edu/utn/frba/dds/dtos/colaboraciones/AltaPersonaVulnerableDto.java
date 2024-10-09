@@ -22,7 +22,7 @@ public class AltaPersonaVulnerableDto {
   private String cantidadTutorados;
   private List<AltaPersonaVulnerableDto> tutorados;
 
-  public static AltaPersonaVulnerableDto of (Context context){
+  public static AltaPersonaVulnerableDto of(Context context) {
     return AltaPersonaVulnerableDto
         .builder()
         .nombre(context.formParam("nombre"))
@@ -35,7 +35,6 @@ public class AltaPersonaVulnerableDto {
         .codigoTarjeta(context.formParam("codTarjeta"))
         .tieneTutorados(context.formParam("tiene-tutorados"))
         .cantidadTutorados(context.formParam("cantMenores"))
-        // TODO Lista de tutorados
         .build();
   }
 }
