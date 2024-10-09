@@ -172,6 +172,8 @@ public class ServiceLocator {
         add(clase, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))
         add(clase, new LogoutController());
+      else if(clase.equals(ModelosHeladeraController.class))
+        add(clase,new ModelosHeladeraController(get(ModelosService.class)));
       else if (clase.equals(OfertasProductoController.class))
         add(clase, new OfertasProductoController(get(OfertasProductoService.class), get(FileUploadService.class)));
       else if (clase.equals(RegistroController.class))
