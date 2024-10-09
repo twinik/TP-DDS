@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.dtos.formularios;
 
-import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Opcion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.form.TipoCampo;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
@@ -10,13 +9,13 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class AltaCampoFormularioDto {
+public class AltaCampoDto {
   private String tipo;
   private String pregunta;
   private String obligatorio; // va a ser "obligatorio" o null (creo)
   private List<String> opciones;
 
-  public static AltaCampoFormularioDto fromContext(Integer nroCampo, Context ctx) {
+  public static AltaCampoDto fromContext(Integer nroCampo, Context ctx) {
     String tipo = ctx.formParam("tipo-campo-" + nroCampo.toString());
     String pregunta = ctx.formParam("pregunta-" + nroCampo.toString());
     String obligatorio = ctx.formParam("obligatorio-campo-" + nroCampo.toString());
@@ -27,7 +26,7 @@ public class AltaCampoFormularioDto {
         opciones.add(ctx.formParam(String.format("opcion-%d-campo-%d-input", i, nroCampo)));
       }
     }
-    return new AltaCampoFormularioDto(tipo, pregunta, obligatorio, opciones);
+    return new AltaCampoDto(tipo, pregunta, obligatorio, opciones);
   }
 
   public static TipoCampo mapToTipo(String tipo) {

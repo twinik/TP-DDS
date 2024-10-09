@@ -10,14 +10,14 @@ import java.util.List;
 @Getter
 public class AltaFormularioDto {
   private String idUsuario;
-  private List<AltaCampoFormularioDto> campos;
+  private List<AltaCampoDto> campos;
 
   public static AltaFormularioDto fromContext(Context ctx) {
     String idUsuario = ctx.sessionAttribute("idUsuario");
     Integer cantidadCampos = Integer.parseInt(ctx.formParam("cantidad-campos"));
-    List<AltaCampoFormularioDto> campos = new ArrayList<>();
+    List<AltaCampoDto> campos = new ArrayList<>();
     for (int i = 1; i <= cantidadCampos; i++) {
-      campos.add(AltaCampoFormularioDto.fromContext(i, ctx));
+      campos.add(AltaCampoDto.fromContext(i, ctx));
     }
     return new AltaFormularioDto(idUsuario, campos);
   }
