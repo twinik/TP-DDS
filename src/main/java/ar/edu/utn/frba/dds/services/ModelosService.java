@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.services;
 
+import ar.edu.utn.frba.dds.dtos.heladeras.ModeloHeladeraInputDto;
 import ar.edu.utn.frba.dds.dtos.heladeras.ModeloHeladeraOutputDto;
 import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.repositories.IModeloHeladeraRepository;
@@ -19,5 +20,10 @@ public class ModelosService {
         Optional<ModeloHeladera> modelo = this.modeloHeladeraRepository.buscar(id);
         if (modelo.isEmpty()) throw new RuntimeException("no se encontro un modelo con este id");
         return modelo.get();
+    }
+
+    public void crearModeloHeladera(ModeloHeladeraInputDto dto){
+        ModeloHeladera modeloHeladera = new ModeloHeladera(dto.getModelo(),dto.getTempMin(),dto.getTempMax());
+        this.modeloHeladeraRepository.guardar(modeloHeladera);
     }
 }

@@ -35,7 +35,8 @@ public class Router {
     app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
     app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
     app.get("/admin/formularios/nuevo", ctx -> ctx.render("/app/admin/alta-formulario.hbs"));
-    app.get("/admin/modelos-heladeras/nuevo", ctx -> ctx.render("/app/admin/alta-modelo-heladera.hbs"));
+    app.get("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::create);
+    app.post("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::save);
 
     //COLABORACIONES
     app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
