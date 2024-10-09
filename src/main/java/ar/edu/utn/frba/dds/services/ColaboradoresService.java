@@ -24,7 +24,7 @@ public class ColaboradoresService {
         // TODO: hacerlo con messageFactory
         if (id == null) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
         Optional<Colaborador> colab = this.colaboradoresRepository.buscar(id);
-        if (colab.isEmpty()) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
+        if (colab.isEmpty()) throw new RecursoInexistenteException("No existe colaborador asociado a este id");
         return colab.get();
     }
 
