@@ -30,13 +30,13 @@ public class AltaCampoDto {
   }
 
   public static TipoCampo mapToTipo(String tipo) {
-    switch (tipo.toLowerCase()) {
-      case "texto-libre": return TipoCampo.LIBRE;
-      case "multiple-choice": return TipoCampo.MULTIPLE_CHOICE;
-      case "single-choice": return TipoCampo.CHOICE;
-      case "numerico": return TipoCampo.NUMERICO;
-      case "fecha": return TipoCampo.FECHA;
-      default: throw new RuntimeException("Tipo de campo de formulario invalido");
-    }
+    return switch (tipo.toLowerCase()) {
+      case "texto-libre" -> TipoCampo.LIBRE;
+      case "multiple-choice" -> TipoCampo.MULTIPLE_CHOICE;
+      case "single-choice" -> TipoCampo.CHOICE;
+      case "numerico" -> TipoCampo.NUMERICO;
+      case "fecha" -> TipoCampo.FECHA;
+      default -> throw new RuntimeException("Tipo de campo de formulario invalido");
+    };
   }
 }

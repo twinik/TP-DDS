@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.repositories.IPermisosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
@@ -73,6 +74,18 @@ public class PermisosHelper {
     return this.permisosDisponibles.stream().filter(p ->
         Arrays.stream(nombres).anyMatch(nombre -> p.getDesc_interna().equalsIgnoreCase(nombre))
     ).collect(Collectors.toSet());
+  }
+
+  public Set<Permiso> fromFormaColaboracion(FormaColaboracion formaColaboracion){
+    return switch (formaColaboracion.getNombreInterno()){
+      case "DONACION_DINERO" -> this.buscarPorNombres("donar-dinero");
+      case "DONACION_VIANDA" -> this.buscarPorNombres("donar-viandas");
+      case "REDISTRIBUCION_VIANDA" -> this.buscarPorNombres("redistribuir-viandas");
+      case "REGISTRO_PERSONA" -> this.buscarPorNombres("alta-vulnerable");
+      case "OFRECER_PRODUCTOS" -> this.buscarPorNombres("ofrecer-productos");
+      case "COLOCACION_HELADERA" -> this.buscarPorNombres("colocar-heladeras");
+      default -> null;
+    };
   }
 
 }

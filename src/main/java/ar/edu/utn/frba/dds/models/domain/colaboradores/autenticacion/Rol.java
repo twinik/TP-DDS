@@ -17,7 +17,7 @@ import java.util.List;
 public class Rol extends EntidadPersistente {
     @Column(name = "nombre")
     private String nombre;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "permisos_x_rol", joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "permiso_id", referencedColumnName = "id"))
     private List<Permiso> permisos = new ArrayList<>();

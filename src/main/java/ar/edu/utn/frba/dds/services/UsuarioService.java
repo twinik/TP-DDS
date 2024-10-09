@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
+import ar.edu.utn.frba.dds.utils.PasswordHasher;
 import lombok.AllArgsConstructor;
 import java.util.Optional;
 
@@ -23,8 +24,9 @@ public class UsuarioService {
 
     public LoginDto obtenerUsuario(UsuarioDto dto) {
         LoginDto resultado = new LoginDto();
-        Optional<Usuario> user = usuariosRepository.buscar(dto.getEmail(), dto.getClave());
+        Optional<Usuario> user = usuariosRepository.buscarPorEmail(dto.getEmail());
         if (user.isEmpty()) throw new LoginFailedException("usuario o contraseña invalidos");
+        if(!PasswordHasher.verifyPassword(dto.getClave(),user.get().getClave())) throw new LoginFailedException("usuario o contraseña invalidos");
         resultado.setIdUsuario(user.get().getId());
         Optional<Colaborador> colaborador = this.colaboradoresService.colaboradorFromUsuario(user.get().getId());
         colaborador.ifPresent(value -> resultado.setIdColaborador(value.getId()));

@@ -123,7 +123,7 @@ public class ServiceLocator {
       } else if (clase.equals(ICalculadorPuntos.class))
         add(clase, new CalculadorPuntos());
       else if (clase.equals(ColaboradoresService.class))
-        add(clase, new ColaboradoresService(get(IColaboradoresRepository.class)));
+        add(clase, new ColaboradoresService(get(IColaboradoresRepository.class), get(MedioContactoService.class), get(FormaColaboracionService.class), get(RolesService.class)));
       else if (clase.equals(ColocacionHeladerasService.class))
         add(clase, new ColocacionHeladerasService(get(IColocacionHeladeraRepository.class), get(ColaboradoresService.class), get(ModelosService.class), get(CalculadorHeladerasCercanas.class), get(IHeladerasRepository.class)));
       else if (clase.equals(DonacionDineroService.class))
@@ -132,6 +132,8 @@ public class ServiceLocator {
         add(clase, new FallasTecnicasService(get(IFallasTecnicasRepository.class), get(ColaboradoresService.class), get(HeladerasService.class)));
       else if (clase.equals(FileUploadService.class))
         add(clase, new FileUploadService());
+      else if (clase.equals(FormaColaboracionService.class))
+        add(clase, new FormaColaboracionService(get(IFormasColaboracionRespository.class)));
       else if (clase.equals(FormulariosService.class))
         add(clase, new FormulariosService(get(IFormularioRepository.class)));
       else if (clase.equals(HeladerasService.class))
@@ -148,6 +150,8 @@ public class ServiceLocator {
         add(clase, new ReportesFactory(get(IViandasRepository.class), get(IDonacionesViandaRepository.class), get(IRedistribucionesViandaRepository.class), get(IFallasTecnicasRepository.class), get(IAlertasRepository.class)));
       else if (clase.equals(RespuestaFormularioService.class))
         add(clase, new RespuestaFormularioService(get(IRespuestasFormularioRepository.class)));
+      else if (clase.equals(RolesService.class))
+        add(clase, new RolesService(get(IRolesRepository.class)));
       else if (clase.equals(SuscripcionesServices.class))
         add(clase, new SuscripcionesServices(get(ISuscripcionesRepository.class)));
       else if (clase.equals(TecnicosHelper.class))
@@ -181,7 +185,7 @@ public class ServiceLocator {
       else if (clase.equals(OfertasProductoController.class))
         add(clase, new OfertasProductoController(get(OfertasProductoService.class), get(FileUploadService.class)));
       else if (clase.equals(RegistroController.class))
-        add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class)));
+        add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class), get(FormaColaboracionService.class)));
       else if (clase.equals(RespuestaFormularioController.class))
         add(clase, new RespuestaFormularioController(get(RespuestaFormularioService.class), get(FormulariosService.class)));
       else if (clase.equals(TecnicosController.class))

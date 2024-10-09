@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "forma_colaboracion")
 public class FormaColaboracion extends EntidadPersistente {
 
-    @Column(name = "nombre", unique = true)
-    private String nombre;
+    @Column(name = "nombreInterno", unique = true)
+    private String nombreInterno;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
 }

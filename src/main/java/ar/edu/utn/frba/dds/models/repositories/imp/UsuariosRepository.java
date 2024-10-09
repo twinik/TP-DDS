@@ -21,11 +21,10 @@ public class UsuariosRepository implements IUsuariosRepository, WithSimplePersis
     }
 
     @Override
-    public Optional<Usuario> buscar(String email, String contra) {
+    public Optional<Usuario> buscarPorEmail(String email) {
         try {
-            return Optional.of(entityManager().createQuery("from Usuario where email=:email and clave=:clave and activo=:activo", Usuario.class)
+            return Optional.of(entityManager().createQuery("from Usuario where email=:email and activo=:activo", Usuario.class)
                     .setParameter("email", email)
-                    .setParameter("clave", contra)
                     .setParameter("activo", true)
                     .getSingleResult());
         } catch (NoResultException e) {
