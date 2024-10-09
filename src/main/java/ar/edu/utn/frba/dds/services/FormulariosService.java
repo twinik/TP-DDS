@@ -1,7 +1,8 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.dtos.formularios.AltaCampoFormularioDto;
+import ar.edu.utn.frba.dds.dtos.formularios.AltaCampoDto;
 import ar.edu.utn.frba.dds.dtos.formularios.AltaFormularioDto;
+import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Campo;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Formulario;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Opcion;
@@ -21,12 +22,16 @@ public class FormulariosService {
     repo.guardar(form);
   }
 
-  private static Campo campoFromDto(AltaCampoFormularioDto c) {
+  private static Campo campoFromDto(AltaCampoDto c) {
     Campo campo = new Campo();
-    campo.setTipo(AltaCampoFormularioDto.mapToTipo(c.getTipo()));
+    campo.setTipo(AltaCampoDto.mapToTipo(c.getTipo()));
     campo.setPregunta(c.getPregunta());
     campo.setObligatorio(c.getObligatorio() != null);
     campo.setOpciones(c.getOpciones().stream().map(Opcion::new).toList());
     return campo;
+  }
+
+  public Formulario obtenerFormulario(String id) {
+    return repo.buscar(id).orElseThrow(() -> new RecursoInexistenteException("El formulario no existe"));
   }
 }

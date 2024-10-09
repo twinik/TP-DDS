@@ -54,6 +54,22 @@ public class Server {
 
             config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
                 Handlebars handlebars = new Handlebars();
+
+                handlebars.registerHelper("switch", (value, options) -> {
+                    options.context.data("switchValue",  value);
+                    return options.fn();
+                });
+
+                handlebars.registerHelper("case", (value, options) -> {
+                    Object switchValue = options.context.data("switchValue");
+
+                    if (switchValue != null && switchValue.equals(value)) {
+                        return options.fn(); // Render the block if case matches the switch
+                    }
+
+                    return options.inverse();
+                });
+
                 Template template = null;
                 try {
                     template = handlebars.compile(

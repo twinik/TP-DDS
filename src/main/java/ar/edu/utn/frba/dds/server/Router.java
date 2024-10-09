@@ -18,20 +18,22 @@ public class Router {
    */
   public static void init(Javalin app) {
 
-    //LOGIN
+    // LOGIN
     app.get("/login", ServiceLocator.get(LoginController.class)::index);
     app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
     app.get("/logout", ServiceLocator.get(LogoutController.class)::handleLogout);
 
-    //REGISTRO
+    // REGISTRO
     app.get("/registro", ServiceLocator.get(RegistroController.class)::index);
     app.get("/registro/{tipo-persona}", ServiceLocator.get(RegistroController.class)::show);
-    //app.get("/registro/persona-humana", ctx -> ctx.render("/auth/registro/registro-humano.hbs"));
+    // app.get("/registro/persona-humana", ctx ->
+    // ctx.render("/auth/registro/registro-humano.hbs"));
     app.post("/registro/persona-humana", ServiceLocator.get(RegistroController.class)::handleRegistroHumano);
-    //app.get("/registro/persona-juridica", ctx -> ctx.render("/auth/registro/registro-juridico.hbs"));
+    // app.get("/registro/persona-juridica", ctx ->
+    // ctx.render("/auth/registro/registro-juridico.hbs"));
     app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
-    //ALTA
+    // ALTA
     app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
     app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
     app.get("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::create);
@@ -39,17 +41,25 @@ public class Router {
     app.get("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::create);
     app.post("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::save);
 
-    //COLABORACIONES
+    app.get("/responder-formulario/{idFormulario}/colaborador/{idColaborador}",
+        ServiceLocator.get(RespuestaFormularioController.class)::create);
+    app.post("/responder-formulario/{idFormulario}/colaborador/{idColaborador}",
+        ServiceLocator.get(RespuestaFormularioController.class)::save);
+
+    // COLABORACIONES
     app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
 
     app.get("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::create);
     app.post("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::save);
 
-
-    app.get("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::create);
-    app.post("/colaborar/registrar-persona-vulnerable", ServiceLocator.get(AltaPersonaVulnerableController.class)::save);
-    app.get("/colaborar/registrar-persona-vulnerable/registrar-tutorados", ServiceLocator.get(AltaPersonaVulnerableController.class)::createTutorados);
-    app.post("/colaborar/registrar-persona-vulnerable/registrar-tutorados", ServiceLocator.get(AltaPersonaVulnerableController.class)::saveTutorados);
+    app.get("/colaborar/registrar-persona-vulnerable",
+        ServiceLocator.get(AltaPersonaVulnerableController.class)::create);
+    app.post("/colaborar/registrar-persona-vulnerable",
+        ServiceLocator.get(AltaPersonaVulnerableController.class)::save);
+    app.get("/colaborar/registrar-persona-vulnerable/registrar-tutorados",
+        ServiceLocator.get(AltaPersonaVulnerableController.class)::createTutorados);
+    app.post("/colaborar/registrar-persona-vulnerable/registrar-tutorados",
+        ServiceLocator.get(AltaPersonaVulnerableController.class)::saveTutorados);
 
     app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
 
@@ -60,21 +70,22 @@ public class Router {
 
     app.get("/colaborar/ofrecer-producto", ServiceLocator.get(OfertasProductoController.class)::create);
 
-    //HELADERAS
+    // HELADERAS
     app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
+    app.get("/heladeras/puntos-donacion", ctx -> ctx.render("/app/heladeras/puntosdonacion.hbs"));
     app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
     app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::create);
     app.post("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::save);
     app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
 
-    //REPORTES
+    // REPORTES
     app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
 
-    //CARGA MASIVA
+    // CARGA MASIVA
     app.get("/carga-masiva-colaboraciones", ctx -> ctx.render("/app/carga-masiva/carga-masiva.hbs"));
 
-    //PRODUCTOS
+    // PRODUCTOS
     app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
     app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
 
