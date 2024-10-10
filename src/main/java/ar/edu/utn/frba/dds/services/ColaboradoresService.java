@@ -78,8 +78,6 @@ public class ColaboradoresService {
   }
 
   public void marcarFormCompletado(String idColaborador) {
-    Colaborador c = obtenerColaborador(idColaborador);
-    c.setFormCompletado(true);
-    this.colaboradoresRepository.actualizar(c);
+    this.colaboradoresRepository.marcarFormCompletado(idColaborador);
   }
 }

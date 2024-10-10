@@ -110,6 +110,7 @@ public class Router {
     });
 
     app.exception(NotFoundResponse.class, (e, ctx) -> {
+      e.printStackTrace();
       ctx.status(404);
       ctx.render("/app/404.hbs");
     });

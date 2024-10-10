@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.usuarios.LoginDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioNavbarDto;
+import ar.edu.utn.frba.dds.exceptions.FormularioNoCompletadoException;
 import ar.edu.utn.frba.dds.exceptions.LoginFailedException;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -36,6 +37,11 @@ public class LoginController implements ICrudViewsHandler {
       ctx.sessionAttribute("permisoModeloHeladera", usuarioNavbarDto.getPermisoModeloHeladera());
       ctx.sessionAttribute("permisoTarjeta", usuarioNavbarDto.getPermisoCodTarjeta());
       ctx.sessionAttribute("admin", usuarioNavbarDto.esAdmin());
+
+      if (dto.getFormCompletado() != null && !dto.getFormCompletado()) {
+        throw new FormularioNoCompletadoException(dto.getIdColaborador());
+      }
+
       String previousUrl = ctx.sessionAttribute("previousUrl");
       ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));
     } catch (LoginFailedException e) {

@@ -22,4 +22,6 @@ public interface IColaboradoresRepository {
     void actualizar(Colaborador colaborador);
 
     void eliminar(Colaborador colaborador);
+
+    void marcarFormCompletado(String id);
 }
