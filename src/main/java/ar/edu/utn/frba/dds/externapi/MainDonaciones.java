@@ -16,7 +16,19 @@ public class MainDonaciones {
         String id = "32d292bf-8677-11ef-87fb-9c6b0047e007";
         Recomendacion recomendacion = recomendadorDonaciones.obtenerRecomendacion(id);
 
+        mostrarRecomendacion(recomendacion);
 
+        String etiquetaLocalidad = "bajoFlores";
+        String etiquetaProvincia = "caba";
+
+        List<Recomendacion> recomendaciones = recomendadorDonaciones.listarRecomendaciones(etiquetaProvincia, etiquetaLocalidad);
+
+        for (Recomendacion r : recomendaciones) {
+            mostrarRecomendacion(r);
+        }
+    }
+
+    private static void mostrarRecomendacion(Recomendacion recomendacion) {
         System.out.println("ID: " + recomendacion.getId());
         System.out.println("Nombre: " + recomendacion.getNombre());
         System.out.println("Calle: " + recomendacion.getCalle());
@@ -25,21 +37,6 @@ public class MainDonaciones {
         System.out.println("Longitud: " + recomendacion.getLongitud());
         System.out.println("Provincia: " + recomendacion.getProvincia().getNombre());
         System.out.println("Localidad: " + recomendacion.getLocalidad().getNombre());
-
-        String etiquetaLocalidad = "bajoFlores";
-        String etiquetaProvincia = "caba";
-
-        List<Recomendacion> recomendaciones = recomendadorDonaciones.listarRecomendaciones(etiquetaProvincia, etiquetaLocalidad);
-
-        for (Recomendacion r : recomendaciones) {
-            System.out.println("ID: " + r.getId());
-            System.out.println("Nombre: " + r.getNombre());
-            System.out.println("Calle: " + r.getCalle());
-            System.out.println("Altura: " + r.getAltura());
-            System.out.println("Latitud: " + r.getLatitud());
-            System.out.println("Longitud: " + r.getLongitud());
-            System.out.println("Provincia: " + r.getProvincia().getNombre());
-            System.out.println("Localidad: " + r.getLocalidad().getNombre());
-        }
+        System.out.println();
     }
 }

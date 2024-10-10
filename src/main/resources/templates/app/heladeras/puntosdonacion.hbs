@@ -2,14 +2,28 @@
     <div id="map"></div>
     <div class="form-container">
         <label for="provincia">Provincia:</label>
-        <input type="text" id="provincia" name="provincia" placeholder="Ingrese la provincia">
+        <select id="provincia">
+            <option value="">Seleccionar</option>
+            <option value="caba">CABA</option>
+            <option value="cordoba">Córdoba</option>
+            <option value="santaFe">Santa Fe</option>
+            <option value="mendoza">Mendoza</option>
+            <option value="buenosAires">Buenos Aires</option>
+        </select>
 
         <label for="localidad">Localidad:</label>
-        <input type="text" id="localidad" name="localidad" placeholder="Ingrese la localidad">
+        <select id="localidad">
+            <option value="">Seleccionar</option>
+        </select>
 
         <button id="confirmar">Confirmar</button>
-        <p id="mensaje-error" class="error-message" style="display:none;">Debe completar ambos campos</p>
+
+
+        <div id="mensaje-error" class="error-message">Por favor, completa todos los campos.</div>
     </div>
+
+
+
 {{/partial}}
 
 {{#partial "links"}}
