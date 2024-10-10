@@ -48,6 +48,8 @@ public class PermisosHelper {
         case "/colaborar/registrar-persona-vulnerable" -> this.buscarPorNombres("alta-vulnerable");
         case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" ->
             this.buscarPorNombres("alta-vulnerable");
+        case "/heladeras/{id}/suscribirse" -> this.buscarPorNombres("colaborador-base");
+        case "/heladeras/{id}/reportar-falla-tecnica" -> this.buscarPorNombres("colaborador-base");
 
         //PRODUCTOS
 //        case "/productos" -> this.buscarPorNombres("canjear-productos");
@@ -66,6 +68,8 @@ public class PermisosHelper {
         case "/colaborar/registrar-persona-vulnerable" -> this.buscarPorNombres("alta-vulnerable");
         case "/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados" ->
             this.buscarPorNombres("alta-vulnerable");
+        case "/heladeras/{id}/suscribirse" -> this.buscarPorNombres("colaborador-base");
+        case "/heladeras/{id}/reportar-falla-tecnica" -> this.buscarPorNombres("colaborador-base");
         default -> new HashSet<>();
       };
     }

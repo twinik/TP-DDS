@@ -18,6 +18,7 @@ public class RolesService {
     r.setNombre(tipoColaborador.getTipo().name() + "-" + UUID.randomUUID());
     tipoColaborador.getFormasPosiblesColaboracion().forEach(forma -> {
       Permiso[] permisos = PermisosHelper.getInstance().fromFormaColaboracion(forma).toArray(new Permiso[0]);
+      r.agregarPermisos(PermisosHelper.getInstance().buscarPorNombres("colaborador-base").toArray(new Permiso[0])); // que es esto loco
       r.agregarPermisos(permisos);
       this.rolesRepository.guardar(r);
     });

@@ -158,8 +158,8 @@ public class ServiceLocator {
         add(clase, new RespuestaFormularioService(get(IRespuestasFormularioRepository.class)));
       else if (clase.equals(RolesService.class))
         add(clase, new RolesService(get(IRolesRepository.class)));
-      else if (clase.equals(SuscripcionesServices.class))
-        add(clase, new SuscripcionesServices(get(ISuscripcionesRepository.class)));
+      else if (clase.equals(SuscripcionesService.class))
+        add(clase, new SuscripcionesService(get(ISuscripcionesRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(TarjetasService.class))
         add(clase, new TarjetasService(get(ITarjetasRepository.class)));
       else if (clase.equals(TecnicosHelper.class))
@@ -209,7 +209,7 @@ public class ServiceLocator {
           throw new RuntimeException(e);
         }
       } else if (clase.equals(SuscripcionesController.class))
-        add(clase, new SuscripcionesController());
+        add(clase, new SuscripcionesController(get(SuscripcionesService.class)));
       else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
     }
     return (T) services.get(clase);

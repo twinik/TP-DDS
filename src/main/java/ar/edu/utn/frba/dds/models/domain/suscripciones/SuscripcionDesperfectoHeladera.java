@@ -4,12 +4,14 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeHeladerasRecomendadasFactory;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
  * suscripcion que notifica si hubo un desperfecto en la heladera
  */
 @AllArgsConstructor
+@NoArgsConstructor
 public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
     private RecomendadorHeladeras recomendadorHeladeras;
 

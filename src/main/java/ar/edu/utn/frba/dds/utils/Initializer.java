@@ -58,16 +58,17 @@ public class Initializer {
     Permiso p10 = new Permiso("Redistribuir viandas", "redistribuir-viandas");
     Permiso p11 = new Permiso("Redistribuir viandas", "alta-vulnerable");
     Permiso p12 = new Permiso("Alta codigo de tarjetas", "alta-cod-tarjeta");
+    Permiso p13 = new Permiso("Colaborador Base", "colaborador-base");
 
-    permisosRepository.guardar(p1,p2,p3,p5, p6, p7, p8, p9, p10,p11,p12);
+    permisosRepository.guardar(p1,p2,p3,p5, p6, p7, p8, p9, p10,p11,p12, p13);
 
     Rol r1 = new Rol();
     r1.setNombre("colaborador");
-    r1.agregarPermisos(p1, p8,p10,p11,p9);
+    r1.agregarPermisos(p1, p8, p10, p11, p9, p13);
     u1.agregarRoles(r1);
     Rol r2 = new Rol();
     r2.setNombre("persona juridica");
-    r2.agregarPermisos(p2, p3, p8);
+    r2.agregarPermisos(p2, p3, p8, p13);
     u2.agregarRoles(r2);
     u3.agregarRoles(r2);
 

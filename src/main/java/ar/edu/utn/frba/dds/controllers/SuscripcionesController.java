@@ -1,14 +1,20 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraDto;
+import ar.edu.utn.frba.dds.dtos.suscripciones.SuscripcionDto;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.HeladerasService;
+import ar.edu.utn.frba.dds.services.SuscripcionesService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
+@AllArgsConstructor
 public class SuscripcionesController implements ICrudViewsHandler {
+
+  private SuscripcionesService suscripcionesService;
 
   @Override
   public void index(Context context) {
@@ -34,7 +40,11 @@ public class SuscripcionesController implements ICrudViewsHandler {
 
   @Override
   public void save(Context context) {
-
+    SuscripcionDto dto = SuscripcionDto.fromContext(context);
+    this.suscripcionesService.guardarSuscripcion(dto);
+    Map<String, Object> model = new HashMap<>();
+    model.put("message", "Tu suscripcion fue registrada con exito");
+    context.render("/app/success.hbs", model);
   }
 
   @Override
