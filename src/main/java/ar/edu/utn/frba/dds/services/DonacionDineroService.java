@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionDinero;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.models.repositories.IDonacionDineroRepository;
 import lombok.AllArgsConstructor;
 
@@ -19,7 +20,7 @@ public class DonacionDineroService {
     public void crearDonacionDinero(DonacionDineroInputDto dto) {
         Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
-        if (!dto.estanCamposLlenos()) throw new FormIncompletoException();
+        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
 
         DonacionDinero donacion = new DonacionDinero();
         donacion.setColaborador(c);

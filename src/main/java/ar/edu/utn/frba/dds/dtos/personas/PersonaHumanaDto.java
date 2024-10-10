@@ -38,14 +38,15 @@ public class PersonaHumanaDto {
     return PersonaHumanaDto.builder().nombre(context.formParam("nombre"))
         .apellido(context.formParam("apellido"))
         .fechaNacimiento(context.formParam("fechaNacimiento"))
-        .direccion((context.formParam("calle") != null && !context.formParam("calle").isBlank() &&
-            context.formParam("altura") != null && !context.formParam("altura").isBlank() &&
-            context.formParam("cp") != null && !context.formParam("cp").isBlank())
+        .direccion((context.formParam("calle") != null && !context.formParam("calle").isBlank() ||
+            context.formParam("altura") != null && !context.formParam("altura").isBlank() ||
+            context.formParam("cp") != null && !context.formParam("cp").isBlank() ||
+            context.formParam("piso") != null && !context.formParam("piso").isBlank())
             ? DireccionDto.builder()
-            .calle(context.formParam("calle"))
-            .numero(Integer.parseInt(context.formParam("altura")))
+            .calle((context.formParam("calle") != null && !context.formParam("calle").isBlank()) ? context.formParam("calle") : null)
+            .numero((context.formParam("altura") != null && !context.formParam("altura").isBlank()) ? Integer.parseInt(context.formParam("altura")) : null)
             .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
-            .codigoPostal(context.formParam("cp"))
+            .codigoPostal((context.formParam("cp") != null && !context.formParam("cp").isBlank()) ? context.formParam("cp") : null)
             .build()
             : null)
         .tipoDocumento(context.formParam("tipoDocumento"))
@@ -63,7 +64,7 @@ public class PersonaHumanaDto {
 
   public boolean estanCamposLlenos() {
     return this.nombre != null && this.apellido != null && (this.direccion == null || this.direccion.estanCamposLlenos()) && this.usuarioDto != null &&
-        this.formasColaboracion != null && this.mediosDeContacto != null && this.nroDocumento != null && this.tipoDocumento != null;
+        this.formasColaboracion != null && MedioContactoDto.estanCamposLLenos(this.mediosDeContacto) && this.nroDocumento != null && this.tipoDocumento != null;
   }
 
 }

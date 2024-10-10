@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.TipoDocumentoDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.TecnicoDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.services.TecnicosService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -36,7 +37,7 @@ public class TecnicosController implements ICrudViewsHandler {
   @Override
   public void save(Context context) {
     TecnicoDto dto = TecnicoDto.of(context);
-    if (!dto.estanCamposLlenos()) throw new FormIncompletoException();
+    if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
 
     this.tecnicosService.crearTecnico(dto);
     Map<String, Object> model = new HashMap<>();

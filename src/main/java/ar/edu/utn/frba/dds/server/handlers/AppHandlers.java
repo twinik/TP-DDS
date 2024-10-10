@@ -12,7 +12,8 @@ public class AppHandlers {
       new NoTieneDireccionHandler(),
       new CodigoInvalidoHandler(),
       new FormularioNoCompletadoHandler(),
-      new RegistroFailedHandler()
+      new RegistroFailedHandler(),
+      new FormIncompletoHandler()
   };
 
   public static void applyHandlers(Javalin app) {

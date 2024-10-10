@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.heladeras.ModeloHeladeraInputDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.services.ModelosService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -32,7 +33,7 @@ public class ModelosHeladeraController implements ICrudViewsHandler {
   @Override
   public void save(Context context) {
     ModeloHeladeraInputDto dto = ModeloHeladeraInputDto.of(context);
-    if(!dto.estanCamposLllenos()) throw new FormIncompletoException();
+    if(!dto.estanCamposLllenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
     modelosService.crearModeloHeladera(dto);
     Map<String, Object> model = new HashMap<>();
     model.put("message", "El modelo " + dto.getModelo() + " fue regisrado con exito!");

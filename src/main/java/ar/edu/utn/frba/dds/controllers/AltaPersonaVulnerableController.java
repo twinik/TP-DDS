@@ -51,21 +51,16 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
   @Override
   public void save(Context context) {
     AltaPersonaVulnerableDto dto = AltaPersonaVulnerableDto.of(context);
+    String idPersona = this.service.darAltaPersonaVulnerable(dto);
 
     if (context.formParam("tiene-tutorados").equals("si")) {
-      String idPersona = this.service.crearPersonaVulnerable(dto);
       context.sessionAttribute("cantMenores", dto.getCantidadTutorados());
       context.sessionAttribute("domicilioFamiliaVulnerable", dto.getDomicilio());
       context.redirect("/colaborar/registrar-persona-vulnerable/" + idPersona + "/registrar-tutorados");
     } else {
-      try {
-        this.service.darAltaPersonaVulnerable(dto);
-        Map<String, Object> model = new HashMap<>();
-        model.put("message", "El alta de la persona: " + dto.getNombre() + " " + dto.getApellido() + " fue registrado con exito");
-        context.render("/app/success.hbs", model);
-      } catch (FormIncompletoException e) {
-        // TODO: Mostrar pop up error ?
-      }
+      Map<String, Object> model = new HashMap<>();
+      model.put("message", "El alta de la persona: " + dto.getNombre() + " " + dto.getApellido() + " fue registrado con exito");
+      context.render("/app/success.hbs", model);
     }
   }
 

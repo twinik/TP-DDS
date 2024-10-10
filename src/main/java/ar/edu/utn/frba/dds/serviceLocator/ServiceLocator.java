@@ -115,7 +115,7 @@ public class ServiceLocator {
       else if (clase.equals(AlertasService.class))
         add(clase, new AlertasService(get(IAlertasRepository.class)));
       else if (clase.equals(AltaPersonaVulnerableService.class))
-        add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(IAltaPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class)));
+        add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(IAltaPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class),get(TarjetasService.class)));
       else if (clase.equals(CalculadorHeladerasCercanas.class)) {
         try {
           add(clase, new CalculadorHeladerasCercanas(get(IHeladerasRepository.class), Integer.parseInt(new ConfigReader("config.properties").getProperty("LIMITE_HELADERAS_CERCANAS"))));

@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.dtos;
 
+import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeDirIncompletaFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,6 +15,10 @@ public class DireccionDto {
     private String codigoPostal;
 
     public boolean estanCamposLlenos(){
-        return this.calle != null && this.numero != null && this.codigoPostal!= null;
+
+        if(this.calle == null || this.numero == null || this.codigoPostal == null){
+            throw new FormIncompletoException(MensajeDirIncompletaFactory.generarMensaje());
+        }
+        return true;
     }
 }

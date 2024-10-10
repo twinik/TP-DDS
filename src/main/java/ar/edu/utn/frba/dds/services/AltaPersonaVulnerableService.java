@@ -24,8 +24,9 @@ public class AltaPersonaVulnerableService {
   private IAltaPersonaVulnerableRepository altaPersonaVulnerableRepository;
   private ColaboradoresService colaboradoresService;
   private ICalculadorPuntos calculadorPuntos;
+  private TarjetasService tarjetasService;
 
-  public void darAltaPersonaVulnerable(AltaPersonaVulnerableDto dto) {
+  public String darAltaPersonaVulnerable(AltaPersonaVulnerableDto dto) {
     Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
 
@@ -33,12 +34,15 @@ public class AltaPersonaVulnerableService {
     a.setPersona(p);
     a.setColaborador(colaborador);
     a.setFecha(LocalDate.now());
+    this.personasVulnerablesRepository.guardar(p);
+    this.tarjetasService.crearTarjeta(p, dto.getTarjeta());
     //a.setTarjeta();
     // TODO Tarjeta
 
     this.calculadorPuntos.sumarPuntosPara(colaborador, a);
-    this.personasVulnerablesRepository.guardar(p);
+    //
     this.altaPersonaVulnerableRepository.guardar(a);
+    return p.getId();
   }
 
   public void darAltaTutorados(TutoradoInputDto dto, String idPersona) {

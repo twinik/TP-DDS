@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.dtos.personas.TipoOrganizacionDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.exceptions.ClaveDebilException;
 import ar.edu.utn.frba.dds.exceptions.ClaveNoCoincidenException;
+import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
 import ar.edu.utn.frba.dds.helpers.ValidadorClaves;
@@ -17,6 +18,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.services.ColaboradoresService;
 import ar.edu.utn.frba.dds.services.FormaColaboracionService;
 import ar.edu.utn.frba.dds.services.FormulariosService;
@@ -42,6 +44,7 @@ public class RegistroController implements ICrudViewsHandler {
 
   public void handleRegistroHumano(Context ctx) {
     PersonaHumanaDto nuevaPersonaHumana = PersonaHumanaDto.of(ctx);
+    if(!nuevaPersonaHumana.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
     this.validarContra(nuevaPersonaHumana);
     try {
       String idNuevoColab = this.colaboradoresService.registrar(nuevaPersonaHumana);
@@ -54,6 +57,7 @@ public class RegistroController implements ICrudViewsHandler {
 
   public void handleRegistroJuridico(Context ctx) {
     PersonaJuridicaDto personaJuridicaDto = PersonaJuridicaDto.of(ctx);
+    if(!personaJuridicaDto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
     this.validarContra(personaJuridicaDto);
     try {
       this.colaboradoresService.registrar(personaJuridicaDto);

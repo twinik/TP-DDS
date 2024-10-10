@@ -1,8 +1,14 @@
 package ar.edu.utn.frba.dds.models.repositories.imp;
 
+import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.FrecuenciaDiaria;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.models.repositories.IAltaPersonaVulnerableRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,29 +51,24 @@ public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRe
             entityManager().merge(altaPersonaVulnerable);
         });
     }
-/*
+
     public static void main(String[] args) {
-        AltaPersonaVulnerable m = new AltaPersonaVulnerable(1);
-        AltaPersonaVulnerable m1 = new AltaPersonaVulnerable("uno");
-        AltaPersonaVulnerable m2 = new AltaPersonaVulnerable("hola");
-        IAltaPersonaVulnerableRepository repositorio = (IAltaPersonaVulnerableRepository) ServiceLocator.get("motivosRedistribucionRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
+        Colaborador c = new Colaborador();
+        c.setUsuario(new Usuario("dkfnadkf","dknfajksdnf"));
+        c.setNombre("jaun");
+        ColaboradoresRepository repo = new ColaboradoresRepository();
+        repo.guardar(c);
+        AltaPersonaVulnerable a = new AltaPersonaVulnerable();
+        a.setColaborador(c);
+        PersonaVulnerable n = new PersonaVulnerable();
+        n.setNombre("dfdf");
+        n.setApellido("dkfmkadf");
+        n.setColaborador(c);
+        a.setPersona(n);
+        a.setTarjeta(Tarjeta.of("aaaaaaaaaaa",0,new FrecuenciaDiaria(), n));
+        a.setFecha(LocalDate.now());
+        AltaPersonaVulnerableRepository r = new AltaPersonaVulnerableRepository();
+        r.guardar(a);
+    }
 
-        repositorio.eliminar(m1);
-        try {
-            Thread.sleep(60 * 1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        repositorio.actualizar(m2);
-
-        Optional<AltaPersonaVulnerable> persona1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<AltaPersonaVulnerable> persona2 = repositorio.buscar(2L);
-
-        List<AltaPersonaVulnerable> lista = repositorio.buscarTodos();
-
-    }*/
 }
