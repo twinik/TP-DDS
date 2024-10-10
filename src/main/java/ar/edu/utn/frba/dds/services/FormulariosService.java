@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Opcion;
 import ar.edu.utn.frba.dds.models.repositories.IFormularioRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.AllArgsConstructor;
+import java.util.List;
 
 @AllArgsConstructor
 public class FormulariosService {
@@ -33,5 +34,11 @@ public class FormulariosService {
 
   public Formulario obtenerFormulario(String id) {
     return repo.buscar(id).orElseThrow(() -> new RecursoInexistenteException("El formulario no existe"));
+  }
+
+  public Formulario obtenerUltimo() {
+    List<Formulario> formularios = repo.buscarTodos();
+    if (formularios.isEmpty()) return null;
+    return formularios.get(formularios.size() - 1);
   }
 }

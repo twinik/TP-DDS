@@ -67,6 +67,9 @@ public class Heladera extends EntidadPersistente {
             joinColumns = @JoinColumn(name = "heldera1_id", referencedColumnName = "id"))
     private List<Heladera> heladerasCercanas = new ArrayList<>();
 
+    @Column(name = "cantidad_viandas")
+    private String cantidadViandas;
+
     public Heladera(LocalDate fecha) {
         this.fechaPuestaFuncionamiento = fecha;
     }

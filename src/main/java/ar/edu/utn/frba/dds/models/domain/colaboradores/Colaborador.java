@@ -80,6 +80,9 @@ public class Colaborador extends EntidadPersistente implements Contactable {
     @Enumerated(EnumType.STRING)
     private TipoPersonaJuridica tipoPersonaJuridica;
 
+    @Column(name = "form_completado")
+    private Boolean formCompletado;
+
     public void sumarPuntos(Float puntos) {
         this.puntosGanados += puntos;
     }

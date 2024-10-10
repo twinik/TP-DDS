@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
 import ar.edu.utn.frba.dds.helpers.ValidadorClaves;
 import ar.edu.utn.frba.dds.helpers.factories.ValidadorFactory;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
@@ -18,6 +19,7 @@ import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.services.ColaboradoresService;
 import ar.edu.utn.frba.dds.services.FormaColaboracionService;
+import ar.edu.utn.frba.dds.services.FormulariosService;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -42,8 +44,8 @@ public class RegistroController implements ICrudViewsHandler {
     PersonaHumanaDto nuevaPersonaHumana = PersonaHumanaDto.of(ctx);
     this.validarContra(nuevaPersonaHumana);
     try {
-      this.colaboradoresService.registrar(nuevaPersonaHumana);
-      ctx.redirect("/login");
+      String idNuevoColab = this.colaboradoresService.registrar(nuevaPersonaHumana);
+      ctx.redirect("/responder-formulario/colaborador/" + idNuevoColab);
     } catch (RegistroFailedException e) {
       ctx.status(400);
       ctx.result("El registro ha fallado: " + e.getMessage());
@@ -89,13 +91,15 @@ public class RegistroController implements ICrudViewsHandler {
   @Override
   public void create(Context context) {
     Map<String, Object> model = new HashMap<>();
-    if (context.pathParam("tipo-persona").equals("humana")) {
+    if (context.pathParam("tipo-persona").equals("persona-humana")) {
       model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
       model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA"));
+      model.put("message", context.queryParam("message"));
       context.render("/auth/registro/registro-humano.hbs", model);
-    } else if (context.pathParam("tipo-persona").equals("juridica")) {
+    } else if (context.pathParam("tipo-persona").equals("persona-juridica")) {
       model.put("tiposOrganizacion", Arrays.stream(TipoPersonaJuridica.values()).map(TipoOrganizacionDto::fromTipoOrganizacion).toList());
       model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "COLOCACION_HELADERA", "REGISTRO_PERSONA", "OFRECER_PRODUCTOS"));
+      model.put("message", context.queryParam("message"));
       context.render("/auth/registro/registro-juridico.hbs", model);
     } else if (context.pathParam("tipo-persona").equals("admin")) {
       // TODO: registro admin????

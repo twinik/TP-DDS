@@ -35,6 +35,8 @@ public class RespuestaFormularioService {
     }).toList());
 
     repo.guardar(res);
+
+    ServiceLocator.get(ColaboradoresService.class).marcarFormCompletado(dto.getIdColaborador());
   }
 
 }
