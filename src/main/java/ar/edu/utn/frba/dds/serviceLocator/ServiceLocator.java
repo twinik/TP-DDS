@@ -115,7 +115,7 @@ public class ServiceLocator {
       else if (clase.equals(AlertasService.class))
         add(clase, new AlertasService(get(IAlertasRepository.class)));
       else if (clase.equals(AltaPersonaVulnerableService.class))
-        add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(IAltaPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class),get(TarjetasService.class)));
+        add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(IAltaPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class), get(TarjetasService.class)));
       else if (clase.equals(CalculadorHeladerasCercanas.class)) {
         try {
           add(clase, new CalculadorHeladerasCercanas(get(IHeladerasRepository.class), Integer.parseInt(new ConfigReader("config.properties").getProperty("LIMITE_HELADERAS_CERCANAS"))));
@@ -124,6 +124,8 @@ public class ServiceLocator {
         }
       } else if (clase.equals(ICalculadorPuntos.class))
         add(clase, new CalculadorPuntos());
+      else if (clase.equals(CargaMasivaService.class))
+        add(clase, new CargaMasivaService(get(FileUploadService.class), get(IColaboradoresRepository.class), get(IFormasColaboracionRespository.class), get(ICalculadorPuntos.class)));
       else if (clase.equals(ColaboradoresService.class))
         add(clase, new ColaboradoresService(get(IColaboradoresRepository.class), get(MedioContactoService.class), get(FormaColaboracionService.class), get(RolesService.class)));
       else if (clase.equals(ColocacionHeladerasService.class))
@@ -158,8 +160,8 @@ public class ServiceLocator {
         add(clase, new RolesService(get(IRolesRepository.class)));
       else if (clase.equals(SuscripcionesServices.class))
         add(clase, new SuscripcionesServices(get(ISuscripcionesRepository.class)));
-      else if(clase.equals(TarjetasService.class))
-        add(clase,new TarjetasService(get(ITarjetasRepository.class)));
+      else if (clase.equals(TarjetasService.class))
+        add(clase, new TarjetasService(get(ITarjetasRepository.class)));
       else if (clase.equals(TecnicosHelper.class))
         add(clase, new TecnicosHelper(get(ITecnicosRepository.class)));
       else if (clase.equals(TecnicosService.class))
@@ -175,7 +177,7 @@ public class ServiceLocator {
       else if (clase.equals(AltaPersonaVulnerableController.class))
         add(clase, new AltaPersonaVulnerableController(get(AltaPersonaVulnerableService.class)));
       else if (clase.equals(CargaMasivaController.class))
-        add(clase, new CargaMasivaController(get(FileUploadService.class)));
+        add(clase, new CargaMasivaController(get(CargaMasivaService.class)));
       else if (clase.equals(ColocacionHeladerasController.class))
         add(clase, new ColocacionHeladerasController(get(ColocacionHeladerasService.class), get(ModelosService.class)));
       else if (clase.equals(DonacionDineroController.class))
@@ -206,8 +208,7 @@ public class ServiceLocator {
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
-      }
-      else if (clase.equals(SuscripcionesController.class))
+      } else if (clase.equals(SuscripcionesController.class))
         add(clase, new SuscripcionesController());
       else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
     }

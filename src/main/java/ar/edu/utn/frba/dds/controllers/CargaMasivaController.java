@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.exceptions.ArchivoNoCargadoException;
+import ar.edu.utn.frba.dds.exceptions.CargaArchivoFailedException;
+import ar.edu.utn.frba.dds.services.CargaMasivaService;
 import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -12,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CargaMasivaController implements ICrudViewsHandler {
-  private FileUploadService service;
+  private CargaMasivaService service;
 
   @Override
   public void index(Context context) {
@@ -32,15 +34,16 @@ public class CargaMasivaController implements ICrudViewsHandler {
   @Override
   public void save(Context context) {
     Map<String, Object> model = new HashMap<>();
-    UploadedFile uploadedFile = context.uploadedFile("file");
+    UploadedFile archivoSubido = context.uploadedFile("file");
 
-    if (uploadedFile == null) throw new ArchivoNoCargadoException("No se ha cargado ningún archivo");
+    if (archivoSubido == null) throw new ArchivoNoCargadoException("No se ha cargado ningún archivo");
 
     try {
-      String result = this.service.uploadFile(uploadedFile);
-      model.put("message", "Archivo subido correctamente");
+      this.service.subirArchivo(archivoSubido);
+      this.service.cargarColaboraciones(archivoSubido);
+      model.put("message", "Colaboraciones cargadas correctamente");
       context.render("/app/success.hbs", model);
-    } catch (IOException e) {
+    } catch (CargaArchivoFailedException e) {
       e.printStackTrace();
       model.put("message", "Error al subir el archivo: " + e.getMessage());
       context.render("/app/error.hbs", model);
