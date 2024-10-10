@@ -14,7 +14,7 @@ public class FormularioRepository implements IFormularioRepository, WithSimplePe
 
     @Override
     public List<Formulario> buscarTodos() {
-        return entityManager().createQuery("from Formulario where activo=:activo", Formulario.class).
+        return entityManager().createQuery("from Formulario where activo=:activo order by created_at", Formulario.class).
                 setParameter("activo", true)
                 .getResultList();
     }

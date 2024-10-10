@@ -34,9 +34,10 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
     @Override
     public Optional<Colaborador> buscarPorUsuario(String idUsuario) {
         try {
-            return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo", Colaborador.class)
+            return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo and formCompletado=:formCompletado", Colaborador.class)
                     .setParameter("idUsuario", idUsuario)
                     .setParameter("activo", true)
+                    .setParameter("formCompletado", true)
                     .getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
@@ -45,8 +46,9 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
 
     @Override
     public List<Colaborador> buscarTodos() {
-        return entityManager().createQuery("from Colaborador where activo=:activo", Colaborador.class).
+        return entityManager().createQuery("from Colaborador where activo=:activo and formCompletado=:formCompletado", Colaborador.class).
                 setParameter("activo", true)
+                .setParameter("formCompletado", true)
                 .getResultList();
     }
 

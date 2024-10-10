@@ -32,7 +32,12 @@ public class UsuarioService {
       throw new LoginFailedException("usuario o contraseña invalidos");
     resultado.setIdUsuario(user.get().getId());
     Optional<Colaborador> colaborador = this.colaboradoresService.colaboradorFromUsuario(user.get().getId());
-    colaborador.ifPresent(value -> resultado.setIdColaborador(value.getId()));
+    colaborador.ifPresent(value -> {
+      if (!value.getFormCompletado()) {
+        throw new LoginFailedException("usuario o contraseña invalidos");
+      }
+      resultado.setIdColaborador(value.getId());
+    });
     return resultado;
   }
 

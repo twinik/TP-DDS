@@ -31,22 +31,22 @@ public class ColaboradoresService {
 
   public Colaborador obtenerColaborador(String id) {
     // TODO: hacerlo con messageFactory
-    if (id == null) throw new RecursoInexistenteException("no existe colaborador asociado a este id");
+    if (id == null) throw new RecursoInexistenteException("No existe colaborador asociado a este id");
     Optional<Colaborador> colab = this.colaboradoresRepository.buscar(id);
     if (colab.isEmpty()) throw new RecursoInexistenteException("No existe colaborador asociado a este id");
     return colab.get();
   }
 
-  public void registrar(PersonaHumanaDto dto) {
+  public String registrar(PersonaHumanaDto dto) {
     Colaborador colaborador = new Colaborador();
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
     colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
     colaborador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_HUMANA, this.formaColaboracionService.fromDtos(dto.getFormasColaboracion())));
+    colaborador.setFormCompletado(false);
 
     if (colaborador.getTipoColaborador().tenesFormaColaboracion("REGISTRO_PERSONA") && colaborador.getDireccion() == null) {
-      // TODO: por favor que alguien me ponga las alerts de estooooo
-      throw new NoTieneDireccionException("Por favor si querés dar de alta a personas en situacion vulnerable tenes que llenar una direccion");
+      throw new NoTieneDireccionException("Por favor, si querés dar de alta a personas en situacion vulnerable tenes que llenar una direccion");
     }
 
 
@@ -55,6 +55,7 @@ public class ColaboradoresService {
     colaborador.setMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
     this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
     this.colaboradoresRepository.guardar(colaborador);
+    return colaborador.getId();
   }
 
   public void registrar(PersonaJuridicaDto dto) {
@@ -74,5 +75,11 @@ public class ColaboradoresService {
     Usuario user = new Usuario(dto.getEmail(), PasswordHasher.hashPassword(dto.getClave()));
     user.agregarRoles(this.rolesService.obtnerRolPara(colaborador.getTipoColaborador()));
     colaborador.setUsuario(user);
+  }
+
+  public void marcarFormCompletado(String idColaborador) {
+    Colaborador c = obtenerColaborador(idColaborador);
+    c.setFormCompletado(true);
+    this.colaboradoresRepository.actualizar(c);
   }
 }

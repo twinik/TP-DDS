@@ -27,6 +27,9 @@ public class Usuario extends EntidadPersistente {
       inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
   private List<Rol> roles = new ArrayList<>();
 
+  @Column(name = "form_completado")
+  private Boolean formCompletado;
+
   public Usuario(String email, String clave) {
     this.email = email;
     this.clave = clave;

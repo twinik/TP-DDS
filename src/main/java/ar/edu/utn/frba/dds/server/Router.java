@@ -28,10 +28,7 @@ public class Router {
     // REGISTRO
     app.get("/registro", ServiceLocator.get(RegistroController.class)::index);
     app.get("/registro/{tipo-persona}", ServiceLocator.get(RegistroController.class)::create);
-    //app.get("/registro/persona-humana", ctx -> ctx.render("/auth/registro/registro-humano.hbs"));
     app.post("/registro/persona-humana", ServiceLocator.get(RegistroController.class)::handleRegistroHumano);
-    // app.get("/registro/persona-juridica", ctx ->
-    // ctx.render("/auth/registro/registro-juridico.hbs"));
     app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
     // ALTA ADMIN
@@ -42,6 +39,7 @@ public class Router {
     app.get("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::create);
     app.post("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::save);
 
+    app.get("/responder-formulario/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::obtenerFormulario);
     app.get("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::create);
     app.post("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::save);
 

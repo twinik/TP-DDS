@@ -114,9 +114,9 @@ public class Initializer {
     List<MedioDeContacto> contactoEmpresa = new ArrayList<>();
     contactoEmpresa.add(emailEmpresa);
 
-    Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 200f, null, new Direccion("medrano", 951, 3, "1405"), listaContacto, "jorge", "lopez", LocalDate.of(1999, 10, 10), null, null, null);
-    Colaborador sa = new Colaborador(u2, null, null, tipo2, 0f, new ArrayList<>(), new Direccion("lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA);
-    Colaborador ong = new Colaborador(u3, null, null, tipo3, 0f, new ArrayList<>(), new Direccion("bonifacio", 30, 10, "1406"), null, null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG);
+    Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 200f, null, new Direccion("medrano", 951, 3, "1405"), listaContacto, "jorge", "lopez", LocalDate.of(1999, 10, 10), null, null, null, false);
+    Colaborador sa = new Colaborador(u2, null, null, tipo2, 0f, new ArrayList<>(), new Direccion("lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA, false);
+    Colaborador ong = new Colaborador(u3, null, null, tipo3, 0f, new ArrayList<>(), new Direccion("bonifacio", 30, 10, "1406"), null, null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG, false);
 
     colaboradoresRepository.guardar(c1);
     colaboradoresRepository.guardar(sa);

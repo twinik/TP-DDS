@@ -17,7 +17,7 @@ public abstract class EntidadPersistente {
     @Column(name = "id", updatable = false, nullable = false, length = 36)
     protected String id;
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
-    protected LocalDateTime crated_at;
+    protected LocalDateTime created_at;
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
     protected LocalDateTime updated_at;
     @Column(name = "activo")
@@ -40,6 +40,6 @@ public abstract class EntidadPersistente {
     protected void onInsert() {
 //        this.id = UUID.randomUUID().toString();
         this.updated_at = LocalDateTime.now();
-        this.crated_at = LocalDateTime.now();
+        this.created_at = LocalDateTime.now();
     }
 }

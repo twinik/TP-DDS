@@ -10,8 +10,11 @@
 {{#partial "contenido"}}
     <div class="flex justify-center items-center lg:mt-16 flex-col">
         <h1 class="title1 mb-6" style="color: #eee;">Registro</h1>
+        {{#if message}}
+            <p id="error-message" style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+        {{/if}}
         <div class="flex flex-col items-center justify-center">
-            <form method="post" action="/registro/persona-juridica" class="content-center max-w-md mx-auto">
+            <form method="post" action="" class="content-center max-w-md mx-auto">
                 <div class="relative z-0 w-full mb-5 group">
                     <input type="text" name="razonSocial" id="razon_social"
                            class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"

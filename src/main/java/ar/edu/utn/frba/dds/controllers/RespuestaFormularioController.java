@@ -2,7 +2,9 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.formularios.RespuestaFormularioDto;
 import ar.edu.utn.frba.dds.dtos.formularios.ShowFormularioDto;
-import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Formulario;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.services.ColaboradoresService;
 import ar.edu.utn.frba.dds.services.FormulariosService;
 import ar.edu.utn.frba.dds.services.RespuestaFormularioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -27,11 +29,20 @@ public class RespuestaFormularioController implements ICrudViewsHandler {
 
   }
 
+  public void obtenerFormulario(Context context) {
+    // obtiene el ultimo formulario activo. Si existe, lo hace contestarlo. Si no existe, pasa directo a login
+    String idColaborador = context.pathParam("idColaborador");
+    Formulario form = this.formService.obtenerUltimo();
+    if (form == null) {
+      ServiceLocator.get(ColaboradoresService.class).marcarFormCompletado(idColaborador);
+      context.redirect("/login");
+    } else {
+      context.redirect("/responder-formulario/" + form.getId() + "/colaborador/" + idColaborador);
+    }
+  }
+
   @Override
   public void create(Context context) {
-    if (context.sessionAttribute("idColaborador") != context.pathParam("idColaborador")) {
-      throw new NoAutorizadoException("No estas autorizado para responder este formulario");
-    }
     Map<String, Object> model = new HashMap<>();
     model.put("formulario", ShowFormularioDto.fromFormulario(formService.obtenerFormulario(context.pathParam("idFormulario"))));
     context.render("auth/registro/formulario-colaborador.hbs", model);
@@ -41,7 +52,7 @@ public class RespuestaFormularioController implements ICrudViewsHandler {
   public void save(Context context) {
     rtaService.crearRespuestaFormulario(RespuestaFormularioDto.fromContext(context));
     Map<String, Object> model = new HashMap<>();
-    model.put("message", "Su respuesta fue guardad con exito! Gracias!");
+    model.put("message", "Su respuesta fue guardada con exito! Gracias!");
     context.render("app/success.hbs", model);
   }
 
