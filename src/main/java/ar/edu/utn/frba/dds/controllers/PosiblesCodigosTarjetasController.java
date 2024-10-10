@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.PosibleCodigoTarjetaDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.services.PosiblesCodigosService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -32,7 +33,7 @@ public class PosiblesCodigosTarjetasController implements ICrudViewsHandler {
     @Override
     public void save(Context context) {
         PosibleCodigoTarjetaDto dto = PosibleCodigoTarjetaDto.of(context);
-        if (!dto.estanCamposLlenos()) throw new FormIncompletoException();
+        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
         //if(this.tarjetasService.existeTarjeta(dto)) throw new TarjetaExistenteException();
 
         //this.tarjetasService.crearTarjeta(dto);

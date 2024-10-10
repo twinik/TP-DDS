@@ -3,7 +3,7 @@
         <h1 class="title1 mb-6" style="color: #eee;">{{formulario.nombre}}</h1>
         <p style="color: #eee;">Para hacer efectivo tu registro en la plataforma, te pedimos por favor que contestes las siguientes preguntas.</p>
         <div class="flex flex-col items-center justify-center">
-            <form method="POST" action="" class="content-center mx-auto w-full max-w-md">
+            <form method="POST" class="content-center mx-auto w-full max-w-md">
                 {{#each formulario.campos}}
                     <div class="relative z-0 w-full mb-5 group">
                         <label for="campo_{{this.id}}" class="text-left block mb-2 text-sm font-medium text-gray-900 text-white">{{this.pregunta}}</label>

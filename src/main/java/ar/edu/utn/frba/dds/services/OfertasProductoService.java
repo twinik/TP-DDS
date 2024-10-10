@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.models.repositories.IOfertaProductoRepository;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ public class OfertasProductoService {
         // validar aca permisos con alguna capa de middleware ??
 
         if (!oferta.estanCamposLlenos())
-            throw new FormIncompletoException("no se proveen todos los campos necesarios");
+            throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
 
         OfertaProducto ofertaProducto = new OfertaProducto();
         ofertaProducto.setProducto(new Producto(oferta.getNombre(), oferta.getUrlFoto()));

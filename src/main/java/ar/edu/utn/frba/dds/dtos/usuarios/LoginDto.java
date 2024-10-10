@@ -11,4 +11,5 @@ import lombok.Setter;
 public class LoginDto {
     private String idUsuario;
     private String idColaborador;
+    private Boolean formCompletado = null;
 }

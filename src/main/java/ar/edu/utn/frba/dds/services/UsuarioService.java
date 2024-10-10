@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.services;
 import ar.edu.utn.frba.dds.dtos.usuarios.LoginDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioNavbarDto;
+import ar.edu.utn.frba.dds.exceptions.FormularioNoCompletadoException;
 import ar.edu.utn.frba.dds.exceptions.LoginFailedException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
@@ -33,9 +34,7 @@ public class UsuarioService {
     resultado.setIdUsuario(user.get().getId());
     Optional<Colaborador> colaborador = this.colaboradoresService.colaboradorFromUsuario(user.get().getId());
     colaborador.ifPresent(value -> {
-      if (!value.getFormCompletado()) {
-        throw new LoginFailedException("usuario o contraseña invalidos");
-      }
+      resultado.setFormCompletado(value.getFormCompletado());
       resultado.setIdColaborador(value.getId());
     });
     return resultado;

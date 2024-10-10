@@ -5,7 +5,15 @@ import java.util.Arrays;
 
 public class AppHandlers {
   private final IHandler[] handlers = new IHandler[]{
-      new AccesoDenegadoHandler(), new UsuarioNoAutenticadoHandler(), new RecursoInexistenteHandler(), new ClaveHandler(), new NoTieneDireccionHandler(), new CodigoInvalidoHandler()
+      new AccesoDenegadoHandler(),
+      new UsuarioNoAutenticadoHandler(),
+      new RecursoInexistenteHandler(),
+      new ClaveHandler(),
+      new NoTieneDireccionHandler(),
+      new CodigoInvalidoHandler(),
+      new FormularioNoCompletadoHandler(),
+      new RegistroFailedHandler(),
+      new FormIncompletoHandler()
   };
 
   public static void applyHandlers(Javalin app) {

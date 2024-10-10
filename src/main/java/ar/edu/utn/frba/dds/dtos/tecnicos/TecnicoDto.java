@@ -29,7 +29,7 @@ public class TecnicoDto {
 
   public boolean estanCamposLlenos(){
     return this.nombre!=null && this.apellido!= null && this.areaCoberturaDto!= null && this.nroDocumento!= null
-        && !this.medioContactoDtoList.isEmpty();
+        && MedioContactoDto.estanCamposLLenos(this.medioContactoDtoList);
   }
 
 }

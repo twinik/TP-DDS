@@ -23,14 +23,15 @@ public class PersonaJuridicaDto {
     return PersonaJuridicaDto.builder().razonSocial(context.formParam("razonSocial"))
         .tipoOrganizacion(context.formParam("tipoOrganizacion"))
         .rubro(context.formParam("rubro"))
-        .direccion((context.formParam("calle") != null && !context.formParam("calle").isBlank() &&
-            context.formParam("altura") != null && !context.formParam("altura").isBlank() &&
-            context.formParam("cp") != null && !context.formParam("cp").isBlank())
+        .direccion((context.formParam("calle") != null && !context.formParam("calle").isBlank() ||
+            context.formParam("altura") != null && !context.formParam("altura").isBlank() ||
+            context.formParam("cp") != null && !context.formParam("cp").isBlank() ||
+            context.formParam("piso") != null && !context.formParam("piso").isBlank())
             ? DireccionDto.builder()
-            .calle(context.formParam("calle"))
-            .numero(Integer.parseInt(context.formParam("altura")))
+            .calle((context.formParam("calle") != null && !context.formParam("calle").isBlank()) ? context.formParam("calle") : null)
+            .numero((context.formParam("altura") != null && !context.formParam("altura").isBlank()) ? Integer.parseInt(context.formParam("altura")) : null)
             .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
-            .codigoPostal(context.formParam("cp"))
+            .codigoPostal((context.formParam("cp") != null && !context.formParam("cp").isBlank()) ? context.formParam("cp") : null)
             .build()
             : null)
         .claveConf(context.formParam("passConf"))
@@ -46,7 +47,7 @@ public class PersonaJuridicaDto {
 
   public boolean estanCamposLlenos() {
     return this.razonSocial != null && (this.direccion == null || this.direccion.estanCamposLlenos()) && this.rubro != null && this.formasColaboracion != null &&
-        this.mediosDeContacto != null && this.usuarioDto != null && this.tipoOrganizacion != null;
+      MedioContactoDto.estanCamposLLenos(this.mediosDeContacto) && this.usuarioDto != null && this.tipoOrganizacion != null;
   }
 
 }

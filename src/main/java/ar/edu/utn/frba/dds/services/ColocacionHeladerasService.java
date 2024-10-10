@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.CalculadorHeladerasCercanas;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.models.repositories.IColocacionHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import lombok.AllArgsConstructor;
@@ -28,12 +29,12 @@ public class ColocacionHeladerasService {
   public void crearColocacionHeladera(HeladeraInputDto dto) {
     Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
-    if (!dto.estanCamposLlenos()) throw new FormIncompletoException();
+    if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
     // TODO: por ahora creo la heladera aca, no se si es mas adecuado ponerlo en heladerasService
     ColocacionHeladeras colocacionHeladeras = new ColocacionHeladeras();
     colocacionHeladeras.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
     if (colocacionHeladeras.getFecha().isAfter(LocalDate.now()))
-      throw new FormIncompletoException("fecha invalida ingresada");
+      throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
     colocacionHeladeras.setColaborador(c);
     Heladera heladera = new Heladera();
     heladera.setNombre(dto.getNombre());

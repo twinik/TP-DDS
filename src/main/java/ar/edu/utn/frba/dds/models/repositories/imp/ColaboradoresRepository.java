@@ -34,10 +34,9 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
     @Override
     public Optional<Colaborador> buscarPorUsuario(String idUsuario) {
         try {
-            return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo and formCompletado=:formCompletado", Colaborador.class)
+            return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo", Colaborador.class)
                     .setParameter("idUsuario", idUsuario)
                     .setParameter("activo", true)
-                    .setParameter("formCompletado", true)
                     .getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
@@ -77,6 +76,16 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
         withTransaction(() -> {
             colaborador.borrarLogico();
             entityManager().merge(colaborador);
+        });
+    }
+
+    @Override
+    public void marcarFormCompletado(String id) {
+        withTransaction(() -> {
+            entityManager().createQuery("UPDATE Colaborador c SET c.formCompletado = :completado WHERE c.id = :idColaborador")
+                .setParameter("completado", true)
+                .setParameter("idColaborador", id)
+                .executeUpdate();
         });
     }
 

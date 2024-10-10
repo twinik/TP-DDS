@@ -30,7 +30,7 @@ public class AltaPersonaVulnerableDto {
         .tipoDocumento(context.formParam("tipoDocumento"))
         .nroDocumento(context.formParam("nroDocumento"))
         .fechaNacimiento(context.formParam("fechaNacimiento"))
-        .domicilio(context.formParam("domicilio"))
+        .domicilio((context.formParam("domicilio") != null && !context.formParam("domicilio").isBlank()) ? context.formParam("domicilio") : null)
         .idColaborador(context.sessionAttribute("idColaborador"))
         .tarjeta(TarjetaInputDto.of(context))
         .tieneTutorados(context.formParam("tiene-tutorados"))
