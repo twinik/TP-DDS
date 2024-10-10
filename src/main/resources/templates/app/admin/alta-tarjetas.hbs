@@ -1,7 +1,7 @@
 {{#partial "contenido"}}
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Alta de Tarjetas</h1>
-        <form class="content-center max-w-md mx-auto" id="altaTarjetaForm" action="/" method="POST">
+        <form class="content-center max-w-md mx-auto" id="altaTarjetaForm" action="/admin/tarjetas/nuevo" method="POST">
             <div class="form-group">
                 <label for="codigoTarjeta" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Código de Tarjeta:</label>
                 <input type="text" id="codigoTarjeta" name="codigoTarjeta" maxlength="11" required
@@ -17,8 +17,6 @@
 {{/partial}}
 
 {{#partial "scripts"}}
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="/js/alta-tarjetas.js"></script>
 {{/partial}}
 

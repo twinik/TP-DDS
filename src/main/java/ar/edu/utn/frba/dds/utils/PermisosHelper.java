@@ -36,7 +36,7 @@ public class PermisosHelper {
         case "/admin/tecnicos/nuevo" -> this.buscarPorNombres("alta-tecnico");
         case "/admin/formularios/nuevo" -> this.buscarPorNombres("alta-formulario");
         case "/admin/modelos-heladeras/nuevo" -> this.buscarPorNombres("alta-modelo-heladera");
-
+        case "/admin/tarjeta/nuevo" -> this.buscarPorNombres("alta-cod-tarjeta");
         //COLABORAR
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
         case "/colaborar/registrar-persona-vulnerable/registrar-tutorados" ->
@@ -58,6 +58,7 @@ public class PermisosHelper {
         case "/admin/tecnicos/nuevo" -> this.buscarPorNombres("alta-tecnico");
         case "/admin/formularios/nuevo" -> this.buscarPorNombres("alta-formulario");
         case "/admin/modelos-heladeras/nuevo" -> this.buscarPorNombres("alta-modelo-heladera");
+        case "/admin/tarjeta/nuevo" -> this.buscarPorNombres("alta-cod-tarjeta");
         case "/colaborar/ofrecer-producto" -> this.buscarPorNombres("ofrecer-productos");
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
         case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");

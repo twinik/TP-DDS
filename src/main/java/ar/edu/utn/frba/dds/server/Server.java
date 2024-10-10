@@ -79,6 +79,7 @@ public class Server {
           model.put("permisoTecnico", context.sessionAttribute("permisoTecnico"));
           model.put("permisoFormulario", context.sessionAttribute("permisoFormulario"));
           model.put("permisoModeloHeladera", context.sessionAttribute("permisoModeloHeladera"));
+          model.put("permisoTarjeta", context.sessionAttribute("permisoTarjeta"));
           model.put("admin", context.sessionAttribute("admin"));
           return template.apply(model);
         } catch (IOException e) {

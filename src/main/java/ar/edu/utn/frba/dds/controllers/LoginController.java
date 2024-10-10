@@ -34,6 +34,7 @@ public class LoginController implements ICrudViewsHandler {
       ctx.sessionAttribute("permisoTecnico", usuarioNavbarDto.getPermisoTecnico());
       ctx.sessionAttribute("permisoFormulario", usuarioNavbarDto.getPermisoFormulario());
       ctx.sessionAttribute("permisoModeloHeladera", usuarioNavbarDto.getPermisoModeloHeladera());
+      ctx.sessionAttribute("permisoTarjeta", usuarioNavbarDto.getPermisoCodTarjeta());
       ctx.sessionAttribute("admin", usuarioNavbarDto.esAdmin());
       String previousUrl = ctx.sessionAttribute("previousUrl");
       ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));

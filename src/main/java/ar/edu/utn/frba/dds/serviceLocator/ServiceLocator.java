@@ -74,6 +74,8 @@ public class ServiceLocator {
         add(clase, new PermisosRepository());
       else if (clase.equals(IPersonaVulnerableRepository.class))
         add(clase, new PersonaVulnerableRepository());
+      else if (clase.equals(IPosiblesCodigosTarjetaRepository.class))
+        add(clase, new PosiblesCodigosTarjetaRepository());
       else if (clase.equals(IProductoRepository.class))
         add(clase, new ProductoRepository());
       else if (clase.equals(IRedistribucionesViandaRepository.class))
@@ -144,7 +146,9 @@ public class ServiceLocator {
         add(clase, new ModelosService(get(IModeloHeladeraRepository.class)));
       else if (clase.equals(OfertasProductoService.class))
         add(clase, new OfertasProductoService(get(IOfertaProductoRepository.class), get(ColaboradoresService.class)));
-      else if (clase.equals(RecomendadorHeladeras.class))
+      else if (clase.equals(PosiblesCodigosService.class)) {
+        add(clase, new PosiblesCodigosService(get(IPosiblesCodigosTarjetaRepository.class)));
+      } else if (clase.equals(RecomendadorHeladeras.class))
         add(clase, new RecomendadorHeladeras());
       else if (clase.equals(ReportesFactory.class))
         add(clase, new ReportesFactory(get(IViandasRepository.class), get(IDonacionesViandaRepository.class), get(IRedistribucionesViandaRepository.class), get(IFallasTecnicasRepository.class), get(IAlertasRepository.class)));
@@ -188,6 +192,8 @@ public class ServiceLocator {
         add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class), get(FormaColaboracionService.class)));
       else if (clase.equals(RespuestaFormularioController.class))
         add(clase, new RespuestaFormularioController(get(RespuestaFormularioService.class), get(FormulariosService.class)));
+      else if (clase.equals(PosiblesCodigosTarjetasController.class))
+        add(clase, new PosiblesCodigosTarjetasController(get(PosiblesCodigosService.class)));
       else if (clase.equals(TecnicosController.class))
         add(clase, new TecnicosController(get(TecnicosService.class)));
       else if (clase.equals(RecomendacionesController.class)) {

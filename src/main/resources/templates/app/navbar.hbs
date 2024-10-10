@@ -371,7 +371,8 @@
                                     <span class="flex-1 ms-3 whitespace-nowrap">Alta de formularios</span>
                                 </a>
                             </li>
-<!--                        TODO: agregar permisos-->
+                        {{/if}}
+                        {{#if permisoTarjeta}}
                             <li>
                                 <a
                                         href="/admin/tarjetas/nuevo"
@@ -389,7 +390,7 @@
                                     </svg>
 
 
-                                    <span class="flex-1 ms-3 whitespace-nowrap">Alta de Tarjetas</span>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Alta de tarjetas</span>
                                 </a>
                             </li>
                         {{/if}}
@@ -413,7 +414,7 @@
                                                 clip-rule="evenodd"
                                         />
                                     </svg>
-                                    <span class="flex-1 ms-3 whitespace-nowrap">Alta de formularios</span>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Alta de modelos</span>
                                 </a>
                             </li>
                         {{/if}}
