@@ -158,6 +158,8 @@ public class ServiceLocator {
         add(clase, new RolesService(get(IRolesRepository.class)));
       else if (clase.equals(SuscripcionesServices.class))
         add(clase, new SuscripcionesServices(get(ISuscripcionesRepository.class)));
+      else if(clase.equals(TarjetasService.class))
+        add(clase,new TarjetasService(get(ITarjetasRepository.class)));
       else if (clase.equals(TecnicosHelper.class))
         add(clase, new TecnicosHelper(get(ITecnicosRepository.class)));
       else if (clase.equals(TecnicosService.class))

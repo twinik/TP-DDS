@@ -8,7 +8,6 @@ public class UsuarioNoAutenticadoHandler implements IHandler {
     public void setHandle(Javalin app) {
         app.exception(NoAutorizadoException.class, (e, context) -> {
             context.status(401);
-            // TODO: HACER PANTALLA
             context.render("/app/401.hbs");
         });
     }

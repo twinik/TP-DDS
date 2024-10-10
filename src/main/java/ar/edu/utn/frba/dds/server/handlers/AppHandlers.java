@@ -10,6 +10,7 @@ public class AppHandlers {
       new RecursoInexistenteHandler(),
       new ClaveHandler(),
       new NoTieneDireccionHandler(),
+      new CodigoInvalidoHandler(),
       new FormularioNoCompletadoHandler(),
       new RegistroFailedHandler()
   };
