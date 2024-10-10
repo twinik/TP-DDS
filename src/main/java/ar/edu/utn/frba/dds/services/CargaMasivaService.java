@@ -22,25 +22,27 @@ public class CargaMasivaService {
   private IFormasColaboracionRespository formasColaboracionRespository;
   private ICalculadorPuntos calculadorPuntos;
 
-  public void subirArchivo(UploadedFile uploadedFile) throws CargaArchivoFailedException {
+  public String subirArchivo(UploadedFile uploadedFile) throws CargaArchivoFailedException {
     try {
-      this.service.uploadFile(uploadedFile);
+      return this.service.uploadFile(uploadedFile);
     } catch (IOException e) {
       e.printStackTrace();
+      return null;
     }
   }
 
   public void cargarColaboraciones(UploadedFile uploadedFile) throws CargaArchivoFailedException {
+    String filePath = this.subirArchivo(uploadedFile);
     try {
       CargaColaboracionCsvReader csvReader = new CargaColaboracionCsvReader();
       SendGridMailSender mailSender = new SendGridMailSender();
       CargadorDeColaboraciones cargador = new CargadorDeColaboraciones(
-          "uploads/" + uploadedFile.filename(),
+          filePath.substring(1),
           csvReader,
           mailSender,
-          colaboradoresRepository,
-          formasColaboracionRespository,
-          calculadorPuntos
+          this.colaboradoresRepository,
+          this.formasColaboracionRespository,
+          this.calculadorPuntos
       );
 
       cargador.cargarColaboraciones();
