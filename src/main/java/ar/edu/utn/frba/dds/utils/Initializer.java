@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
+import ar.edu.utn.frba.dds.models.domain.reportes.ReporteFallasHeladera;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.models.domain.utils.*;
@@ -41,6 +42,7 @@ public class Initializer {
     IAlertasRepository alertasRepository = ServiceLocator.get(IAlertasRepository.class);
     IColocacionHeladeraRepository colocacionHeladeraRepository = ServiceLocator.get(IColocacionHeladeraRepository.class);
     IPermisosRepository permisosRepository = ServiceLocator.get(IPermisosRepository.class);
+    IReportesRepository reportesRepository = ServiceLocator.get(IReportesRepository.class);
 
     Usuario u1 = new Usuario("usuario@mail.com", PasswordHasher.hashPassword("contra"));
     Usuario u2 = new Usuario("usuuuario@mail.com", PasswordHasher.hashPassword("1234"));
@@ -166,6 +168,10 @@ public class Initializer {
 
     tecnicosRepository.guardar(t1);
 
+    ReporteFallasHeladera reporteEjemplo = new ReporteFallasHeladera();
+    reporteEjemplo.setRutaArchivo("/reportes/un-reporte.pdf");
+
+    reportesRepository.guardar(reporteEjemplo);
 
   }
 

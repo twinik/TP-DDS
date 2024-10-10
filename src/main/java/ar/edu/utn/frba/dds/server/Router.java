@@ -77,7 +77,8 @@ public class Router {
     app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
 
     // REPORTES
-    app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
+    app.get("/reportes", ServiceLocator.get(ReportesController.class)::index);
+    app.get("/reportes/descargar", ServiceLocator.get(ReportesController.class)::show);
 
     // CARGA MASIVA
     app.get("/carga-masiva-colaboraciones", ServiceLocator.get(CargaMasivaController.class)::create);
