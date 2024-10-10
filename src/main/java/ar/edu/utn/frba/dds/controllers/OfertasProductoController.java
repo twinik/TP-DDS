@@ -19,27 +19,27 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class OfertasProductoController implements ICrudViewsHandler {
-    private OfertasProductoService ofertasProductoService;
-    private FileUploadService fileUploadService;
+  private OfertasProductoService ofertasProductoService;
+  private FileUploadService fileUploadService;
 
-    @Override
-    public void index(Context context) {
-        //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
-        List<OfertaProductoDto> ofertas = this.ofertasProductoService.obtenerTodos();
-        Map<String, Object> model = new HashMap<>();
-        if(context.sessionAttribute("idColaborador") != null){
-            ColaboradorPuntosDto puntosdDisponibles = this.ofertasProductoService.obtenerPuntos(context.sessionAttribute("idColaborador"));
-            model.put("puntosDisp", puntosdDisponibles);
-        }
-        model.put("ofertas", ofertas);
-
-        context.render("/app/productos/productos.hbs", model);
+  @Override
+  public void index(Context context) {
+    //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
+    List<OfertaProductoDto> ofertas = this.ofertasProductoService.obtenerTodos();
+    Map<String, Object> model = new HashMap<>();
+    if (context.sessionAttribute("idColaborador") != null) {
+      ColaboradorPuntosDto puntosdDisponibles = this.ofertasProductoService.obtenerPuntos(context.sessionAttribute("idColaborador"));
+      model.put("puntosDisp", puntosdDisponibles);
     }
+    model.put("ofertas", ofertas);
 
-    @Override
-    public void show(Context context) {
-        //RECIBE POR PATH PARAM EL ID DE UN OFERTA Y PRETENDE DEVOLVER UNA VISTA CON EL DETALLE DE ESE PRODUCTO
-        // TODO: falta esta vista
+    context.render("/app/productos/productos.hbs", model);
+  }
+
+  @Override
+  public void show(Context context) {
+    //RECIBE POR PATH PARAM EL ID DE UN OFERTA Y PRETENDE DEVOLVER UNA VISTA CON EL DETALLE DE ESE PRODUCTO
+    // TODO: falta esta vista
 //    Optional<OfertaProducto> posibleOferta = this.ofertaProductoRepository.buscar(context.pathParam("id"));
 //
 //    if(posibleOferta.isEmpty()){
@@ -51,52 +51,52 @@ public class OfertasProductoController implements ICrudViewsHandler {
 //    model.put("oferta", posibleOferta.get());
 //
 //    context.render("insertar_vista_mis_amores", model);
+  }
+
+  @Override
+  public void create(Context context) {
+    //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO PARA DAR DE ALTA UNA NUEVA OFERTA
+    // TODO: ya pongo las categorias en el model para que las puedas desplegar
+
+    Map<String, Object> model = new HashMap<>();
+    model.put("categorias", Arrays.stream(CategoriaOferta.values()).map(CategoriaOfertaDto::of).toList());
+    context.render("/app/colaboraciones/ofrecer-productos.hbs", model);
+  }
+
+  @Override
+  public void save(Context context) {
+    // obtener de sesion
+    OfertaProductoDto dto = OfertaProductoDto.of(context);
+    UploadedFile uploadedFile = context.uploadedFile("file");
+    try {
+      if (uploadedFile != null) {
+        String result = this.fileUploadService.uploadFile(uploadedFile);
+        dto.setUrlFoto(result);
+      }
+      ofertasProductoService.crearOferta(dto);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (FormIncompletoException e) {
+      // TODO: Mostrar pop up error ?
     }
+    //O BIEN LANZO UNA PANTALLA DE EXITO
+    //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
+    context.redirect("/productos");
+  }
 
-    @Override
-    public void create(Context context) {
-        //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO PARA DAR DE ALTA UNA NUEVA OFERTA
-        // TODO: ya pongo las categorias en el model para que las puedas desplegar
+  @Override
+  public void edit(Context context) {
+    //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO QUE PERMITA EDITAR AL RECURSO QUE LLEGA POR PATH PARAM
+    // TODO: falta esta vista
+  }
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("categorias", Arrays.stream(CategoriaOferta.values()).map(CategoriaOfertaDto::of).toList());
-        context.render("/app/colaboraciones/ofrecer-productos.hbs", model);
-    }
+  @Override
+  public void update(Context context) {
 
-    @Override
-    public void save(Context context) {
-        // obtener de sesion
-        OfertaProductoDto dto = OfertaProductoDto.of(context);
-        UploadedFile uploadedFile = context.uploadedFile("file");
-        try {
-            if (uploadedFile != null) {
-                String result = this.fileUploadService.uploadFile(uploadedFile);
-                dto.setUrlFoto(result);
-            }
-            ofertasProductoService.crearOferta(dto);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (FormIncompletoException e) {
-            // TODO: Mostrar pop up error ?
-        }
-        //O BIEN LANZO UNA PANTALLA DE EXITO
-        //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
-        context.redirect("/productos");
-    }
+  }
 
-    @Override
-    public void edit(Context context) {
-        //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO QUE PERMITA EDITAR AL RECURSO QUE LLEGA POR PATH PARAM
-        // TODO: falta esta vista
-    }
+  @Override
+  public void delete(Context context) {
 
-    @Override
-    public void update(Context context) {
-
-    }
-
-    @Override
-    public void delete(Context context) {
-
-    }
+  }
 }

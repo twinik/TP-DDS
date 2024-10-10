@@ -174,6 +174,8 @@ public class ServiceLocator {
         add(clase, new AlertasController(get(AlertasService.class)));
       else if (clase.equals(AltaPersonaVulnerableController.class))
         add(clase, new AltaPersonaVulnerableController(get(AltaPersonaVulnerableService.class)));
+      else if (clase.equals(CargaMasivaController.class))
+        add(clase, new CargaMasivaController(get(FileUploadService.class)));
       else if (clase.equals(ColocacionHeladerasController.class))
         add(clase, new ColocacionHeladerasController(get(ColocacionHeladerasService.class), get(ModelosService.class)));
       else if (clase.equals(DonacionDineroController.class))

@@ -14,7 +14,6 @@
     <div class="p-10 mx-auto max-w-4xl">
         <h1 class="title1 mb-8">Ofrecer producto</h1>
 
-        <!--Carga masiva-->
         <form method="POST" action="/productos" class="content-center max-w-md mx-auto"
               enctype="multipart/form-data">
             <label for="nombre"
@@ -47,10 +46,9 @@
                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                    placeholder="Puntos necesarios" required min="1"/>
 
-            <label for="imagen"
-                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagen del
-                producto/servicio</label>
-            <!--Upload file-->
+            <label for="imagen" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Imagen del producto/servicio
+            </label>
             <div class="mb-5">
                 <label for="dropzone-file"
                        class="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
@@ -59,14 +57,16 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"/>
                     </svg>
-
                     <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
                         Subir archivo
                     </h2>
-                    <input id="dropzone-file" type="file" name="file" class="hidden" required/>
+                    <input id="dropzone-file" type="file" name="file" class="hidden" required accept="image/*"/>
                 </label>
+                <div id="image-preview" class="mt-4 hidden">
+                    <img id="preview" src="#" alt="Vista previa de la imagen"
+                         class="max-w-full h-auto rounded-lg shadow-lg"/>
+                </div>
             </div>
-            <!--Upload file-->
 
             <button type="submit"
                     class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
@@ -74,6 +74,10 @@
             </button>
         </form>
     </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script src="/js/carga-imagen-producto.js"></script>
 {{/partial}}
 
 {{> templates/app/base}}

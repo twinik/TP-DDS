@@ -79,29 +79,15 @@ public class Router {
     app.get("/reportes", ctx -> ctx.render("/app/reportes/reportes.hbs"));
 
     // CARGA MASIVA
-    app.get("/carga-masiva-colaboraciones", ctx -> ctx.render("/app/carga-masiva/carga-masiva.hbs"));
+    app.get("/carga-masiva-colaboraciones", ServiceLocator.get(CargaMasivaController.class)::create);
+    app.post("/carga-masiva-colaboraciones", ServiceLocator.get(CargaMasivaController.class)::save);
 
     // PRODUCTOS
     app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
     app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
 
-    app.get("/", ctx -> {
-      ctx.redirect("/quienes-somos");
-    });
-
     app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
-
-    app.post("/upload-carga-masiva", ctx -> {
-      UploadedFile uploadedFile = ctx.uploadedFile("file");
-      try {
-        FileUploadService fileUploadService = new FileUploadService();
-        String result = fileUploadService.uploadFile(uploadedFile);
-        ctx.result(result);
-      } catch (IOException e) {
-        e.printStackTrace();
-        ctx.result("Error al subir el archivo: " + e.getMessage());
-      }
-    });
+    app.get("/", ctx -> ctx.redirect("/quienes-somos"));
 
     app.exception(Exception.class, (e, ctx) -> {
       e.printStackTrace();
@@ -110,6 +96,7 @@ public class Router {
     });
 
     app.exception(NotFoundResponse.class, (e, ctx) -> {
+      e.printStackTrace();
       ctx.status(404);
       ctx.render("/app/404.hbs");
     });

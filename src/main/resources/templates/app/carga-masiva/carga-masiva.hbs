@@ -1,6 +1,6 @@
 {{#partial "contenido"}}
     <div class="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-4xl mx-auto">
             <h1 class="text-3xl font-bold text-gray-900 text-center mb-8">Carga Masiva de Colaboraciones</h1>
 
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -12,38 +12,24 @@
                         <code>tipoDocumento - documento - nombre - apellido - mail - fechaColaboracion -
                             formaColaboracion - cantidad - jsonColaboracion</code>
                     </div>
-                    <button id="downloadExampleBtn" class="text-sm text-blue-700 hover:text-blue-800 font-medium">
+                    <button id="downloadExampleBtn" class="text-sm text-blue-700 hover:text-blue-500 font-medium">
                         Descargar ejemplo
                     </button>
                 </div>
 
-                <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
-                    <form action="/upload-carga-masiva" method="post" enctype="multipart/form-data">
-                        <div id="dropzone"
-                             class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                            <div class="space-y-1 text-center">
-                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
-                                     viewBox="0 0 48 48" aria-hidden="true">
-                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <div class="flex text-sm text-gray-600">
-                                    <label for="file-upload"
-                                           class="relative cursor-pointer bg-white rounded-md font-medium text-blue-900 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                                        <span>Subir un archivo</span>
-                                        <input id="file-upload" name="file" type="file" class="sr-only" accept=".csv">
-                                    </label>
-                                    <p class="pl-1">o arrastrar y soltar</p>
-                                </div>
-                                <p class="text-xs text-gray-500">CSV hasta 10MB</p>
-                            </div>
-                        </div>
-                        <div id="file-info" class="mt-4 text-sm text-gray-500 hidden">
-                            Archivo cargado: <span id="file-name" class="font-medium text-gray-900"></span>
-                        </div>
+                <div class="px-4 py-5 sm:p-6">
+                    <form action="/carga-masiva-colaboraciones" method="post" enctype="multipart/form-data">
+                        <input
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="file_input"
+                                type="file"
+                                name="file"
+                                accept=".csv"
+                                required
+                        >
                         <div class="mt-5">
                             <button type="submit"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-900 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                 Confirmar carga
                             </button>
                         </div>
@@ -52,84 +38,6 @@
             </div>
         </div>
     </div>
-{{/partial}}
-
-{{#partial "scripts"}}
-    <script>
-        const dropzone = document.getElementById('dropzone');
-        const fileUpload = document.getElementById('file-upload');
-        const fileInfo = document.getElementById('file-info');
-        const fileName = document.getElementById('file-name');
-
-        document.getElementById("downloadExampleBtn").addEventListener("click", function () {
-            const csvContent = "data:text/csv;charset=utf-8," +
-                    'LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}\n' +
-                    'LC,12345,Johnas,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,2,{"vianda":{"fechaDonacion":"12/12/2023"}}\n' +
-                    'DNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,REDISTRIBUCION_VIANDA,1,{"fecha":"12/12/2023"}\n' +
-                    'DNI,12345,Juan,Doe,gturri@frba.utn.edu.ar,22/05/2024,REGISTRO_PERSONA,3,{"fecha":"12/12/2023"}\n' +
-                    'LC,12345,Johnas,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,10,{"vianda":{"fechaDonacion":"12/12/2023"}}\n' +
-                    'LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,1,{"vianda":{"fechaDonacion":"12/12/2023"}}\n' +
-                    'LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}';
-
-            const downloadLink = document.createElement("a");
-            downloadLink.href = encodeURI(csvContent);
-            downloadLink.download = "ejemplo_carga_masiva.csv";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        });
-
-        function updateFileInfo(file) {
-            if (file) {
-                fileName.textContent = file.name;
-                fileInfo.classList.remove('hidden');
-                dropzone.classList.add('border-green-500', 'bg-green-50');
-                dropzone.classList.remove('border-gray-300');
-            } else {
-                fileInfo.classList.add('hidden');
-                dropzone.classList.remove('border-green-500', 'bg-green-50');
-                dropzone.classList.add('border-gray-300');
-            }
-        }
-
-        fileUpload.addEventListener('change', (e) => {
-            updateFileInfo(e.target.files[0]);
-        });
-
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, preventDefaults, false);
-        });
-
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropzone.addEventListener(eventName, highlight, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, unhighlight, false);
-        });
-
-        function highlight(e) {
-            dropzone.classList.add('border-blue-300', 'border-4');
-        }
-
-        function unhighlight(e) {
-            dropzone.classList.remove('border-blue-300', 'border-4');
-        }
-
-        dropzone.addEventListener('drop', handleDrop, false);
-
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            fileUpload.files = files;
-            updateFileInfo(files[0]);
-        }
-    </script>
 {{/partial}}
 
 {{> templates/app/base}}

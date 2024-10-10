@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class LogoutController {
-    public void handleLogout(Context ctx) {
-        ctx.req().getSession().invalidate();
-        ctx.redirect("/");
-    }
+  public void handleLogout(Context ctx) {
+    ctx.req().getSession().invalidate();
+    ctx.redirect("/");
+  }
 }
