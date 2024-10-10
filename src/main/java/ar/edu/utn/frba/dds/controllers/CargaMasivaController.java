@@ -39,7 +39,6 @@ public class CargaMasivaController implements ICrudViewsHandler {
     if (archivoSubido == null) throw new ArchivoNoCargadoException("No se ha cargado ningún archivo");
 
     try {
-      this.service.subirArchivo(archivoSubido);
       this.service.cargarColaboraciones(archivoSubido);
       model.put("message", "Colaboraciones cargadas correctamente");
       context.render("/app/success.hbs", model);
