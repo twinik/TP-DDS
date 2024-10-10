@@ -1,10 +1,14 @@
 package ar.edu.utn.frba.dds.models.repositories.imp;
 
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionDinero;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.FrecuenciaDonacion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import javax.persistence.NoResultException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,22 +93,22 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
         });
     }
 
-//  public static void main(String[] args) {
-//        Colaborador m = new Colaborador();
-//
-//        ColaboradoresRepository repo = new ColaboradoresRepository();
-//        m.setUsuario(new Usuario("hola","chau"));
-//
-//
-//        DonacionDinero d = new DonacionDinero(m, LocalDate.now(),100f, FrecuenciaDonacion.ANUAL);
-//
-//        repo.guardar(m);
-//
-//        Optional<Colaborador> colaborador1 = repo.buscar(1L);
-//        //System.out.println(hidratado.get().getMotivo());
-//        Optional<Colaborador> colaborador2 = repo.buscar(2L);
-//
-//        List<Colaborador> lista = repo.buscarTodos();
-//
-//    }
+  public static void main(String[] args) {
+        Colaborador m = new Colaborador();
+
+        ColaboradoresRepository repo = new ColaboradoresRepository();
+        m.setUsuario(new Usuario("hola","chau"));
+
+
+        DonacionDinero d = new DonacionDinero(m, LocalDate.now(),100f, FrecuenciaDonacion.ANUAL);
+
+        repo.guardar(m);
+
+        repo.eliminar(m);
+        //System.out.println(hidratado.get().getMotivo());
+       // Optional<Colaborador> colaborador2 = repo.buscar(2L);
+
+        List<Colaborador> lista = repo.buscarTodos();
+
+    }
 }

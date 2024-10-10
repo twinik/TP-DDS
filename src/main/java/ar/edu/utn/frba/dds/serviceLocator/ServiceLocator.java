@@ -127,7 +127,7 @@ public class ServiceLocator {
       else if (clase.equals(CargaMasivaService.class))
         add(clase, new CargaMasivaService(get(FileUploadService.class), get(IColaboradoresRepository.class), get(IFormasColaboracionRespository.class), get(ICalculadorPuntos.class)));
       else if (clase.equals(ColaboradoresService.class))
-        add(clase, new ColaboradoresService(get(IColaboradoresRepository.class), get(MedioContactoService.class), get(FormaColaboracionService.class), get(RolesService.class)));
+        add(clase, new ColaboradoresService(get(IColaboradoresRepository.class), get(MedioContactoService.class), get(FormaColaboracionService.class), get(RolesService.class),get(TarjetasService.class),get(IUsuariosRepository.class)));
       else if (clase.equals(ColocacionHeladerasService.class))
         add(clase, new ColocacionHeladerasService(get(IColocacionHeladeraRepository.class), get(ColaboradoresService.class), get(ModelosService.class), get(CalculadorHeladerasCercanas.class), get(IHeladerasRepository.class)));
       else if (clase.equals(DonacionDineroService.class))
@@ -163,7 +163,7 @@ public class ServiceLocator {
       else if (clase.equals(SuscripcionesService.class))
         add(clase, new SuscripcionesService(get(ISuscripcionesRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(TarjetasService.class))
-        add(clase, new TarjetasService(get(ITarjetasRepository.class)));
+        add(clase, new TarjetasService(get(ITarjetasRepository.class),get(ITarjetasColaboradorRepository.class),get(IPosiblesCodigosTarjetaRepository.class)));
       else if (clase.equals(TecnicosHelper.class))
         add(clase, new TecnicosHelper(get(ITecnicosRepository.class)));
       else if (clase.equals(TecnicosService.class))

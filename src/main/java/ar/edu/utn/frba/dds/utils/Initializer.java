@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.helpers.GeneradorDeCodigosHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
@@ -8,11 +9,16 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.*;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Rol;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Campo;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Formulario;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Opcion;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.form.TipoCampo;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReporteFallasHeladera;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.PosibleCodigoTarjeta;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.models.domain.utils.*;
@@ -172,6 +178,30 @@ public class Initializer {
     reporteEjemplo.setRutaArchivo("/reportes/un-reporte.pdf");
 
     reportesRepository.guardar(reporteEjemplo);
+
+    Formulario f = new Formulario();
+    f.setNombre("formulario 1");
+    f.setAutor(u5);
+    f.agregarCampos(new Campo(TipoCampo.LIBRE, "quien sos", true),
+        new Campo(TipoCampo.LIBRE, "te gusta el helado", false));
+    Campo compuesto = new Campo(TipoCampo.MULTIPLE_CHOICE, "vas a aprobar dds?", true);
+    compuesto.agregarOpciones(new Opcion("si"), new Opcion("no"));
+    f.agregarCampos(compuesto);
+    ServiceLocator.get(IFormularioRepository.class).guardar(f);
+
+    PosibleCodigoTarjeta codigo1 = new PosibleCodigoTarjeta(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11));
+    PosibleCodigoTarjeta codigo2 = new PosibleCodigoTarjeta(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11));
+
+    PosibleCodigoTarjeta codigo3 = new PosibleCodigoTarjeta(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11));
+
+    PosibleCodigoTarjeta codigo4 = new PosibleCodigoTarjeta(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11));
+
+    IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository = ServiceLocator.get(IPosiblesCodigosTarjetaRepository.class);
+    posiblesCodigosTarjetaRepository.guardar(codigo1);
+    posiblesCodigosTarjetaRepository.guardar(codigo2);
+    posiblesCodigosTarjetaRepository.guardar(codigo3);
+    posiblesCodigosTarjetaRepository.guardar(codigo4);
+
 
   }
 

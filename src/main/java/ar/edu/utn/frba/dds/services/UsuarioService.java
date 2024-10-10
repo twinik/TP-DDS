@@ -69,5 +69,4 @@ public class UsuarioService {
     dto.setPermisoCodTarjeta(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-cod-tarjeta").toArray(new Permiso[0])));
     return dto;
   }
-
 }

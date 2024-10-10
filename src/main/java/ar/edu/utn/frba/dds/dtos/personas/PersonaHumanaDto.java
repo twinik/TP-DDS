@@ -37,7 +37,7 @@ public class PersonaHumanaDto {
 //    Direccion direccion = new Direccion(calle, altura, piso, codigoPostal);
     return PersonaHumanaDto.builder().nombre(context.formParam("nombre"))
         .apellido(context.formParam("apellido"))
-        .fechaNacimiento(context.formParam("fechaNacimiento"))
+        .fechaNacimiento((context.formParam("fechaNacimiento").isBlank()) ? null : context.formParam("fechaNacimiento"))
         .direccion((context.formParam("calle") != null && !context.formParam("calle").isBlank() ||
             context.formParam("altura") != null && !context.formParam("altura").isBlank() ||
             context.formParam("cp") != null && !context.formParam("cp").isBlank() ||

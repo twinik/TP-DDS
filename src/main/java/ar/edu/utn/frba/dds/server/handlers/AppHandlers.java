@@ -14,6 +14,7 @@ public class AppHandlers {
       new FormularioNoCompletadoHandler(),
       new RegistroFailedHandler(),
       new FormIncompletoHandler()
+      , new MailDuplicadoHandler()
   };
 
   public static void applyHandlers(Javalin app) {

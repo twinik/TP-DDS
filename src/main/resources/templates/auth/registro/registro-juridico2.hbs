@@ -1,0 +1,237 @@
+{{#partial "btn-volver"}}
+    <a href="/registro">
+        <button
+                class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+            Volver
+        </button>
+    </a>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <div class="flex justify-center items-center lg:mt-16 flex-col">
+        <h1 class="title1 mb-6" style="color: #eee;">Registro</h1>
+        {{#if message}}
+            <p id="error-message" style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+        {{/if}}
+        <form method="post" action="" class="content-center max-w-md mx-auto">
+            <label
+                    for="razon_social"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Razon social</label
+            >
+            <input
+                    type="text"
+                    id="razon_social"
+                    name="razonSocial"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Nombre"
+                    required
+            />
+
+            <label
+                    for="underline_select"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Tipo de Organiazacion</label
+            >
+            <select
+                    id="underline_select"
+                    name="tipoOrganizacion"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+                <option selected disabled>Tipo de Organizacion</option>
+                {{#each tiposOrganizacion}}
+                    <option value={{this.valor}}>{{this.valor}}</option>
+                {{/each}}
+            </select>
+
+            <label
+                    for="rubro"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Rubro</label
+            >
+            <input
+                    type="text"
+                    id="rubro"
+                    name="rubro"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Rubro"
+                    required
+            />
+
+            <label
+                    for="floating_email"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Email</label
+            >
+            <input
+                    type="email"
+                    id="floating_email"
+                    name="email"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="email"
+                    required
+            />
+
+            <label
+                    for="floating_password"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Contraseña</label
+            >
+            <input
+                    type="password"
+                    id="floating_password"
+                    name="password"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="contraseña"
+                    required
+            />
+
+            <label
+                    for="floating_repeat_password"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Confirmar contraseña</label
+            >
+            <input
+                    type="password"
+                    id="floating_repeat_password"
+                    name="passConf"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="confirmar contraseña"
+                    required
+            />
+
+            <div class="relative z-0 w-full mb-5 group">
+                <span style="color: #eee;">Direccion</span>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <label
+                                for="calle"
+                                class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                        >Calle</label
+                        >
+                        <input
+                                type="text"
+                                id="calle"
+                                name="calle"
+                                class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="calle"
+
+                        />
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <label
+                                for="altura"
+                                class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                        >Altura</label
+                        >
+                        <input
+                                type="number"
+                                id="altura"
+                                name="altura"
+                                class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="altura"
+
+                        />
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <label
+                                for="piso"
+                                class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                        >Piso</label
+                        >
+                        <input
+                                type="number"
+                                id="piso"
+                                name="piso"
+                                class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="piso"
+
+                        />
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <label
+                                for="codigo-postal"
+                                class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                        >Codigo postal</label
+                        >
+                        <input
+                                type="text"
+                                id="codigo-postal"
+                                name="cp"
+                                class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="codigo postal"
+
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2 text-white">Formas de colaboracion</div>
+            <div class="grid grid-cols-2">
+                {{#each formasColaboracion}}
+                    <div class="flex items-center">
+                        <input
+                                id="default-checkbox"
+                                name="forma-{{@index}}"
+                                type="checkbox"
+                                class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                value={{this.id}}
+                        >
+                        <label for="default-checkbox"
+                               class="ms-2 text-sm font-medium text-white dark:text-gray-300">{{this.desc}}</label>
+                    </div>
+                {{/each}}
+            </div>
+
+            <input type="hidden" name="cant-formas" id="cant-formas" value={{formasColaboracion.length}} />
+            <div id="mediosContactoContainer">
+                <label
+                        for="medio-contacto-1"
+                        class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                >Canal de Contacto 1</label
+                >
+                <select
+                        id="medio-contacto-1"
+                        name="canal-1"
+                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option value="Whatsapp">Whatsapp</option>
+                    <option value="Email">Mail</option>
+                    <option value="Telegram">Telegram</option>
+                </select>
+                <label
+                        for="contacto-1"
+                        class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                >Contacto 1</label
+                >
+                <input
+                        type="text"
+                        id="contacto-1"
+                        name="contacto-1"
+                        aria-describedby="helper-text-explanation"
+                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Nro de telefono o Email"
+                        required
+                        min="1"
+                />
+            </div>
+            <button class="text-left block mb-4 text-sm font-medium text-white dark:text-white" type="button" onclick="nuevoMedioContacto()">
+                Agregar medio de contacto +
+            </button>
+            <input type="hidden" name="cantidad-contactos" id="cantidad-contactos" value="1"/>
+
+            <button type="submit"
+                    class="w-full mt-4 px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
+                Registrarse
+            </button>
+        </form>
+    </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script src="/js/input-contactos.js"></script>
+{{/partial}}
+
+{{> templates/auth/base }}

@@ -9,46 +9,58 @@ import java.util.Optional;
 
 public class PosiblesCodigosTarjetaRepository implements WithSimplePersistenceUnit, IPosiblesCodigosTarjetaRepository {
 
-    @Override
-    public Optional<PosibleCodigoTarjeta> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(PosibleCodigoTarjeta.class,id));
+  @Override
+  public Optional<PosibleCodigoTarjeta> buscarPrimeroLibre() {
+    try {
+      return Optional.of(entityManager().createQuery("from PosibleCodigoTarjeta where activo=:activo and ocupado=:ocupado", PosibleCodigoTarjeta.class)
+          .setParameter("activo", true)
+          .setParameter("ocupado", false)
+          .setMaxResults(1).getSingleResult());
+    } catch (NoResultException e) {
+      return Optional.empty();
     }
+  }
 
-    @Override
-    public Optional<PosibleCodigoTarjeta> buscarPorCodigo(String codigo) {
-        try{
-            return Optional.of(entityManager().createQuery("from PosibleCodigoTarjeta where codigo=:codigo and activo=:activo", PosibleCodigoTarjeta.class)
-                    .setParameter("codigo",codigo)
-                    .setParameter("activo",true)
-                    .getSingleResult());
-        } catch (NoResultException e){
-            return Optional.empty();
-        }
-    }
+  @Override
+  public Optional<PosibleCodigoTarjeta> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(PosibleCodigoTarjeta.class, id));
+  }
 
-    @Override
-    public List<PosibleCodigoTarjeta> buscarTodos() {
-        return entityManager().createQuery("from PosibleCodigoTarjeta where activo=:activo", PosibleCodigoTarjeta.class)
-                .setParameter("activo",true)
-                .getResultList();
+  @Override
+  public Optional<PosibleCodigoTarjeta> buscarPorCodigo(String codigo) {
+    try {
+      return Optional.of(entityManager().createQuery("from PosibleCodigoTarjeta where codigo=:codigo and activo=:activo", PosibleCodigoTarjeta.class)
+          .setParameter("codigo", codigo)
+          .setParameter("activo", true)
+          .getSingleResult());
+    } catch (NoResultException e) {
+      return Optional.empty();
     }
+  }
 
-    @Override
-    public void guardar(PosibleCodigoTarjeta codigo) {
-        withTransaction(() -> entityManager().persist(codigo));
-    }
+  @Override
+  public List<PosibleCodigoTarjeta> buscarTodos() {
+    return entityManager().createQuery("from PosibleCodigoTarjeta where activo=:activo", PosibleCodigoTarjeta.class)
+        .setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public void actualizar(PosibleCodigoTarjeta codigo) {
-        withTransaction(()->entityManager().merge(codigo));
-    }
+  @Override
+  public void guardar(PosibleCodigoTarjeta codigo) {
+    withTransaction(() -> entityManager().persist(codigo));
+  }
 
-    @Override
-    public void eliminar(PosibleCodigoTarjeta codigo) {
-        withTransaction(()->{
-            codigo.borrarLogico();
-            entityManager().merge(codigo);
-        });
-    }
+  @Override
+  public void actualizar(PosibleCodigoTarjeta codigo) {
+    withTransaction(() -> entityManager().merge(codigo));
+  }
+
+  @Override
+  public void eliminar(PosibleCodigoTarjeta codigo) {
+    withTransaction(() -> {
+      codigo.borrarLogico();
+      entityManager().merge(codigo);
+    });
+  }
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IPosiblesCodigosTarjetaRepository {
+
+    Optional<PosibleCodigoTarjeta> buscarPrimeroLibre();
     Optional<PosibleCodigoTarjeta> buscar(String id);
 
     Optional<PosibleCodigoTarjeta> buscarPorCodigo(String codigo);

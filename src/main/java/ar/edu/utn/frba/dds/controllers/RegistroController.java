@@ -99,12 +99,12 @@ public class RegistroController implements ICrudViewsHandler {
       model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
       model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA"));
       model.put("message", context.queryParam("message"));
-      context.render("/auth/registro/registro-humano.hbs", model);
+      context.render("/auth/registro/registro_humano2.hbs", model);
     } else if (context.pathParam("tipo-persona").equals("persona-juridica")) {
       model.put("tiposOrganizacion", Arrays.stream(TipoPersonaJuridica.values()).map(TipoOrganizacionDto::fromTipoOrganizacion).toList());
-      model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "COLOCACION_HELADERA", "REGISTRO_PERSONA", "OFRECER_PRODUCTOS"));
+      model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "COLOCACION_HELADERA", "OFRECER_PRODUCTOS"));
       model.put("message", context.queryParam("message"));
-      context.render("/auth/registro/registro-juridico.hbs", model);
+      context.render("/auth/registro/registro-juridico2.hbs", model);
     } else if (context.pathParam("tipo-persona").equals("admin")) {
       // TODO: registro admin????
       context.redirect("/");

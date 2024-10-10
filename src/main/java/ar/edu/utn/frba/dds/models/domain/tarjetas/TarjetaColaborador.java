@@ -43,7 +43,7 @@ public class TarjetaColaborador extends EntidadPersistente {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
-    private List<AperturaHeladera> usos;
+    private List<AperturaHeladera> usos = new ArrayList<>();
 
     public TarjetaColaborador(String codigo, Colaborador colaborador, boolean activa, LocalDate fechaAlta, LocalDate fechaBaja, List<AperturaHeladera> usos) {
         if(!GeneradorDeCodigosHelper.esCodigoValido(codigo, 11)) throw new CodigoInvalidoException("El codigo no es valido");
