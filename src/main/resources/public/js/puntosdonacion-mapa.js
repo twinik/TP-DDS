@@ -10,38 +10,45 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     minZoom: 5
 }).addTo(map);
 
+// Crear un grupo de capas vacío
+var markerLayerGroup = L.layerGroup().addTo(map);
+
 // Validación de los inputs
 document.getElementById('confirmar').addEventListener('click', async function () {
     const localidad = document.getElementById('localidad').value;
     const provincia = document.getElementById('provincia').value;
     const mensajeError = document.getElementById('mensaje-error');
 
+    // Mostrar error si faltan campos
     if (localidad === '' || provincia === '') {
         mensajeError.style.display = 'block';
     } else {
         mensajeError.style.display = 'none';
 
         try {
+            // Eliminar los marcadores anteriores
+            markerLayerGroup.clearLayers();
+
+            // Obtener los nuevos puntos de donación
             var markers = await fetchDonaciones(provincia, localidad);
 
+            // Añadir nuevos marcadores al mapa
             markers.forEach(function (markerData) {
-                var marker = L.marker(markerData.coords).addTo(map);
+                var marker = L.marker(markerData.coords).addTo(markerLayerGroup); // Añadir al grupo
 
-            //     const inhabilitadaContent =
-            //         '<div style="display: flex; flexDirection: row; gap: 5px; alignItems: center"> <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 16 16" fill = "currentColor" width="16" height="16" > <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg > <span style="color: white;">INHABILITADA</span> </div >';
-            //     const reportarFallaBtn =
-            //         `<a href="/heladeras/${markerData.id}/reportar-falla-tecnica" class="popup-button">Reportar Falla</a>`;
-            //
-            //     const markerTemplate = `<div class="popup-content flex flex-col">
-            //     <div class="popup-title">${markerData.title}</div>
-            //     ${markerData.disabled ? inhabilitadaContent : reportarFallaBtn}
-            //     <a href="/heladeras/${markerData.id}/suscribirse" class="popup-button">Suscribirse</a>
-            // </div>`
+                // Plantilla para el popup con nombre y dirección
+                const markerTemplate = `
+                    <div class="popup-content">
+                        <div class="popup-title">${markerData.nombre}</div>
+                        <div class="popup-subtitle">${markerData.calle} ${markerData.altura}</div>
+                    </div>
+                `;
 
+                // Asignar el popup al marcador
                 marker.bindPopup(markerTemplate);
             });
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error al obtener donaciones:', error);
         }
     }
 });

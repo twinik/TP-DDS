@@ -59,3 +59,32 @@
     display: none;
     flex-direction: column;
 }
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem;
+    background-color: #202A3D;
+    color: white;
+    border-radius: 5px;
+}
+
+.popup-title {
+    font-weight: bold;
+}
+
+.popup-subtitle {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background-color: #202A3D;
+    color: white;
+}
+
+.leaflet-popup-close-button {
+    color: white;
+}
