@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.dtos.heladeras;
 
-import ar.edu.utn.frba.dds.dtos.DIreccionDto;
+import ar.edu.utn.frba.dds.dtos.DireccionDto;
 import ar.edu.utn.frba.dds.dtos.UbicacionDto;
 import io.javalin.http.Context;
 import lombok.Builder;
@@ -14,7 +14,7 @@ public class HeladeraInputDto {
     private Integer capacidad;
     private String fecha;
     private UbicacionDto ubicacion;
-    private DIreccionDto direccion;
+    private DireccionDto direccion;
     private String idColaborador;
 
     public static HeladeraInputDto of(Context context) {
@@ -23,7 +23,7 @@ public class HeladeraInputDto {
                 .capacidad(Integer.valueOf(context.formParam("capacidad")))
                 .fecha(context.formParam("fecha"))
                 .ubicacion(new UbicacionDto(Float.valueOf(context.formParam("latitud")), Float.valueOf(context.formParam("longitud"))))
-                .direccion(DIreccionDto.builder().calle(context.formParam("calle")).numero(Integer.valueOf(context.formParam("numero")))
+                .direccion(DireccionDto.builder().calle(context.formParam("calle")).numero(Integer.valueOf(context.formParam("numero")))
                         .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
                         .codigoPostal(context.formParam("codPostal"))
                         .build())

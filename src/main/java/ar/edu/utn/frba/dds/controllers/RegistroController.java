@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.TipoDocumentoDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaHumanaDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
+import ar.edu.utn.frba.dds.dtos.personas.TipoOrganizacionDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.exceptions.ClaveDebilException;
 import ar.edu.utn.frba.dds.exceptions.ClaveNoCoincidenException;
@@ -11,6 +12,7 @@ import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
 import ar.edu.utn.frba.dds.helpers.ValidadorClaves;
 import ar.edu.utn.frba.dds.helpers.factories.ValidadorFactory;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
@@ -38,8 +40,7 @@ public class RegistroController implements ICrudViewsHandler {
 
   public void handleRegistroHumano(Context ctx) {
     PersonaHumanaDto nuevaPersonaHumana = PersonaHumanaDto.of(ctx);
-    if (!nuevaPersonaHumana.sonClavesIguales()) throw new ClaveNoCoincidenException();
-    this.validarContra(nuevaPersonaHumana.getUsuarioDto().getClave());
+    this.validarContra(nuevaPersonaHumana);
     try {
       this.colaboradoresService.registrar(nuevaPersonaHumana);
       ctx.redirect("/login");
@@ -49,45 +50,30 @@ public class RegistroController implements ICrudViewsHandler {
     }
   }
 
-  private void validarContra(String contra) {
-
-    ValidadorClaves validador = ValidadorFactory.create();
-    if (!validador.esValida(contra)) throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo());
-  }
-
   public void handleRegistroJuridico(Context ctx) {
+    PersonaJuridicaDto personaJuridicaDto = PersonaJuridicaDto.of(ctx);
+    this.validarContra(personaJuridicaDto);
     try {
-      String email = ctx.formParam("email");
-      String clave = ctx.formParam("password");
-      String claveConf = ctx.formParam("passConf");
-      String razonSocial = ctx.formParam("razonSocial");
-      String tipoOrganizacion = ctx.formParam("tipoOrganizacion");
-      String rubro = ctx.formParam("rubro");
-      String calle = ctx.formParam("calle");
-      Integer altura = Integer.parseInt(ctx.formParam("altura"));
-      Integer piso = Integer.parseInt(ctx.formParam("piso"));
-      String codigoPostal = ctx.formParam("cp");
-      Direccion direccion = new Direccion(calle, altura, piso, codigoPostal);
-
-      // TODO: formasColaboracion y mediosDeContacto
-      //  List<FormaColaboracion> formasColaboracion = ctx.formParams("formasColaboracion").stream().map(FormaColaboracion::new).toList();
-      List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-      //List<MedioDeContacto> mediosDeContacto = ctx.formParams("mediosDeContacto").stream().map(MedioDeContacto::new).toList();
-
-      if (!clave.equals(claveConf)) {
-        throw new RegistroFailedException("Las contraseñas no coinciden");
-      }
-
-      //PersonaJuridicaDto nuevaPersonaJuridica = new PersonaJuridicaDto(razonSocial, tipoOrganizacion, rubro, direccion, formasColaboracion, mediosDeContacto);
-
-      UsuarioDto nuevoUsuario = new UsuarioDto(email, clave);
-      //this.colaboradoresService.registrar(nuevoUsuario);
-
+      this.colaboradoresService.registrar(personaJuridicaDto);
       ctx.redirect("/login");
     } catch (RegistroFailedException e) {
       ctx.status(400);
       ctx.result("El registro ha fallado: " + e.getMessage());
     }
+  }
+
+  private void validarContra(PersonaHumanaDto personaHumanaDto) {
+    if (!personaHumanaDto.sonClavesIguales()) throw new ClaveNoCoincidenException();
+    ValidadorClaves validador = ValidadorFactory.create();
+    if (!validador.esValida(personaHumanaDto.getUsuarioDto().getClave()))
+      throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo());
+  }
+
+  private void validarContra(PersonaJuridicaDto personaJuridicaDto) {
+    if (!personaJuridicaDto.sonClavesIguales()) throw new ClaveNoCoincidenException();
+    ValidadorClaves validador = ValidadorFactory.create();
+    if (!validador.esValida(personaJuridicaDto.getUsuarioDto().getClave()))
+      throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo());
   }
 
   @Override
@@ -108,6 +94,7 @@ public class RegistroController implements ICrudViewsHandler {
       model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA"));
       context.render("/auth/registro/registro-humano.hbs", model);
     } else if (context.pathParam("tipo-persona").equals("juridica")) {
+      model.put("tiposOrganizacion", Arrays.stream(TipoPersonaJuridica.values()).map(TipoOrganizacionDto::fromTipoOrganizacion).toList());
       model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "COLOCACION_HELADERA", "REGISTRO_PERSONA", "OFRECER_PRODUCTOS"));
       context.render("/auth/registro/registro-juridico.hbs", model);
     } else if (context.pathParam("tipo-persona").equals("admin")) {

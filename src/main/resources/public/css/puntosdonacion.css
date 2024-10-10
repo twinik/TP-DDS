@@ -54,8 +54,71 @@
 
 .error-message {
     color: red;
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.3rem;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     display: none;
-    flex-direction: column;
+    z-index: 1001;
 }
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem;
+    background-color: #202A3D;
+    color: white;
+    border-radius: 5px;
+}
+
+.popup-title {
+    font-weight: bold;
+}
+
+.popup-subtitle {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background-color: #202A3D;
+    color: white;
+}
+
+.leaflet-popup-close-button {
+    color: white;
+}
+
+.form-container select {
+    padding: 0.3rem 2rem 0.3rem 0.3rem; /* Añadir más espacio a la derecha */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    background-color: white;
+    color: #000;
+    appearance: none; /* Quitar estilo por defecto del navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+}
+
+.form-container select:focus {
+    outline: none;
+    border-color: #516894; /* Cambiar el color del borde al enfocar */
+}
+
+#provincia, #localidad {
+    width: 100%;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D"http%3A//www.w3.org/2000/svg" viewBox%3D"0 0 4 5"%3E%3Cpath fill%3D"%23333" d%3D"M2 0L0 2h4zM2 5L0 3h4z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 0.65rem auto;
+}
+
