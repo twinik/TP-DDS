@@ -50,7 +50,7 @@ public class PermisosHelper {
             this.buscarPorNombres("alta-vulnerable");
 
         //PRODUCTOS
-        case "/productos" -> this.buscarPorNombres("canjear-productos");
+//        case "/productos" -> this.buscarPorNombres("canjear-productos");
         default -> new HashSet<>();
       };
     } else if (ctx.method().name().equals("POST")) {

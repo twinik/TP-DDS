@@ -26,10 +26,13 @@ public class OfertasProductoController implements ICrudViewsHandler {
     public void index(Context context) {
         //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
         List<OfertaProductoDto> ofertas = this.ofertasProductoService.obtenerTodos();
-        ColaboradorPuntosDto puntosdDisponibles = this.ofertasProductoService.obtenerPuntos(context.sessionAttribute("idColaborador"));
         Map<String, Object> model = new HashMap<>();
+        if(context.sessionAttribute("idColaborador") != null){
+            ColaboradorPuntosDto puntosdDisponibles = this.ofertasProductoService.obtenerPuntos(context.sessionAttribute("idColaborador"));
+            model.put("puntosDisp", puntosdDisponibles);
+        }
         model.put("ofertas", ofertas);
-        model.put("puntosDisp", puntosdDisponibles);
+
         context.render("/app/productos/productos.hbs", model);
     }
 
