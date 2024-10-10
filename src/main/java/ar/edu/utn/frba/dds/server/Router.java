@@ -41,6 +41,7 @@ public class Router {
     app.post("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::save);
     app.get("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::create);
     app.post("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::save);
+    app.get("/admin/tarjetas/nuevo", ctx -> ctx.render("/app/admin/alta-tarjetas.hbs"));  //TODO hacerle el controller
 
     app.get("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::create);
     app.post("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::save);

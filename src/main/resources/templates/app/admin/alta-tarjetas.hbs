@@ -1,0 +1,25 @@
+{{#partial "contenido"}}
+    <div class="p-10 mx-auto max-w-7xl">
+        <h1 class="title1 mb-8">Alta de Tarjetas</h1>
+        <form class="content-center max-w-md mx-auto" id="altaTarjetaForm" action="/" method="POST">
+            <div class="form-group">
+                <label for="codigoTarjeta" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Código de Tarjeta:</label>
+                <input type="text" id="codigoTarjeta" name="codigoTarjeta" maxlength="11" required
+                       pattern="[A-Za-z0-9]{11}" title="Debe contener exactamente 11 caracteres alfanuméricos"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </div>
+            <button type="submit"
+                    class="mt-6 content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
+                Confirmar
+            </button>
+        </form>
+    </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/js/alta-tarjetas.js"></script>
+{{/partial}}
+
+{{> templates/app/base }}
