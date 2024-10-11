@@ -41,7 +41,7 @@ public class Vianda extends EntidadPersistente {
     @Column(name = "peso")
     private Float peso;
 
-    private boolean entregada;
+    private boolean entregada=false;
 
     public Vianda(String comida, LocalDate fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Integer calorias, Float peso, boolean entregada) {
         this.comida = comida;

@@ -174,6 +174,8 @@ public class ServiceLocator {
         add(clase, new TipoDocumentoMapper());
       else if (clase.equals(UsuarioService.class))
         add(clase, new UsuarioService(get(IUsuariosRepository.class), get(ColaboradoresService.class)));
+      else if (clase.equals(ViandasService.class))
+        add(clase, new ViandasService(get(IViandasRepository.class), get(IDonacionesViandaRepository.class)));
 
         // CONTROLADORES
       else if (clase.equals(AlertasController.class))
@@ -214,8 +216,11 @@ public class ServiceLocator {
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
-      } else if (clase.equals(SuscripcionesController.class))
+      }
+      else if (clase.equals(SuscripcionesController.class))
         add(clase, new SuscripcionesController(get(SuscripcionesService.class), get(HeladerasService.class)));
+      else if (clase.equals(ViandasController.class))
+        add(clase, new ViandasController(get(ViandasService.class)));
       else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
     }
     return (T) services.get(clase);

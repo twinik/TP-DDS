@@ -11,7 +11,7 @@ import java.util.List;
 public class RecomendadorHeladeras {
 
     public List<Heladera> recomendarCombinacionHeladeras(Heladera heladera) {
-        int totalViandas = heladera.getViandas().size();
+        int totalViandas = heladera.getViandas();
 
         List<Heladera> heladerasCercanas = heladera.getHeladerasCercanas();
 

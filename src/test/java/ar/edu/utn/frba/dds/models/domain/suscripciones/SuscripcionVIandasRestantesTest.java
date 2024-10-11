@@ -34,9 +34,9 @@ public class SuscripcionVIandasRestantesTest {
         viandas.add(new Vianda());
 
         Heladera heladera = new Heladera(LocalDate.now());
-        heladera.setViandas(viandas);
+        heladera.setViandas(3);
         heladera.agregarSuscripcion(sucripcion);
-        heladera.quitarVianda(vianda1);
+        heladera.quitarVianda();
 
         verify(strategy, times(1)).notificar(any(), any());
     }
@@ -58,9 +58,9 @@ public class SuscripcionVIandasRestantesTest {
         viandas.add(new Vianda());
 
         Heladera heladera = new Heladera(LocalDate.now());
-        heladera.setViandas(viandas);
+        heladera.setViandas(3);
         heladera.agregarSuscripcion(sucripcion);
-        heladera.quitarVianda(vianda1);
+        heladera.quitarVianda();
 
         verify(strategy, times(0)).notificar(any(), any());
     }

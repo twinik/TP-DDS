@@ -3,7 +3,7 @@
         <h1 class="title1 mb-6" style="color: #eee;">{{formulario.nombre}}</h1>
         <p style="color: #eee;">Para hacer efectivo tu registro en la plataforma, te pedimos por favor que contestes las siguientes preguntas.</p>
         <div class="flex flex-col items-center justify-center">
-            <form method="POST" class="content-center mx-auto w-full max-w-md">
+            <form method="POST" class="content-center mx-auto w-full max-w-md" id="myForm">
                 {{#each formulario.campos}}
                     <div class="relative z-0 w-full mb-5 group">
                         <label for="campo_{{this.id}}" class="text-left block mb-2 text-sm font-medium text-gray-900 text-white">{{this.pregunta}}</label>
@@ -47,20 +47,17 @@
                            {{/case}}
                            {{#case "multiple-choice"}}
                                {{#each this.opciones}}
-                                   <input
-                                           id="opcion_{{this.id}}"
-                                           name="campo_{{../id}}"
-                                           type="checkbox"
-                                           value="{{this.id}}"
-                                           class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-                                       {{#if this.obligatorio}}
-                                           required
-                                       {{/if}}
-                                   />
                                    <label
                                            for="opcion_{{this.id}}"
                                            class="block ms-2 text-sm font-medium text-white"
                                    >
+                                       <input
+                                               id="opcion_{{this.id}}"
+                                               name="campo_{{../id}}"
+                                               type="checkbox"
+                                               value="{{this.id}}"
+                                               class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                                       />
                                        {{this.texto}}
                                    </label>
                                {{/each}}
@@ -73,7 +70,7 @@
                                             type="radio"
                                             value="{{this.id}}"
                                             class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-                                            {{#if this.obligatorio}}
+                                            {{#if ../obligatorio}}
                                                 required
                                             {{/if}}
                                     />
@@ -99,6 +96,35 @@
 {{/partial}}
 
 {{#partial "scripts"}}
+    <script>
+        document.getElementById("myForm").onsubmit = function(e) {
+            let checkboxes;
+            let isChecked;
+            {{#each formulario.campos}}
+                {{#if this.obligatorio}}
+                    {{#switch this.tipo}}
+                        {{#case "multiple-choice"}}
+                            checkboxes = document.querySelectorAll('input[name="campo_{{this.id}}"]');
+
+                            isChecked = false;
+
+                            // Check if at least one checkbox is checked
+                            checkboxes.forEach((checkbox) => {
+                                if (checkbox.checked) {
+                                    isChecked = true;
+                                }
+                            });
+
+                            if (!isChecked) {
+                                e.preventDefault();
+                                alert("Por favor, debes responder el campo \'" + "{{this.pregunta}}\'");
+                            }
+                        {{/case}}
+                    {{/switch}}
+                {{/if}}
+            {{/each}}
+        };
+    </script>
 {{/partial}}
 
 {{> templates/auth/base }}

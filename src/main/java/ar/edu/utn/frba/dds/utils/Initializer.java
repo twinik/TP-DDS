@@ -184,9 +184,12 @@ public class Initializer {
     f.setAutor(u5);
     f.agregarCampos(new Campo(TipoCampo.LIBRE, "quien sos", true),
         new Campo(TipoCampo.LIBRE, "te gusta el helado", false));
-    Campo compuesto = new Campo(TipoCampo.MULTIPLE_CHOICE, "vas a aprobar dds?", true);
+    Campo compuesto = new Campo(TipoCampo.CHOICE, "vas a aprobar dds?", true);
     compuesto.agregarOpciones(new Opcion("si"), new Opcion("no"));
     f.agregarCampos(compuesto);
+    Campo multiple = new Campo(TipoCampo.MULTIPLE_CHOICE,"de este grupo quien labura?", true);
+    multiple.agregarOpciones(new Opcion("uri"),new Opcion("manu"),new Opcion("tobi"),new Opcion("thomi"));
+    f.agregarCampos(multiple);
     ServiceLocator.get(IFormularioRepository.class).guardar(f);
 
     PosibleCodigoTarjeta codigo1 = new PosibleCodigoTarjeta(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11));

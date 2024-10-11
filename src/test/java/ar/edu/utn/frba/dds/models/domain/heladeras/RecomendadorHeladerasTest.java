@@ -30,7 +30,7 @@ class RecomendadorHeladerasTest {
         Vianda vianda3 = new Vianda("Comida 3", null, LocalDate.now(), null, null, null, null, false);
         Vianda vianda4 = new Vianda("Comida 4", null, LocalDate.now(), null, null, null, null, false);
         Vianda vianda5 = new Vianda("Comida 5", null, LocalDate.now(), null, null, null, null, false);
-        Heladera heladeraObjetivo = new Heladera(null, null, "Heladera Objetivo", null, LocalDate.now(), Arrays.asList(vianda1, vianda2, vianda3, vianda4, vianda5), null);
+        Heladera heladeraObjetivo = new Heladera(null, null, "Heladera Objetivo", null, LocalDate.now(), 5, null);
         Heladera[] heladerasTop = new Heladera[3];
         heladerasTop[0] = heladera1;
         heladerasTop[1] = heladera2;

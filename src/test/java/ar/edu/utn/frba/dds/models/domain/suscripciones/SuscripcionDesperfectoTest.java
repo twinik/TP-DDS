@@ -56,7 +56,7 @@ public class SuscripcionDesperfectoTest {
         Heladera heladera = new Heladera(LocalDate.now());
         heladera.setCapacidadViandas(5);
         heladera.agregarSuscripcion(sucripcion);
-        heladera.setViandas(viandas);
+        heladera.setViandas(1);
         heladera.agregarVianda(new Vianda());
 
 

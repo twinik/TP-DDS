@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class SuscripcionViandasFaltantes implements ITipoSuscripcion {
 
     public void notificar(Heladera heladera, Suscripcion suscripcion) {
-        int viandasFaltantes = heladera.getCapacidadViandas() - heladera.getViandas().size();
+        int viandasFaltantes = heladera.getCapacidadViandas() - heladera.getViandas();
         if (viandasFaltantes <= suscripcion.getNumero()) {
             String message = MensajeViandasFaltantesFactory.generarMensaje(viandasFaltantes, heladera);
             suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(), message);
