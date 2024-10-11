@@ -15,6 +15,8 @@ public interface IColaboradoresRepository {
 
     Optional<Colaborador> buscarPorUsuario(String idUsuario);
 
+    Optional<Colaborador> buscarPorDni(String dni);
+
     List<Colaborador> buscarTodos();
 
     void guardar(Colaborador colaborador);

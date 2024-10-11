@@ -30,9 +30,7 @@ public class UsuariosRepository implements IUsuariosRepository, WithSimplePersis
     } catch (NoResultException e) {
       return Optional.empty();
     }
-
   }
-
 
   @Override
   public List<Usuario> buscarTodos() {

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.services;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaHumanaDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
+import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.EmailDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
@@ -15,6 +16,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
 import ar.edu.utn.frba.dds.models.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeEmailDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeNoTieneDireccionFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
@@ -49,6 +51,7 @@ public class ColaboradoresService {
   public String registrar(PersonaHumanaDto dto) {
     Colaborador colaborador = new Colaborador();
     this.validarSiYaExisteMail(dto.getUsuarioDto());
+    this.validarSiYaExisteDni(dto.getNroDocumento());
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
     colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
@@ -113,5 +116,10 @@ public class ColaboradoresService {
   public void validarSiYaExisteMail(UsuarioDto dto) {
     Optional<Usuario> user = this.usuariosRepository.buscarPorEmail(dto.getEmail());
     if (user.isPresent()) throw new EmailDuplicadoException(MensajeEmailDuplicadoFactory.generarMensaje());
+  }
+
+  public void validarSiYaExisteDni(String nroDocumento) {
+    Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(nroDocumento);
+    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
   }
 }

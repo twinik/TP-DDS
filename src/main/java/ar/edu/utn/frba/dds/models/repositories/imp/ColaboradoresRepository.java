@@ -54,6 +54,18 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
     }
 
     @Override
+    public Optional<Colaborador> buscarPorDni(String documento) {
+        try {
+            return Optional.of(entityManager().createQuery("from Colaborador where documento = :documento and activo=:activo", Colaborador.class)
+                    .setParameter("documento", documento)
+                    .setParameter("activo", true)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public List<Colaborador> buscarTodos() {
         return entityManager().createQuery("from Colaborador where activo=:activo and formCompletado=:formCompletado", Colaborador.class).
                 setParameter("activo", true)
