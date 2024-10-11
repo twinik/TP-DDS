@@ -15,6 +15,7 @@ import java.util.Map;
 public class SuscripcionesController implements ICrudViewsHandler {
 
   private SuscripcionesService suscripcionesService;
+  private HeladerasService heladerasService;
 
   @Override
   public void index(Context context) {
@@ -30,7 +31,7 @@ public class SuscripcionesController implements ICrudViewsHandler {
   public void create(Context context) {
     String heladeraId = context.pathParam("id");
 
-    HeladeraDto h = ServiceLocator.get(HeladerasService.class).getHeladeraDto(heladeraId);
+    HeladeraDto h = this.heladerasService.getHeladeraDto(heladeraId);
 
     Map<String, Object> model = new HashMap<>();
 

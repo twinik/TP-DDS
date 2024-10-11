@@ -40,4 +40,8 @@ public class Formulario extends EntidadPersistente {
         Collections.addAll(this.campos, campos);
     }
 
+    public void agregarCampos(List<Campo> campos) {
+        this.campos.addAll(campos);
+    }
+
 }

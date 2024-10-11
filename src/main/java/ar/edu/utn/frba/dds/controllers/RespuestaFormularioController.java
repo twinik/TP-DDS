@@ -16,8 +16,10 @@ import java.util.Map;
 @AllArgsConstructor
 public class RespuestaFormularioController implements ICrudViewsHandler {
 
-  RespuestaFormularioService rtaService;
-  FormulariosService formService;
+  private RespuestaFormularioService rtaService;
+  private FormulariosService formService;
+
+  private ColaboradoresService colaboradoresService;
 
   @Override
   public void index(Context context) {
@@ -34,7 +36,7 @@ public class RespuestaFormularioController implements ICrudViewsHandler {
     String idColaborador = context.pathParam("idColaborador");
     Formulario form = this.formService.obtenerUltimo();
     if (form == null) {
-      ServiceLocator.get(ColaboradoresService.class).marcarFormCompletado(idColaborador);
+      this.colaboradoresService.marcarFormCompletado(idColaborador);
       context.redirect("/login");
     } else {
       context.redirect("/responder-formulario/" + form.getId() + "/colaborador/" + idColaborador);
@@ -53,7 +55,8 @@ public class RespuestaFormularioController implements ICrudViewsHandler {
     rtaService.crearRespuestaFormulario(RespuestaFormularioDto.fromContext(context));
     Map<String, Object> model = new HashMap<>();
     model.put("message", "Su respuesta fue guardada con exito! Gracias!");
-    context.render("app/success.hbs", model);
+    context.render("auth/registro/form-success.hbs", model);
+    // TODO: redirect a login?
   }
 
   @Override

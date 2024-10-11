@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.exceptions.EmailDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
+import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoColaborador;
@@ -16,11 +17,11 @@ import ar.edu.utn.frba.dds.models.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeEmailDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeNoTieneDireccionFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.utils.PasswordHasher;
 import lombok.AllArgsConstructor;
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 
@@ -51,7 +52,10 @@ public class ColaboradoresService {
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
     colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
-    colaborador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_HUMANA, this.formaColaboracionService.fromDtos(dto.getFormasColaboracion())));
+    TipoColaborador tipo = new TipoColaborador();
+    tipo.setTipo(TipoPersona.PERSONA_HUMANA);
+    tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
+    colaborador.setTipoColaborador(tipo);
     colaborador.setFormCompletado(false);
 
     if (colaborador.getTipoColaborador().tenesFormaColaboracion("REGISTRO_PERSONA") && colaborador.getDireccion() == null) {
@@ -61,7 +65,7 @@ public class ColaboradoresService {
 
     if (dto.getFechaNacimiento() != null)
       colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "MM/dd/yyyy"));
-    colaborador.setMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
+    colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
     this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
     this.colaboradoresRepository.guardar(colaborador);
     try {
@@ -81,8 +85,11 @@ public class ColaboradoresService {
     colaborador.setTipoPersonaJuridica(TipoPersonaJuridica.valueOf(dto.getTipoOrganizacion()));
     colaborador.setRubro(dto.getRubro());
     colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
-    colaborador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_JURIDICA, this.formaColaboracionService.fromDtos(dto.getFormasColaboracion())));
-    colaborador.setMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
+    TipoColaborador tipo = new TipoColaborador();
+    tipo.setTipo(TipoPersona.PERSONA_JURIDICA);
+    tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
+    colaborador.setTipoColaborador(tipo);
+    colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
     this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
     this.colaboradoresRepository.guardar(colaborador);
   }
@@ -95,7 +102,12 @@ public class ColaboradoresService {
   }
 
   public void marcarFormCompletado(String idColaborador) {
-    this.colaboradoresRepository.marcarFormCompletado(idColaborador);
+    Optional<Colaborador> c = this.colaboradoresRepository.buscar(idColaborador);
+    if (c.isEmpty())
+      throw new RegistroFailedException(MensajeRecursoInexistenteFactory.generarMensaje("Colaborador", idColaborador));
+    c.get().setFormCompletado(true);
+    this.colaboradoresRepository.actualizar(c.get());
+    // this.colaboradoresRepository.marcarFormCompletado(idColaborador);
   }
 
   public void validarSiYaExisteMail(UsuarioDto dto) {

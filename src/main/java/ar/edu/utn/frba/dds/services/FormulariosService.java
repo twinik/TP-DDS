@@ -13,14 +13,15 @@ import java.util.List;
 
 @AllArgsConstructor
 public class FormulariosService {
-  IFormularioRepository repo;
+  private IFormularioRepository formularioRepository;
+  private UsuarioService usuarioService;
 
   public void crearFormulario(AltaFormularioDto dto) {
     Formulario form = new Formulario();
     form.setNombre("Formulario Colaboradores");
-    form.setAutor(ServiceLocator.get(UsuarioService.class).obtenerUsuario(dto.getIdUsuario()));
-    form.setCampos(dto.getCampos().stream().map(FormulariosService::campoFromDto).toList());
-    repo.guardar(form);
+    form.setAutor(this.usuarioService.obtenerUsuario(dto.getIdUsuario()));
+    form.agregarCampos(dto.getCampos().stream().map(FormulariosService::campoFromDto).toList());
+    this.formularioRepository.guardar(form);
   }
 
   private static Campo campoFromDto(AltaCampoDto c) {
@@ -33,11 +34,11 @@ public class FormulariosService {
   }
 
   public Formulario obtenerFormulario(String id) {
-    return repo.buscar(id).orElseThrow(() -> new RecursoInexistenteException("El formulario no existe"));
+    return this.formularioRepository.buscar(id).orElseThrow(() -> new RecursoInexistenteException("El formulario no existe"));
   }
 
   public Formulario obtenerUltimo() {
-    List<Formulario> formularios = repo.buscarTodos();
+    List<Formulario> formularios = this.formularioRepository.buscarTodos();
     if (formularios.isEmpty()) return null;
     return formularios.get(formularios.size() - 1);
   }

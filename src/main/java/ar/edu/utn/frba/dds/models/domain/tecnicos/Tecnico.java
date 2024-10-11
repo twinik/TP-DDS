@@ -44,6 +44,10 @@ public class Tecnico extends EntidadPersistente implements Contactable {
     @Embedded
     private AreaDeCobertura areaDeCobertura;
 
+
+    public void agregarMedioContacto(List<MedioDeContacto> medioContacto){
+        this.medioContacto.addAll(medioContacto);
+    }
     @Override
     public String email() {
         return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.EMAIL);

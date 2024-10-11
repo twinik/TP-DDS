@@ -17,8 +17,9 @@ import java.util.Map;
 @AllArgsConstructor
 public class FallasTecnicasController implements ICrudViewsHandler {
 
-  FallasTecnicasService service;
-  FileUploadService fileUploadService;
+  private FallasTecnicasService fallasTecnicasService;
+  private FileUploadService fileUploadService;
+  private HeladerasService heladerasService;
 
   @Override
   public void index(Context context) {
@@ -34,7 +35,7 @@ public class FallasTecnicasController implements ICrudViewsHandler {
   public void create(Context context) {
     String heladeraId = context.pathParam("id");
 
-    HeladeraDto h = ServiceLocator.get(HeladerasService.class).getHeladeraDto(heladeraId);
+    HeladeraDto h = this.heladerasService.getHeladeraDto(heladeraId);
 
     Map<String, Object> model = new HashMap<>();
 
@@ -54,7 +55,7 @@ public class FallasTecnicasController implements ICrudViewsHandler {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    service.crear(falla);
+    this.fallasTecnicasService.crear(falla);
     Map<String, String> model = new HashMap<>();
     model.put("message", "La falla tecnica fue registrada con exito!");
     context.status(201);

@@ -4,7 +4,9 @@ import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +15,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 @Entity
 @Table(name = "tipo_colaborador")
 public class TipoColaborador extends EntidadPersistente {
@@ -23,10 +26,14 @@ public class TipoColaborador extends EntidadPersistente {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tipo_colaborador_x_forma_colaboracion", inverseJoinColumns = @JoinColumn(name = "forma_colaboracion_id", referencedColumnName = "id"),
             joinColumns = @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id"))
-    private List<FormaColaboracion> formasPosiblesColaboracion;
+    private List<FormaColaboracion> formasPosiblesColaboracion = new ArrayList<>();
 
     public boolean tenesFormaColaboracion(String nombreInterno){
         return this.formasPosiblesColaboracion.stream().anyMatch(forma -> forma.getNombreInterno().equals(nombreInterno));
+    }
+
+    public void agregarFormasColaboracion(List<FormaColaboracion> formas){
+        this.formasPosiblesColaboracion.addAll(formas);
     }
 
 }

@@ -104,6 +104,10 @@ public class Colaborador extends EntidadPersistente implements Contactable {
         this.medioContacto.addAll(Arrays.stream(medio).toList());
     }
 
+    public void agregarMedioContacto(List<MedioDeContacto> medios) {
+        this.medioContacto.addAll(medios);
+    }
+
 
     @Override
     public String email() {

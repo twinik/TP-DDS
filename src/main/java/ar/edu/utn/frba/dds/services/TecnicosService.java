@@ -21,7 +21,7 @@ public class TecnicosService {
     tecnico.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
     tecnico.setNroDocumento(dto.getNroDocumento());
     tecnico.setAreaDeCobertura(new AreaDeCobertura(new Ubicacion(dto.getAreaCoberturaDto().getLatitud(), dto.getAreaCoberturaDto().getLongitud()), dto.getAreaCoberturaDto().getRadio()));
-    tecnico.setMedioContacto(this.medioContactoService.fromDtos(dto.getMedioContactoDtoList()));
+    tecnico.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMedioContactoDtoList()));
 
     this.tecnicosRepository.guardar(tecnico);
   }
