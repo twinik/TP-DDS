@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.exceptions.EmailDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
+import ar.edu.utn.frba.dds.helpers.DniHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoColaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
@@ -16,8 +17,10 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
 import ar.edu.utn.frba.dds.models.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniInvalidoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeEmailDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeNoTieneDireccionFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
@@ -44,19 +47,21 @@ public class ColaboradoresService {
 
   public Colaborador obtenerColaborador(String id) {
     // TODO: hacerlo con messageFactory
-    if (id == null) throw new RecursoInexistenteException("No existe colaborador asociado a este id");
+    if (id == null)
+      throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Colaborador"));
     Optional<Colaborador> colab = this.colaboradoresRepository.buscar(id);
-    if (colab.isEmpty()) throw new RecursoInexistenteException("No existe colaborador asociado a este id");
+    if (colab.isEmpty())
+      throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Colaborador", id));
     return colab.get();
   }
 
   public String registrar(PersonaHumanaDto dto) {
     Colaborador colaborador = new Colaborador();
     this.validarSiYaExisteMail(dto.getUsuarioDto());
-    this.validarSiYaExisteDni(dto.getNroDocumento());
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
     colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
+    this.validarDocumento(colaborador.getTipoDocumento(),dto.getNroDocumento());
     colaborador.setDocumento(dto.getNroDocumento());
     colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
     TipoColaborador tipo = new TipoColaborador();
@@ -117,13 +122,14 @@ public class ColaboradoresService {
     // this.colaboradoresRepository.marcarFormCompletado(idColaborador);
   }
 
-  public void validarSiYaExisteMail(UsuarioDto dto) {
+  private void validarSiYaExisteMail(UsuarioDto dto) {
     Optional<Usuario> user = this.usuariosRepository.buscarPorEmail(dto.getEmail());
     if (user.isPresent()) throw new EmailDuplicadoException(MensajeEmailDuplicadoFactory.generarMensaje());
   }
 
-  public void validarSiYaExisteDni(String nroDocumento) {
-    Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(nroDocumento);
+  private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento) {
+    if (!DniHelper.esValido(nroDocumento)) throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
+    Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(tipoDocumento,nroDocumento);
     if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
   }
 }

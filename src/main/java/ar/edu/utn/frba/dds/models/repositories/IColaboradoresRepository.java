@@ -15,7 +15,7 @@ public interface IColaboradoresRepository {
 
     Optional<Colaborador> buscarPorUsuario(String idUsuario);
 
-    Optional<Colaborador> buscarPorDni(String dni);
+    Optional<Colaborador> buscarPorDni(TipoDocumento tipo,String dni);
 
     List<Colaborador> buscarTodos();
 
@@ -25,5 +25,4 @@ public interface IColaboradoresRepository {
 
     void eliminar(Colaborador colaborador);
 
-    void marcarFormCompletado(String id);
 }

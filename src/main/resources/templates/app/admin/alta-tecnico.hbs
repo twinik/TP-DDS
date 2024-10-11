@@ -2,6 +2,10 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Registrar Técnico</h1>
 
+        {{#if message}}
+            <p style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+        {{/if}}
+
         <form method="post" action="" class="content-center max-w-md mx-auto">
             <label
                     for="nombre"
@@ -55,7 +59,7 @@
             >Numero de Documento</label
             >
             <input
-                    type="number"
+                    type="text"
                     id="documento"
                     name="documento"
                     aria-describedby="helper-text-explanation"
@@ -64,6 +68,9 @@
                     required
                     min="1"
             />
+            {{#if message}}
+                <p id="error-message" style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            {{/if}}
 
             <div id="mediosContactoContainer">
                 <label
@@ -111,8 +118,8 @@
                     class="mb-5"
             ></div>
 
-            <input type="hidden" name="latitud" id="latitud"/>
-            <input type="hidden" name="longitud" id="longitud"/>
+            <input  required type="hidden" name="latitud" id="latitud"/>
+            <input  required type="hidden" name="longitud" id="longitud"/>
 
             <label
                     for="radio-de-cobertura"
@@ -128,9 +135,6 @@
                     placeholder="1"
                     required
             />
-            {{#if message}}
-                <p id="error-message" style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
-            {{/if}}
             <button
                     type="submit"
                     class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"

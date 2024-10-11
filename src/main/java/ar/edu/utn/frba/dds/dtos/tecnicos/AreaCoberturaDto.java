@@ -9,4 +9,8 @@ public class AreaCoberturaDto {
   private Float latitud;
   private Float longitud;
   private Float radio;
+
+  public boolean estanCamposLlenos(){
+    return this.latitud != null && this.longitud != null && this.radio != null;
+  }
 }

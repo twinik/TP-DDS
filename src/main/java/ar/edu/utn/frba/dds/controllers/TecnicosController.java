@@ -31,6 +31,7 @@ public class TecnicosController implements ICrudViewsHandler {
   public void create(Context context) {
     HashMap<String, Object> model = new HashMap<>();
     model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
+    model.put("message", context.queryParam("message"));
     context.render("/app/admin/alta-tecnico.hbs", model);
   }
 
