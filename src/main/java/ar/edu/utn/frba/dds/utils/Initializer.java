@@ -182,12 +182,12 @@ public class Initializer {
     Formulario f = new Formulario();
     f.setNombre("formulario 1");
     f.setAutor(u5);
-    f.agregarCampos(new Campo(TipoCampo.LIBRE, "quien sos", true),
-        new Campo(TipoCampo.LIBRE, "te gusta el helado", false));
-    Campo compuesto = new Campo(TipoCampo.CHOICE, "vas a aprobar dds?", true);
+    f.agregarCampos(new Campo(TipoCampo.LIBRE, "Nos gustaria saber quien sos y que te gustaria lograr en la ONG", true),
+        new Campo(TipoCampo.LIBRE, "¿Es la primera vez que participas en una ONG?¿Como llegaste a nosotros?", false));
+    Campo compuesto = new Campo(TipoCampo.CHOICE, "¿Crees que tener conocimiento en el area de Diseño de Sistemas es importante para nuestro entorno?", true);
     compuesto.agregarOpciones(new Opcion("si"), new Opcion("no"));
     f.agregarCampos(compuesto);
-    Campo multiple = new Campo(TipoCampo.MULTIPLE_CHOICE,"de este grupo quien labura?", true);
+    Campo multiple = new Campo(TipoCampo.MULTIPLE_CHOICE,"Las personas mostradas son nustros top 4 colaboradores. Marque aquellos que conozca", true);
     multiple.agregarOpciones(new Opcion("uri"),new Opcion("manu"),new Opcion("tobi"),new Opcion("thomi"));
     f.agregarCampos(multiple);
     ServiceLocator.get(IFormularioRepository.class).guardar(f);

@@ -2,10 +2,10 @@
     <div class="flex justify-center items-center lg:pt-16 flex-col">
         <h1 class="title1 mb-6" style="color: #eee;">{{formulario.nombre}}</h1>
         <p style="color: #eee;">Para hacer efectivo tu registro en la plataforma, te pedimos por favor que contestes las siguientes preguntas.</p>
-        <div class="flex flex-col items-center justify-center">
+
             <form method="POST" class="content-center mx-auto w-full max-w-md" id="myForm">
                 {{#each formulario.campos}}
-                    <div class="relative z-0 w-full mb-5 group">
+                    <div class="relative z-0 w-full mb-5 mt-5 group">
                         <label for="campo_{{this.id}}" class="text-left block mb-2 text-sm font-medium text-gray-900 text-white">{{this.pregunta}}</label>
 
                         {{#switch this.tipo}}
@@ -46,11 +46,13 @@
                                />
                            {{/case}}
                            {{#case "multiple-choice"}}
+                           <div class="grid md:grid-cols-2 md:gap-6">
                                {{#each this.opciones}}
+                                   <div>
                                    <label
                                            for="opcion_{{this.id}}"
-                                           class="block ms-2 text-sm font-medium text-white"
-                                   >
+                                           class="block ms-2 text-sm font-medium text-grey-900"
+                                   ></label>
                                        <input
                                                id="opcion_{{this.id}}"
                                                name="campo_{{../id}}"
@@ -59,12 +61,19 @@
                                                class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                        />
                                        {{this.texto}}
-                                   </label>
+                                   </div>
                                {{/each}}
+                           </div>
                            {{/case}}
                            {{#case "single-choice"}}
+                           <div class="grid md:grid-cols-2 md:gap-6">
                                 {{#each this.opciones}}
-                                    <input
+                                    <div>
+                                        <label
+                                                for="opcion_{{this.id}}"
+                                                class="block ms-2 text-sm font-medium text-grey-900"
+                                        ></label>
+                                        <input
                                             id="opcion_{{this.id}}"
                                             name="campo_{{../id}}"
                                             type="radio"
@@ -73,14 +82,11 @@
                                             {{#if ../obligatorio}}
                                                 required
                                             {{/if}}
-                                    />
-                                    <label
-                                            for="opcion_{{this.id}}"
-                                            class="block ms-2 text-sm font-medium text-white"
-                                    >
+                                        />
                                         {{this.texto}}
-                                    </label>
+                                    </div>
                                 {{/each}}
+                           </div>
                            {{/case}}
                         {{/switch}}
 
@@ -91,7 +97,7 @@
                     Enviar Respuesta
                 </button>
             </form>
-        </div>
+
     </div>
 {{/partial}}
 
