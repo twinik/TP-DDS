@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraDto;
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraMapaDto;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import lombok.AllArgsConstructor;
 import java.util.List;
@@ -37,5 +38,10 @@ public class HeladerasService {
     } else {
       return h.get();
     }
+  }
+
+  public void agregarSuscripcionAHeladera(Heladera h, Suscripcion s) {
+    h.agregarSuscripcion(s);
+    this.repoHeladeras.actualizar(h);
   }
 }
