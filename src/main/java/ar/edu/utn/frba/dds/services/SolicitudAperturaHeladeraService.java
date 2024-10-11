@@ -19,7 +19,7 @@ public class SolicitudAperturaHeladeraService {
     solicitudAperturaHeladera.setColaborador(vianda.getColaborador());
     solicitudAperturaHeladera.setHeladera(vianda.getHeladera());
     solicitudAperturaHeladera.setMotivo("apertura para ingresar una donacion");
-    solicitudAperturaHeladera.setViandas(new IngresoVianda(vianda.getFechaDonacion(),vianda.getColaborador()));
+    solicitudAperturaHeladera.setViandas(new IngresoVianda(vianda.getFechaDonacion(),vianda.getColaborador(),vianda.getHeladera()));
     solicitudAperturaHeladera.agregarViandas(vianda);
     solicitudAperturaHeladera.setTimestamp(LocalDateTime.now());
     this.solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);

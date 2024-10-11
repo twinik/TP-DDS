@@ -89,9 +89,8 @@ public class Tarjeta extends EntidadPersistente {
         return Tarjeta.of(codigo, 0, frecuenciaPermitida, duenio);
     }
 
-    public void agregarUsos(Heladera heladera) {
-        UsoTarjeta usoTarjeta = new UsoTarjeta(LocalDateTime.now(), heladera);
-        this.usos.add(usoTarjeta);
+    public void agregarUsos(UsoTarjeta uso) {
+        this.usos.add(uso);
         this.cantidadUsosDia++;
         this.nroUsos++;
     }

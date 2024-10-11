@@ -83,17 +83,13 @@ public class Heladera extends EntidadPersistente {
     this.modelo = modelo;
   }
 
-  public void agregarVianda(Vianda vianda) {
-    vianda.setHeladera(this);
+  public void agregarVianda() {
     this.viandas++;
     avisarObservers();
   }
 
-  public void agregarVianda(Vianda... vianda) {
-    for (Vianda v : vianda) {
-      v.setHeladera(this);
-      this.viandas++;
-    }
+  public void agregarVianda(int cantidad) {
+    this.viandas += cantidad;
     avisarObservers();
   }
 

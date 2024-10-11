@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.domain.heladeras;
 
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.UsoTarjeta;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,11 @@ public class AperturaHeladera extends EntidadPersistente {
     @ManyToOne
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
+
+    // TODO: ver por consistencia de datos ??
+    @OneToOne
+    @JoinColumn(name = "uso_id", referencedColumnName = "id")
+    private UsoTarjeta usoTarjeta;
 
     public AperturaHeladera(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera) {
         this.solicitud = solicitud;

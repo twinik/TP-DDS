@@ -54,5 +54,9 @@ public class Vianda extends EntidadPersistente {
         this.entregada = entregada;
     }
 
+    public void marcarEntregada(){
+        this.entregada = true;
+    }
+
 
 }

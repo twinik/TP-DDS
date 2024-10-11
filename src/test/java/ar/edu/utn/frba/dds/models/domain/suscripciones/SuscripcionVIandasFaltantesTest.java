@@ -35,7 +35,7 @@ public class SuscripcionVIandasFaltantesTest {
         heladera.setCapacidadViandas(5);
         heladera.agregarSuscripcion(sucripcion);
         heladera.setViandas(2);
-        heladera.agregarVianda(new Vianda());
+        heladera.agregarVianda();
 
 
         verify(strategy, times(1)).notificar(any(), any());
@@ -58,7 +58,7 @@ public class SuscripcionVIandasFaltantesTest {
         heladera.setCapacidadViandas(5);
         heladera.agregarSuscripcion(sucripcion);
         heladera.setViandas(1);
-        heladera.agregarVianda(new Vianda());
+        heladera.agregarVianda();
 
 
         verify(strategy, times(0)).notificar(any(), any());

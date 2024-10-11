@@ -12,7 +12,10 @@ import ar.edu.utn.frba.dds.models.repositories.IAperturasHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITarjetasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.services.DonacionesViandaService;
+import ar.edu.utn.frba.dds.services.RedistribucionViandaService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,6 +43,9 @@ public class AperturaHeladeraBroker {
         receptor.setTarjetasColaboradorRepository(ServiceLocator.get(ITarjetasColaboradorRepository.class));
         receptor.setAperturasHeladeraRepository(ServiceLocator.get(IAperturasHeladeraRepository.class));
         receptor.setSolicitudesAperturaHeladeraRepository(ServiceLocator.get(ISolicitudesAperturaHeladeraRepository.class));
+        receptor.setTarjetasRepository(ServiceLocator.get(ITarjetasRepository.class));
+        receptor.setRedistribucionViandaService(ServiceLocator.get(RedistribucionViandaService.class));
+        receptor.setDonacionesViandaService(ServiceLocator.get(DonacionesViandaService.class));
 
         BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
         brokerSubscriber.listen();

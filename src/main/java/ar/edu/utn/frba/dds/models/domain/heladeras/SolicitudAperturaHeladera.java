@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.models.domain.heladeras;
 
 import ar.edu.utn.frba.dds.brokers.BrokerPublisher;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
@@ -81,8 +82,8 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
         String topic = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER_TOPIC") + "/" + this.heladera.getNombre(); // cada heladera se va a suscribir a su topic
         String broker = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER");
         String clientId = configReader.getProperty("CLIENT_ID");
-        ZonedDateTime zdt = ZonedDateTime.of(this.timestamp, ZoneId.systemDefault());
-        String timestampEnMilis = Long.toString(zdt.toInstant().toEpochMilli());
+
+        String timestampEnMilis = Long.toString(DateHelper.getTimestamp(this.timestamp));
         String content = String.join(";", this.colaborador.getId(), timestampEnMilis, this.id);
 
         BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);

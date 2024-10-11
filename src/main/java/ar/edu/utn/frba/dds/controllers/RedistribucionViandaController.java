@@ -1,13 +1,14 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
-import ar.edu.utn.frba.dds.services.RedistribucionViandasService;
+import ar.edu.utn.frba.dds.services.RedistribucionViandaService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class RedistribucionViandaController implements ICrudViewsHandler {
 
-  private static RedistribucionViandasService redistribucionViandasService;
+  private RedistribucionViandaService redistribucionViandasService;
 
   @Override
   public void index(Context context) {

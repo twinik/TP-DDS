@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.domain.heladeras;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.excepciones.ViandasIncosistentesException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,11 +40,14 @@ public class IngresoVianda extends EntidadPersistente {
   @JoinColumn(name = "ingreso_vianda_id", referencedColumnName = "id")
   private List<Vianda> viandas = new ArrayList<>();
 
-//    private Heladera heladera;
+  @ManyToOne
+  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+  private Heladera heladera;
 
-  public IngresoVianda(LocalDate fechaDonacion, Colaborador colaborador) {
+  public IngresoVianda(LocalDate fechaDonacion, Colaborador colaborador,Heladera h) {
     this.fechaDonacion = fechaDonacion;
     this.colaborador = colaborador;
+    this.heladera = h;
   }
 
   public void agregarViandas(Vianda... viandas) {
@@ -51,7 +55,13 @@ public class IngresoVianda extends EntidadPersistente {
   }
 
   public List<DonacionVianda> donar() {
-    return this.viandas.stream().map(vianda -> new DonacionVianda(this.colaborador, vianda.getFechaDonacion(), vianda)).toList();
+    if (this.getViandas().stream().anyMatch(v -> !v.getHeladera().getNombre().equals(this.heladera.getNombre())))
+      throw new ViandasIncosistentesException();
+    this.heladera.agregarVianda(this.viandas.size());
+    return this.viandas.stream().map(vianda -> {
+      vianda.marcarEntregada();
+      return new DonacionVianda(this.colaborador, vianda.getFechaDonacion(), vianda);
+    }).toList();
   }
 
 }

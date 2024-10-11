@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.brokers.AperturaHeladeraBroker;
 import ar.edu.utn.frba.dds.middleware.AppMiddlewares;
 import ar.edu.utn.frba.dds.server.handlers.AppHandlers;
 import ar.edu.utn.frba.dds.utils.Initializer;
@@ -32,7 +33,12 @@ public class Server {
       AppMiddlewares.applyMiddlewares(app);
       AppHandlers.applyHandlers(app);
       Router.init(app);
-
+      // TODO: esto va aca ???
+      try {
+        AperturaHeladeraBroker.suscribirseAAperturasHeladeras();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
       if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
         Initializer.init();
       }
