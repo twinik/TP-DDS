@@ -20,7 +20,7 @@ public class FormaColaboracionDto {
             String idForma = context.formParam("forma-" +i);
             if(idForma != null) result.add(new FormaColaboracionDto(idForma));
         }
-        if(result.isEmpty()) throw new RegistroFailedException("no seleccionaste ninguna forma de colaboracion");
+        if(result.isEmpty()) throw new RegistroFailedException("Debes seleccionar una forma de colaboracion");
         return result;
     }
 }

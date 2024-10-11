@@ -109,7 +109,7 @@ public class RegistroController implements ICrudViewsHandler {
       // TODO: registro admin????
       context.redirect("/");
     } else {
-      throw new RecursoInexistenteException("no existe registro para este recurso");
+      throw new RecursoInexistenteException("No existe registro para este recurso");
     }
   }
 
