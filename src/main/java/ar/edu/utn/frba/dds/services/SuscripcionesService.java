@@ -16,7 +16,7 @@ public class SuscripcionesService {
     private ISuscripcionesRepository repo;
     private ColaboradoresService colaboradoresService;
 
-    public void guardarSuscripcion(SuscripcionDto dto) {
+    public Suscripcion guardarSuscripcion(SuscripcionDto dto) {
         Suscripcion s = new Suscripcion();
         s.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
         switch (dto.getTipoSuscripcion()) {
@@ -44,5 +44,6 @@ public class SuscripcionesService {
                 break;
         }
         this.repo.guardar(s);
+        return s;
     }
 }
