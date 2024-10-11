@@ -17,6 +17,7 @@ import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
+import ar.edu.utn.frba.dds.utils.PasswordHasher;
 import lombok.Getter;
 import lombok.Setter;
 import java.io.IOException;
@@ -87,7 +88,7 @@ public class CargadorDeColaboraciones {
     try {
       TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
       String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
-      Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), claveGenerada);
+      Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), PasswordHasher.hashPassword(claveGenerada));
       Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
       nuevoColaborador.setTipoDocumento(tipoDoc);
       nuevoColaborador.setDocumento(carga.getDocumento());
