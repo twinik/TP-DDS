@@ -5,12 +5,14 @@ import ar.edu.utn.frba.dds.models.converters.FrecuenciaUsoAttributeConverter;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class Tarjeta extends EntidadPersistente {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
-    private List<UsoTarjeta> usos;
+    private List<UsoTarjeta> usos = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "duenio_id", referencedColumnName = "id", unique = true)
@@ -87,7 +89,9 @@ public class Tarjeta extends EntidadPersistente {
         return Tarjeta.of(codigo, 0, frecuenciaPermitida, duenio);
     }
 
-    public void agregarUsos() {
+    public void agregarUsos(Heladera heladera) {
+        UsoTarjeta usoTarjeta = new UsoTarjeta(LocalDateTime.now(), heladera);
+        this.usos.add(usoTarjeta);
         this.cantidadUsosDia++;
         this.nroUsos++;
     }

@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.brokers;
 
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.IngresoVianda;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
@@ -14,6 +16,7 @@ import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Clase que se encarga de suscribirse al broker de aperturas de heladeras.
@@ -54,8 +57,7 @@ public class AperturaHeladeraBroker {
         TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c, "3", LocalDate.now());
         ///tarjetaColaborador.setId(3L);
         tarjetasColaboradorRepository.guardar(tarjetaColaborador);
-        ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = ServiceLocator.get(ISolicitudesAperturaHeladeraRepository.class);
-        SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(c, "un motivo", LocalDateTime.now(), heladera);
+        ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = ServiceLocator.get(ISolicitudesAperturaHeladeraRepository.class);SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(c, "un motivo", LocalDateTime.now(), heladera, new RedistribucionViandas(),new IngresoVianda());
         solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
         try {
             suscribirseAAperturasHeladeras();

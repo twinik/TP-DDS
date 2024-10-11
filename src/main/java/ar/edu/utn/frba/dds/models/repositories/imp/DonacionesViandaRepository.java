@@ -55,12 +55,11 @@ public class DonacionesViandaRepository implements IDonacionesViandaRepository, 
         withTransaction(() -> entityManager().persist(donacionVianda));
     }
 
-    public void guardar(DonacionVianda... donacionVianda) {
+    @Override
+    public void guardar(List<DonacionVianda> donacionesVianda) {
 
         withTransaction(() -> {
-            for (DonacionVianda donacion : donacionVianda) {
-                entityManager().persist(donacion);
-            }
+            donacionesVianda.forEach(d -> entityManager().persist(d));
         });
     }
 

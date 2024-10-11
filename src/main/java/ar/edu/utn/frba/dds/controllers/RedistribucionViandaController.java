@@ -1,15 +1,14 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.dtos.colaboraciones.ViandaDto;
-import ar.edu.utn.frba.dds.services.ViandasService;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
+import ar.edu.utn.frba.dds.services.RedistribucionViandasService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class ViandasController implements ICrudViewsHandler {
+public class RedistribucionViandaController implements ICrudViewsHandler {
 
-  private ViandasService viandasService;
+  private static RedistribucionViandasService redistribucionViandasService;
+
   @Override
   public void index(Context context) {
 
@@ -22,12 +21,11 @@ public class ViandasController implements ICrudViewsHandler {
 
   @Override
   public void create(Context context) {
-    context.render("/app/colaboraciones/donacion-vianda.hbs");
+
   }
 
   @Override
   public void save(Context context) {
-    ViandaDto dto = ViandaDto.of(context);
 
   }
 

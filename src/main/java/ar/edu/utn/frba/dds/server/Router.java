@@ -2,13 +2,10 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.*;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
-import ar.edu.utn.frba.dds.services.FileUploadService;
 import ar.edu.utn.frba.dds.services.HeladerasService;
 import ar.edu.utn.frba.dds.controllers.RecomendacionesController;
 import io.javalin.Javalin;
 import io.javalin.http.NotFoundResponse;
-import io.javalin.http.UploadedFile;
-import java.io.IOException;
 
 /**
  * EL router es el encargado de las RUTAS.
@@ -56,7 +53,7 @@ public class Router {
     app.get("/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados", ServiceLocator.get(AltaPersonaVulnerableController.class)::createTutorados);
     app.post("/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados", ServiceLocator.get(AltaPersonaVulnerableController.class)::saveTutorados);
 
-    app.get("/colaborar/donar-vianda", ctx -> ctx.render("/app/colaboraciones/donacion-vianda.hbs"));
+    app.get("/colaborar/donar-vianda", ServiceLocator.get(ViandasController.class)::create);
 
     app.get("/colaborar/distribuir-viandas", ctx -> ctx.render("/app/colaboraciones/distribucion-vianda.hbs"));
 

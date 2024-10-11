@@ -25,10 +25,4 @@ public class UsoTarjeta extends EntidadPersistente {
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
-    public UsoTarjeta(Tarjeta tarjeta, LocalDateTime fechaUso, Heladera heladera) {
-        this.fechaUso = fechaUso;
-        this.heladera = heladera;
-        tarjeta.agregarUsos();
-    }
-
 }

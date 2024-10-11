@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.models.domain.heladeras;
 import ar.edu.utn.frba.dds.brokers.BrokerPublisher;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Registra una solicud de apertura por parte del colaborador
@@ -41,12 +46,29 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
+    @Transient
+    private RedistribucionViandas redistribucionViandas;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
+    @JoinColumn(name = "solicitud_id",referencedColumnName = "id")
+    private IngresoVianda viandas;
+
+    public void agregarViandas(Vianda ... viandas){
+        this.viandas.agregarViandas(viandas);
+    }
+
+    public boolean esDonacionDeViandas(){
+        return !this.getViandas().getViandas().isEmpty();
+    }
+
+
+
     public static void main(String[] args) {
         Colaborador colab = new Colaborador();
         colab.setUsuario(new Usuario("jorge@mail", "contrasenia"));
         Heladera heladera = new Heladera(LocalDate.now());
         heladera.setNombre("heladera_de_thomi");
-        SolicitudAperturaHeladera soli = new SolicitudAperturaHeladera(colab, "un motivo", LocalDateTime.now(), heladera);
+        SolicitudAperturaHeladera soli = new SolicitudAperturaHeladera(colab, "un motivo", LocalDateTime.now(), heladera, null, null);
         try {
             soli.publicarSolicitudABroker();
         } catch (IOException e) {
@@ -61,7 +83,7 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
         String clientId = configReader.getProperty("CLIENT_ID");
         ZonedDateTime zdt = ZonedDateTime.of(this.timestamp, ZoneId.systemDefault());
         String timestampEnMilis = Long.toString(zdt.toInstant().toEpochMilli());
-        String content = String.join(";", this.colaborador.getId().toString(), timestampEnMilis);
+        String content = String.join(";", this.colaborador.getId(), timestampEnMilis, this.id);
 
         BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);
         brokerPublisher.publicar(content);

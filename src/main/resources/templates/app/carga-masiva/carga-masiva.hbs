@@ -60,6 +60,18 @@
             document.body.removeChild(downloadLink);
         });
     </script>
+    <script>
+        document.querySelector("form").addEventListener("submit", function (event) {
+            const fileInput = document.getElementById("file_input");
+            const filePath = fileInput.value;
+            const allowedExtensions = /(\.csv)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Por favor, selecciona un archivo con formato .csv');
+                fileInput.value = ''; // Limpia el input
+                event.preventDefault(); // Detiene el envío del formulario
+            }
+        });
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}

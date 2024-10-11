@@ -5,35 +5,71 @@ import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.domain.heladeras.AperturaHeladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
 import ar.edu.utn.frba.dds.models.repositories.IAperturasHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITarjetasRepository;
+import ar.edu.utn.frba.dds.services.DonacionesViandaService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.util.Optional;
 
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AperturaHeladeraListener implements IMqttMessageListener {
-    IHeladerasRepository heladerasRepository;
-    ITarjetasColaboradorRepository tarjetasColaboradorRepository;
-    IAperturasHeladeraRepository aperturasHeladeraRepository;
-    ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
+    private IHeladerasRepository heladerasRepository;
+    private ITarjetasColaboradorRepository tarjetasColaboradorRepository;
+    private IAperturasHeladeraRepository aperturasHeladeraRepository;
+    private ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
+    private ITarjetasRepository tarjetasRepository;
+    private DonacionesViandaService donacionesViandaService;
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) {
         AperturaHeladeraBrokerDTO aperturaDto = AperturaHeladeraBrokerDTO.fromString(mqttMessage.toString());
         Optional<Heladera> heladeraOpt = heladerasRepository.buscar(aperturaDto.getIdHeladera());
         Optional<TarjetaColaborador> tarjetaOpt = tarjetasColaboradorRepository.buscar(aperturaDto.getIdTarjetaColaborador());
+        Optional<Tarjeta> tarjetaPersonaVulnerableOpt = tarjetasRepository.buscar(aperturaDto.getIdTarjetaPersonaVulnerable());
         Optional<SolicitudAperturaHeladera> solicitudAperturaHeladeraOpt = solicitudesAperturaHeladeraRepository.buscar(aperturaDto.getIdSolicitudApertura());
-        if (heladeraOpt.isEmpty() || tarjetaOpt.isEmpty() || solicitudAperturaHeladeraOpt.isEmpty()) {
-            return;
+        if (heladeraOpt.isEmpty()) {
+            throw new RuntimeException("La Heladera no existe");
         }
         Heladera heladera = heladeraOpt.get();
-        SolicitudAperturaHeladera solicitudAperturaHeladera = solicitudAperturaHeladeraOpt.get();
-        AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladera, DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
+        AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladeraOpt.orElse(null), DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
         aperturasHeladeraRepository.guardar(aperturaHeladera);
+        if (tarjetaOpt.isPresent()) {
+            if(solicitudAperturaHeladeraOpt.isEmpty()) throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Solcitud apertura",aperturaDto.idSolicitudApertura));
+            manejarAperturaColaborador(heladera, solicitudAperturaHeladeraOpt.get(), tarjetaOpt.get());
+        } else {
+            if (tarjetaPersonaVulnerableOpt.isEmpty()) throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Tarjeta de perso vulnerable",aperturaDto.idTarjetaPersonaVulnerable));
+            manejarAperturaPersonaVulnerable(heladera, tarjetaPersonaVulnerableOpt.get());
+        }
     }
+
+    private void manejarAperturaColaborador(Heladera heladera, SolicitudAperturaHeladera solicitudAperturaHeladera, TarjetaColaborador tarjetaColaborador){
+        if(solicitudAperturaHeladera.esDonacionDeViandas()){
+            // asumo que es donacion vianda
+            donacionesViandaService.crearDonaciones(solicitudAperturaHeladera.getViandas());
+            return;
+        }
+
+        // TODO: handle redistribucion viandas
+        return;
+    }
+
+    private void manejarAperturaPersonaVulnerable(Heladera heladera, Tarjeta tarjeta) {
+        if(!tarjeta.permiteUsar()) // todo hacer algo
+        heladera.quitarVianda();
+        tarjeta.agregarUsos(heladera);
+        tarjetasRepository.actualizar(tarjeta);
+    }
+
 }

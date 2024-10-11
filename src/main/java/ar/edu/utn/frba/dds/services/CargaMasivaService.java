@@ -1,26 +1,48 @@
 package ar.edu.utn.frba.dds.services;
 
 import ar.edu.utn.frba.dds.exceptions.CargaArchivoFailedException;
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.CalculadorPuntos;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.ColocacionHeladeras;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionDinero;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.IPuntajeCalculable;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva.CargaColaboracionCsvReader;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva.CargadorDeColaboraciones;
-import ar.edu.utn.frba.dds.models.domain.emailSending.MailSenderAdapter;
 import ar.edu.utn.frba.dds.models.domain.emailSending.SendGridMailSender;
+import ar.edu.utn.frba.dds.models.repositories.IAltaPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
+import ar.edu.utn.frba.dds.models.repositories.IColocacionHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IDonacionDineroRepository;
+import ar.edu.utn.frba.dds.models.repositories.IDonacionesViandaRepository;
 import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
-import ar.edu.utn.frba.dds.models.repositories.imp.ColaboradoresRepository;
-import ar.edu.utn.frba.dds.models.repositories.imp.FormasColaboracionRespository;
+import ar.edu.utn.frba.dds.models.repositories.IOfertaProductoRepository;
+import ar.edu.utn.frba.dds.models.repositories.IRedistribucionesViandaRepository;
 import io.javalin.http.UploadedFile;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @AllArgsConstructor
 public class CargaMasivaService {
   private FileUploadService service;
+  private CargaColaboracionCsvReader csvReader;
+  private SendGridMailSender mailSender;
   private IColaboradoresRepository colaboradoresRepository;
   private IFormasColaboracionRespository formasColaboracionRespository;
   private ICalculadorPuntos calculadorPuntos;
+  private IDonacionesViandaRepository donacionesViandaRepository;
+  private IDonacionDineroRepository donacionesDineroRepository;
+  private IColocacionHeladeraRepository colocacionHeladeraRepository;
+  private IRedistribucionesViandaRepository redistribucionesViandaRepository;
+  private IAltaPersonaVulnerableRepository altaPersonaVulnerableRepository;
 
   public String subirArchivo(UploadedFile uploadedFile) throws CargaArchivoFailedException {
     try {
@@ -34,20 +56,38 @@ public class CargaMasivaService {
   public void cargarColaboraciones(UploadedFile uploadedFile) throws CargaArchivoFailedException {
     String filePath = this.subirArchivo(uploadedFile);
     try {
-      CargaColaboracionCsvReader csvReader = new CargaColaboracionCsvReader();
-      SendGridMailSender mailSender = new SendGridMailSender();
       CargadorDeColaboraciones cargador = new CargadorDeColaboraciones(
           filePath.substring(1),
-          csvReader,
-          mailSender,
+          this.csvReader,
+          this.mailSender,
           this.colaboradoresRepository,
           this.formasColaboracionRespository,
           this.calculadorPuntos
       );
 
-      cargador.cargarColaboraciones();
+      List<IPuntajeCalculable> colaboraciones = cargador.cargarColaboraciones();
+
+      for (IPuntajeCalculable colab : colaboraciones) {
+        this.guardarColaboracion(colab);
+      }
+
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  public void guardarColaboracion(IPuntajeCalculable colab) {
+    Class claseColab = colab.getClass();
+    if (claseColab.equals(DonacionDinero.class)) {
+      this.donacionesDineroRepository.guardar((DonacionDinero) colab);
+    } else if (claseColab.equals(DonacionVianda.class)){
+      this.donacionesViandaRepository.guardar((DonacionVianda) colab);
+    } else if (claseColab.equals(AltaPersonaVulnerable.class)) {
+      this.altaPersonaVulnerableRepository.guardar((AltaPersonaVulnerable) colab);
+    } else if (claseColab.equals(ColocacionHeladeras.class)) {
+      this.colocacionHeladeraRepository.guardar((ColocacionHeladeras) colab);
+    } else if (claseColab.equals(RedistribucionViandas.class)) {
+      this.redistribucionesViandaRepository.guardar((RedistribucionViandas) colab);
     }
   }
 }

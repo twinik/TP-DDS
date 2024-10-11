@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraMapaDto;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.suscripciones.Suscripcion;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import lombok.AllArgsConstructor;
 import java.util.List;
@@ -34,7 +35,7 @@ public class HeladerasService {
   public Heladera obtenerHeladera(String id) {
     Optional<Heladera> h = repoHeladeras.buscar(id);
     if (h.isEmpty()) {
-      throw new RecursoInexistenteException("La heladera no existe");
+      throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Heladera",id));
     } else {
       return h.get();
     }
