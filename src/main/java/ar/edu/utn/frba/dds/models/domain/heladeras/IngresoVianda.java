@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,7 +35,7 @@ public class IngresoVianda extends EntidadPersistente {
   private Colaborador colaborador;
 //    private boolean entregada;
 
-  @OneToMany
+  @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "ingreso_vianda_id", referencedColumnName = "id")
   private List<Vianda> viandas = new ArrayList<>();
 

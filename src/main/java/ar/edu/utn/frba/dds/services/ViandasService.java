@@ -16,6 +16,7 @@ public class ViandasService {
   private IDonacionesViandaRepository donacionesViandaRepository;
   private HeladerasService heladerasService;
   private SolicitudAperturaHeladeraService solicitudAperturaHeladeraService;
+  private ColaboradoresService colaboradoresService;
 
   public void crearVianda(ViandaDto dto) {
     Vianda vianda = new Vianda();
@@ -26,13 +27,14 @@ public class ViandasService {
     vianda.setFechaDonacion(DateHelper.fechaFromString(dto.getFechaDonacion(), "dd/MM/yyyy"));
     if (vianda.getFechaDonacion().isBefore(LocalDate.now()))
       throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+    vianda.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
     vianda.setCalorias(dto.getCalorias());
     vianda.setPeso(dto.getPeso());
     vianda.setHeladera(heladerasService.obtenerHeladera(dto.getHeladeraDto().getId()));
 
     this.viandasRepository.guardar(vianda);
 
-    this.solicitudAperturaHeladeraService.generarSolicitud(vianda,dto.getIdColaborador());
+    this.solicitudAperturaHeladeraService.generarSolicitud(vianda);
 
   }
 }

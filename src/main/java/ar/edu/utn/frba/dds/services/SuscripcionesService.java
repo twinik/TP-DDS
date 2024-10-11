@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.services;
 
 import ar.edu.utn.frba.dds.dtos.suscripciones.SuscripcionDto;
+import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.models.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.models.domain.suscripciones.SuscripcionDesperfectoHeladera;
@@ -29,7 +30,7 @@ public class SuscripcionesService {
                 s.setNumero(Integer.parseInt(dto.getNumero()));
                 break;
             case "desperfecto-heladera":
-                s.setTipoSuscripcion(new SuscripcionDesperfectoHeladera());
+                s.setTipoSuscripcion(new SuscripcionDesperfectoHeladera(ServiceLocator.get(RecomendadorHeladeras.class)));
                 break;
         }
         switch (dto.getCanalContacto()) {

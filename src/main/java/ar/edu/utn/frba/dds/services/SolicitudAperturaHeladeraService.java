@@ -12,16 +12,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class SolicitudAperturaHeladeraService {
   private ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
-  private ColaboradoresService colaboradoresService;
 
 
-  public void generarSolicitud(Vianda vianda, String idColaborador) {
+  public void generarSolicitud(Vianda vianda) {
     SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera();
-    Colaborador colaborador = this.colaboradoresService.obtenerColaborador(idColaborador);
-    solicitudAperturaHeladera.setColaborador(colaborador);
+    solicitudAperturaHeladera.setColaborador(vianda.getColaborador());
     solicitudAperturaHeladera.setHeladera(vianda.getHeladera());
     solicitudAperturaHeladera.setMotivo("apertura para ingresar una donacion");
-    solicitudAperturaHeladera.setViandas(new IngresoVianda(vianda.getFechaDonacion(),colaborador));
+    solicitudAperturaHeladera.setViandas(new IngresoVianda(vianda.getFechaDonacion(),vianda.getColaborador()));
     solicitudAperturaHeladera.agregarViandas(vianda);
     solicitudAperturaHeladera.setTimestamp(LocalDateTime.now());
     this.solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);

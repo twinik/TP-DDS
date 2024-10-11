@@ -11,6 +11,8 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva.CargaColabor
 import ar.edu.utn.frba.dds.models.domain.emailSending.SendGridMailSender;
 import ar.edu.utn.frba.dds.models.domain.heladeras.CalculadorHeladerasCercanas;
 import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
+import ar.edu.utn.frba.dds.models.domain.recomendadorPuntosColocacion.RecomendadorDePuntosDeColocacion;
+import ar.edu.utn.frba.dds.models.domain.recomendadorPuntosColocacion.RecomendadorRetrofitAdapter;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.models.repositories.*;
@@ -168,6 +170,13 @@ public class ServiceLocator {
         add(clase, new PosiblesCodigosService(get(IPosiblesCodigosTarjetaRepository.class)));
       } else if (clase.equals(RecomendadorHeladeras.class))
         add(clase, new RecomendadorHeladeras());
+      else if(clase.equals(RecomendadorDePuntosDeColocacion.class)) {
+        try {
+          add(clase,new RecomendadorDePuntosDeColocacion(RecomendadorRetrofitAdapter.getInstance()));
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
       else if (clase.equals(ReportesFactory.class))
         add(clase, new ReportesFactory(get(IViandasRepository.class), get(IDonacionesViandaRepository.class), get(IRedistribucionesViandaRepository.class), get(IFallasTecnicasRepository.class), get(IAlertasRepository.class)));
       else if (clase.equals(ReportesService.class))
@@ -179,7 +188,7 @@ public class ServiceLocator {
       else if (clase.equals(RolesService.class))
         add(clase, new RolesService(get(IRolesRepository.class)));
       else if(clase.equals(SolicitudAperturaHeladeraService.class))
-        add(clase,new SolicitudAperturaHeladeraService(get(ISolicitudesAperturaHeladeraRepository.class),get(ColaboradoresService.class)));
+        add(clase,new SolicitudAperturaHeladeraService(get(ISolicitudesAperturaHeladeraRepository.class)));
       else if (clase.equals(SuscripcionesService.class))
         add(clase, new SuscripcionesService(get(ISuscripcionesRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(TarjetasService.class))
@@ -193,7 +202,7 @@ public class ServiceLocator {
       else if (clase.equals(UsuarioService.class))
         add(clase, new UsuarioService(get(IUsuariosRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(ViandasService.class))
-        add(clase, new ViandasService(get(IViandasRepository.class), get(IDonacionesViandaRepository.class),get(HeladerasService.class),get(SolicitudAperturaHeladeraService.class)));
+        add(clase, new ViandasService(get(IViandasRepository.class), get(IDonacionesViandaRepository.class),get(HeladerasService.class),get(SolicitudAperturaHeladeraService.class),get(ColaboradoresService.class)));
 
       // CONTROLADORES
       else if (clase.equals(AlertasController.class))

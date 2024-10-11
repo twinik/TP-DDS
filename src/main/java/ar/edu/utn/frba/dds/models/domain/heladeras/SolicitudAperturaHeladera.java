@@ -49,7 +49,7 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     @Transient
     private RedistribucionViandas redistribucionViandas;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
     @JoinColumn(name = "solicitud_id",referencedColumnName = "id")
     private IngresoVianda viandas;
 
