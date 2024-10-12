@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.services;
 
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.heladeras.IngresoVianda;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Vianda;
@@ -10,22 +11,48 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 public class SolicitudAperturaHeladeraService {
-    private ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
+  private ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
 
 
-    public void generarSolicitud(Vianda vianda) {
-        SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera();
-        solicitudAperturaHeladera.setColaborador(vianda.getColaborador());
-        solicitudAperturaHeladera.setHeladera(vianda.getHeladera());
-        solicitudAperturaHeladera.setMotivo("apertura para ingresar una donacion");
-        solicitudAperturaHeladera.setViandas(new IngresoVianda(vianda.getFechaDonacion(), vianda.getColaborador(), vianda.getHeladera()));
-        solicitudAperturaHeladera.agregarViandas(vianda);
-        solicitudAperturaHeladera.setTimestamp(LocalDateTime.now());
-        this.solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
-        try {
-            solicitudAperturaHeladera.publicarSolicitudABroker();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+  public void generarSolicitud(Vianda vianda) {
+    SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera();
+    solicitudAperturaHeladera.setColaborador(vianda.getColaborador());
+    solicitudAperturaHeladera.setHeladera(vianda.getHeladera());
+    solicitudAperturaHeladera.setMotivo("apertura para ingresar una donacion");
+    solicitudAperturaHeladera.setViandas(new IngresoVianda(vianda.getFechaDonacion(), vianda.getColaborador(), vianda.getHeladera()));
+    solicitudAperturaHeladera.agregarViandas(vianda);
+    solicitudAperturaHeladera.setTimestamp(LocalDateTime.now());
+    this.publicarABroker(solicitudAperturaHeladera);
+  }
+
+  public void generarSolicitud(RedistribucionViandas redistribucionViandas) {
+    // ORIGEN
+    SolicitudAperturaHeladera solicitudAperturaHeladeraOrigen = new SolicitudAperturaHeladera();
+    solicitudAperturaHeladeraOrigen.setColaborador(redistribucionViandas.getColaborador());
+    solicitudAperturaHeladeraOrigen.setRedistribucionViandas(redistribucionViandas);
+    solicitudAperturaHeladeraOrigen.setHeladera(redistribucionViandas.getHeladeraOrigen());
+    solicitudAperturaHeladeraOrigen.setMotivo("Apertura para redistribuir viandas");
+    solicitudAperturaHeladeraOrigen.setTimestamp(LocalDateTime.now());
+
+    //DESTINO
+    SolicitudAperturaHeladera solicitudAperturaDestino = new SolicitudAperturaHeladera();
+    solicitudAperturaDestino.setColaborador(solicitudAperturaHeladeraOrigen.getColaborador());
+    solicitudAperturaDestino.setHeladera(redistribucionViandas.getHeladeraDestino());
+    solicitudAperturaDestino.setRedistribucionViandas(redistribucionViandas);
+    solicitudAperturaDestino.setMotivo(solicitudAperturaHeladeraOrigen.getMotivo());
+    solicitudAperturaDestino.setTimestamp(LocalDateTime.now());
+
+
+    this.publicarABroker(solicitudAperturaHeladeraOrigen);
+    this.publicarABroker(solicitudAperturaDestino);
+  }
+
+  private void publicarABroker(SolicitudAperturaHeladera solicitudAperturaHeladera) {
+    this.solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
+    try {
+      solicitudAperturaHeladera.publicarSolicitudABroker();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+  }
 }

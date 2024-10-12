@@ -163,6 +163,8 @@ public class ServiceLocator {
                 add(clase, new MedioContactoService());
             else if (clase.equals(ModelosService.class))
                 add(clase, new ModelosService(get(IModeloHeladeraRepository.class)));
+            else if(clase.equals(MotivoRedistribucionService.class))
+                add(clase,new MotivoRedistribucionService(get(IMotivoRedistribucionRepository.class)));
             else if (clase.equals(OfertasProductoService.class))
                 add(clase, new OfertasProductoService(get(IOfertaProductoRepository.class), get(ColaboradoresService.class)));
             else if (clase.equals(PosiblesCodigosService.class)) {
@@ -176,7 +178,7 @@ public class ServiceLocator {
                     throw new RuntimeException(e);
                 }
             } else if (clase.equals(RedistribucionViandaService.class))
-                add(clase, new RedistribucionViandaService(get(IRedistribucionesViandaRepository.class), get(ColaboradoresService.class), get(HeladerasService.class)));
+                add(clase, new RedistribucionViandaService(get(IRedistribucionesViandaRepository.class), get(ColaboradoresService.class), get(HeladerasService.class),get(MotivoRedistribucionService.class),get(SolicitudAperturaHeladeraService.class),get(ICalculadorPuntos.class)));
             else if (clase.equals(ReportesFactory.class))
                 add(clase, new ReportesFactory(get(IViandasRepository.class), get(IDonacionesViandaRepository.class), get(IRedistribucionesViandaRepository.class), get(IFallasTecnicasRepository.class), get(IAlertasRepository.class)));
             else if (clase.equals(ReportesService.class))
@@ -230,7 +232,7 @@ public class ServiceLocator {
             else if (clase.equals(RegistroController.class))
                 add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class), get(FormaColaboracionService.class)));
             else if (clase.equals(RedistribucionViandaController.class))
-                add(clase, new RedistribucionViandaController(get(RedistribucionViandaService.class)));
+                add(clase, new RedistribucionViandaController(get(RedistribucionViandaService.class),get(MotivoRedistribucionService.class)));
             else if (clase.equals(ReportesController.class))
                 add(clase, new ReportesController(get(ReportesService.class)));
             else if (clase.equals(RespuestaFormularioController.class))

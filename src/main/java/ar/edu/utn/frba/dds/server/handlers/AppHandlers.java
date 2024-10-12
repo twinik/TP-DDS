@@ -16,6 +16,7 @@ public class AppHandlers {
             new FormIncompletoHandler()
             , new MailDuplicadoHandler()
             , new DniDuplicadoHandler()
+        ,new MismaHeladeraHandler()
     };
 
     public static void applyHandlers(Javalin app) {

@@ -46,6 +46,13 @@ public class RedistribucionViandas extends EntidadPersistente implements IPuntaj
     @Column(name = "cantidad")
     private Integer cantidad;
 
+    public void redistribuirEnOrigen(){
+        this.heladeraOrigen.quitarVianda(this.cantidad);
+    }
+
+    public void redistribuirEnDestino(){
+        this.heladeraDestino.agregarVianda(this.cantidad);
+    }
     @Override
     public Float calcularPuntaje() {
         return (float) this.cantidad;

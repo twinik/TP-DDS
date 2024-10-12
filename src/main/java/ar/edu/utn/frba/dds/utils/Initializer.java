@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.helpers.GeneradorDeCodigosHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.*;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
@@ -142,7 +143,7 @@ public class Initializer {
         modeloHeladeraRepository.guardar(modelo1);
         modeloHeladeraRepository.guardar(modelo2);
 
-    Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), 0, modelo1);
+    Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), 4, modelo1);
     h1.setHeladeraActiva(false);
     Heladera h2 = new Heladera(new Ubicacion(-34.613466f, -58.419659f), new Direccion("lima", 800, null, "1405"), "Heladera-lima-dds", 50, LocalDate.now(), 0, modelo1);
     Heladera h3 = new Heladera(new Ubicacion(-34.582345f, -58.43329f), new Direccion("rivadavia", 5000, null, "1407"), "Heladera-rivadavia-dds", 20, LocalDate.now(), 0, modelo1);
@@ -208,6 +209,16 @@ public class Initializer {
         posiblesCodigosTarjetaRepository.guardar(codigo2);
         posiblesCodigosTarjetaRepository.guardar(codigo3);
         posiblesCodigosTarjetaRepository.guardar(codigo4);
+
+
+        MotivoRedistribucionVianda mot1 = new MotivoRedistribucionVianda("Redistribuir viandas por capacidad");
+        MotivoRedistribucionVianda mot2 = new MotivoRedistribucionVianda("Redistribuir viandas de heladera inahbilitada");
+        MotivoRedistribucionVianda mot3 = new MotivoRedistribucionVianda("Otro");
+
+        IMotivoRedistribucionRepository redistribucionRepository = ServiceLocator.get(IMotivoRedistribucionRepository.class);
+        redistribucionRepository.guardar(mot1);
+        redistribucionRepository.guardar(mot2);
+        redistribucionRepository.guardar(mot3);
 
 
     }

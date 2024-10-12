@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.models.domain.heladeras;
 
-import ar.edu.utn.frba.dds.exceptions.ViandaVaciaException;
+import ar.edu.utn.frba.dds.exceptions.HeladeraVaciaException;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
@@ -95,8 +95,15 @@ public class Heladera extends EntidadPersistente {
   }
 
   public void quitarVianda() {
-    if (this.viandas <= 0) throw new ViandaVaciaException();
+    if (this.viandas <= 0) throw new HeladeraVaciaException();
     this.viandas--;
+    avisarObservers();
+
+  }
+
+  public void quitarVianda(int cantidad) {
+    if (this.viandas - cantidad < 0) throw new HeladeraVaciaException();
+    this.viandas-= cantidad;
     avisarObservers();
 
   }

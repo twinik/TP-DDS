@@ -50,4 +50,8 @@ public class HeladerasService {
         h.agregarSuscripcion(s);
         this.repoHeladeras.actualizar(h);
     }
+
+    public void actualizarHeladera(Heladera heladera){
+        this.repoHeladeras.actualizar(heladera);
+    }
 }

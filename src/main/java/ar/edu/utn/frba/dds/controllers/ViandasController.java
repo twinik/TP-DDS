@@ -35,7 +35,7 @@ public class ViandasController implements ICrudViewsHandler {
         ViandaDto dto = ViandaDto.of(context);
         this.viandasService.crearVianda(dto);
         Map<String, Object> model = new HashMap<>();
-        model.put("message", "Su solcitud de donacion ha sido registrada con eéxito, esperamos su donación con ansias");
+        model.put("message", "Su solcitud de donacioón ha sido registrada con éxito, esperamos su donación con ansias");
         context.render("/app/success.hbs", model);
     }
 

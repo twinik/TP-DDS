@@ -16,6 +16,10 @@
 
         <form method="post" action="" class="content-center max-w-md mx-auto">
             <div>
+                {{#if message}}
+                    <p id="error-message" style="background: rgb(255, 163, 163);"
+                       class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+                {{/if}}
                 <p
                         class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
@@ -85,6 +89,7 @@
             <input
                     type="number"
                     id="viandas"
+                    name="viandas"
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Cantidad de viandas"
@@ -97,13 +102,17 @@
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >Motivo de la distribución</label
             >
-            <input
-                    type="text"
+            <select
                     id="motivo-distribucion"
+                    name="motivo"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Motivo de la distribución"
                     required
-            />
+            >
+                {{#each motivos}}
+                    <option value={{this.id}}>{{this.desc}}</option>
+                {{/each}}
+
+            </select>
 
             <label
                     for="default-datepicker"
@@ -116,6 +125,7 @@
                     datepicker-autohide
                     datepicker-format="dd/mm/yyyy"
                     id="default-datepicker"
+                    name="fecha"
                     type="text"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Fecha de distribución"
