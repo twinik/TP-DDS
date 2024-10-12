@@ -9,6 +9,7 @@ public class MailDuplicadoHandler implements IHandler {
   @Override
   public void setHandle(Javalin app) {
     app.exception(EmailDuplicadoException.class, (e, context) -> {
+      e.printStackTrace();
       context.redirect(context.path() + "?message=" + e.getMessage());
     });
   }

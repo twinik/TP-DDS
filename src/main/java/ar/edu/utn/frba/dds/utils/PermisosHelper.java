@@ -63,6 +63,8 @@ public class PermisosHelper {
         case "/admin/tarjeta/nuevo" -> this.buscarPorNombres("alta-cod-tarjeta");
         case "/colaborar/ofrecer-producto" -> this.buscarPorNombres("ofrecer-productos");
         case "/colaborar/donar-dinero" -> this.buscarPorNombres("donar-dinero");
+        case "/colaborar/donar-vianda" -> this.buscarPorNombres("donar-viandas");
+        case "/colaborar/distribuir-viandas" -> this.buscarPorNombres("redistribuir-viandas");
         case "/colaborar/colocar-heladera" -> this.buscarPorNombres("colocar-heladeras");
         case "/productos" -> this.buscarPorNombres("ofrecer-productos");
         case "/colaborar/registrar-persona-vulnerable" -> this.buscarPorNombres("alta-vulnerable");

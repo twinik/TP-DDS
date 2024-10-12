@@ -11,6 +11,7 @@ public class FormularioNoCompletadoHandler implements IHandler {
   @Override
   public void setHandle(Javalin app) {
     app.exception(FormularioNoCompletadoException.class, (e, context) -> {
+      e.printStackTrace();
       context.redirect("/responder-formulario/colaborador/" + e.getIdColaborador());
     });
   }

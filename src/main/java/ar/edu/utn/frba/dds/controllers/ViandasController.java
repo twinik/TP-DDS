@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.services.ViandasService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
+import java.util.HashMap;
+import java.util.Map;
 
 @AllArgsConstructor
 public class ViandasController implements ICrudViewsHandler {
@@ -22,13 +24,18 @@ public class ViandasController implements ICrudViewsHandler {
 
   @Override
   public void create(Context context) {
-    context.render("/app/colaboraciones/donacion-vianda.hbs");
+    Map<String, Object> model = new HashMap<>();
+    model.put("message",context.queryParam("message"));
+    context.render("/app/colaboraciones/donacion-vianda.hbs",model);
   }
 
   @Override
   public void save(Context context) {
     ViandaDto dto = ViandaDto.of(context);
-
+    this.viandasService.crearVianda(dto);
+    Map<String, Object> model = new HashMap<>();
+    model.put("message", "Su solcitud de donacion ha sido registrada con eéxito, esperamos su donación con ansias");
+    context.render("/app/success.hbs", model);
   }
 
   @Override

@@ -9,6 +9,7 @@ public class RecursoInexistenteHandler implements IHandler {
     @Override
     public void setHandle(Javalin app) {
         app.exception(RecursoInexistenteException.class, (e, context) -> {
+            e.printStackTrace();
             Map<String, String> model = new HashMap<>();
             model.put("message", e.getMessage());
             context.status(404);

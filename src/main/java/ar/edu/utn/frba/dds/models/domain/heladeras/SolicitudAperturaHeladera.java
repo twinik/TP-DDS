@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.brokers.BrokerPublisher;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
@@ -12,15 +11,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Registra una solicud de apertura por parte del colaborador
@@ -51,7 +51,7 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     private RedistribucionViandas redistribucionViandas;
 
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
-    @JoinColumn(name = "solicitud_id",referencedColumnName = "id")
+    @JoinColumn(name = "ingreso_vianda_id",referencedColumnName = "id")
     private IngresoVianda viandas;
 
     public void agregarViandas(Vianda ... viandas){

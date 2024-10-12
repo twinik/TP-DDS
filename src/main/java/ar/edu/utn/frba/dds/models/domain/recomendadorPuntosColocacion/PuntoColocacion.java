@@ -1,15 +1,14 @@
 package ar.edu.utn.frba.dds.models.domain.recomendadorPuntosColocacion;
 
+import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.ArrayList;
 
-/**
- * Representa el listado de ubicaciones.
- */
 @Getter
 @Setter
-public class ListadoUbicaciones {
-    ArrayList<PuntoColocacion> listadoUbicaciones;
+public class PuntoColocacion {
+  private String nombre;
+  private Ubicacion ubicacion;
+  private Direccion direccion;
 }

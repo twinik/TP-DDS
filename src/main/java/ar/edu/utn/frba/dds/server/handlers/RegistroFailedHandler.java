@@ -8,6 +8,7 @@ public class RegistroFailedHandler implements IHandler {
   @Override
   public void setHandle(Javalin app) {
     app.exception(RegistroFailedException.class, (e, context) -> {
+      e.printStackTrace();
       context.redirect(context.path() + "?message=" + e.getMessage());
     });
   }

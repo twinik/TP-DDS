@@ -19,6 +19,7 @@ import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReporteFallasHeladera;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.PosibleCodigoTarjeta;
+import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.models.domain.utils.*;
@@ -131,6 +132,9 @@ public class Initializer {
     colaboradoresRepository.guardar(c1);
     colaboradoresRepository.guardar(sa);
     colaboradoresRepository.guardar(ong);
+
+    TarjetaColaborador tarjetita = TarjetaColaborador.of(c1,GeneradorDeCodigosHelper.generarAlfanumericoUnico(11));
+    ServiceLocator.get(ITarjetasColaboradorRepository.class).guardar(tarjetita);
 
     ModeloHeladera modelo1 = new ModeloHeladera("philips-500", 3, 7);
     ModeloHeladera modelo2 = new ModeloHeladera("filgo-AX3", 2, 8);

@@ -19,6 +19,7 @@ public class BrokerSubscriber {
             connOpts.setAutomaticReconnect(true);
             connOpts.setCleanSession(true);
             connOpts.setKeepAliveInterval(0);
+            connOpts.setConnectionTimeout(300);
 
             sampleClient.setCallback(new MqttCallback() {
                 @Override

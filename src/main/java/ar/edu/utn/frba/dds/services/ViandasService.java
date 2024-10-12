@@ -25,7 +25,7 @@ public class ViandasService {
     if (vianda.getFechaCaducidad().isBefore(LocalDate.now()))
       throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
     vianda.setFechaDonacion(DateHelper.fechaFromString(dto.getFechaDonacion(), "dd/MM/yyyy"));
-    if (vianda.getFechaDonacion().isBefore(LocalDate.now()))
+    if (vianda.getFechaDonacion().isBefore(LocalDate.now().minusDays(1)))
       throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
     vianda.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
     vianda.setCalorias(dto.getCalorias());

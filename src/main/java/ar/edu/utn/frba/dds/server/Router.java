@@ -54,6 +54,7 @@ public class Router {
     app.post("/colaborar/registrar-persona-vulnerable/{id}/registrar-tutorados", ServiceLocator.get(AltaPersonaVulnerableController.class)::saveTutorados);
 
     app.get("/colaborar/donar-vianda", ServiceLocator.get(ViandasController.class)::create);
+    app.post("/colaborar/donar-vianda", ServiceLocator.get(ViandasController.class)::save);
 
     app.get("/colaborar/distribuir-viandas", ctx -> ctx.render("/app/colaboraciones/distribucion-vianda.hbs"));
 

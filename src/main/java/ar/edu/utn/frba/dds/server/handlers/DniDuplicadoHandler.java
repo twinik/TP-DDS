@@ -8,6 +8,7 @@ public class DniDuplicadoHandler implements IHandler{
     @Override
     public void setHandle(Javalin app){
         app.exception(DniDuplicadoException.class, (e, context) -> {
+            e.printStackTrace();
             context.redirect(context.path() + "?message=" + e.getMessage());
         });
     }

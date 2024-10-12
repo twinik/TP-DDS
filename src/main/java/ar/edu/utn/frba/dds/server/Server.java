@@ -28,17 +28,24 @@ public class Server {
   public static void init() {
     if (app == null) {
       // TODO: Revisar properties
+
       Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
       app = Javalin.create(config()).start(port);
       AppMiddlewares.applyMiddlewares(app);
       AppHandlers.applyHandlers(app);
       Router.init(app);
       // TODO: esto va aca ???
-      try {
-        AperturaHeladeraBroker.suscribirseAAperturasHeladeras();
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
+
+      Thread listenerBrokerThread = new Thread(() ->{
+          try {
+            AperturaHeladeraBroker.suscribirseAAperturasHeladeras();
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+      });
+
+      listenerBrokerThread.start();
+
       if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
         Initializer.init();
       }
