@@ -34,10 +34,22 @@ body {
 
 .boton {
     background-color: #3a4b6b !important;
+    color: #eee;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .boton:hover {
-    background-color: #202a3d;
+    background-color: #202a3d !important;
+}
+
+.boton-canje {
+    background-color: #3a4b6b !important;
+}
+
+.boton-canje:hover {
+    background-color: #202a3d !important;
 }
 
 .title1 {

@@ -204,7 +204,7 @@ public class ServiceLocator {
       else if (clase.equals(UsuarioService.class))
         add(clase, new UsuarioService(get(IUsuariosRepository.class), get(ColaboradoresService.class)));
       else if (clase.equals(ViandasService.class))
-        add(clase, new ViandasService(get(IViandasRepository.class), get(IDonacionesViandaRepository.class), get(HeladerasService.class), get(SolicitudAperturaHeladeraService.class), get(ColaboradoresService.class)));
+        add(clase, new ViandasService(get(IViandasRepository.class), get(HeladerasService.class), get(SolicitudAperturaHeladeraService.class), get(ColaboradoresService.class)));
 
         // CONTROLADORES
       else if (clase.equals(AlertasController.class))
