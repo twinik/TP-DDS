@@ -72,6 +72,7 @@ public class Router {
         // HELADERAS
         app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
         app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
+        app.get("/heladeras/donar",ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaDonar()));
 
         app.get("/heladeras/puntos-donacion", ctx -> ctx.render("/app/heladeras/puntosdonacion.hbs"));
         app.get("/heladeras/recibir-puntos", ServiceLocator.get(RecomendacionesController.class)::getDonacionesParaMapa);

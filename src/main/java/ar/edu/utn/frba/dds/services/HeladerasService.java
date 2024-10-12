@@ -23,6 +23,11 @@ public class HeladerasService {
         return resultado;
     }
 
+    public List<HeladeraMapaDto> getHeladerasParaDonar(){
+        List<Heladera> heladeras = repoHeladeras.buscarTodos().stream().filter(Heladera::isHeladeraActiva).toList();
+        return heladeras.stream().map(HeladeraMapaDto::fromHeladera).toList();
+    }
+
     public HeladeraDto getHeladeraDto(String id) {
         Optional<Heladera> h = repoHeladeras.buscar(id);
         if (h.isEmpty()) {

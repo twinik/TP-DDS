@@ -22,6 +22,30 @@ async function fetchHeladeras() {
     }
 }
 
+async function fetchHeladerasDonaciones() {
+    try {
+        const response = await fetch('/heladeras/donar');
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        const heladerasArray = await response.json();
+        return heladerasArray;
+        //
+        // console.log(heladerasArray)
+        //
+        // return heladerasArray.map(h => {
+        //     if (h.disabled) {
+        //         return {...h, extraContent: inhabilitadaContent}
+        //     } else {
+        //         return h;
+        //     }
+        // });
+    } catch (error) {
+        console.error('Failed to fetch heladeras:', error);
+    }
+}
+
 async function fetchDonaciones(provincia, localidad) {
     try {
         const response = await fetch(`/heladeras/recibir-puntos?provincia=${provincia}&localidad=${localidad}`);
