@@ -6,7 +6,6 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
 import ar.edu.utn.frba.dds.models.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.models.domain.heladeras.AperturaHeladera;
-import ar.edu.utn.frba.dds.models.messageFactory.MensajeExcepcionDireccionTarjetaFactory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,7 +45,8 @@ public class TarjetaColaborador extends EntidadPersistente {
     private List<AperturaHeladera> usos = new ArrayList<>();
 
     public TarjetaColaborador(String codigo, Colaborador colaborador, boolean activa, LocalDate fechaAlta, LocalDate fechaBaja, List<AperturaHeladera> usos) {
-        if(!GeneradorDeCodigosHelper.esCodigoValido(codigo, 11)) throw new CodigoInvalidoException("El codigo no es valido");
+        if (!GeneradorDeCodigosHelper.esCodigoValido(codigo, 11))
+            throw new CodigoInvalidoException("El codigo no es valido");
         this.codigo = codigo;
         this.colaborador = colaborador;
         this.tarjetaActiva = activa;

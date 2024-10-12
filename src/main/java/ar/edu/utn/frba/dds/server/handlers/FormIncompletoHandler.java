@@ -5,12 +5,12 @@ import io.javalin.Javalin;
 
 public class FormIncompletoHandler implements IHandler {
 
-  @Override
-  public void setHandle(Javalin app) {
-    app.exception(FormIncompletoException.class, (e, context) -> {
-      e.printStackTrace();
-      context.redirect(context.path() + "?message=" + e.getMessage());
-    });
-  }
+    @Override
+    public void setHandle(Javalin app) {
+        app.exception(FormIncompletoException.class, (e, context) -> {
+            e.printStackTrace();
+            context.redirect(context.path() + "?message=" + e.getMessage());
+        });
+    }
 
 }

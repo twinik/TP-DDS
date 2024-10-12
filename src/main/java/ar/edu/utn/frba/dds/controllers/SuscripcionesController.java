@@ -15,54 +15,54 @@ import java.util.Map;
 @AllArgsConstructor
 public class SuscripcionesController implements ICrudViewsHandler {
 
-  private SuscripcionesService suscripcionesService;
-  private HeladerasService heladerasService;
+    private SuscripcionesService suscripcionesService;
+    private HeladerasService heladerasService;
 
-  @Override
-  public void index(Context context) {
+    @Override
+    public void index(Context context) {
 
-  }
+    }
 
-  @Override
-  public void show(Context context) {
+    @Override
+    public void show(Context context) {
 
-  }
+    }
 
-  @Override
-  public void create(Context context) {
-    String heladeraId = context.pathParam("id");
+    @Override
+    public void create(Context context) {
+        String heladeraId = context.pathParam("id");
 
-    HeladeraDto h = this.heladerasService.getHeladeraDto(heladeraId);
+        HeladeraDto h = this.heladerasService.getHeladeraDto(heladeraId);
 
-    Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = new HashMap<>();
 
-    model.put("heladera", h);
-    context.render("/app/heladeras/suscripcion.hbs", model);
-  }
+        model.put("heladera", h);
+        context.render("/app/heladeras/suscripcion.hbs", model);
+    }
 
-  @Override
-  public void save(Context context) {
-    SuscripcionDto dto = SuscripcionDto.fromContext(context);
-    Suscripcion nuevaSuscripcion = this.suscripcionesService.guardarSuscripcion(dto);
-    Heladera h = this.heladerasService.obtenerHeladera(context.pathParam("id"));
-    this.heladerasService.agregarSuscripcionAHeladera(h, nuevaSuscripcion);
-    Map<String, Object> model = new HashMap<>();
-    model.put("message", "Tu suscripcion fue registrada con exito");
-    context.render("/app/success.hbs", model);
-  }
+    @Override
+    public void save(Context context) {
+        SuscripcionDto dto = SuscripcionDto.fromContext(context);
+        Suscripcion nuevaSuscripcion = this.suscripcionesService.guardarSuscripcion(dto);
+        Heladera h = this.heladerasService.obtenerHeladera(context.pathParam("id"));
+        this.heladerasService.agregarSuscripcionAHeladera(h, nuevaSuscripcion);
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", "Tu suscripcion fue registrada con exito");
+        context.render("/app/success.hbs", model);
+    }
 
-  @Override
-  public void edit(Context context) {
+    @Override
+    public void edit(Context context) {
 
-  }
+    }
 
-  @Override
-  public void update(Context context) {
+    @Override
+    public void update(Context context) {
 
-  }
+    }
 
-  @Override
-  public void delete(Context context) {
+    @Override
+    public void delete(Context context) {
 
-  }
+    }
 }

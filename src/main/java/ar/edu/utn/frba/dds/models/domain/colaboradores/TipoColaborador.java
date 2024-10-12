@@ -28,11 +28,11 @@ public class TipoColaborador extends EntidadPersistente {
             joinColumns = @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id"))
     private List<FormaColaboracion> formasPosiblesColaboracion = new ArrayList<>();
 
-    public boolean tenesFormaColaboracion(String nombreInterno){
+    public boolean tenesFormaColaboracion(String nombreInterno) {
         return this.formasPosiblesColaboracion.stream().anyMatch(forma -> forma.getNombreInterno().equals(nombreInterno));
     }
 
-    public void agregarFormasColaboracion(List<FormaColaboracion> formas){
+    public void agregarFormasColaboracion(List<FormaColaboracion> formas) {
         this.formasPosiblesColaboracion.addAll(formas);
     }
 

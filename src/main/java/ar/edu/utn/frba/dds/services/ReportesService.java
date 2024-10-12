@@ -5,5 +5,5 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class ReportesService {
-  private IReportesRepository repo;
+    private IReportesRepository repo;
 }

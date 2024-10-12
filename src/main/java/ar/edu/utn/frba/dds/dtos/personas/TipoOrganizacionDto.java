@@ -8,9 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class TipoOrganizacionDto {
-  private String valor;
+    private String valor;
 
-  public static TipoOrganizacionDto fromTipoOrganizacion(TipoPersonaJuridica tipo){
-    return new TipoOrganizacionDto(tipo.name());
-  }
+    public static TipoOrganizacionDto fromTipoOrganizacion(TipoPersonaJuridica tipo) {
+        return new TipoOrganizacionDto(tipo.name());
+    }
 }

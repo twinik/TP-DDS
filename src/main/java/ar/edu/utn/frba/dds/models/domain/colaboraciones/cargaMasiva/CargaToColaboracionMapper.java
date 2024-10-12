@@ -14,38 +14,38 @@ import java.time.LocalDateTime;
  */
 public class CargaToColaboracionMapper {
 
-  /**
-   * colaboracionFromCarga mapea una carga a una colaboracion.
-   */
-  public static IPuntajeCalculable colaboracionFromCarga(CargaColaboracion carga, Colaborador colaborador) {
+    /**
+     * colaboracionFromCarga mapea una carga a una colaboracion.
+     */
+    public static IPuntajeCalculable colaboracionFromCarga(CargaColaboracion carga, Colaborador colaborador) {
 
-    Gson gson = new GsonBuilder()
-        .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
-        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
-        .create();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
+                .create();
 
-    switch (carga.getFormaColaboracion()) {
-      case "DONACION_DINERO" -> {
-        DonacionDinero c = gson.fromJson(carga.getJsonColaboracion(), DonacionDinero.class);
-        c.setColaborador(colaborador);
-        return c;
-      }
-      case "DONACION_VIANDA" -> {
-        DonacionVianda c = gson.fromJson(carga.getJsonColaboracion(), DonacionVianda.class);
-        c.setColaborador(colaborador);
-        return c;
-      }
-      case "REDISTRIBUCION_VIANDA" -> {
-        RedistribucionViandas c = gson.fromJson(carga.getJsonColaboracion(), RedistribucionViandas.class);
-        c.setColaborador(colaborador);
-        return c;
-      }
-      case "REGISTRO_PERSONA" -> {
-        AltaPersonaVulnerable c = gson.fromJson(carga.getJsonColaboracion(), AltaPersonaVulnerable.class);
-        c.setColaborador(colaborador);
-        return c;
-      }
-      default -> throw new RuntimeException("Forma de Colaboracion Invalida");
+        switch (carga.getFormaColaboracion()) {
+            case "DONACION_DINERO" -> {
+                DonacionDinero c = gson.fromJson(carga.getJsonColaboracion(), DonacionDinero.class);
+                c.setColaborador(colaborador);
+                return c;
+            }
+            case "DONACION_VIANDA" -> {
+                DonacionVianda c = gson.fromJson(carga.getJsonColaboracion(), DonacionVianda.class);
+                c.setColaborador(colaborador);
+                return c;
+            }
+            case "REDISTRIBUCION_VIANDA" -> {
+                RedistribucionViandas c = gson.fromJson(carga.getJsonColaboracion(), RedistribucionViandas.class);
+                c.setColaborador(colaborador);
+                return c;
+            }
+            case "REGISTRO_PERSONA" -> {
+                AltaPersonaVulnerable c = gson.fromJson(carga.getJsonColaboracion(), AltaPersonaVulnerable.class);
+                c.setColaborador(colaborador);
+                return c;
+            }
+            default -> throw new RuntimeException("Forma de Colaboracion Invalida");
+        }
     }
-  }
 }

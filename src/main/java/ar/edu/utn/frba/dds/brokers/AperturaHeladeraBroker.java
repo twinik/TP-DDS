@@ -10,19 +10,13 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.IngresoVianda;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
-import ar.edu.utn.frba.dds.models.repositories.IAperturasHeladeraRepository;
-import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
-import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
-import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepository;
-import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
-import ar.edu.utn.frba.dds.models.repositories.ITarjetasRepository;
+import ar.edu.utn.frba.dds.models.repositories.*;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.DonacionesViandaService;
 import ar.edu.utn.frba.dds.services.RedistribucionViandaService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * Clase que se encarga de suscribirse al broker de aperturas de heladeras.
@@ -56,7 +50,7 @@ public class AperturaHeladeraBroker {
 
     public static void main(String[] args) {
         Colaborador c = new Colaborador();
-        c.setUsuario(new Usuario("dfmaskdmf","fladsmlfmds"));
+        c.setUsuario(new Usuario("dfmaskdmf", "fladsmlfmds"));
         c.setDireccion(new Direccion("hola", 534, 1, "434"));
         IHeladerasRepository heladerasRepository = ServiceLocator.get(IHeladerasRepository.class);
         Heladera heladera = new Heladera(LocalDate.now());
@@ -68,7 +62,8 @@ public class AperturaHeladeraBroker {
         TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c, GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), LocalDate.now());
         ///tarjetaColaborador.setId(3L);
         tarjetasColaboradorRepository.guardar(tarjetaColaborador);
-        ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = ServiceLocator.get(ISolicitudesAperturaHeladeraRepository.class);SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(c, "un motivo", LocalDateTime.now(), heladera, new RedistribucionViandas(),new IngresoVianda());
+        ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = ServiceLocator.get(ISolicitudesAperturaHeladeraRepository.class);
+        SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(c, "un motivo", LocalDateTime.now(), heladera, new RedistribucionViandas(), new IngresoVianda());
         solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
         try {
             suscribirseAAperturasHeladeras();

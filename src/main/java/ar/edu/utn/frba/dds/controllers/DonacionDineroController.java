@@ -15,49 +15,49 @@ import java.util.Map;
 @AllArgsConstructor
 public class DonacionDineroController implements ICrudViewsHandler {
 
-  private DonacionDineroService donacionDineroService;
+    private DonacionDineroService donacionDineroService;
 
-  @Override
-  public void index(Context context) {
+    @Override
+    public void index(Context context) {
 
-  }
-
-  @Override
-  public void show(Context context) {
-
-  }
-
-  @Override
-  public void create(Context context) {
-    Map<String, Object> model = new HashMap<>();
-    model.put("frecuenciasDonacion", Arrays.stream(FrecuenciaDonacion.values()).map(FrecuenciaDonacionDineroDto::of).toList());
-    context.render("/app/colaboraciones/donacion-dinero.hbs", model);
-  }
-
-  @Override
-  public void save(Context context) {
-    DonacionDineroInputDto dto = DonacionDineroInputDto.of(context);
-    try {
-      this.donacionDineroService.crearDonacionDinero(dto);
-    } catch (FormIncompletoException e) {
-      // TODO: Mostrar pop up error ?
     }
-    //TODO: mostrar cartel de creado con exito
-    context.redirect("/colaborar");
-  }
 
-  @Override
-  public void edit(Context context) {
+    @Override
+    public void show(Context context) {
 
-  }
+    }
 
-  @Override
-  public void update(Context context) {
+    @Override
+    public void create(Context context) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("frecuenciasDonacion", Arrays.stream(FrecuenciaDonacion.values()).map(FrecuenciaDonacionDineroDto::of).toList());
+        context.render("/app/colaboraciones/donacion-dinero.hbs", model);
+    }
 
-  }
+    @Override
+    public void save(Context context) {
+        DonacionDineroInputDto dto = DonacionDineroInputDto.of(context);
+        try {
+            this.donacionDineroService.crearDonacionDinero(dto);
+        } catch (FormIncompletoException e) {
+            // TODO: Mostrar pop up error ?
+        }
+        //TODO: mostrar cartel de creado con exito
+        context.redirect("/colaborar");
+    }
 
-  @Override
-  public void delete(Context context) {
+    @Override
+    public void edit(Context context) {
 
-  }
+    }
+
+    @Override
+    public void update(Context context) {
+
+    }
+
+    @Override
+    public void delete(Context context) {
+
+    }
 }

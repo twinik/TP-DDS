@@ -19,6 +19,7 @@ public interface IDonacionesViandaRepository {
     Map<String, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha);
 
     void guardar(DonacionVianda donacionVianda);
+
     void guardar(List<DonacionVianda> donacionesVianda);
 
     void actualizar(DonacionVianda donacionVianda);

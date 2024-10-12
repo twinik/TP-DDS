@@ -17,25 +17,26 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class TecnicosService {
-  private ITecnicosRepository tecnicosRepository;
-  private MedioContactoService medioContactoService;
+    private ITecnicosRepository tecnicosRepository;
+    private MedioContactoService medioContactoService;
 
-  public void crearTecnico(TecnicoDto dto) {
-    Tecnico tecnico = new Tecnico();
-    tecnico.setNombre(dto.getNombre());
-    tecnico.setApellido(dto.getApellido());
-    tecnico.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
-    tecnico.setNroDocumento(dto.getNroDocumento());
-    this.validarDocumento(tecnico.getTipoDocumento(),tecnico.getNroDocumento());
-    tecnico.setAreaDeCobertura(new AreaDeCobertura(new Ubicacion(dto.getAreaCoberturaDto().getLatitud(), dto.getAreaCoberturaDto().getLongitud()), dto.getAreaCoberturaDto().getRadio()));
-    tecnico.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMedioContactoDtoList()));
+    public void crearTecnico(TecnicoDto dto) {
+        Tecnico tecnico = new Tecnico();
+        tecnico.setNombre(dto.getNombre());
+        tecnico.setApellido(dto.getApellido());
+        tecnico.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
+        tecnico.setNroDocumento(dto.getNroDocumento());
+        this.validarDocumento(tecnico.getTipoDocumento(), tecnico.getNroDocumento());
+        tecnico.setAreaDeCobertura(new AreaDeCobertura(new Ubicacion(dto.getAreaCoberturaDto().getLatitud(), dto.getAreaCoberturaDto().getLongitud()), dto.getAreaCoberturaDto().getRadio()));
+        tecnico.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMedioContactoDtoList()));
 
-    this.tecnicosRepository.guardar(tecnico);
-  }
+        this.tecnicosRepository.guardar(tecnico);
+    }
 
-  private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento){
-    if(!DniHelper.esValido(nroDocumento)) throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
-    Optional<Tecnico> t = tecnicosRepository.buscar(tipoDocumento,nroDocumento);
-    if(t.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
-  }
+    private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento) {
+        if (!DniHelper.esValido(nroDocumento))
+            throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
+        Optional<Tecnico> t = tecnicosRepository.buscar(tipoDocumento, nroDocumento);
+        if (t.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
+    }
 }

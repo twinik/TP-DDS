@@ -13,6 +13,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class PosiblesCodigosTarjetasController implements ICrudViewsHandler {
     private PosiblesCodigosService posiblesCodigosService;
+
     @Override
     public void index(Context context) {
 
@@ -25,9 +26,9 @@ public class PosiblesCodigosTarjetasController implements ICrudViewsHandler {
 
     @Override
     public void create(Context context) {
-        Map<String,Object> model = new HashMap<>();
-        model.put("message",context.queryParam("message"));
-        context.render("/app/admin/alta-tarjetas.hbs",model);
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", context.queryParam("message"));
+        context.render("/app/admin/alta-tarjetas.hbs", model);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class PosiblesCodigosTarjetasController implements ICrudViewsHandler {
         this.posiblesCodigosService.crearPosibleCodigo(dto);
         Map<String, Object> model = new HashMap<>();
         model.put("message", "La tarjeta fue registrada con exito");
-        context.render("/app/success.hbs",model);
+        context.render("/app/success.hbs", model);
     }
 
     @Override

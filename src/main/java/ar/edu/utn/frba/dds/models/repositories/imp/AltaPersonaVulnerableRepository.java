@@ -13,6 +13,25 @@ import java.util.List;
 import java.util.Optional;
 
 public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRepository, WithSimplePersistenceUnit {
+    public static void main(String[] args) {
+        Colaborador c = new Colaborador();
+        c.setUsuario(new Usuario("dkfnadkf", "dknfajksdnf"));
+        c.setNombre("jaun");
+        ColaboradoresRepository repo = new ColaboradoresRepository();
+        repo.guardar(c);
+        AltaPersonaVulnerable a = new AltaPersonaVulnerable();
+        a.setColaborador(c);
+        PersonaVulnerable n = new PersonaVulnerable();
+        n.setNombre("dfdf");
+        n.setApellido("dkfmkadf");
+        n.setColaborador(c);
+        a.setPersona(n);
+        a.setTarjeta(Tarjeta.of("aaaaaaaaaaa", 0, new FrecuenciaDiaria(), n));
+        a.setFecha(LocalDate.now());
+        AltaPersonaVulnerableRepository r = new AltaPersonaVulnerableRepository();
+        r.guardar(a);
+    }
+
     @Override
     public Optional<AltaPersonaVulnerable> buscar(String id) {
         return Optional.ofNullable(entityManager().find(AltaPersonaVulnerable.class, id));
@@ -50,25 +69,6 @@ public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRe
             altaPersonaVulnerable.borrarLogico();
             entityManager().merge(altaPersonaVulnerable);
         });
-    }
-
-    public static void main(String[] args) {
-        Colaborador c = new Colaborador();
-        c.setUsuario(new Usuario("dkfnadkf","dknfajksdnf"));
-        c.setNombre("jaun");
-        ColaboradoresRepository repo = new ColaboradoresRepository();
-        repo.guardar(c);
-        AltaPersonaVulnerable a = new AltaPersonaVulnerable();
-        a.setColaborador(c);
-        PersonaVulnerable n = new PersonaVulnerable();
-        n.setNombre("dfdf");
-        n.setApellido("dkfmkadf");
-        n.setColaborador(c);
-        a.setPersona(n);
-        a.setTarjeta(Tarjeta.of("aaaaaaaaaaa",0,new FrecuenciaDiaria(), n));
-        a.setFecha(LocalDate.now());
-        AltaPersonaVulnerableRepository r = new AltaPersonaVulnerableRepository();
-        r.guardar(a);
     }
 
 }

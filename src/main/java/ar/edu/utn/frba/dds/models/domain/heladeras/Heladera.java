@@ -26,124 +26,124 @@ import java.util.List;
 @NoArgsConstructor
 public class Heladera extends EntidadPersistente {
 
-  @Embedded
-  private Ubicacion ubicacion;
+    @Embedded
+    private Ubicacion ubicacion;
 
-  @Embedded
-  private Direccion direccion;
+    @Embedded
+    private Direccion direccion;
 
-  @Column(name = "heladera_activa")
-  private boolean heladeraActiva = true;
+    @Column(name = "heladera_activa")
+    private boolean heladeraActiva = true;
 
-  @Column(name = "nombre", unique = true)
-  private String nombre;
+    @Column(name = "nombre", unique = true)
+    private String nombre;
 
-  @Column(name = "capacidad_viandas")
-  private Integer capacidadViandas;
+    @Column(name = "capacidad_viandas")
+    private Integer capacidadViandas;
 
-  @Column(name = "fecha_puesta_funcionamiento", columnDefinition = "DATE")
-  private LocalDate fechaPuestaFuncionamiento;
+    @Column(name = "fecha_puesta_funcionamiento", columnDefinition = "DATE")
+    private LocalDate fechaPuestaFuncionamiento;
 
-  @Column(name = "viandas")
-  private Integer viandas;
+    @Column(name = "viandas")
+    private Integer viandas;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "modelo_id", referencedColumnName = "id")
-  private ModeloHeladera modelo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "modelo_id", referencedColumnName = "id")
+    private ModeloHeladera modelo;
 
-  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-  private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    private List<RegistroTemperatura> registroTemperaturas = new ArrayList<>();
 
-  @OneToMany(mappedBy = "heladera", fetch = FetchType.LAZY)
-  private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
+    @OneToMany(mappedBy = "heladera", fetch = FetchType.LAZY)
+    private List<SolicitudAperturaHeladera> solicitudesApertura = new ArrayList<>();
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-  private List<Suscripcion> suscripciones = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    private List<Suscripcion> suscripciones = new ArrayList<>();
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "cercania_heladera", inverseJoinColumns = @JoinColumn(name = "heladera2_id", referencedColumnName = "id"),
-      joinColumns = @JoinColumn(name = "heldera1_id", referencedColumnName = "id"))
-  private List<Heladera> heladerasCercanas = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "cercania_heladera", inverseJoinColumns = @JoinColumn(name = "heladera2_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "heldera1_id", referencedColumnName = "id"))
+    private List<Heladera> heladerasCercanas = new ArrayList<>();
 
-  public Heladera(LocalDate fecha) {
-    this.fechaPuestaFuncionamiento = fecha;
-  }
+    public Heladera(LocalDate fecha) {
+        this.fechaPuestaFuncionamiento = fecha;
+    }
 
-  public Heladera(Ubicacion ubicacion, Direccion direccion, String nombre, Integer capacidadViandas,
-                  LocalDate fechaPuestaFuncionamiento, Integer viandas,
-                  ModeloHeladera modelo) {
-    this.ubicacion = ubicacion;
-    this.direccion = direccion;
-    this.nombre = nombre;
-    this.capacidadViandas = capacidadViandas;
-    this.fechaPuestaFuncionamiento = fechaPuestaFuncionamiento;
-    this.viandas = viandas;
-    this.modelo = modelo;
-  }
+    public Heladera(Ubicacion ubicacion, Direccion direccion, String nombre, Integer capacidadViandas,
+                    LocalDate fechaPuestaFuncionamiento, Integer viandas,
+                    ModeloHeladera modelo) {
+        this.ubicacion = ubicacion;
+        this.direccion = direccion;
+        this.nombre = nombre;
+        this.capacidadViandas = capacidadViandas;
+        this.fechaPuestaFuncionamiento = fechaPuestaFuncionamiento;
+        this.viandas = viandas;
+        this.modelo = modelo;
+    }
 
-  public void agregarVianda() {
-    this.viandas++;
-    avisarObservers();
-  }
+    public void agregarVianda() {
+        this.viandas++;
+        avisarObservers();
+    }
 
-  public void agregarVianda(int cantidad) {
-    this.viandas += cantidad;
-    avisarObservers();
-  }
+    public void agregarVianda(int cantidad) {
+        this.viandas += cantidad;
+        avisarObservers();
+    }
 
-  public void quitarVianda() {
-    this.viandas--;
-    avisarObservers();
-  }
+    public void quitarVianda() {
+        this.viandas--;
+        avisarObservers();
+    }
 
-  // TODO cuando llegue el momento ver como funciona esto
-  public void agregarHeladeraCercana(Heladera... heladeras) {
-    this.heladerasCercanas.addAll(Arrays.stream(heladeras).toList());
-  }
-
-
-  public void agregarSuscripcion(Suscripcion... suscripciones) {
-    this.suscripciones.addAll(Arrays.stream(suscripciones).toList());
-  }
-
-  public void agregarSoliApertura(SolicitudAperturaHeladera soli) {
-    this.solicitudesApertura.add(soli);
-    soli.setHeladera(this);
-  }
-
-  /**
-   * Metodo que registra la temperatura de la heladera.
-   */
-  public void registrarTemperatura(float temperatura) {
-    registroTemperaturas.add(new RegistroTemperatura(LocalDateTime.now(), temperatura));
-  }
-
-  public boolean temperaturaEsAdecuada() {
-    Float temp = this.registroTemperaturas.get(registroTemperaturas.size() - 1).temperaturaRegistrada;
-    return (temp < this.modelo.getTempMax() && temp > this.modelo.getTempMin());
-  }
-
-  public float getUltimaTemperaturaRegistrada() {
-    // asumo que van en orden la lista, si no hay que comparar las fechas
-    return this.registroTemperaturas.get(this.registroTemperaturas.size() - 1).temperaturaRegistrada;
-  }
-
-  public void inhabilitar() {
-    this.heladeraActiva = false;
-    avisarObservers();
-  }
-
-  public int getCuposLibresViandas() {
-    return this.capacidadViandas - this.viandas;
-  }
-
-  //un metodo llamado heladerasCercanas que devuelve una lista de heladeras cercanas a la heladera pasado por parametro
+    // TODO cuando llegue el momento ver como funciona esto
+    public void agregarHeladeraCercana(Heladera... heladeras) {
+        this.heladerasCercanas.addAll(Arrays.stream(heladeras).toList());
+    }
 
 
-  private void avisarObservers() {
-    this.suscripciones.stream().parallel().forEach(s -> s.avisarEvento(this));
-  }
+    public void agregarSuscripcion(Suscripcion... suscripciones) {
+        this.suscripciones.addAll(Arrays.stream(suscripciones).toList());
+    }
+
+    public void agregarSoliApertura(SolicitudAperturaHeladera soli) {
+        this.solicitudesApertura.add(soli);
+        soli.setHeladera(this);
+    }
+
+    /**
+     * Metodo que registra la temperatura de la heladera.
+     */
+    public void registrarTemperatura(float temperatura) {
+        registroTemperaturas.add(new RegistroTemperatura(LocalDateTime.now(), temperatura));
+    }
+
+    public boolean temperaturaEsAdecuada() {
+        Float temp = this.registroTemperaturas.get(registroTemperaturas.size() - 1).temperaturaRegistrada;
+        return (temp < this.modelo.getTempMax() && temp > this.modelo.getTempMin());
+    }
+
+    public float getUltimaTemperaturaRegistrada() {
+        // asumo que van en orden la lista, si no hay que comparar las fechas
+        return this.registroTemperaturas.get(this.registroTemperaturas.size() - 1).temperaturaRegistrada;
+    }
+
+    public void inhabilitar() {
+        this.heladeraActiva = false;
+        avisarObservers();
+    }
+
+    public int getCuposLibresViandas() {
+        return this.capacidadViandas - this.viandas;
+    }
+
+    //un metodo llamado heladerasCercanas que devuelve una lista de heladeras cercanas a la heladera pasado por parametro
+
+
+    private void avisarObservers() {
+        this.suscripciones.stream().parallel().forEach(s -> s.avisarEvento(this));
+    }
 
 }

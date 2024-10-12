@@ -5,11 +5,7 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -22,28 +18,27 @@ import java.time.LocalDateTime;
 @Getter
 public class UsoTarjeta extends EntidadPersistente {
 
-  @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
-  private LocalDateTime fechaUso;
+    @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
+    private LocalDateTime fechaUso;
 
-  @ManyToOne
-  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-  private Heladera heladera;
+    @ManyToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    private Heladera heladera;
 
-  private boolean autorizado = true;
+    private boolean autorizado = true;
 
-  private UsoTarjeta(LocalDateTime fechaUso, Heladera heladera) {
-    this.fechaUso = fechaUso;
-    this.heladera = heladera;
-  }
+    private UsoTarjeta(LocalDateTime fechaUso, Heladera heladera) {
+        this.fechaUso = fechaUso;
+        this.heladera = heladera;
+    }
 
-  public static UsoTarjeta of(LocalDateTime fechaUso, Heladera heladera){
-   return new UsoTarjeta(fechaUso,heladera);
- }
+    public static UsoTarjeta of(LocalDateTime fechaUso, Heladera heladera) {
+        return new UsoTarjeta(fechaUso, heladera);
+    }
 
- public void marcarNoAutorizado(){
-    this.autorizado = false;
- }
-
+    public void marcarNoAutorizado() {
+        this.autorizado = false;
+    }
 
 
 }

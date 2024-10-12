@@ -23,84 +23,104 @@ import java.util.Optional;
  */
 public class ColaboradoresRepository implements IColaboradoresRepository, WithSimplePersistenceUnit {
 
-  @Override
-  public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
-    try {
-      Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
-          .setParameter("tipoDocumento", tipoDocumento)
-          .setParameter("documento", documento).getSingleResult();
-      return Optional.ofNullable(c);
-    } catch (NoResultException e) {
-      return Optional.empty();
+    public static void main(String[] args) {
+        Colaborador m = new Colaborador();
+
+        ColaboradoresRepository repo = new ColaboradoresRepository();
+        Usuario u = new Usuario("dkfnkdafs", "dlmfads");
+        Rol r = new Rol();
+        r.setNombre("fasf");
+        Permiso p1 = new Permiso("fodmasofd", "dkasfds");
+        Permiso p2 = new Permiso("lkfmasdlf", "flamflds");
+        ServiceLocator.get(IPermisosRepository.class).guardar(p1, p2);
+
+        r.agregarPermisos(PermisosHelper.getInstance().buscarPorNombres("dkasfds").toArray(new Permiso[0]));
+        ServiceLocator.get(IRolesRepository.class).guardar(r);
+        u.agregarRoles(r);
+        m.setUsuario(u);
+
+
+        DonacionDinero d = new DonacionDinero(m, LocalDate.now(), 100f, FrecuenciaDonacion.ANUAL);
+
+        repo.guardar(m);
+
+        repo.eliminar(m);
+        //System.out.println(hidratado.get().getMotivo());
+        // Optional<Colaborador> colaborador2 = repo.buscar(2L);
+
+        List<Colaborador> lista = repo.buscarTodos();
+
     }
 
-  }
+    @Override
+    public Optional<Colaborador> buscar(TipoDocumento tipoDocumento, String documento) {
+        try {
+            Colaborador c = (Colaborador) entityManager().createQuery("from Colaborador where tipoDocumento=:tipoDocumento and documento=:documento")
+                    .setParameter("tipoDocumento", tipoDocumento)
+                    .setParameter("documento", documento).getSingleResult();
+            return Optional.ofNullable(c);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
 
-  @Override
-  public Optional<Colaborador> buscar(String id) {
-    return Optional.ofNullable(entityManager().find(Colaborador.class, id));
-  }
-
-  @Override
-  public Optional<Colaborador> buscarPorUsuario(String idUsuario) {
-    try {
-      return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo", Colaborador.class)
-          .setParameter("idUsuario", idUsuario)
-          .setParameter("activo", true)
-          .getSingleResult());
-    } catch (NoResultException e) {
-      return Optional.empty();
     }
-  }
 
-  @Override
-  public Optional<Colaborador> buscarPorDni(TipoDocumento tipoDocumento, String documento) {
-    try {
-      return Optional.of(entityManager().createQuery("from Colaborador where documento =:documento and tipoDocumento=:tipo and activo=:activo", Colaborador.class)
-          .setParameter("documento", documento)
-          .setParameter("activo", true)
-          .setParameter("tipo", tipoDocumento)
-          .getSingleResult());
-    } catch (NoResultException e) {
-      return Optional.empty();
+    @Override
+    public Optional<Colaborador> buscar(String id) {
+        return Optional.ofNullable(entityManager().find(Colaborador.class, id));
     }
-  }
 
-  @Override
-  public List<Colaborador> buscarTodos() {
-    return entityManager().createQuery("from Colaborador where activo=:activo and formCompletado=:formCompletado", Colaborador.class).
-        setParameter("activo", true)
-        .setParameter("formCompletado", true)
-        .getResultList();
-  }
+    @Override
+    public Optional<Colaborador> buscarPorUsuario(String idUsuario) {
+        try {
+            return Optional.of(entityManager().createQuery("from Colaborador where usuario.id = :idUsuario and activo=:activo", Colaborador.class)
+                    .setParameter("idUsuario", idUsuario)
+                    .setParameter("activo", true)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
 
-  @Override
-  public void guardar(Colaborador colaborador) {
-    withTransaction(() -> entityManager().persist(colaborador));
-  }
+    @Override
+    public Optional<Colaborador> buscarPorDni(TipoDocumento tipoDocumento, String documento) {
+        try {
+            return Optional.of(entityManager().createQuery("from Colaborador where documento =:documento and tipoDocumento=:tipo and activo=:activo", Colaborador.class)
+                    .setParameter("documento", documento)
+                    .setParameter("activo", true)
+                    .setParameter("tipo", tipoDocumento)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
 
-  public void guardar(Colaborador... colaborador) {
+    @Override
+    public List<Colaborador> buscarTodos() {
+        return entityManager().createQuery("from Colaborador where activo=:activo and formCompletado=:formCompletado", Colaborador.class).
+                setParameter("activo", true)
+                .setParameter("formCompletado", true)
+                .getResultList();
+    }
 
-    withTransaction(() -> {
-      for (Colaborador colab : colaborador) {
-        entityManager().persist(colab);
-      }
-    });
-  }
+    @Override
+    public void guardar(Colaborador colaborador) {
+        withTransaction(() -> entityManager().persist(colaborador));
+    }
 
-  @Override
-  public void actualizar(Colaborador colaborador) {
-    withTransaction(() -> entityManager().merge(colaborador));
-  }
+    public void guardar(Colaborador... colaborador) {
 
-  @Override
-  public void eliminar(Colaborador colaborador) {
+        withTransaction(() -> {
+            for (Colaborador colab : colaborador) {
+                entityManager().persist(colab);
+            }
+        });
+    }
 
-    withTransaction(() -> {
-      colaborador.borrarLogico();
-      entityManager().merge(colaborador);
-    });
-  }
+    @Override
+    public void actualizar(Colaborador colaborador) {
+        withTransaction(() -> entityManager().merge(colaborador));
+    }
 
 //    @Override
 //    public void marcarFormCompletado(String id) {
@@ -112,32 +132,12 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
 //        });
 //    }
 
-  public static void main(String[] args) {
-    Colaborador m = new Colaborador();
+    @Override
+    public void eliminar(Colaborador colaborador) {
 
-    ColaboradoresRepository repo = new ColaboradoresRepository();
-    Usuario u = new Usuario("dkfnkdafs", "dlmfads");
-    Rol r = new Rol();
-    r.setNombre("fasf");
-    Permiso p1 = new Permiso("fodmasofd", "dkasfds");
-    Permiso p2 = new Permiso("lkfmasdlf", "flamflds");
-    ServiceLocator.get(IPermisosRepository.class).guardar(p1, p2);
-
-    r.agregarPermisos(PermisosHelper.getInstance().buscarPorNombres("dkasfds").toArray(new Permiso[0]));
-    ServiceLocator.get(IRolesRepository.class).guardar(r);
-    u.agregarRoles(r);
-    m.setUsuario(u);
-
-
-    DonacionDinero d = new DonacionDinero(m, LocalDate.now(), 100f, FrecuenciaDonacion.ANUAL);
-
-    repo.guardar(m);
-
-    repo.eliminar(m);
-    //System.out.println(hidratado.get().getMotivo());
-    // Optional<Colaborador> colaborador2 = repo.buscar(2L);
-
-    List<Colaborador> lista = repo.buscarTodos();
-
-  }
+        withTransaction(() -> {
+            colaborador.borrarLogico();
+            entityManager().merge(colaborador);
+        });
+    }
 }

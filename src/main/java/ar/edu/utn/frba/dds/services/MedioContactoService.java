@@ -6,12 +6,12 @@ import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import java.util.List;
 
 public class MedioContactoService {
-  public MedioDeContacto fromDto(MedioContactoDto dto) {
-    return new MedioDeContacto(CanalContacto.valueOf(dto.getCanal().toUpperCase()), dto.getValor());
-  }
+    public MedioDeContacto fromDto(MedioContactoDto dto) {
+        return new MedioDeContacto(CanalContacto.valueOf(dto.getCanal().toUpperCase()), dto.getValor());
+    }
 
-  public List<MedioDeContacto> fromDtos(List<MedioContactoDto> dtos) {
-    return dtos.stream().map(this::fromDto).toList();
-  }
+    public List<MedioDeContacto> fromDtos(List<MedioContactoDto> dtos) {
+        return dtos.stream().map(this::fromDto).toList();
+    }
 
 }

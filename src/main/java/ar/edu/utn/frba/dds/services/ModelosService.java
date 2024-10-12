@@ -22,8 +22,8 @@ public class ModelosService {
         return modelo.get();
     }
 
-    public void crearModeloHeladera(ModeloHeladeraInputDto dto){
-        ModeloHeladera modeloHeladera = new ModeloHeladera(dto.getModelo(),dto.getTempMin(),dto.getTempMax());
+    public void crearModeloHeladera(ModeloHeladeraInputDto dto) {
+        ModeloHeladera modeloHeladera = new ModeloHeladera(dto.getModelo(), dto.getTempMin(), dto.getTempMax());
         this.modeloHeladeraRepository.guardar(modeloHeladera);
     }
 }

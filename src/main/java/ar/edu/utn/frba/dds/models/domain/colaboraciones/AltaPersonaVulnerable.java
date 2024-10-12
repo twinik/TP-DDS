@@ -24,32 +24,32 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntajeCalculable {
 
-  // TODO revisar REPO quizas un on delete cascade con activo...
+    // TODO revisar REPO quizas un on delete cascade con activo...
 
-  private static final Float puntajePorAlta = 2f;
-  @ManyToOne
-  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
-  private Colaborador colaborador;
-  @Column(name = "fecha_redistribucion", columnDefinition = "DATE", nullable = false)
-  private LocalDate fecha;
-  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-  @JoinColumn(name = "persona_vulnerable_id", referencedColumnName = "id", nullable = false, unique = true)
-  private PersonaVulnerable persona;
+    private static final Float puntajePorAlta = 2f;
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
+    private Colaborador colaborador;
+    @Column(name = "fecha_redistribucion", columnDefinition = "DATE", nullable = false)
+    private LocalDate fecha;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "persona_vulnerable_id", referencedColumnName = "id", nullable = false, unique = true)
+    private PersonaVulnerable persona;
 
-  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-  @JoinColumn(name = "tarjeta_id", referencedColumnName = "id", unique = true)
-  private Tarjeta tarjeta;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "tarjeta_id", referencedColumnName = "id", unique = true)
+    private Tarjeta tarjeta;
 
-  /**
-   * Constructor con parametros.
-   */
-  @Override
-  public Float calcularPuntaje() {
-    return puntajePorAlta;
-  }
+    /**
+     * Constructor con parametros.
+     */
+    @Override
+    public Float calcularPuntaje() {
+        return puntajePorAlta;
+    }
 
-  /**
-   * Metodo efectuar que se encarga de sumar puntos al colaborador.
-   */
+    /**
+     * Metodo efectuar que se encarga de sumar puntos al colaborador.
+     */
 
 }

@@ -18,7 +18,7 @@ public class PosibleCodigoTarjetaDto {
         return new PosibleCodigoTarjetaDto(context.formParam("codigoTarjeta"));
     }
 
-    public boolean estanCamposLlenos(){
-        return this.codigo!=null;
+    public boolean estanCamposLlenos() {
+        return this.codigo != null;
     }
 }

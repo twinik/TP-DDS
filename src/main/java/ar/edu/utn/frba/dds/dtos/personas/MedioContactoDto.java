@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.dtos.personas;
 
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
-import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeContactoVacioFactory;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
@@ -12,21 +11,21 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class MedioContactoDto {
-  private String canal;
-  private String valor;
+    private String canal;
+    private String valor;
 
-  public static List<MedioContactoDto> of(Context context) {
-    List<MedioContactoDto> lista = new ArrayList<>();
-    int cantidadIngresada = Integer.parseInt(context.formParam("cantidad-contactos"));
-    for (int i = 1; i <= cantidadIngresada; i++) {
-      lista.add(new MedioContactoDto(context.formParam("canal-" + i), context.formParam("contacto-" + i)));
+    public static List<MedioContactoDto> of(Context context) {
+        List<MedioContactoDto> lista = new ArrayList<>();
+        int cantidadIngresada = Integer.parseInt(context.formParam("cantidad-contactos"));
+        for (int i = 1; i <= cantidadIngresada; i++) {
+            lista.add(new MedioContactoDto(context.formParam("canal-" + i), context.formParam("contacto-" + i)));
+        }
+        return lista;
     }
-    return lista;
-  }
 
-  public static boolean estanCamposLLenos(List<MedioContactoDto> lista){
-    if(lista.isEmpty()) throw new FormIncompletoException(MensajeContactoVacioFactory.generarMensaje());
-    return lista.stream().allMatch( m -> (m.canal != null && m.valor != null));
-  }
+    public static boolean estanCamposLLenos(List<MedioContactoDto> lista) {
+        if (lista.isEmpty()) throw new FormIncompletoException(MensajeContactoVacioFactory.generarMensaje());
+        return lista.stream().allMatch(m -> (m.canal != null && m.valor != null));
+    }
 
 }

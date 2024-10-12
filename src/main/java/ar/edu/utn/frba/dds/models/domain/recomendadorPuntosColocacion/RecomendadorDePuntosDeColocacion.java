@@ -18,17 +18,17 @@ public class RecomendadorDePuntosDeColocacion {
 
     RecomendadorDePuntosAdapter recomendadorDePuntosAdapter;
 
+    public static void main(String[] args) throws IOException {
+        RecomendadorDePuntosDeColocacion recomendadorDePuntosDeColocacion = new RecomendadorDePuntosDeColocacion();
+        recomendadorDePuntosDeColocacion.setRecomendadorDePuntosAdapter(RecomendadorRetrofitAdapter.getInstance());
+        ListadoUbicaciones listadoUbicaciones = recomendadorDePuntosDeColocacion.recomendarUbicacion(new Ubicacion(30f, 50f), 2f);
+        System.out.println(listadoUbicaciones);
+    }
+
     /**
      * Recomienda una ubicacion.
      */
     public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
         return this.recomendadorDePuntosAdapter.recomendarUbicacion(punto, radio);
-    }
-
-    public static void main(String[] args) throws IOException {
-        RecomendadorDePuntosDeColocacion recomendadorDePuntosDeColocacion  = new RecomendadorDePuntosDeColocacion();
-        recomendadorDePuntosDeColocacion.setRecomendadorDePuntosAdapter(RecomendadorRetrofitAdapter.getInstance());
-        ListadoUbicaciones listadoUbicaciones = recomendadorDePuntosDeColocacion.recomendarUbicacion(new Ubicacion(30f,50f),2f);
-        System.out.println(listadoUbicaciones);
     }
 }

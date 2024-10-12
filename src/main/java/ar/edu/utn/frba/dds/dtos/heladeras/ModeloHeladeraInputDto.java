@@ -10,19 +10,19 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ModeloHeladeraInputDto {
-  private String modelo;
-  private Float tempMin;
-  private Float tempMax;
+    private String modelo;
+    private Float tempMin;
+    private Float tempMax;
 
-  public static ModeloHeladeraInputDto of(Context context){
-    return ModeloHeladeraInputDto.builder().modelo(context.formParam("modelo"))
-        .tempMin(Float.valueOf(context.formParam("tempMin")))
-        .tempMax(Float.valueOf(context.formParam("tempMax")))
-        .build();
-  }
+    public static ModeloHeladeraInputDto of(Context context) {
+        return ModeloHeladeraInputDto.builder().modelo(context.formParam("modelo"))
+                .tempMin(Float.valueOf(context.formParam("tempMin")))
+                .tempMax(Float.valueOf(context.formParam("tempMax")))
+                .build();
+    }
 
-  public boolean estanCamposLllenos(){
-    return this.modelo != null && this.tempMax!=null && this.tempMin!= null;
-  }
+    public boolean estanCamposLllenos() {
+        return this.modelo != null && this.tempMax != null && this.tempMin != null;
+    }
 
 }

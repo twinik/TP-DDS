@@ -1,4 +1,3 @@
-
 var cabaCoords = [-34.6118, -58.4173];
 
 var map = L.map("map").setView(cabaCoords, 13);
@@ -31,7 +30,7 @@ function actualizarLocalidades() {
 
 
     if (provinciaSeleccionada && localidadesPorProvincia[provinciaSeleccionada]) {
-        localidadesPorProvincia[provinciaSeleccionada].forEach(function(localidad) {
+        localidadesPorProvincia[provinciaSeleccionada].forEach(function (localidad) {
             const option = document.createElement('option');
             option.value = localidad.toLowerCase().replace(/\s+/g, ''); // Formatear valor para que coincida con el select
             option.text = localidad;

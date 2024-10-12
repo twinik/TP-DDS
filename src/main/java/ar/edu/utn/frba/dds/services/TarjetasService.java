@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.TarjetaInputDto;
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
@@ -22,16 +21,16 @@ public class TarjetasService {
     private ITarjetasColaboradorRepository tarjetasColaboradorRepository;
     private IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository;
 
-    public void crearTarjeta(PersonaVulnerable vulnerable, TarjetaInputDto dto){
-        Tarjeta t = Tarjeta.of(dto.getCodigo(),0,new FrecuenciaDiaria(),vulnerable);
+    public void crearTarjeta(PersonaVulnerable vulnerable, TarjetaInputDto dto) {
+        Tarjeta t = Tarjeta.of(dto.getCodigo(), 0, new FrecuenciaDiaria(), vulnerable);
         tarjetasRepository.guardar(t);
     }
 
-    public void asignarTarjetaColaborador(Colaborador c){
+    public void asignarTarjetaColaborador(Colaborador c) {
         Optional<PosibleCodigoTarjeta> codigo = this.posiblesCodigosTarjetaRepository.buscarPrimeroLibre();
-        if(codigo.isEmpty()) throw new CodigoInvalidoException(MensajeCodigosNoDisponiblesFactory.generarMensaje());
+        if (codigo.isEmpty()) throw new CodigoInvalidoException(MensajeCodigosNoDisponiblesFactory.generarMensaje());
         codigo.get().ocupar();
-        TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c,codigo.get().getCodigo());
+        TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c, codigo.get().getCodigo());
         this.tarjetasColaboradorRepository.guardar(tarjetaColaborador);
     }
 }

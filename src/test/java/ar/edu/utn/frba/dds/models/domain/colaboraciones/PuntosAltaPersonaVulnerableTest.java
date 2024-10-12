@@ -12,8 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class PuntosAltaPersonaVulnerableTest {
     AltaPersonaVulnerable donacion_1, donacion_2;
@@ -26,8 +24,8 @@ public class PuntosAltaPersonaVulnerableTest {
     @BeforeEach
     void test_init() {
         colaborador = new Colaborador();
-        personaVulnerable_1 = new PersonaVulnerable("Ernesto", LocalDate.of(1990,8,4), LocalDate.of(2000,8,4), true, "Caballito", TipoDocumento.DNI, "45419968", colaborador, null);
-        personaVulnerable_2 = new PersonaVulnerable("Jaime", LocalDate.of(1995,8,8), LocalDate.of(2005,8,2), true, "Monte Grande", TipoDocumento.DNI, "45419967", colaborador, null);
+        personaVulnerable_1 = new PersonaVulnerable("Ernesto", LocalDate.of(1990, 8, 4), LocalDate.of(2000, 8, 4), true, "Caballito", TipoDocumento.DNI, "45419968", colaborador, null);
+        personaVulnerable_2 = new PersonaVulnerable("Jaime", LocalDate.of(1995, 8, 8), LocalDate.of(2005, 8, 2), true, "Monte Grande", TipoDocumento.DNI, "45419967", colaborador, null);
         donacion_1 = new AltaPersonaVulnerable();
         donacion_1.setColaborador(colaborador);
         donacion_1.setPersona(personaVulnerable_1);

@@ -8,40 +8,40 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RedistribucionViandaController implements ICrudViewsHandler {
 
-  private RedistribucionViandaService redistribucionViandasService;
+    private RedistribucionViandaService redistribucionViandasService;
 
-  @Override
-  public void index(Context context) {
+    @Override
+    public void index(Context context) {
 
-  }
+    }
 
-  @Override
-  public void show(Context context) {
+    @Override
+    public void show(Context context) {
 
-  }
+    }
 
-  @Override
-  public void create(Context context) {
+    @Override
+    public void create(Context context) {
 
-  }
+    }
 
-  @Override
-  public void save(Context context) {
+    @Override
+    public void save(Context context) {
 
-  }
+    }
 
-  @Override
-  public void edit(Context context) {
+    @Override
+    public void edit(Context context) {
 
-  }
+    }
 
-  @Override
-  public void update(Context context) {
+    @Override
+    public void update(Context context) {
 
-  }
+    }
 
-  @Override
-  public void delete(Context context) {
+    @Override
+    public void delete(Context context) {
 
-  }
+    }
 }

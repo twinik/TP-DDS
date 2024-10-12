@@ -31,80 +31,80 @@ import java.util.Optional;
 @Setter
 @Getter
 public class CargadorDeColaboraciones {
-  private CSVReaderAdapter csvReader;
-  private MailSenderAdapter mailSender;
-  private String filePath;
-  private String separator;
-  private IColaboradoresRepository colaboradorRepository;
-  private IFormasColaboracionRespository formasColaboracionRespository;
-  private ConfigReader config;
-  private ICalculadorPuntos calculadorPuntos;
+    private CSVReaderAdapter csvReader;
+    private MailSenderAdapter mailSender;
+    private String filePath;
+    private String separator;
+    private IColaboradoresRepository colaboradorRepository;
+    private IFormasColaboracionRespository formasColaboracionRespository;
+    private ConfigReader config;
+    private ICalculadorPuntos calculadorPuntos;
 
-  /**
-   * Constructor con parametros.
-   */
-  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, IColaboradoresRepository respository, IFormasColaboracionRespository formasColaboracionRespository, ICalculadorPuntos calculadorPuntos) throws IOException {
-    this.config = new ConfigReader("config.properties");
-    this.csvReader = csvReader;
-    this.mailSender = mailAdapter;
-    this.filePath = filePath;
-    this.separator = config.getProperty("separator");
-    this.colaboradorRepository = respository;
-    this.formasColaboracionRespository = formasColaboracionRespository;
-    this.calculadorPuntos = calculadorPuntos;
-  }
-
-  /**
-   * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
-   */
-  public List<IPuntajeCalculable> cargarColaboraciones() throws IOException {
-    List<Object> registros = csvReader.readCsv(filePath, separator);
-    ArrayList<IPuntajeCalculable> colaboraciones = new ArrayList<>();
-    Colaborador colaborador = null;
-
-    for (Object reg : registros) {
-      CargaColaboracion carga = (CargaColaboracion) reg;
-
-      Optional<Colaborador> colaboradorOption = colaboradorRepository.buscar(
-          new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
-          carga.getDocumento());
-      colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
-
-      IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
-
-      Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
-      if (forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
-
-      for (int i = 0; i < carga.getCantidad(); i++) {
-        colaboraciones.add(colaboracion);
-        this.calculadorPuntos.sumarPuntosPara(colaborador, colaboracion);
-      }
-
+    /**
+     * Constructor con parametros.
+     */
+    public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, IColaboradoresRepository respository, IFormasColaboracionRespository formasColaboracionRespository, ICalculadorPuntos calculadorPuntos) throws IOException {
+        this.config = new ConfigReader("config.properties");
+        this.csvReader = csvReader;
+        this.mailSender = mailAdapter;
+        this.filePath = filePath;
+        this.separator = config.getProperty("separator");
+        this.colaboradorRepository = respository;
+        this.formasColaboracionRespository = formasColaboracionRespository;
+        this.calculadorPuntos = calculadorPuntos;
     }
-    return colaboraciones;
-  }
 
-  private Colaborador crearUsuarioColaboradorNoRegistrado(CargaColaboracion carga, ConfigReader config) {
-    try {
-      TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
-      String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
-      Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), PasswordHasher.hashPassword(claveGenerada));
-      Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
-      nuevoColaborador.setTipoDocumento(tipoDoc);
-      nuevoColaborador.setDocumento(carga.getDocumento());
+    /**
+     * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
+     */
+    public List<IPuntajeCalculable> cargarColaboraciones() throws IOException {
+        List<Object> registros = csvReader.readCsv(filePath, separator);
+        ArrayList<IPuntajeCalculable> colaboraciones = new ArrayList<>();
+        Colaborador colaborador = null;
 
-      MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
-          carga.getMail(),
-          config.getProperty("ASUNTO"),
-          config.getProperty("CUERPO") + claveGenerada);
+        for (Object reg : registros) {
+            CargaColaboracion carga = (CargaColaboracion) reg;
 
-      mailSender.enviarMail(email);
+            Optional<Colaborador> colaboradorOption = colaboradorRepository.buscar(
+                    new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
+                    carga.getDocumento());
+            colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
 
-      colaboradorRepository.guardar(nuevoColaborador);
-      return nuevoColaborador;
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+            IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
+
+            Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
+            if (forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
+
+            for (int i = 0; i < carga.getCantidad(); i++) {
+                colaboraciones.add(colaboracion);
+                this.calculadorPuntos.sumarPuntosPara(colaborador, colaboracion);
+            }
+
+        }
+        return colaboraciones;
     }
-  }
+
+    private Colaborador crearUsuarioColaboradorNoRegistrado(CargaColaboracion carga, ConfigReader config) {
+        try {
+            TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
+            String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
+            Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), PasswordHasher.hashPassword(claveGenerada));
+            Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
+            nuevoColaborador.setTipoDocumento(tipoDoc);
+            nuevoColaborador.setDocumento(carga.getDocumento());
+
+            MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
+                    carga.getMail(),
+                    config.getProperty("ASUNTO"),
+                    config.getProperty("CUERPO") + claveGenerada);
+
+            mailSender.enviarMail(email);
+
+            colaboradorRepository.guardar(nuevoColaborador);
+            return nuevoColaborador;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

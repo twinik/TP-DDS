@@ -11,13 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,19 +44,9 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     @Transient
     private RedistribucionViandas redistribucionViandas;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
-    @JoinColumn(name = "ingreso_vianda_id",referencedColumnName = "id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinColumn(name = "ingreso_vianda_id", referencedColumnName = "id")
     private IngresoVianda viandas;
-
-    public void agregarViandas(Vianda ... viandas){
-        this.viandas.agregarViandas(viandas);
-    }
-
-    public boolean esDonacionDeViandas(){
-        return !this.getViandas().getViandas().isEmpty();
-    }
-
-
 
     public static void main(String[] args) {
         Colaborador colab = new Colaborador();
@@ -75,6 +59,14 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void agregarViandas(Vianda... viandas) {
+        this.viandas.agregarViandas(viandas);
+    }
+
+    public boolean esDonacionDeViandas() {
+        return !this.getViandas().getViandas().isEmpty();
     }
 
     public void publicarSolicitudABroker() throws IOException {

@@ -3,7 +3,8 @@
         <h1 class="title1 mb-8">Registrar Técnico</h1>
 
         {{#if message}}
-            <p style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            <p style="background: rgb(255, 163, 163);"
+               class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
         {{/if}}
 
         <form method="post" action="" class="content-center max-w-md mx-auto">
@@ -69,7 +70,8 @@
                     min="1"
             />
             {{#if message}}
-                <p id="error-message" style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+                <p id="error-message" style="background: rgb(255, 163, 163);"
+                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
             {{/if}}
 
             <div id="mediosContactoContainer">
@@ -118,8 +120,8 @@
                     class="mb-5"
             ></div>
 
-            <input  required type="hidden" name="latitud" id="latitud"/>
-            <input  required type="hidden" name="longitud" id="longitud"/>
+            <input required type="hidden" name="latitud" id="latitud"/>
+            <input required type="hidden" name="longitud" id="longitud"/>
 
             <label
                     for="radio-de-cobertura"

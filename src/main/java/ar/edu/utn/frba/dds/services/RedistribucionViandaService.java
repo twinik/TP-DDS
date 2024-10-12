@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class RedistribucionViandaService {
-  private IRedistribucionesViandaRepository redistribucionesViandaRepository;
-  private ColaboradoresService colaboradoresService;
-  private HeladerasService heladerasService;
+    private IRedistribucionesViandaRepository redistribucionesViandaRepository;
+    private ColaboradoresService colaboradoresService;
+    private HeladerasService heladerasService;
 }

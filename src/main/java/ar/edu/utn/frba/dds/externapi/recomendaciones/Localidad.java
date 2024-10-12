@@ -16,7 +16,7 @@ public class Localidad {
     private String nombre;
     private String etiqueta;
 
-    public static String of(Context ctx){
+    public static String of(Context ctx) {
         return ctx.formParam("localidad");
     }
 }

@@ -27,10 +27,10 @@ public class AperturaHeladeraBrokerDTO {
 
     public String toString() {
         return String.format("Id: %s -- Id Tarjeta Colaborador: %s --- Id Tarjeta Colaborador: %s --- IdSolcitud: %s -- timestamp: %d",
-            this.idHeladera,
-            this.idTarjetaColaborador,
-            this.idTarjetaPersonaVulnerable,
-            this.idSolicitudApertura,
-            this.timestamp);
+                this.idHeladera,
+                this.idTarjetaColaborador,
+                this.idTarjetaPersonaVulnerable,
+                this.idSolicitudApertura,
+                this.timestamp);
     }
 }

@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.externapi.recomendaciones;
 
-import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraMapaDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

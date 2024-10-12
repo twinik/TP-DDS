@@ -5,14 +5,12 @@ import ar.edu.utn.frba.dds.models.converters.FrecuenciaUsoAttributeConverter;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
-import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +60,8 @@ public class Tarjeta extends EntidadPersistente {
      * Constructor de Tarjeta.
      */
     public Tarjeta(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, LocalDate fechaAdjudicacion, Integer cantidadUsosDia) {
-        if(!GeneradorDeCodigosHelper.esCodigoValido(codigo, 11)) throw new CodigoInvalidoException("El codigo no es valido");
+        if (!GeneradorDeCodigosHelper.esCodigoValido(codigo, 11))
+            throw new CodigoInvalidoException("El codigo no es valido");
         this.codigo = codigo;
         this.nroUsos = nroUsos;
         this.frecuenciaPermitida = frecuenciaPermitida;

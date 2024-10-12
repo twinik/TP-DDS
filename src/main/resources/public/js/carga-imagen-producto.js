@@ -1,14 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const dropzoneFile = document.getElementById('dropzone-file');
     const imagePreview = document.getElementById('image-preview');
     const preview = document.getElementById('preview');
 
-    dropzoneFile.addEventListener('change', function(e) {
+    dropzoneFile.addEventListener('change', function (e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 preview.src = e.target.result;
                 imagePreview.classList.remove('hidden');
             }
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (file) {
             const reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 preview.src = e.target.result;
                 imagePreview.classList.remove('hidden');
             }

@@ -8,13 +8,13 @@ import java.util.List;
 @Getter
 @Setter
 public class ShowFormularioDto {
-  private String nombre;
-  private List<ShowCampoDto> campos;
+    private String nombre;
+    private List<ShowCampoDto> campos;
 
-  public static ShowFormularioDto fromFormulario(Formulario form) {
-    ShowFormularioDto f = new ShowFormularioDto();
-    f.setNombre(form.getNombre());
-    f.setCampos(form.getCampos().stream().map(ShowCampoDto::fromCampo).toList());
-    return f;
-  }
+    public static ShowFormularioDto fromFormulario(Formulario form) {
+        ShowFormularioDto f = new ShowFormularioDto();
+        f.setNombre(form.getNombre());
+        f.setCampos(form.getCampos().stream().map(ShowCampoDto::fromCampo).toList());
+        return f;
+    }
 }

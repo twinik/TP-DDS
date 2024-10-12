@@ -11,7 +11,8 @@
     <div class="flex justify-center items-center lg:mt-16 flex-col">
         <h1 class="title1 mb-6" style="color: #eee;">Registro</h1>
         {{#if message}}
-            <p id="error-message" style="background: rgb(255, 163, 163);" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            <p id="error-message" style="background: rgb(255, 163, 163);"
+               class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
         {{/if}}
         <form method="post" action="" class="content-center max-w-md mx-auto">
             <label
@@ -139,20 +140,20 @@
                 <span style="color: #eee;">Direccion</span>
                 <div class="grid md:grid-cols-2 md:gap-6">
                     <div class="relative z-0 w-full mb-5 group">
-                    <label
-                            for="calle"
-                            class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
-                    >Calle</label
-                    >
-                    <input
-                            type="text"
-                            id="calle"
-                            name="calle"
-                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="calle"
+                        <label
+                                for="calle"
+                                class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                        >Calle</label
+                        >
+                        <input
+                                type="text"
+                                id="calle"
+                                name="calle"
+                                class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="calle"
 
-                    />
-                </div>
+                        />
+                    </div>
                     <div class="relative z-0 w-full mb-5 group">
                         <label
                                 for="altura"
@@ -197,7 +198,7 @@
                                 name="cp"
                                 class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="codigo postal"
-                                
+
                         />
                     </div>
                 </div>
@@ -213,7 +214,7 @@
                                 type="checkbox"
                                 class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                 value={{this.id}}
-                               >
+                        >
                         <label for="default-checkbox"
                                class="ms-2 text-sm font-medium text-white dark:text-gray-300">{{this.desc}}</label>
                     </div>
@@ -252,7 +253,8 @@
                         min="1"
                 />
             </div>
-            <button class="text-left block mb-4 text-sm font-medium text-white dark:text-white" type="button" onclick="nuevoMedioContacto()">
+            <button class="text-left block mb-4 text-sm font-medium text-white dark:text-white" type="button"
+                    onclick="nuevoMedioContacto()">
                 Agregar medio de contacto +
             </button>
             <input type="hidden" name="cantidad-contactos" id="cantidad-contactos" value="1"/>
