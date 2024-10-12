@@ -40,7 +40,6 @@ public class ColocacionHeladerasController implements ICrudViewsHandler {
         } catch (FormIncompletoException e) {
             // TODO: Mostrar pop up error ?
         }
-        //TODO: mostrar cartel de creado con exito
         context.status(201);
         context.redirect("/heladeras");
     }

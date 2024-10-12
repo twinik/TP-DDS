@@ -4,6 +4,7 @@ package ar.edu.utn.frba.dds.dtos.tecnicos;
 
  */
 
+import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,4 +21,14 @@ public class VisitaTecnicoDto {
     private String urlFoto;
     private boolean solucionado;
     private String incidente;
+
+    public static VisitaTecnicoDto of(Context context) {
+    String idTecnico = context.formParam("tecnico");
+    String fechaVisita = context.formParam("fecha");
+    String descripcion = context.formParam("desc");
+    String incidente = context.formParam("incidente");
+    boolean solucionado = "Sí".equals(context.formParam("incidenteSolucionado"));
+
+    return new VisitaTecnicoDto(idTecnico, fechaVisita, descripcion, null, solucionado, incidente);
+}
 }

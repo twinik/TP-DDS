@@ -33,7 +33,6 @@ public class OfertaProductoDto {
 
   public static OfertaProductoDto of(Context context) {
 
-    // TODO: conseguir categoria con el form param
     return OfertaProductoDto.builder()
         .nombre(context.formParam("nombre"))
         .puntosNecesarios(Float.valueOf(context.formParam("puntos")))

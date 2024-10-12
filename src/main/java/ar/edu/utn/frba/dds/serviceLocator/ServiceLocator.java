@@ -14,7 +14,9 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.recomendadorPuntosColocacion.RecomendadorDePuntosDeColocacion;
 import ar.edu.utn.frba.dds.models.domain.recomendadorPuntosColocacion.RecomendadorRetrofitAdapter;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
+import ar.edu.utn.frba.dds.models.domain.telegramSender.BotTelegramSender;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.models.domain.whatsappSender.TwilioWhatsappSender;
 import ar.edu.utn.frba.dds.models.repositories.*;
 import ar.edu.utn.frba.dds.models.repositories.imp.*;
 import ar.edu.utn.frba.dds.services.*;
@@ -62,6 +64,8 @@ public class ServiceLocator {
         add(clase, new FormasColaboracionRespository());
       else if (clase.equals(IFormularioRepository.class))
         add(clase, new FormularioRepository());
+      else if (clase.equals(IIncidentesRepository.class))
+        add(clase, new IncidentesRepository());
       else if (clase.equals(IHeladerasRepository.class))
         add(clase, new HeladeraRepository());
       else if (clase.equals(IMedioContactoRepository.class))
@@ -114,6 +118,8 @@ public class ServiceLocator {
         add(clase, new UsuariosRepository());
       else if (clase.equals(IViandasRepository.class))
         add(clase, new ViandasRepository());
+      else if (clase.equals(IVisitasTecnicoRepository.class))
+        add(clase, new VisitasTecnicoRepository());
 
         // SERVICIOS
       else if (clase.equals(AlertasService.class))
@@ -144,7 +150,7 @@ public class ServiceLocator {
       else if (clase.equals(ColaboradoresService.class))
         add(clase, new ColaboradoresService(get(IColaboradoresRepository.class), get(MedioContactoService.class), get(FormaColaboracionService.class), get(RolesService.class), get(TarjetasService.class), get(IUsuariosRepository.class)));
       else if (clase.equals(ColocacionHeladerasService.class))
-        add(clase, new ColocacionHeladerasService(get(IColocacionHeladeraRepository.class), get(ColaboradoresService.class), get(ModelosService.class), get(CalculadorHeladerasCercanas.class), get(IHeladerasRepository.class)));
+        add(clase, new ColocacionHeladerasService(get(IColocacionHeladeraRepository.class), get(ColaboradoresService.class), get(ModelosService.class), get(CalculadorHeladerasCercanas.class), get(IHeladerasRepository.class), get(ISensorMovimientoRepository.class), get(ISensorTemperaturaRepository.class)));
       else if (clase.equals(DonacionDineroService.class))
         add(clase, new DonacionDineroService(get(IDonacionDineroRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class)));
       else if (clase.equals(DonacionesViandaService.class))
@@ -159,6 +165,8 @@ public class ServiceLocator {
         add(clase, new FormulariosService(get(IFormularioRepository.class), get(UsuarioService.class)));
       else if (clase.equals(HeladerasService.class))
         add(clase, new HeladerasService(get(IHeladerasRepository.class)));
+      else if (clase.equals(IncidentesService.class))
+        add(clase, new IncidentesService(get(IIncidentesRepository.class)));
       else if (clase.equals(MedioContactoService.class))
         add(clase, new MedioContactoService());
       else if (clase.equals(ModelosService.class))
@@ -198,7 +206,7 @@ public class ServiceLocator {
       else if (clase.equals(TecnicosHelper.class))
         add(clase, new TecnicosHelper(get(ITecnicosRepository.class)));
       else if (clase.equals(TecnicosService.class))
-        add(clase, new TecnicosService(get(ITecnicosRepository.class), get(MedioContactoService.class)));
+        add(clase, new TecnicosService(get(ITecnicosRepository.class), get(MedioContactoService.class), get(IVisitasTecnicoRepository.class),get(IncidentesService.class)));
       else if (clase.equals(TipoDocumentoMapper.class))
         add(clase, new TipoDocumentoMapper());
       else if (clase.equals(UsuarioService.class))
@@ -254,9 +262,10 @@ public class ServiceLocator {
       else if (clase.equals(ViandasController.class))
         add(clase, new ViandasController(get(ViandasService.class)));
       else if (clase.equals(VisitasTecnicoController.class))
-        add(clase, new VisitasTecnicoController());
-
+        add(clase, new VisitasTecnicoController(get(TecnicosService.class), get(IncidentesService.class),get(FileUploadService.class)));
         //EXTRAS
+      else if (clase.equals(BotTelegramSender.class))
+        add(clase, new BotTelegramSender());
       else if (clase.equals(CargaColaboracionCsvReader.class))
         add(clase, new CargaColaboracionCsvReader());
       else if (clase.equals(SendGridMailSender.class)) {
@@ -265,7 +274,9 @@ public class ServiceLocator {
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
-      } else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
+      } else if (clase.equals(TwilioWhatsappSender.class))
+        add(clase, new TwilioWhatsappSender());
+      else throw new IllegalArgumentException("No hay servicio provisto para esa clase");
     }
     return (T) services.get(clase);
   }

@@ -41,9 +41,6 @@ public class AltaPersonaVulnerableService {
     a.setFecha(LocalDate.now());
     this.personasVulnerablesRepository.guardar(p);
     this.tarjetasService.crearTarjeta(p, dto.getTarjeta());
-    //a.setTarjeta();
-    // TODO Tarjeta
-
     this.calculadorPuntos.sumarPuntosPara(colaborador, a);
     this.altaPersonaVulnerableRepository.guardar(a);
     return p.getId();

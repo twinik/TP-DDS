@@ -4,7 +4,9 @@ import ar.edu.utn.frba.dds.dtos.tecnicos.VisitaTecnicoDto;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Incidente;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "visita_tecnico")
 @AllArgsConstructor
+@Setter
+@Getter
 @NoArgsConstructor
 public class VisitaTecnico extends EntidadPersistente {
 
@@ -36,5 +40,9 @@ public class VisitaTecnico extends EntidadPersistente {
     @ManyToOne
     @JoinColumn(name = "incidente_id", referencedColumnName = "id", nullable = false)
     private Incidente incidente;
+
+    public boolean estaSolucionado(){
+        return this.solucionado;
+    }
 
 }

@@ -33,6 +33,7 @@ public class PermisosHelper {
             return switch (ctx.matchedPath()) {
                 //ADMIN
                 case "/admin/tecnicos/nuevo" -> this.buscarPorNombres("alta-tecnico");
+                case "/admin/visitas-tecnico/nuevo" -> this.buscarPorNombres("alta-tecnico");
                 case "/admin/formularios/nuevo" -> this.buscarPorNombres("alta-formulario");
                 case "/admin/modelos-heladeras/nuevo" -> this.buscarPorNombres("alta-modelo-heladera");
                 case "/admin/tarjeta/nuevo" -> this.buscarPorNombres("alta-cod-tarjeta");
@@ -57,6 +58,7 @@ public class PermisosHelper {
         } else if (ctx.method().name().equals("POST")) {
             return switch (ctx.matchedPath()) {
                 case "/admin/tecnicos/nuevo" -> this.buscarPorNombres("alta-tecnico");
+                case "/admin/visitas-tecnico/nuevo" -> this.buscarPorNombres("alta-tecnico");
                 case "/admin/formularios/nuevo" -> this.buscarPorNombres("alta-formulario");
                 case "/admin/modelos-heladeras/nuevo" -> this.buscarPorNombres("alta-modelo-heladera");
                 case "/admin/tarjeta/nuevo" -> this.buscarPorNombres("alta-cod-tarjeta");

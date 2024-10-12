@@ -128,9 +128,9 @@ public class Initializer {
     List<MedioDeContacto> contactoEmpresa = new ArrayList<>();
     contactoEmpresa.add(emailEmpresa);
 
-    Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 500f, null, new Direccion("medrano", 951, 3, "1405"), listaContacto, "jorge", "lopez", LocalDate.of(1999, 10, 10), null, null, null, true);
-    Colaborador sa = new Colaborador(u2, null, null, tipo2, 0f, new ArrayList<>(), new Direccion("lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA, true);
-    Colaborador ong = new Colaborador(u3, null, null, tipo3, 0f, new ArrayList<>(), new Direccion("bonifacio", 30, 10, "1406"), null, null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG, true);
+    Colaborador c1 = new Colaborador(u1, TipoDocumento.DNI, "4432653", tipo, 500f, null, new Direccion("Medrano", 951, 3, "1405"), listaContacto, "Jorge", "Lopez", LocalDate.of(1999, 10, 10), null, null, null, true);
+    Colaborador sa = new Colaborador(u2, null, null, tipo2, 0f, new ArrayList<>(), new Direccion("Lavalle", 1500, 2, "1400"), contactoEmpresa, null, null, null, "comida", "MC DONALDS", TipoPersonaJuridica.EMPRESA, true);
+    Colaborador ong = new Colaborador(u3, null, null, tipo3, 0f, new ArrayList<>(), new Direccion("Bonifacio", 30, 10, "1406"), null, null, null, null, "ong", "ONG RE SOLIDARIA", TipoPersonaJuridica.ONG, true);
 
     colaboradoresRepository.guardar(c1);
     colaboradoresRepository.guardar(sa);
@@ -139,16 +139,16 @@ public class Initializer {
     TarjetaColaborador tarjetita = TarjetaColaborador.of(c1, GeneradorDeCodigosHelper.generarAlfanumericoUnico(11));
     ServiceLocator.get(ITarjetasColaboradorRepository.class).guardar(tarjetita);
 
-    ModeloHeladera modelo1 = new ModeloHeladera("philips-500", 3, 7);
-    ModeloHeladera modelo2 = new ModeloHeladera("filgo-AX3", 2, 8);
+    ModeloHeladera modelo1 = new ModeloHeladera("Philips-500", 3, 7);
+    ModeloHeladera modelo2 = new ModeloHeladera("Filgo-AX3", 2, 8);
 
     modeloHeladeraRepository.guardar(modelo1);
     modeloHeladeraRepository.guardar(modelo2);
 
-    Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), 4, modelo1);
+    Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("Medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), 4, modelo1);
     h1.setHeladeraActiva(false);
-    Heladera h2 = new Heladera(new Ubicacion(-34.613466f, -58.419659f), new Direccion("lima", 800, null, "1405"), "Heladera-lima-dds", 50, LocalDate.now(), 0, modelo1);
-    Heladera h3 = new Heladera(new Ubicacion(-34.582345f, -58.43329f), new Direccion("rivadavia", 5000, null, "1407"), "Heladera-rivadavia-dds", 20, LocalDate.now(), 0, modelo1);
+    Heladera h2 = new Heladera(new Ubicacion(-34.613466f, -58.419659f), new Direccion("Lima", 800, null, "1405"), "Heladera-lima-dds", 50, LocalDate.now(), 0, modelo1);
+    Heladera h3 = new Heladera(new Ubicacion(-34.582345f, -58.43329f), new Direccion("Rivadavia", 5000, null, "1407"), "Heladera-rivadavia-dds", 20, LocalDate.now(), 0, modelo1);
 
     heladerasRepository.guardar(h1);
     heladerasRepository.guardar(h2);
@@ -197,7 +197,7 @@ public class Initializer {
     ofertaProductoRepository.guardar(oferta9);
     ofertaProductoRepository.guardar(oferta10);
 
-    Tecnico t1 = new Tecnico("juan", "fernandez", "34564992", TipoDocumento.DNI, new ArrayList<>(), new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
+    Tecnico t1 = new Tecnico("Juan", "Fernandez", "34564992", TipoDocumento.DNI, new ArrayList<>(), new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
 
     tecnicosRepository.guardar(t1);
 
