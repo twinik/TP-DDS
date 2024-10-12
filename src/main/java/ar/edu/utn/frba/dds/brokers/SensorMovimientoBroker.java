@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.brokers;
 
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISensorMovimientoRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class SensorMovimientoBroker {
 
         SensorMovimientoListener receptor = new SensorMovimientoListener();
         receptor.setSensorMovimientoRepository(ServiceLocator.get(ISensorMovimientoRepository.class));
+        receptor.setAlertasRepository(ServiceLocator.get(IAlertasRepository.class));
 
         BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
         brokerSubscriber.listen();

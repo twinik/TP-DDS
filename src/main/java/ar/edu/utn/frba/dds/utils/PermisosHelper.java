@@ -71,6 +71,7 @@ public class PermisosHelper {
                         this.buscarPorNombres("alta-vulnerable");
                 case "/heladeras/{id}/suscribirse" -> this.buscarPorNombres("colaborador-base");
                 case "/heladeras/{id}/reportar-falla-tecnica" -> this.buscarPorNombres("colaborador-base");
+                case  "/canjear-producto/{id}" -> this.buscarPorNombres("colaborador-base");
                 default -> new HashSet<>();
             };
         }

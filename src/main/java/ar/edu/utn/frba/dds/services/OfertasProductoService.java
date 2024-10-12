@@ -50,6 +50,7 @@ public class OfertasProductoService {
 
   public ColaboradorPuntosDto obtenerPuntos(String idColaborador) {
     Colaborador c = this.colaboradoresService.obtenerColaborador(idColaborador);
+    this.colaboradoresService.refresh(c);
     return ColaboradorPuntosDto.fromColaborador(c);
   }
 
@@ -69,6 +70,7 @@ public class OfertasProductoService {
 
     c.restarPuntos(o.getPuntosNecesarios());
     this.colaboradoresService.actualizar(c);
+    this.colaboradoresService.refresh(c);
   }
 
   public OfertaProducto obtenerOferta(String idOferta) {

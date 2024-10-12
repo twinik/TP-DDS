@@ -54,6 +54,10 @@ public class ColaboradoresService {
     this.colaboradoresRepository.actualizar(colaborador);
   }
 
+  public void refresh(Colaborador c) {
+    this.colaboradoresRepository.refresh(c);
+  }
+
   public String registrar(PersonaHumanaDto dto) {
     Colaborador colaborador = new Colaborador();
     this.validarSiYaExisteMail(dto.getUsuarioDto());

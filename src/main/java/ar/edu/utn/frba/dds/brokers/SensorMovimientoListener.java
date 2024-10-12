@@ -10,7 +10,6 @@ import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISensorMovimientoRepository;
-import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
@@ -19,20 +18,20 @@ import java.util.Optional;
 
 @Setter
 public class SensorMovimientoListener implements IMqttMessageListener {
-    ISensorMovimientoRepository sensorMovimientoRepository;
+  private ISensorMovimientoRepository sensorMovimientoRepository;
+  private IAlertasRepository alertasRepository;
 
-    @Override
-    public void messageArrived(String s, MqttMessage mqttMessage) {
-        SensorMovimientoBrokerDto sensorDto = SensorMovimientoBrokerDto.fromString(mqttMessage.toString());
-        Optional<SensorMovimiento> sensorMovimientoOpt = sensorMovimientoRepository.buscar(sensorDto.getIdSensor());
+  @Override
+  public void messageArrived(String s, MqttMessage mqttMessage) {
+    SensorMovimientoBrokerDto sensorDto = SensorMovimientoBrokerDto.fromString(mqttMessage.toString());
+    Optional<SensorMovimiento> sensorMovimientoOpt = sensorMovimientoRepository.buscar(sensorDto.getIdSensor());
 
-        if (sensorMovimientoOpt.isPresent()) {
-            Heladera heladera = sensorMovimientoOpt.get().getHeladera();
-            Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), new TecnicosHelper(ServiceLocator.get(ITecnicosRepository.class))
-                    , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
-            alerta.reportar();
-            IAlertasRepository repository = ServiceLocator.get(IAlertasRepository.class);
-            repository.guardar(alerta);
-        }
+    if (sensorMovimientoOpt.isPresent()) {
+      Heladera heladera = sensorMovimientoOpt.get().getHeladera();
+      Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
+          , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
+      alerta.reportar();
+      this.alertasRepository.guardar(alerta);
     }
+  }
 }

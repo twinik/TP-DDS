@@ -25,4 +25,5 @@ public interface IColaboradoresRepository {
 
     void eliminar(Colaborador colaborador);
 
+    void refresh(Colaborador c);
 }

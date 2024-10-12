@@ -16,6 +16,8 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Opcion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.form.TipoCampo;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.SensorMovimiento;
+import ar.edu.utn.frba.dds.models.domain.heladeras.SensorTemperatura;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReporteFallasHeladera;
@@ -63,22 +65,22 @@ public class Initializer {
     Permiso p5 = new Permiso("Alta tecnico", "alta-tecnico");
     Permiso p6 = new Permiso("Alta formulario", "alta-formulario");
     Permiso p7 = new Permiso("Alta modelo heladera", "alta-modelo-heladera");
-    Permiso p8 = new Permiso("Canjear productos", "canjear-productos");
+    //Permiso p8 = new Permiso("Canjear productos", "canjear-productos");
     Permiso p9 = new Permiso("Donar viandas", "donar-viandas");
     Permiso p10 = new Permiso("Redistribuir viandas", "redistribuir-viandas");
     Permiso p11 = new Permiso("Redistribuir viandas", "alta-vulnerable");
     Permiso p12 = new Permiso("Alta codigo de tarjetas", "alta-cod-tarjeta");
     Permiso p13 = new Permiso("Colaborador Base", "colaborador-base");
 
-    permisosRepository.guardar(p1, p2, p3, p5, p6, p7, p8, p9, p10, p11, p12, p13);
+    permisosRepository.guardar(p1, p2, p3, p5, p6, p7, p9, p10, p11, p12, p13);
 
     Rol r1 = new Rol();
     r1.setNombre("colaborador");
-    r1.agregarPermisos(p1, p8, p10, p11, p9, p13);
+    r1.agregarPermisos(p1, p10, p11, p9, p13);
     u1.agregarRoles(r1);
     Rol r2 = new Rol();
     r2.setNombre("persona juridica");
-    r2.agregarPermisos(p2, p3, p8, p13);
+    r2.agregarPermisos(p2, p3, p13);
     u2.agregarRoles(r2);
     u3.agregarRoles(r2);
 
@@ -167,6 +169,11 @@ public class Initializer {
     Alerta a1 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
 
     alertasRepository.guardar(a1);
+
+    SensorTemperatura sensorTemperatura = new SensorTemperatura(h1);
+    ServiceLocator.get(ISensorTemperaturaRepository.class).guardar(sensorTemperatura);
+    SensorMovimiento sensorMovimiento = new SensorMovimiento(h2);
+    ServiceLocator.get(ISensorMovimientoRepository.class).guardar(sensorMovimiento);
 
     OfertaProducto oferta1 = new OfertaProducto(ong, LocalDate.now(), new Producto("Tostadora Liliana", "/img/AT900_web_01.jpg"), 400f, CategoriaOferta.ARTICULOS_HOGAR);
     OfertaProducto oferta2 = new OfertaProducto(ong, LocalDate.now(), new Producto("Heladera Whirpool", "/img/164249-800-auto.png"), 1000f, CategoriaOferta.OTROS);

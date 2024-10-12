@@ -76,8 +76,6 @@ public class OfertasProductoController implements ICrudViewsHandler {
       ofertasProductoService.crearOferta(dto);
     } catch (IOException e) {
       e.printStackTrace();
-    } catch (FormIncompletoException e) {
-      // TODO: Mostrar pop up error ?
     }
     //O BIEN LANZO UNA PANTALLA DE EXITO
     //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS

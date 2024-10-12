@@ -27,21 +27,16 @@ public class Server {
 
   public static void init() {
     if (app == null) {
+      // TODO: Revisar properties
+
       Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
       app = Javalin.create(config()).start(port);
       AppMiddlewares.applyMiddlewares(app);
       AppHandlers.applyHandlers(app);
       Router.init(app);
 
-      Thread listenerBrokerThread = new Thread(() -> {
-        try {
-          AperturaHeladeraBroker.suscribirseAAperturasHeladeras();
-        } catch (IOException e) {
-          throw new RuntimeException(e);
-        }
-      });
-
-      listenerBrokerThread.start();
+      // TODO: esto va aca ???
+      Brokers.init();
 
       if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {
         Initializer.init();
@@ -74,7 +69,7 @@ public class Server {
         // Helper para formatear números
         handlebars.registerHelper("formatPuntos", (puntos, options) -> {
           if (puntos == null) {
-            return "0 puntos";
+            return "0";
           }
 
           // Convertir el número a un String

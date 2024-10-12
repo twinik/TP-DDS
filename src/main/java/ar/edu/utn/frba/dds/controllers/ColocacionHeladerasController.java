@@ -41,6 +41,7 @@ public class ColocacionHeladerasController implements ICrudViewsHandler {
             // TODO: Mostrar pop up error ?
         }
         //TODO: mostrar cartel de creado con exito
+        context.status(201);
         context.redirect("/heladeras");
     }
 
