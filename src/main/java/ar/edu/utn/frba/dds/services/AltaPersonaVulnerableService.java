@@ -4,11 +4,16 @@ import static ar.edu.utn.frba.dds.helpers.DateHelper.fechaFromString;
 
 import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.TutoradoInputDto;
+import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
+import ar.edu.utn.frba.dds.helpers.DniHelper;
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniDuplicadoFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniInvalidoFactory;
 import ar.edu.utn.frba.dds.models.repositories.IAltaPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.models.repositories.IPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
@@ -27,6 +32,8 @@ public class AltaPersonaVulnerableService {
   public String darAltaPersonaVulnerable(AltaPersonaVulnerableDto dto) {
     Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
+
+    this.validarDocumento(p.getTipoDocumento(), dto.getNroDocumento());
 
     AltaPersonaVulnerable a = new AltaPersonaVulnerable();
     a.setPersona(p);
@@ -84,6 +91,12 @@ public class AltaPersonaVulnerableService {
     p.setNroDocumento(dto.getNroDocumento());
     p.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
     return p;
+  }
+
+  private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento) {
+    if (!DniHelper.esValido(nroDocumento)) throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
+    Optional<PersonaVulnerable> user = this.personasVulnerablesRepository.buscarPorDni(tipoDocumento,nroDocumento);
+    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
   }
 
 }

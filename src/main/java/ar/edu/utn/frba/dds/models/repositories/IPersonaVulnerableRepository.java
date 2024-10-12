@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.models.repositories;
 
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
+import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +11,8 @@ import java.util.Optional;
  */
 public interface IPersonaVulnerableRepository {
     Optional<PersonaVulnerable> buscar(String id);
+
+    Optional<PersonaVulnerable> buscarPorDni(TipoDocumento tipoDocumento, String documento);
 
     List<PersonaVulnerable> buscarTodos();
 
