@@ -4,7 +4,7 @@
             <h1 class="title1">Catálogo de productos</h1>
             {{#if puntosDisp}}
                 <p class="text-xl text-black">
-                    Puntos disponibles: <span class="font-bold text-black">{{puntosDisp.puntos}}</span>
+                    Puntos disponibles: <span class="font-bold text-black">{{formatPuntos puntosDisp.puntos}}</span>
                 </p>
             {{/if}}
         </div>
@@ -23,7 +23,7 @@
                         </h5>
                         <p class="mb-3 text-lg text-gray-300">Samsung</p>
                         <p class="mb-4 text-xl font-bold text-white">
-                            {{this.puntosNecesarios}} puntos
+                            {{formatPuntos this.puntosNecesarios}} puntos
                         </p>
                         <div class="flex-grow"></div>
                         <form action="/canjear-producto/{{this.id}}" method="post" class="w-full mt-auto">
