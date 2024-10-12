@@ -12,7 +12,7 @@ public class FrecuenciaUsoAttributeConverter implements AttributeConverter<Frecu
     public String convertToDatabaseColumn(FrecuenciaUso frecuenciaUso) {
         if (frecuenciaUso == null) return null;
         if (frecuenciaUso instanceof FrecuenciaDiaria) {
-            return "FRECUENCIA_DIARA";
+            return "FRECUENCIA_DIARIA";
         }
         return null;
     }

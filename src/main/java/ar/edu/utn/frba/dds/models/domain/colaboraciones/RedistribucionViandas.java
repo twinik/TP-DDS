@@ -1,9 +1,13 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.exceptions.HeladeraLlenaException;
+import ar.edu.utn.frba.dds.exceptions.HeladeraVaciaException;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeHeladeraLLenaFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeHeladeraVaciaFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,37 +28,45 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RedistribucionViandas extends EntidadPersistente implements IPuntajeCalculable {
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
-    private Colaborador colaborador;
+  @ManyToOne
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
+  private Colaborador colaborador;
 
-    @Column(name = "fecha_redistribucion", columnDefinition = "DATE", nullable = false)
-    private LocalDate fecha;
+  @Column(name = "fecha_redistribucion", columnDefinition = "DATE", nullable = false)
+  private LocalDate fecha;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "heladera_origen", referencedColumnName = "id", nullable = false)
-    private Heladera heladeraOrigen;
+  @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "heladera_origen", referencedColumnName = "id", nullable = false)
+  private Heladera heladeraOrigen;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "heladera_destino", referencedColumnName = "id", nullable = false)
-    private Heladera heladeraDestino;
+  @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "heladera_destino", referencedColumnName = "id", nullable = false)
+  private Heladera heladeraDestino;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "motivo_id", referencedColumnName = "id")
-    private MotivoRedistribucionVianda motivo;
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "motivo_id", referencedColumnName = "id")
+  private MotivoRedistribucionVianda motivo;
 
-    @Column(name = "cantidad")
-    private Integer cantidad;
+  @Column(name = "cantidad")
+  private Integer cantidad;
 
-    public void redistribuirEnOrigen(){
-        this.heladeraOrigen.quitarVianda(this.cantidad);
-    }
+  public void redistribuirEnOrigen() {
+    this.heladeraOrigen.quitarVianda(this.cantidad);
+  }
 
-    public void redistribuirEnDestino(){
-        this.heladeraDestino.agregarVianda(this.cantidad);
-    }
-    @Override
-    public Float calcularPuntaje() {
-        return (float) this.cantidad;
-    }
+  public void redistribuirEnDestino() {
+    this.heladeraDestino.agregarVianda(this.cantidad);
+  }
+
+  public void validarCantidades() {
+    if (this.cantidad > this.heladeraOrigen.getViandas())
+      throw new HeladeraVaciaException(MensajeHeladeraVaciaFactory.generarMensaje(this.heladeraOrigen.getNombre()));
+    if (this.getCantidad() > this.heladeraDestino.getCuposLibresViandas())
+      throw new HeladeraLlenaException(MensajeHeladeraLLenaFactory.generarMensaje(this.heladeraDestino.getNombre()));
+  }
+
+  @Override
+  public Float calcularPuntaje() {
+    return (float) this.cantidad;
+  }
 }

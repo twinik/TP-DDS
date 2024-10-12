@@ -79,7 +79,7 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     String timestampEnMilis = Long.toString(DateHelper.getTimestamp(this.timestamp));
     String content = String.join(";", this.colaborador.getId(), timestampEnMilis, this.id);
 
-    BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, "idFalopa");
+    BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);
     brokerPublisher.publicar(content);
   }
 }

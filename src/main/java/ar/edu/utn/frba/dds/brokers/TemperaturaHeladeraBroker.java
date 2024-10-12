@@ -12,7 +12,7 @@ public class TemperaturaHeladeraBroker {
 
         String topic = configReader.getProperty("SENSOR_TEMP_BROKER_TOPIC");
         String broker = configReader.getProperty("SENSOR_TEMP_BROKER");
-        String clientId = configReader.getProperty("CLIENT_ID");
+        String clientId = configReader.getProperty("CLIENT_TEMPERATURA_ID");
 
         SensorTemperaturaListener receptor = new SensorTemperaturaListener();
         receptor.setSensorTemperaturaRepository(ServiceLocator.get(ISensorTemperaturaRepository.class));
