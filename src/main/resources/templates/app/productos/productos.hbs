@@ -49,13 +49,13 @@
                 text: "¿Deseas canjear " + productName + " por " + productPoints + " puntos?",
                 type: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
+                confirmButtonColor: "#28b463",
+                cancelButtonColor: "#cb4335",
                 confirmButtonText: "Sí, canjear",
                 cancelButtonText: "No, cancelar",
                 closeOnConfirm: false
             }, function (isConfirm) {
                 if (isConfirm) {
-                    // Si el usuario confirma, envía el formulario
                     document.getElementById('form-canje-' + productId).submit();
                 }
             });
