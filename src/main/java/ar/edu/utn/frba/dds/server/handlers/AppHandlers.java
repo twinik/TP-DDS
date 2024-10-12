@@ -18,6 +18,7 @@ public class AppHandlers {
       new DniDuplicadoHandler(),
       new MismaHeladeraHandler(),
       new PuntosInsuficientesHandler(),
+      new CapcacidadHeladeraHandler(),
   };
 
   public static void applyHandlers(Javalin app) {

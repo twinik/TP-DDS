@@ -31,6 +31,7 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
   private ITarjetasRepository tarjetasRepository;
   private DonacionesViandaService donacionesViandaService;
   private RedistribucionViandaService redistribucionViandaService;
+  private IUsosTarjetaRepository usosTarjetaRepository;
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
@@ -84,9 +85,11 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
 
   private void manejarAperturaPersonaVulnerable(Heladera heladera, Tarjeta tarjeta, AperturaHeladera aperturaHeladera) {
     try {
+      // TODO: el que quiera modularizar esto bienvenido sea
       heladera.quitarVianda();
       UsoTarjeta usoTarjeta = UsoTarjeta.of(aperturaHeladera.getTimestamp(), heladera);
       if (!tarjeta.permiteUsar()) usoTarjeta.marcarNoAutorizado();
+      this.usosTarjetaRepository.guardar(usoTarjeta);
       tarjeta.agregarUsos(usoTarjeta);
       aperturaHeladera.setUsoTarjeta(usoTarjeta);
       this.tarjetasRepository.actualizar(tarjeta);

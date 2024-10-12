@@ -38,7 +38,7 @@ public class Tarjeta extends EntidadPersistente {
     @Column(name = "frecuencia_permitida")
     private FrecuenciaUso frecuenciaPermitida;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
     private List<UsoTarjeta> usos = new ArrayList<>();
 

@@ -31,6 +31,7 @@ public class RedistribucionViandaService {
     redistribucionViandas.setCantidad(dto.getCantViandas());
     if (dto.getIdMotivo() != null)
       redistribucionViandas.setMotivo(this.motivoRedistribucionService.obtenerMotivo(dto.getIdMotivo()));
+    redistribucionViandas.validarCantidades();
     this.redistribucionesViandaRepository.guardar(redistribucionViandas);
     this.solicitudAperturaHeladeraService.generarSolicitud(redistribucionViandas);
 

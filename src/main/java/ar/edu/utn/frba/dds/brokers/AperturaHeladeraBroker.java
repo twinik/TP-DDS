@@ -33,7 +33,7 @@ public class AperturaHeladeraBroker {
 
         String topic = configReader.getProperty("APERTURA_HELADERA_BROKER_TOPIC");
         String broker = configReader.getProperty("APERTURA_HELADERA_BROKER");
-        String clientId = configReader.getProperty("CLIENT_ID");
+        String clientId = configReader.getProperty("CLIENT_APERTURAS_ID");
 
         AperturaHeladeraListener receptor = new AperturaHeladeraListener();
         receptor.setHeladerasRepository(ServiceLocator.get(IHeladerasRepository.class));
@@ -43,6 +43,7 @@ public class AperturaHeladeraBroker {
         receptor.setTarjetasRepository(ServiceLocator.get(ITarjetasRepository.class));
         receptor.setRedistribucionViandaService(ServiceLocator.get(RedistribucionViandaService.class));
         receptor.setDonacionesViandaService(ServiceLocator.get(DonacionesViandaService.class));
+        receptor.setUsosTarjetaRepository(ServiceLocator.get(IUsosTarjetaRepository.class));
 
         BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
         brokerSubscriber.listen();
