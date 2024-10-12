@@ -34,6 +34,19 @@ public class RecomendadorRetrofitAdapter implements RecomendadorDePuntosAdapter 
      * @param radio cuantos killoemtros desde tu punto de referencia toleraria alejarse
      * @return el listado de posibles ubicaciones a paartir de los parametros
      */
+    /*
+    En realidad deberia ser
+    public List<RecomendacionColocacionDto> recomendarUbicacion(Ubicacion punto, Float radio)
+        RecomendadorPuntosColocacionService service = this.retrofit.create(RecomendadorPuntosColocacionService.class);
+        Call<List<RecomendacionColocacionDto>> requestRecomendacionPuntos = service.puntosRecomendados(punto.getLatitud(), punto.getLongitud(), radio);
+        Response<List<RecomendacionColocacionDto>> response;
+        try {
+            response = requestRecomendacionPuntos.execute();
+        } catch (IOException e) {
+            throw new FallaAlConsumirApiException(e);
+        }
+        return response.body();
+     */
     public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
         RecomendadorPuntosColocacionService service = this.retrofit.create(RecomendadorPuntosColocacionService.class);
         Call<ListadoUbicaciones> requestRecomendacionPuntos = service.puntosRecomendados(punto.getLatitud(), punto.getLongitud(), radio);

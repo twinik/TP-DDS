@@ -10,4 +10,8 @@ import retrofit2.http.Query;
 public interface RecomendadorPuntosColocacionService {
     @GET("/puntos")
     Call<ListadoUbicaciones> puntosRecomendados(@Query("latitud") float latitud, @Query("longitud") float longitud, @Query("radio") float radio);
+    /*
+    Esto ahora deberia ser asi
+    Call<List<RecomendacionColocacionDto>> puntosRecomendados(@Query("latitud") float latitud, @Query("longitud") float longitud, @Query("radio") float radio);
+     */
 }

@@ -1,0 +1,80 @@
+{{#partial "contenido"}}
+    <div id="map"></div>
+    <div class="new-point-container">
+        <button id="elegir-nuevo-punto" class="new-point-button">
+            Elegir nuevo punto
+        </button>
+    </div>
+    <div class="form-container p-4 bg-gray-100 rounded-lg">
+        <div class="flex items-center space-x-2">
+            <!-- Contenedor de Latitud -->
+            <div class="flex items-center space-x-2">
+                <label for="latitud">Latitud:</label>
+                <input
+                        type="number"
+                        id="latitud"
+                        name="latitud"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-40"
+                        placeholder="Latitud"
+                        required
+                        step="0.000001"
+                        min="-90"
+                        max="90"
+                />
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <label for="longitud">Longitud:</label>
+                <input
+                        type="number"
+                        id="longitud"
+                        name="longitud"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-40"
+                        placeholder="Longitud"
+                        required
+                        step="0.000001"
+                        min="-180"
+                        max="180"
+                />
+            </div>
+
+            <!-- Contenedor de Radio de Cobertura -->
+            <div class=" flex items-center space-x-2">
+                <label for="radio" class="whitespace-nowrap">Cobertura (Km):</label>
+                <input
+                        type="number"
+                        step="0.2"
+                        id="radio"
+                        name="radio"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-16"
+                        placeholder="1"
+                        required
+                />
+            </div>
+            <!-- Botón Confirmar -->
+            <button id="confirmar"
+                    class="ml-4 px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Confirmar
+            </button>
+        </div>
+
+        <div id="mensaje-error" class="error-message">Por favor, completa todos los campos.</div>
+    </div>
+
+{{/partial}}
+
+{{#partial "links"}}
+    <link rel="stylesheet" href="/css/puntosdonacion.css"/>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+    ></script>
+    <script src="/js/mapa-seleccionar-ubicacion.js"></script>
+    <script src="/js/puntos-colocacion.js"></script>
+{{/partial}}
+
+{{> templates/app/base}}

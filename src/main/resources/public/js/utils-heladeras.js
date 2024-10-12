@@ -35,3 +35,17 @@ async function fetchDonaciones(provincia, localidad) {
         console.error('Failed to fetch donaciones:', error);
     }
 }
+
+async function fetchDonacionesCercanas(latitud, longitud, radio) {
+    try {
+        const response = await fetch(`/colaborar/recibir-puntos-colocacion?latitud=${latitud}&longitud=${longitud}&radio=${radio}`);
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+        const puntos_colocacion = await response.json();
+        console.log('Puntos Colocacion:', puntos_colocacion);
+        return puntos_colocacion;
+    } catch (error) {
+        console.error('Failed to fetch puntos colocacion:', error);
+    }
+}

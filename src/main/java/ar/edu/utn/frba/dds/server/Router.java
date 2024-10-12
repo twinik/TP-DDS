@@ -59,18 +59,23 @@ public class Router {
 
     app.get("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::create);
     app.post("/colaborar/colocar-heladera", ServiceLocator.get(ColocacionHeladerasController.class)::save);
+    app.get("/colaborar/recibir-puntos-colocacion", ServiceLocator.get(RecomendacionesController.class)::getPuntosColocacionParaMapa);
 
     app.get("/colaborar/ofrecer-producto", ServiceLocator.get(OfertasProductoController.class)::create);
 
     // HELADERAS
     app.get("/heladeras", ctx -> ctx.render("/app/heladeras/heladeras.hbs"));
     app.get("/heladeras/mapa", ctx -> ctx.json(ServiceLocator.get(HeladerasService.class).getHeladerasParaMapa()));
-    app.get("/heladeras/recibir-puntos", ServiceLocator.get(RecomendacionesController.class)::getDonacionesParaMapa);
+
     app.get("/heladeras/puntos-donacion", ctx -> ctx.render("/app/heladeras/puntosdonacion.hbs"));
+    app.get("/heladeras/recibir-puntos", ServiceLocator.get(RecomendacionesController.class)::getDonacionesParaMapa);
+
     app.get("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::create);
     app.post("/heladeras/{id}/suscribirse", ServiceLocator.get(SuscripcionesController.class)::save);
+
     app.get("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::create);
     app.post("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::save);
+
     app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
 
     // REPORTES

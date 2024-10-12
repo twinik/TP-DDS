@@ -16,7 +16,7 @@ import java.io.IOException;
 @NoArgsConstructor
 public class RecomendadorDePuntosDeColocacion {
 
-    private RecomendadorDePuntosAdapter recomendadorDePuntosAdapter;
+    RecomendadorDePuntosAdapter recomendadorDePuntosAdapter;
 
     /**
      * Recomienda una ubicacion.

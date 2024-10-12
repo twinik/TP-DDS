@@ -241,7 +241,7 @@ public class ServiceLocator {
         add(clase, new TecnicosController(get(TecnicosService.class)));
       else if (clase.equals(RecomendacionesController.class)) {
         try {
-          add(clase, new RecomendacionesController(new RecomendacionDonaciones(RecomendadorDonacionesRetrofitAdapter.getInstance())));
+          add(clase, new RecomendacionesController(new RecomendacionDonaciones(RecomendadorDonacionesRetrofitAdapter.getInstance()), new RecomendadorDePuntosDeColocacion(RecomendadorRetrofitAdapter.getInstance())));
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
