@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.brokers;
 
 import ar.edu.utn.frba.dds.brokers.dtos.AperturaHeladeraBrokerDTO;
+import ar.edu.utn.frba.dds.exceptions.ViandaVaciaException;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.domain.heladeras.AperturaHeladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
@@ -72,12 +73,17 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
     }
 
     private void manejarAperturaPersonaVulnerable(Heladera heladera, Tarjeta tarjeta, AperturaHeladera aperturaHeladera) {
-        UsoTarjeta usoTarjeta = UsoTarjeta.of(aperturaHeladera.getTimestamp(), heladera);
-        if (!tarjeta.permiteUsar()) usoTarjeta.marcarNoAutorizado();
-        heladera.quitarVianda();
-        tarjeta.agregarUsos(usoTarjeta);
-        aperturaHeladera.setUsoTarjeta(usoTarjeta);
-        this.tarjetasRepository.actualizar(tarjeta);
+        try{
+            heladera.quitarVianda();
+            UsoTarjeta usoTarjeta = UsoTarjeta.of(aperturaHeladera.getTimestamp(), heladera);
+            if (!tarjeta.permiteUsar()) usoTarjeta.marcarNoAutorizado();
+            tarjeta.agregarUsos(usoTarjeta);
+            aperturaHeladera.setUsoTarjeta(usoTarjeta);
+            this.tarjetasRepository.actualizar(tarjeta);
+        }
+        catch (ViandaVaciaException e){
+            e.printStackTrace();
+        }
         this.aperturasHeladeraRepository.actualizar(aperturaHeladera);
     }
 
