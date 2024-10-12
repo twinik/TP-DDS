@@ -15,7 +15,6 @@ public class Router {
    * Inicio de App.
    */
   public static void init(Javalin app) {
-
     // LOGIN
     app.get("/login", ServiceLocator.get(LoginController.class)::index);
     app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
@@ -97,6 +96,7 @@ public class Router {
     // PRODUCTOS
     app.get("/productos", ServiceLocator.get(OfertasProductoController.class)::index);
     app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
+    app.post("/canjear-producto/{id}", ServiceLocator.get(CanjeProductoController.class)::save);
 
     app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
     app.get("/", ctx -> ctx.redirect("/quienes-somos"));

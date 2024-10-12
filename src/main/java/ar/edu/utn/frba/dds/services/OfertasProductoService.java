@@ -3,49 +3,80 @@ package ar.edu.utn.frba.dds.services;
 import ar.edu.utn.frba.dds.dtos.ofertas.OfertaProductoDto;
 import ar.edu.utn.frba.dds.dtos.personas.ColaboradorPuntosDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CanjeProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.Producto;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.PuntosInsuficientesException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
+import ar.edu.utn.frba.dds.models.repositories.ICanjeProductoRepository;
 import ar.edu.utn.frba.dds.models.repositories.IOfertaProductoRepository;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
 public class OfertasProductoService {
-    private IOfertaProductoRepository ofertaProductoRepository;
-    private ColaboradoresService colaboradoresService;
+  private IOfertaProductoRepository ofertaProductoRepository;
+  private ICanjeProductoRepository canjeProductoRepository;
+  private ColaboradoresService colaboradoresService;
 
-    public List<OfertaProductoDto> obtenerTodos() {
-        return this.ofertaProductoRepository.buscarTodos().stream().map(OfertaProductoDto::fromOferta).toList();
-    }
+  public List<OfertaProductoDto> obtenerTodos() {
+    return this.ofertaProductoRepository.buscarTodos().stream().map(OfertaProductoDto::fromOferta).toList();
+  }
 
-    public void crearOferta(OfertaProductoDto oferta) {
+  public void crearOferta(OfertaProductoDto oferta) {
+    Colaborador colab = this.colaboradoresService.obtenerColaborador(oferta.getIdColaborador());
 
-        Colaborador colab = this.colaboradoresService.obtenerColaborador(oferta.getIdColaborador());
+    // validar aca permisos con alguna capa de middleware ??
 
-        // validar aca permisos con alguna capa de middleware ??
+    if (!oferta.estanCamposLlenos())
+      throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
 
-        if (!oferta.estanCamposLlenos())
-            throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+    OfertaProducto ofertaProducto = new OfertaProducto();
+    ofertaProducto.setProducto(new Producto(oferta.getNombre(), oferta.getUrlFoto()));
+    ofertaProducto.setFechaCreacion(LocalDate.now());
+    ofertaProducto.setPuntosNecesarios(oferta.getPuntosNecesarios());
+    ofertaProducto.setColaborador(colab);
+    ofertaProducto.setCategoria(CategoriaOferta.valueOf(oferta.getCategoria()));
 
-        OfertaProducto ofertaProducto = new OfertaProducto();
-        ofertaProducto.setProducto(new Producto(oferta.getNombre(), oferta.getUrlFoto()));
-        ofertaProducto.setFechaCreacion(LocalDate.now());
-        ofertaProducto.setPuntosNecesarios(oferta.getPuntosNecesarios());
-        ofertaProducto.setColaborador(colab);
-        ofertaProducto.setCategoria(CategoriaOferta.valueOf(oferta.getCategoria()));
+    ofertaProductoRepository.guardar(ofertaProducto);
+  }
 
+  public ColaboradorPuntosDto obtenerPuntos(String idColaborador) {
+    Colaborador c = this.colaboradoresService.obtenerColaborador(idColaborador);
+    return ColaboradorPuntosDto.fromColaborador(c);
+  }
 
-        ofertaProductoRepository.guardar(ofertaProducto);
+  public void canjearOferta(String idColaborador, String idOferta) throws PuntosInsuficientesException {
+    Colaborador c = this.colaboradoresService.obtenerColaborador(idColaborador);
+    OfertaProducto o = this.obtenerOferta(idOferta);
 
-    }
+    if (!o.puedeSerCanjeadoPor(c))
+      throw new PuntosInsuficientesException();
 
-    public ColaboradorPuntosDto obtenerPuntos(String idColaborador) {
-        Colaborador c = this.colaboradoresService.obtenerColaborador(idColaborador);
-        return ColaboradorPuntosDto.fromColaborador(c);
-    }
+    CanjeProducto canje = new CanjeProducto();
+    canje.setComprador(c);
+    canje.setOfertaCanjeada(o);
+    canje.setFechaCanje(LocalDateTime.now());
+    canje.setPuntosGastados(o.getPuntosNecesarios());
+    this.canjeProductoRepository.guardar(canje);
 
+    c.restarPuntos(o.getPuntosNecesarios());
+    this.colaboradoresService.actualizar(c);
+  }
+
+  public OfertaProducto obtenerOferta(String idOferta) {
+    if (idOferta == null)
+      throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Oferta producto"));
+    Optional<OfertaProducto> oferta = this.ofertaProductoRepository.buscar(idOferta);
+    if (oferta.isEmpty())
+      throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Oferta producto", idOferta));
+    return oferta.get();
+  }
 }

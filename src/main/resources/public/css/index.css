@@ -33,18 +33,10 @@ body {
 }
 
 .boton {
-    background-color: #3a4b6b;
-    color: #eee;
-    font-weight: 500;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
+    background-color: #3a4b6b !important;
 }
 
 .boton:hover {
-    background-color: #32405c;
-}
-
-.boton-canje {
     background-color: #202a3d;
 }
 

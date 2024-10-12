@@ -25,7 +25,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "colaborador",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"tipo_documento", "documento"})
+    uniqueConstraints = @UniqueConstraint(columnNames = {"tipo_documento", "documento"})
 )
 @Getter
 @Setter
@@ -33,96 +33,95 @@ import java.util.List;
 @NoArgsConstructor
 public class Colaborador extends EntidadPersistente implements Contactable {
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
-    private Usuario usuario;
+  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
+  private Usuario usuario;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_documento")
-    private TipoDocumento tipoDocumento;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipo_documento")
+  private TipoDocumento tipoDocumento;
 
-    @Column(name = "documento", columnDefinition = "varchar(11)")
-    private String documento;
+  @Column(name = "documento", columnDefinition = "varchar(11)")
+  private String documento;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id", unique = true)
-    private TipoColaborador tipoColaborador;
+  @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id", unique = true)
+  private TipoColaborador tipoColaborador;
 
-    @Column(name = "puntosGanados")
-    private Float puntosGanados = 0f;
+  @Column(name = "puntosGanados")
+  private Float puntosGanados = 0f;
 
-    @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
+  @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+  private List<ColocacionHeladeras> heladerasColocadas = new ArrayList<>();
 
-    @Embedded
-    private Direccion direccion;
+  @Embedded
+  private Direccion direccion;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    private List<MedioDeContacto> medioContacto = new ArrayList<>();
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+  private List<MedioDeContacto> medioContacto = new ArrayList<>();
 
-    @Column(name = "nombre")
-    private String nombre;
+  @Column(name = "nombre")
+  private String nombre;
 
-    @Column(name = "apellido")
-    private String apellido;
+  @Column(name = "apellido")
+  private String apellido;
 
-    @Column(name = "fechaNacimiento")
-    private LocalDate fechaNacimiento;
+  @Column(name = "fechaNacimiento")
+  private LocalDate fechaNacimiento;
 
-    @Column(name = "rubro")
-    private String rubro;
+  @Column(name = "rubro")
+  private String rubro;
 
-    @Column(name = "razonSocial")
-    private String razonSocial;
+  @Column(name = "razonSocial")
+  private String razonSocial;
 
-    @Column(name = "tipo_persona_juridica")
-    @Enumerated(EnumType.STRING)
-    private TipoPersonaJuridica tipoPersonaJuridica;
+  @Column(name = "tipo_persona_juridica")
+  @Enumerated(EnumType.STRING)
+  private TipoPersonaJuridica tipoPersonaJuridica;
 
-    @Column(name = "form_completado")
-    private Boolean formCompletado;
+  @Column(name = "form_completado")
+  private Boolean formCompletado;
 
-    public void sumarPuntos(Float puntos) {
-        this.puntosGanados += puntos;
-    }
+  public void sumarPuntos(Float puntos) {
+    this.puntosGanados += puntos;
+  }
 
-    public void restarPuntos(Float puntos) {
-        this.puntosGanados -= puntos;
-    }
+  public void restarPuntos(Float puntos) {
+    this.puntosGanados -= puntos;
+  }
 
-    public void agregarColocacionHeladera(ColocacionHeladeras colocacion) {
-        this.heladerasColocadas.add(colocacion);
-        colocacion.setColaborador(this);
-    }
+  public void agregarColocacionHeladera(ColocacionHeladeras colocacion) {
+    this.heladerasColocadas.add(colocacion);
+    colocacion.setColaborador(this);
+  }
 
-    public String getNombreYapellido() {
-        return String.format("%s %s", this.nombre, this.apellido);
-    }
+  public String getNombreYapellido() {
+    return String.format("%s %s", this.nombre, this.apellido);
+  }
 
-    public void agregarMedioContacto(MedioDeContacto... medio) {
-        this.medioContacto.addAll(Arrays.stream(medio).toList());
-    }
+  public void agregarMedioContacto(MedioDeContacto... medio) {
+    this.medioContacto.addAll(Arrays.stream(medio).toList());
+  }
 
-    public void agregarMedioContacto(List<MedioDeContacto> medios) {
-        this.medioContacto.addAll(medios);
-    }
+  public void agregarMedioContacto(List<MedioDeContacto> medios) {
+    this.medioContacto.addAll(medios);
+  }
 
+  @Override
+  public String email() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.EMAIL);
+  }
 
-    @Override
-    public String email() {
-        return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.EMAIL);
-    }
+  @Override
+  public String telefonoCompleto() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.WHATSAPP);
+  }
 
-    @Override
-    public String telefonoCompleto() {
-        return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.WHATSAPP);
-    }
-
-    @Override
-    public String telegramId() {
-        return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.TELEGRAM);
-    }
+  @Override
+  public String telegramId() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.TELEGRAM);
+  }
 }
 
 //el colaborador a lo largo del tiempo podria tener distintas tarjetas

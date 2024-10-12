@@ -8,5 +8,4 @@ public enum CategoriaOferta {
     ELECTRONICA,
     ARTICULOS_HOGAR,
     OTROS
-
 }
