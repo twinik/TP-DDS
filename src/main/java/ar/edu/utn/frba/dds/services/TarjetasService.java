@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.models.domain.tarjetas.FrecuenciaDiaria;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.PosibleCodigoTarjeta;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeCodigoDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeCodigosNoDisponiblesFactory;
 import ar.edu.utn.frba.dds.models.repositories.IPosiblesCodigosTarjetaRepository;
 import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
@@ -22,6 +23,8 @@ public class TarjetasService {
     private IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository;
 
     public void crearTarjeta(PersonaVulnerable vulnerable, TarjetaInputDto dto) {
+        Optional<Tarjeta> posibleTarjeta = this.tarjetasRepository.buscarPorCodigo(dto.getCodigo());
+        if(posibleTarjeta.isPresent()) throw new CodigoInvalidoException(MensajeCodigoDuplicadoFactory.generarMensaje());
         Tarjeta t = Tarjeta.of(dto.getCodigo(), 0, new FrecuenciaDiaria(), vulnerable);
         tarjetasRepository.guardar(t);
     }

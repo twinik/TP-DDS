@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculadorPuntos;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniDuplicadoFactory;
@@ -39,10 +40,15 @@ public class AltaPersonaVulnerableService {
     a.setPersona(p);
     a.setColaborador(colaborador);
     a.setFecha(LocalDate.now());
-    this.personasVulnerablesRepository.guardar(p);
-    this.tarjetasService.crearTarjeta(p, dto.getTarjeta());
-    this.calculadorPuntos.sumarPuntosPara(colaborador, a);
-    this.altaPersonaVulnerableRepository.guardar(a);
+    try {
+      this.personasVulnerablesRepository.guardar(p);
+      this.tarjetasService.crearTarjeta(p, dto.getTarjeta());
+      this.calculadorPuntos.sumarPuntosPara(colaborador, a);
+      this.altaPersonaVulnerableRepository.guardar(a);
+    } catch (CodigoInvalidoException e) {
+      this.personasVulnerablesRepository.eliminar(p);
+      throw e;
+    }
     return p.getId();
   }
 

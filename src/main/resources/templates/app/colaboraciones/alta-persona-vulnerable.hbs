@@ -15,6 +15,10 @@
         <h1 class="title1 mb-8">Alta de persona vulnerable</h1>
 
         <form method="post" action="/colaborar/registrar-persona-vulnerable" class="content-center max-w-md mx-auto">
+            {{#if message}}
+                <p id="error-message" style="background: rgb(255, 163, 163);"
+                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            {{/if}}
             <label
                     for="nombre"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -73,10 +77,6 @@
                     required
                     min="1"
             />
-            {{#if message}}
-                <p id="error-message" style="background: rgb(255, 163, 163);"
-                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
-            {{/if}}
             <label
                     for="default-datepicker"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
