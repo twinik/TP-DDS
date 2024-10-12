@@ -30,12 +30,18 @@ public class Router {
         // ALTA ADMIN
         app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);
         app.post("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::save);
+
         app.get("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::create);
         app.post("/admin/formularios/nuevo", ServiceLocator.get(FormulariosController.class)::save);
+
         app.get("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::create);
         app.post("/admin/modelos-heladeras/nuevo", ServiceLocator.get(ModelosHeladeraController.class)::save);
+
         app.get("/admin/tarjetas/nuevo", ServiceLocator.get(PosiblesCodigosTarjetasController.class)::create);
         app.post("/admin/tarjetas/nuevo", ServiceLocator.get(PosiblesCodigosTarjetasController.class)::save);
+
+        app.get("/admin/visitas-tecnico/nuevo", ServiceLocator.get(VisitasTecnicoController.class)::create);
+        app.post("/admin/visitas-tecnico/nuevo", ServiceLocator.get(VisitasTecnicoController.class)::save);
 
         app.get("/responder-formulario/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::obtenerFormulario);
         app.get("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::create);

@@ -249,6 +249,8 @@ public class ServiceLocator {
                 add(clase, new SuscripcionesController(get(SuscripcionesService.class), get(HeladerasService.class)));
             else if (clase.equals(ViandasController.class))
                 add(clase, new ViandasController(get(ViandasService.class)));
+            else if (clase.equals(VisitasTecnicoController.class))
+                add(clase, new VisitasTecnicoController());
 
                 //EXTRAS
             else if (clase.equals(CargaColaboracionCsvReader.class))

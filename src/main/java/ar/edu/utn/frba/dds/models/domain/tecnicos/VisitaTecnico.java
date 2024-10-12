@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.domain.tecnicos;
 
+import ar.edu.utn.frba.dds.dtos.tecnicos.VisitaTecnicoDto;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Incidente;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class VisitaTecnico extends EntidadPersistente {
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id", nullable = false)
     private Tecnico tecnico;
 
-    @Column(name = "fecha_donacion_dinero", columnDefinition = "TIMESTAMP", nullable = false)
+    @Column(name = "fecha_visita", nullable = false)
     private LocalDateTime timestamp;
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
@@ -35,4 +36,5 @@ public class VisitaTecnico extends EntidadPersistente {
     @ManyToOne
     @JoinColumn(name = "incidente_id", referencedColumnName = "id", nullable = false)
     private Incidente incidente;
+
 }
