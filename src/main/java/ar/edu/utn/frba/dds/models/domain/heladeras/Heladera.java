@@ -44,8 +44,8 @@ public class Heladera extends EntidadPersistente {
     @Column(name = "fecha_puesta_funcionamiento", columnDefinition = "DATE")
     private LocalDate fechaPuestaFuncionamiento;
 
-    @Column(name = "viandas")
-    private Integer viandas;
+  @Column(name = "viandas")
+  private Integer viandas=0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")

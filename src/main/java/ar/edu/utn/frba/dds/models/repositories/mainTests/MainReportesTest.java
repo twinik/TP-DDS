@@ -68,11 +68,11 @@ public class MainReportesTest {
         viandas.guardar(v4);
         viandas.guardar(v5);
 
-        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v1, h));
-        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v2, h));
-        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v3, h));
-        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v4, h));
-        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v5, h));
+        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v1));
+        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v2));
+        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v3));
+        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v4));
+        donacionesRepo.guardar(new DonacionVianda(c1, LocalDate.now(), v5));
 
         RedistribucionViandas redistribucionViandas = new RedistribucionViandas(c1, LocalDate.now(), h, h2, new MotivoRedistribucionVianda("prueba"), 2);
 

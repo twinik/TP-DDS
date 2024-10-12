@@ -49,22 +49,21 @@ public class AperturaHeladeraBroker {
     }
 
     public static void main(String[] args) {
-        Colaborador c = new Colaborador();
-        c.setUsuario(new Usuario("dfmaskdmf", "fladsmlfmds"));
-        c.setDireccion(new Direccion("hola", 534, 1, "434"));
-        IHeladerasRepository heladerasRepository = ServiceLocator.get(IHeladerasRepository.class);
-        Heladera heladera = new Heladera(LocalDate.now());
-        // heladera.setId(2L);
-        heladera.setNombre("heladerita");
-        heladerasRepository.guardar(heladera);
-        ServiceLocator.get(IColaboradoresRepository.class).guardar(c);
-        ITarjetasColaboradorRepository tarjetasColaboradorRepository = ServiceLocator.get(ITarjetasColaboradorRepository.class);
-        TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c, GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), LocalDate.now());
-        ///tarjetaColaborador.setId(3L);
-        tarjetasColaboradorRepository.guardar(tarjetaColaborador);
-        ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = ServiceLocator.get(ISolicitudesAperturaHeladeraRepository.class);
-        SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(c, "un motivo", LocalDateTime.now(), heladera, new RedistribucionViandas(), new IngresoVianda());
-        solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
+//        Colaborador c = new Colaborador();
+//        c.setUsuario(new Usuario("dfmaskdmf","fladsmlfmds"));
+//        c.setDireccion(new Direccion("hola", 534, 1, "434"));
+//        IHeladerasRepository heladerasRepository = ServiceLocator.get(IHeladerasRepository.class);
+//        Heladera heladera = new Heladera(LocalDate.now());
+//        // heladera.setId(2L);
+//        heladera.setNombre("heladerita");
+//        heladerasRepository.guardar(heladera);
+//        ServiceLocator.get(IColaboradoresRepository.class).guardar(c);
+//        ITarjetasColaboradorRepository tarjetasColaboradorRepository = ServiceLocator.get(ITarjetasColaboradorRepository.class);
+//        TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c, GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), LocalDate.now());
+//        ///tarjetaColaborador.setId(3L);
+//        tarjetasColaboradorRepository.guardar(tarjetaColaborador);
+//        ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository = ServiceLocator.get(ISolicitudesAperturaHeladeraRepository.class);SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera(c, "un motivo", LocalDateTime.now(), heladera, new RedistribucionViandas(),new IngresoVianda());
+//        solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
         try {
             suscribirseAAperturasHeladeras();
         } catch (IOException e) {

@@ -37,8 +37,8 @@ public class DonacionesViandaRepository implements IDonacionesViandaRepository, 
         LocalDate principioDeSemana = DateHelper.principioDeSemana(fecha);
         LocalDate finDeSemana = DateHelper.finDeSemana(fecha);
         List<Object[]> results = entityManager().createQuery(
-                        "select d.heladera.nombre, count(d) from DonacionVianda d where d.activo = :activo" + " and d.fecha between :principioSemana and :finSemana" +
-                                " and d.heladera.activo=:activo group by d.heladera.nombre order by count(d)", Object[].class)
+                        "select d.vianda.heladera.nombre, count(d) from DonacionVianda d where d.activo = :activo" + " and d.fecha between :principioSemana and :finSemana" +
+                                " and d.vianda.heladera.activo=:activo group by d.vianda.heladera.nombre order by count(d)", Object[].class)
                 .setParameter("activo", true)
                 .setParameter("principioSemana", principioDeSemana)
                 .setParameter("finSemana", finDeSemana)

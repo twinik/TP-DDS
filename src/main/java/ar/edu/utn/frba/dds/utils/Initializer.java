@@ -142,10 +142,10 @@ public class Initializer {
         modeloHeladeraRepository.guardar(modelo1);
         modeloHeladeraRepository.guardar(modelo2);
 
-        Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), null, modelo1);
-        h1.setHeladeraActiva(false);
-        Heladera h2 = new Heladera(new Ubicacion(-34.613466f, -58.419659f), new Direccion("lima", 800, null, "1405"), "Heladera-lima-dds", 50, LocalDate.now(), null, modelo1);
-        Heladera h3 = new Heladera(new Ubicacion(-34.582345f, -58.43329f), new Direccion("rivadavia", 5000, null, "1407"), "Heladera-rivadavia-dds", 20, LocalDate.now(), null, modelo1);
+    Heladera h1 = new Heladera(new Ubicacion(-34.61178f, -58.417308f), new Direccion("medrano", 555, null, "1405"), "Heladera-medrano-dds", 50, LocalDate.now(), 0, modelo1);
+    h1.setHeladeraActiva(false);
+    Heladera h2 = new Heladera(new Ubicacion(-34.613466f, -58.419659f), new Direccion("lima", 800, null, "1405"), "Heladera-lima-dds", 50, LocalDate.now(), 0, modelo1);
+    Heladera h3 = new Heladera(new Ubicacion(-34.582345f, -58.43329f), new Direccion("rivadavia", 5000, null, "1407"), "Heladera-rivadavia-dds", 20, LocalDate.now(), 0, modelo1);
 
         heladerasRepository.guardar(h1);
         heladerasRepository.guardar(h2);

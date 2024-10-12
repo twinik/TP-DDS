@@ -33,25 +33,29 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) {
-        AperturaHeladeraBrokerDTO aperturaDto = AperturaHeladeraBrokerDTO.fromString(mqttMessage.toString());
-        Optional<Heladera> heladeraOpt = heladerasRepository.buscar(aperturaDto.getIdHeladera());
-        Optional<TarjetaColaborador> tarjetaOpt = tarjetasColaboradorRepository.buscar(aperturaDto.getIdTarjetaColaborador());
-        Optional<Tarjeta> tarjetaPersonaVulnerableOpt = tarjetasRepository.buscar(aperturaDto.getIdTarjetaPersonaVulnerable());
-        Optional<SolicitudAperturaHeladera> solicitudAperturaHeladeraOpt = solicitudesAperturaHeladeraRepository.buscar(aperturaDto.getIdSolicitudApertura());
-        if (heladeraOpt.isEmpty()) {
-            throw new RuntimeException("La Heladera no existe");
-        }
-        Heladera heladera = heladeraOpt.get();
-        AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladeraOpt.orElse(null), DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
-        aperturasHeladeraRepository.guardar(aperturaHeladera);
-        if (tarjetaOpt.isPresent()) {
-            if (solicitudAperturaHeladeraOpt.isEmpty())
-                throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Solcitud apertura", aperturaDto.idSolicitudApertura));
-            manejarAperturaColaborador(heladera, solicitudAperturaHeladeraOpt.get(), tarjetaOpt.get());
-        } else {
-            if (tarjetaPersonaVulnerableOpt.isEmpty())
-                throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Tarjeta de persona vulnerable", aperturaDto.idTarjetaPersonaVulnerable));
-            manejarAperturaPersonaVulnerable(heladera, tarjetaPersonaVulnerableOpt.get(), aperturaHeladera);
+        try {
+            AperturaHeladeraBrokerDTO aperturaDto = AperturaHeladeraBrokerDTO.fromString(mqttMessage.toString());
+            Optional<Heladera> heladeraOpt = heladerasRepository.buscar(aperturaDto.getIdHeladera());
+            Optional<TarjetaColaborador> tarjetaOpt = tarjetasColaboradorRepository.buscar(aperturaDto.getIdTarjetaColaborador());
+            Optional<Tarjeta> tarjetaPersonaVulnerableOpt = tarjetasRepository.buscar(aperturaDto.getIdTarjetaPersonaVulnerable());
+            Optional<SolicitudAperturaHeladera> solicitudAperturaHeladeraOpt = solicitudesAperturaHeladeraRepository.buscar(aperturaDto.getIdSolicitudApertura());
+            if (heladeraOpt.isEmpty()) {
+                throw new RuntimeException("La Heladera no existe");
+            }
+            Heladera heladera = heladeraOpt.get();
+            AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladeraOpt.orElse(null), DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
+            aperturasHeladeraRepository.guardar(aperturaHeladera);
+            if (tarjetaOpt.isPresent()) {
+                tarjetaOpt.get().agregarUso(aperturaHeladera);
+                if(solicitudAperturaHeladeraOpt.isEmpty()) throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Solcitud apertura",aperturaDto.idSolicitudApertura));
+                manejarAperturaColaborador(heladera, solicitudAperturaHeladeraOpt.get(), tarjetaOpt.get());
+            } else {
+                if (tarjetaPersonaVulnerableOpt.isEmpty()) throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Tarjeta de persona vulnerable",aperturaDto.idTarjetaPersonaVulnerable));
+                manejarAperturaPersonaVulnerable(heladera, tarjetaPersonaVulnerableOpt.get(),aperturaHeladera);
+            }
+        } catch (RuntimeException e) {
+            System.err.println("Error in messageArrived: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
