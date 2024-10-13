@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraDto;
+import ar.edu.utn.frba.dds.dtos.incidentes.FallaTecnicaAltaDto;
 import ar.edu.utn.frba.dds.dtos.incidentes.FallaTecnicaDto;
 import ar.edu.utn.frba.dds.services.FallasTecnicasService;
 import ar.edu.utn.frba.dds.services.FileUploadService;
@@ -11,6 +12,7 @@ import io.javalin.http.UploadedFile;
 import lombok.AllArgsConstructor;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -22,15 +24,20 @@ public class FallasTecnicasController implements ICrudViewsHandler {
 
     @Override
     public void index(Context context) {
-        // TODO: hacer view para que un admin pueda ver fallas tecnicas
         Map<String ,Object> model = new HashMap<>();
-        model.put("fallas",this.fallasTecnicasService.obtenerTodos());
-        context.render("dafdf",model);
+        model.put("fallas",this.fallasTecnicasService.obtenerTodos(context.queryParam("heladeraId"), context.queryParam("filtroSolucionadas")));
+        List<HeladeraDto> heladeraDtoList = this.heladerasService.obtenerHeladeras();
+        model.put("heladeras",heladeraDtoList);
+        model.put("heladeraSeleccionada", heladeraDtoList.stream().filter(h -> h.getId().equals(context.queryParam("heladeraId"))).findFirst().orElse(null));
+        model.put("filtroSolucionadas", context.queryParam("filtroSolucionadas"));
+        context.render("app/heladeras/listado-fallas-tecnicas.hbs",model);
     }
 
     @Override
     public void show(Context context) {
-
+        Map<String ,Object> model = new HashMap<>();
+        model.put("falla", this.fallasTecnicasService.obtenerFallaTecnica(context.pathParam("id")));
+        context.render("app/heladeras/falla-tecnica.hbs",model);
     }
 
     @Override
@@ -47,7 +54,7 @@ public class FallasTecnicasController implements ICrudViewsHandler {
 
     @Override
     public void save(Context context) {
-        FallaTecnicaDto falla = FallaTecnicaDto.of(context);
+        FallaTecnicaAltaDto falla = FallaTecnicaAltaDto.of(context);
         UploadedFile uploadedFile = context.uploadedFile("file");
         try {
             if (uploadedFile != null) {

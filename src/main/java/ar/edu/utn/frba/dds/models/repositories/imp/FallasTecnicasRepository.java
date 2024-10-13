@@ -42,14 +42,14 @@ public class FallasTecnicasRepository implements IFallasTecnicasRepository, With
 
     @Override
     public List<FallaTecnica> buscarTodos() {
-        return entityManager().createQuery("from FallaTecnica where activo=:activo", FallaTecnica.class)
+        return entityManager().createQuery("from FallaTecnica where activo=:activo order by created_at desc", FallaTecnica.class)
                 .setParameter("activo", true)
                 .getResultList();
     }
 
     @Override
-    public List<FallaTecnica> buscarPorHeladera(Long heladera_id) {
-        return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera.id=:heladera_id and solucionado=:solucionado", FallaTecnica.class)
+    public List<FallaTecnica> buscarPorHeladera(String heladera_id) {
+        return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera.id=:heladera_id and solucionado=:solucionado order by created_at desc", FallaTecnica.class)
                 .setParameter("activo", true)
                 .setParameter("heladera_id", heladera_id)
                 .setParameter("solucionado", false)

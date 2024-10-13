@@ -1,0 +1,98 @@
+{{#partial "contenido"}}
+    <div class="p-6 sm:p-10 mx-auto max-w-5xl">
+        <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Listado de alertas</h1>
+
+        <div class="bg-gray-100 rounded-lg p-6 mb-8">
+            <form method="GET" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="filtroSolucionadas" class="block text-base font-semibold text-gray-700 mb-2">Filtrar por
+                            estado:</label>
+                        <select id="filtroSolucionadas"
+                                name="filtroSolucionadas"
+                                class="w-full py-3 px-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
+                            {{#if filtroSolucionadas}}
+                                <option value="{{filtroSolucionadas}}" hidden="hidden" selected="selected">{{filtroSolucionadas}}</option>
+                            {{else}}
+                                <option value="Mostrar todas" hidden="hidden" selected="selected">Mostrar todas</option>
+                            {{/if}}
+                            <option value="{{filtroSolucionadas}}" hidden="hidden" selected="selected">{{filtroSolucionadas}}</option>
+                            <option value="Mostrar todas">Mostrar todas</option>
+                            <option value="Solucionadas">Solucionadas</option>
+                            <option value="No Solucionadas">No Solucionadas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filtroHeladera" class="block text-base font-semibold text-gray-700 mb-2">Filtrar por
+                            heladera:</label>
+                        <select id="filtroHeladera"
+                                name="heladeraId"
+                                class="w-full py-3 px-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
+                            {{#if heladeraSeleccionada}}
+                                <option value="{{heladeraSeleccionada.id}}" hidden="hidden" selected="selected">{{heladeraSeleccionada.nombre}}</option>
+                            {{else}}
+                                <option value="" hidden="hidden" selected="selected">Mostrar todas</option>
+                            {{/if}}
+                            <option value="">Mostrar todas</option>
+                            {{#each heladeras}}
+                                <option value="{{this.id}}">{{this.nombre}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <button type="submit"
+                            class="w-full py-3 px-4 boton-canje text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        Filtrar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <table class="w-full table-auto">
+                <thead>
+                <tr class="azulIntermedio">
+                    <th class="p-4 text-center text-lg font-semibold text-white">Heladera</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Estado</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Descripcion</th>
+                </tr>
+                </thead>
+                <tbody id="alertasBody">
+                {{#each fallas}}
+                    <tr class="border-b alerta-row hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                        <td class="p-4 text-base">{{this.heladeraNombre}}</td>
+                        <td class="p-4 text-base">
+                            {{#if this.solucionado}}
+                                Solucionado
+                            {{else}}
+                                No Solucionado
+                            {{/if}}
+                                </td>
+                        <td class="p-4 text-base" style="display: flex; justify-content: space-between;">
+                            <p style="overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    max-width: 80%;"
+                            >{{this.descripcion}}</p>
+                            <a style="color: dodgerblue; cursor: pointer" onclick="redirigirAFalla('{{this.id}}')">Ver mas</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script>
+        function redirigirAFalla(fallaId) {
+            const currentRoute = window.location.pathname;  // Get the current route
+            const newRoute = `${currentRoute}/${fallaId}`;
+            window.location.href = newRoute;
+        }
+    </script>
+{{/partial}}
+
+{{> templates/app/base}}

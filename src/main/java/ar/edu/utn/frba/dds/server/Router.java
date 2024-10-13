@@ -84,6 +84,8 @@ public class Router {
     app.post("/heladeras/{id}/reportar-falla-tecnica", ServiceLocator.get(FallasTecnicasController.class)::save);
 
     app.get("/heladeras/alertas", ServiceLocator.get(AlertasController.class)::index);
+    app.get("/heladeras/fallas-tecnicas", ServiceLocator.get(FallasTecnicasController.class)::index);
+    app.get("/heladeras/fallas-tecnicas/{id}", ServiceLocator.get(FallasTecnicasController.class)::show);
 
     // REPORTES
     app.get("/reportes", ServiceLocator.get(ReportesController.class)::index);
