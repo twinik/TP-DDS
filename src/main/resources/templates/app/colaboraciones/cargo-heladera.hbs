@@ -42,9 +42,6 @@
                 {{#each modelos}}
                     <option value={{this.id}}>{{this.modelo}}  {{this.rangoTemperaturas}}</option>
                 {{/each }}
-                <!--                <option value="modelo1">Modelo 1</option>-->
-                <!--                <option value="modelo2">Modelo 2</option>-->
-                <!--                <option value="modelo3">Modelo 3</option>-->
             </select>
 
             <label
@@ -82,7 +79,7 @@
 
             <span
                     class="text-left block mb-3 text-sm font-medium text-gray-900 dark:text-white"
-            ><strong>Recomendación de Puntos de Colocacion</strong></span
+            ><strong>Recomendación de puntos de colocacion (opcional)</strong></span
             >
 
             <label for="latitud"
@@ -125,7 +122,8 @@
                     id="radio"
                     name="radio"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="1"
+                    placeholder="Radio de cobertura"
+                    min="0.1"
             />
 
             <div
