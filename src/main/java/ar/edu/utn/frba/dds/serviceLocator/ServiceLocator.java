@@ -146,7 +146,8 @@ public class ServiceLocator {
             get(IDonacionDineroRepository.class),
             get(IColocacionHeladeraRepository.class),
             get(IRedistribucionesViandaRepository.class),
-            get(IAltaPersonaVulnerableRepository.class)));
+            get(IAltaPersonaVulnerableRepository.class),
+            get(IHeladerasRepository.class)));
       else if (clase.equals(ColaboradoresService.class))
         add(clase, new ColaboradoresService(get(IColaboradoresRepository.class), get(MedioContactoService.class), get(FormaColaboracionService.class), get(RolesService.class), get(TarjetasService.class), get(IUsuariosRepository.class)));
       else if (clase.equals(ColocacionHeladerasService.class))

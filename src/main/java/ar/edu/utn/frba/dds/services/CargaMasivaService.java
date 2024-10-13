@@ -29,6 +29,7 @@ public class CargaMasivaService {
     private IColocacionHeladeraRepository colocacionHeladeraRepository;
     private IRedistribucionesViandaRepository redistribucionesViandaRepository;
     private IAltaPersonaVulnerableRepository altaPersonaVulnerableRepository;
+    private IHeladerasRepository heladerasRepository;
 
     public String subirArchivo(UploadedFile uploadedFile) throws CargaArchivoFailedException {
         try {
@@ -73,7 +74,10 @@ public class CargaMasivaService {
         } else if (claseColab.equals(ColocacionHeladeras.class)) {
             this.colocacionHeladeraRepository.guardar((ColocacionHeladeras) colab);
         } else if (claseColab.equals(RedistribucionViandas.class)) {
-            this.redistribucionesViandaRepository.guardar((RedistribucionViandas) colab);
+            RedistribucionViandas r = (RedistribucionViandas) colab;
+            r.setHeladeraOrigen(this.heladerasRepository.buscarPorNombre(r.getHeladeraOrigen().getNombre()));
+            r.setHeladeraDestino(this.heladerasRepository.buscarPorNombre(r.getHeladeraDestino().getNombre()));
+            this.redistribucionesViandaRepository.guardar(r);
         }
     }
 }

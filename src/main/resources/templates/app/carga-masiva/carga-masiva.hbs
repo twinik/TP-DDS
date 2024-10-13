@@ -44,12 +44,12 @@
     <script>
         document.getElementById("downloadExampleBtn").addEventListener("click", function () {
             const csvContent = "data:text/csv;charset=utf-8," +
+                    'DNI,12345,Juan,Doe,gturri2@frba.utn.edu.ar,22/05/2024,REDISTRIBUCION_VIANDA,1,{"fecha":"12/12/2023", "cantidad": "2", "heladeraOrigen": {"nombre": "Heladera-rivadavia-dds"}, "heladeraDestino": {"nombre": "Heladera-lima-dds"}}\n' +
                     'LE,12345,John,Doe,gturri@frba.utn.edu.ar,22/05/2024,DONACION_DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}\n' +
-                    'LC,12345,Johnas,Doe,gturri1@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,2,{"vianda":{"fechaDonacion":"12/12/2023"}}\n' +
-                    'DNI,12345,Juan,Doe,gturri2@frba.utn.edu.ar,22/05/2024,REDISTRIBUCION_VIANDA,1,{"fecha":"12/12/2023", "cantidad": "2"}\n' +
-                    'DNI,12345,Juan,Doe,gturri3@frba.utn.edu.ar,22/05/2024,REGISTRO_PERSONA,3,{"fecha":"12/12/2023"}\n' +
-                    'LC,12345,Johnas,Doe,gturri4@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,10,{"vianda":{"fechaDonacion":"12/12/2023"}}\n' +
-                    'LE,12345,John,Doe,gturri5@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,1,{"vianda":{"fechaDonacion":"12/12/2023"}}\n' +
+                    'LC,12345,Johnas,Doe,gturri1@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,2,{"fecha":"12/12/2023", "vianda":{"fechaDonacion":"12/12/2023"}}\n' +
+                    'LC,12345,Johnas,Doe,gturri4@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,10,{"fecha":"12/12/2023", "vianda":{"fechaDonacion":"12/12/2023"}}\n' +
+                    'DNI,12345,Juan,Doe,gturri3@frba.utn.edu.ar,22/05/2024,REGISTRO_PERSONA,3,{"fecha":"12/12/2023", "persona": {"nombre": "Gerardo", "apellido": "Perez"}}\n' +
+                    'LE,12345,John,Doe,gturri5@frba.utn.edu.ar,22/05/2024,DONACION_VIANDA,1,{"fecha":"12/12/2023", "vianda":{"fechaDonacion":"12/12/2023"}}\n' +
                     'LE,12345,John,Doe,gturri6@frba.utn.edu.ar,22/05/2024,DONACION_DINERO,1,{"monto": 10000, "frecuencia": "DIARIA", "fecha": "09/12/2018"}';
 
             const downloadLink = document.createElement("a");

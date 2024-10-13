@@ -9,6 +9,8 @@ public interface IHeladerasRepository {
 
     List<Heladera> buscarTodos();
 
+    Heladera buscarPorNombre(String nombre);
+
     void guardar(Heladera heladera);
 
     void actualizar(Heladera heladera);

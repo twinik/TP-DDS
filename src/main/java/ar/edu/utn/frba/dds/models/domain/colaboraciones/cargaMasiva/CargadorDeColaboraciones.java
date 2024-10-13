@@ -92,6 +92,8 @@ public class CargadorDeColaboraciones {
             Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
             nuevoColaborador.setTipoDocumento(tipoDoc);
             nuevoColaborador.setDocumento(carga.getDocumento());
+            nuevoColaborador.setNombre(carga.getNombre());
+            nuevoColaborador.setApellido(carga.getApellido());
 
             MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
                     carga.getMail(),

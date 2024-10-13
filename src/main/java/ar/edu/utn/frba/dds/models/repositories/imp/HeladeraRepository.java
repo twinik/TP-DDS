@@ -52,6 +52,12 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
                 .getResultList();
     }
 
+    public Heladera buscarPorNombre(String nombre) {
+        return entityManager().createQuery("from Heladera where nombre=:nombre", Heladera.class).
+            setParameter("nombre", nombre)
+            .getSingleResult();
+    }
+
     @Override
     public void guardar(Heladera heladera) {
         withTransaction(() -> entityManager().persist(heladera));
