@@ -65,14 +65,15 @@ public class HeladerasService {
     if (idColaborador == null) throw new NoAutorizadoException(MensajeNoAutorizadoFactory.generarMensaje());
     this.validarPermisosHeladera(dto.getId(), idColaborador);
     if (dto.getNombre() != null) heladera.setNombre(dto.getNombre());
-    if (dto.getActiva() != null) heladera.setHeladeraActiva(dto.getActiva());
     this.repoHeladeras.actualizar(heladera);
+    this.repoHeladeras.refresh(heladera);
   }
 
   public void eliminarHeladera(String idHeladera, String idColaborador) {
     Heladera h = this.obtenerHeladera(idHeladera);
     this.validarPermisosHeladera(idHeladera, idColaborador);
     this.repoHeladeras.eliminar(h);
+    this.repoHeladeras.refresh(h);
   }
 
   private void validarPermisosHeladera(String idHeladera, String idColaborador) {
@@ -81,8 +82,13 @@ public class HeladerasService {
   }
 
   public List<HeladeraDto> obtenerHeladerasConAlerta() {
-    List<Heladera> heladeras = repoHeladeras.buscarConAlertas();
+    List<Heladera> heladeras = this.repoHeladeras.buscarConAlertas();
     return heladeras.stream().map(HeladeraDto::fromHeladera).collect(Collectors.toList());
+  }
+
+  public List<HeladeraDto> obtenerHeladerasColaborador(String id){
+    List<Heladera> heladeras = this.repoHeladeras.buscarPorColaborador(id);
+    return heladeras.stream().map(HeladeraDto::fromHeladera).toList();
   }
 
 }

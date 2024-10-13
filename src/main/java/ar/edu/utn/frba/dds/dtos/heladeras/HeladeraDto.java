@@ -36,8 +36,9 @@ public class HeladeraDto {
   }
 
   public static HeladeraDto of(Context context) {
-    // TODO
-    return null;
+    return HeladeraDto.builder().id(context.pathParam("id"))
+            .nombre(context.formParam("nombre"))
+            .build();
   }
 
 }

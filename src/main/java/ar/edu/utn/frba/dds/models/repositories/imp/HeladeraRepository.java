@@ -40,8 +40,9 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
   @Override
   public List<Heladera> buscarPorColaborador(String idColaborador) {
     return entityManager().createQuery("SELECT h from Heladera h INNER JOIN ColocacionHeladeras c " +
-            "ON c.heladera.id = h.id where c.colaborador.id =:idColaborador", Heladera.class)
+            "ON c.heladera.id = h.id where c.colaborador.id =:idColaborador and h.activo=:activo", Heladera.class)
         .setParameter("idColaborador", idColaborador)
+            .setParameter("activo",true)
         .getResultList();
   }
 

@@ -74,6 +74,10 @@ public class Router {
     app.get("/heladeras/mapa", ServiceLocator.get(HeladerasController.class)::getHeladerasMapa);
     app.get("/heladeras/donar", ServiceLocator.get(HeladerasController.class)::getHeladerasAptasDonacion);
 
+    app.get("/heladeras/mis-heladeras", ServiceLocator.get(HeladerasController.class)::edit);
+    app.post("/heladeras/mis-heladeras/{id}/edicion", ServiceLocator.get(HeladerasController.class)::update);
+    app.post("/heladeras/mis-heladeras/{id}/eliminacion", ServiceLocator.get(HeladerasController.class)::delete);
+
     app.get("/heladeras/puntos-donacion", ServiceLocator.get(RecomendacionesController.class)::index);
     app.get("/heladeras/recibir-puntos", ServiceLocator.get(RecomendacionesController.class)::getDonacionesParaMapa);
 

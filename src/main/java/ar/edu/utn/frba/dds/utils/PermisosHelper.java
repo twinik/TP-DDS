@@ -50,6 +50,7 @@ public class PermisosHelper {
                         this.buscarPorNombres("alta-vulnerable");
                 case "/heladeras/{id}/suscribirse" -> this.buscarPorNombres("colaborador-base");
                 case "/heladeras/{id}/reportar-falla-tecnica" -> this.buscarPorNombres("colaborador-base");
+                case "/heladeras/mis-heladeras" ->this.buscarPorNombres("colocar-heladeras");
                 default -> new HashSet<>();
             };
         } else if (ctx.method().name().equals("POST")) {
@@ -71,6 +72,8 @@ public class PermisosHelper {
                 case "/heladeras/{id}/suscribirse" -> this.buscarPorNombres("colaborador-base");
                 case "/heladeras/{id}/reportar-falla-tecnica" -> this.buscarPorNombres("colaborador-base");
                 case  "/canjear-producto/{id}" -> this.buscarPorNombres("colaborador-base");
+                case "/heladeras/mis-heladeras" ->this.buscarPorNombres("colocar-heladeras");
+                case "/heladeras/mis-heladeras/{id}" ->this.buscarPorNombres("colocar-heladeras");
                 default -> new HashSet<>();
             };
         }

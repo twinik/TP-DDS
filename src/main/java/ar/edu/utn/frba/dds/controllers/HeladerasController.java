@@ -10,6 +10,9 @@ import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @AllArgsConstructor
 public class HeladerasController implements ICrudViewsHandler {
   private HeladerasService heladerasService;
@@ -25,7 +28,8 @@ public class HeladerasController implements ICrudViewsHandler {
 
   @Override
   public void create(Context context) {
-
+    context.render("/app/heladeras/mis-heladeras.hbs");
+    context.redirect("/heladeras/" + context.sessionAttribute("idColaborador") + "/mis-heladeras");
   }
 
   @Override
@@ -35,22 +39,28 @@ public class HeladerasController implements ICrudViewsHandler {
 
   @Override
   public void edit(Context context) {
-
     //TODO: generar vista para actualizar la heladera
-    if(context.pathParam("id") != context.sessionAttribute("idColaborador")) throw new NoAutorizadoException(MensajeNoAutorizadoFactory.generarMensaje());
-
+    Map<String, Object> model = new HashMap<>();
+    model.put("heladeras", this.heladerasService.obtenerHeladerasColaborador(context.sessionAttribute("idColaborador")));
+    context.render("/app/heladeras/mis-heladeras.hbs", model);
   }
 
   @Override
   public void update(Context context) {
     HeladeraDto heladeraDto = HeladeraDto.of(context);
     if(heladeraDto == null) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+    Map<String, Object> model = new HashMap<>();
     this.heladerasService.actualizarHeladera(heladeraDto,context.sessionAttribute("idColaborador"));
+    model.put("message", "La heladera fue editada exitosamente");
+    context.render("/app/success.hbs", model);
   }
 
   @Override
   public void delete(Context context) {
     this.heladerasService.eliminarHeladera(context.pathParam("id"),context.sessionAttribute("idColaborador"));
+    Map<String, Object> model = new HashMap<>();
+    model.put("message", "La heladera fue dada de baja exitosamente");
+    context.render("/app/success.hbs", model);
   }
 
   public void getHeladerasMapa(Context context){
