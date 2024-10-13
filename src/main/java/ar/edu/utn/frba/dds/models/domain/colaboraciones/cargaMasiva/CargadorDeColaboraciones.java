@@ -82,13 +82,7 @@ public class CargadorDeColaboraciones {
       Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
       if (forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
 
-      if (!colaborador.getTipoColaborador().tenesFormaColaboracion(forma.get().getNombreInterno()))
-        colaborador.getTipoColaborador().agregarFormasColaboracion(forma.get());
-
-      if (!colaborador.getUsuario().tenesPermisos(PermisosHelper.getInstance().fromFormaColaboracion(forma.get()).toArray(new Permiso[0]))) {
-        colaborador.getUsuario().getRoles().get(0).agregarPermisos(PermisosHelper.getInstance().fromFormaColaboracion(forma.get()).toArray(new Permiso[0]));
-
-      }
+      validarYAgregarPermisos(colaborador, forma.get());
 
       IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
 
@@ -137,6 +131,15 @@ public class CargadorDeColaboraciones {
       return nuevoColaborador;
     } catch (IOException e) {
       throw new RuntimeException(e);
+    }
+  }
+
+  private void validarYAgregarPermisos(Colaborador colaborador, FormaColaboracion forma) {
+    if (!colaborador.getTipoColaborador().tenesFormaColaboracion(forma.getNombreInterno()))
+      colaborador.getTipoColaborador().agregarFormasColaboracion(forma);
+
+    if (!colaborador.getUsuario().tenesPermisos(PermisosHelper.getInstance().fromFormaColaboracion(forma).toArray(new Permiso[0]))) {
+      colaborador.getUsuario().getRoles().get(0).agregarPermisos(PermisosHelper.getInstance().fromFormaColaboracion(forma).toArray(new Permiso[0]));
     }
   }
 

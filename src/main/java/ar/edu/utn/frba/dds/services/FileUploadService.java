@@ -10,6 +10,7 @@ public class FileUploadService {
     public String uploadFile(UploadedFile uploadedFile) throws IOException {
         //Path currentPath = Paths.get(System.getProperty("user.dir"));
         String filePath = "uploads/" + UUID.randomUUID() + "-" + uploadedFile.filename();
+        filePath = filePath.replace(' ', '_'); // a veces los espacios generan problemas
         try (FileOutputStream out = new FileOutputStream(filePath)) {
             out.write(uploadedFile.content().readAllBytes());
         }
