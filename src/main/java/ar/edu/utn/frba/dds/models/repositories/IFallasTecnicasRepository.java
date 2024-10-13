@@ -14,7 +14,7 @@ public interface IFallasTecnicasRepository {
 
     List<FallaTecnica> buscarTodos();
 
-    List<FallaTecnica> buscarPorHeladera(Long heladera_id);
+    List<FallaTecnica> buscarPorHeladera(String heladera_id);
 
     Map<String, Long> buscarFallasAgrupadasPorHeladera(LocalDate fecha);
 

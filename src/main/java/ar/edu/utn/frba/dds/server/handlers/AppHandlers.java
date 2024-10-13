@@ -19,6 +19,7 @@ public class AppHandlers {
       new MismaHeladeraHandler(),
       new PuntosInsuficientesHandler(),
       new CapcacidadHeladeraHandler(),
+      new RecursoNoDisponibleHandler()
   };
 
   public static void applyHandlers(Javalin app) {

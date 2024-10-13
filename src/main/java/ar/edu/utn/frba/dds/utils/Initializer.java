@@ -19,6 +19,7 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SensorMovimiento;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SensorTemperatura;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
+import ar.edu.utn.frba.dds.models.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReporteFallasHeladera;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.PosibleCodigoTarjeta;
@@ -53,6 +54,7 @@ public class Initializer {
     IColocacionHeladeraRepository colocacionHeladeraRepository = ServiceLocator.get(IColocacionHeladeraRepository.class);
     IPermisosRepository permisosRepository = ServiceLocator.get(IPermisosRepository.class);
     IReportesRepository reportesRepository = ServiceLocator.get(IReportesRepository.class);
+    IFallasTecnicasRepository fallasTecnicasRepository = ServiceLocator.get(IFallasTecnicasRepository.class);
 
     Usuario u1 = new Usuario("usuario@mail.com", PasswordHasher.hashPassword("contra"));
     Usuario u2 = new Usuario("usuuuario@mail.com", PasswordHasher.hashPassword("1234"));
@@ -179,7 +181,6 @@ public class Initializer {
     a5.setSolucionado(true);
     a6.setSolucionado(true);
 
-
     alertasRepository.guardar(a1);
     alertasRepository.guardar(a2);
     alertasRepository.guardar(a3);
@@ -261,6 +262,13 @@ public class Initializer {
     redistribucionRepository.guardar(mot2);
     redistribucionRepository.guardar(mot3);
 
+    FallaTecnica fallaTecnica = new FallaTecnica();
+    fallaTecnica.setHeladera(h1);
+    fallaTecnica.setTimestamp(LocalDateTime.now());
+    fallaTecnica.setColaborador(c1);
+    fallaTecnica.setDescripcion("Descripcion de una falla tecnica.");
+    fallaTecnica.setUrlFoto("/uploads/foto-falla.jpg");
+    fallasTecnicasRepository.guardar(fallaTecnica);
 
   }
 

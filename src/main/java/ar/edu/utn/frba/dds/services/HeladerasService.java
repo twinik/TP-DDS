@@ -51,6 +51,10 @@ public class HeladerasService {
     }
   }
 
+  public List<HeladeraDto> obtenerHeladeras() {
+    return this.repoHeladeras.buscarTodos().stream().map(HeladeraDto::fromHeladera).toList();
+  }
+
   public void agregarSuscripcionAHeladera(Heladera h, Suscripcion s) {
     h.agregarSuscripcion(s);
     this.repoHeladeras.actualizar(h);

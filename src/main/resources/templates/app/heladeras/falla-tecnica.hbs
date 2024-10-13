@@ -1,0 +1,18 @@
+{{#partial "contenido"}}
+    <div class="p-6 sm:p-10 mx-auto max-w-5xl">
+        <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Falla Tecnica</h1>
+
+        <p><strong>Heladera: </strong> {{falla.heladeraNombre}}</p>
+        <p><strong>Fecha reportada: </strong> {{falla.fecha}}</p>
+        <p><strong>Reportada por el colaborador: </strong> {{falla.nombreColaborador}}</p>
+        <p><strong>Descripcion: </strong></p>
+        <p>{{falla.descripcion}}</p>
+        {{#if falla.urlFoto}}
+            <div class="bg-white p-6 flex items-center justify-center h-56">
+                <img class="max-w-full max-h-full object-contain" src={{falla.urlFoto}} alt="img-falla" />
+            </div>
+        {{/if}}
+    </div>
+{{/partial}}
+
+{{> templates/app/base}}
