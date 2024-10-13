@@ -174,6 +174,13 @@ public class Initializer {
     Alerta a6 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FRAUDE);
     Alerta a7 = Alerta.of(h1, LocalDateTime.now(), null, null, TipoAlerta.TEMPERATURA);
 
+    a1.setSolucionado(true);
+    a2.setSolucionado(true);
+    a3.setSolucionado(true);
+    a5.setSolucionado(true);
+    a6.setSolucionado(true);
+    a7.setSolucionado(true);
+
     alertasRepository.guardar(a1);
     alertasRepository.guardar(a2);
     alertasRepository.guardar(a3);

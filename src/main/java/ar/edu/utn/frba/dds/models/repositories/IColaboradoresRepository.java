@@ -23,6 +23,8 @@ public interface IColaboradoresRepository {
 
     void actualizar(Colaborador colaborador);
 
+    void actualizar(List<Colaborador> colaboradores);
+
     void eliminar(Colaborador colaborador);
 
     void refresh(Colaborador c);
