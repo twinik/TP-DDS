@@ -122,15 +122,12 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
     withTransaction(() -> entityManager().merge(colaborador));
   }
 
-//    @Override
-//    public void marcarFormCompletado(String id) {
-//        withTransaction(() -> {
-//            entityManager().createQuery("UPDATE Colaborador c SET c.formCompletado = :completado WHERE c.id = :idColaborador")
-//                .setParameter("completado", true)
-//                .setParameter("idColaborador", id)
-//                .executeUpdate();
-//        });
-//    }
+  @Override
+  public void actualizar(List<Colaborador> colaboradores) {
+    withTransaction(() -> {
+      colaboradores.forEach(c -> entityManager().merge(c));
+    });
+  }
 
   @Override
   public void eliminar(Colaborador colaborador) {

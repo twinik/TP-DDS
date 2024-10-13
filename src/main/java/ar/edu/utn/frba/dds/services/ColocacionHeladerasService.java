@@ -42,6 +42,7 @@ public class ColocacionHeladerasService {
     colocacionHeladeras.setColaborador(c);
     Heladera heladera = new Heladera();
     heladera.setNombre(dto.getNombre());
+    heladera.setCapacidadViandas(dto.getCapacidad());
     heladera.setFechaPuestaFuncionamiento(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
     heladera.setModelo(this.modelosService.obtenerModelo(dto.getIdModelo()));
     heladera.setUbicacion(new Ubicacion(dto.getUbicacion().getLatitud(), dto.getUbicacion().getLongitud()));

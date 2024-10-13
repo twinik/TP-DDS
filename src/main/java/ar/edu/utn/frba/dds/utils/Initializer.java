@@ -173,6 +173,13 @@ public class Initializer {
     Alerta a5 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
     Alerta a6 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FRAUDE);
 
+    a1.setSolucionado(true);
+    a2.setSolucionado(true);
+    a3.setSolucionado(true);
+    a5.setSolucionado(true);
+    a6.setSolucionado(true);
+    a7.setSolucionado(true);
+
     alertasRepository.guardar(a1);
     alertasRepository.guardar(a2);
     alertasRepository.guardar(a3);

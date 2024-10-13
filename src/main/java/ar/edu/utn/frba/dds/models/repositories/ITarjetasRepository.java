@@ -19,5 +19,7 @@ public interface ITarjetasRepository {
 
     void actualizar(Tarjeta tarjeta);
 
+    void actualizar(List<Tarjeta> tarjetas);
+
     void eliminar(Tarjeta tarjeta);
 }
