@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.dtos.heladeras;
 
 
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,11 +18,13 @@ public class HeladeraDto {
     // TODO: completar compos
     private String id;
     private String nombre;
+    private Boolean activa;
 
     public static HeladeraDto fromHeladera(Heladera heladera) {
         return HeladeraDto.builder().
                 id(heladera.getId())
                 .nombre(heladera.getNombre())
+            .activa(heladera.isHeladeraActiva())
                 .build();
     }
 
@@ -31,7 +34,7 @@ public class HeladeraDto {
         return heladera;
     }
 
-    public static HeladeraDto of(Map<String, List<String>> camposFormulario, String idColaborador) {
+    public static HeladeraDto of(Context context) {
         // TODO
         return null;
     }

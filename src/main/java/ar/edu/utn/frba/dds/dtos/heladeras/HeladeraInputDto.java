@@ -15,6 +15,8 @@ public class HeladeraInputDto {
     private String fecha;
     private UbicacionDto ubicacion;
     private DireccionDto direccion;
+    private Boolean sensorTemp;
+    private Boolean sensorMov;
     private String idColaborador;
 
     public static HeladeraInputDto of(Context context) {
@@ -28,6 +30,8 @@ public class HeladeraInputDto {
                         .codigoPostal(context.formParam("codPostal"))
                         .build())
                 .idColaborador(context.sessionAttribute("idColaborador"))
+            .sensorMov(context.formParam("sensorMov") != null && !context.formParam("sensorMov").isBlank())
+            .sensorTemp(context.formParam("sensorTemp") != null && !context.formParam("sensorTemp").isBlank())
                 .build();
     }
 

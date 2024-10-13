@@ -160,7 +160,7 @@ public class Initializer {
 
     sa.agregarColocacionHeladera(colocoH3);
     sa.agregarColocacionHeladera(colocoH1);
-    sa.agregarColocacionHeladera(colocoH2);
+    ong.agregarColocacionHeladera(colocoH2);
 
     colocacionHeladeraRepository.guardar(colocoH1);
     colocacionHeladeraRepository.guardar(colocoH2);

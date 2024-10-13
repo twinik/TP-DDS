@@ -30,6 +30,16 @@ public class OfertasProductoService {
     return this.ofertaProductoRepository.buscarTodos().stream().map(OfertaProductoDto::fromOferta).toList();
   }
 
+  public List<OfertaProductoDto> obtenerTodos(String categoria) {
+    try {
+      CategoriaOferta categoriaOferta = CategoriaOferta.valueOf(categoria.toUpperCase());
+      return this.ofertaProductoRepository.buscarTodos().stream().filter(o -> o.getCategoria().equals(categoriaOferta))
+          .map(OfertaProductoDto::fromOferta).toList();
+    } catch (IllegalArgumentException e) {
+      return obtenerTodos();
+    }
+  }
+
   public void crearOferta(OfertaProductoDto oferta) {
     Colaborador colab = this.colaboradoresService.obtenerColaborador(oferta.getIdColaborador());
 

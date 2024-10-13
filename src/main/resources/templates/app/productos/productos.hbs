@@ -9,6 +9,18 @@
             {{/if}}
         </div>
 
+        <div class="flex justify-between items-center mb-4">
+            <form method="GET" action="" class="flex items-center" id="filtroForm">
+                <label for="categoria" class="text-black font-bold mr-2">Filtrar por categoría:</label>
+                <select id="categoria" name="categoria" class="py-2 px-3 rounded-lg text-black" onchange="filtrarCategoria();">
+                    <option value="">Sin filtros</option>
+                    <option value="GASTRONOMIA">Gastronomía</option>
+                    <option value="ELECTRONICA">Electrónica</option>
+                    <option value="ARTICULOS_HOGAR">Artículos para el Hogar</option>
+                    <option value="OTROS">Otros</option>
+                </select>
+            </form>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {{#each ofertas}}
                 <div class="sidebar rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
@@ -60,6 +72,35 @@
                 }
             });
         }
+    </script>
+    <script>
+
+        function guardarCategoriaSeleccionada() {
+            const categoriaSeleccionada = document.getElementById('categoria').value;
+            localStorage.setItem('categoriaSeleccionada', categoriaSeleccionada);
+        }
+
+        function cargarCategoriaSeleccionada() {
+            const categoriaGuardada = localStorage.getItem('categoriaSeleccionada');
+            if (categoriaGuardada && window.performance && window.performance.navigation.type !== 1) {
+                document.getElementById('categoria').value = categoriaGuardada;
+            } else {
+                localStorage.removeItem('categoriaSeleccionada');
+            }
+        }
+
+        function filtrarCategoria() {
+            const categoria = document.getElementById('categoria').value;
+            if (categoria === "") {
+                localStorage.removeItem('categoriaSeleccionada');
+                window.location.href = window.location.pathname;
+            } else {
+                guardarCategoriaSeleccionada();
+                document.getElementById('filtroForm').submit();
+            }
+        }
+
+        window.onload = cargarCategoriaSeleccionada;
     </script>
 {{/partial}}
 

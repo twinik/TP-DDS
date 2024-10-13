@@ -232,6 +232,8 @@ public class ServiceLocator {
         add(clase, new FallasTecnicasController(get(FallasTecnicasService.class), get(FileUploadService.class), get(HeladerasService.class)));
       else if (clase.equals(FormulariosController.class))
         add(clase, new FormulariosController(get(FormulariosService.class)));
+      else if(clase.equals(HeladerasController.class))
+        add(clase,new HeladerasController(get(HeladerasService.class)));
       else if (clase.equals(LoginController.class))
         add(clase, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))

@@ -35,11 +35,9 @@ public class ColocacionHeladerasController implements ICrudViewsHandler {
     @Override
     public void save(Context context) {
         HeladeraInputDto dto = HeladeraInputDto.of(context);
-        try {
-            this.colocacionHeladerasService.crearColocacionHeladera(dto);
-        } catch (FormIncompletoException e) {
-            // TODO: Mostrar pop up error ?
-        }
+
+        this.colocacionHeladerasService.crearColocacionHeladera(dto);
+
         context.status(201);
         context.redirect("/heladeras");
     }

@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
 import ar.edu.utn.frba.dds.exceptions.UsuarioNoAutenticadoException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeNoAutorizadoFactory;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.PermisosHelper;
@@ -25,11 +26,11 @@ public class AuthMiddleware implements IMiddleware {
             Usuario usuario = getUser(ctx);
             if (!permisos.isEmpty()) {
                 if (usuario == null) {
-                    ctx.sessionAttribute("previousUrl", ctx.path()); // TODO y esto que es???
+                    ctx.sessionAttribute("previousUrl", ctx.path());
                     throw new UsuarioNoAutenticadoException();
                 }
                 if (permisos.stream().noneMatch(usuario::tenesPermiso)) {
-                    throw new NoAutorizadoException("no esta autorizado");
+                    throw new NoAutorizadoException(MensajeNoAutorizadoFactory.generarMensaje());
                 }
             }
         });

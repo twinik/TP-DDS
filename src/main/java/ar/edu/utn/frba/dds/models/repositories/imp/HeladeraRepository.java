@@ -1,45 +1,14 @@
 package ar.edu.utn.frba.dds.models.repositories.imp;
 
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
-import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @NoArgsConstructor
 public class HeladeraRepository implements IHeladerasRepository, WithSimplePersistenceUnit {
-
-
-    public static void main(String[] args) {
-        Heladera h = new Heladera();
-        IHeladerasRepository repositorio = ServiceLocator.get(IHeladerasRepository.class);
-        repositorio.guardar(h);
-        h.setModelo(new ModeloHeladera("filgo", 22, 33));
-        Heladera otra = new Heladera(LocalDate.now());
-        h.agregarHeladeraCercana(otra);
-        otra.setModelo(new ModeloHeladera("jorge", 10, 50));
-        //repositorio.guardar(otra);
-        repositorio.actualizar(h);
-//        repositorio.guardar(m1);
-//        repositorio.guardar(m2);
-
-//        repositorio.eliminar(m1);
-//        m2.setMotivo("lo cambio");
-//        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-//      repositorio.actualizar(m2);
-
-        Optional<Heladera> heladera1 = repositorio.buscar(h.getId());
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Heladera> heladera2 = repositorio.buscar(otra.getId());
-
-        List<Heladera> lista = repositorio.buscarTodos();
-
-    }
-
     @Override
     public Optional<Heladera> buscar(String id) {
         return Optional.ofNullable(entityManager().find(Heladera.class, id));
@@ -56,6 +25,14 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
         return entityManager().createQuery("from Heladera where nombre=:nombre", Heladera.class).
             setParameter("nombre", nombre)
             .getSingleResult();
+    }
+
+    @Override
+    public List<Heladera> buscarPorColaborador(String idColaborador) {
+        return entityManager().createQuery("SELECT h from Heladera h INNER JOIN ColocacionHeladeras c " +
+                "ON c.heladera.id = h.id where c.colaborador.id =:idColaborador",Heladera.class)
+            .setParameter("idColaborador",idColaborador)
+            .getResultList();
     }
 
     @Override

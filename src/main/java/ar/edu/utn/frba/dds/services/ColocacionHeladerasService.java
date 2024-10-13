@@ -55,8 +55,8 @@ public class ColocacionHeladerasService {
     heladera.setHeladerasCercanas(this.calculadorHeladerasCercanas.getHeladerasCercanasA(heladera));
 
     this.colocacionHeladeraRepository.guardar(colocacionHeladeras);
-    this.sensorMovimientoRepository.guardar(new SensorMovimiento(heladera));
-    this.sensorTemperaturaRepository.guardar(new SensorTemperatura(heladera));
+    if (dto.getSensorMov()) this.sensorMovimientoRepository.guardar(new SensorMovimiento(heladera));
+    if (dto.getSensorTemp()) this.sensorTemperaturaRepository.guardar(new SensorTemperatura(heladera));
 
 
     // Le recalculo solo a las que podrian llegar a haber cambiado??? igual mas lento que no se que..

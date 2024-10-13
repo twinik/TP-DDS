@@ -25,7 +25,7 @@ public class OfertasProductoController implements ICrudViewsHandler {
   @Override
   public void index(Context context) {
     //PRETENDE DEVOLVER UNA VISTA QUE CONTENGA A TODOS LOS PRODUCTOS ALMACENADOS EN MI SISTEMA
-    List<OfertaProductoDto> ofertas = this.ofertasProductoService.obtenerTodos();
+    List<OfertaProductoDto> ofertas = this.ofertasProductoService.obtenerTodos((context.queryParam("categoria") != null) ? context.queryParam("categoria") : "");
     Map<String, Object> model = new HashMap<>();
     if (context.sessionAttribute("idColaborador") != null) {
       ColaboradorPuntosDto puntosdDisponibles = this.ofertasProductoService.obtenerPuntos(context.sessionAttribute("idColaborador"));

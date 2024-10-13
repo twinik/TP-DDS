@@ -104,6 +104,7 @@ public class ColaboradoresService {
     tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
     colaborador.setTipoColaborador(tipo);
     colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
+    colaborador.setFormCompletado(true);
     this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
     this.colaboradoresRepository.guardar(colaborador);
   }
