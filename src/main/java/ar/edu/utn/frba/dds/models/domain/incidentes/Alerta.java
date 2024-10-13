@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Alerta extends Incidente {
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_alterta")
+    @Column(name = "tipo_alerta")
     private TipoAlerta tipoAlerta;
 
     public Alerta(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {

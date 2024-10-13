@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class HeladerasService {
-
   IHeladerasRepository repoHeladeras;
 
   public List<HeladeraMapaDto> getHeladerasParaMapa() {
@@ -79,6 +78,11 @@ public class HeladerasService {
   private void validarPermisosHeladera(String idHeladera, String idColaborador) {
     if (this.repoHeladeras.buscarPorColaborador(idColaborador).stream().noneMatch(hel -> hel.getId().equals(idHeladera)))
       throw new NoAutorizadoException(MensajeNoAutorizadoFactory.generarMensaje());
+  }
+
+  public List<HeladeraDto> obtenerHeladerasConAlerta() {
+    List<Heladera> heladeras = repoHeladeras.buscarConAlertas();
+    return heladeras.stream().map(HeladeraDto::fromHeladera).collect(Collectors.toList());
   }
 
 }

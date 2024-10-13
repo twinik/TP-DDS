@@ -15,28 +15,29 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 public class HeladeraDto {
-    // TODO: completar compos
-    private String id;
-    private String nombre;
-    private Boolean activa;
+  // TODO: completar compos
+  private String id;
+  private String nombre;
+  private Boolean activa;
 
-    public static HeladeraDto fromHeladera(Heladera heladera) {
-        return HeladeraDto.builder().
-                id(heladera.getId())
-                .nombre(heladera.getNombre())
-            .activa(heladera.isHeladeraActiva())
-                .build();
-    }
+  public static HeladeraDto fromHeladera(Heladera heladera) {
+    return HeladeraDto
+        .builder()
+        .id(heladera.getId())
+        .nombre(heladera.getNombre())
+        .activa(heladera.isHeladeraActiva())
+        .build();
+  }
 
-    public static Heladera toHeladera(HeladeraDto dto) {
-        Heladera heladera = new Heladera();
-        heladera.setNombre(dto.getNombre());
-        return heladera;
-    }
+  public static Heladera toHeladera(HeladeraDto dto) {
+    Heladera heladera = new Heladera();
+    heladera.setNombre(dto.getNombre());
+    return heladera;
+  }
 
-    public static HeladeraDto of(Context context) {
-        // TODO
-        return null;
-    }
+  public static HeladeraDto of(Context context) {
+    // TODO
+    return null;
+  }
 
 }

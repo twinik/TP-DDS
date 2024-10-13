@@ -218,7 +218,7 @@ public class ServiceLocator {
 
         // CONTROLADORES
       else if (clase.equals(AlertasController.class))
-        add(clase, new AlertasController(get(AlertasService.class)));
+        add(clase, new AlertasController(get(AlertasService.class), get(HeladerasService.class)));
       else if (clase.equals(AltaPersonaVulnerableController.class))
         add(clase, new AltaPersonaVulnerableController(get(AltaPersonaVulnerableService.class)));
       else if (clase.equals(CanjeProductoController.class))

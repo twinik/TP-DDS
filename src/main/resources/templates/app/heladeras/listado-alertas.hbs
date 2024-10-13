@@ -1,25 +1,61 @@
 {{#partial "contenido"}}
-    <div class="p-10 mx-auto max-w-4xl">
-        <h1 class="title1">Listado de alertas</h1>
-        <table class="w-full mt-10 table-auto">
-            <tr>
-                <th class="p-2 azulIntermedio text-white">Heladera</th>
-                <th class="p-2 azulIntermedio text-white">
-                    Tipo de alerta
-                </th>
-                <th class="p-2 azulIntermedio text-white">
-                    Fecha y hora
-                </th>
-            </tr>
-            {{#each alertas}}
-                <tr class="border-b">
-                    <td class="p-3 border-x">{{this.heladera.nombre}}</td>
-                    <td class="p-3 border-x">{{this.tipoAlerta}}</td>
-                    <td class="p-3 border-x">{{this.fechaHora}}</td>
+    <div class="p-6 sm:p-10 mx-auto max-w-5xl">
+        <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Listado de alertas</h1>
+
+        <div class="bg-gray-100 rounded-lg p-6 mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end space-y-4 sm:space-y-0 sm:space-x-6">
+                <div class="w-full sm:w-1/2">
+                    <label for="filtroAlerta" class="block text-base font-semibold text-gray-700 mb-2">Filtrar por tipo de
+                        alerta:</label>
+                    <select id="filtroAlerta"
+                            class="w-full py-3 px-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
+                        <option value="">Mostrar todas</option>
+                        <option value="Temperatura">Temperatura</option>
+                        <option value="Fraude">Fraude</option>
+                        <option value="Falla de conexión">Falla de conexión</option>
+                    </select>
+                </div>
+
+                <div class="w-full sm:w-1/2">
+                    <label for="filtroHeladera" class="block text-base font-semibold text-gray-700 mb-2">Filtrar por
+                        heladera:</label>
+                    <select id="filtroHeladera"
+                            class="w-full py-3 px-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
+                        <option value="">Mostrar todas</option>
+                        {{#each heladeras}}
+                            <option value="{{this.nombre}}">{{this.nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <table class="w-full table-auto">
+                <thead>
+                <tr class="azulIntermedio">
+                    <th class="p-4 text-center text-lg font-semibold text-white">Heladera</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Tipo de alerta</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Fecha y hora</th>
                 </tr>
-            {{/each}}
-        </table>
+                </thead>
+                <tbody id="alertasBody">
+                {{#each alertas}}
+                    <tr class="border-b alerta-row hover:bg-gray-50 transition-colors duration-150 ease-in-out"
+                        data-tipo="{{this.tipoAlerta}}" data-heladera="{{this.heladera.nombre}}">
+                        <td class="p-4 text-base">{{this.heladera.nombre}}</td>
+                        <td class="p-4 text-base">{{this.tipoAlerta}}</td>
+                        <td class="p-4 text-base">{{this.fechaHora}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script src="/js/listado-alertas.js"></script>
 {{/partial}}
 
 {{> templates/app/base}}

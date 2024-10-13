@@ -17,6 +17,8 @@ public interface IHeladerasRepository {
 
   List<Heladera> buscarPorColaborador(String idColaborador);
 
+  List<Heladera> buscarConAlertas();
+
   void guardar(Heladera heladera);
 
   void actualizar(Heladera heladera);

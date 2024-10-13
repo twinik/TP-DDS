@@ -72,7 +72,7 @@ public class Initializer {
     Permiso p12 = new Permiso("Alta codigo de tarjetas", "alta-cod-tarjeta");
     Permiso p13 = new Permiso("Colaborador Base", "colaborador-base");
 
-    permisosRepository.guardar(p1, p2, p3, p5, p6, p7,p8,p9, p10, p11, p12, p13);
+    permisosRepository.guardar(p1, p2, p3, p5, p6, p7, p8, p9, p10, p11, p12, p13);
 
     Rol r1 = new Rol();
     r1.setNombre("colaborador");
@@ -86,12 +86,12 @@ public class Initializer {
 
     Rol r3 = new Rol();
     r3.setNombre("admin");
-    r3.agregarPermisos(p5, p6, p7,p8, p12);
+    r3.agregarPermisos(p5, p6, p7, p8, p12);
     rolesRepository.guardar(r1, r2, r3);
     u4.agregarRoles(r3);
     Rol r4 = new Rol();
     r4.setNombre("admin2");
-    r4.agregarPermisos(p5,p8);
+    r4.agregarPermisos(p5, p8);
     rolesRepository.guardar(r4);
     u5.agregarRoles(r4);
     usuariosRepository.guardar(u1);
@@ -167,8 +167,20 @@ public class Initializer {
     colocacionHeladeraRepository.guardar(colocoH3);
 
     Alerta a1 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
+    Alerta a2 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FRAUDE);
+    Alerta a3 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.TEMPERATURA);
+    Alerta a4 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
+    Alerta a5 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
+    Alerta a6 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FRAUDE);
+    Alerta a7 = Alerta.of(h1, LocalDateTime.now(), null, null, TipoAlerta.TEMPERATURA);
 
     alertasRepository.guardar(a1);
+    alertasRepository.guardar(a2);
+    alertasRepository.guardar(a3);
+    alertasRepository.guardar(a4);
+    alertasRepository.guardar(a5);
+    alertasRepository.guardar(a6);
+    alertasRepository.guardar(a7);
 
     SensorTemperatura sensorTemperatura = new SensorTemperatura(h1);
     ServiceLocator.get(ISensorTemperaturaRepository.class).guardar(sensorTemperatura);
@@ -198,8 +210,8 @@ public class Initializer {
     ofertaProductoRepository.guardar(oferta10);
 
     List<MedioDeContacto> contactoTecnico = new ArrayList<>();
-    contactoTecnico.add(new MedioDeContacto(CanalContacto.EMAIL,"gturri@frba.utn.edu.ar"));
-    Tecnico t1 = new Tecnico("Juan", "Fernandez", "34564992", TipoDocumento.DNI,contactoTecnico, new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
+    contactoTecnico.add(new MedioDeContacto(CanalContacto.EMAIL, "gturri@frba.utn.edu.ar"));
+    Tecnico t1 = new Tecnico("Juan", "Fernandez", "34564992", TipoDocumento.DNI, contactoTecnico, new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
 
     tecnicosRepository.guardar(t1);
 
