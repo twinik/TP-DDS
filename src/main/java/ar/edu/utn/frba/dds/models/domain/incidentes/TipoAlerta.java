@@ -8,7 +8,7 @@ public enum TipoAlerta {
   public static String mapearAString(TipoAlerta tipoAlerta) {
     return switch (tipoAlerta) {
       case FRAUDE -> "Fraude";
-      case TEMPERATURA -> "Temperatura";
+      case TEMPERATURA -> "Falla de Temperatura";
       case FALLA_CONEXION -> "Falla de conexión";
     };
   }

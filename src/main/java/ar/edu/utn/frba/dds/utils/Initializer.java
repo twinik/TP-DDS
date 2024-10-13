@@ -221,10 +221,10 @@ public class Initializer {
 
     tecnicosRepository.guardar(t1);
 
-    ReporteFallasHeladera reporteEjemplo = new ReporteFallasHeladera();
-    reporteEjemplo.setRutaArchivo("/reportes/un-reporte.pdf");
-
-    reportesRepository.guardar(reporteEjemplo);
+//    ReporteFallasHeladera reporteEjemplo = new ReporteFallasHeladera();
+//    reporteEjemplo.setRutaArchivo("/reportes/un-reporte.pdf");
+//
+//    reportesRepository.guardar(reporteEjemplo);
 
     Formulario f = new Formulario();
     f.setNombre("formulario 1");

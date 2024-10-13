@@ -23,4 +23,6 @@ public abstract class Reporte extends EntidadPersistente {
     protected String rutaArchivo;
 
     public abstract void generarPDF();
+
+    public abstract String getTipo();
 }

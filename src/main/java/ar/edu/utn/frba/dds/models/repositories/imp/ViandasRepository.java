@@ -52,15 +52,6 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
         withTransaction(() -> entityManager().persist(vianda));
     }
 
-    public void guardar(Vianda... vianda) {
-
-        withTransaction(() -> {
-            for (Vianda via : vianda) {
-                entityManager().persist(via);
-            }
-        });
-    }
-
     @Override
     public void actualizar(Vianda vianda) {
         withTransaction(() -> entityManager().merge(vianda));
@@ -74,26 +65,4 @@ public class ViandasRepository implements IViandasRepository, WithSimplePersiste
             entityManager().merge(vianda);
         });
     }
-
-  /*public static void main(String[] args) {
-        Vianda m = new Vianda("otro");
-        Vianda m1 = new Vianda("uno");
-        Vianda m2 = new Vianda("hola");
-        IViandasRepository repositorio = ServiceLocator.get(IViandasRepository.class);
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<Vianda> vianda1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Vianda> vianda2 = repositorio.buscar(2L);
-
-        List<Vianda> lista = repositorio.buscarTodos();
-
-    }*/
 }

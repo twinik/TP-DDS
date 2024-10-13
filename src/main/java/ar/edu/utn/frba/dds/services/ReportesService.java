@@ -23,23 +23,23 @@ public class ReportesService {
             ReporteDto dto = new ReporteDto();
             dto.setFecha(r.getCreated_at().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             dto.setArchivo(r.getRutaArchivo());
-            dto.setTipo(getTipoReporte(r));
+            dto.setTipo(r.getTipo());
             return dto;
         }).toList();
         return dtos;
     }
 
-    private String getTipoReporte(Reporte r) {
-        if(r instanceof ReporteViandasPorHeladera) return "Viandas por heladera";
-        if(r instanceof ReporteViandasPorColaborador) return "Viandas por colaborador";
-        if(r instanceof ReporteFallasHeladera) return "Fallas por heladera";
-        throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Reporte"));
-//        Class clase = r.getClass();
-//        if (clase.equals(ReporteViandasPorHeladera.class)) return "Viandas por heladera";
-//        else if (clase.equals(ReporteViandasPorColaborador.class)) return "Viandas por colaborador";
-//        else if (clase.equals(ReporteFallasHeladera.class)) return "Fallas por heladera";
-//        else {
-//            throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Reporte"));
-//        }
-    }
+//    private String getTipoReporte(Reporte r) {
+//        if(r instanceof ReporteViandasPorHeladera) return "Viandas por heladera";
+//        if(r instanceof ReporteViandasPorColaborador) return "Viandas por colaborador";
+//        if(r instanceof ReporteFallasHeladera) return "Fallas por heladera";
+//        throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Reporte"));
+////        Class clase = r.getClass();
+////        if (clase.equals(ReporteViandasPorHeladera.class)) return "Viandas por heladera";
+////        else if (clase.equals(ReporteViandasPorColaborador.class)) return "Viandas por colaborador";
+////        else if (clase.equals(ReporteFallasHeladera.class)) return "Fallas por heladera";
+////        else {
+////            throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Reporte"));
+////        }
+//    }
 }

@@ -89,6 +89,11 @@ public class ReporteViandasPorHeladera extends Reporte {
         pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, entradasInformeColocadas + "\n" + entradasInformeRetiradas);
     }
 
+    @Override
+    public String getTipo() {
+        return "Viandas por heladera";
+    }
+
     private String generarEntradasInforme(Map<String, Long> viandasPorHeladera, String tipo) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");

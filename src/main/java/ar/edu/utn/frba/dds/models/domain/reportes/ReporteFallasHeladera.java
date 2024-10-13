@@ -59,6 +59,11 @@ public class ReporteFallasHeladera extends Reporte {
         pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(fallasTecnicasPorHeladera));
     }
 
+    @Override
+    public String getTipo() {
+        return "Fallas por heladera";
+    }
+
     private String generarEntradasInforme(Map<String, Long> incidnetesPorHeladera) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");

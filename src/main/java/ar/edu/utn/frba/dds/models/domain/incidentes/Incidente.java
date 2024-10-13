@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "incidente")
 @DiscriminatorColumn(name = "tipo_incidente")
-public class Incidente extends EntidadPersistente {
+public abstract class Incidente extends EntidadPersistente {
   @ManyToOne
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private Heladera heladera;
@@ -68,5 +68,7 @@ public class Incidente extends EntidadPersistente {
   public void marcarSolucionado() {
     this.solucionado = true;
   }
+
+  public abstract String getTipo();
 
 }
