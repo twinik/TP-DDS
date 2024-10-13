@@ -11,15 +11,17 @@ import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFacto
 import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISensorMovimientoRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.services.AlertasService;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import java.util.List;
 import java.util.Optional;
 
 @Setter
 public class SensorMovimientoListener implements IMqttMessageListener {
   private ISensorMovimientoRepository sensorMovimientoRepository;
-  private IAlertasRepository alertasRepository;
+  private AlertasService alertasService;
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
@@ -29,10 +31,9 @@ public class SensorMovimientoListener implements IMqttMessageListener {
 
       if (sensorMovimientoOpt.isPresent()) {
         Heladera heladera = sensorMovimientoOpt.get().getHeladera();
-        Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
+        Alerta alerta = Alerta.of(heladera, DateHelper.fromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
             , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
-        alerta.reportar();
-        this.alertasRepository.guardar(alerta);
+        this.alertasService.reportarYGuardarSiNoEstabaElMismoProblema(alerta, heladera);
       }
     } catch (RuntimeException e){
       e.printStackTrace();

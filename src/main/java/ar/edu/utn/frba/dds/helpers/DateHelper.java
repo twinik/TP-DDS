@@ -74,10 +74,10 @@ public class DateHelper {
                 .with(LocalTime.MAX);
     }
 
-    public static LocalDateTime getTimestamp(Long timestamp) {
+    public static LocalDateTime fromTimestamp(Long timestamp) {
         Instant instant = Instant.ofEpochMilli(timestamp);
-
-        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
+        return zonedDateTime.toLocalDateTime();
     }
 
 

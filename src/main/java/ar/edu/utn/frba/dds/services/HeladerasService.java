@@ -90,8 +90,9 @@ public class HeladerasService {
     return heladeras.stream().map(HeladeraDto::fromHeladera).collect(Collectors.toList());
   }
 
-  public List<HeladeraDto> obtenerHeladerasColaborador(String id){
+  public List<HeladeraDto> obtenerHeladerasColaborador(String id) {
     List<Heladera> heladeras = this.repoHeladeras.buscarPorColaborador(id);
+    this.repoHeladeras.refresh(heladeras);
     return heladeras.stream().map(HeladeraDto::fromHeladera).toList();
   }
 

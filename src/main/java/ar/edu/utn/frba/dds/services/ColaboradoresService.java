@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.EmailDuplicadoException;
+import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
@@ -25,6 +26,7 @@ import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.utils.PasswordHasher;
 import lombok.AllArgsConstructor;
+import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -77,8 +79,12 @@ public class ColaboradoresService {
       throw new NoTieneDireccionException(MensajeNoTieneDireccionFactory.generarMensaje());
     }
 
-    if (dto.getFechaNacimiento() != null)
+    if (dto.getFechaNacimiento() != null){
       colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+      if(colaborador.getFechaNacimiento().isAfter(LocalDate.now()))
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+    }
+
     colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
     this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
     this.colaboradoresRepository.guardar(colaborador);

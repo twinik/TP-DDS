@@ -4,9 +4,11 @@ import ar.edu.utn.frba.dds.dtos.tecnicos.TecnicoDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.TecnicoOutputDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.VisitaTecnicoDto;
 import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
+import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.helpers.DniHelper;
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.VisitaTecnico;
@@ -15,6 +17,7 @@ import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniInvalidoFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFechaInvalidaFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
 import ar.edu.utn.frba.dds.models.repositories.IIncidentesRepository;
 import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
@@ -58,13 +61,14 @@ public class TecnicosService {
     visitaTecnico.setTecnico(tecnico.get());
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     visitaTecnico.setTimestamp(LocalDateTime.parse(dto.getFechaVisita(), formatter));
+    if (visitaTecnico.getTimestamp().isAfter(LocalDateTime.now()))
+      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
     visitaTecnico.setDescripcion(dto.getDescripcion());
     visitaTecnico.setUrlFoto(dto.getUrlFoto());
     visitaTecnico.setSolucionado(dto.isSolucionado());
     visitaTecnico.setIncidente(this.incidentesService.obtenerIncidente(dto.getIncidente()));
-    if (visitaTecnico.estaSolucionado()) {
-      visitaTecnico.getIncidente().marcarSolucionado();
-    }
+    if (visitaTecnico.estaSolucionado())
+      this.incidentesService.solucionar(visitaTecnico.getIncidente());
     this.visitasTecnicoRepository.guardar(visitaTecnico);
   }
 

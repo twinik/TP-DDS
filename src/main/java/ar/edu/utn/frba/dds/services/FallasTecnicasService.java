@@ -54,9 +54,9 @@ public class FallasTecnicasService {
         Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
         Heladera heladera = this.heladerasService.obtenerHeladera(dto.getHeladeraId());
 
-        if (!heladera.isHeladeraActiva()) {
-         throw new RecursoNoDisponibleException("La heladera ya se encuentra inhabilitada debido a otro incidente y estamos trabajando para solucionarlo cuanto antes. De todos modos, gracias por informarnos!");
-        }
+//        if (!heladera.isHeladeraActiva()) {
+//         throw new RecursoNoDisponibleException("La heladera ya se encuentra inhabilitada debido a otro incidente y estamos trabajando para solucionarlo cuanto antes. De todos modos, gracias por informarnos!");
+//        }
 
         FallaTecnica falla = new FallaTecnica(
                 heladera,

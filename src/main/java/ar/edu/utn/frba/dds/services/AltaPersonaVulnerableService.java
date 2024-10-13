@@ -5,6 +5,8 @@ import static ar.edu.utn.frba.dds.helpers.DateHelper.fechaFromString;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.TutoradoInputDto;
 import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
+import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.helpers.DniHelper;
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
@@ -15,6 +17,7 @@ import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniInvalidoFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFechaInvalidaFactory;
 import ar.edu.utn.frba.dds.models.repositories.IAltaPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.models.repositories.IPersonaVulnerableRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
@@ -35,6 +38,13 @@ public class AltaPersonaVulnerableService {
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
 
     this.validarDocumento(p.getTipoDocumento(), dto.getNroDocumento());
+
+    if (dto.getFechaNacimiento() != null){
+      p.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+      if(p.getFechaNacimiento().isAfter(LocalDate.now()))
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+    }
+
 
     AltaPersonaVulnerable a = new AltaPersonaVulnerable();
     a.setPersona(p);
@@ -86,7 +96,11 @@ public class AltaPersonaVulnerableService {
     PersonaVulnerable p = new PersonaVulnerable();
     p.setNombre(dto.getNombre());
     p.setApellido(dto.getApellido());
-    p.setFechaNacimiento(fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+    if (dto.getFechaNacimiento() != null){
+      p.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+      if(p.getFechaNacimiento().isAfter(LocalDate.now()))
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+    }
     p.setFechaRegistro(LocalDate.now());
     p.setDomicilio(dto.getDomicilio());
     p.setPoseeDomicilio(dto.getDomicilio() != null);

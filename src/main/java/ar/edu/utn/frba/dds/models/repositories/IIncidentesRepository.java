@@ -8,4 +8,8 @@ public interface IIncidentesRepository {
 
   Optional<Incidente> buscar(String id);
    List<Incidente> buscarTodos();
+
+  List<Incidente> buscarPorHeladera(String id);
+
+  void actualizar(Incidente incidente);
 }

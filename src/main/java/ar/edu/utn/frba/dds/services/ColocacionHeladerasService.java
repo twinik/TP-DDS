@@ -7,10 +7,12 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.ColocacionHeladeras;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.heladeras.CalculadorHeladerasCercanas;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
+import ar.edu.utn.frba.dds.models.domain.heladeras.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SensorMovimiento;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SensorTemperatura;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFechaInvalidaFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.models.repositories.IColocacionHeladeraRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
@@ -36,9 +38,12 @@ public class ColocacionHeladerasService {
 
     if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
     ColocacionHeladeras colocacionHeladeras = new ColocacionHeladeras();
-    colocacionHeladeras.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
-    if (colocacionHeladeras.getFecha().isAfter(LocalDate.now()))
-      throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+
+
+      colocacionHeladeras.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
+      if(colocacionHeladeras.getFecha().isAfter(LocalDate.now()))
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+
     colocacionHeladeras.setColaborador(c);
     Heladera heladera = new Heladera();
     heladera.setNombre(dto.getNombre());
