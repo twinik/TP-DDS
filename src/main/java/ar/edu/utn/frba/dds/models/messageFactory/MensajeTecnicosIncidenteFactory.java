@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class MensajeTecnicosIncidenteFactory {
     public static String generarMensaje(Tecnico tecnicoAContactar, Heladera heladera, LocalDateTime timestamp) {
-        return format("Hola %s se rompio la heladera %s a las %s y necesitamos que por favor venga a repararla",
+        return format("Estimado %s, la heladera %s se ha averiado a las %s. Le solicitamos amablemente que acuda a repararla a la brevedad posible.",
                 tecnicoAContactar.getNombre(), heladera.getNombre(), timestamp.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a")));
     }
 }

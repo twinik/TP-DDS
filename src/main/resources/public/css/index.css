@@ -52,6 +52,18 @@ body {
     background-color: #202a3d !important;
 }
 
+.boton-colaborar {
+    background-color: #3a4b6b !important;
+    color: #eee;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.boton-colaborar:hover {
+    background-color: #202a3d !important;
+}
+
 .title1 {
     font-weight: 800;
     font-size: 1.8rem;
