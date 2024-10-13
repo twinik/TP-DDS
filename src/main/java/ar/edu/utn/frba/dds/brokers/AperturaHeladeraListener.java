@@ -45,7 +45,7 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
         throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Heladera"));
       }
       Heladera heladera = heladeraOpt.get();
-      AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladeraOpt.orElse(null), DateHelper.localDateTimeFromTimestamp(aperturaDto.getTimestamp()), heladera);
+      AperturaHeladera aperturaHeladera = AperturaHeladera.of(solicitudAperturaHeladeraOpt.orElse(null), DateHelper.fromTimestamp(aperturaDto.getTimestamp()), heladera);
       aperturasHeladeraRepository.guardar(aperturaHeladera);
       if (tarjetaOpt.isPresent()) {
         tarjetaOpt.get().agregarUso(aperturaHeladera);

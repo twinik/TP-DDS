@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.services.AlertasService;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class FallaConexionCronJob {
     public static void main(String[] args) {
         int limite_minutos;
         IHeladerasRepository heladerasRepository = ServiceLocator.get(IHeladerasRepository.class);
-        IAlertasRepository alertasRepository = ServiceLocator.get(IAlertasRepository.class);
+        AlertasService alertasService = ServiceLocator.get(AlertasService.class);
         List<Heladera> heladeras = heladerasRepository.buscarTodos();
         try {
             limite_minutos = Integer.parseInt(new ConfigReader("config.properties").getProperty("MINUTOS_TOLERANCIA_CONEXION"));
@@ -31,8 +32,7 @@ public class FallaConexionCronJob {
             if (verifcador.huboFallaConexion(h, limite_minutos)) { // Agregar desde el archivo de config (ya esta)
                 Alerta alerta = Alerta.of(h, new TecnicosHelper(ServiceLocator.get(ITecnicosRepository.class))
                         , new NotificationStrategyFactory(), TipoAlerta.FALLA_CONEXION);
-                alerta.reportar();
-                alertasRepository.guardar(alerta);
+                alertasService.reportarYGuardarSiNoEstabaElMismoProblema(alerta, h);
             }
         }
     }

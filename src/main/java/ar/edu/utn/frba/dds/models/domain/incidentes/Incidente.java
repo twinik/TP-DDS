@@ -67,7 +67,6 @@ public class Incidente extends EntidadPersistente {
 
   public void marcarSolucionado() {
     this.solucionado = true;
-    heladera.habilitar();
   }
 
 }

@@ -168,7 +168,7 @@ public class ServiceLocator {
       else if (clase.equals(HeladerasService.class))
         add(clase, new HeladerasService(get(IHeladerasRepository.class)));
       else if (clase.equals(IncidentesService.class))
-        add(clase, new IncidentesService(get(IIncidentesRepository.class)));
+        add(clase, new IncidentesService(get(IIncidentesRepository.class),get(HeladerasService.class)));
       else if (clase.equals(MedioContactoService.class))
         add(clase, new MedioContactoService());
       else if (clase.equals(ModelosService.class))

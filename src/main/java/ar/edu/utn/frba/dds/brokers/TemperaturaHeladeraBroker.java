@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISensorTemperaturaRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.services.AlertasService;
 import java.io.IOException;
 
 public class TemperaturaHeladeraBroker {
@@ -19,7 +20,7 @@ public class TemperaturaHeladeraBroker {
     SensorTemperaturaListener receptor = new SensorTemperaturaListener();
     receptor.setSensorTemperaturaRepository(ServiceLocator.get(ISensorTemperaturaRepository.class));
     receptor.setHeladerasRepository(ServiceLocator.get(IHeladerasRepository.class));
-    receptor.setAlertasRepository(ServiceLocator.get(IAlertasRepository.class));
+    receptor.setAlertasService(ServiceLocator.get(AlertasService.class));
 
     BrokerSubscriber brokerSubscriber = new BrokerSubscriber(topic, broker, clientId, receptor);
     brokerSubscriber.listen();

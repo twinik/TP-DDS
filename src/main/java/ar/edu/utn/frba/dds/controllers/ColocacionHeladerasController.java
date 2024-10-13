@@ -29,6 +29,7 @@ public class ColocacionHeladerasController implements ICrudViewsHandler {
     public void create(Context context) {
         Map<String, Object> model = new HashMap<>();
         model.put("modelos", this.modelosService.obtenerModelosDisponibles());
+        model.put("message",context.queryParam("message"));
         context.render("/app/colaboraciones/cargo-heladera.hbs", model);
     }
 

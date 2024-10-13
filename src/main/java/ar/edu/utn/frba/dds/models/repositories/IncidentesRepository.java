@@ -14,9 +14,28 @@ public class IncidentesRepository implements IIncidentesRepository, WithSimplePe
 
   @Override
   public List<Incidente> buscarTodos() {
-    return entityManager().createQuery("from Incidente where solucionado=:solucionado and activo=:activo order by timestamp",Incidente.class)
-        .setParameter("solucionado",false)
-        .setParameter("activo",true)
+    return entityManager().createQuery("from Incidente where solucionado=:solucionado and activo=:activo order by timestamp", Incidente.class)
+        .setParameter("solucionado", false)
+        .setParameter("activo", true)
         .getResultList();
   }
+
+  @Override
+  public List<Incidente> buscarPorHeladera(String id) {
+    return entityManager().createQuery("from Incidente where solucionado=:solucionado and heladera.id=:id and activo=:activo", Incidente.class)
+        .setParameter("solucionado", false)
+        .setParameter("activo", true)
+        .setParameter("id", id)
+        .getResultList();
+  }
+
+  @Override
+  public void actualizar(Incidente incidente) {
+    withTransaction(() -> {
+          entityManager().merge(incidente);
+        }
+    );
+    entityManager().refresh(incidente);
+  }
+
 }

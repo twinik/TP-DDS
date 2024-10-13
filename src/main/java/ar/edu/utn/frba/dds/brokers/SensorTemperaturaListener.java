@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISensorTemperaturaRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
+import ar.edu.utn.frba.dds.services.AlertasService;
 import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -21,8 +22,7 @@ import java.util.Optional;
 public class SensorTemperaturaListener implements IMqttMessageListener {
   private ISensorTemperaturaRepository sensorTemperaturaRepository;
   private IHeladerasRepository heladerasRepository;
-  private IAlertasRepository alertasRepository;
-
+  private AlertasService alertasService;
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
@@ -37,10 +37,9 @@ public class SensorTemperaturaListener implements IMqttMessageListener {
         Heladera heladera = sensorTemperatura.getHeladera();
         heladerasRepository.actualizar(heladera);
         if (!heladera.temperaturaEsAdecuada()) {
-          Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
+          Alerta alerta = Alerta.of(heladera, DateHelper.fromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
               , new NotificationStrategyFactory(), TipoAlerta.TEMPERATURA);
-          alerta.reportar();
-          this.alertasRepository.guardar(alerta);
+          this.alertasService.reportarYGuardarSiNoEstabaElMismoProblema(alerta, heladera);
         }
       }
     }catch (RuntimeException e){
