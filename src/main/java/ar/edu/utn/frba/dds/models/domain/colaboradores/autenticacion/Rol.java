@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -15,20 +16,26 @@ import java.util.List;
 @Entity
 @Table(name = "rol")
 public class Rol extends EntidadPersistente {
-    @Column(name = "nombre")
-    private String nombre;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "permisos_x_rol", joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "permiso_id", referencedColumnName = "id"))
-    private List<Permiso> permisos = new ArrayList<>();
+  @Column(name = "nombre")
+  private String nombre;
+  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinTable(name = "permisos_x_rol", joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "permiso_id", referencedColumnName = "id"))
+  private List<Permiso> permisos = new ArrayList<>();
 
-    public boolean tenesPermiso(Permiso permiso) {
-        return this.permisos.stream().anyMatch(p -> p.tieneIgualDescripcion(permiso));
-    }
+  public boolean tenesPermiso(Permiso permiso) {
+    return this.permisos.stream().anyMatch(p -> p.tieneIgualDescripcion(permiso));
+  }
 
-    public void agregarPermisos(Permiso... permisos) {
-        this.permisos.addAll(Arrays.asList(permisos));
-    }
+  public void agregarPermisos(Permiso... permisos) {
+    this.permisos.addAll(Arrays.asList(permisos));
+  }
 
+  public static Rol of(Set<Permiso> p) {
+    Rol r = new Rol();
+    r.setNombre("Rol from csv");
+    r.agregarPermisos(p.toArray(new Permiso[0]));
+    return r;
+  }
 
 }

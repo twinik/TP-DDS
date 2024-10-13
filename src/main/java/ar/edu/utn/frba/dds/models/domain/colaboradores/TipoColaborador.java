@@ -36,4 +36,8 @@ public class TipoColaborador extends EntidadPersistente {
         this.formasPosiblesColaboracion.addAll(formas);
     }
 
+    public void agregarFormasColaboracion(FormaColaboracion forma) {
+        this.formasPosiblesColaboracion.add(forma);
+    }
+
 }

@@ -147,7 +147,8 @@ public class ServiceLocator {
             get(IColocacionHeladeraRepository.class),
             get(IRedistribucionesViandaRepository.class),
             get(IAltaPersonaVulnerableRepository.class),
-            get(IHeladerasRepository.class)));
+            get(IHeladerasRepository.class)
+            , get(IRolesRepository.class)));
       else if (clase.equals(ColaboradoresService.class))
         add(clase, new ColaboradoresService(get(IColaboradoresRepository.class), get(MedioContactoService.class), get(FormaColaboracionService.class), get(RolesService.class), get(TarjetasService.class), get(IUsuariosRepository.class)));
       else if (clase.equals(ColocacionHeladerasService.class))
@@ -207,7 +208,7 @@ public class ServiceLocator {
       else if (clase.equals(TecnicosHelper.class))
         add(clase, new TecnicosHelper(get(ITecnicosRepository.class)));
       else if (clase.equals(TecnicosService.class))
-        add(clase, new TecnicosService(get(ITecnicosRepository.class), get(MedioContactoService.class), get(IVisitasTecnicoRepository.class),get(IncidentesService.class)));
+        add(clase, new TecnicosService(get(ITecnicosRepository.class), get(MedioContactoService.class), get(IVisitasTecnicoRepository.class), get(IncidentesService.class)));
       else if (clase.equals(TipoDocumentoMapper.class))
         add(clase, new TipoDocumentoMapper());
       else if (clase.equals(UsuarioService.class))
@@ -232,8 +233,8 @@ public class ServiceLocator {
         add(clase, new FallasTecnicasController(get(FallasTecnicasService.class), get(FileUploadService.class), get(HeladerasService.class)));
       else if (clase.equals(FormulariosController.class))
         add(clase, new FormulariosController(get(FormulariosService.class)));
-      else if(clase.equals(HeladerasController.class))
-        add(clase,new HeladerasController(get(HeladerasService.class)));
+      else if (clase.equals(HeladerasController.class))
+        add(clase, new HeladerasController(get(HeladerasService.class)));
       else if (clase.equals(LoginController.class))
         add(clase, new LoginController(get(UsuarioService.class)));
       else if (clase.equals(LogoutController.class))
@@ -265,7 +266,7 @@ public class ServiceLocator {
       else if (clase.equals(ViandasController.class))
         add(clase, new ViandasController(get(ViandasService.class)));
       else if (clase.equals(VisitasTecnicoController.class))
-        add(clase, new VisitasTecnicoController(get(TecnicosService.class), get(IncidentesService.class),get(FileUploadService.class)));
+        add(clase, new VisitasTecnicoController(get(TecnicosService.class), get(IncidentesService.class), get(FileUploadService.class)));
         //EXTRAS
       else if (clase.equals(BotTelegramSender.class))
         add(clase, new BotTelegramSender());

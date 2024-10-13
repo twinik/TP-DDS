@@ -121,18 +121,6 @@
                     <span class="ml-3">Productos</span>
                 </a>
             </li>
-
-            <li>
-                <a href="/carga-masiva-colaboraciones" class="flex items-center p-2 rounded-lg nav-item group">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-                    </svg>
-                    <span class="ml-3">Carga masiva</span>
-                </a>
-            </li>
-
             <li>
                 <a href="/reportes" class="flex items-center p-2 rounded-lg nav-item group">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300" fill="none"
@@ -200,6 +188,18 @@
                                               d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                                     </svg>
                                     <span class="ml-3">Alta de tarjetas</span>
+                                </a>
+                            </li>
+                        {{/if}}
+                        {{#if permisoCsv}}
+                            <li>
+                                <a href="/carga-masiva-colaboraciones" class="flex items-center p-2 pl-11 rounded-lg nav-item group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-300" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="ml-3">Carga masiva</span>
                                 </a>
                             </li>
                         {{/if}}

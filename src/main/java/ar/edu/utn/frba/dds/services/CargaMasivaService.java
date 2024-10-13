@@ -30,6 +30,7 @@ public class CargaMasivaService {
     private IRedistribucionesViandaRepository redistribucionesViandaRepository;
     private IAltaPersonaVulnerableRepository altaPersonaVulnerableRepository;
     private IHeladerasRepository heladerasRepository;
+    private IRolesRepository rolesRepository;
 
     public String subirArchivo(UploadedFile uploadedFile) throws CargaArchivoFailedException {
         try {
@@ -49,7 +50,8 @@ public class CargaMasivaService {
                     this.mailSender,
                     this.colaboradoresRepository,
                     this.formasColaboracionRespository,
-                    this.calculadorPuntos
+                    this.calculadorPuntos,
+                this.rolesRepository
             );
 
             List<IPuntajeCalculable> colaboraciones = cargador.cargarColaboraciones();

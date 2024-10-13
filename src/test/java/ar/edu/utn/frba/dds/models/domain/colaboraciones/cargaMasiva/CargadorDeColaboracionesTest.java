@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.emailSending.SendGridMailSender;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
+import ar.edu.utn.frba.dds.models.repositories.IRolesRepository;
 import ar.edu.utn.frba.dds.models.repositories.imp.ColaboradoresRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ class CargadorDeColaboracionesTest {
         when(formasColaboracionRespository.buscarPorNombre("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("DONACION_VIANDA", "vianda")));
         when(formasColaboracionRespository.buscarPorNombre("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion("REGISTRO_PERSONA", "persona")));
         when(formasColaboracionRespository.buscarPorNombre("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("REDISTRIBUCION_VIANDA", "vianda")));
-        cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/models/domain/assets/cargacolaboraciones.csv", csvReader, mailSender, repositorio, formasColaboracionRespository, ServiceLocator.get(ICalculadorPuntos.class));
+        cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/models/domain/assets/cargacolaboraciones.csv", csvReader, mailSender, repositorio, formasColaboracionRespository, ServiceLocator.get(ICalculadorPuntos.class),ServiceLocator.get(IRolesRepository.class));
     }
 
     @Test

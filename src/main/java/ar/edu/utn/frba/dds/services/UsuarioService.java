@@ -66,6 +66,7 @@ public class UsuarioService {
         dto.setPermisoFormulario(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-formulario").toArray(new Permiso[0])));
         dto.setPermisoModeloHeladera(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-modelo-heladera").toArray(new Permiso[0])));
         dto.setPermisoCodTarjeta(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-cod-tarjeta").toArray(new Permiso[0])));
+        dto.setPermisoCsv(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("carga-colaboraciones").toArray(new Permiso[0])));
         return dto;
     }
 }

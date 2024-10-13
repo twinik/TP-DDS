@@ -36,6 +36,7 @@ public class LoginController implements ICrudViewsHandler {
             ctx.sessionAttribute("permisoFormulario", usuarioNavbarDto.getPermisoFormulario());
             ctx.sessionAttribute("permisoModeloHeladera", usuarioNavbarDto.getPermisoModeloHeladera());
             ctx.sessionAttribute("permisoTarjeta", usuarioNavbarDto.getPermisoCodTarjeta());
+            ctx.sessionAttribute("permisoCsv",usuarioNavbarDto.getPermisoCsv());
             ctx.sessionAttribute("admin", usuarioNavbarDto.esAdmin());
 
             if (dto.getFormCompletado() != null && !dto.getFormCompletado()) {

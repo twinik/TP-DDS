@@ -12,8 +12,10 @@ public class UsuarioNavbarDto {
     private Boolean permisoFormulario = false;
     private Boolean permisoModeloHeladera = false;
     private Boolean permisoCodTarjeta = false;
+    private Boolean permisoCsv = false;
 
     public Boolean esAdmin() {
-        return this.permisoTecnico || this.permisoFormulario || this.permisoModeloHeladera || this.permisoCodTarjeta;
+        return this.permisoTecnico || this.permisoFormulario || this.permisoModeloHeladera || this.permisoCodTarjeta
+            || this.permisoCsv;
     }
 }
