@@ -2,14 +2,14 @@
     <div class="p-6 sm:p-10 mx-auto max-w-5xl">
         <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Falla Tecnica</h1>
 
-        <p><strong>Heladera: </strong> {{falla.heladeraNombre}}</p>
-        <p><strong>Fecha reportada: </strong> {{falla.fecha}}</p>
-        <p><strong>Reportada por el colaborador: </strong> {{falla.nombreColaborador}}</p>
-        <p><strong>Descripcion: </strong></p>
-        <p>{{falla.descripcion}}</p>
+        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Heladera: </strong> {{falla.heladeraNombre}}</span>
+        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Fecha reportada: </strong> {{falla.fecha}}</span>
+        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Reportada por el colaborador: </strong> {{falla.nombreColaborador}}</span>
+        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Descripcion: </strong></span>
+        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white">{{falla.descripcion}}</span>
         {{#if falla.urlFoto}}
-            <div class="bg-white p-6 flex items-center justify-center h-56">
-                <img class="max-w-full max-h-full object-contain" src={{falla.urlFoto}} alt="img-falla" />
+            <div class="bg-white p-6 flex items-center justify-center h-56 rounded-lg shadow-lg">
+                <img class="max-w-full max-h-full object-contain rounded-lg" src={{falla.urlFoto}} alt="img-falla"/>
             </div>
         {{/if}}
     </div>
