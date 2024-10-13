@@ -1,18 +1,20 @@
 {{#partial "contenido"}}
     <div class="p-6 sm:p-10 mx-auto max-w-5xl">
-        <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Listado de alertas</h1>
+        <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Listado de fallas técnicas</h1>
 
         <div class="bg-gray-100 rounded-lg p-6 mb-8">
             <form method="GET" class="space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="filtroSolucionadas" class="block text-base font-semibold text-gray-700 mb-2">Filtrar por
+                        <label for="filtroSolucionadas" class="block text-base font-semibold text-gray-700 mb-2">Filtrar
+                            por
                             estado:</label>
                         <select id="filtroSolucionadas"
                                 name="filtroSolucionadas"
                                 class="w-full py-3 px-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
                             {{#if filtroSolucionadas}}
-                                <option value="{{filtroSolucionadas}}" hidden="hidden" selected="selected">{{filtroSolucionadas}}</option>
+                                <option value="{{filtroSolucionadas}}" hidden="hidden"
+                                        selected="selected">{{filtroSolucionadas}}</option>
                             {{else}}
                                 <option value="Mostrar todas" hidden="hidden" selected="selected">Mostrar todas</option>
                             {{/if}}
@@ -28,7 +30,8 @@
                                 name="heladeraId"
                                 class="w-full py-3 px-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
                             {{#if heladeraSeleccionada}}
-                                <option value="{{heladeraSeleccionada.id}}" hidden="hidden" selected="selected">{{heladeraSeleccionada.nombre}}</option>
+                                <option value="{{heladeraSeleccionada.id}}" hidden="hidden"
+                                        selected="selected">{{heladeraSeleccionada.nombre}}</option>
                             {{else}}
                                 <option value="" hidden="hidden" selected="selected">Mostrar todas</option>
                             {{/if}}
@@ -54,7 +57,8 @@
                 <tr class="azulIntermedio">
                     <th class="p-4 text-center text-lg font-semibold text-white">Heladera</th>
                     <th class="p-4 text-center text-lg font-semibold text-white">Estado</th>
-                    <th class="p-4 text-center text-lg font-semibold text-white">Descripcion</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Descripción</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Detalles</th>
                 </tr>
                 </thead>
                 <tbody id="alertasBody">
@@ -67,14 +71,19 @@
                             {{else}}
                                 No Solucionado
                             {{/if}}
-                                </td>
-                        <td class="p-4 text-base" style="display: flex; justify-content: space-between;">
-                            <p style="overflow: hidden;
-                                    white-space: nowrap;
-                                    text-overflow: ellipsis;
-                                    max-width: 80%;"
-                            >{{this.descripcion}}</p>
-                            <a style="color: dodgerblue; cursor: pointer" onclick="redirigirAFalla('{{this.id}}')">Ver mas</a>
+                        </td>
+                        <td class="p-4 text-base max-w-xs break-words overflow-hidden">
+                            <p class="text-center">
+                                {{this.descripcion}}
+                            </p>
+                        </td>
+                        <td class="p-4 text-base">
+                            <button
+                                    class="py-1 text-sm font-medium text-blue-600 hover:text-blue-800 focus:outline-none"
+                                    onclick="redirigirAFalla('{{this.id}}')"
+                            >
+                                Ver más
+                            </button>
                         </td>
                     </tr>
                 {{/each}}

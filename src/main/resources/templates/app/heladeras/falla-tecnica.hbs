@@ -1,17 +1,57 @@
-{{#partial "contenido"}}
-    <div class="p-6 sm:p-10 mx-auto max-w-5xl">
-        <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Falla Tecnica</h1>
+{{#partial "btn-volver"}}
+    <div class="flex">
+        <a href="/heladeras/fallas-tecnicas">
+            <button
+                    class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            >
+                Volver
+            </button>
+        </a>
+    </div>
+{{/partial}}
 
-        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Heladera: </strong> {{falla.heladeraNombre}}</span>
-        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Fecha reportada: </strong> {{falla.fecha}}</span>
-        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Reportada por el colaborador: </strong> {{falla.nombreColaborador}}</span>
-        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white"><strong>Descripcion: </strong></span>
-        <span class="text-center block mb-3 text-sm font-medium text-gray-900 dark:text-white">{{falla.descripcion}}</span>
-        {{#if falla.urlFoto}}
-            <div class="bg-white p-6 flex items-center justify-center h-56 rounded-lg shadow-lg">
-                <img class="max-w-full max-h-full object-contain rounded-lg" src={{falla.urlFoto}} alt="img-falla"/>
+{{#partial "contenido"}}
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto bg-white dark:bg-gray-700 rounded-lg shadow-xl overflow-hidden">
+            <div class="px-6 py-8 sm:p-10">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-8">
+                    Falla Técnica
+                </h1>
+
+                <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Heladera:</span>
+                        <span class="text-lg font-semibold text-gray-900 dark:text-white">{{falla.heladeraNombre}}</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Fecha reportada:</span>
+                        <span class="text-lg font-semibold text-gray-900 dark:text-white">{{falla.fecha}}</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Reportada por el colaborador:</span>
+                        <span class="text-lg font-semibold text-gray-900 dark:text-white">{{falla.nombreColaborador}}</span>
+                    </div>
+
+                    <div class="bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Descripción:</h2>
+                        <p class="text-gray-700 dark:text-gray-200 break-words overflow-hidden">{{falla.descripcion}}</p>
+                    </div>
+
+                    {{#if falla.urlFoto}}
+                        <div class="mt-8">
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Imagen de la
+                                falla:</h2>
+                            <div class="bg-white dark:bg-gray-800 p-2 rounded-lg shadow-inner">
+                                <img class="w-full h-auto object-contain rounded-lg" src="{{falla.urlFoto}}"
+                                     alt="Imagen de la falla técnica"/>
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
             </div>
-        {{/if}}
+        </div>
     </div>
 {{/partial}}
 
