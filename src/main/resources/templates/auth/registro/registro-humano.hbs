@@ -1,206 +1,167 @@
 {{#partial "btn-volver"}}
-    <a href="/registro">
-        <button
-                class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+    <a href="/registro" class="fixed top-4 left-4 z-10">
+        <button class="px-6 py-3 text-sm lg:text-lg font-medium text-white azulIntermedio rounded-lg hover:bg-blue-900 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 shadow-md">
             Volver
         </button>
     </a>
 {{/partial}}
 
 {{#partial "contenido"}}
-    <div class="flex justify-center items-center lg:mt-16 flex-col">
-        <h1 class="title1 mb-6" style="color: #eee;">Registro</h1>
-        {{#if message}}
-            <p id="error-message" style="background: rgb(255, 163, 163);"
-               class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
-        {{/if}}
-        <div class="flex flex-col items-center justify-center">
-            <form method="post" action="" class="content-center max-w-md mx-auto">
-                <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-5 group">
-                        <input type="text" name="nombre" id="floating_first_name"
-                               class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                               placeholder=" " required/>
-                        <label for="floating_first_name"
-                               class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombre</label>
+    <div class="flex justify-center items-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="w-full max-w-md space-y-8">
+            <div>
+                <h1 class="title1 mb-6 text-center text-3xl font-extrabold text-white">Registro</h1>
+                {{#if message}}
+                    <p id="error-message"
+                       class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 border border-red-400">{{message}}</p>
+                {{/if}}
+            </div>
+            <form method="post" action="" class="mt-8 space-y-6">
+                <div class="space-y-4">
+                    <div>
+                        <label for="nombre" class="block text-sm font-medium text-gray-300">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required
+                               class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Nombre">
                     </div>
-                    <div class="relative z-0 w-full mb-5 group">
-                        <input type="text" name="apellido" id="floating_last_name"
-                               class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                               placeholder=" " required/>
-                        <label for="floating_last_name"
-                               class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Apellido</label>
-                    </div>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="email" name="email" id="floating_email"
-                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                           placeholder=" " required/>
-                    <label for="floating_email"
-                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="password" name="password" id="floating_password"
-                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                           placeholder=" " required/>
-                    <label for="floating_password"
-                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contaseña</label>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="password" name="passConf" id="floating_repeat_password"
-                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                           placeholder=" " required/>
-                    <label for="floating_repeat_password"
-                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirmar
-                        contraseña</label>
-                </div>
-                <!--                <div class="relative z-0 w-full mb-5 group">-->
-                <!--                    <input type="text" name="repeat_password" id="floating_contact"-->
-                <!--                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"-->
-                <!--                           placeholder=" " required/>-->
-                <!--                    <label for="floating_contact"-->
-                <!--                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contacto-->
-                <!--                        1</label>-->
-                <!--                    <span class="text-gray-300 cursor-pointer text-sm">Añadir otro medio de contacto</span>-->
-                <!--                </div>-->
-                <input datepicker id="default-datepicker" type="text" name="fechaNacimiento"
-                       class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Fecha de nacimiento">
-                <div class="relative z-0 w-full mb-5 group">
-                    <label
-                            for="tipo-documento"
-                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Tipo de documento</label>
-                    <select
-                            id="tipo-documento"
-                            name="tipoDocumento"
-                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    >
-                        {{#each tiposDocumento}}
-                            <option value={{this.valor}}>{{this.descripcion}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="relative z-0 w-full mb-5 group">
-                    <input type="text" name="documento" id="documento"
-                           class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                           placeholder="documento" required min="1"/>
-                    <label for="documento"
-                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nro
-                        de documento</label>
-                </div>
 
-
-                <div class="relative z-0 w-full mb-5 group">
-                    <span style="color: #eee;">Direccion</span>
-                    <div class="grid md:grid-cols-2 md:gap-6">
-                        <div class="relative z-0 w-full mb-5 group">
-                            <input type="text" name="calle" id="calle"
-                                   class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                   placeholder=" "/>
-                            <label for="calle"
-                                   class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Calle</label>
-                        </div>
-                        <div class="relative z-0 w-full mb-5 group">
-                            <input type="number" name="altura" id="altura"
-                                   class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                   placeholder=" "/>
-                            <label for="altura"
-                                   class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Altura</label>
-                        </div>
+                    <div>
+                        <label for="apellido" class="block text-sm font-medium text-gray-300">Apellido</label>
+                        <input type="text" id="apellido" name="apellido" required
+                               class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Apellido">
                     </div>
-                    <div class="grid md:grid-cols-2 md:gap-6">
-                        <div class="relative z-0 w-full mb-5 group">
-                            <input type="number" name="piso" id="piso"
-                                   class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                   placeholder=" "/>
-                            <label for="piso"
-                                   class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Piso</label>
+
+                    <div>
+                        <label for="floating_email" class="block text-sm font-medium text-gray-300">Email</label>
+                        <input type="email" id="floating_email" name="email" required
+                               class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Email">
+                    </div>
+
+                    <div>
+                        <label for="floating_password"
+                               class="block text-sm font-medium text-gray-300">Contraseña</label>
+                        <input type="password" id="floating_password" name="password" required
+                               class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Contraseña">
+                    </div>
+
+                    <div>
+                        <label for="floating_repeat_password" class="block text-sm font-medium text-gray-300">Confirmar
+                            contraseña</label>
+                        <input type="password" id="floating_repeat_password" name="passConf" required
+                               class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Confirmar contraseña">
+                    </div>
+
+                    <div>
+                        <label for="default-datepicker" class="block text-sm font-medium text-gray-300">Fecha de
+                            nacimiento</label>
+                        <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy" autoSelectToday="1"
+                               id="default-datepicker" type="text" name="fechaNacimiento"
+                               class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Fecha de nacimiento">
+                    </div>
+
+                    <div>
+                        <label for="tipo-documento" class="block text-sm font-medium text-gray-300">Tipo de
+                            documento</label>
+                        <select id="tipo-documento" name="tipoDocumento"
+                                class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            {{#each tiposDocumento}}
+                                <option value="{{this.valor}}">{{this.descripcion}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="documento" class="block text-sm font-medium text-gray-300">Número de
+                            documento</label>
+                        <input type="number" id="documento" name="documento" required min="1"
+                               class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Número de documento">
+                    </div>
+
+                    <div class="space-y-4">
+                        <span class="block text-sm font-medium text-gray-300">Dirección</span>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="calle" class="block text-sm font-medium text-gray-300">Calle</label>
+                                <input type="text" id="calle" name="calle"
+                                       class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="Calle">
+                            </div>
+                            <div>
+                                <label for="altura" class="block text-sm font-medium text-gray-300">Altura</label>
+                                <input type="number" id="altura" name="altura"
+                                       class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="Altura">
+                            </div>
                         </div>
-                        <div class="relative z-0 w-full mb-5 group">
-                            <input type="text" name="cp" id="codigo-postal"
-                                   class="block py-2.5 px-0 w-full text-sm text-gray-300 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                   placeholder=" "/>
-                            <label for="codigo-postal"
-                                   class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Codigo
-                                Postal</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="piso" class="block text-sm font-medium text-gray-300">Piso</label>
+                                <input type="number" id="piso" name="piso"
+                                       class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="Piso">
+                            </div>
+                            <div>
+                                <label for="codigo-postal" class="block text-sm font-medium text-gray-300">Código
+                                    postal</label>
+                                <input type="text" id="codigo-postal" name="cp"
+                                       class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="Código postal">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-
-                <div class="mb-2 text-gray-500">Formas de colaboracion</div>
-                <div class="grid grid-cols-2">
-                    {{#each formasColaboracion}}
-                        <div class="flex items-center">
-                            <input id="default-checkbox" name="forma-{{@index}}" type="checkbox" value={{this.id}}
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-checkbox"
-                                   class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">{{this.desc}}</label>
+                    <div>
+                        <span class="block text-sm font-medium text-gray-300 mb-2">Formas de colaboración</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            {{#each formasColaboracion}}
+                                <div class="flex items-center">
+                                    <input id="forma-{{@index}}" name="forma-{{@index}}" type="checkbox"
+                                           value="{{this.id}}"
+                                           class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500">
+                                    <label for="forma-{{@index}}"
+                                           class="ml-2 text-sm text-gray-300">{{this.desc}}</label>
+                                </div>
+                            {{/each}}
                         </div>
-                    {{/each}}
+                    </div>
 
-                    <!--                    <div class="flex items-center">-->
-                    <!--                        <input id="default-checkbox" type="checkbox" value=""-->
-                    <!--                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
-                    <!--                        <label for="default-checkbox"-->
-                    <!--                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Donacion-->
-                    <!--                            de viandas</label>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="flex items-center">-->
-                    <!--                        <input id="default-checkbox" type="checkbox" value=""-->
-                    <!--                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
-                    <!--                        <label for="default-checkbox"-->
-                    <!--                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Redistribucion de-->
-                    <!--                            viandas</label>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="flex items-center">-->
-                    <!--                        <input id="default-checkbox" type="checkbox" value=""-->
-                    <!--                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
-                    <!--                        <label for="default-checkbox"-->
-                    <!--                               class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-300">Alta-->
-                    <!--                            persona vulnerable</label>-->
-                    <!--                    </div>-->
+                    <input type="hidden" name="cant-formas" id="cant-formas" value="{{formasColaboracion.length}}">
+
+                    <div id="mediosContactoContainer" class="space-y-4">
+                        <div>
+                            <label for="medio-contacto-1" class="block text-sm font-medium text-gray-300">Canal de
+                                Contacto 1</label>
+                            <select id="medio-contacto-1" name="canal-1"
+                                    class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="Whatsapp">Whatsapp</option>
+                                <option value="Email">Mail</option>
+                                <option value="Telegram">Telegram</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="contacto-1" class="block text-sm font-medium text-gray-300">Contacto 1</label>
+                            <input type="text" id="contacto-1" name="contacto-1" required
+                                   class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                   placeholder="Nro de teléfono o Email">
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="nuevoMedioContacto()"
+                            class="text-sm font-medium text-blue-500 hover:text-blue-400 focus:outline-none focus:underline">
+                        Agregar medio de contacto +
+                    </button>
+
+                    <input type="hidden" name="cantidad-contactos" id="cantidad-contactos" value="1">
                 </div>
-                <input type="hidden" name="cant-formas" id="cant-formas" value={{formasColaboracion.length}} />
-                <div id="mediosContactoContainer">
-                    <label
-                            for="medio-contacto-1"
-                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Canal de Contacto 1</label
-                    >
-                    <select
-                            id="medio-contacto-1"
-                            name="canal-1"
-                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    >
-                        <option value="Whatsapp">Whatsapp</option>
-                        <option value="Email">Mail</option>
-                        <option value="Telegram">Telegram</option>
-                    </select>
-                    <label
-                            for="contacto-1"
-                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Contacto 1</label
-                    >
-                    <input
-                            type="text"
-                            id="contacto-1"
-                            name="contacto-1"
-                            aria-describedby="helper-text-explanation"
-                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Nro de telefono o Email"
-                            required
-                            min="1"
-                    />
-                </div>
-                <button class="mb-4 text-sm" type="button" onclick="nuevoMedioContacto()">
-                    Agregar medio de contacto +
-                </button>
-                <input type="hidden" name="cantidad-contactos" id="cantidad-contactos" value="1"/>
 
                 <button type="submit"
-                        class="w-full mt-4 px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
+                        class="w-full px-6 py-3 text-sm font-medium text-white botonFormularios rounded-lg hover:bg-blue-900 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
                     Registrarse
                 </button>
             </form>
