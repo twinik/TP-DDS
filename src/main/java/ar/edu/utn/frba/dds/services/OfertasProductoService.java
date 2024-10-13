@@ -69,7 +69,7 @@ public class OfertasProductoService {
     OfertaProducto o = this.obtenerOferta(idOferta);
 
     if (!o.puedeSerCanjeadoPor(c))
-      throw new PuntosInsuficientesException();
+      throw new PuntosInsuficientesException(o.getProducto().getNombre());
 
     CanjeProducto canje = new CanjeProducto();
     canje.setComprador(c);
