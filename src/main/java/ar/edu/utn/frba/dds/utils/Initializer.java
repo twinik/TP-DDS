@@ -172,7 +172,6 @@ public class Initializer {
     Alerta a4 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
     Alerta a5 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
     Alerta a6 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FRAUDE);
-    Alerta a7 = Alerta.of(h1, LocalDateTime.now(), null, null, TipoAlerta.TEMPERATURA);
 
     a1.setSolucionado(true);
     a2.setSolucionado(true);
@@ -187,7 +186,6 @@ public class Initializer {
     alertasRepository.guardar(a4);
     alertasRepository.guardar(a5);
     alertasRepository.guardar(a6);
-    alertasRepository.guardar(a7);
 
     SensorTemperatura sensorTemperatura = new SensorTemperatura(h1);
     ServiceLocator.get(ISensorTemperaturaRepository.class).guardar(sensorTemperatura);
