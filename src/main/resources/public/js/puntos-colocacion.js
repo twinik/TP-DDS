@@ -58,11 +58,11 @@ function clickOnPopup(element) {
     document.getElementById('numero').value = alturaElegida;
 }
 
-//cuando le al boton id="elegir-nuevo-punto" quiero que se me limpie el mapa y me deje elegir un nuevo punto, que tambien se borre lo que se escribio en los inputs
 document.getElementById('elegir-nuevo-punto').addEventListener('click', function (event) {
     event.preventDefault();
     document.getElementById('latitud').value = '';
     document.getElementById('longitud').value = '';
     document.getElementById('radio').value = '';
     if (marker) map.removeLayer(marker);
+    markerLayerGroup.clearLayers();
 });
