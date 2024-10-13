@@ -23,15 +23,20 @@ public class SensorMovimientoListener implements IMqttMessageListener {
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
-    SensorMovimientoBrokerDto sensorDto = SensorMovimientoBrokerDto.fromString(mqttMessage.toString());
-    Optional<SensorMovimiento> sensorMovimientoOpt = sensorMovimientoRepository.buscar(sensorDto.getIdSensor());
+    try{
+      SensorMovimientoBrokerDto sensorDto = SensorMovimientoBrokerDto.fromString(mqttMessage.toString());
+      Optional<SensorMovimiento> sensorMovimientoOpt = sensorMovimientoRepository.buscar(sensorDto.getIdSensor());
 
-    if (sensorMovimientoOpt.isPresent()) {
-      Heladera heladera = sensorMovimientoOpt.get().getHeladera();
-      Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
-          , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
-      alerta.reportar();
-      this.alertasRepository.guardar(alerta);
+      if (sensorMovimientoOpt.isPresent()) {
+        Heladera heladera = sensorMovimientoOpt.get().getHeladera();
+        Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
+            , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
+        alerta.reportar();
+        this.alertasRepository.guardar(alerta);
+      }
+    } catch (RuntimeException e){
+      e.printStackTrace();
     }
+
   }
 }

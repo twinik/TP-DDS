@@ -1,412 +1,90 @@
 {{#partial "contenido"}}
     <div class="p-10 mx-auto max-w-4xl">
         <h1 class="title1">Reportes</h1>
+        <form method="GET">
+            <label
+                    for="default-datepicker"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Desde</label
+            >
+            <input
+                    datepicker
+                    datepicker-autohide
+                    datepicker-format="dd/mm/yyyy"
+                    autoSelectToday="1"
+                    id="default-datepicker"
+                    type="text"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Fecha de nacimiento"
+                    name="fechaDesde"
+                    value="{{fechaDesde}}"
+            />
+            <label
+                    for="default-datepicker"
+                    class="text-left block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+            >Hasta</label
+            >
+            <input
+                    datepicker
+                    datepicker-autohide
+                    datepicker-format="dd/mm/yyyy"
+                    autoSelectToday="1"
+                    id="default-datepicker"
+                    type="text"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="fechaHasta"
+                    value="{{fechaHasta}}"
+            />
+            <button type="submit"
+                    class="w-full mt-4 px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
+                Buscar Reportes
+            </button>
+        </form>
         <table class="w-full mt-10 table-auto">
             <tr>
                 <th class="p-2 azulIntermedio text-white">Fecha</th>
                 <th class="p-2 azulIntermedio text-white">
-                    Fallas por Heladera
+                    Tipo
                 </th>
                 <th class="p-2 azulIntermedio text-white">
-                    Viandas retiradas/colocadas por Heladera
-                </th>
-                <th class="p-2 azulIntermedio text-white">
-                    Viandas por Colaborador
+                    Archivo
                 </th>
             </tr>
             {{#each reportes}}
                 <tr class="border-b">
                     <td class="p-3 border-x">{{this.fecha}}</td>
+                    <td class="p-3 border-x">{{this.tipo}}</td>
                     <td class="p-3 border-x cursor-pointer">
-                        <div class="flex justify-center" onclick="descargarArchivo({{this.archivoFallas}})">
-                            <span>Descargar reporte</span>
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    enable-background="new 0 0 24 24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    width="24"
-                            >
-                                <g>
-                                    <rect
-                                            fill="none"
-                                            height="24"
-                                            width="24"
-                                    />
-                                </g>
-                                <g>
-                                    <path
-                                            d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                    />
-                                </g>
-                            </svg>
-                        </div>
-                    </td>
-                    <td class="p-3 border-x cursor-pointer">
-                        <div class="flex justify-center" onclick="descargarArchivo({{this.archivoViandasHeladera}})">
-                            <span>Descargar reporte</span>
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    enable-background="new 0 0 24 24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    width="24"
-                            >
-                                <g>
-                                    <rect
-                                            fill="none"
-                                            height="24"
-                                            width="24"
-                                    />
-                                </g>
-                                <g>
-                                    <path
-                                            d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                    />
-                                </g>
-                            </svg>
-                        </div>
-                    </td>
-                    <td class="p-3 border-x cursor-pointer"
-                        onclick="descargarArchivo({{this.archivoViandasColaborador}})">
-                        <div class="flex justify-center">
-                            <span>Descargar reporte</span>
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    enable-background="new 0 0 24 24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    width="24"
-                            >
-                                <g>
-                                    <rect
-                                            fill="none"
-                                            height="24"
-                                            width="24"
-                                    />
-                                </g>
-                                <g>
-                                    <path
-                                            d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                    />
-                                </g>
-                            </svg>
-                        </div>
+                        {{#if this.archivo}}
+                            <div class="flex justify-center" onclick="descargarArchivo('{{this.archivo}}')">
+                                <span>Descargar reporte</span>
+                                <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        enable-background="new 0 0 24 24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                >
+                                    <g>
+                                        <rect
+                                                fill="none"
+                                                height="24"
+                                                width="24"
+                                        />
+                                    </g>
+                                    <g>
+                                        <path
+                                                d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
+                                        />
+                                    </g>
+                                </svg>
+                            </div>
+                        {{else}}
+                            <span>Reporte no disponible</span>
+                        {{/if}}
                     </td>
                 </tr>
             {{/each}}
-            <tr class="border-b">
-                <td class="p-3 border-x">09/12/2018</td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-            </tr>
-            <tr class="border-b">
-                <td class="p-3 border-x">09/12/2018</td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-            </tr>
-            <tr class="border-b">
-                <td class="p-3 border-x">09/12/2018</td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-            </tr>
-            <tr class="border-b">
-                <td class="p-3 border-x">09/12/2018</td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-                <td class="p-3 border-x cursor-pointer">
-                    <div class="flex justify-center">
-                        <span>Descargar reporte</span>
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                enable-background="new 0 0 24 24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                width="24"
-                        >
-                            <g>
-                                <rect
-                                        fill="none"
-                                        height="24"
-                                        width="24"
-                                />
-                            </g>
-                            <g>
-                                <path
-                                        d="M5,20h14v-2H5V20z M19,9h-4V3H9v6H5l7,7L19,9z"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </td>
-            </tr>
         </table>
     </div>
 {{/partial}}
@@ -414,7 +92,7 @@
 {{#partial "scripts"}}
     <script>
         function descargarArchivo(fileName) {
-            fetch(`/download-reporte?file=${encodeURIComponent(fileName)}`)
+            fetch(`${fileName}`) // tendria que ser /reportes/nombre_arhcivo
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('File download failed');

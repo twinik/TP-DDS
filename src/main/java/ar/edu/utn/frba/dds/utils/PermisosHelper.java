@@ -50,9 +50,6 @@ public class PermisosHelper {
                         this.buscarPorNombres("alta-vulnerable");
                 case "/heladeras/{id}/suscribirse" -> this.buscarPorNombres("colaborador-base");
                 case "/heladeras/{id}/reportar-falla-tecnica" -> this.buscarPorNombres("colaborador-base");
-
-                //PRODUCTOS
-//        case "/productos" -> this.buscarPorNombres("canjear-productos");
                 default -> new HashSet<>();
             };
         } else if (ctx.method().name().equals("POST")) {

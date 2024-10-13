@@ -1,131 +1,116 @@
 {{#partial "contenido"}}
-    <div class="flex justify-center items-center lg:pt-16 flex-col">
-        <h1 class="title1 mb-6" style="color: #eee;">{{formulario.nombre}}</h1>
-        <p style="color: #eee;">Para hacer efectivo tu registro en la plataforma, te pedimos por favor que contestes las
-            siguientes preguntas.</p>
+    <div class="flex justify-center items-center min-h-screen bg-gray-900 px-4 py-12">
+        <div class="w-full max-w-2xl bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+            <div class="p-8">
+                <h1 class="text-3xl font-bold mb-6 text-white text-center">{{formulario.nombre}}</h1>
+                <p class="text-gray-300 mb-8 text-center">Para hacer efectivo tu registro en la plataforma, te pedimos por favor que contestes las siguientes preguntas.</p>
 
-        <form method="POST" class="content-center mx-auto w-full max-w-md" id="myForm">
-            {{#each formulario.campos}}
-                <div class="relative z-0 w-full mb-5 mt-5 group">
-                    <label for="campo_{{this.id}}"
-                           class="text-left block mb-2 text-sm font-medium text-gray-900 text-white">{{this.pregunta}}</label>
-
-                    {{#switch this.tipo}}
-                        {{#case "texto-libre"}}
-                            <textarea
-                                    name="campo_{{this.id}}"
-                                    id="campo_{{this.id}}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                <form method="POST" id="myForm" class="space-y-6">
+                    {{#each formulario.campos}}
+                        <div class="space-y-2">
+                            <label for="campo_{{this.id}}" class="block text-sm font-medium text-gray-200">
+                                {{this.pregunta}}
                                 {{#if this.obligatorio}}
-                                    required
-                                {{/if}}></textarea>
-                        {{/case}}
-                        {{#case "numerico"}}
-                            <input
-                                    type="number"
-                                    name="campo_{{this.id}}"
-                                    id="campo_{{this.id}}"
-                                    step="0.01"
-                                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                {{#if this.obligatorio}}
-                                    required
+                                    <span class="text-red-500 ml-1">*</span>
                                 {{/if}}
-                            />
-                        {{/case}}
-                        {{#case "fecha"}}
-                            <input
-                                    datepicker
-                                    datepicker-autohide
-                                    datepicker-format="dd/mm/yyyy"
-                                    autoSelectToday="1"
-                                    name="campo_{{this.id}}"
-                                    id="campo_{{this.id}}"
-                                    type="text"
-                                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                {{#if this.obligatorio}}
-                                    required
-                                {{/if}}
-                            />
-                        {{/case}}
-                        {{#case "multiple-choice"}}
-                            <div class="grid md:grid-cols-2 md:gap-6">
-                                {{#each this.opciones}}
-                                    <div>
-                                        <label
-                                                for="opcion_{{this.id}}"
-                                                class="block ms-2 text-sm font-medium text-grey-900"
-                                        ></label>
-                                        <input
-                                                id="opcion_{{this.id}}"
-                                                name="campo_{{../id}}"
-                                                type="checkbox"
-                                                value="{{this.id}}"
-                                                class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-                                        />
-                                        {{this.texto}}
-                                    </div>
-                                {{/each}}
-                            </div>
-                        {{/case}}
-                        {{#case "single-choice"}}
-                            <div class="grid md:grid-cols-2 md:gap-6">
-                                {{#each this.opciones}}
-                                    <div>
-                                        <label
-                                                for="opcion_{{this.id}}"
-                                                class="block ms-2 text-sm font-medium text-grey-900"
-                                        ></label>
-                                        <input
-                                                id="opcion_{{this.id}}"
-                                                name="campo_{{../id}}"
-                                                type="radio"
-                                                value="{{this.id}}"
-                                                class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-                                            {{#if ../obligatorio}}
-                                                required
-                                            {{/if}}
-                                        />
-                                        {{this.texto}}
-                                    </div>
-                                {{/each}}
-                            </div>
-                        {{/case}}
-                    {{/switch}}
+                            </label>
 
-                </div>
-            {{/each}}
-            <button type="submit"
-                    class="w-full mt-4 px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
-                Enviar Respuesta
-            </button>
-        </form>
-
+                            {{#switch this.tipo}}
+                                {{#case "texto-libre"}}
+                                    <textarea
+                                            name="campo_{{this.id}}"
+                                            id="campo_{{this.id}}"
+                                            class="w-full px-3 py-2 text-white bg-gray-700 rounded-lg border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                                            rows="4"
+                                            {{#if this.obligatorio}}required{{/if}}
+                                    ></textarea>
+                                {{/case}}
+                                {{#case "numerico"}}
+                                    <input
+                                            type="number"
+                                            name="campo_{{this.id}}"
+                                            id="campo_{{this.id}}"
+                                            step="0.01"
+                                            class="w-full px-3 py-2 text-white bg-gray-700 rounded-lg border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                                            {{#if this.obligatorio}}required{{/if}}
+                                    />
+                                {{/case}}
+                                {{#case "fecha"}}
+                                    <input
+                                            datepicker
+                                            datepicker-autohide
+                                            datepicker-format="dd/mm/yyyy"
+                                            autoSelectToday="1"
+                                            name="campo_{{this.id}}"
+                                            id="campo_{{this.id}}"
+                                            type="text"
+                                            class="w-full px-3 py-2 text-white bg-gray-700 rounded-lg border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                                            {{#if this.obligatorio}}required{{/if}}
+                                    />
+                                {{/case}}
+                                {{#case "multiple-choice"}}
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {{#each this.opciones}}
+                                            <div class="flex items-center">
+                                                <input
+                                                        id="opcion_{{this.id}}"
+                                                        name="campo_{{../id}}"
+                                                        type="checkbox"
+                                                        value="{{this.id}}"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-offset-gray-800"
+                                                />
+                                                <label for="opcion_{{this.id}}" class="ml-2 text-sm text-gray-300">
+                                                    {{this.texto}}
+                                                </label>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                {{/case}}
+                                {{#case "single-choice"}}
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {{#each this.opciones}}
+                                            <div class="flex items-center">
+                                                <input
+                                                        id="opcion_{{this.id}}"
+                                                        name="campo_{{../id}}"
+                                                        type="radio"
+                                                        value="{{this.id}}"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500 focus:ring-offset-gray-800"
+                                                        {{#if ../obligatorio}}required{{/if}}
+                                                />
+                                                <label for="opcion_{{this.id}}" class="ml-2 text-sm text-gray-300">
+                                                    {{this.texto}}
+                                                </label>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                {{/case}}
+                            {{/switch}}
+                        </div>
+                    {{/each}}
+                    <button type="submit"
+                            class="w-full px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300 mt-6">
+                        Enviar Respuesta
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 {{/partial}}
 
 {{#partial "scripts"}}
     <script>
         document.getElementById("myForm").onsubmit = function (e) {
-            let checkboxes;
-            let isChecked;
             {{#each formulario.campos}}
                 {{#if this.obligatorio}}
                     {{#switch this.tipo}}
                         {{#case "multiple-choice"}}
-                            checkboxes = document.querySelectorAll('input[name="campo_{{this.id}}"]');
-
-                            isChecked = false;
-
-                            // Check if at least one checkbox is checked
-                            checkboxes.forEach((checkbox) => {
-                                if (checkbox.checked) {
-                                    isChecked = true;
-                                }
-                            });
-
+                            var checkboxes = document.querySelectorAll('input[name="campo_{{this.id}}"]');
+                            var isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
                             if (!isChecked) {
                                 e.preventDefault();
-                                alert("Por favor, debes responder el campo \'" + "{{this.pregunta}}\'");
+                                alert("Por favor, debes responder el campo '{{this.pregunta}}'");
+                                return false;
                             }
                         {{/case}}
                     {{/switch}}

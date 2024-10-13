@@ -145,6 +145,10 @@ public class Heladera extends EntidadPersistente {
     avisarObservers();
   }
 
+  public void habilitar(){
+    this.heladeraActiva = true;
+  }
+
   public int getCuposLibresViandas() {
     return this.capacidadViandas - this.viandas;
   }

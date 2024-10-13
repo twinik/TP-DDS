@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.domain.incidentes;
 
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
@@ -11,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
@@ -54,12 +56,17 @@ public class Incidente extends EntidadPersistente {
         String message = MensajeTecnicosIncidenteFactory.generarMensaje(tecnicoAContactar, heladera, timestamp);
         tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
             NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
-            strategy.notificar(tecnicoAContactar, message);
+          try {
+            strategy.notificar(tecnicoAContactar, new ConfigReader("config.properties").getProperty("ASUNTO_MENSAJE_TECNICO"), message);;
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
         });
     }
 
     public void marcarSolucionado() {
         this.solucionado = true;
+        heladera.habilitar();
     }
 
 }

@@ -23,6 +23,9 @@ public class FallasTecnicasController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
         // TODO: hacer view para que un admin pueda ver fallas tecnicas
+        Map<String ,Object> model = new HashMap<>();
+        model.put("fallas",this.fallasTecnicasService.obtenerTodos());
+        context.render("dafdf",model);
     }
 
     @Override

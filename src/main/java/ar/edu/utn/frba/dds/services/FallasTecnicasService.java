@@ -24,10 +24,6 @@ public class FallasTecnicasService {
 
     public void crear(FallaTecnicaDto dto) {
 
-//    colaboradoresService.validarExistenciaColaborador(dto.getIdColaborador());
-
-        // ya te lo valida aca
-
         Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
         Heladera heladera = this.heladerasService.obtenerHeladera(dto.getHeladeraId());
 

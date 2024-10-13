@@ -197,7 +197,9 @@ public class Initializer {
     ofertaProductoRepository.guardar(oferta9);
     ofertaProductoRepository.guardar(oferta10);
 
-    Tecnico t1 = new Tecnico("Juan", "Fernandez", "34564992", TipoDocumento.DNI, new ArrayList<>(), new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
+    List<MedioDeContacto> contactoTecnico = new ArrayList<>();
+    contactoTecnico.add(new MedioDeContacto(CanalContacto.EMAIL,"gturri@frba.utn.edu.ar"));
+    Tecnico t1 = new Tecnico("Juan", "Fernandez", "34564992", TipoDocumento.DNI,contactoTecnico, new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
 
     tecnicosRepository.guardar(t1);
 
@@ -210,7 +212,7 @@ public class Initializer {
     f.setNombre("formulario 1");
     f.setAutor(u5);
     f.agregarCampos(new Campo(TipoCampo.LIBRE, "Nos gustaria saber quien sos y que te gustaria lograr en la ONG", true),
-        new Campo(TipoCampo.LIBRE, "¿Es la primera vez que participas en una ONG?¿Como llegaste a nosotros?", false));
+        new Campo(TipoCampo.LIBRE, "¿Es la primera vez que participas en una ONG? ¿Como llegaste a nosotros?", false));
     Campo compuesto = new Campo(TipoCampo.CHOICE, "¿Crees que tener conocimiento en el area de Diseño de Sistemas es importante para nuestro entorno?", true);
     compuesto.agregarOpciones(new Opcion("si"), new Opcion("no"));
     f.agregarCampos(compuesto);

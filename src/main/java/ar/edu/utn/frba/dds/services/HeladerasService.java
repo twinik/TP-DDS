@@ -21,12 +21,14 @@ public class HeladerasService {
 
   public List<HeladeraMapaDto> getHeladerasParaMapa() {
     List<Heladera> heladeras = repoHeladeras.buscarTodos();
+    this.repoHeladeras.refresh(heladeras);
     List<HeladeraMapaDto> resultado = heladeras.stream().map(HeladeraMapaDto::fromHeladera).collect(Collectors.toList());
     return resultado;
   }
 
   public List<HeladeraMapaDto> getHeladerasParaDonar() {
     List<Heladera> heladeras = repoHeladeras.buscarTodos().stream().filter(Heladera::isHeladeraActiva).toList();
+    this.repoHeladeras.refresh(heladeras);
     return heladeras.stream().map(HeladeraMapaDto::fromHeladera).toList();
   }
 
@@ -41,9 +43,11 @@ public class HeladerasService {
 
   public Heladera obtenerHeladera(String id) {
     Optional<Heladera> h = repoHeladeras.buscar(id);
+
     if (h.isEmpty()) {
       throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Heladera", id));
     } else {
+      this.repoHeladeras.refresh(h.get());
       return h.get();
     }
   }

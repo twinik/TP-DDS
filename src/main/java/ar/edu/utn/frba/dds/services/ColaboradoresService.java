@@ -78,7 +78,7 @@ public class ColaboradoresService {
     }
 
     if (dto.getFechaNacimiento() != null)
-      colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "MM/dd/yyyy"));
+      colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
     colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
     this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
     this.colaboradoresRepository.guardar(colaborador);

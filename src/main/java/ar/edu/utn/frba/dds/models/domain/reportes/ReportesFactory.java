@@ -8,9 +8,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ReportesFactory {
 
-    private static final String RUTA_VIANDAS_X_COLAB = "reporte-viandas-colab";
-    private static final String RUTA_VIANDAS_X_HELADERA = "reporte-viandas-heladera";
-    private static final String RUTA_FALLAS_X_HELADERA = "reporte-fallas-heladera";
+    private static final String RUTA_VIANDAS_X_COLAB = "reportes/reporte-viandas-colab";
+    private static final String RUTA_VIANDAS_X_HELADERA = "reportes/reporte-viandas-heladera";
+    private static final String RUTA_FALLAS_X_HELADERA = "reportes/reporte-fallas-heladera";
     private IViandasRepository viandasRepository;
     private IDonacionesViandaRepository donacionesViandaRepository;
     private IRedistribucionesViandaRepository redistribucionesViandaRepository;

@@ -18,11 +18,11 @@ public class MailNotificationStrategy implements NotificationStrategy {
      * @param contactable
      */
     @Override
-    public void notificar(Contactable contactable, String message) {
+    public void notificar(Contactable contactable, String asunto, String message) {
         ConfigReader config = new ConfigReader("config.properties");
         try {
             mailSenderAdapter.enviarMail(MyMailFactory.createMail(config.getProperty("MAIL-DIR")
-                    , contactable.email(), config.getProperty("ASUNTO_MENSAJE_TENICO"), message));
+                    , contactable.email(), asunto, message));
         } catch (IOException e) {
             throw new CrearMailException(e);
         }

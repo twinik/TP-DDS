@@ -7,6 +7,10 @@ import java.util.Optional;
 public interface IHeladerasRepository {
   Optional<Heladera> buscar(String id);
 
+  void refresh(List<Heladera> heladeras);
+
+  void refresh(Heladera heladera);
+
   List<Heladera> buscarTodos();
 
   Heladera buscarPorNombre(String nombre);

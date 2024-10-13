@@ -26,21 +26,26 @@ public class SensorTemperaturaListener implements IMqttMessageListener {
 
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) {
-    SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(mqttMessage.toString());
-    Optional<SensorTemperatura> sensorTemperaturaOpt = sensorTemperaturaRepository.buscar(sensorDto.getIdSensor());
+    try{
+      SensorTemperaturaBrokerDto sensorDto = SensorTemperaturaBrokerDto.fromString(mqttMessage.toString());
+      Optional<SensorTemperatura> sensorTemperaturaOpt = sensorTemperaturaRepository.buscar(sensorDto.getIdSensor());
 
-    if (sensorTemperaturaOpt.isPresent()) {
-      SensorTemperatura sensorTemperatura = sensorTemperaturaOpt.get();
-      sensorTemperatura.registrarTemperatura(sensorDto.getTemperatura());
+      if (sensorTemperaturaOpt.isPresent()) {
+        SensorTemperatura sensorTemperatura = sensorTemperaturaOpt.get();
+        sensorTemperatura.registrarTemperatura(sensorDto.getTemperatura());
 
-      Heladera heladera = sensorTemperatura.getHeladera();
-      heladerasRepository.actualizar(heladera);
-      if (!heladera.temperaturaEsAdecuada()) {
-        Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
-            , new NotificationStrategyFactory(), TipoAlerta.TEMPERATURA);
-        alerta.reportar();
-        this.alertasRepository.guardar(alerta);
+        Heladera heladera = sensorTemperatura.getHeladera();
+        heladerasRepository.actualizar(heladera);
+        if (!heladera.temperaturaEsAdecuada()) {
+          Alerta alerta = Alerta.of(heladera, DateHelper.localDateTimeFromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
+              , new NotificationStrategyFactory(), TipoAlerta.TEMPERATURA);
+          alerta.reportar();
+          this.alertasRepository.guardar(alerta);
+        }
       }
+    }catch (RuntimeException e){
+      e.printStackTrace();
     }
+
   }
 }

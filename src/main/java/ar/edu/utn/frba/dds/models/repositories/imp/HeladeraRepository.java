@@ -15,6 +15,16 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
     }
 
     @Override
+    public void refresh(List<Heladera> heladeras){
+        heladeras.forEach(h -> entityManager().refresh(h));
+    }
+
+    @Override
+    public void refresh(Heladera heladera){
+        entityManager().refresh(heladera);
+    }
+
+    @Override
     public List<Heladera> buscarTodos() {
         return entityManager().createQuery("from Heladera where activo=:activo", Heladera.class).
                 setParameter("activo", true)
