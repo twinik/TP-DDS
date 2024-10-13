@@ -1,3 +1,30 @@
+var cabaCoords = [-34.6118, -58.4173];
+
+var map = L.map("map").setView(cabaCoords, 13);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    minZoom: 5
+}).addTo(map);
+
+var marker;
+map.on("click", function (e) {
+    if (marker) map.removeLayer(marker);
+    console.log(e.latlng); // e is an event object (MouseEvent in this case)
+    document.getElementById("latitud").value = e.latlng.lat;
+    document.getElementById("longitud").value = e.latlng.lng;
+
+    const markerTemplate = `<div class="flex flex-col popup-content">
+        <div class="popup-title">Nuevo Punto</div>
+        <div class="popup-button" data-lat="${e.latlng.lat}" data-lng="${e.latlng.lng}" onclick="clickOnPopup(this)">
+            Seleccionar
+        </div>
+    </div>`;
+
+    marker = L.marker(e.latlng).addTo(map);
+    marker.bindPopup(markerTemplate).openPopup();
+});
+
 var markerLayerGroup = L.layerGroup().addTo(map);
 
 document.getElementById('confirmar').addEventListener('click', async function (event) {
