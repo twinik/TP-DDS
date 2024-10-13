@@ -31,12 +31,10 @@ public class ColocacionHeladerasService {
   private ISensorMovimientoRepository sensorMovimientoRepository;
   private ISensorTemperaturaRepository sensorTemperaturaRepository;
 
-  // TODO: Herencia para las colaboraciones con colaboradoresService ??
   public void crearColocacionHeladera(HeladeraInputDto dto) {
     Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
     if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
-    // TODO: por ahora creo la heladera aca, no se si es mas adecuado ponerlo en heladerasService
     ColocacionHeladeras colocacionHeladeras = new ColocacionHeladeras();
     colocacionHeladeras.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
     if (colocacionHeladeras.getFecha().isAfter(LocalDate.now()))

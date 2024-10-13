@@ -24,8 +24,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AltaPersonaVulnerable extends EntidadPersistente implements IPuntajeCalculable {
 
-    // TODO revisar REPO quizas un on delete cascade con activo...
-
     private static final Float puntajePorAlta = 2f;
     @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)

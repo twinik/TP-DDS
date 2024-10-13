@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public class AperturaHeladeraBrokerDTO {
     // formato: ID_HELADERA;ID_TARJETA_COLABORADOR;ID_TARJETA_VULNERABLE;ID_SOLICITUD_APERTURA;TIMESTAMP
-    // TODO: hacer que sirva para registrar tmbn las aperturas de las personas vulnerables
     public String idHeladera;
     public String idTarjetaColaborador;
     public String idTarjetaPersonaVulnerable;

@@ -19,8 +19,6 @@ public class OfertaProductoDto {
   private String idColaborador;
   private String categoria;
 
-  // TODO: agregar el colaborador que hizo la oferta ??
-
   public static OfertaProductoDto fromOferta(OfertaProducto oferta) {
     return OfertaProductoDto.builder()
         .id(oferta.getId())

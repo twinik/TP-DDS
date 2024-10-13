@@ -24,8 +24,4 @@ public class SensorMovimiento extends EntidadPersistente {
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
-    //TODO: esto esta al cuete revisar si merece la pena refactorear incidente o solo borrar esto
-    public void alertarRobo() {
-        this.heladera.inhabilitar();
-    }
 }

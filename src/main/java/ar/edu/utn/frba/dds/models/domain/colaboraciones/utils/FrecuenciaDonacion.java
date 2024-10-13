@@ -14,8 +14,6 @@ public enum FrecuenciaDonacion {
         return primerCaracter + f.name().substring(1).toLowerCase();
     }
 
-    //TODO: revisar esto
-
     public static FrecuenciaDonacion fromOrdinal(Integer ordinal) {
         return FrecuenciaDonacion.values()[ordinal];
     }
