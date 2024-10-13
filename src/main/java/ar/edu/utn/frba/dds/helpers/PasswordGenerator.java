@@ -5,8 +5,6 @@ import java.security.SecureRandom;
 /**
  * PasswordGenerator class permite generar una contrasenia.
  */
-
-//TODO: no olivdarse que existe esto
 public class PasswordGenerator {
     private static final String MAYUSC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String MINUSC = "abcdefghijklmnopqrstuvwxyz";

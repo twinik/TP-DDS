@@ -6,7 +6,6 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
 import java.util.Optional;
 
-// TODO QUIZAS BORRAR
 public class OpcionRepository implements IOpcionRepository, WithSimplePersistenceUnit {
     @Override
     public Optional<Opcion> buscar(String id) {
@@ -47,26 +46,4 @@ public class OpcionRepository implements IOpcionRepository, WithSimplePersistenc
             entityManager().merge(opcion);
         });
     }
-
-  /*public static void main(String[] args) {
-        Opcion m = new Opcion("otro");
-        Opcion m1 = new Opcion("uno");
-        Opcion m2 = new Opcion("hola");
-        IOpcionRepository repositorio = (IOpcionRepository) ServiceLocator.get("opcionRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<Opcion> opcion1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Opcion> opcion2 = repositorio.buscar(2L);
-
-        List<Opcion> lista = repositorio.buscarTodos();
-
-    }*/
 }

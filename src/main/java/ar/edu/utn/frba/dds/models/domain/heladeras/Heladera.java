@@ -108,7 +108,7 @@ public class Heladera extends EntidadPersistente {
 
   }
 
-  // TODO cuando llegue el momento ver como funciona esto
+
   public void agregarHeladeraCercana(Heladera... heladeras) {
     this.heladerasCercanas.addAll(Arrays.stream(heladeras).toList());
   }
