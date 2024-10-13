@@ -16,6 +16,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class HeladerasController implements ICrudViewsHandler {
   private HeladerasService heladerasService;
+
   @Override
   public void index(Context context) {
     context.render("/app/heladeras/heladeras.hbs");
@@ -48,26 +49,26 @@ public class HeladerasController implements ICrudViewsHandler {
   @Override
   public void update(Context context) {
     HeladeraDto heladeraDto = HeladeraDto.of(context);
-    if(heladeraDto == null) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+    if (heladeraDto == null) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
     Map<String, Object> model = new HashMap<>();
-    this.heladerasService.actualizarHeladera(heladeraDto,context.sessionAttribute("idColaborador"));
+    this.heladerasService.actualizarHeladera(heladeraDto, context.sessionAttribute("idColaborador"));
     model.put("message", "La heladera fue editada exitosamente");
     context.render("/app/success.hbs", model);
   }
 
   @Override
   public void delete(Context context) {
-    this.heladerasService.eliminarHeladera(context.pathParam("id"),context.sessionAttribute("idColaborador"));
+    this.heladerasService.eliminarHeladera(context.pathParam("id"), context.sessionAttribute("idColaborador"));
     Map<String, Object> model = new HashMap<>();
     model.put("message", "La heladera fue dada de baja exitosamente");
     context.render("/app/success.hbs", model);
   }
 
-  public void getHeladerasMapa(Context context){
+  public void getHeladerasMapa(Context context) {
     context.json(this.heladerasService.getHeladerasParaMapa());
   }
 
-  public void getHeladerasAptasDonacion(Context context){
+  public void getHeladerasAptasDonacion(Context context) {
     context.json(this.heladerasService.getHeladerasParaDonar());
   }
 }

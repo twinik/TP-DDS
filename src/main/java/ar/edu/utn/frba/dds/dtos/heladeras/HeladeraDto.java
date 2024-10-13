@@ -15,7 +15,6 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 public class HeladeraDto {
-  // TODO: completar compos
   private String id;
   private String nombre;
   private Boolean activa;
@@ -37,8 +36,8 @@ public class HeladeraDto {
 
   public static HeladeraDto of(Context context) {
     return HeladeraDto.builder().id(context.pathParam("id"))
-            .nombre(context.formParam("nombre"))
-            .build();
+        .nombre(context.formParam("nombre"))
+        .build();
   }
 
 }

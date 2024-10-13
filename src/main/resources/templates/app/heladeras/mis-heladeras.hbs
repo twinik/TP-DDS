@@ -1,48 +1,48 @@
 {{#partial "contenido"}}
     <div class="p-6 md:p-10 mx-auto max-w-7xl">
         <div class="mb-10 text-center">
-            <h1 class="title1 mb-4">Mis heladeras</h1>
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Mis heladeras</h1>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="heladeras-lista">
             {{#each heladeras}}
-                <div class="overflow-hidden flex flex-col h-full transform transition duration-300 hover:scale-105 bg-white rounded-lg shadow-lg">
+                <div class="group overflow-hidden flex flex-col h-full transform transition duration-300 hover:scale-105 bg-white rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl">
                     <div class="p-6 flex flex-col flex-grow">
-                        <h5 class="text-2xl font-bold mb-2 line-clamp-2">{{this.nombre}}</h5>
-                        <span class="inline-block px-2 py-1 text-sm font-semibold rounded-full mb-4 {{#if this.activa}}bg-green-100 text-green-800{{else}}bg-red-100 text-red-800{{/if}}">
-                            {{#if this.activa}}Activo{{else}}Inactivo{{/if}}
-                        </span>
+                        <div class="flex justify-between items-start mb-4">
+                            <h5 class="text-2xl font-bold line-clamp-2 text-gray-800 group-hover:text-blue-900 transition-colors duration-300">{{this.nombre}}</h5>
+                            <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full {{#if
+                                    this.activa}}bg-green-100 text-green-800 group-hover:bg-green-200{{else}}bg-red-100 text-red-800 group-hover:bg-red-200{{/if}} transition-colors duration-300">
+                                {{#if this.activa}}Activo{{else}}Inactivo{{/if}}
+                            </span>
+                        </div>
                         <div class="flex-grow"></div>
-                        <div class="flex space-x-2">
-                            <form id="editar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/edicion" method="post"
-                                  class="w-full mt-auto">
-                                <input type="hidden" name="idHeladera" value={{this.id}}>
-                                <button type="submit"
-                                        class="flex-1 py-2 px-3 text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 bg-blue-600"
-                                        onclick="editar('{{this.id}}', '{{this.nombre}}')"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                    Editar
-                                </button>
-                            </form>
-                            <form id="eliminar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/eliminacion" method="post"
-                                  class="w-full mt-auto">
-                                <button type="button"
-                                        class="flex-1 py-2 px-3 text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500 bg-red-600"
-                                        onclick="confirmarEliminacion('{{this.id}}', '{{this.nombre}}')"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                    </svg>
-                                    Eliminar
-                                </button>
-                            </form>
+                        <div class="flex flex-col space-y-3 mt-6">
+                            <button type="button"
+                                    class="w-full py-2 px-4 text-blue-600 font-semibold rounded-lg transition-all duration-300 hover:bg-blue-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-blue-100 shadow-md"
+                                    onclick="editar('{{this.id}}', '{{this.nombre}}')"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2"
+                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                                Editar
+                            </button>
+                            <button type="button"
+                                    class="w-full py-2 px-4 text-red-600 font-semibold rounded-lg transition-all duration-300 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 bg-red-100 shadow-md"
+                                    onclick="confirmarEliminacion('{{this.id}}', '{{this.nombre}}')"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2"
+                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                                Eliminar
+                            </button>
                         </div>
                     </div>
                 </div>

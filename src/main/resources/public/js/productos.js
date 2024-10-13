@@ -1,16 +1,16 @@
 function confirmarCanje(productId, productName, productPoints) {
-    swal({
+    Swal.fire({
         title: "¿Estás seguro?",
         text: "¿Deseas canjear " + productName + " por " + productPoints + " puntos?",
-        type: "warning",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#28b463",
         cancelButtonColor: "#cb4335",
         confirmButtonText: "Sí, canjear",
         cancelButtonText: "No, cancelar",
-        closeOnConfirm: false
-    }, function (isConfirm) {
-        if (isConfirm) {
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
             document.getElementById('form-canje-' + productId).submit();
         }
     });
