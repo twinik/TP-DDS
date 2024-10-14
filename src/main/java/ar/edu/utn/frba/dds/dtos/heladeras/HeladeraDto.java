@@ -18,6 +18,7 @@ public class HeladeraDto {
   private String id;
   private String nombre;
   private Boolean activa;
+  private Integer viandas;
 
   public static HeladeraDto fromHeladera(Heladera heladera) {
     return HeladeraDto
@@ -25,6 +26,7 @@ public class HeladeraDto {
         .id(heladera.getId())
         .nombre(heladera.getNombre())
         .activa(heladera.isHeladeraActiva())
+        .viandas(heladera.getViandas())
         .build();
   }
 
