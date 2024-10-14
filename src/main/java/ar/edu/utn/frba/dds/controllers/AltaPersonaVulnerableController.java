@@ -57,6 +57,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
     } else {
       Map<String, Object> model = new HashMap<>();
       model.put("message", "El alta de la persona: " + dto.getNombre() + " " + dto.getApellido() + " fue registrado con exito");
+      context.status(201);
       context.render("/app/success.hbs", model);
     }
   }
@@ -71,6 +72,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
     context.sessionAttribute("domicilioFamiliaVulnerable", null);
     Map<String, Object> model = new HashMap<>();
     model.put("message", "El alta de los tutorados fue registrado con exito");
+    context.status(201);
     context.render("/app/success.hbs", model);
   }
 

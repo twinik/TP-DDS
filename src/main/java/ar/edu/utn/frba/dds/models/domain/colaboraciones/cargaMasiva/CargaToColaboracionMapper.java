@@ -32,6 +32,8 @@ public class CargaToColaboracionMapper {
             }
             case "DONACION_VIANDA" -> {
                 DonacionVianda c = gson.fromJson(carga.getJsonColaboracion(), DonacionVianda.class);
+                c.getVianda().setEntregada(true);
+                c.getVianda().setColaborador(c.getColaborador());
                 c.setColaborador(colaborador);
                 return c;
             }

@@ -32,9 +32,11 @@ public class CanjeProductoController implements ICrudViewsHandler {
     try {
       this.ofertasProductoService.canjearOferta(context.sessionAttribute("idColaborador"), context.pathParam("id"));
       model.put("message", "El canje del producto fue realizado con exito");
+      context.status(201);
       context.render("/app/success.hbs", model);
     } catch (Exception e) {
       model.put("message", e.getMessage());
+      context.status(400);
       context.render("/app/error.hbs", model);
     }
   }

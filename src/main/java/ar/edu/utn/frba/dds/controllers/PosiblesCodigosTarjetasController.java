@@ -41,6 +41,7 @@ public class PosiblesCodigosTarjetasController implements ICrudViewsHandler {
         this.posiblesCodigosService.crearPosibleCodigo(dto);
         Map<String, Object> model = new HashMap<>();
         model.put("message", "La tarjeta fue registrada con exito");
+        context.status(201);
         context.render("/app/success.hbs", model);
     }
 

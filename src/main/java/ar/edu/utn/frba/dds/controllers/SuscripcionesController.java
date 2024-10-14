@@ -48,6 +48,7 @@ public class SuscripcionesController implements ICrudViewsHandler {
         this.heladerasService.agregarSuscripcionAHeladera(h, nuevaSuscripcion);
         Map<String, Object> model = new HashMap<>();
         model.put("message", "Tu suscripcion fue registrada con exito");
+        context.status(201);
         context.render("/app/success.hbs", model);
     }
 

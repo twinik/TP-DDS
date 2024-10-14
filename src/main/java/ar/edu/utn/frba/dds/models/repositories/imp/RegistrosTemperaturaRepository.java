@@ -26,15 +26,6 @@ public class RegistrosTemperaturaRepository implements IRegistrosTemperaturaRepo
         withTransaction(() -> entityManager().persist(registroTemperatura));
     }
 
-    public void guardar(RegistroTemperatura... registroTemperatura) {
-
-        withTransaction(() -> {
-            for (RegistroTemperatura registro : registroTemperatura) {
-                entityManager().persist(registro);
-            }
-        });
-    }
-
     @Override
     public void actualizar(RegistroTemperatura registroTemperatura) {
         withTransaction(() -> entityManager().merge(registroTemperatura));

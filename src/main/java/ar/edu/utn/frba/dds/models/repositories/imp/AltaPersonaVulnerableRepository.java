@@ -49,15 +49,6 @@ public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRe
         withTransaction(() -> entityManager().persist(altaPersonaVulnerable));
     }
 
-    public void guardar(AltaPersonaVulnerable... altaPersonaVulnerable) {
-
-        withTransaction(() -> {
-            for (AltaPersonaVulnerable persona : altaPersonaVulnerable) {
-                entityManager().persist(persona);
-            }
-        });
-    }
-
     @Override
     public void actualizar(AltaPersonaVulnerable altaPersonaVulnerable) {
         withTransaction(() -> entityManager().merge(altaPersonaVulnerable));

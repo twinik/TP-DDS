@@ -24,6 +24,7 @@ public class AlertasController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("alertas", alertas);
     model.put("heladeras", heladeras);
+    context.status(200);
     context.render("/app/heladeras/listado-alertas.hbs", model);
   }
 

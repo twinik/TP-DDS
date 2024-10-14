@@ -46,26 +46,4 @@ public class CampoRepository implements ICampoRepository, WithSimplePersistenceU
             entityManager().merge(campo);
         });
     }
-
-    /* public static void main(String[] args) {
-        Campo m = new campo("otro");
-        Campo m1 = new campo("uno");
-        Campo m2 = new campo("hola");
-        ICampoRepository repositorio = (ICampoRepository) ServiceLocator.get("campoRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<Campo> campo1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Campo> campo2 = repositorio.buscar(2L);
-
-        List<Campo> lista = repositorio.buscarTodos();
-
-    }*/
 }

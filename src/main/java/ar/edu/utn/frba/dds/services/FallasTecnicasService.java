@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Incidente;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFallaTecnicaExistenteException;
 import ar.edu.utn.frba.dds.models.repositories.IFallasTecnicasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.AllArgsConstructor;
@@ -20,58 +21,67 @@ import java.util.List;
 
 @AllArgsConstructor
 public class FallasTecnicasService {
-    private IFallasTecnicasRepository fallasTecnicasRepository;
-    private ColaboradoresService colaboradoresService;
-    private HeladerasService heladerasService;
+  private IFallasTecnicasRepository fallasTecnicasRepository;
+  private ColaboradoresService colaboradoresService;
+  private HeladerasService heladerasService;
 
-    public List<FallaTecnicaListadoDto> obtenerTodos(String heladeraId, String solucionado) {
-        List<FallaTecnica> fallas;
-        if (heladeraId != null && !heladeraId.isEmpty()) {
-            fallas = this.fallasTecnicasRepository.buscarPorHeladera(heladeraId);
+  public List<FallaTecnicaListadoDto> obtenerTodos(String heladeraId, String solucionado) {
+    List<FallaTecnica> fallas;
+    if (heladeraId != null && !heladeraId.isBlank()) {
+      fallas = this.fallasTecnicasRepository.buscarPorHeladera(heladeraId);
+    } else {
+      fallas = this.fallasTecnicasRepository.buscarTodos();
+    }
+    this.fallasTecnicasRepository.refresh(fallas);
+    if (this.esParametroValido(solucionado)) {
+      fallas = fallas.stream().filter(f -> {
+        if (solucionado.equals("Solucionadas")) {
+          return f.isSolucionado();
         } else {
-            fallas = this.fallasTecnicasRepository.buscarTodos();
+          return !f.isSolucionado();
         }
-        if (solucionado != null && !solucionado.equals("Mostrar todas")) {
-            fallas = fallas.stream().filter(f -> {
-                if (solucionado.equals("Solucionadas")) {
-                    return f.isSolucionado();
-                } else {
-                    return !f.isSolucionado();
-                }
-            }).toList();
-        }
-        return fallas.stream().map(FallaTecnicaListadoDto::fromFalla).toList();
+      }).toList();
     }
+    return fallas.stream().map(FallaTecnicaListadoDto::fromFalla).toList();
+  }
 
-    public FallaTecnicaDto obtenerFallaTecnica(String id) {
-        return FallaTecnicaDto.fromFalla(
-            this.fallasTecnicasRepository.buscar(id)
-                .orElseThrow(() -> new RecursoNoDisponibleException("Esta falla tecnica no existe")));
-    }
+  private boolean esParametroValido(String param) {
+    return param != null && !param.isBlank() && !param.equals("Mostrar todas") && (param.equals("Solucionadas") || param.equals("No Solucionadas"));
+  }
 
-    public void crear(FallaTecnicaAltaDto dto) {
+  public FallaTecnicaDto obtenerFallaTecnica(String id) {
+    return FallaTecnicaDto.fromFalla(
+        this.fallasTecnicasRepository.buscar(id)
+            .orElseThrow(() -> new RecursoNoDisponibleException("Esta falla tecnica no existe")));
+  }
 
-        Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
-        Heladera heladera = this.heladerasService.obtenerHeladera(dto.getHeladeraId());
+  public void crear(FallaTecnicaAltaDto dto) {
 
-//        if (!heladera.isHeladeraActiva()) {
-//         throw new RecursoNoDisponibleException("La heladera ya se encuentra inhabilitada debido a otro incidente y estamos trabajando para solucionarlo cuanto antes. De todos modos, gracias por informarnos!");
-//        }
+    Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
+    Heladera heladera = this.heladerasService.obtenerHeladera(dto.getHeladeraId());
 
-        FallaTecnica falla = new FallaTecnica(
-                heladera,
-                LocalDateTime.now(),
-                ServiceLocator.get(TecnicosHelper.class),
-                new NotificationStrategyFactory(),
-                colaborador,
-                dto.getDescripcion(),
-                dto.getUrlFoto()
-        );
+    if (existenFallasNoSoluciondas(heladera.getId()))
+      throw new RecursoNoDisponibleException(MensajeFallaTecnicaExistenteException.generarMensaje());
 
-        falla.reportar();
+    FallaTecnica falla = new FallaTecnica(
+        heladera,
+        LocalDateTime.now(),
+        ServiceLocator.get(TecnicosHelper.class),
+        new NotificationStrategyFactory(),
+        colaborador,
+        dto.getDescripcion(),
+        dto.getUrlFoto()
+    );
 
-        this.fallasTecnicasRepository.guardar(falla);
-    }
+    falla.reportar();
+
+    this.fallasTecnicasRepository.guardar(falla);
+  }
+
+  private boolean existenFallasNoSoluciondas(String idHeladera) {
+    return !this.fallasTecnicasRepository.buscarPorHeladera(idHeladera).stream().
+        filter(f -> !f.isSolucionado()).toList().isEmpty();
+  }
 
 
 }

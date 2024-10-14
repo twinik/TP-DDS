@@ -51,14 +51,6 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
         withTransaction(() -> entityManager().persist(motivosRedistribucion));
     }
 
-    public void guardar(MotivoRedistribucionVianda... motivosRedistribucion) {
-
-        withTransaction(() -> {
-            for (MotivoRedistribucionVianda motivo : motivosRedistribucion) {
-                entityManager().persist(motivo);
-            }
-        });
-    }
 
     @Override
     public void actualizar(MotivoRedistribucionVianda motivo) {

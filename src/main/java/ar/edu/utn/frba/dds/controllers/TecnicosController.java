@@ -43,6 +43,7 @@ public class TecnicosController implements ICrudViewsHandler {
         this.tecnicosService.crearTecnico(dto);
         Map<String, Object> model = new HashMap<>();
         model.put("message", "El tecnico: " + dto.getNombre() + " " + dto.getApellido() + " fue registrado con exito");
+        context.status(201);
         context.render("/app/success.hbs", model);
     }
 

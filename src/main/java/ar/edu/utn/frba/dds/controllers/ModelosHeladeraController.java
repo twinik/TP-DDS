@@ -39,6 +39,7 @@ public class ModelosHeladeraController implements ICrudViewsHandler {
     modelosService.crearModeloHeladera(dto);
     Map<String, Object> model = new HashMap<>();
     model.put("message", "El modelo " + dto.getModelo() + " fue regisrado con exito!");
+    context.status(201);
     context.render("/app/success.hbs", model);
   }
 

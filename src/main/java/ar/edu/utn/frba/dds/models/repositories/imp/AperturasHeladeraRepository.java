@@ -34,15 +34,6 @@ public class AperturasHeladeraRepository implements IAperturasHeladeraRepository
         withTransaction(() -> entityManager().persist(aperturaHeladera));
     }
 
-    public void guardar(AperturaHeladera... aperturaHeladera) {
-
-        withTransaction(() -> {
-            for (AperturaHeladera apertura : aperturaHeladera) {
-                entityManager().persist(apertura);
-            }
-        });
-    }
-
     @Override
     public void actualizar(AperturaHeladera aperturaHeladera) {
         withTransaction(() -> entityManager().merge(aperturaHeladera));

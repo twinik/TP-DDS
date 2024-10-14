@@ -24,15 +24,6 @@ public class DonacionDineroRepository implements IDonacionDineroRepository, With
         withTransaction(() -> entityManager().persist(donacionDinero));
     }
 
-    public void guardar(DonacionDinero... donacionDinero) {
-
-        withTransaction(() -> {
-            for (DonacionDinero donacion : donacionDinero) {
-                entityManager().persist(donacion);
-            }
-        });
-    }
-
     @Override
     public void actualizar(DonacionDinero donacionDinero) {
         withTransaction(() -> entityManager().merge(donacionDinero));

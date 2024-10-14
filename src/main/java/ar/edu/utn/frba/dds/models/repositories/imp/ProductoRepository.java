@@ -24,15 +24,6 @@ public class ProductoRepository implements IProductoRepository, WithSimplePersis
         withTransaction(() -> entityManager().persist(producto));
     }
 
-    public void guardar(Producto... producto) {
-
-        withTransaction(() -> {
-            for (Producto prod : producto) {
-                entityManager().persist(prod);
-            }
-        });
-    }
-
     @Override
     public void actualizar(Producto producto) {
         withTransaction(() -> entityManager().merge(producto));
@@ -47,27 +38,4 @@ public class ProductoRepository implements IProductoRepository, WithSimplePersis
         });
     }
 
-  /*public static void main(String[] args) {
-        Producto m = new Producto("otro");
-        Producto m1 = new Producto("uno");
-        Producto m2 = new Producto("hola");
-        IProductoRepository repositorio = (IProductoRepository) ServiceLocator.get("productoRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<Producto> producto1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Producto> producto2 = repositorio.buscar(2L);
-
-        List<Producto> lista = repositorio.buscarTodos();
-
-    }
-
-}*/
 }

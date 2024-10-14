@@ -26,15 +26,6 @@ public class RespuestasCampoRepository implements IRespuestasCampoRepository, Wi
         withTransaction(() -> entityManager().persist(respuestaACampo));
     }
 
-    public void guardar(RespuestaACampo... respuestaACampo) {
-
-        withTransaction(() -> {
-            for (RespuestaACampo respuesta : respuestaACampo) {
-                entityManager().persist(respuesta);
-            }
-        });
-    }
-
     @Override
     public void actualizar(RespuestaACampo respuestaACampo) {
         withTransaction(() -> entityManager().merge(respuestaACampo));

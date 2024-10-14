@@ -59,14 +59,6 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
     withTransaction(() -> entityManager().persist(heladera));
   }
 
-  public void guardar(Heladera... heladera) {
-    withTransaction(() -> {
-      for (Heladera hela : heladera) {
-        entityManager().persist(hela);
-      }
-    });
-  }
-
   @Override
   public void actualizar(Heladera heladera) {
     withTransaction(() -> entityManager().merge(heladera));
@@ -76,15 +68,6 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
   public void actualizar(List<Heladera> heladeras) {
     withTransaction(() -> heladeras.forEach(h -> entityManager().merge(h)));
   }
-
-//  @Override
-//  public List<Heladera> heladerasCercanas(Heladera heladera, int limite) {
-//    return heladeras.stream()
-//        .filter(Heladera::isActiva)
-//        .sorted(Comparator.comparing(h -> h.getUbicacion().calcularDistanciaHasta(heladera.getUbicacion())))
-//        .limit(limite)
-//        .collect(Collectors.toList());
-//  }
 
   @Override
   public void eliminar(Heladera heladera) {

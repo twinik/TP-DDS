@@ -66,15 +66,6 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
         withTransaction(() -> entityManager().persist(redistribucionViandas));
     }
 
-    public void guardar(RedistribucionViandas... redistribucionViandas) {
-
-        withTransaction(() -> {
-            for (RedistribucionViandas motivo : redistribucionViandas) {
-                entityManager().persist(motivo);
-            }
-        });
-    }
-
     @Override
     public void actualizar(RedistribucionViandas redistribucionViandas) {
         withTransaction(() -> entityManager().merge(redistribucionViandas));
@@ -88,26 +79,4 @@ public class RedistribucionesViandaRepository implements IRedistribucionesVianda
             entityManager().merge(redistribucionViandas);
         });
     }
-
-  /*public static void main(String[] args) {
-        RedistribucionViandas m = new RedistribucionViandas("otro");
-        RedistribucionViandas m1 = new RedistribucionViandas("uno");
-        RedistribucionViandas m2 = new RedistribucionViandas("hola");
-        IRedistribucionesViandaRepository repositorio = ServiceLocator.get(IRedistribucionesViandaRepository.class);
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<RedistribucionViandas> redistribucionViandas1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<RedistribucionViandas> redistribucionViandas2 = repositorio.buscar(2L);
-
-        List<RedistribucionViandas> lista = repositorio.buscarTodos();
-
-    }*/
 }

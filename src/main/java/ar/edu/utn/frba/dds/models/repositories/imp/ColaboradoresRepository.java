@@ -108,15 +108,6 @@ public class ColaboradoresRepository implements IColaboradoresRepository, WithSi
     withTransaction(() -> entityManager().persist(colaborador));
   }
 
-  public void guardar(Colaborador... colaborador) {
-
-    withTransaction(() -> {
-      for (Colaborador colab : colaborador) {
-        entityManager().persist(colab);
-      }
-    });
-  }
-
   @Override
   public void actualizar(Colaborador colaborador) {
     withTransaction(() -> entityManager().merge(colaborador));

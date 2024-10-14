@@ -24,15 +24,6 @@ public class ModeloHeladeraRepository implements IModeloHeladeraRepository, With
         withTransaction(() -> entityManager().persist(modeloHeladera));
     }
 
-    public void guardar(ModeloHeladera... modeloHeladera) {
-
-        withTransaction(() -> {
-            for (ModeloHeladera modelo : modeloHeladera) {
-                entityManager().persist(modelo);
-            }
-        });
-    }
-
     @Override
     public void actualizar(ModeloHeladera modeloHeladera) {
         withTransaction(() -> entityManager().merge(modeloHeladera));

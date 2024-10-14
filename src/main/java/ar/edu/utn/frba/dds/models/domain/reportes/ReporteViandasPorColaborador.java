@@ -36,21 +36,6 @@ public class ReporteViandasPorColaborador extends Reporte {
     this.viandasRepository = viandasRepository;
   }
 
-/*    public void generarPDF() {
-        LocalDate hoy = LocalDate.now();
-        List<Vianda> viandasDonadasEstaSemana = viandasRepository.buscarTodosMismaSemana(LocalDate.now());
-
-        Map<Colaborador, Long> viandasPorColaborador = viandasDonadasEstaSemana
-                .stream().collect(Collectors.groupingBy(Vianda::getColaborador, Collectors.counting()));
-
-        String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-        pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
-
-
-    }
-*/
-
   public void generarPDF() {
     LocalDate hoy = LocalDate.now();
     Map<String, Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);

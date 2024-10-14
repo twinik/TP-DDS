@@ -19,6 +19,8 @@ public class HeladeraDto {
   private String nombre;
   private Boolean activa;
   private Integer viandas;
+  private Integer capacidadMaxima;
+  private ModeloHeladeraOutputDto modelo;
 
   public static HeladeraDto fromHeladera(Heladera heladera) {
     return HeladeraDto
@@ -27,13 +29,9 @@ public class HeladeraDto {
         .nombre(heladera.getNombre())
         .activa(heladera.isHeladeraActiva())
         .viandas(heladera.getViandas())
+        .capacidadMaxima(heladera.getCapacidadViandas())
+        .modelo(ModeloHeladeraOutputDto.fromModelo(heladera.getModelo()))
         .build();
-  }
-
-  public static Heladera toHeladera(HeladeraDto dto) {
-    Heladera heladera = new Heladera();
-    heladera.setNombre(dto.getNombre());
-    return heladera;
   }
 
   public static HeladeraDto of(Context context) {

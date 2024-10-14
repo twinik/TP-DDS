@@ -24,16 +24,6 @@ public class FormularioRepository implements IFormularioRepository, WithSimplePe
         withTransaction(() -> entityManager().persist(formulario));
     }
 
-    public void guardar(Formulario... formulario) {
-
-        withTransaction(() -> {
-            for (Formulario form : formulario) {
-                entityManager().persist(form);
-            }
-        });
-    }
-
-
     @Override
     public void actualizar(Formulario formulario) {
         withTransaction(() -> entityManager().merge(formulario));

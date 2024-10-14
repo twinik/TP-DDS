@@ -47,15 +47,6 @@ public class SensoresMovimientoRepository implements ISensorMovimientoRepository
         withTransaction(() -> entityManager().persist(sensorMovimiento));
     }
 
-    public void guardar(SensorMovimiento... sensorMovimiento) {
-
-        withTransaction(() -> {
-            for (SensorMovimiento sensor : sensorMovimiento) {
-                entityManager().persist(sensor);
-            }
-        });
-    }
-
     @Override
     public void actualizar(SensorMovimiento sensorMovimiento) {
         withTransaction(() -> entityManager().merge(sensorMovimiento));

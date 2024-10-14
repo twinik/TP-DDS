@@ -26,14 +26,6 @@ public class SolicitudesAperturaHeladeraRepository implements ISolicitudesApertu
         withTransaction(() -> entityManager().persist(solicitudAperturaHeladera));
     }
 
-    public void guardar(SolicitudAperturaHeladera... solicitudAperturaHeladera) {
-
-        withTransaction(() -> {
-            for (SolicitudAperturaHeladera solicitud : solicitudAperturaHeladera) {
-                entityManager().persist(solicitud);
-            }
-        });
-    }
 
     @Override
     public void actualizar(SolicitudAperturaHeladera solicitudAperturaHeladera) {

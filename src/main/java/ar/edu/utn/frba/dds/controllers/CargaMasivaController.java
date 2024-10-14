@@ -39,6 +39,7 @@ public class CargaMasivaController implements ICrudViewsHandler {
         try {
             this.service.cargarColaboraciones(archivoSubido);
             model.put("message", "Colaboraciones cargadas correctamente");
+            context.status(201);
             context.render("/app/success.hbs", model);
         } catch (CargaArchivoFailedException e) {
             e.printStackTrace();

@@ -24,15 +24,6 @@ public class OfertaProductoRepository implements IOfertaProductoRepository, With
     withTransaction(() -> entityManager().persist(ofertaProducto));
   }
 
-  public void guardar(OfertaProducto... ofertaProducto) {
-
-    withTransaction(() -> {
-      for (OfertaProducto oferta : ofertaProducto) {
-        entityManager().persist(oferta);
-      }
-    });
-  }
-
   @Override
   public void actualizar(OfertaProducto ofertaProducto) {
     withTransaction(() -> entityManager().merge(ofertaProducto));

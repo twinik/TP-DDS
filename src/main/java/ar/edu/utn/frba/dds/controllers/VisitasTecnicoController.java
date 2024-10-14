@@ -54,6 +54,7 @@ public class VisitasTecnicoController implements ICrudViewsHandler {
     }
     Map<String,Object> model = new HashMap<>();
     model.put("message", "La visita se registro con éxito");
+    context.status(201);
     context.render("/app/success.hbs",model);
   }
 

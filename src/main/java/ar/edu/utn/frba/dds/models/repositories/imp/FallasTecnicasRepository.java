@@ -22,73 +22,84 @@ import java.util.stream.Collectors;
 public class FallasTecnicasRepository implements IFallasTecnicasRepository, WithSimplePersistenceUnit {
 
 
-    public static void main(String[] args) {
-        Colaborador c = new Colaborador();
-        c.setUsuario(new Usuario("123", "123"));
-        FallaTecnica f1 = new FallaTecnica(new Heladera(), LocalDateTime.now(), new TecnicosHelper(new TecnicosRepository()),
-                new NotificationStrategyFactory(), c, "hola", "rerer");
+  public static void main(String[] args) {
+    Colaborador c = new Colaborador();
+    c.setUsuario(new Usuario("123", "123"));
+    FallaTecnica f1 = new FallaTecnica(new Heladera(), LocalDateTime.now(), new TecnicosHelper(new TecnicosRepository()),
+        new NotificationStrategyFactory(), c, "hola", "rerer");
 
-        FallasTecnicasRepository repo = new FallasTecnicasRepository();
-        repo.guardar(f1);
+    FallasTecnicasRepository repo = new FallasTecnicasRepository();
+    repo.guardar(f1);
 
-        Optional<FallaTecnica> f3 = repo.buscar(f1.getId());
+    Optional<FallaTecnica> f3 = repo.buscar(f1.getId());
 
-    }
+  }
 
-    @Override
-    public Optional<FallaTecnica> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(FallaTecnica.class, id));
-    }
+  @Override
+  public Optional<FallaTecnica> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(FallaTecnica.class, id));
+  }
 
-    @Override
-    public List<FallaTecnica> buscarTodos() {
-        return entityManager().createQuery("from FallaTecnica where activo=:activo order by created_at desc", FallaTecnica.class)
-                .setParameter("activo", true)
-                .getResultList();
-    }
+  @Override
+  public List<FallaTecnica> buscarTodos() {
+    return entityManager().createQuery("from FallaTecnica where activo=:activo order by created_at desc", FallaTecnica.class)
+        .setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public List<FallaTecnica> buscarPorHeladera(String heladera_id) {
-        return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera.id=:heladera_id and solucionado=:solucionado order by created_at desc", FallaTecnica.class)
-                .setParameter("activo", true)
-                .setParameter("heladera_id", heladera_id)
-                .setParameter("solucionado", false)
-                .getResultList();
-    }
+  @Override
+  public List<FallaTecnica> buscarPorHeladera(String heladera_id) {
+    return entityManager().createQuery("from FallaTecnica where activo=:activo and heladera.id=:heladera_id order by created_at desc", FallaTecnica.class)
+        .setParameter("activo", true)
+        .setParameter("heladera_id", heladera_id)
+        .getResultList();
+  }
 
-    @Override
-    public Map<String, Long> buscarFallasAgrupadasPorHeladera(LocalDate fecha) {
-        LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
-        LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha).atStartOfDay();
-        List<Object[]> results = entityManager().createQuery(
-                        "select f.heladera.nombre, count(f) from FallaTecnica f where f.activo = :activo" + " and f.timestamp between :principioSemana and :finSemana group by f.heladera.nombre order by count(f)", Object[].class)
-                .setParameter("activo", true)
-                .setParameter("principioSemana", principioDeSemana)
-                .setParameter("finSemana", finDeSemana)
-                .getResultList();
+  @Override
+  public Map<String, Long> buscarFallasAgrupadasPorHeladera(LocalDate fecha) {
+    LocalDateTime principioDeSemana = DateHelper.principioDeSemana(fecha.atStartOfDay());
+    LocalDateTime finDeSemana = DateHelper.finDeSemana(fecha).atStartOfDay();
+    List<Object[]> results = entityManager().createQuery(
+            "select f.heladera.nombre, count(f) from FallaTecnica f where f.activo = :activo" + " and f.timestamp between :principioSemana and :finSemana group by f.heladera.nombre order by count(f)", Object[].class)
+        .setParameter("activo", true)
+        .setParameter("principioSemana", principioDeSemana)
+        .setParameter("finSemana", finDeSemana)
+        .getResultList();
 
-        return results.stream().collect(Collectors.toMap(
-                result -> (String) result[0],
-                result -> (Long) result[1]
-        ));
-    }
+    return results.stream().collect(Collectors.toMap(
+        result -> (String) result[0],
+        result -> (Long) result[1]
+    ));
+  }
 
-    @Override
-    public void guardar(FallaTecnica fallaTecnica) {
-        withTransaction(() -> entityManager().persist(fallaTecnica));
-    }
+  @Override
+  public void guardar(FallaTecnica fallaTecnica) {
+    withTransaction(() -> entityManager().persist(fallaTecnica));
+  }
 
-    @Override
-    public void actualizar(FallaTecnica fallaTecnica) {
-        withTransaction(() -> entityManager().merge(fallaTecnica));
-    }
+  @Override
+  public void actualizar(FallaTecnica fallaTecnica) {
+    withTransaction(() -> entityManager().merge(fallaTecnica));
+  }
 
-    @Override
-    public void eliminar(FallaTecnica fallaTecnica) {
+  @Override
+  public void eliminar(FallaTecnica fallaTecnica) {
 
-        withTransaction(() -> {
-            fallaTecnica.borrarLogico();
-            entityManager().merge(fallaTecnica);
-        });
-    }
+    withTransaction(() -> {
+      fallaTecnica.borrarLogico();
+      entityManager().merge(fallaTecnica);
+    });
+  }
+
+  @Override
+  public void refresh(FallaTecnica fallaTecnica) {
+    entityManager().refresh(fallaTecnica);
+  }
+
+  @Override
+  public void refresh(List<FallaTecnica> fallaTecnicas) {
+    fallaTecnicas.forEach(f -> {
+      entityManager().refresh(f);
+    });
+  }
 }

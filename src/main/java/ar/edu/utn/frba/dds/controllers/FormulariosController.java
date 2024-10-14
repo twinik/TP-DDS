@@ -34,6 +34,7 @@ public class FormulariosController implements ICrudViewsHandler {
         formulariosService.crearFormulario(dto);
         Map<String, String> model = new HashMap<>();
         model.put("message", "El formulario ha sido creado con exito!");
+        context.status(201);
         context.render("app/success.hbs", model);
     }
 

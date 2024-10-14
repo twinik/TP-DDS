@@ -66,6 +66,7 @@ public class OfertasProductoService {
 
   public void canjearOferta(String idColaborador, String idOferta) throws PuntosInsuficientesException {
     Colaborador c = this.colaboradoresService.obtenerColaborador(idColaborador);
+    this.colaboradoresService.refresh(c);
     OfertaProducto o = this.obtenerOferta(idOferta);
 
     if (!o.puedeSerCanjeadoPor(c))

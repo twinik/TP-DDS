@@ -32,7 +32,6 @@ public class OfertasProductoController implements ICrudViewsHandler {
       model.put("puntosDisp", puntosdDisponibles);
     }
     model.put("ofertas", ofertas);
-
     context.render("/app/productos/productos.hbs", model);
   }
 
@@ -65,6 +64,7 @@ public class OfertasProductoController implements ICrudViewsHandler {
     }
     //O BIEN LANZO UNA PANTALLA DE EXITO
     //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
+    context.status(201);
     context.redirect("/productos");
   }
 

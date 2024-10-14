@@ -51,6 +51,7 @@ public class RegistroController implements ICrudViewsHandler {
         this.validarContra(personaJuridicaDto);
         try {
             this.colaboradoresService.registrar(personaJuridicaDto);
+            ctx.status(201);
             ctx.redirect("/login");
         } catch (RegistroFailedException e) {
             ctx.status(400);

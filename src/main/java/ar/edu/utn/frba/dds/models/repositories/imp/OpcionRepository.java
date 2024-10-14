@@ -24,15 +24,6 @@ public class OpcionRepository implements IOpcionRepository, WithSimplePersistenc
         withTransaction(() -> entityManager().persist(opcion));
     }
 
-    public void guardar(Opcion... opcion) {
-
-        withTransaction(() -> {
-            for (Opcion op : opcion) {
-                entityManager().persist(op);
-            }
-        });
-    }
-
     @Override
     public void actualizar(Opcion opcion) {
         withTransaction(() -> entityManager().merge(opcion));

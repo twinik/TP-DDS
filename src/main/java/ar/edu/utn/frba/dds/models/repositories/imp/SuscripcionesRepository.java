@@ -38,14 +38,6 @@ public class SuscripcionesRepository implements ISuscripcionesRepository, WithSi
         withTransaction(() -> entityManager().persist(suscripcion));
     }
 
-    public void guardar(Suscripcion... suscripcion) {
-
-        withTransaction(() -> {
-            for (Suscripcion sus : suscripcion) {
-                entityManager().persist(sus);
-            }
-        });
-    }
 
     @Override
     public void actualizar(Suscripcion suscripcion) {

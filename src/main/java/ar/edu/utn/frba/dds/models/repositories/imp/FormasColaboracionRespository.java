@@ -38,6 +38,7 @@ public class FormasColaboracionRespository implements IFormasColaboracionResposi
         withTransaction(() -> entityManager().persist(forma));
     }
 
+    @Override
     public void guardar(FormaColaboracion... formas) {
         withTransaction(() -> {
             for (FormaColaboracion f : formas) {

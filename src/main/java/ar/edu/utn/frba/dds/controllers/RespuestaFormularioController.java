@@ -52,9 +52,7 @@ public class RespuestaFormularioController implements ICrudViewsHandler {
     @Override
     public void save(Context context) {
         rtaService.crearRespuestaFormulario(RespuestaFormularioDto.fromContext(context));
-//    Map<String, Object> model = new HashMap<>();
-//    model.put("message", "Su respuesta fue guardada con exito! Gracias!");
-//    context.render("auth/registro/form-success.hbs", model);
+        context.status(201);
         context.redirect("/login");
     }
 

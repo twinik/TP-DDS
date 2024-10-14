@@ -41,34 +41,6 @@ public class ReporteViandasPorHeladera extends Reporte {
         this.redistribucionesViandaRepository = redistribucionesViandaRepository;
     }
 
-    /**
-     * Genera un reporte en formato PDF con la cantidad de viandas colocadas y retiradas por heladera.
-     */
-/*  public void generarPDF() {
-    LocalDate hoy = LocalDate.now();
-
-    Map<Heladera, Long> viandasColocadasPorHeladera =
-        donacionesViandaRepository
-            .buscarTodosMismaSemana(LocalDate.now()).stream()
-            .collect(Collectors.groupingBy(donacion -> donacion.getVianda().getHeladera(), Collectors.counting()));
-
-    viandasColocadasPorHeladera
-        .putAll(redistribucionesViandaRepository
-            .buscarTodosMismaSemana(LocalDate.now()).stream()
-            .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraDestino, Collectors.summingLong(RedistribucionViandas::getCantidad))));
-
-    Map<Heladera, Long> viandasRetiradasPorHeladera =
-        redistribucionesViandaRepository
-            .buscarTodosMismaSemana(LocalDate.now()).stream()
-            .collect(Collectors.groupingBy(RedistribucionViandas::getHeladeraOrigen, Collectors.counting()));
-
-    String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-    String entradasInformeColocadas = this.generarEntradasInforme(viandasColocadasPorHeladera, "Colocadas");
-    String entradasInformeRetiradas = this.generarEntradasInforme(viandasRetiradasPorHeladera, "Retiradas");
-
-    pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, entradasInformeColocadas + "\n" + entradasInformeRetiradas);
-  }*/
     public void generarPDF() {
         LocalDate hoy = LocalDate.now();
 

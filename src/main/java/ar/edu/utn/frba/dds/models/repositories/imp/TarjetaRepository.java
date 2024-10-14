@@ -14,22 +14,6 @@ import java.util.Optional;
 @NoArgsConstructor
 public class TarjetaRepository implements ITarjetasRepository, WithSimplePersistenceUnit {
 
-
-  public static void main(String[] args) {
-    PersonaVulnerable p = new PersonaVulnerable();
-    p.setNombre("juancito");
-    Tarjeta m = new Tarjeta("uncodigo", 2, new FrecuenciaDiaria(), p, null, 3);
-    ITarjetasRepository repositorio = ServiceLocator.get(ITarjetasRepository.class);
-    repositorio.guardar(m);
-
-
-    Optional<Tarjeta> tarjeta1 = repositorio.buscar(m.getId());
-    Optional<Tarjeta> tarjeta2 = repositorio.buscar(m.getId());
-
-    List<Tarjeta> lista = repositorio.buscarTodos();
-
-  }
-
   @Override
   public Optional<Tarjeta> buscarPorCodigo(String codigo) {
     try {

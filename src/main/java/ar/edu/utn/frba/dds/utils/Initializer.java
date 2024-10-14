@@ -171,7 +171,7 @@ public class Initializer {
     Alerta a1 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
     Alerta a2 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FRAUDE);
     Alerta a3 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.TEMPERATURA);
-    Alerta a4 = Alerta.of(h3, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
+    Alerta a4 = Alerta.of(h1, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
     Alerta a5 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FALLA_CONEXION);
     Alerta a6 = Alerta.of(h2, LocalDateTime.now(), null, null, TipoAlerta.FRAUDE);
 

@@ -24,16 +24,6 @@ public class RespuestasFormularioRepository implements IRespuestasFormularioRepo
     public void guardar(RespuestaFormulario respuestaFormulario) {
         withTransaction(() -> entityManager().persist(respuestaFormulario));
     }
-
-    public void guardar(RespuestaFormulario... respuestaFormulario) {
-
-        withTransaction(() -> {
-            for (RespuestaFormulario respuesta : respuestaFormulario) {
-                entityManager().persist(respuesta);
-            }
-        });
-    }
-
     @Override
     public void actualizar(RespuestaFormulario respuestaFormulario) {
         withTransaction(() -> entityManager().merge(respuestaFormulario));
@@ -47,27 +37,4 @@ public class RespuestasFormularioRepository implements IRespuestasFormularioRepo
             entityManager().merge(respuestaFormulario);
         });
     }
-
-  /* public static void main(String[] args) {
-        RespuestaFormulario m = new RespuestaFormulario("otro");
-        RespuestaFormulario m1 = new RespuestaFormulario("uno");
-        RespuestaFormulario m2 = new RespuestaFormulario("hola");
-        IRespuestasFormularioRepository repositorio = (IRespuestasFormularioRepository) ServiceLocator.get("respuestasFormularioRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
-
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<RespuestaFormulario> respuestaFormulario1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<RespuestaFormulario> respuestaFormulario2 = repositorio.buscar(2L);
-
-        List<RespuestaFormulario> lista = repositorio.buscarTodos();
-
-    }*/
-
 }

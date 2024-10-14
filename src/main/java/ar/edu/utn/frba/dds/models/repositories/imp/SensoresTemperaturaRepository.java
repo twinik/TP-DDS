@@ -25,14 +25,6 @@ public class SensoresTemperaturaRepository implements ISensorTemperaturaReposito
         withTransaction(() -> entityManager().persist(sensorTemperatura));
     }
 
-    public void guardar(SensorTemperatura... sensorTemperatura) {
-
-        withTransaction(() -> {
-            for (SensorTemperatura sensor : sensorTemperatura) {
-                entityManager().persist(sensor);
-            }
-        });
-    }
 
     @Override
     public void actualizar(SensorTemperatura sensorTemperatura) {

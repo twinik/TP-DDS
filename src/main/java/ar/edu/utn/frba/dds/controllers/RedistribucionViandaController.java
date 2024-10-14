@@ -45,6 +45,7 @@ public class RedistribucionViandaController implements ICrudViewsHandler {
         this.redistribucionViandasService.solicitarRedistribucion(dto);
         Map<String, Object> model = new HashMap<>();
         model.put("message", "Su solcitud de redistribución ha sido registrada con éxito, esperamos su donación con ansias");
+        context.status(201);
         context.render("/app/success.hbs", model);
 
     }
