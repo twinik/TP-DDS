@@ -105,7 +105,8 @@ public class Router {
     app.post("/canjear-producto/{id}", ServiceLocator.get(CanjeProductoController.class)::save);
 
     app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
-    app.get("/", ctx -> ctx.redirect("/quienes-somos"));
+    app.get("/quienes-somos2", ctx -> ctx.render("/app/quienes-somos2.hbs"));
+    app.get("/", ctx -> ctx.redirect("/quienes-somos2"));
 
     app.exception(Exception.class, (e, ctx) -> {
       e.printStackTrace();

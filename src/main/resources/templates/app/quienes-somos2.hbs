@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="/img/logo-rapido.png" type="image/svg+xml"/>
+    <title>
+        Mejora del Acceso Alimentario en Contextos de Vulnerabilidad Socioeconómica
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/starwarsintro.css">
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+{{> templates/app/navbar}}
+<div class="relative h-full w-full bg-black">
+    <div id="starfield" class="absolute inset-0">
+        <canvas id="starfield-canvas"></canvas>
+    </div>
+
+    <div class="star-wars-intro">
+
+        <p class="intro-text">
+            Mejorando el Acceso Alimentario en Contextos de
+            Vulnerabilidad Socioeconómica
+        </p>
+
+        <h2 class="main-logo">
+            <img src="/img/logo-rapido.png">
+        </h2>
+
+        <div class="main-content">
+
+            <div class="title-content">
+                <p class="content-body">
+                    En Alimentos Fríos, Corazones Calientes, creemos que todos tienen derecho a un
+                    acceso digno y seguro a los alimentos. Nuestra misión es
+                    reducir la inseguridad alimentaria y mejorar la calidad de
+                    vida de las personas en situaciones de vulnerabilidad
+                    socioeconómica a través de iniciativas innovadoras y
+                    comunitarias.
+                </p>
+                <h2 class="title2">¿Quiénes Somos?</h2>
+                <p class="content-body">
+                    Somos una organización no gubernamental comprometida con la
+                    mejora del acceso alimentario en todo el país. Con un equipo
+                    dedicado y una red creciente de voluntarios y colaboradores,
+                    trabajamos incansablemente para asegurar que nadie pase
+                    hambre en nuestras comunidades.
+                </p>
+                <h2 class="title2">Nuestra Iniciativa</h2>
+                <p class="content-body">
+                    Para enfrentar la inseguridad alimentaria, hemos
+                    implementado un proyecto revolucionario: heladeras
+                    comunitarias. Estas heladeras están estratégicamente
+                    ubicadas en restaurantes, estaciones de transporte público y
+                    otros establecimientos de fácil acceso.
+                    <br/>
+                    Cualquier persona o negocio puede contribuir donando
+                    alimentos frescos y en buen estado. Todos podemos ser parte
+                    de la solución.
+                </p>
+                <h2 class="title2">Únete a Nosotros</h2>
+                <p class="content-body">
+                    Ya sea donando alimentos, siendo voluntario o ayudándonos a
+                    difundir nuestra misión, tu apoyo es crucial. Juntos,
+                    podemos hacer una diferencia real y tangible en la vida de
+                    muchas personas.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function invariant(condition, message) {
+        if (!condition) {
+            throw new Error(message);
+        }
+    }
+
+    const COUNT = 1000;
+    const SPEED = 0.2;
+
+    class Star {
+        constructor(x = 0, y = 0, z = 0) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.xPrev = x;
+            this.yPrev = y;
+        }
+
+        update(width, height, speed) {
+            this.xPrev = this.x;
+            this.yPrev = this.y;
+            this.z += speed * 0.0675;
+            this.x += this.x * (speed * 0.0225) * this.z;
+            this.y += this.y * (speed * 0.0225) * this.z;
+            if (this.x > width / 2 || this.x < -width / 2 || this.y > height / 2 || this.y < -height / 2) {
+                this.x = Math.random() * width - width / 2;
+                this.y = Math.random() * height - height / 2;
+                this.xPrev = this.x;
+                this.yPrev = this.y;
+                this.z = 0;
+            }
+        }
+
+        draw(ctx) {
+            ctx.lineWidth = this.z;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.xPrev, this.yPrev);
+            ctx.stroke();
+        }
+    }
+
+    const stars = Array.from({length: COUNT}, () => new Star(0, 0, 0));
+    let rafId = 0;
+
+    const canvas = document.querySelector("#starfield-canvas");
+    invariant(canvas, "canvas should not be null");
+    const ctx = canvas.getContext("2d");
+
+    const container = document.querySelector("#starfield");
+    invariant(container, "container should not be null");
+    const resizeObserver = new ResizeObserver(setup);
+    resizeObserver.observe(container);
+
+    function setup() {
+        invariant(ctx, "canvas context should not be null");
+        rafId > 0 && cancelAnimationFrame(rafId);
+
+        const {clientWidth: width, clientHeight: height} = container;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.scale(dpr, dpr);
+
+        for (const star of stars) {
+            star.x = Math.random() * width - width / 2;
+            star.y = Math.random() * height - height / 2;
+            star.z = 0;
+        }
+
+        ctx.translate(width / 2, height / 2);
+        ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+        ctx.strokeStyle = "white";
+        rafId = requestAnimationFrame(frame);
+    }
+
+    function frame() {
+        invariant(ctx, "canvas context should not be null");
+        const {clientWidth: width, clientHeight: height} = container;
+
+        for (const star of stars) {
+            star.update(width, height, SPEED);
+            star.draw(ctx);
+        }
+
+        ctx.fillRect(-width / 2, -height / 2, width, height);
+        rafId = requestAnimationFrame(frame);
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+</body>
+</html>
