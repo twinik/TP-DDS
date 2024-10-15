@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.repositories.imp;
 
+import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Incidente;
 import ar.edu.utn.frba.dds.models.repositories.IIncidentesRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -28,6 +29,15 @@ public class IncidentesRepository implements IIncidentesRepository, WithSimplePe
         .setParameter("activo", true)
         .setParameter("id", id)
         .getResultList();
+  }
+
+  @Override
+  public Long cantidadNoSolucionadosPorHeladera(Heladera h){
+    return entityManager().createQuery("select count(*) from Incidente i where solucionado=:solucionado and heladera=:hel and activo=:activo",Long.class)
+         .setParameter("solucionado", false)
+        .setParameter("activo", true)
+        .setParameter("hel", h)
+        .getSingleResult();
   }
 
   @Override
