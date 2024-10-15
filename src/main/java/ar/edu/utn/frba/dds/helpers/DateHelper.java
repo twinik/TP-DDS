@@ -76,8 +76,14 @@ public class DateHelper {
 
     public static LocalDateTime fromTimestamp(Long timestamp) {
         Instant instant = Instant.ofEpochMilli(timestamp);
-        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
-        return zonedDateTime.toLocalDateTime();
+        // Convertir el Instant a un LocalDateTime usando el sistema de zona horaria por defecto
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    }
+
+
+
+    public static void main(String[] args) {
+        System.out.println(fromTimestamp(1729021209762L));
     }
 
 

@@ -22,7 +22,7 @@ public class AuthMiddleware implements IMiddleware {
 
     public void apply(Javalin app) {
         app.beforeMatched(ctx -> {
-            Set<Permiso> permisos = PermisosHelper.getInstance().buscarPermisosPara(ctx);
+            Set<String> permisos = PermisosHelper.getInstance().buscarPermisosPara(ctx);
             Usuario usuario = getUser(ctx);
             if (!permisos.isEmpty()) {
                 if (usuario == null) {

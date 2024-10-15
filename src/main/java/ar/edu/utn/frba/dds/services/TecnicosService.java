@@ -61,12 +61,12 @@ public class TecnicosService {
     visitaTecnico.setTecnico(tecnico.get());
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     visitaTecnico.setTimestamp(LocalDateTime.parse(dto.getFechaVisita(), formatter));
-    if (visitaTecnico.getTimestamp().isAfter(LocalDateTime.now()))
-      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
     visitaTecnico.setDescripcion(dto.getDescripcion());
     visitaTecnico.setUrlFoto(dto.getUrlFoto());
     visitaTecnico.setSolucionado(dto.isSolucionado());
     visitaTecnico.setIncidente(this.incidentesService.obtenerIncidente(dto.getIncidente()));
+    if (visitaTecnico.getTimestamp().isAfter(LocalDateTime.now()) || visitaTecnico.getTimestamp().isBefore(visitaTecnico.getIncidente().getTimestamp()))
+      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
     if (visitaTecnico.estaSolucionado())
       this.incidentesService.solucionar(visitaTecnico.getIncidente());
     this.visitasTecnicoRepository.guardar(visitaTecnico);

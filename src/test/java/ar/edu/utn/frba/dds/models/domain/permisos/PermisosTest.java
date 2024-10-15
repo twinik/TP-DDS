@@ -23,9 +23,9 @@ public class PermisosTest {
         Usuario u2 = new Usuario();
         u2.agregarRoles(veedor, admin);
 
-        Assertions.assertTrue(u1.tenesPermiso(editar));
-        Assertions.assertTrue(u1.tenesPermiso(borrar));
-        Assertions.assertFalse(u1.tenesPermiso(visualizar));
-        Assertions.assertTrue(u2.tenesPermiso(visualizar));
+        Assertions.assertTrue(u1.tenesPermiso("editar"));
+        Assertions.assertTrue(u1.tenesPermiso("borrar"));
+        Assertions.assertFalse(u1.tenesPermiso("visualizar"));
+        Assertions.assertTrue(u2.tenesPermiso("visualizar"));
     }
 }

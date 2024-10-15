@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * CargadorDeColaboraciones class se encarga de cargar colaboraciones.
@@ -116,7 +117,8 @@ public class CargadorDeColaboraciones {
       tipo.agregarFormasColaboracion(forma.get());
       nuevoColaborador.setTipoColaborador(tipo);
 
-      Rol nuevoRol = Rol.of(PermisosHelper.getInstance().fromFormaColaboracion(forma.get()));
+      Rol nuevoRol = Rol.of(PermisosHelper.getInstance().buscarPorNombres(PermisosHelper.getInstance().fromFormaColaboracion(forma.get()).toArray(new String[0])));
+      nuevoRol.agregarPermisos(PermisosHelper.getInstance().buscarPorNombres("colaborador-base").toArray(new Permiso[0]));
       this.rolesRepository.guardar(nuevoRol);
       nuevoUsuario.agregarRoles(nuevoRol);
 
@@ -138,8 +140,9 @@ public class CargadorDeColaboraciones {
     if (!colaborador.getTipoColaborador().tenesFormaColaboracion(forma.getNombreInterno()))
       colaborador.getTipoColaborador().agregarFormasColaboracion(forma);
 
-    if (!colaborador.getUsuario().tenesPermisos(PermisosHelper.getInstance().fromFormaColaboracion(forma).toArray(new Permiso[0]))) {
-      colaborador.getUsuario().getRoles().get(0).agregarPermisos(PermisosHelper.getInstance().fromFormaColaboracion(forma).toArray(new Permiso[0]));
+    Set<String> permisosDeEstaForma  = PermisosHelper.getInstance().fromFormaColaboracion(forma);
+    if (!colaborador.getUsuario().tenesPermisos(permisosDeEstaForma.toArray(new String[0]))) {
+      colaborador.getUsuario().getRoles().get(0).agregarPermisos(PermisosHelper.getInstance().buscarPorNombres(permisosDeEstaForma.toArray(new String[0])).toArray(new Permiso[0]));
     }
   }
 

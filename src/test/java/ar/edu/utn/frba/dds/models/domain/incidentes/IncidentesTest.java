@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.helpers.TecnicosHelper;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategy;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class IncidentesTest {
@@ -51,14 +53,14 @@ public class IncidentesTest {
         TecnicosHelper helper = Mockito.mock(TecnicosHelper.class);
         Mockito.when(helper.findTecnicoMasCercano(any())).thenReturn(tecnico);
         NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-        Mockito.doNothing().when(strategy).notificar(any(), any());
+        Mockito.doNothing().when(strategy).notificar(any(),any(), any());
 
         NotificationStrategyFactory factory = Mockito.mock(NotificationStrategyFactory.class);
         Mockito.when(factory.create(any())).thenReturn(strategy);
         Alerta alerta = Alerta.of(heladera, this.fecha, helper, factory, TipoAlerta.FRAUDE);
         alerta.reportar();
-        this.output = "Hola jorge se rompio la heladera unaHeladera a las " + fecha.toString() + " y necesitamos que por favor venga a repararla";
-        verify(strategy, times(1)).notificar(this.tecnico, this.output);
+        this.output = "Estimado jorge, la heladera unaHeladera se ha averiado a las " + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a")) + ". Le solicitamos amablemente que acuda a repararla a la brevedad posible.";
+        verify(strategy, times(1)).notificar(this.tecnico ,"Se solicita una visita para arreglar heladera", this.output);
 
     }
 }

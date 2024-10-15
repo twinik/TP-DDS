@@ -20,46 +20,58 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Optional;
 
 class CargadorDeColaboracionesTest {
-    private CargaColaboracionCsvReader csvReader;
-    private SendGridMailSender mailSender;
-    private CargadorDeColaboraciones cargador;
+  private CargaColaboracionCsvReader csvReader;
+  private SendGridMailSender mailSender;
+  private CargadorDeColaboraciones cargador;
 
-    private IColaboradoresRepository repositorio;
-    private IFormasColaboracionRespository formasColaboracionRespository;
+  private IColaboradoresRepository repositorio;
+  private IFormasColaboracionRespository formasColaboracionRespository;
 
-    @BeforeEach
-    void setUp() throws IOException {
-        csvReader = new CargaColaboracionCsvReader();
-        mailSender = mock(SendGridMailSender.class);
-        doNothing().when(mailSender).enviarMail(any());
-        repositorio = new ColaboradoresRepository();
-        formasColaboracionRespository = mock(IFormasColaboracionRespository.class);
-        when(formasColaboracionRespository.buscarPorNombre("DONACION_DINERO")).thenReturn(Optional.of(new FormaColaboracion("DONACION_DINERO", "dinero")));
-        when(formasColaboracionRespository.buscarPorNombre("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("DONACION_VIANDA", "vianda")));
-        when(formasColaboracionRespository.buscarPorNombre("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion("REGISTRO_PERSONA", "persona")));
-        when(formasColaboracionRespository.buscarPorNombre("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("REDISTRIBUCION_VIANDA", "vianda")));
-        cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/models/domain/assets/cargacolaboraciones.csv", csvReader, mailSender, repositorio, formasColaboracionRespository, ServiceLocator.get(ICalculadorPuntos.class), ServiceLocator.get(IRolesRepository.class));
+private static int i=0;
+
+  @BeforeEach
+   public void setUp() throws IOException {
+    csvReader = new CargaColaboracionCsvReader();
+    mailSender = mock(SendGridMailSender.class);
+    doNothing().when(mailSender).enviarMail(any());
+    repositorio = new ColaboradoresRepository();
+    if (i == 0) {
+      formasColaboracionRespository = ServiceLocator.get(IFormasColaboracionRespository.class);
+      FormaColaboracion donacionDinero = new FormaColaboracion("DONACION_DINERO", "Donación de dinero");
+      FormaColaboracion donacionVianda = new FormaColaboracion("DONACION_VIANDA", "Donación de viandas");
+      FormaColaboracion redistribucionVianda = new FormaColaboracion("REDISTRIBUCION_VIANDA", "Redistribución de viandas");
+      FormaColaboracion registroPersona = new FormaColaboracion("REGISTRO_PERSONA", "Alta persona vulnerable");
+      FormaColaboracion colocacionHeladeras = new FormaColaboracion("COLOCACION_HELADERA", "Hacerse cargo de heladeras");
+      FormaColaboracion ofrecerProductos = new FormaColaboracion("OFRECER_PRODUCTOS", "Ofrecer productos");
+      formasColaboracionRespository.guardar(donacionVianda, donacionDinero, redistribucionVianda, registroPersona, colocacionHeladeras, ofrecerProductos);
     }
 
-    @Test
-    void pruebaJsonToDonacionDinero() throws IOException {
-        String json = "{\"monto\": 10000, \"frecuencia\": \"DIARIA\", \"fecha\": \"09/12/2018\"}";
-        CargaColaboracion carga = new CargaColaboracion();
-        carga.setFormaColaboracion("DONACION_DINERO");
-        carga.setJsonColaboracion(json);
-        DonacionDinero donacion = (DonacionDinero) CargaToColaboracionMapper.colaboracionFromCarga(carga, new Colaborador());
-        assertEquals(10000, donacion.getMonto());
-        assertEquals(FrecuenciaDonacion.DIARIA, donacion.getFrecuencia());
-        assertEquals(LocalDate.of(2018, 12, 9), donacion.getFecha());
-    }
+    i++;
+//        when(formasColaboracionRespository.buscarPorNombre("DONACION_DINERO")).thenReturn(Optional.of(new FormaColaboracion("DONACION_DINERO", "dinero")));
+//        when(formasColaboracionRespository.buscarPorNombre("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("DONACION_VIANDA", "vianda")));
+//        when(formasColaboracionRespository.buscarPorNombre("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion("REGISTRO_PERSONA", "persona")));
+//        when(formasColaboracionRespository.buscarPorNombre("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("REDISTRIBUCION_VIANDA", "vianda")));
+    cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/models/domain/assets/cargacolaboraciones.csv", csvReader, mailSender, repositorio, formasColaboracionRespository, ServiceLocator.get(ICalculadorPuntos.class), ServiceLocator.get(IRolesRepository.class));
+  }
 
-    @Test
-    @DisplayName("Carga de colaboraciones")
-    void cargarColaboraciones() throws IOException {
-        assertEquals(19, cargador.cargarColaboraciones().size());
-        verify(mailSender, times(3)).enviarMail(any());
-    }
+  @Test
+  void pruebaJsonToDonacionDinero() throws IOException {
+    String json = "{\"monto\": 10000, \"frecuencia\": \"DIARIA\", \"fecha\": \"09/12/2018\"}";
+    CargaColaboracion carga = new CargaColaboracion();
+    carga.setFormaColaboracion("DONACION_DINERO");
+    carga.setJsonColaboracion(json);
+    DonacionDinero donacion = (DonacionDinero) CargaToColaboracionMapper.colaboracionFromCarga(carga, new Colaborador());
+    assertEquals(10000, donacion.getMonto());
+    assertEquals(FrecuenciaDonacion.DIARIA, donacion.getFrecuencia());
+    assertEquals(LocalDate.of(2018, 12, 9), donacion.getFecha());
+  }
+
+  @Test
+  @DisplayName("Carga de colaboraciones")
+  void cargarColaboraciones() throws IOException {
+    assertEquals(19, cargador.cargarColaboraciones().size());
+    verify(mailSender, times(3)).enviarMail(any());
+  }
 }

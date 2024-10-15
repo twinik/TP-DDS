@@ -62,11 +62,11 @@ public class UsuarioService {
         UsuarioNavbarDto dto = new UsuarioNavbarDto();
         dto.setEmail(u.getEmail());
         dto.setNombre("Usuario");
-        dto.setPermisoTecnico(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-tecnico").toArray(new Permiso[0])));
-        dto.setPermisoFormulario(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-formulario").toArray(new Permiso[0])));
-        dto.setPermisoModeloHeladera(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-modelo-heladera").toArray(new Permiso[0])));
-        dto.setPermisoCodTarjeta(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("alta-cod-tarjeta").toArray(new Permiso[0])));
-        dto.setPermisoCsv(u.tenesPermisos(PermisosHelper.getInstance().buscarPorNombres("carga-colaboraciones").toArray(new Permiso[0])));
+        dto.setPermisoTecnico(u.tenesPermisos("alta-tecnico"));
+        dto.setPermisoFormulario(u.tenesPermisos("alta-formulario"));
+        dto.setPermisoModeloHeladera(u.tenesPermisos("alta-modelo-heladera"));
+        dto.setPermisoCodTarjeta(u.tenesPermisos("alta-cod-tarjeta"));
+        dto.setPermisoCsv(u.tenesPermisos("carga-colaboraciones"));
         return dto;
     }
 }

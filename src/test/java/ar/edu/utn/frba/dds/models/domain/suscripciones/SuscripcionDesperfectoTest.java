@@ -24,7 +24,7 @@ public class SuscripcionDesperfectoTest {
         RecomendadorHeladeras recomendadorHeladeras = Mockito.mock(RecomendadorHeladeras.class);
 
         NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-        doNothing().when(strategy).notificar(any(), any());
+        doNothing().when(strategy).notificar(any(),any(), any());
 
         sucripcion = new Suscripcion(new Colaborador(),
                 strategy, new SuscripcionDesperfectoHeladera(recomendadorHeladeras), 2);
@@ -36,7 +36,7 @@ public class SuscripcionDesperfectoTest {
         heladera.inhabilitar();
 
 
-        verify(strategy, times(1)).notificar(any(), any());
+        verify(strategy, times(1)).notificar(any(),any(), any());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SuscripcionDesperfectoTest {
         Suscripcion sucripcion;
         RecomendadorHeladeras recomendadorHeladeras = Mockito.mock(RecomendadorHeladeras.class);
         NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-        doNothing().when(strategy).notificar(any(), any());
+        doNothing().when(strategy).notificar(any(),any(), any());
         sucripcion = new Suscripcion(new Colaborador(),
                 strategy, new SuscripcionDesperfectoHeladera(recomendadorHeladeras), 2);
 
@@ -60,6 +60,6 @@ public class SuscripcionDesperfectoTest {
         heladera.agregarVianda();
 
 
-        verify(strategy, times(0)).notificar(any(), any());
+        verify(strategy, times(0)).notificar(any(),any(), any());
     }
 }

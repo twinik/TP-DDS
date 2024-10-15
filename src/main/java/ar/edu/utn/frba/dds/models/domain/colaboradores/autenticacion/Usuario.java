@@ -43,11 +43,11 @@ public class Usuario extends EntidadPersistente {
         this.roles.addAll(Arrays.asList(roles));
     }
 
-    public boolean tenesPermiso(Permiso permiso) {
+    public boolean tenesPermiso(String permiso) {
         return this.roles.stream().anyMatch(r -> r.tenesPermiso(permiso));
     }
 
-    public boolean tenesPermisos(Permiso... permisos) {
+    public boolean tenesPermisos(String... permisos) {
         return Arrays.stream(permisos).allMatch(this::tenesPermiso);
     }
 

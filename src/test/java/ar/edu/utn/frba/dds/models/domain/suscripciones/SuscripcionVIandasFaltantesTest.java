@@ -22,7 +22,7 @@ public class SuscripcionVIandasFaltantesTest {
     void mandarNotificacion() {
         Suscripcion sucripcion;
         NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-        doNothing().when(strategy).notificar(any(), any());
+        doNothing().when(strategy).notificar(any(),any(), any());
         sucripcion = new Suscripcion(new Colaborador(),
                 strategy, new SuscripcionViandasFaltantes(), 2);
 
@@ -38,7 +38,7 @@ public class SuscripcionVIandasFaltantesTest {
         heladera.agregarVianda();
 
 
-        verify(strategy, times(1)).notificar(any(), any());
+        verify(strategy, times(1)).notificar(any(),any(), any());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class SuscripcionVIandasFaltantesTest {
     void noMandaNada() {
         Suscripcion sucripcion;
         NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-        doNothing().when(strategy).notificar(any(), any());
+        doNothing().when(strategy).notificar(any(), any(),any());
         sucripcion = new Suscripcion(new Colaborador(),
                 strategy, new SuscripcionViandasFaltantes(), 2);
 
@@ -61,6 +61,6 @@ public class SuscripcionVIandasFaltantesTest {
         heladera.agregarVianda();
 
 
-        verify(strategy, times(0)).notificar(any(), any());
+        verify(strategy, times(0)).notificar(any(),any(), any());
     }
 }

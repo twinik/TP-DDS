@@ -23,7 +23,7 @@ public class Rol extends EntidadPersistente {
       inverseJoinColumns = @JoinColumn(name = "permiso_id", referencedColumnName = "id"))
   private List<Permiso> permisos = new ArrayList<>();
 
-  public boolean tenesPermiso(Permiso permiso) {
+  public boolean tenesPermiso(String permiso) {
     return this.permisos.stream().anyMatch(p -> p.tieneIgualDescripcion(permiso));
   }
 

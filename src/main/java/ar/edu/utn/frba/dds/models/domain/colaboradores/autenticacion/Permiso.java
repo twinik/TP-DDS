@@ -23,8 +23,8 @@ public class Permiso extends EntidadPersistente implements RouteRole {
     @Column(name = "desc_interna", nullable = false)
     private String desc_interna;
 
-    public boolean tieneIgualDescripcion(Permiso p) {
-        return this.desc_interna.equals(p.getDesc_interna());
+    public boolean tieneIgualDescripcion(String desc) {
+        return this.desc_interna.equals(desc);
     }
 
 }
