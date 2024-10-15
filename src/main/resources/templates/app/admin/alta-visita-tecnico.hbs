@@ -1,4 +1,4 @@
-    {{#partial "contenido"}}
+{{#partial "contenido"}}
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Registrar Visita de técnico</h1>
 
@@ -87,7 +87,8 @@
                     required
             >
                 {{#each incidentes}}
-                    <option value={{this.id}}>{{this.tipo}} en {{this.nombreHeladera}}  del día  {{this.fecha}} a las {{this.hora}}</option>
+                    <option value={{this.id}}>{{this.tipo}} en {{this.nombreHeladera}}  del día  {{this.fecha}} a
+                        las {{this.hora}}</option>
                 {{/each}}
 
             </select>

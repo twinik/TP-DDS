@@ -26,7 +26,8 @@
                         </div>
                         <div class="flex-grow"></div>
                         <div class="flex flex-col space-y-3 mt-6">
-                            <form id="editar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/edicion" method="post"
+                            <form id="editar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/edicion"
+                                  method="post"
                                   class="w-full mt-auto">
                                 <input type="hidden" name="idHeladera" value="{{this.id}}">
                                 <input type="hidden" name="nombre" value="{{this.nombre}}">
@@ -43,7 +44,8 @@
                                     Editar
                                 </button>
                             </form>
-                            <form id="eliminar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/eliminacion" method="post"
+                            <form id="eliminar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/eliminacion"
+                                  method="post"
                                   class="w-full mt-auto">
                                 <button type="button"
                                         class="w-full py-2 px-4 text-red-600 font-semibold rounded-lg transition-all duration-300 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 bg-red-100 shadow-md"

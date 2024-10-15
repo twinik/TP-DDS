@@ -41,7 +41,7 @@ class CargadorDeColaboracionesTest {
         when(formasColaboracionRespository.buscarPorNombre("DONACION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("DONACION_VIANDA", "vianda")));
         when(formasColaboracionRespository.buscarPorNombre("REGISTRO_PERSONA")).thenReturn(Optional.of(new FormaColaboracion("REGISTRO_PERSONA", "persona")));
         when(formasColaboracionRespository.buscarPorNombre("REDISTRIBUCION_VIANDA")).thenReturn(Optional.of(new FormaColaboracion("REDISTRIBUCION_VIANDA", "vianda")));
-        cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/models/domain/assets/cargacolaboraciones.csv", csvReader, mailSender, repositorio, formasColaboracionRespository, ServiceLocator.get(ICalculadorPuntos.class),ServiceLocator.get(IRolesRepository.class));
+        cargador = new CargadorDeColaboraciones("src/main/java/ar/edu/utn/frba/dds/models/domain/assets/cargacolaboraciones.csv", csvReader, mailSender, repositorio, formasColaboracionRespository, ServiceLocator.get(ICalculadorPuntos.class), ServiceLocator.get(IRolesRepository.class));
     }
 
     @Test
