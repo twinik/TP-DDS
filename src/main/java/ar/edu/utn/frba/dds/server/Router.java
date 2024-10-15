@@ -106,7 +106,7 @@ public class Router {
 
     app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
     app.get("/quienes-somos2", ctx -> ctx.render("/app/quienes-somos2.hbs"));
-    app.get("/", ctx -> ctx.redirect("/quienes-somos2"));
+    app.get("/", ctx -> ctx.redirect("/quienes-somos"));
 
     app.exception(Exception.class, (e, ctx) -> {
       e.printStackTrace();

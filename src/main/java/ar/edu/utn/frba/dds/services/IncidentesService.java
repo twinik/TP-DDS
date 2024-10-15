@@ -35,8 +35,10 @@ public class IncidentesService {
     incidente.marcarSolucionado();
     this.incidentesRepository.actualizar(incidente);
     Heladera h = incidente.getHeladera();
-    if (this.incidentesRepository.buscarPorHeladera(h.getId()).isEmpty())
+    if (this.incidentesRepository.buscarPorHeladera(h.getId()).isEmpty()) {
       h.habilitar();
+    }
+
     this.heladerasService.actualizarHeladera(h);
   }
 }

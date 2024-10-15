@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public class Tecnico extends EntidadPersistente implements Contactable {
 
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
-    private List<MedioDeContacto> medioContacto;
+    private List<MedioDeContacto> medioContacto = new ArrayList<>();
 
     @Embedded
     private AreaDeCobertura areaDeCobertura;
