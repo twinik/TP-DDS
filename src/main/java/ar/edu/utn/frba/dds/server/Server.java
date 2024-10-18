@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.server;
 
-import ar.edu.utn.frba.dds.brokers.AperturaHeladeraBroker;
 import ar.edu.utn.frba.dds.middleware.AppMiddlewares;
 import ar.edu.utn.frba.dds.server.handlers.AppHandlers;
 import ar.edu.utn.frba.dds.utils.Initializer;
@@ -111,14 +110,15 @@ public class Server {
         try {
           template = handlebars.compile(
               "templates/" + path.replace(".hbs", ""));
-          model.put("username", context.sessionAttribute("username"));
-          model.put("email", context.sessionAttribute("email"));
-          model.put("permisoTecnico", context.sessionAttribute("permisoTecnico"));
-          model.put("permisoFormulario", context.sessionAttribute("permisoFormulario"));
-          model.put("permisoModeloHeladera", context.sessionAttribute("permisoModeloHeladera"));
-          model.put("permisoTarjeta", context.sessionAttribute("permisoTarjeta"));
-          model.put("permisoCsv",context.sessionAttribute("permisoCsv"));
-          model.put("admin", context.sessionAttribute("admin"));
+//          model.put("username", context.sessionAttribute("username"));
+//          model.put("email", context.sessionAttribute("email"));
+//          model.put("permisoTecnico", context.sessionAttribute("permisoTecnico"));
+//          model.put("permisoFormulario", context.sessionAttribute("permisoFormulario"));
+//          model.put("permisoModeloHeladera", context.sessionAttribute("permisoModeloHeladera"));
+//          model.put("permisoTarjeta", context.sessionAttribute("permisoTarjeta"));
+//          model.put("permisoCsv",context.sessionAttribute("permisoCsv"));
+//          model.put("admin", context.sessionAttribute("admin"));
+          NavbarHelper.agregarAtributosSesionAlModelo(context, model);
           return template.apply(model);
         } catch (IOException e) {
           e.printStackTrace();
@@ -130,4 +130,5 @@ public class Server {
       config.jsonMapper(new JavalinGson());
     };
   }
+
 }

@@ -125,7 +125,7 @@ public class CargadorDeColaboraciones {
       MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
           carga.getMail(),
           config.getProperty("ASUNTO"),
-          config.getProperty("CUERPO") + claveGenerada);
+          config.getProperty("CUERPO") + " " + claveGenerada);
 
       mailSender.enviarMail(email);
 
