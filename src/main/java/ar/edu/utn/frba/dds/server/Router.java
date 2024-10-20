@@ -19,6 +19,7 @@ public class Router {
     app.get("/login", ServiceLocator.get(LoginController.class)::index);
     app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
     app.get("/logout", ServiceLocator.get(LogoutController.class)::handleLogout);
+    app.get("/perfil", ServiceLocator.get(PerfilController.class)::index);
 
     // REGISTRO
     app.get("/registro", ServiceLocator.get(RegistroController.class)::index);

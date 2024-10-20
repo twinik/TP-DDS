@@ -13,6 +13,13 @@ public class CanjeProductoRepository implements ICanjeProductoRepository, WithSi
     }
 
     @Override
+    public List<CanjeProducto> buscarPorColaborador(String id) {
+        return entityManager().createQuery("from CanjeProducto where colaborador_id=:id", CanjeProducto.class).
+                setParameter("id", id)
+                .getResultList();
+    }
+
+    @Override
     public List<CanjeProducto> buscarTodos() {
         return entityManager().createQuery("from CanjeProducto where activo=:activo", CanjeProducto.class).
                 setParameter("activo", true)

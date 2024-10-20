@@ -7,6 +7,8 @@ import java.util.Optional;
 public interface ICanjeProductoRepository {
     Optional<CanjeProducto> buscar(String id);
 
+    List<CanjeProducto> buscarPorColaborador(String id);
+
     List<CanjeProducto> buscarTodos();
 
     void guardar(CanjeProducto canje);

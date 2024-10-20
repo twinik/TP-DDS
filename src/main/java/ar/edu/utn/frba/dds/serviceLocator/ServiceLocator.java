@@ -243,6 +243,8 @@ public class ServiceLocator {
         add(clase, new ModelosHeladeraController(get(ModelosService.class)));
       else if (clase.equals(OfertasProductoController.class))
         add(clase, new OfertasProductoController(get(OfertasProductoService.class), get(FileUploadService.class)));
+      else if (clase.equals(PerfilController.class))
+        add(clase, new PerfilController (get(OfertasProductoService.class), get(ColaboradoresService.class)));
       else if (clase.equals(RegistroController.class))
         add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class), get(FormaColaboracionService.class)));
       else if (clase.equals(RedistribucionViandaController.class))

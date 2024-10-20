@@ -1,0 +1,245 @@
+{{#partial "contenido"}}
+    <div class="p-10 mx-auto max-w-7xl">
+        <h1 class="title1 mb-8">Perfil de Usuario</h1>
+
+        {{#if message}}
+            <p style="background: rgb(255, 163, 163);"
+               class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+        {{/if}}
+
+        <form method="post" action="" class="content-center max-w-md mx-auto">
+            <label
+                    for="nombre"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Nombre</label>
+            <input
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    value="{{nombre}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                    disabled
+            />
+
+            <label
+                    for="apellido"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Apellido</label>
+            <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    value="{{apellido}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                    disabled
+            />
+
+            <label
+                    for="email"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Email</label>
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{email}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                    disabled
+            />
+
+            <label
+                    for="documento"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Documento</label>
+            <input
+                    type="text"
+                    id="documento"
+                    name="documento"
+                    value="{{documento}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                    disabled
+            />
+
+            <label
+                    for="tipo-documento"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Tipo de Documento</label>
+            <input
+                    type="text"
+                    id="tipo-documento"
+                    name="tipoDocumento"
+                    value="{{tipoDocumento}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    disabled
+            />
+
+            <label
+                    for="calle"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Calle</label>
+            <input
+                    type="text"
+                    id="calle"
+                    name="calle"
+                    value="{{calle}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                    disabled
+            />
+
+            <label
+                    for="altura"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Altura</label>
+            <input
+                    type="number"
+                    id="altura"
+                    name="altura"
+                    value="{{altura}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                    disabled
+            />
+
+            <label
+                    for="piso"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Piso</label>
+            <input
+                    type="number"
+                    id="piso"
+                    name="piso"
+                    value="{{piso}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    disabled
+            />
+
+            <label
+                    for="codigoPostal"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Código Postal</label>
+            <input
+                    type="text"
+                    id="codigoPostal"
+                    name="codigoPostal"
+                    value="{{codigoPostal}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                    disabled
+            />
+
+            <label
+                    for="fecha-nacimiento"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Fecha de Nacimiento</label>
+            <input
+                    type="date"
+                    id="fecha-nacimiento"
+                    name="fechaNacimiento"
+                    value="{{fechaNacimiento}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    disabled
+            />
+
+            <label
+                    for="rubro"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Rubro</label>
+            <input
+                    type="text"
+                    id="rubro"
+                    name="rubro"
+                    value="{{rubro}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    disabled
+            />
+
+            {{#if razonSocial}}
+                <label
+                        for="razonSocial"
+                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Razón Social</label>
+                <input
+                        type="text"
+                        id="razonSocial"
+                        name="razonSocial"
+                        value="{{razonSocial}}"
+                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        disabled
+                />
+            {{/if}}
+
+            {{#if tipoPersonaJuridica}}
+                <label
+                        for="tipoPersonaJuridica"
+                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Tipo de Persona Jurídica</label>
+                <input
+                        type="text"
+                        id="tipoPersonaJuridica"
+                        name="tipoPersonaJuridica"
+                        value="{{tipoPersonaJuridica}}"
+                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        disabled
+                />
+            {{/if}}
+
+            <label
+                    for="formCompletado"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Formulario Completado</label>
+            <input
+                    type="text"
+                    id="formCompletado"
+                    name="formCompletado"
+                    value="{{#if formCompletado}}Sí{{else}}No{{/if}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    disabled
+            />
+
+            <label
+                    for="puntosGanados"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Puntos Ganados</label>
+            <input
+                    type="text"
+                    id="puntosGanados"
+                    name="puntosGanados"
+                    value="{{puntosGanados}}"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    disabled
+            />
+        </form>
+    </div>
+    <h2 class="text-center text-xl font-bold mb-6">Productos Canjeados</h2>
+    {{#if canjes.length}}
+    {{else}}
+        <div class="flex justify-center items-center h-64">
+            <p class="text-center text-lg text-gray-500">No hay productos canjeados.</p>
+        </div>
+    {{/if}}
+    <div class="flex flex-wrap justify-center gap-4" id="canjes-lista">
+        {{#each canjes}}
+            <div class="w-full max-w-xs p-2">
+                <div class="sidebar rounded-lg shadow-lg overflow-hidden flex flex-col h-full producto transform transition duration-300 hover:scale-105 mx-auto">
+                    <div class="bg-white p-4 flex items-center justify-center h-40">
+                        <img class="max-w-full max-h-full object-contain" src={{this.ofertaCanjeada.producto.urlFoto}}
+                             alt={{this.ofertaCanjeada.producto.nombre}} />
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <h5 class="text-lg font-bold text-white mb-1 line-clamp-2 text-center">{{this.ofertaCanjeada.producto.nombre}}</h5>
+                        <p class="mb-2 text-sm text-gray-300 text-center">Canjeado el {{this.fechaCanje}}</p>
+                        <p class="mb-2 text-md font-bold text-white text-center">{{this.puntosGastados}} puntos
+                            gastados</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/partial}}
+
+{{> templates/app/base }}

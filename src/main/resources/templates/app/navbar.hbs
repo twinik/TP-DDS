@@ -20,10 +20,12 @@
             <li class="mb-5">
                 <div class="flex items-center space-x-4">
                     {{#if email}}
-                        <div class="flex-1 min-w-0 ml-4 text-base">
-                            <p class="font-medium truncate">{{username}}</p>
-                            <p class="text-gray-300 truncate">{{email}}</p>
-                        </div>
+                        <a href="/perfil" class="flex items-center p-2 rounded-lg nav-item group">
+                            <div class="flex-1 min-w-0 ml-4 text-base">
+                                <p class="font-medium truncate">{{username}}</p>
+                                <p class="text-gray-300 truncate">{{email}}</p>
+                            </div>
+                        </a>
                     {{else}}
                         <a href="/login" class="flex items-center p-2 rounded-lg nav-item group">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300" fill="none"
@@ -36,6 +38,7 @@
                     {{/if}}
                 </div>
             </li>
+
 
             <li>
                 <a href="/quienes-somos" class="flex items-center p-2 rounded-lg nav-item group">

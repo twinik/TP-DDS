@@ -40,6 +40,10 @@ public class OfertasProductoService {
     }
   }
 
+  public List<CanjeProducto> obtenerCanjes(String idColaborador) {
+    return this.canjeProductoRepository.buscarPorColaborador(idColaborador);
+  }
+
   public void crearOferta(OfertaProductoDto oferta) {
     Colaborador colab = this.colaboradoresService.obtenerColaborador(oferta.getIdColaborador());
 
