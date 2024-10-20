@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.services;
 
+import ar.edu.utn.frba.dds.dtos.CanjeOutputDto;
 import ar.edu.utn.frba.dds.dtos.ofertas.OfertaProductoDto;
 import ar.edu.utn.frba.dds.dtos.personas.ColaboradorPuntosDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
@@ -40,8 +41,9 @@ public class OfertasProductoService {
     }
   }
 
-  public List<CanjeProducto> obtenerCanjes(String idColaborador) {
-    return this.canjeProductoRepository.buscarPorColaborador(idColaborador);
+  public List<CanjeOutputDto> obtenerCanjes(String idColaborador) {
+    return this.canjeProductoRepository.buscarPorColaborador(idColaborador).stream()
+        .map(CanjeOutputDto::fromCanje).toList();
   }
 
   public void crearOferta(OfertaProductoDto oferta) {

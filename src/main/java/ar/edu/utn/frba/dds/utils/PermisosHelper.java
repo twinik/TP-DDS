@@ -51,6 +51,7 @@ public class PermisosHelper {
         case "/heladeras/{id}/suscribirse" -> Set.of("colaborador-base");
         case "/heladeras/{id}/reportar-falla-tecnica" -> Set.of("colaborador-base");
         case "/heladeras/mis-heladeras" -> Set.of("colocar-heladeras");
+        case "/perfil" -> Set.of("colaborador-base");
         default -> new HashSet<>();
       };
     } else if (ctx.method().name().equals("POST")) {
