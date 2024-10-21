@@ -28,6 +28,7 @@ function editar(heladeraId, heladeraName) {
         cancelButtonColor: "#6c757d",
         confirmButtonText: "Editar",
         cancelButtonText: "Cancelar",
+        reverseButtons: true,
         inputValidator: (value) => {
             if (!value) {
                 return "¡Debes ingresar un nombre!";
