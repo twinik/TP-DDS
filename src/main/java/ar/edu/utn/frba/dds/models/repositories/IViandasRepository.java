@@ -15,6 +15,8 @@ public interface IViandasRepository {
 
     void guardar(Vianda vianda);
 
+    void guardar(List<Vianda> viandas);
+
     void actualizar(Vianda vianda);
 
     void eliminar(Vianda vianda);

@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.models.domain.excepciones.ViandasIncosistentesExcepti
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
+@Setter
 @Table(name = "ingreso_vianda")
 public class IngresoVianda extends EntidadPersistente {
     @Column(name = "fechaDonacion")

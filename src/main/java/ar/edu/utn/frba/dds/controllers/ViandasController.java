@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.colaboraciones.IngresoViandaDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.ViandaDto;
 import ar.edu.utn.frba.dds.services.ViandasService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -32,8 +33,9 @@ public class ViandasController implements ICrudViewsHandler {
 
     @Override
     public void save(Context context) {
-        ViandaDto dto = ViandaDto.of(context);
-        this.viandasService.crearVianda(dto);
+        IngresoViandaDto dto = IngresoViandaDto.of(context);
+        //ViandaDto dto = ViandaDto.obtenerListaViandas(context);
+        this.viandasService.crearIngresoViandas(dto);
         Map<String, Object> model = new HashMap<>();
         model.put("message", "Su solcitud de donacioón ha sido registrada con éxito, esperamos su donación con ansias");
         context.status(201);

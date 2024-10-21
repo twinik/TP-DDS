@@ -20,43 +20,11 @@
                 <p id="error-message" style="background: rgb(255, 163, 163);"
                    class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
             {{/if}}
-            <label
-                    for="descripcion-vianda"
-                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Descripción de la vianda</label
-            >
-            <input
-                    type="text"
-                    id="descripcion-vianda"
-                    name="desc"
-                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Descripción"
-                    required
-            />
-
-            <label
-                    for="caducidad"
-                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Fecha de caducidad</label
-            >
-            <input
-                    required
-                    datepicker
-                    datepicker-autohide
-                    datepicker-format="dd/mm/yyyy"
-                    autoSelectToday="1"
-                    id="caducidad"
-                    name="fechaCaducidad"
-                    type="text"
-                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Fecha de caducidad"
-            />
 
             <label
                     for="default-datepicker"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Fecha de donación</label
-            >
+            >Fecha de donación</label>
             <input
                     required
                     datepicker
@@ -70,35 +38,72 @@
                     placeholder="Fecha de donación"
             />
 
-            <label
-                    for="calorias"
-                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Calorías</label
-            >
-            <input
-                    type="number"
-                    id="calorias"
-                    name="calorias"
-                    aria-describedby="helper-text-explanation"
-                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Calorías"
-                    min="1"
-            />
+            <div id="viandas-container">
+                <!-- Contenedor donde se clonan las viandas -->
+                <div class="vianda">
+                    <label
+                            for="descripcion-vianda-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Descripción de la vianda</label>
+                    <input
+                            type="text"
+                            id="descripcion-vianda-1"
+                            name="desc-1"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Descripción"
+                            required
+                    />
 
-            <label
-                    for="peso"
-                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Peso de la vianda (kg)</label
-            >
-            <input
-                    type="number"
-                    id="peso"
-                    name="peso"
-                    aria-describedby="helper-text-explanation"
-                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Peso (kg)"
-                    min="1"
-            />
+                    <label
+                            for="caducidad-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Fecha de caducidad</label>
+                    <input
+                            required
+                            datepicker
+                            datepicker-autohide
+                            datepicker-format="dd/mm/yyyy"
+                            autoSelectToday="1"
+                            id="caducidad-1"
+                            name="fechaCaducidad-1"
+                            type="text"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Fecha de caducidad"
+                    />
+
+                    <label
+                            for="calorias-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Calorías</label>
+                    <input
+                            type="number"
+                            id="calorias-1"
+                            name="calorias-1"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Calorías"
+                            min="1"
+                    />
+
+                    <label
+                            for="peso-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Peso de la vianda (kg)</label>
+                    <input
+                            type="number"
+                            id="peso-1"
+                            name="peso-1"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Peso (kg)"
+                            min="0.1"
+                    />
+                </div>
+            </div>
+
+            <input type="hidden" name="cant-viandas" id="cantidad-viandas" value="1">
+
+            <button type="button" id="add-vianda-btn" class="mt-2 mb-5 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-800">
+                Agregar otra vianda
+            </button>
 
             <label
                     for="map"
@@ -159,6 +164,41 @@
     ></script>
     <script src="/js/utils-heladeras.js"></script>
     <script src="/js/heladeras-seleccion.js"></script>
+    <script>
+        document.getElementById('add-vianda-btn').addEventListener('click', function () {
+            const viandasContainer = document.getElementById('viandas-container');
+            const viandaCount = viandasContainer.getElementsByClassName('vianda').length;
+            const newVianda = viandasContainer.firstElementChild.cloneNode(true);
+
+            // Actualizamos los IDs y nombres de los campos para que sean únicos
+            newVianda.querySelectorAll('input').forEach(function(input) {
+                const newId = input.id.split('-')[0] + '-' + (viandaCount + 1);
+                const newName = input.name.split('-')[0] + '-' + (viandaCount + 1);
+                input.id = newId;
+                input.value = ''; // Limpiar el valor del campo
+                input.name = newName;
+            });
+
+            newVianda.querySelectorAll('label').forEach(function(label) {
+                const newFor = label.getAttribute('for').split('-')[0] + '-' + (viandaCount + 1);
+                label.setAttribute('for', newFor);
+            });
+
+
+
+            viandasContainer.appendChild(newVianda);
+            document.getElementById('cantidad-viandas').value = viandaCount+1;
+
+
+            newVianda.querySelectorAll('[datepicker]').forEach(function(dateInput) {
+                // Reemplaza este bloque con el código para inicializar tu datepicker
+                new Datepicker(dateInput, {
+                    autohide: true,
+                    format: 'dd/mm/yyyy'
+                });
+            });
+        });
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}
