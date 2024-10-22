@@ -109,8 +109,9 @@
 
             <button
                     id="enviar-dinero"
-                    type="submit"
+                    type="button"
                     class="content-center max-w-md mx-auto w-full mt-4 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
+                    onclick="confirmarDonacion(document.getElementById('monto-input').value)"
             >
                 Registrar donación
             </button>
@@ -157,7 +158,35 @@
     </script>
     <script src="/js/form-handler.js"></script>
     <script>
-        handleFormSubmit('form-dinero','enviar-dinero');
+        handleFormSubmit('form-dinero', 'enviar-dinero');
+    </script>
+    <script>
+        function confirmarDonacion(monto) {
+            const periodicaSi = document.getElementById('periodica').checked;
+            const frecuencia = periodicaSi ? document.getElementById('frecuencia').options[document.getElementById('frecuencia').selectedIndex].text : null;
+
+            let mensaje = `¿Deseas donar $${monto}`;
+            if (frecuencia) {
+                mensaje += ` de forma ${frecuencia}`;
+            }
+            mensaje += "?";
+
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: mensaje,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#28b463",
+                cancelButtonColor: "#cb4335",
+                confirmButtonText: "Sí, donar",
+                cancelButtonText: "No, cancelar",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('form-dinero').submit();
+                }
+            });
+        }
     </script>
 {{/partial}}
 
