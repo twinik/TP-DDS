@@ -36,22 +36,29 @@ public class ColaboradorPerfilDto {
   private List<FormaColaboracionDto> formaColaboracionDtos;
 
   public static ColaboradorPerfilDto of(Context context) {
-    return ColaboradorPerfilDto
-        .builder()
-        .id(context.pathParam("id"))
-        .nombre(context.formParam("nombre"))
-        .apellido(context.formParam("apellido"))
-        .email(context.formParam("email"))
-        .documento(context.formParam("documento"))
-        .tipoDocumento(TipoDocumento.valueOf(context.formParam("tipoDocumento")))
-        .fechaNacimiento(context.formParam("fechaNacimiento"))
-        .direccionDto(DireccionDto.of(context))
-        .rubro(context.formParam("rubro"))
-        .razonSocial(context.formParam("razonSocial"))
-        .tipoPersonaJuridica(TipoPersonaJuridica.valueOf(context.formParam("tipoPersonaJuridica")))
-        .puntosGanados(Float.parseFloat(context.formParam("puntosGanados")))
-        .formCompletado(Boolean.parseBoolean(context.formParam("formCompletado")))
-        .build();
+    if (context.formParam("nombre") != null) {
+      return ColaboradorPerfilDto
+          .builder()
+          .id(context.pathParam("id"))
+          .nombre(context.formParam("nombre"))
+          .apellido(context.formParam("apellido"))
+          .email(context.formParam("email"))
+          .documento(context.formParam("documento"))
+          .tipoDocumento(TipoDocumento.valueOf(context.formParam("tipoDocumento")))
+          .fechaNacimiento(context.formParam("fechaNacimiento"))
+          .direccionDto(DireccionDto.of(context))
+          .build();
+    } else {
+      return ColaboradorPerfilDto
+          .builder()
+          .id(context.pathParam("id"))
+          .email(context.formParam("email"))
+          .direccionDto(DireccionDto.of(context))
+          .rubro(context.formParam("rubro"))
+          .razonSocial(context.formParam("razonSocial"))
+          .tipoPersonaJuridica(TipoPersonaJuridica.valueOf(context.formParam("tipoPersonaJuridica")))
+          .build();
+    }
   }
 
   public static ColaboradorPerfilDto fromColaborador(Colaborador colaborador) {

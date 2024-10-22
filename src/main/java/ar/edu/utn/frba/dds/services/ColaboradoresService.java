@@ -60,6 +60,9 @@ public class ColaboradoresService {
 
   public void actualizar(ColaboradorPerfilDto dto) {
     Colaborador colaborador = this.obtenerColaborador(dto.getId());
+
+    // TODO Actualizar colaborador con datos del dto
+
     this.colaboradoresRepository.actualizar(colaborador);
     this.colaboradoresRepository.refresh(colaborador);
   }
@@ -76,7 +79,7 @@ public class ColaboradoresService {
     colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
     this.validarDocumento(colaborador.getTipoDocumento(), dto.getNroDocumento(), dto);
     colaborador.setDocumento(dto.getNroDocumento());
-    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
+    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
     TipoColaborador tipo = new TipoColaborador();
     tipo.setTipo(TipoPersona.PERSONA_HUMANA);
     tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
