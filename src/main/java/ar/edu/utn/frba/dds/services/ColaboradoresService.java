@@ -69,7 +69,7 @@ public class ColaboradoresService {
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
     // TODO Email
-    colaborador.setTipoDocumento(dto.getTipoDocumento());
+    colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
     colaborador.setDocumento(dto.getDocumento());
     colaborador.setDireccion(dto.getDireccionDto() != null ? new Direccion(dto.getDireccionDto().getCalle(), dto.getDireccionDto().getAltura(), dto.getDireccionDto().getPiso(), dto.getDireccionDto().getCodigoPostal()) : null);
     colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
