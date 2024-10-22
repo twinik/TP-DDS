@@ -23,8 +23,8 @@ public class MedioContactoDto {
         return lista;
     }
 
-    public static boolean estanCamposLLenos(List<MedioContactoDto> lista) {
-        if (lista.isEmpty()) throw new FormIncompletoException(MensajeContactoVacioFactory.generarMensaje());
+    public static boolean estanCamposLLenos(List<MedioContactoDto> lista, Object formDto) {
+        if (lista.isEmpty()) throw new FormIncompletoException(MensajeContactoVacioFactory.generarMensaje(), formDto);
         return lista.stream().allMatch(m -> (m.canal != null && m.valor != null));
     }
 

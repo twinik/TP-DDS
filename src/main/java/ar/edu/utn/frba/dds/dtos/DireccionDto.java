@@ -35,9 +35,10 @@ public class DireccionDto {
         .build();
   }
 
-  public boolean estanCamposLlenos() {
+
+  public boolean estanCamposLlenos(Object formDto) {
     if (this.calle == null || this.altura == null || this.codigoPostal == null) {
-      throw new FormIncompletoException(MensajeDirIncompletaFactory.generarMensaje());
+      throw new FormIncompletoException(MensajeDirIncompletaFactory.generarMensaje(), formDto);
     }
     return true;
   }
