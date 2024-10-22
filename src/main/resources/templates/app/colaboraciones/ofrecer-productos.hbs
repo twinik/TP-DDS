@@ -14,7 +14,7 @@
     <div class="p-10 mx-auto max-w-4xl">
         <h1 class="title1 mb-8">Ofrecer producto</h1>
 
-        <form method="POST" action="/productos" class="content-center max-w-md mx-auto"
+        <form id="form-prod" method="POST" action="/productos" class="content-center max-w-md mx-auto"
               enctype="multipart/form-data">
             <label for="nombre"
                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del
@@ -68,7 +68,8 @@
                 </div>
             </div>
 
-            <button type="submit"
+            <button id="enviar-prod"
+                    type="submit"
                     class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
                 Publicar producto
             </button>
@@ -78,6 +79,10 @@
 
 {{#partial "scripts"}}
     <script src="/js/carga-imagen-producto.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-prod','enviar-prod');
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}

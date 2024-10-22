@@ -31,7 +31,8 @@
                                   class="w-full mt-auto">
                                 <input type="hidden" name="idHeladera" value="{{this.id}}">
                                 <input type="hidden" name="nombre" value="{{this.nombre}}">
-                                <button type="button"
+                                <button id="b-editar-{{this.id}}"
+                                        type="button"
                                         class="w-full py-2 px-4 text-blue-600 font-semibold rounded-lg transition-all duration-300 hover:bg-blue-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-blue-100 shadow-md"
                                         onclick="editar('{{this.id}}', '{{this.nombre}}')"
                                 >
@@ -47,7 +48,8 @@
                             <form id="eliminar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/eliminacion"
                                   method="post"
                                   class="w-full mt-auto">
-                                <button type="button"
+                                <button id="b-eliminar-{{this.id}}"
+                                        type="button"
                                         class="w-full py-2 px-4 text-red-600 font-semibold rounded-lg transition-all duration-300 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 bg-red-100 shadow-md"
                                         onclick="confirmarEliminacion('{{this.id}}', '{{this.nombre}}')"
                                 >

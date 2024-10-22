@@ -1,7 +1,7 @@
 {{#partial "contenido"}}
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Alta de Tarjetas</h1>
-        <form class="content-center max-w-md mx-auto" id="altaTarjetaForm" action="/admin/tarjetas/nuevo" method="POST">
+        <form id="form-cod-tarjeta" class="content-center max-w-md mx-auto" id="altaTarjetaForm" action="/admin/tarjetas/nuevo" method="POST">
             <div class="form-group">
                 <label for="codigoTarjeta"
                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Código de
@@ -14,7 +14,8 @@
                 <p id="error-message" style="background: rgb(255, 163, 163); height: 48px;"
                    class="mt-4 p-4 mb-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 flex items-center justify-center">{{message}}</p>
             {{/if}}
-            <button type="submit"
+            <button id="enviar-cod-tarjeta"
+                    type="submit"
                     class="mt-4 content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
                 Confirmar
             </button>
@@ -24,6 +25,10 @@
 
 {{#partial "scripts"}}
     <script src="/js/alta-tarjeta.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-cod-tarjeta', 'enviar-cod-tarjeta');
+    </script>
 {{/partial}}
 
 {{> templates/app/base }}

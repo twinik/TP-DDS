@@ -14,7 +14,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Colocar heladera</h1>
 
-        <form method="post" action="/colaborar/colocar-heladera" class="content-center max-w-md mx-auto">
+        <form id="enviar-hel" method="post" action="/colaborar/colocar-heladera" class="content-center max-w-md mx-auto">
             {{#if message}}
                 <p id="error-message" style="background: rgb(255, 163, 163);"
                    class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
@@ -279,6 +279,7 @@
 
 
             <button
+                    id="enviar-hel"
                     type="submit"
                     class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
             >
@@ -300,6 +301,10 @@
     ></script>
     <script src="/js/utils-heladeras.js"></script>
     <script src="/js/puntos-colocacion.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-hel','enviar-hel');
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}

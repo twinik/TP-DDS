@@ -14,7 +14,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Donación de dinero</h1>
 
-        <form method="post" action="/colaborar/donar-dinero" class="content-center max-w-sm mx-auto">
+        <form id="form-dinero" method="post" action="/colaborar/donar-dinero" class="content-center max-w-sm mx-auto">
             <label
                     for="default-datepicker"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -108,6 +108,7 @@
             </div>
 
             <button
+                    id="enviar-dinero"
                     type="submit"
                     class="content-center max-w-md mx-auto w-full mt-4 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
             >
@@ -153,6 +154,10 @@
                 }
             });
         });
+    </script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-dinero','enviar-dinero');
     </script>
 {{/partial}}
 

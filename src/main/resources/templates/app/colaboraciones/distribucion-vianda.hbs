@@ -14,7 +14,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Distribucion de viandas</h1>
 
-        <form method="post" action="" class="content-center max-w-md mx-auto">
+        <form id="form-redis" method="post" action="" class="content-center max-w-md mx-auto">
             <div>
                 {{#if message}}
                     <p id="error-message" style="background: rgb(255, 163, 163);"
@@ -132,6 +132,7 @@
             />
 
             <button
+                    id="enviar-redis"
                     type="submit"
                     class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
             >
@@ -153,6 +154,10 @@
     ></script>
     <script src="/js/utils-heladeras.js"></script>
     <script src="/js/heladeras-seleccion-origen-destino.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-redis','enviar-redis');
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}

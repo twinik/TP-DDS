@@ -2,7 +2,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Alta Modelo Heladera</h1>
 
-        <form method="post" action="" class="content-center max-w-md mx-auto">
+        <form id="form-modelo" method="post" action="" class="content-center max-w-md mx-auto">
             <label
                     for="modelo"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -50,6 +50,7 @@
             />
 
             <button
+                    id="enviar-modelo"
                     type="submit"
                     class="content-center max-w-md mx-auto w-full mt-6 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
             >
@@ -93,6 +94,10 @@
                 });
             });
         });
+    </script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-modelo', 'enviar-modelo');
     </script>
 {{/partial}}
 

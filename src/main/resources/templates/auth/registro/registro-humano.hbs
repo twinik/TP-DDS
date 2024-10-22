@@ -16,7 +16,7 @@
                        class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 border border-red-400">{{message}}</p>
                 {{/if}}
             </div>
-            <form method="post" action="" class="mt-8 space-y-6">
+            <form id="form-humano" method="post" action="" class="mt-8 space-y-6">
                 <div class="space-y-4">
                     <div>
                         <label for="nombre" class="block text-sm font-medium text-gray-300">Nombre</label>
@@ -160,7 +160,8 @@
                     <input type="hidden" name="cantidad-contactos" id="cantidad-contactos" value="1">
                 </div>
 
-                <button type="submit"
+                <button id="enviar-humano"
+                        type="submit"
                         class="w-full px-6 py-3 text-sm font-medium text-white botonFormularios rounded-lg hover:bg-blue-900 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
                     Registrarse
                 </button>
@@ -171,6 +172,10 @@
 
 {{#partial "scripts"}}
     <script src="/js/input-contactos.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-humano', 'enviar-humano');
+    </script>
 {{/partial}}
 
 {{> templates/auth/base }}

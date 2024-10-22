@@ -7,7 +7,7 @@
                class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
         {{/if}}
 
-        <form method="post" action="" class="content-center max-w-md mx-auto">
+        <form id="form-tecnico" method="post" action="" class="content-center max-w-md mx-auto">
             <label
                     for="nombre"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -132,7 +132,7 @@
                     placeholder="1"
                     required
             />
-            <button
+            <button id="enviar-tecnico"
                     type="submit"
                     class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
             >
@@ -150,6 +150,10 @@
     ></script>
     <script src="/js/mapa-seleccionar-ubicacion.js"></script>
     <script src="/js/input-contactos.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-tecnico', 'enviar-tecnico');
+    </script>
 {{/partial}}
 
 {{> templates/app/base }}
