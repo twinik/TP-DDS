@@ -9,6 +9,7 @@ public class DniDuplicadoHandler implements IHandler {
     public void setHandle(Javalin app) {
         app.exception(DniDuplicadoException.class, (e, context) -> {
             e.printStackTrace();
+            context.sessionAttribute("formDto", e.getFormDto());
             context.redirect(context.path() + "?message=" + e.getMessage());
         });
     }

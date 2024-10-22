@@ -24,17 +24,6 @@ public class PersonaHumanaDto {
     private String claveConf;
 
     public static PersonaHumanaDto of(Context context) {
-//    String email = ctx.formParam("email");
-//    String clave = ctx.formParam("password");
-//    String claveConf = ctx.formParam("passConf");
-//    String nombre = ctx.formParam("nombre");
-//    String apellido = ctx.formParam("apellido");
-//    LocalDate fechaNacimiento = fechaFromString(ctx.formParam("fechaNacimiento"), "dd/MM/yyyy");
-//    String calle = ctx.formParam("calle");
-//    Integer altura = Integer.parseInt(ctx.formParam("altura"));
-//    Integer piso = Integer.parseInt(ctx.formParam("piso"));
-//    String codigoPostal = ctx.formParam("cp");
-//    Direccion direccion = new Direccion(calle, altura, piso, codigoPostal);
         return PersonaHumanaDto.builder().nombre(context.formParam("nombre"))
                 .apellido(context.formParam("apellido"))
                 .fechaNacimiento((context.formParam("fechaNacimiento").isBlank()) ? null : context.formParam("fechaNacimiento"))
@@ -63,8 +52,8 @@ public class PersonaHumanaDto {
     }
 
     public boolean estanCamposLlenos() {
-        return this.nombre != null && this.apellido != null && (this.direccion == null || this.direccion.estanCamposLlenos()) && this.usuarioDto != null &&
-                this.formasColaboracion != null && MedioContactoDto.estanCamposLLenos(this.mediosDeContacto) && this.nroDocumento != null && this.tipoDocumento != null;
+        return this.nombre != null && this.apellido != null && (this.direccion == null || this.direccion.estanCamposLlenos(this)) && this.usuarioDto != null &&
+                FormaColaboracionDto.validarSeleccion(this.formasColaboracion, this) && MedioContactoDto.estanCamposLLenos(this.mediosDeContacto, this) && this.nroDocumento != null && this.tipoDocumento != null;
     }
 
 }

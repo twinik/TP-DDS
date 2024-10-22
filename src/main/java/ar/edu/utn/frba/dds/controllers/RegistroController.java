@@ -33,7 +33,7 @@ public class RegistroController implements ICrudViewsHandler {
     public void handleRegistroHumano(Context ctx) {
         PersonaHumanaDto nuevaPersonaHumana = PersonaHumanaDto.of(ctx);
         if (!nuevaPersonaHumana.estanCamposLlenos())
-            throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+            throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje(), nuevaPersonaHumana);
         this.validarContra(nuevaPersonaHumana);
         try {
             String idNuevoColab = this.colaboradoresService.registrar(nuevaPersonaHumana);
@@ -47,7 +47,7 @@ public class RegistroController implements ICrudViewsHandler {
     public void handleRegistroJuridico(Context ctx) {
         PersonaJuridicaDto personaJuridicaDto = PersonaJuridicaDto.of(ctx);
         if (!personaJuridicaDto.estanCamposLlenos())
-            throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+            throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje(), personaJuridicaDto);
         this.validarContra(personaJuridicaDto);
         try {
             this.colaboradoresService.registrar(personaJuridicaDto);
@@ -62,17 +62,17 @@ public class RegistroController implements ICrudViewsHandler {
     }
 
     private void validarContra(PersonaHumanaDto personaHumanaDto) {
-        if (!personaHumanaDto.sonClavesIguales()) throw new ClaveNoCoincidenException();
+        if (!personaHumanaDto.sonClavesIguales()) throw new ClaveNoCoincidenException(personaHumanaDto);
         ValidadorClaves validador = ValidadorFactory.create();
         if (!validador.esValida(personaHumanaDto.getUsuarioDto().getClave()))
-            throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo());
+            throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo(), personaHumanaDto);
     }
 
     private void validarContra(PersonaJuridicaDto personaJuridicaDto) {
-        if (!personaJuridicaDto.sonClavesIguales()) throw new ClaveNoCoincidenException();
+        if (!personaJuridicaDto.sonClavesIguales()) throw new ClaveNoCoincidenException(personaJuridicaDto);
         ValidadorClaves validador = ValidadorFactory.create();
         if (!validador.esValida(personaJuridicaDto.getUsuarioDto().getClave()))
-            throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo());
+            throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo(), personaJuridicaDto);
     }
 
     @Override
@@ -88,6 +88,7 @@ public class RegistroController implements ICrudViewsHandler {
     @Override
     public void create(Context context) {
         Map<String, Object> model = new HashMap<>();
+        model.put("datosForm", context.consumeSessionAttribute("formDto"));
         if (context.pathParam("tipo-persona").equals("persona-humana")) {
             model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
             model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA"));

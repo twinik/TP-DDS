@@ -8,6 +8,7 @@ public class NoTieneDireccionHandler implements IHandler {
     public void setHandle(Javalin app) {
         app.exception(NoTieneDireccionException.class, (e, context) -> {
             e.printStackTrace();
+            context.sessionAttribute("formDto", e.getFormDto());
             context.redirect(context.path() + "?message=" + e.getMessage());
         });
 

@@ -66,7 +66,7 @@ public class ColaboradoresService {
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
     colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
-    this.validarDocumento(colaborador.getTipoDocumento(), dto.getNroDocumento());
+    this.validarDocumento(colaborador.getTipoDocumento(), dto.getNroDocumento(), dto);
     colaborador.setDocumento(dto.getNroDocumento());
     colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
     TipoColaborador tipo = new TipoColaborador();
@@ -76,13 +76,13 @@ public class ColaboradoresService {
     colaborador.setFormCompletado(false);
 
     if (colaborador.getTipoColaborador().tenesFormaColaboracion("REGISTRO_PERSONA") && colaborador.getDireccion() == null) {
-      throw new NoTieneDireccionException(MensajeNoTieneDireccionFactory.generarMensaje());
+      throw new NoTieneDireccionException(MensajeNoTieneDireccionFactory.generarMensaje(), dto);
     }
 
     if (dto.getFechaNacimiento() != null){
       colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
       if(colaborador.getFechaNacimiento().isAfter(LocalDate.now()))
-        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
     }
 
     colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
@@ -135,10 +135,10 @@ public class ColaboradoresService {
     if (user.isPresent()) throw new EmailDuplicadoException(MensajeEmailDuplicadoFactory.generarMensaje());
   }
 
-  private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento) {
+  private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento, PersonaHumanaDto dto) {
     if (!DniHelper.esValido(nroDocumento))
-      throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
+      throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
     Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(tipoDocumento, nroDocumento);
-    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
+    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
   }
 }
