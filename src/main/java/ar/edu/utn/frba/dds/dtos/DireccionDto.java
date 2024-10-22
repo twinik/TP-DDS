@@ -20,7 +20,7 @@ public class DireccionDto {
         .builder()
         .calle(context.formParam("calle"))
         .altura(Integer.parseInt(context.formParam("altura")))
-        .piso( (context.formParam("piso") != null && !context.formParam("pisio").isBlank()) ? Integer.parseInt(context.formParam("piso")) : null)
+        .piso( (context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.parseInt(context.formParam("piso")) : null)
         .codigoPostal(context.formParam("codigoPostal"))
         .build();
   }
