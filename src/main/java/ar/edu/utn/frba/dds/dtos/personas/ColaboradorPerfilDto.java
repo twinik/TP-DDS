@@ -6,6 +6,8 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.javalin.http.Context;
 import java.time.LocalDate;
 import java.util.List;
@@ -24,7 +26,7 @@ public class ColaboradorPerfilDto {
   private String apellido;
   private String email;
   private String documento;
-  private TipoDocumento tipoDocumento;
+  private String tipoDocumento;
   private String fechaNacimiento;
   private DireccionDto direccionDto;
   private String rubro;
@@ -44,7 +46,7 @@ public class ColaboradorPerfilDto {
           .apellido(context.formParam("apellido"))
           .email(context.formParam("email"))
           .documento(context.formParam("documento"))
-          .tipoDocumento(TipoDocumento.valueOf(context.formParam("tipoDocumento")))
+          .tipoDocumento(context.formParam("tipoDocumento"))
           .fechaNacimiento(context.formParam("fechaNacimiento"))
           .direccionDto(DireccionDto.of(context))
           .build();
@@ -69,7 +71,7 @@ public class ColaboradorPerfilDto {
         .apellido(colaborador.getApellido())
         .email(colaborador.email())
         .documento(colaborador.getDocumento())
-        .tipoDocumento(colaborador.getTipoDocumento())
+        .tipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).mapearAstring(colaborador.getTipoDocumento()))
         .fechaNacimiento(String.valueOf(colaborador.getFechaNacimiento()))
         .direccionDto(DireccionDto.fromDireccion(colaborador.getDireccion()))
         .rubro(colaborador.getRubro())
