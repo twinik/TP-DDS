@@ -165,7 +165,7 @@
             const periodicaSi = document.getElementById('periodica').checked;
             const frecuencia = periodicaSi ? document.getElementById('frecuencia').options[document.getElementById('frecuencia').selectedIndex].text : null;
 
-            let mensaje = `¿Deseas donar $${monto}`;
+            let mensaje = `¿Deseas registrar una donación de dinero de $${monto}`;
             if (frecuencia) {
                 mensaje += ` de forma ${frecuencia}`;
             }
