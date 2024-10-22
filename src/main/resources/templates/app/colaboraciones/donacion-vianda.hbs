@@ -41,6 +41,7 @@
             <div id="viandas-container">
                 <!-- Contenedor donde se clonan las viandas -->
                 <div class="vianda">
+                    <strong>Vianda 1</strong>
                     <label
                             for="descripcion-vianda-1"
                             class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -102,7 +103,8 @@
 
             <input type="hidden" name="cant-viandas" id="cantidad-viandas" value="1">
 
-            <button type="button" id="add-vianda-btn" class="mt-2 mb-5 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-800">
+            <button type="button" id="add-vianda-btn"
+                    class="mt-2 mb-5 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-800">
                 Agregar otra vianda
             </button>
 
@@ -128,7 +130,7 @@
                 </div>
             </div>
             <div class="flex flex-row">
-						<span
+      <span
                                 class="mr-1 text-left block mb-2 text-sm dark:text-white"
                         >Heladera seleccionada: </span
                         ><span
@@ -172,28 +174,25 @@
             const viandaCount = viandasContainer.getElementsByClassName('vianda').length;
             const newVianda = viandasContainer.firstElementChild.cloneNode(true);
 
-            // Actualizamos los IDs y nombres de los campos para que sean únicos
-            newVianda.querySelectorAll('input').forEach(function(input) {
+            newVianda.querySelectorAll('input').forEach(function (input) {
                 const newId = input.id.split('-')[0] + '-' + (viandaCount + 1);
                 const newName = input.name.split('-')[0] + '-' + (viandaCount + 1);
                 input.id = newId;
-                input.value = ''; // Limpiar el valor del campo
+                input.value = '';
                 input.name = newName;
             });
 
-            newVianda.querySelectorAll('label').forEach(function(label) {
+            newVianda.querySelectorAll('label').forEach(function (label) {
                 const newFor = label.getAttribute('for').split('-')[0] + '-' + (viandaCount + 1);
                 label.setAttribute('for', newFor);
             });
 
-
+            newVianda.querySelector('strong').textContent = `Vianda ${viandaCount + 1}`;
 
             viandasContainer.appendChild(newVianda);
-            document.getElementById('cantidad-viandas').value = viandaCount+1;
+            document.getElementById('cantidad-viandas').value = viandaCount + 1;
 
-
-            newVianda.querySelectorAll('[datepicker]').forEach(function(dateInput) {
-                // Reemplaza este bloque con el código para inicializar tu datepicker
+            newVianda.querySelectorAll('[datepicker]').forEach(function (dateInput) {
                 new Datepicker(dateInput, {
                     autohide: true,
                     format: 'dd/mm/yyyy'
@@ -203,7 +202,7 @@
     </script>
     <script src="/js/form-handler.js"></script>
     <script>
-        handleFormSubmit('form-vianda','enviar-vianda');
+        handleFormSubmit('form-vianda', 'enviar-vianda');
     </script>
 {{/partial}}
 

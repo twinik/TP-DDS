@@ -163,7 +163,7 @@
     <script>
         function confirmarDonacion(monto) {
             const periodicaSi = document.getElementById('periodica').checked;
-            const frecuencia = periodicaSi ? document.getElementById('frecuencia').options[document.getElementById('frecuencia').selectedIndex].text : null;
+            const frecuencia = periodicaSi ? document.getElementById('frecuencia').options[document.getElementById('frecuencia').selectedIndex].text.toLowerCase() : null;
 
             let mensaje = `¿Deseas registrar una donación de dinero de $${monto}`;
             if (frecuencia) {
