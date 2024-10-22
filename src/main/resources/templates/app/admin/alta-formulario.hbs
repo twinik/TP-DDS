@@ -2,7 +2,7 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Crear formulario</h1>
 
-        <form class="content-center max-w-md mx-auto" method="POST">
+        <form  id="form-form" class="content-center max-w-md mx-auto" method="POST">
             <input type="hidden" id="cantidad-campos" name="cantidad-campos" value="1"/>
             <div id="camposContainer">
                 <strong>Campo 1</strong>
@@ -59,7 +59,8 @@
                 Agregar campo +
             </button>
 
-            <button type="submit"
+            <button id="enviar-formulario"
+                    type="submit"
                     class="mt-6 content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12">
                 Crear formulario
             </button>
@@ -71,6 +72,10 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="/js/input-campos.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-form', 'enviar-formulario');
+    </script>
 {{/partial}}
 
 {{> templates/app/base }}

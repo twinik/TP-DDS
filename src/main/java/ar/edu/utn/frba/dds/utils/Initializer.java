@@ -275,13 +275,4 @@ public class Initializer {
   public static void main(String[] args) {
     Initializer.init();
   }
-
-  public static Optional<Colaborador> dameOng() {
-    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter(c -> c.getRazonSocial() != null).findFirst();
-  }
-
-  public static Optional<Colaborador> dameColaborador() {
-    return ServiceLocator.get(IColaboradoresRepository.class).buscarTodos().stream().filter(c -> c.getRazonSocial() == null).findFirst();
-  }
-
 }

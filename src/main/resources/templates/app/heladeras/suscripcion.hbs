@@ -18,6 +18,7 @@
         >
             <!--Cantidad de viandas restantes-->
             <form
+                    id="form-restantes"
                     method="POST"
                     class="rounded-xl border-2 shadow-lg p-5 flex flex-col items-center"
             >
@@ -52,6 +53,7 @@
                 <input type="hidden" name="heladera-id" value="{{heladera.id}}"/>
 
                 <button
+                        id="enviar-restantes"
                         type="submit"
                         class="content-center max-w-md mx-auto mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                 >
@@ -62,6 +64,7 @@
 
             <!--Cantidad de viandas para llenar la heladera-->
             <form
+                    id="form-faltantes"
                     method="POST"
                     class="rounded-xl border-2 shadow-lg p-5 flex flex-col items-center"
             >
@@ -95,6 +98,7 @@
                 <input type="hidden" name="heladera-id" value="{{heladera.id}}"/>
 
                 <button
+                        id="enviar-faltantes"
                         type="submit"
                         class="content-center max-w-md mx-auto mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                 >
@@ -104,7 +108,7 @@
             <!--Cantidad de viandas par llenar la heladera-->
 
             <!--Heladera sufre desperfecto-->
-            <form
+            <form id="form-desperfecto"
                     method="POST"
                     class="rounded-xl border-2 shadow-lg p-5 flex flex-col items-center"
             >
@@ -126,6 +130,7 @@
                 <input type="hidden" name="heladera-id" value="{{heladera.id}}"/>
 
                 <button
+                        id="enviar-desperfecto"
                         type="submit"
                         class="content-center max-w-md mx-auto mt-auto px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                 >
@@ -135,6 +140,15 @@
             <!--Heladera sufre desperfecto-->
         </div>
     </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-desperfecto','enviar-desperfecto');
+        handleFormSubmit('form-faltantes','enviar-faltantes')
+        handleFormSubmit('form-restantes','enviar-restantes')
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}

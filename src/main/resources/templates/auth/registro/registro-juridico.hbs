@@ -16,7 +16,7 @@
                        class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 border border-red-400">{{message}}</p>
                 {{/if}}
             </div>
-            <form method="post" action="" class="mt-8 space-y-6">
+            <form id="form-juridico" method="post" action="" class="mt-8 space-y-6">
                 <div class="space-y-4">
                     <div>
                         <label for="razon_social" class="block text-sm font-medium text-gray-300">Razón social</label>
@@ -33,7 +33,7 @@
                             Organización</label>
                         <select id="underline_select" name="tipoOrganizacion" required
                                 class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option selected disabled>Tipo de Organización</option>
+<!--                            <option selected disabled>Tipo de Organización</option>-->
                             {{#each tiposOrganizacion}}
                                 <option value="{{this.valor}}">{{this.valor}}</option>
                             {{/each}}
@@ -165,7 +165,7 @@
                     <input type="hidden" name="cantidad-contactos" id="cantidad-contactos" value="1">
                 </div>
 
-                <button type="submit"
+                <button id="enviar-juridico" type="submit"
                         class="w-full px-6 py-3 text-sm font-medium text-white botonFormularios rounded-lg hover:bg-blue-900 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
                     Registrarse
                 </button>
@@ -176,6 +176,10 @@
 
 {{#partial "scripts"}}
     <script src="/js/input-contactos.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-juridico', 'enviar-juridico');
+    </script>
 {{/partial}}
 
 {{> templates/auth/base }}

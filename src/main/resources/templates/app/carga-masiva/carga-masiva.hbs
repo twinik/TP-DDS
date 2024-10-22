@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="px-4 py-5 sm:p-6">
-                    <form action="/carga-masiva-colaboraciones" method="post" enctype="multipart/form-data">
+                    <form id="form-csv" action="/carga-masiva-colaboraciones" method="post" enctype="multipart/form-data">
                         <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                 id="file_input"
@@ -28,7 +28,8 @@
                                 required
                         >
                         <div class="mt-5">
-                            <button type="submit"
+                            <button id="enviar-csv"
+                                    type="submit"
                                     class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                 Confirmar carga
                             </button>
@@ -71,6 +72,10 @@
                 event.preventDefault(); // Detiene el envío del formulario
             }
         });
+    </script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-csv','enviar-csv');
     </script>
 {{/partial}}
 

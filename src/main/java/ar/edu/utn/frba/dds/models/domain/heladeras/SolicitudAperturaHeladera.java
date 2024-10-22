@@ -62,9 +62,9 @@ public class SolicitudAperturaHeladera extends EntidadPersistente {
     }
   }
 
-  public void agregarViandas(Vianda... viandas) {
-    this.viandas.agregarViandas(viandas);
-  }
+//  public void agregarViandas(Vianda... viandas) {
+//    this.viandas.agregarViandas(viandas);
+//  }
 
   public boolean esDonacionDeViandas() {
     return this.viandas != null && !this.viandas.getViandas().isEmpty();

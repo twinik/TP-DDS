@@ -14,13 +14,12 @@ public class SolicitudAperturaHeladeraService {
   private ISolicitudesAperturaHeladeraRepository solicitudesAperturaHeladeraRepository;
 
 
-  public void generarSolicitud(Vianda vianda) {
+  public void generarSolicitud(IngresoVianda ingreso) {
     SolicitudAperturaHeladera solicitudAperturaHeladera = new SolicitudAperturaHeladera();
-    solicitudAperturaHeladera.setColaborador(vianda.getColaborador());
-    solicitudAperturaHeladera.setHeladera(vianda.getHeladera());
+    solicitudAperturaHeladera.setColaborador(ingreso.getColaborador());
+    solicitudAperturaHeladera.setHeladera(ingreso.getHeladera());
     solicitudAperturaHeladera.setMotivo("apertura para ingresar una donacion");
-    solicitudAperturaHeladera.setViandas(new IngresoVianda(vianda.getFechaDonacion(), vianda.getColaborador(), vianda.getHeladera()));
-    solicitudAperturaHeladera.agregarViandas(vianda);
+    solicitudAperturaHeladera.setViandas(ingreso);
     solicitudAperturaHeladera.setTimestamp(LocalDateTime.now());
     this.publicarABroker(solicitudAperturaHeladera);
   }

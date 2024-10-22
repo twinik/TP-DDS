@@ -6,7 +6,7 @@
                 <p class="text-gray-300 mb-8 text-center">Para hacer efectivo tu registro en la plataforma, te pedimos
                     por favor que contestes las siguientes preguntas.</p>
 
-                <form method="POST" id="myForm" class="space-y-6">
+                <form id="form-rta-form" method="POST" id="myForm" class="space-y-6">
                     {{#each formulario.campos}}
                         <div class="space-y-2">
                             <label for="campo_{{this.id}}" class="block text-sm font-medium text-gray-200">
@@ -89,7 +89,7 @@
                             {{/switch}}
                         </div>
                     {{/each}}
-                    <button type="submit"
+                    <button id="enviar-rta-form" type="submit"
                             class="w-full px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300 mt-6">
                         Enviar Respuesta
                     </button>
@@ -118,6 +118,10 @@
                 {{/if}}
             {{/each}}
         };
+    </script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-rta-form', 'enviar-rta-form');
     </script>
 {{/partial}}
 
