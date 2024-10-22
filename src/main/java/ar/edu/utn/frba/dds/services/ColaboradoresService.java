@@ -60,11 +60,23 @@ public class ColaboradoresService {
 
   public void actualizar(ColaboradorPerfilDto dto) {
     Colaborador colaborador = this.obtenerColaborador(dto.getId());
-
-    // TODO Actualizar colaborador con datos del dto
-
+    colaborador = this.actualizarFromDto(colaborador, dto);
     this.colaboradoresRepository.actualizar(colaborador);
     this.colaboradoresRepository.refresh(colaborador);
+  }
+
+  public Colaborador actualizarFromDto(Colaborador colaborador, ColaboradorPerfilDto dto) {
+    colaborador.setNombre(dto.getNombre());
+    colaborador.setApellido(dto.getApellido());
+    // TODO Email
+    colaborador.setTipoDocumento(dto.getTipoDocumento());
+    colaborador.setDocumento(dto.getDocumento());
+    colaborador.setDireccion(dto.getDireccionDto() != null ? new Direccion(dto.getDireccionDto().getCalle(), dto.getDireccionDto().getAltura(), dto.getDireccionDto().getPiso(), dto.getDireccionDto().getCodigoPostal()) : null);
+    colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+    colaborador.setRubro(dto.getRubro());
+    colaborador.setRazonSocial(dto.getRazonSocial());
+    colaborador.setTipoPersonaJuridica(dto.getTipoPersonaJuridica());
+    return colaborador;
   }
 
   public void refresh(Colaborador c) {
