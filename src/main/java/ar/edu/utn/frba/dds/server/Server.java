@@ -91,6 +91,33 @@ public class Server {
           return resultado;
         });
 
+        // Helper para formatear fechas
+        handlebars.registerHelper("formatFecha", (fecha, options) -> {
+          if (fecha == null || fecha.toString().isEmpty()) {
+            return "";
+          }
+
+          try {
+            // Separar la fecha en partes: yyyy, MM, dd
+            String[] partes = fecha.toString().split("-");
+
+            if (partes.length == 3) {
+              String año = partes[0];
+              String mes = partes[1];
+              String dia = partes[2];
+
+              // Devolver en formato dd/MM/yyyy
+              return dia + "/" + mes + "/" + año;
+            } else {
+              return fecha.toString();  // Si el formato no es correcto, devolverlo tal cual
+            }
+
+          } catch (Exception e) {
+            // En caso de error, devolver la fecha original
+            return fecha.toString();
+          }
+        });
+
         handlebars.registerHelper("switch", (value, options) -> {
           options.context.data("switchValue", value);
           return options.fn();

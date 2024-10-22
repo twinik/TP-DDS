@@ -19,13 +19,16 @@ public class Router {
     app.get("/login", ServiceLocator.get(LoginController.class)::index);
     app.post("/login", ServiceLocator.get(LoginController.class)::handleLogin);
     app.get("/logout", ServiceLocator.get(LogoutController.class)::handleLogout);
-    app.get("/perfil", ServiceLocator.get(PerfilController.class)::index);
 
     // REGISTRO
     app.get("/registro", ServiceLocator.get(RegistroController.class)::index);
     app.get("/registro/{tipo-persona}", ServiceLocator.get(RegistroController.class)::create);
     app.post("/registro/persona-humana", ServiceLocator.get(RegistroController.class)::handleRegistroHumano);
     app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
+
+    // PERFIL
+    app.get("/perfil", ServiceLocator.get(PerfilController.class)::index);
+    app.post("/perfil/{id}", ServiceLocator.get(PerfilController.class)::update);
 
     // ALTA ADMIN
     app.get("/admin/tecnicos/nuevo", ServiceLocator.get(TecnicosController.class)::create);

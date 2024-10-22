@@ -1,23 +1,44 @@
 package ar.edu.utn.frba.dds.dtos;
 
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
+import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeDirIncompletaFactory;
+import io.javalin.http.Context;
 import lombok.Builder;
 import lombok.Getter;
 
 @Builder
 @Getter
 public class DireccionDto {
-    private String calle;
-    private Integer numero;
-    private Integer piso;
-    private String codigoPostal;
+  private String calle;
+  private Integer altura;
+  private Integer piso;
+  private String codigoPostal;
 
-    public boolean estanCamposLlenos() {
+  public static DireccionDto of(Context context) {
+    return DireccionDto
+        .builder()
+        .calle(context.formParam("calle"))
+        .altura(Integer.parseInt(context.formParam("numero")))
+        .piso(Integer.parseInt(context.formParam("piso")))
+        .codigoPostal(context.formParam("codigoPostal"))
+        .build();
+  }
 
-        if (this.calle == null || this.numero == null || this.codigoPostal == null) {
-            throw new FormIncompletoException(MensajeDirIncompletaFactory.generarMensaje());
-        }
-        return true;
+  public static DireccionDto fromDireccion(Direccion direccion) {
+    return DireccionDto
+        .builder()
+        .calle(direccion.getCalle())
+        .altura(direccion.getAltura())
+        .piso(direccion.getPiso())
+        .codigoPostal(direccion.getCodigoPostal())
+        .build();
+  }
+
+  public boolean estanCamposLlenos() {
+    if (this.calle == null || this.altura == null || this.codigoPostal == null) {
+      throw new FormIncompletoException(MensajeDirIncompletaFactory.generarMensaje());
     }
+    return true;
+  }
 }

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.services;
 
+import ar.edu.utn.frba.dds.dtos.personas.ColaboradorPerfilDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaHumanaDto;
 import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
@@ -54,6 +55,13 @@ public class ColaboradoresService {
 
   public void actualizar(Colaborador colaborador) {
     this.colaboradoresRepository.actualizar(colaborador);
+    this.colaboradoresRepository.refresh(colaborador);
+  }
+
+  public void actualizar(ColaboradorPerfilDto dto) {
+    Colaborador colaborador = this.obtenerColaborador(dto.getId());
+    this.colaboradoresRepository.actualizar(colaborador);
+    this.colaboradoresRepository.refresh(colaborador);
   }
 
   public void refresh(Colaborador c) {
@@ -68,7 +76,7 @@ public class ColaboradoresService {
     colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
     this.validarDocumento(colaborador.getTipoDocumento(), dto.getNroDocumento());
     colaborador.setDocumento(dto.getNroDocumento());
-    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
+    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
     TipoColaborador tipo = new TipoColaborador();
     tipo.setTipo(TipoPersona.PERSONA_HUMANA);
     tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
@@ -79,9 +87,9 @@ public class ColaboradoresService {
       throw new NoTieneDireccionException(MensajeNoTieneDireccionFactory.generarMensaje());
     }
 
-    if (dto.getFechaNacimiento() != null){
+    if (dto.getFechaNacimiento() != null) {
       colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
-      if(colaborador.getFechaNacimiento().isAfter(LocalDate.now()))
+      if (colaborador.getFechaNacimiento().isAfter(LocalDate.now()))
         throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
     }
 
@@ -104,7 +112,7 @@ public class ColaboradoresService {
     colaborador.setRazonSocial(dto.getRazonSocial());
     colaborador.setTipoPersonaJuridica(TipoPersonaJuridica.valueOf(dto.getTipoOrganizacion()));
     colaborador.setRubro(dto.getRubro());
-    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getNumero(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
+    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
     TipoColaborador tipo = new TipoColaborador();
     tipo.setTipo(TipoPersona.PERSONA_JURIDICA);
     tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));

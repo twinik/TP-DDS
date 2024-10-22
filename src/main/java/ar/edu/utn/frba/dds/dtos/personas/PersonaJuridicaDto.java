@@ -29,7 +29,7 @@ public class PersonaJuridicaDto {
                         context.formParam("piso") != null && !context.formParam("piso").isBlank())
                         ? DireccionDto.builder()
                         .calle((context.formParam("calle") != null && !context.formParam("calle").isBlank()) ? context.formParam("calle") : null)
-                        .numero((context.formParam("altura") != null && !context.formParam("altura").isBlank()) ? Integer.parseInt(context.formParam("altura")) : null)
+                        .altura((context.formParam("altura") != null && !context.formParam("altura").isBlank()) ? Integer.parseInt(context.formParam("altura")) : null)
                         .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.valueOf(context.formParam("piso")) : null)
                         .codigoPostal((context.formParam("cp") != null && !context.formParam("cp").isBlank()) ? context.formParam("cp") : null)
                         .build()
