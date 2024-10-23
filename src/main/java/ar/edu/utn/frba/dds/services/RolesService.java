@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.services;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoColaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Rol;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.IRolesRepository;
 import ar.edu.utn.frba.dds.utils.PermisosHelper;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,11 @@ public class RolesService {
     this.rolesRepository.guardar(r);
     return r;
   }
+
+  public void agregarRolPara(Usuario u, Rol r){
+    this.rolesRepository.guardar(r);
+    u.agregarRoles(r);
+  }
+
 
 }

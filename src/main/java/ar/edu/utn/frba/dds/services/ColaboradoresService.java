@@ -12,9 +12,12 @@ import ar.edu.utn.frba.dds.exceptions.RegistroFailedException;
 import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.helpers.DniHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoColaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Rol;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
 import ar.edu.utn.frba.dds.models.domain.excepciones.NoTieneDireccionException;
@@ -26,8 +29,10 @@ import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.utils.PasswordHasher;
+import ar.edu.utn.frba.dds.utils.PermisosHelper;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -68,7 +73,7 @@ public class ColaboradoresService {
   public Colaborador actualizarFromDto(Colaborador colaborador, ColaboradorPerfilDto dto) {
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
-    // TODO Email
+    colaborador.getUsuario().setEmail(dto.getEmail());
     colaborador.setTipoDocumento(dto.getTipoDocumento() != null ? ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()) : colaborador.getTipoDocumento());
     colaborador.setDocumento(dto.getDocumento());
     colaborador.setDireccion(dto.getDireccionDto() != null ? new Direccion(dto.getDireccionDto().getCalle(), dto.getDireccionDto().getAltura(), dto.getDireccionDto().getPiso(), dto.getDireccionDto().getCodigoPostal()) : null);
@@ -76,92 +81,107 @@ public class ColaboradoresService {
     colaborador.setRubro(dto.getRubro());
     colaborador.setRazonSocial(dto.getRazonSocial());
     colaborador.setTipoPersonaJuridica(dto.getTipoPersonaJuridica());
+    List<FormaColaboracion> posiblesNuevasFormas = this.formaColaboracionService.fromDtos(dto.getFormaColaboracionInput());
+
+    if (!posiblesNuevasFormas.isEmpty()) {
+      posiblesNuevasFormas.forEach(forma -> {
+        colaborador.getTipoColaborador().agregarFormasColaboracion(forma);
+
+        if (colaborador.getTipoColaborador().tenesFormaColaboracion("REGISTRO_PERSONA") && colaborador.getDireccion() == null)
+          throw new NoTieneDireccionException(MensajeNoTieneDireccionFactory.generarMensaje(),null);
+
+        this.rolesService.agregarRolPara(colaborador.getUsuario(),Rol.of(PermisosHelper.getInstance().
+            buscarPorNombres(PermisosHelper.getInstance().fromFormaColaboracion(forma).toArray(new String[0]))));
+      });
+
+
+    }
     return colaborador;
+}
+
+public void refresh(Colaborador c) {
+  this.colaboradoresRepository.refresh(c);
+}
+
+public String registrar(PersonaHumanaDto dto) {
+  Colaborador colaborador = new Colaborador();
+  this.validarSiYaExisteMail(dto.getUsuarioDto());
+  colaborador.setNombre(dto.getNombre());
+  colaborador.setApellido(dto.getApellido());
+  colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
+  this.validarDocumento(colaborador.getTipoDocumento(), dto.getNroDocumento(), dto);
+  colaborador.setDocumento(dto.getNroDocumento());
+  colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
+  TipoColaborador tipo = new TipoColaborador();
+  tipo.setTipo(TipoPersona.PERSONA_HUMANA);
+  tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
+  colaborador.setTipoColaborador(tipo);
+  colaborador.setFormCompletado(false);
+
+  if (colaborador.getTipoColaborador().tenesFormaColaboracion("REGISTRO_PERSONA") && colaborador.getDireccion() == null) {
+    throw new NoTieneDireccionException(MensajeNoTieneDireccionFactory.generarMensaje(), dto);
   }
 
-  public void refresh(Colaborador c) {
-    this.colaboradoresRepository.refresh(c);
+  if (dto.getFechaNacimiento() != null) {
+    colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+    if (colaborador.getFechaNacimiento().isAfter(LocalDate.now()))
+      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
   }
 
-  public String registrar(PersonaHumanaDto dto) {
-    Colaborador colaborador = new Colaborador();
-    this.validarSiYaExisteMail(dto.getUsuarioDto());
-    colaborador.setNombre(dto.getNombre());
-    colaborador.setApellido(dto.getApellido());
-    colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
-    this.validarDocumento(colaborador.getTipoDocumento(), dto.getNroDocumento(), dto);
-    colaborador.setDocumento(dto.getNroDocumento());
-    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
-    TipoColaborador tipo = new TipoColaborador();
-    tipo.setTipo(TipoPersona.PERSONA_HUMANA);
-    tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
-    colaborador.setTipoColaborador(tipo);
-    colaborador.setFormCompletado(false);
-
-    if (colaborador.getTipoColaborador().tenesFormaColaboracion("REGISTRO_PERSONA") && colaborador.getDireccion() == null) {
-      throw new NoTieneDireccionException(MensajeNoTieneDireccionFactory.generarMensaje(), dto);
-    }
-
-    if (dto.getFechaNacimiento() != null) {
-      colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
-      if (colaborador.getFechaNacimiento().isAfter(LocalDate.now()))
-        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
-    }
-
-    colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
-    this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
-    this.colaboradoresRepository.guardar(colaborador);
-    try {
-      this.tarjetasService.asignarTarjetaColaborador(colaborador);
-    } catch (CodigoInvalidoException e) {
-      this.colaboradoresRepository.eliminar(colaborador);
-      throw e;
-    }
-
-    return colaborador.getId();
+  colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
+  this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
+  this.colaboradoresRepository.guardar(colaborador);
+  try {
+    this.tarjetasService.asignarTarjetaColaborador(colaborador);
+  } catch (CodigoInvalidoException e) {
+    this.colaboradoresRepository.eliminar(colaborador);
+    throw e;
   }
 
-  public void registrar(PersonaJuridicaDto dto) {
-    Colaborador colaborador = new Colaborador();
-    this.validarSiYaExisteMail(dto.getUsuarioDto());
-    colaborador.setRazonSocial(dto.getRazonSocial());
-    colaborador.setTipoPersonaJuridica(TipoPersonaJuridica.valueOf(dto.getTipoOrganizacion()));
-    colaborador.setRubro(dto.getRubro());
-    colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
-    TipoColaborador tipo = new TipoColaborador();
-    tipo.setTipo(TipoPersona.PERSONA_JURIDICA);
-    tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
-    colaborador.setTipoColaborador(tipo);
-    colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
-    colaborador.setFormCompletado(true);
-    this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
-    this.colaboradoresRepository.guardar(colaborador);
-  }
+  return colaborador.getId();
+}
 
-  private void darleNuevoUsuarioA(UsuarioDto dto, Colaborador colaborador) {
-    Usuario user = new Usuario(dto.getEmail(), PasswordHasher.hashPassword(dto.getClave()));
-    user.agregarRoles(this.rolesService.obtnerRolPara(colaborador.getTipoColaborador()));
-    colaborador.setUsuario(user);
-  }
+public void registrar(PersonaJuridicaDto dto) {
+  Colaborador colaborador = new Colaborador();
+  this.validarSiYaExisteMail(dto.getUsuarioDto());
+  colaborador.setRazonSocial(dto.getRazonSocial());
+  colaborador.setTipoPersonaJuridica(TipoPersonaJuridica.valueOf(dto.getTipoOrganizacion()));
+  colaborador.setRubro(dto.getRubro());
+  colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
+  TipoColaborador tipo = new TipoColaborador();
+  tipo.setTipo(TipoPersona.PERSONA_JURIDICA);
+  tipo.agregarFormasColaboracion(this.formaColaboracionService.fromDtos(dto.getFormasColaboracion()));
+  colaborador.setTipoColaborador(tipo);
+  colaborador.agregarMedioContacto(this.medioContactoService.fromDtos(dto.getMediosDeContacto()));
+  colaborador.setFormCompletado(true);
+  this.darleNuevoUsuarioA(dto.getUsuarioDto(), colaborador);
+  this.colaboradoresRepository.guardar(colaborador);
+}
 
-  public void marcarFormCompletado(String idColaborador) {
-    Optional<Colaborador> c = this.colaboradoresRepository.buscar(idColaborador);
-    if (c.isEmpty())
-      throw new RegistroFailedException(MensajeRecursoInexistenteFactory.generarMensaje("Colaborador", idColaborador));
-    c.get().setFormCompletado(true);
-    this.colaboradoresRepository.actualizar(c.get());
-    // this.colaboradoresRepository.marcarFormCompletado(idColaborador);
-  }
+private void darleNuevoUsuarioA(UsuarioDto dto, Colaborador colaborador) {
+  Usuario user = new Usuario(dto.getEmail(), PasswordHasher.hashPassword(dto.getClave()));
+  user.agregarRoles(this.rolesService.obtnerRolPara(colaborador.getTipoColaborador()));
+  colaborador.setUsuario(user);
+}
 
-  private void validarSiYaExisteMail(UsuarioDto dto) {
-    Optional<Usuario> user = this.usuariosRepository.buscarPorEmail(dto.getEmail());
-    if (user.isPresent()) throw new EmailDuplicadoException(MensajeEmailDuplicadoFactory.generarMensaje());
-  }
+public void marcarFormCompletado(String idColaborador) {
+  Optional<Colaborador> c = this.colaboradoresRepository.buscar(idColaborador);
+  if (c.isEmpty())
+    throw new RegistroFailedException(MensajeRecursoInexistenteFactory.generarMensaje("Colaborador", idColaborador));
+  c.get().setFormCompletado(true);
+  this.colaboradoresRepository.actualizar(c.get());
+  // this.colaboradoresRepository.marcarFormCompletado(idColaborador);
+}
 
-  private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento, PersonaHumanaDto dto) {
-    if (!DniHelper.esValido(nroDocumento))
-      throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
-    Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(tipoDocumento, nroDocumento);
-    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
-  }
+private void validarSiYaExisteMail(UsuarioDto dto) {
+  Optional<Usuario> user = this.usuariosRepository.buscarPorEmail(dto.getEmail());
+  if (user.isPresent()) throw new EmailDuplicadoException(MensajeEmailDuplicadoFactory.generarMensaje());
+}
+
+private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento, PersonaHumanaDto dto) {
+  if (!DniHelper.esValido(nroDocumento))
+    throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
+  Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(tipoDocumento, nroDocumento);
+  if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
+}
 }

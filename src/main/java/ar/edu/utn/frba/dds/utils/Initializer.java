@@ -113,8 +113,13 @@ public class Initializer {
     TipoColaborador tipo = new TipoColaborador(TipoPersona.PERSONA_HUMANA, new ArrayList<>());
     tipo.getFormasPosiblesColaboracion().add(donacionDinero);
     tipo.getFormasPosiblesColaboracion().add(donacionVianda);
+   tipo.getFormasPosiblesColaboracion().add(registroPersona);
+   tipo.getFormasPosiblesColaboracion().add(redistribucionVianda);
 
     TipoColaborador tipo2 = new TipoColaborador(TipoPersona.PERSONA_JURIDICA, new ArrayList<>());
+    tipo2.getFormasPosiblesColaboracion().add(colocacionHeladeras);
+    tipo2.getFormasPosiblesColaboracion().add(donacionDinero);
+    tipo2.getFormasPosiblesColaboracion().add(ofrecerProductos);
     TipoColaborador tipo3 = new TipoColaborador(TipoPersona.PERSONA_JURIDICA, new ArrayList<>());
 
     MedioDeContacto wsp = new MedioDeContacto(CanalContacto.WHATSAPP, "+5491132458865");

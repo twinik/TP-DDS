@@ -1,20 +1,16 @@
 package ar.edu.utn.frba.dds.dtos.personas;
 
 import ar.edu.utn.frba.dds.dtos.DireccionDto;
-import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraDto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
-import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
-import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.javalin.http.Context;
-import java.time.LocalDate;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,7 +31,8 @@ public class ColaboradorPerfilDto {
   private Float puntosGanados;
   private Boolean formCompletado;
   private List<MedioContactoDto> mediosContacto;
-  private List<FormaColaboracionDto> formaColaboracionDtos;
+  private List<FormaColaboracionOutputDto> formaColaboracionDtos;
+  private List<FormaColaboracionDto> formaColaboracionInput;
 
   public static ColaboradorPerfilDto of(Context context) {
     if (context.formParam("nombre") != null) {
@@ -47,8 +44,9 @@ public class ColaboradorPerfilDto {
           .email(context.formParam("email"))
           .documento(context.formParam("documento"))
           .tipoDocumento(context.formParam("tipoDocumento"))
-          .fechaNacimiento(context.formParam("fechaNacimiento"))
+          .fechaNacimiento((context.formParam("fechaNacimiento") != null  &&  !context.formParam("fechaNacimiento").isBlank()) ?  context.formParam("fechaNacimiento") : null)
           .direccionDto(DireccionDto.of(context))
+          .formaColaboracionInput(FormaColaboracionDto.of(context))
           .build();
     } else {
       return ColaboradorPerfilDto
@@ -59,6 +57,7 @@ public class ColaboradorPerfilDto {
           .rubro(context.formParam("rubro"))
           .razonSocial(context.formParam("razonSocial"))
           .tipoPersonaJuridica(TipoPersonaJuridica.valueOf(context.formParam("tipoPersonaJuridica")))
+          .formaColaboracionInput(FormaColaboracionDto.of(context))
           .build();
     }
   }
@@ -69,7 +68,7 @@ public class ColaboradorPerfilDto {
         .id(colaborador.getId())
         .nombre(colaborador.getNombre())
         .apellido(colaborador.getApellido())
-        .email(colaborador.email())
+        .email(colaborador.getUsuario().getEmail())
         .documento(colaborador.getDocumento())
         .tipoDocumento(colaborador.getTipoDocumento() != null ? ServiceLocator.get(TipoDocumentoMapper.class).mapearAstring(colaborador.getTipoDocumento()) : null)
         .fechaNacimiento(String.valueOf(colaborador.getFechaNacimiento()))
@@ -79,6 +78,7 @@ public class ColaboradorPerfilDto {
         .tipoPersonaJuridica(colaborador.getTipoPersonaJuridica())
         .puntosGanados(colaborador.getPuntosGanados())
         .formCompletado(colaborador.getFormCompletado())
+        .formaColaboracionDtos(colaborador.getTipoColaborador().getFormasPosiblesColaboracion().stream().map(FormaColaboracionOutputDto::fromForma).toList())
         .build();
   }
 }

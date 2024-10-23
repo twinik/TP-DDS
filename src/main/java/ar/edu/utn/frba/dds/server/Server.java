@@ -123,6 +123,17 @@ public class Server {
           return options.fn();
         });
 
+
+        handlebars.registerHelper("eq", (value, options) -> {
+          Object second = options.param(0);
+          // Compara los dos valores
+          if (value != null && value.equals(second)) {
+            return options.fn();  // Ejecuta el bloque {{#if}}
+          } else {
+            return options.inverse();  // Ejecuta el bloque {{else}}
+          }
+        });
+
         handlebars.registerHelper("case", (value, options) -> {
           Object switchValue = options.context.data("switchValue");
 

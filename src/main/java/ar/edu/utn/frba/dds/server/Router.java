@@ -27,7 +27,8 @@ public class Router {
     app.post("/registro/persona-juridica", ServiceLocator.get(RegistroController.class)::handleRegistroJuridico);
 
     // PERFIL
-    app.get("/perfil", ServiceLocator.get(PerfilController.class)::index);
+    app.get("/perfil", ServiceLocator.get(PerfilController.class)::handlePerfil);
+    app.get("/perfil/{id}", ServiceLocator.get(PerfilController.class)::index);
     app.post("/perfil/{id}", ServiceLocator.get(PerfilController.class)::update);
 
     // ALTA ADMIN

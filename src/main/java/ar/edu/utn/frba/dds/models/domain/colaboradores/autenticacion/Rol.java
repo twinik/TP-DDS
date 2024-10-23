@@ -33,7 +33,7 @@ public class Rol extends EntidadPersistente {
 
   public static Rol of(Set<Permiso> p) {
     Rol r = new Rol();
-    r.setNombre("Rol from csv");
+    r.setNombre("Rol agregado");
     r.agregarPermisos(p.toArray(new Permiso[0]));
     return r;
   }

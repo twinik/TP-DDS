@@ -52,6 +52,7 @@ public class PermisosHelper {
         case "/heladeras/{id}/reportar-falla-tecnica" -> Set.of("colaborador-base");
         case "/heladeras/mis-heladeras" -> Set.of("colocar-heladeras");
         case "/perfil" -> Set.of("colaborador-base");
+        case "/perfil/{id}" -> Set.of("colaborador-base");
         default -> new HashSet<>();
       };
     } else if (ctx.method().name().equals("POST")) {
@@ -75,6 +76,7 @@ public class PermisosHelper {
         case "/canjear-producto/{id}" -> Set.of("colaborador-base");
         case "/heladeras/mis-heladeras" -> Set.of("colocar-heladeras");
         case "/heladeras/mis-heladeras/{id}" ->Set.of("colocar-heladeras");
+        case "/perfil/{id}" -> Set.of("colaborador-base");
         default -> new HashSet<>();
       };
     }
