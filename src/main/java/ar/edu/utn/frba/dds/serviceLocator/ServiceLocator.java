@@ -168,7 +168,7 @@ public class ServiceLocator {
       else if (clase.equals(HeladerasService.class))
         add(clase, new HeladerasService(get(IHeladerasRepository.class)));
       else if (clase.equals(IncidentesService.class))
-        add(clase, new IncidentesService(get(IIncidentesRepository.class),get(HeladerasService.class)));
+        add(clase, new IncidentesService(get(IIncidentesRepository.class), get(HeladerasService.class)));
       else if (clase.equals(MedioContactoService.class))
         add(clase, new MedioContactoService());
       else if (clase.equals(ModelosService.class))
@@ -244,7 +244,7 @@ public class ServiceLocator {
       else if (clase.equals(OfertasProductoController.class))
         add(clase, new OfertasProductoController(get(OfertasProductoService.class), get(FileUploadService.class)));
       else if (clase.equals(PerfilController.class))
-        add(clase, new PerfilController (get(OfertasProductoService.class), get(ColaboradoresService.class)));
+        add(clase, new PerfilController(get(OfertasProductoService.class), get(ColaboradoresService.class), get(FormaColaboracionService.class)));
       else if (clase.equals(RegistroController.class))
         add(clase, new RegistroController(get(UsuarioService.class), get(ColaboradoresService.class), get(FormaColaboracionService.class)));
       else if (clase.equals(RedistribucionViandaController.class))

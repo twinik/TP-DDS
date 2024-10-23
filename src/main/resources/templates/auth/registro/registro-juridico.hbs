@@ -22,9 +22,9 @@
                         <label for="razon_social" class="block text-sm font-medium text-gray-300">Razón social</label>
                         <input type="text" id="razon_social" name="razonSocial" required
                                class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                {{#if datosForm.razonSocial}}
-                                   value="{{datosForm.razonSocial}}"
-                                {{/if}}
+                            {{#if datosForm.razonSocial}}
+                               value="{{datosForm.razonSocial}}"
+                            {{/if}}
                                placeholder="Nombre">
                     </div>
 
@@ -33,7 +33,6 @@
                             Organización</label>
                         <select id="underline_select" name="tipoOrganizacion" required
                                 class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-<!--                            <option selected disabled>Tipo de Organización</option>-->
                             {{#each tiposOrganizacion}}
                                 <option value="{{this.valor}}">{{this.valor}}</option>
                             {{/each}}
@@ -44,9 +43,9 @@
                         <label for="rubro" class="block text-sm font-medium text-gray-300">Rubro</label>
                         <input type="text" id="rubro" name="rubro" required
                                class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                {{#if datosForm.rubro}}
-                                   value="{{datosForm.rubro}}"
-                                {{/if}}
+                            {{#if datosForm.rubro}}
+                               value="{{datosForm.rubro}}"
+                            {{/if}}
                                placeholder="Rubro">
                     </div>
 
@@ -54,9 +53,9 @@
                         <label for="floating_email" class="block text-sm font-medium text-gray-300">Email</label>
                         <input type="email" id="floating_email" name="email" required
                                class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                {{#if datosForm.usuarioDto.email}}
-                                   value="{{datosForm.usuarioDto.email}}"
-                                {{/if}}
+                            {{#if datosForm.usuarioDto.email}}
+                               value="{{datosForm.usuarioDto.email}}"
+                            {{/if}}
                                placeholder="Email">
                     </div>
 
@@ -83,9 +82,9 @@
                                 <label for="calle" class="block text-sm font-medium text-gray-300">Calle</label>
                                 <input type="text" id="calle" name="calle"
                                        class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        {{#if datosForm.direccion.calle}}
-                                           value="{{datosForm.direccion.calle}}"
-                                        {{/if}}
+                                    {{#if datosForm.direccion.calle}}
+                                       value="{{datosForm.direccion.calle}}"
+                                    {{/if}}
                                        placeholder="Calle">
                             </div>
                             <div>

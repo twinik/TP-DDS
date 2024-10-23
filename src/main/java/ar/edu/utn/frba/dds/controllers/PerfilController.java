@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.services.ColaboradoresService;
+import ar.edu.utn.frba.dds.services.FormaColaboracionService;
 import ar.edu.utn.frba.dds.services.OfertasProductoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -19,8 +20,9 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class PerfilController implements ICrudViewsHandler {
-  OfertasProductoService ofertasProductoService;
-  ColaboradoresService colaboradoresService;
+  private OfertasProductoService ofertasProductoService;
+  private ColaboradoresService colaboradoresService;
+  private FormaColaboracionService formaColaboracionService;
 
   @Override
   public void index(Context ctx) {
@@ -38,6 +40,7 @@ public class PerfilController implements ICrudViewsHandler {
     model.put("colaborador", colaboradorPerfilDto);
     model.put("tiposOrganizacion", Arrays.stream(TipoPersonaJuridica.values()).map(TipoOrganizacionDto::fromTipoOrganizacion).toList());
     model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
+    model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA"));
     model.put("canjes", canjes);
 
     ctx.render("/app/perfil.hbs", model);

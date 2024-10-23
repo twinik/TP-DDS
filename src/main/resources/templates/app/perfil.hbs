@@ -136,6 +136,22 @@
                 </div>
             </div>
 
+            <!-- FORMAS COLABORACION -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Formas de colaboración</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {{#each formasColaboracion}}
+                        <div class="flex items-center">
+                            <input id="forma-{{@index}}" name="forma-{{@index}}" type="checkbox"
+                                   value="{{this.id}}"
+                                   class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <label for="forma-{{@index}}"
+                                   class="ml-3 block text-sm font-medium text-gray-700">{{this.desc}}</label>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+
             <div class="mb-8">
                 <button type="button"
                         class="w-full py-3 px-4 boton-canje text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -178,7 +194,8 @@
                             <div class="p-4 text-white">
                                 <h5 class="text-xl font-semibold mb-2 line-clamp-2">{{this.nombreProducto}}</h5>
                                 <p class="text-sm mb-2">Canjeado el {{this.fechaCanje}} hs</p>
-                                <p class="text-lg font-bold text-white">Costo: {{formatPuntos this.puntosGastados}} puntos</p>
+                                <p class="text-lg font-bold text-white">Costo: {{formatPuntos this.puntosGastados}}
+                                    puntos</p>
                             </div>
                         </div>
                     {{/each}}
