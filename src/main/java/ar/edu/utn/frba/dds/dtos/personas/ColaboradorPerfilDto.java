@@ -71,7 +71,7 @@ public class ColaboradorPerfilDto {
         .apellido(colaborador.getApellido())
         .email(colaborador.email())
         .documento(colaborador.getDocumento())
-        .tipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).mapearAstring(colaborador.getTipoDocumento()))
+        .tipoDocumento(colaborador.getTipoDocumento() != null ? ServiceLocator.get(TipoDocumentoMapper.class).mapearAstring(colaborador.getTipoDocumento()) : null)
         .fechaNacimiento(String.valueOf(colaborador.getFechaNacimiento()))
         .direccionDto(DireccionDto.fromDireccion(colaborador.getDireccion()))
         .rubro(colaborador.getRubro())

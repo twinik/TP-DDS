@@ -66,11 +66,21 @@ public class PerfilController implements ICrudViewsHandler {
   @Override
   public void update(Context context) {
     ColaboradorPerfilDto colaboradorPerfilDto = ColaboradorPerfilDto.of(context);
-    colaboradoresService.actualizar(colaboradorPerfilDto);
-
     Map<String, Object> model = new HashMap<>();
-    model.put("message", "Perfil actualizado correctamente");
-    context.render("/app/success.hbs", model);
+    try {
+      colaboradoresService.actualizar(colaboradorPerfilDto);
+      if (colaboradorPerfilDto.getNombre() != null) {
+        context.sessionAttribute("username", colaboradorPerfilDto.getNombre() + " " + colaboradorPerfilDto.getApellido());
+      } else {
+        context.sessionAttribute("username", colaboradorPerfilDto.getRazonSocial());
+      }
+      context.sessionAttribute("email", colaboradorPerfilDto.getEmail());
+      model.put("message", "Perfil actualizado correctamente");
+      context.render("/app/success.hbs", model);
+    } catch (Exception e) {
+      model.put("message", "Error al actualizar el perfil");
+      context.render("/app/error.hbs", model);
+    }
   }
 
   @Override
