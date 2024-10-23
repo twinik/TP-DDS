@@ -1,7 +1,7 @@
 {{#partial "contenido"}}
     <div class="p-6 md:p-10 mx-auto max-w-4xl">
         <div class="mb-10 text-center">
-            <h1 class="text-4xl font-bold text-gray-800 mb-4">Mi perfil</h1>
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Perfil</h1>
         </div>
 
         {{#if message}}
@@ -11,137 +11,136 @@
         {{/if}}
 
         <form method="post" action="/perfil/{{colaborador.id}}" id="actualizar-perfil">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Mis datos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- PERSONA HUMANA -->
+                    {{#if colaborador.nombre}}
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" value="{{colaborador.nombre}}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                   required/>
+                        </div>
 
-                {{#if colaborador.nombre}}
+                        <div>
+                            <label for="apellido"
+                                   class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+                            <input type="text" id="apellido" name="apellido" value="{{colaborador.apellido}}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                   required/>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" id="email" name="email" value="{{colaborador.email}}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                   required/>
+                        </div>
+
+                        <div>
+                            <label for="documento"
+                                   class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
+                            <input type="text" id="documento" name="documento" value="{{colaborador.documento}}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                   required/>
+                        </div>
+
+                        <div>
+                            <label for="tipoDocumento" class="block text-sm font-medium text-gray-700 mb-1">Tipo de
+                                Documento</label>
+                            <select id="tipoDocumento" name="tipoDocumento"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <option selected
+                                        value="{{colaborador.tipoDocumento}}">{{colaborador.tipoDocumento}}</option>
+                                {{#each tiposDocumento}}
+                                    <option value="{{this.valor}}">{{this.descripcion}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="default-datepicker" class="block text-sm font-medium text-gray-700 mb-1">Fecha
+                                de nacimiento</label>
+                            <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy"
+                                   id="default-datepicker" type="text" name="fechaNacimiento"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="Fecha de nacimiento"
+                                   value="{{formatFecha colaborador.fechaNacimiento}}"/>
+                        </div>
+                    {{/if}}
+
+                    <!-- PERSONA JURÍDICA -->
+                    {{#if colaborador.razonSocial}}
+                        <div>
+                            <label for="razonSocial" class="block text-sm font-medium text-gray-700 mb-1">Razón
+                                Social</label>
+                            <input type="text" id="razonSocial" name="razonSocial" value="{{colaborador.razonSocial}}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"/>
+                        </div>
+
+                        <div>
+                            <label for="rubro" class="block text-sm font-medium text-gray-700 mb-1">Rubro</label>
+                            <input type="text" id="rubro" name="rubro" value="{{colaborador.rubro}}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"/>
+                        </div>
+
+                        <div>
+                            <label for="underline_select" class="block text-sm font-medium text-gray-700 mb-1">Tipo
+                                de organización</label>
+                            <select id="underline_select" name="tipoPersonaJuridica" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <option selected
+                                        value="{{colaborador.tipoPersonaJuridica}}">{{colaborador.tipoPersonaJuridica}}</option>
+                                {{#each tiposOrganizacion}}
+                                    <option value="{{this.valor}}">{{this.valor}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            <!-- DIRECCION -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Dirección</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" value="{{colaborador.nombre}}"
+                        <label for="calle" class="block text-sm font-medium text-gray-700 mb-1">Calle</label>
+                        <input type="text" id="calle" name="calle" value="{{colaborador.direccionDto.calle}}"
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                                required/>
                     </div>
-                {{/if}}
 
-                {{#if colaborador.apellido}}
                     <div>
-                        <label for="apellido" class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
-                        <input type="text" id="apellido" name="apellido" value="{{colaborador.apellido}}"
+                        <label for="altura" class="block text-sm font-medium text-gray-700 mb-1">Altura</label>
+                        <input type="number" id="altura" name="altura" value="{{colaborador.direccionDto.altura}}"
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                                required/>
                     </div>
-                {{/if}}
 
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="email" name="email" value="{{colaborador.email}}"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                           required/>
-                </div>
-
-                {{#if colaborador.documento}}
                     <div>
-                        <label for="documento" class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
-                        <input type="text" id="documento" name="documento" value="{{colaborador.documento}}"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                               required/>
-                    </div>
-                {{/if}}
-
-                {{#if colaborador.tipoDocumento}}
-                    <div>
-                        <label for="tipoDocumento" class="block text-sm font-medium text-gray-700 mb-1">Tipo de
-                            Documento</label>
-                        <select id="tipoDocumento" name="tipoDocumento"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option selected
-                                    value="{{colaborador.tipoDocumento}}">{{colaborador.tipoDocumento}}</option>
-                            {{#each tiposDocumento}}
-                                <option value="{{this.valor}}">{{this.descripcion}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                {{/if}}
-
-                <div>
-                    <label for="calle" class="block text-sm font-medium text-gray-700 mb-1">Calle</label>
-                    <input type="text" id="calle" name="calle" value="{{colaborador.direccionDto.calle}}"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                           required/>
-                </div>
-
-                <div>
-                    <label for="altura" class="block text-sm font-medium text-gray-700 mb-1">Altura</label>
-                    <input type="number" id="altura" name="altura" value="{{colaborador.direccionDto.altura}}"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                           required/>
-                </div>
-
-                <div>
-                    <label for="piso" class="block text-sm font-medium text-gray-700 mb-1">Piso</label>
-                    <input type="number" id="piso" name="piso" value="{{colaborador.direccionDto.piso}}"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"/>
-                </div>
-
-                <div>
-                    <label for="codigoPostal" class="block text-sm font-medium text-gray-700 mb-1">Código
-                        Postal</label>
-                    <input type="text" id="codigoPostal" name="codigoPostal"
-                           value="{{colaborador.direccionDto.codigoPostal}}"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                           required/>
-                </div>
-
-                {{#if colaborador.fechaNacimiento}}
-                    <div>
-                        <label for="default-datepicker" class="block text-sm font-medium text-gray-700 mb-1">Fecha de
-                            nacimiento</label>
-                        <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy"
-                               id="default-datepicker" type="text" name="fechaNacimiento"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="Fecha de nacimiento"
-                               value="{{formatFecha colaborador.fechaNacimiento}}"/>
-                    </div>
-                {{/if}}
-
-                {{#if colaborador.rubro}}
-                    <div>
-                        <label for="rubro" class="block text-sm font-medium text-gray-700 mb-1">Rubro</label>
-                        <input type="text" id="rubro" name="rubro" value="{{colaborador.rubro}}"
+                        <label for="piso" class="block text-sm font-medium text-gray-700 mb-1">Piso</label>
+                        <input type="number" id="piso" name="piso" value="{{colaborador.direccionDto.piso}}"
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"/>
                     </div>
-                {{/if}}
 
-                {{#if colaborador.razonSocial}}
                     <div>
-                        <label for="razonSocial" class="block text-sm font-medium text-gray-700 mb-1">Razón
-                            Social</label>
-                        <input type="text" id="razonSocial" name="razonSocial" value="{{colaborador.razonSocial}}"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"/>
+                        <label for="codigoPostal" class="block text-sm font-medium text-gray-700 mb-1">Código
+                            Postal</label>
+                        <input type="text" id="codigoPostal" name="codigoPostal"
+                               value="{{colaborador.direccionDto.codigoPostal}}"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                               required/>
                     </div>
-                {{/if}}
-
-                {{#if colaborador.tipoPersonaJuridica}}
-                    <div>
-                        <label for="underline_select" class="block text-sm font-medium text-gray-700 mb-1">Tipo de
-                            organización</label>
-                        <select id="underline_select" name="tipoPersonaJuridica" required
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        >
-                            <option selected
-                                    value="{{colaborador.tipoPersonaJuridica}}">{{colaborador.tipoPersonaJuridica}}</option>
-                            {{#each tiposOrganizacion}}
-                                <option value="{{this.valor}}">{{this.valor}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                {{/if}}
+                </div>
             </div>
 
             <div class="mb-8">
                 <button type="button"
                         class="w-full py-3 px-4 boton-canje text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                        onclick="actualizarPerfil()"
-                >Actualizar perfil
+                        onclick="actualizarPerfil()">
+                    Actualizar perfil
                 </button>
             </div>
         </form>
@@ -166,7 +165,6 @@
                 </div>
             </div>
         </div>
-
         <div>
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Productos Canjeados</h2>
             {{#if canjes.length}}
@@ -178,10 +176,9 @@
                                      alt="{{this.nombreProducto}}"/>
                             </div>
                             <div class="p-4 text-white">
-                                <h5 class="text-lg font-semibold mb-2 line-clamp-2">{{this.nombreProducto}}</h5>
-                                <p class="text-sm mb-2">Canjeado el {{this.fechaCanje}}</p>
-                                <p class="text-xl font-bold text-white">{{formatPuntos this.puntosGastados}} puntos
-                                    gastados</p>
+                                <h5 class="text-xl font-semibold mb-2 line-clamp-2">{{this.nombreProducto}}</h5>
+                                <p class="text-sm mb-2">Canjeado el {{this.fechaCanje}} hs</p>
+                                <p class="text-lg font-bold text-white">Costo: {{formatPuntos this.puntosGastados}} puntos</p>
                             </div>
                         </div>
                     {{/each}}
@@ -218,7 +215,6 @@
             } else {
                 form.reportValidity();
             }
-
         }
     </script>
 {{/partial}}
