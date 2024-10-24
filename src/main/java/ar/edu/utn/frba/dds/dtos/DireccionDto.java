@@ -21,10 +21,10 @@ public class DireccionDto {
         context.formParam("cp") != null && !context.formParam("cp").isBlank() ||
         context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? DireccionDto
         .builder()
-        .calle(context.formParam("calle"))
-        .altura(Integer.parseInt(context.formParam("altura")))
+        .calle( (!context.formParam("calle").isBlank()) ?  context.formParam("calle"): null)
+        .altura( (context.formParam("altura") != null && !context.formParam("altura").isBlank()) ? Integer.parseInt(context.formParam("altura")) : null)
         .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.parseInt(context.formParam("piso")) : null)
-        .codigoPostal(context.formParam("codigoPostal"))
+        .codigoPostal( (context.formParam("codigoPostal") != null && !context.formParam("codigoPostal").isBlank()) ? context.formParam("codigoPostal") : null)
         .build() : null;
   }
 

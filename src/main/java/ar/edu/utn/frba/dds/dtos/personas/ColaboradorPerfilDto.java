@@ -27,7 +27,7 @@ public class ColaboradorPerfilDto {
   private DireccionDto direccionDto;
   private String rubro;
   private String razonSocial;
-  private TipoPersonaJuridica tipoPersonaJuridica;
+  private String tipoPersonaJuridica;
   private Float puntosGanados;
   private Boolean formCompletado;
   private List<MedioContactoDto> mediosContacto;
@@ -56,7 +56,7 @@ public class ColaboradorPerfilDto {
           .direccionDto(DireccionDto.of(context))
           .rubro(context.formParam("rubro"))
           .razonSocial(context.formParam("razonSocial"))
-          .tipoPersonaJuridica(TipoPersonaJuridica.valueOf(context.formParam("tipoPersonaJuridica")))
+          .tipoPersonaJuridica(context.formParam("tipoPersonaJuridica"))
           .formaColaboracionInput(FormaColaboracionDto.of(context))
           .build();
     }
@@ -75,7 +75,7 @@ public class ColaboradorPerfilDto {
         .direccionDto(DireccionDto.fromDireccion(colaborador.getDireccion()))
         .rubro(colaborador.getRubro())
         .razonSocial(colaborador.getRazonSocial())
-        .tipoPersonaJuridica(colaborador.getTipoPersonaJuridica())
+        .tipoPersonaJuridica(colaborador.getTipoPersonaJuridica().name())
         .puntosGanados(colaborador.getPuntosGanados())
         .formCompletado(colaborador.getFormCompletado())
         .formaColaboracionDtos(colaborador.getTipoColaborador().getFormasPosiblesColaboracion().stream().map(FormaColaboracionOutputDto::fromForma).toList())

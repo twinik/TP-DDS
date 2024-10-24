@@ -54,8 +54,10 @@
                             <select id="tipoDocumento" name="tipoDocumento"
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                                 {{#each tiposDocumento}}
-                                    <option {{#if (eq this.valor colaborador.tipoDocumento)}}
-                                    selected {{/if}} value="{{this.valor}}">{{this.descripcion}}</option>
+                                    <option value="{{this.valor}}"
+                                            {{#eq this.valor ../colaborador.tipoDocumento}}selected{{/eq}} >
+                                        {{this.descripcion}}
+                                    </option>
                                 {{/each}}
                             </select>
                         </div>
@@ -90,8 +92,10 @@
                             <select id="underline_select" name="tipoPersonaJuridica" required
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                                 {{#each tiposOrganizacion}}
-                                    <option  {{#if (eq this.valor colaborador.tipoPersonaJuridica) }}
-                                    selected {{/if}} value="{{this.valor}}">{{this.valor}}</option>
+                                    <option value="{{this.valor}}"
+                                            {{#eq this.valor ../colaborador.tipoPersonaJuridica}}selected{{/eq}} >
+                                        {{this.valor}}
+                                    </option>
                                 {{/each}}
                             </select>
                         </div>

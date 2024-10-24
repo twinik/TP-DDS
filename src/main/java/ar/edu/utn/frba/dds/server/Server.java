@@ -134,6 +134,7 @@ public class Server {
           }
         });
 
+
         handlebars.registerHelper("case", (value, options) -> {
           Object switchValue = options.context.data("switchValue");
 
