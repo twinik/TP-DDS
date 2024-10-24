@@ -22,12 +22,12 @@
                         </p>
                     </div>
                 </div>
-                <a
-                        href="/colaborar/donar-dinero"
+                <button
+                        onclick="intentarColaborar('/colaborar/donar-dinero')"
                         class="w-full py-3 px-4 boton-colaborar text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mt-auto"
                 >
                     Quiero colaborar
-                </a>
+                </button>
             </div>
 
             <div
@@ -45,12 +45,12 @@
                         </p>
                     </div>
                 </div>
-                <a
-                        href="/colaborar/registrar-persona-vulnerable"
+                <button
+                        onclick="intentarColaborar('/colaborar/registrar-persona-vulnerable')"
                         class="w-full py-3 px-4 boton-colaborar text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mt-auto"
                 >
                     Quiero colaborar
-                </a>
+                </button>
             </div>
 
             <div
@@ -68,12 +68,12 @@
                         </p>
                     </div>
                 </div>
-                <a
-                        href="/colaborar/donar-vianda"
+                <button
+                        onclick="intentarColaborar('/colaborar/donar-vianda')"
                         class="w-full py-3 px-4 boton-colaborar text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mt-auto"
                 >
                     Quiero colaborar
-                </a>
+                </button>
             </div>
 
             <div
@@ -91,12 +91,12 @@
                         </p>
                     </div>
                 </div>
-                <a
-                        href="/colaborar/distribuir-viandas"
+                <button
+                        onclick="intentarColaborar('/colaborar/distribuir-viandas')"
                         class="w-full py-3 px-4 boton-colaborar text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mt-auto"
                 >
                     Quiero colaborar
-                </a>
+                </button>
             </div>
 
             <div
@@ -115,12 +115,12 @@
                         </p>
                     </div>
                 </div>
-                <a
-                        href="/colaborar/colocar-heladera"
+                <button
+                        onclick="intentarColaborar('/colaborar/colocar-heladera')"
                         class="w-full py-3 px-4 boton-colaborar text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mt-auto"
                 >
                     Quiero colaborar
-                </a>
+                </button>
             </div>
 
             <div
@@ -138,15 +138,61 @@
                         </p>
                     </div>
                 </div>
-                <a
-                        href="/colaborar/ofrecer-producto"
+                <button
+                        onclick="intentarColaborar('/colaborar/ofrecer-producto')"
                         class="w-full py-3 px-4 boton-colaborar text-white font-bold rounded transition-colors duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mt-auto"
                 >
                     Quiero colaborar
-                </a>
+                </button>
             </div>
         </div>
     </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script>
+        async function intentarColaborar(link) {
+            try {
+                // Make a fetch call to the server to verify authorization
+                const response = await fetch(link, { method: 'GET', credentials: 'include' });
+
+                console.log(response)
+
+                if (response.ok) {
+                    // If authorized, redirect to the link
+                    window.location.href = link;
+                    // console.log("dio ok")
+                } else {
+                    // console.log("dio no ok")
+                    // If not authorized, show the SweetAlert warning
+                    Swal.fire({
+                        title: "¡Ups! No puedes realizar esta colaboración",
+                        text: "Se ve que no tienes los permisos necesarios para realizar este tipo de colaboración.\nPuedes intentar ir a tu perfil y agregar nuevas formas de colaboración.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#28b463",
+                        cancelButtonColor: "#cb4335",
+                        confirmButtonText: "Ir a mi perfil",
+                        cancelButtonText: "Cancelar",
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to profile or perform another action
+                            window.location.href = '/perfil'; // Adjust this path as needed
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error verifying authorization:', error);
+                Swal.fire({
+                    title: "Error de conexión",
+                    text: "No se pudo verificar la autorización. Por favor, intenta nuevamente.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
+            }
+        }
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}
