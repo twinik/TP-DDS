@@ -87,14 +87,13 @@
                     required
             >
                 {{#each incidentes}}
-                    <option value={{this.id}}>{{this.tipo}} en {{this.nombreHeladera}}  del día  {{this.fecha}} a
+                    <option value={{this.id}}>{{this.tipo}} en {{this.nombreHeladera}} del día {{this.fecha}} a
                         las {{this.hora}}</option>
                 {{/each}}
-
             </select>
 
 
-            <label class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label class="text-left block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 ¿Incidente solucionado?
             </label>
             <div class="mb-5">
@@ -133,7 +132,9 @@
     </div>
 {{/partial}}
 
-
+{{#partial "links"}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+{{/partial}}
 
 {{#partial "scripts"}}
     <script
@@ -145,8 +146,23 @@
     <script src="/js/mapa-seleccionar-ubicacion.js"></script>
     <script src="/js/input-contactos.js"></script>
     <script src="/js/form-handler.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         handleFormSubmit('form-visita', 'enviar-visita');
+    </script>
+    <script>
+        $(document).ready(function () {
+            console.log('Inicializando Select2');
+            if ($('#incidente-id').length) {
+                console.log('Elemento select encontrado:', $('#incidente-id'));
+                $('#incidente-id').select2({
+                    theme: 'default'
+                });
+            } else {
+                console.error('Elemento select no encontrado');
+            }
+        });
     </script>
 {{/partial}}
 
