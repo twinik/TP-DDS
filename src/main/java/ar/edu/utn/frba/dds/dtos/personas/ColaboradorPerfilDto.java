@@ -44,7 +44,7 @@ public class ColaboradorPerfilDto {
           .email(context.formParam("email"))
           .documento(context.formParam("documento"))
           .tipoDocumento(context.formParam("tipoDocumento"))
-          .fechaNacimiento((context.formParam("fechaNacimiento") != null  &&  !context.formParam("fechaNacimiento").isBlank()) ?  context.formParam("fechaNacimiento") : null)
+          .fechaNacimiento((context.formParam("fechaNacimiento") != null && !context.formParam("fechaNacimiento").isBlank()) ? context.formParam("fechaNacimiento") : null)
           .direccionDto(DireccionDto.of(context))
           .formaColaboracionInput(FormaColaboracionDto.of(context))
           .build();
@@ -75,7 +75,7 @@ public class ColaboradorPerfilDto {
         .direccionDto(DireccionDto.fromDireccion(colaborador.getDireccion()))
         .rubro(colaborador.getRubro())
         .razonSocial(colaborador.getRazonSocial())
-        .tipoPersonaJuridica(colaborador.getTipoPersonaJuridica().name())
+        .tipoPersonaJuridica(colaborador.getTipoPersonaJuridica() != null ? colaborador.getTipoPersonaJuridica().name() : null)
         .puntosGanados(colaborador.getPuntosGanados())
         .formCompletado(colaborador.getFormCompletado())
         .formaColaboracionDtos(colaborador.getTipoColaborador().getFormasPosiblesColaboracion().stream().map(FormaColaboracionOutputDto::fromForma).toList())

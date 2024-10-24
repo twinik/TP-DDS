@@ -72,22 +72,22 @@ public class ColaboradoresService {
   }
 
   public Colaborador actualizarFromDto(Colaborador colaborador, ColaboradorPerfilDto dto) {
-    colaborador.setNombre(dto.getNombre());
-    colaborador.setApellido(dto.getApellido());
-    colaborador.getUsuario().setEmail(dto.getEmail());
+    colaborador.setNombre(dto.getNombre()!= null ?   dto.getNombre(): colaborador.getNombre());
+    colaborador.setApellido(dto.getApellido() != null?  dto.getApellido(): colaborador.getApellido());
+    colaborador.getUsuario().setEmail(dto.getEmail() != null ?  dto.getEmail(): colaborador.getUsuario().getEmail());
     colaborador.setTipoDocumento(dto.getTipoDocumento() != null ? ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()) : colaborador.getTipoDocumento());
     if (dto.getDocumento() != null && !dto.getDocumento().equals(colaborador.getDocumento())) {
       this.validarDocumento(dto.getDocumento());
     }
-    colaborador.setDocumento(dto.getDocumento());
+    colaborador.setDocumento(dto.getDocumento() != null ?  dto.getDocumento(): colaborador.getDocumento());
     colaborador.setDireccion(dto.getDireccionDto() != null ? new Direccion(dto.getDireccionDto().getCalle(), dto.getDireccionDto().getAltura(), dto.getDireccionDto().getPiso(), dto.getDireccionDto().getCodigoPostal()) : null);
     if (dto.getFechaNacimiento() != null) {
       colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
       this.validarFechaNacimiento(colaborador);
     }
-    colaborador.setRubro(dto.getRubro());
-    colaborador.setRazonSocial(dto.getRazonSocial());
-    colaborador.setTipoPersonaJuridica(TipoPersonaJuridica.valueOf(dto.getTipoPersonaJuridica()));
+    colaborador.setRubro(dto.getRubro()!= null ?  dto.getRubro() : colaborador.getRubro());
+    colaborador.setRazonSocial(dto.getRazonSocial() != null ?  dto.getRazonSocial(): colaborador.getRazonSocial());
+    colaborador.setTipoPersonaJuridica(dto.getTipoPersonaJuridica() != null ? TipoPersonaJuridica.valueOf(dto.getTipoPersonaJuridica()) : colaborador.getTipoPersonaJuridica());
     List<FormaColaboracion> posiblesNuevasFormas = this.formaColaboracionService.fromDtos(dto.getFormaColaboracionInput());
 
     if (!posiblesNuevasFormas.isEmpty()) {
