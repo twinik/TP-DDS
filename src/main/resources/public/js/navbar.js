@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function highlightActiveNavItem() {
         navItems.forEach(item => {
             const itemPath = item.getAttribute('href');
-            if (itemPath === currentPath) {
+            const isProfilePage = currentPath.startsWith('/perfil/'); // Verifica si es una ruta de perfil
+
+            // Si el itemPath coincide con el inicio de la ruta, o es una página de perfil
+            if (itemPath === currentPath || (isProfilePage && itemPath === '/perfil')) {
                 item.classList.add('azulIntermedio'); // Clase para resaltar el item activo
 
                 // Si el item está dentro de un dropdown, abre ese dropdown
@@ -43,6 +46,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         });
     }
+
 
     // Prevenir que el dropdown se cierre al hacer clic en sus items
     navItems.forEach(item => {
