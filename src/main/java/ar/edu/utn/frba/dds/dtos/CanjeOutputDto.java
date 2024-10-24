@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.dtos;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CanjeProducto;
 import lombok.Builder;
 import lombok.Getter;
+
+import io.javalin.http.Context;
 import java.time.format.DateTimeFormatter;
 
 @Builder

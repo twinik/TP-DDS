@@ -11,6 +11,12 @@
         {{else}}
             <p class="text-xl mb-8 text-center">La operación se ha completado correctamente.</p>
         {{/if}}
+        {{#if nombreProducto}}
+            <p class="text-xl mb-4 text-center">Has canjeado el producto: <strong>{{nombreProducto}}</strong></p>
+        {{/if}}
+        {{#if puntosProducto}}
+            <p class="text-xl mb-8 text-center">Puntos del producto: <strong>{{puntosProducto}}</strong></p>
+        {{/if}}
         <a href="/" class="bg-white text-blue-900 py-2 px-4 rounded-full hover:bg-opacity-90 transition duration-300">
             Volver al inicio
         </a>
