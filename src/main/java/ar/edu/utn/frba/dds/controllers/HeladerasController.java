@@ -40,7 +40,6 @@ public class HeladerasController implements ICrudViewsHandler {
 
   @Override
   public void edit(Context context) {
-    //TODO: generar vista para actualizar la heladera
     Map<String, Object> model = new HashMap<>();
     model.put("heladeras", this.heladerasService.obtenerHeladerasColaborador(context.sessionAttribute("idColaborador")));
     context.render("/app/heladeras/mis-heladeras.hbs", model);

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.dtos.heladeras;
 
 
+import ar.edu.utn.frba.dds.dtos.DireccionDto;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class HeladeraDto {
   private Integer viandas;
   private Integer capacidadMaxima;
   private ModeloHeladeraOutputDto modelo;
+  private DireccionDto direccion;
 
   public static HeladeraDto fromHeladera(Heladera heladera) {
     return HeladeraDto
@@ -31,11 +33,14 @@ public class HeladeraDto {
         .viandas(heladera.getViandas())
         .capacidadMaxima(heladera.getCapacidadViandas())
         .modelo(ModeloHeladeraOutputDto.fromModelo(heladera.getModelo()))
+        .direccion(DireccionDto.fromDireccion(heladera.getDireccion()))
         .build();
   }
 
   public static HeladeraDto of(Context context) {
-    return HeladeraDto.builder().id(context.pathParam("id"))
+    return HeladeraDto
+        .builder()
+        .id(context.pathParam("id"))
         .nombre(context.formParam("nombre"))
         .build();
   }

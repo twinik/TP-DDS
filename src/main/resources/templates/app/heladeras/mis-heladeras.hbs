@@ -6,66 +6,86 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="heladeras-lista">
             {{#each heladeras}}
-                <div class="group overflow-hidden flex flex-col h-full transform transition duration-300 hover:scale-105 bg-white rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h5 class="text-2xl font-bold line-clamp-2 text-gray-800 group-hover:text-blue-900 transition-colors duration-300">{{this.nombre}}</h5>
-                            <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full {{#if
-                                    this.activa}}bg-green-100 text-green-800 group-hover:bg-green-200{{else}}bg-red-100 text-red-800 group-hover:bg-red-200{{/if}} transition-colors duration-300">
-                                {{#if this.activa}}Activo{{else}}Inactivo{{/if}}
-                            </span>
+                <article
+                        class="group h-full bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105">
+                    <div class="flex flex-col h-full">
+                        <header class="bg-gray-50 p-4 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-xl font-bold text-gray-800 group-hover:text-blue-900 transition-colors duration-300 line-clamp-2"
+                                    title="{{this.nombre}}">{{this.nombre}}</h2>
+                                <span class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full {{#if
+                                        this.activa}}bg-green-100 text-green-800 group-hover:bg-green-200{{else}}bg-red-100 text-red-800 group-hover:bg-red-200{{/if}} transition-colors duration-300"
+                                      role="status">
+                                    {{#if this.activa}}Activa{{else}}Inactiva{{/if}}
+                                </span>
+                            </div>
+                        </header>
+
+                        <div class="p-6 flex-grow">
+                            <dl class="text-gray-600 text-sm space-y-3">
+                                <div class="flex justify-between">
+                                    <dt class="font-semibold">Cantidad de viandas:</dt>
+                                    <dd>{{this.viandas}}</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt class="font-semibold">Capacidad máxima:</dt>
+                                    <dd>{{this.capacidadMaxima}}</dd>
+                                </div>
+                                <div class="flex justify-between">
+                                    <dt class="font-semibold">Modelo:</dt>
+                                    <dd>{{this.modelo.modelo}} {{this.modelo.rangoTemperaturas}}</dd>
+                                </div>
+                                <div class="flex justify-between pt-3 border-t border-gray-200">
+                                    <dt class="font-semibold">Dirección:</dt>
+                                    <dd class="text-right">
+                                        {{this.direccion.calle}} {{this.direccion.altura}}{{#if this.direccion.piso}}
+                                        - Piso {{this.direccion.piso}}{{/if}} - CP: {{this.direccion.codigoPostal}}
+                                    </dd>
+                                </div>
+                            </dl>
                         </div>
-                        <div class="text-gray-600 text-base mt-2">
-                            Cantidad de viandas: {{this.viandas}}
-                        </div>
-                        <div class="text-gray-600 text-base mt-2">
-                            Capacidad máxima: {{this.capacidadMaxima}}
-                        </div>
-                        <div class="text-gray-600 text-base mt-2">
-                            Modelo: {{this.modelo.modelo}}  {{this.modelo.rangoTemperaturas}}
-                        </div>
-                        <div class="flex-grow"></div>
-                        <div class="flex flex-col space-y-3 mt-6">
-                            <form id="editar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/edicion"
-                                  method="post"
-                                  class="w-full mt-auto">
-                                <input type="hidden" name="nombre" value="{{this.nombre}}">
-                                <button id="b-editar-{{this.id}}"
-                                        type="button"
-                                        class="w-full py-2 px-4 text-blue-600 font-semibold rounded-lg transition-all duration-300 hover:bg-blue-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-blue-100 shadow-md"
-                                        onclick="editar('{{this.id}}', '{{this.nombre}}')"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2"
-                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                    Editar
-                                </button>
-                            </form>
-                            <form id="eliminar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/eliminacion"
-                                  method="post"
-                                  class="w-full mt-auto">
-                                <button id="b-eliminar-{{this.id}}"
-                                        type="button"
-                                        class="w-full py-2 px-4 text-red-600 font-semibold rounded-lg transition-all duration-300 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 bg-red-100 shadow-md"
-                                        onclick="confirmarEliminacion('{{this.id}}', '{{this.nombre}}')"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2"
-                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                    </svg>
-                                    Eliminar
-                                </button>
-                            </form>
-                        </div>
+
+                        <footer class="p-4 bg-gray-50 border-t border-gray-200">
+                            <div class="space-y-2">
+                                <form id="editar-{{this.id}}" action="/heladeras/mis-heladeras/{{this.id}}/edicion"
+                                      method="post">
+                                    <input type="hidden" name="nombre" value="{{this.nombre}}">
+                                    <button id="b-editar-{{this.id}}" type="button"
+                                            onclick="editar('{{this.id}}', '{{this.nombre}}')"
+                                            class="w-full py-2 px-4 text-blue-600 font-semibold rounded-lg transition-all duration-300 hover:bg-blue-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2 bg-blue-50 shadow-sm flex items-center justify-center group"
+                                            aria-label="Editar {{this.nombre}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5 mr-2 transition-transform group-hover:scale-110"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                        Editar
+                                    </button>
+                                </form>
+                                <form id="eliminar-{{this.id}}"
+                                      action="/heladeras/mis-heladeras/{{this.id}}/eliminacion" method="post">
+                                    <button id="b-eliminar-{{this.id}}" type="button"
+                                            onclick="confirmarEliminacion('{{this.id}}', '{{this.nombre}}')"
+                                            class="w-full py-2 px-4 text-red-600 font-semibold rounded-lg transition-all duration-300 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 bg-red-50 shadow-sm flex items-center justify-center group"
+                                            aria-label="Eliminar {{this.nombre}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5 mr-2 transition-transform group-hover:scale-110"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                        </svg>
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </footer>
                     </div>
-                </div>
+                </article>
             {{/each}}
         </div>
     </div>
