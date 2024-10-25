@@ -61,3 +61,14 @@
 .disabled-heladera {
     background-color: #821D1D !important;
 }
+
+#mapa-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Forzamos el datepicker a aparecer sobre el mapa */
+.datepicker {
+    position: absolute; /* or relative depending on your datepicker library */
+    z-index: 9999; /* Elevarlo suficientemente alto para que esté sobre el mapa */
+}
