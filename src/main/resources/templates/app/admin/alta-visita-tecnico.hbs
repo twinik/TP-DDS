@@ -164,6 +164,20 @@
             }
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            console.log('Inicializando Select2');
+            if ($('#tecnicoId').length) {
+                console.log('Elemento select encontrado:', $('#tecnicoId'));
+                $('#tecnicoId').select2({
+                    theme: 'default'
+                });
+            } else {
+                console.error('Elemento select no encontrado');
+            }
+        });
+    </script>
+    <!-- todo buscar una mejor libreria -->
 {{/partial}}
 
 {{> templates/app/base }}
