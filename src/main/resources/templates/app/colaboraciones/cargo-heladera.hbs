@@ -11,138 +11,300 @@
 {{/partial}}
 
 {{#partial "contenido"}}
-    <div class="p-10 mx-auto max-w-4xl">
-        <h1 class="text-3xl font-bold mb-8 text-center">Colocar heladera</h1>
+    <div class="p-10 mx-auto max-w-7xl">
+        <h1 class="title1 mb-8">Colocar heladera</h1>
 
-        <form id="enviar-hel" method="post" action="/colaborar/colocar-heladera" class="space-y-8">
+        <form id="enviar-hel" method="post" action="/colaborar/colocar-heladera" class="content-center max-w-md mx-auto">
             {{#if message}}
-                <p id="error-message" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100">{{message}}</p>
+                <p id="error-message" style="background: rgb(255, 163, 163);"
+                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
             {{/if}}
+            <label
+                    for="nombre"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Nombre de la heladera</label
+            >
+            <input
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Nombre"
+                    required
+            />
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la heladera</label>
-                    <input type="text" name="nombre" id="nombre" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Nombre" required />
-                </div>
-                <div>
-                    <label for="modelo" class="block text-sm font-medium text-gray-700 mb-1">Modelo</label>
-                    <select name="modelo" id="modelo" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                        {{#each modelos}}
-                            <option value={{this.id}}>{{this.modelo}} {{this.rangoTemperaturas}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div>
-                    <label for="capacidad" class="block text-sm font-medium text-gray-700 mb-1">Capacidad (en cantidad de viandas)</label>
-                    <input type="number" name="capacidad" id="capacidad" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Capacidad" required min="1" />
-                </div>
-                <div>
-                    <label for="fecha" class="block text-sm font-medium text-gray-700 mb-1">Fecha de puesta en funcionamiento</label>
-                    <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy" name="fecha" id="fecha" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Fecha de puesta en funcionamiento" required />
-                </div>
+            <label
+                    for="modelo"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Modelo</label
+            >
+            <select
+                    name="modelo"
+                    id="modelo"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+                {{#each modelos}}
+                    <option value={{this.id}}>{{this.modelo}}  {{this.rangoTemperaturas}}</option>
+                {{/each }}
+            </select>
+
+            <label
+                    for="capacidad"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Capacidad (en cantidad de viandas)</label
+            >
+            <input
+                    type="number"
+                    name="capacidad"
+                    id="capacidad"
+                    aria-describedby="helper-text-explanation"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Capacidad"
+                    required
+                    min="1"
+            />
+
+            <label
+                    for="default-datepicker"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Fecha de puesta en funcionamiento</label
+            >
+            <input
+                    required
+                    datepicker
+                    datepicker-autohide
+                    datepicker-format="dd/mm/yyyy"
+                    name="fecha"
+                    id="default-datepicker"
+                    type="text"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Fecha de puesta en funcionamiento"
+            />
+
+            <span
+                    class="text-left block mb-3 text-sm font-medium text-gray-900 dark:text-white"
+            ><strong>Recomendación de puntos de colocacion (opcional)</strong></span
+            >
+
+            <label for="latitud"
+                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Latitud</label>
+
+            <input
+                    type="number"
+                    id="latitud"
+                    name="latitud"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Latitud"
+                    step="0.000000000000001"
+                    min="-90"
+                    max="90"
+            />
+
+            <label for="longitud"
+                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Longitud</label>
+
+            <input
+                    type="number"
+                    id="longitud"
+                    name="longitud"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Longitud"
+                    step="0.000000000000001"
+                    min="-180"
+                    max="180"
+            />
+
+
+            <label for="radio"
+                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Cobertura (Km):</label>
+            <input
+                    type="number"
+                    step="0.1"
+                    id="radio"
+                    name="radio"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Radio de cobertura"
+            />
+
+            <div
+                    id="map"
+                    style="height: 300px; width: 100%; z-index: 50"
+                    class="mb-0"
+            ></div>
+            <div id="mensaje-error" class="mb-5 text-red-500 text-sm" style="display: none;">
+                Por favor, completa los campos de latitud, longitud y radio.
             </div>
-
-            <div class="border-t border-gray-200 pt-8">
-                <h2 class="text-xl font-semibold mb-4">Ubicación de la heladera</h2>
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-4">
-                        <input type="radio" id="seleccionar-punto" name="modo-mapa" value="seleccionar" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" checked>
-                        <label for="seleccionar-punto" class="text-sm font-medium text-gray-700">Seleccionar punto específico</label>
-                        <input type="radio" id="recomendar-punto" name="modo-mapa" value="recomendar" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
-                        <label for="recomendar-punto" class="text-sm font-medium text-gray-700">Recomendar ubicación</label>
-                    </div>
-                    <div id="mapa-container" class="h-96 w-full rounded-lg shadow-md"></div>
-                </div>
-            </div>
-
-            <div id="seleccionar-punto-form" class="space-y-4">
-                <h3 class="text-lg font-medium">Punto seleccionado</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="latitudElegida" class="block text-sm font-medium text-gray-700 mb-1">Latitud elegida</label>
-                        <input type="number" id="latitudElegida" name="latitudElegida" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Latitud" required step="0.000001" min="-90" max="90" />
-                    </div>
-                    <div>
-                        <label for="longitudElegida" class="block text-sm font-medium text-gray-700 mb-1">Longitud elegida</label>
-                        <input type="number" id="longitudElegida" name="longitudElegida" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Longitud" required step="0.000001" min="-180" max="180" />
-                    </div>
-                </div>
-            </div>
-
-            <div id="recomendar-punto-form" class="space-y-4" style="display: none;">
-                <h3 class="text-lg font-medium">Recomendación de ubicación</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label for="latitud" class="block text-sm font-medium text-gray-700 mb-1">Latitud central</label>
-                        <input type="number" id="latitud" name="latitud" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Latitud" step="0.000001" min="-90" max="90" />
-                    </div>
-                    <div>
-                        <label for="longitud" class="block text-sm font-medium text-gray-700 mb-1">Longitud central</label>
-                        <input type="number" id="longitud" name="longitud" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Longitud" step="0.000001" min="-180" max="180" />
-                    </div>
-                    <div>
-                        <label for="radio" class="block text-sm font-medium text-gray-700 mb-1">Radio de búsqueda (Km)</label>
-                        <input type="number" step="0.1" id="radio" name="radio" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Radio de búsqueda" />
-                    </div>
-                </div>
-                <button id="buscar-recomendaciones" type="button" class="popup-button">
-                    Buscar ubicaciones recomendadas
+            <div class="flex space-x-4 my-3">
+                <button id="elegir-nuevo-punto"
+                        class="w-1/2 mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                    Elegir nueva referencia
                 </button>
-            </div>
-
-            <div class="border-t border-gray-200 pt-8">
-                <h2 class="text-xl font-semibold mb-4">Dirección</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="calle" class="block text-sm font-medium text-gray-700 mb-1">Calle</label>
-                        <input type="text" id="calle" name="calle" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Calle" required />
-                    </div>
-                    <div>
-                        <label for="numero" class="block text-sm font-medium text-gray-700 mb-1">Número</label>
-                        <input type="number" id="numero" name="numero" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Número" required />
-                    </div>
-                    <div>
-                        <label for="piso" class="block text-sm font-medium text-gray-700 mb-1">Piso (opcional)</label>
-                        <input type="number" id="piso" name="piso" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Piso" />
-                    </div>
-                    <div>
-                        <label for="codPostal" class="block text-sm font-medium text-gray-700 mb-1">Código postal</label>
-                        <input type="text" id="codPostal" name="codPostal" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Código postal" required />
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-200 pt-8">
-                <h2 class="text-xl font-semibold mb-4">Sensores disponibles</h2>
-                <div class="space-y-2">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="sensor-temperatura" name="sensorTemp" value="temp" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                        <label for="sensor-temperatura" class="ml-2 block text-sm text-gray-900">Sensor de temperatura</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="sensor-movimiento" name="sensorMov" value="mov" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                        <label for="sensor-movimiento" class="ml-2 block text-sm text-gray-900">Sensor de movimiento</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pt-8">
-                <button id="enviar-hel" type="submit" class="popup-button">
-                    Registrar donación
+                <button id="confirmar" type="button"
+                        class="w-1/2 mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                    Buscar puntos
                 </button>
+
             </div>
+
+            <span
+                    class="text-left block mb-3 text-sm font-medium text-gray-900 dark:text-white"
+            ><strong>Selección de heladera</strong></span
+            >
+
+            <label for="latitudElegida"
+                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Latitud elegida</label>
+
+            <input
+                    type="number"
+                    id="latitudElegida"
+                    name="latitudElegida"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Latitud de Heladera Elegida"
+                    required
+                    step="0.000000000000001"
+                    min="-90"
+                    max="90"
+            />
+
+            <label for="longitudElegida"
+                   class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Longitud elegida</label>
+
+            <input
+                    type="number"
+                    id="longitudElegida"
+                    name="longitudElegida"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Longitud de Heladera Elegida"
+                    step="0.000000000000001"
+                    min="-180"
+                    max="180"
+            />
+
+            <label
+                    for="Calle"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Calle</label
+            >
+            <input
+                    type="text"
+                    id="calle"
+                    name="calle"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Calle"
+                    required
+            />
+
+            <label
+                    for="numero"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Numero</label
+            >
+            <input
+                    type="number"
+                    id="numero"
+                    name="numero"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Numero"
+                    required
+            />
+
+            <label
+                    for="piso"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Piso (opcional)</label
+            >
+            <input
+                    type="number"
+                    id="piso"
+                    name="piso"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Piso"
+            />
+
+            <label
+                    for="codPostal"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Código postal</label
+            >
+            <input
+                    type="text"
+                    id="codPostal"
+                    name="codPostal"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Código"
+                    required
+            />
+
+            <div class="mb-6">
+                <!-- Título de la sección -->
+                <span
+                        class="text-left block mb-3 text-sm font-medium text-gray-900 dark:text-white"
+                ><strong>Seleccione los sensores a disposición</strong></span
+                >
+                <!-- Checkbox para sensor de temperatura -->
+                <div class="flex items-center mb-4">
+                    <input
+                            type="checkbox"
+                            id="sensor-temperatura"
+                            name="sensorTemp"
+                            value="temp"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                            for="sensor-temperatura"
+                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >Sensor de temperatura</label>
+                </div>
+
+                <!-- Checkbox para sensor de movimiento -->
+                <div class="flex items-center mb-4">
+                    <input
+                            type="checkbox"
+                            id="sensor-movimiento"
+                            name="sensorMov"
+                            value="mov"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                            for="sensor-movimiento"
+                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >Sensor de movimiento</label>
+                </div>
+            </div>
+
+
+            <button
+                    id="enviar-hel"
+                    type="submit"
+                    class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
+            >
+                Registrar donación
+            </button>
         </form>
     </div>
 {{/partial}}
 
 {{#partial "links"}}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="stylesheet" href="/css/heladeras.css" />
+    <link rel="stylesheet" href="/css/heladeras.css"/>
 {{/partial}}
 
 {{#partial "scripts"}}
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="/js/colocacion-heladeras.js"></script>
+    <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+    ></script>
+    <script src="/js/utils-heladeras.js"></script>
+    <script src="/js/puntos-colocacion.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-hel','enviar-hel');
+    </script>
 {{/partial}}
 
 {{> templates/app/base}}
