@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva;
 
+import ar.edu.utn.frba.dds.exceptions.ExceptionHelper;
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import ar.edu.utn.frba.dds.helpers.PasswordGenerator;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.IPuntajeCalculable;
@@ -17,18 +18,22 @@ import ar.edu.utn.frba.dds.models.domain.emailSending.MailSenderAdapter;
 import ar.edu.utn.frba.dds.models.domain.emailSending.MyEmail;
 import ar.edu.utn.frba.dds.models.domain.emailSending.MyMailFactory;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CsvInvalidoException;
+import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
+import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeEmailDuplicadoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeFilaCsvInvalidaFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormaColaboracionInvalidaFactory;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
 import ar.edu.utn.frba.dds.models.repositories.IRolesRepository;
-import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.utils.PasswordHasher;
 import ar.edu.utn.frba.dds.utils.PermisosHelper;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.exception.ConstraintViolationException;
+import javax.persistence.RollbackException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +92,7 @@ public class CargadorDeColaboraciones {
 
         Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
         if (forma.isEmpty())
-          throw new CsvInvalidoException(MensajeFilaCsvInvalidaFactory.generarMensaje(index, MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion())));
+          throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
 
         validarYAgregarPermisos(colaborador, forma.get());
 
@@ -121,7 +126,8 @@ public class CargadorDeColaboraciones {
 
 
       Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
-      if (forma.isEmpty()) throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
+      if (forma.isEmpty())
+        throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
       //TODO: solo para personas humanas ??? ?? ??
       TipoColaborador tipo = new TipoColaborador();
       tipo.setTipo(TipoPersona.PERSONA_HUMANA);
@@ -132,17 +138,25 @@ public class CargadorDeColaboraciones {
       nuevoRol.agregarPermisos(PermisosHelper.getInstance().buscarPorNombres("colaborador-base").toArray(new Permiso[0]));
       this.rolesRepository.guardar(nuevoRol);
       nuevoUsuario.agregarRoles(nuevoRol);
+      nuevoColaborador.agregarMedioContacto(new MedioDeContacto(CanalContacto.EMAIL, carga.getMail()));
 
       MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
           carga.getMail(),
           config.getProperty("ASUNTO"),
           config.getProperty("CUERPO") + " " + claveGenerada);
 
-      mailSender.enviarMail(email);
+      try {
+        colaboradorRepository.guardar(nuevoColaborador);
+      } catch (RollbackException e) {
+        e.printStackTrace();
+        if (ExceptionHelper.isCausedBy(e, ConstraintViolationException.class))
+          throw new CsvInvalidoException(MensajeEmailDuplicadoFactory.generarMensaje(carga.getMail()));
+      }
 
-      colaboradorRepository.guardar(nuevoColaborador);
+      mailSender.enviarMail(email);
       return nuevoColaborador;
     } catch (IOException | RuntimeException e) {
+      e.printStackTrace();
       throw new CsvInvalidoException(e.getMessage());
     }
   }
@@ -157,4 +171,6 @@ public class CargadorDeColaboraciones {
     }
   }
 
+
 }
+
