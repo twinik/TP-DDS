@@ -31,6 +31,7 @@ public class TecnicosController implements ICrudViewsHandler {
     public void create(Context context) {
         HashMap<String, Object> model = new HashMap<>();
         model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
+        model.put("datosForm", context.consumeSessionAttribute("formDto"));
         model.put("message", context.queryParam("message"));
         context.render("/app/admin/alta-tecnico.hbs", model);
     }
@@ -38,7 +39,7 @@ public class TecnicosController implements ICrudViewsHandler {
     @Override
     public void save(Context context) {
         TecnicoDto dto = TecnicoDto.of(context);
-        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje(), dto);
 
         this.tecnicosService.crearTecnico(dto);
         Map<String, Object> model = new HashMap<>();

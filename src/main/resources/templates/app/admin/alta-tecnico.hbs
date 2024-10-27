@@ -3,8 +3,10 @@
         <h1 class="title1 mb-8">Registrar Técnico</h1>
 
         {{#if message}}
-            <p style="background: rgb(255, 163, 163);"
-               class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            <div class="content-center max-w-md mx-auto">
+                <p style="background: rgb(255, 163, 163);"
+                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            </div>
         {{/if}}
 
         <form id="form-tecnico" method="post" action="" class="content-center max-w-md mx-auto">
@@ -19,6 +21,9 @@
                     id="nombre"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Nombre"
+                {{#if datosForm.nombre}}
+                    value="{{datosForm.nombre}}"
+                {{/if}}
                     required
             />
 
@@ -33,6 +38,9 @@
                     name="apellido"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Apellido"
+                {{#if datosForm.apellido}}
+                    value="{{datosForm.apellido}}"
+                {{/if}}
                     required
             />
 
@@ -65,7 +73,10 @@
                     name="documento"
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="documento"
+                {{#if datosForm.nroDocumento}}
+                    value="{{datosForm.nroDocumento}}"
+                {{/if}}
+                    placeholder="Documento"
                     required
                     min="1"
             />
@@ -118,6 +129,8 @@
             <input required type="hidden" name="latitud" id="latitud"/>
             <input required type="hidden" name="longitud" id="longitud"/>
 
+            <!-- todo, capaz hacer que el punto de referencia vuelva a marcarse-->
+
             <label
                     for="radio-de-cobertura"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -129,6 +142,9 @@
                     id="radio-de-cobertura"
                     name="radio"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                {{#if datosForm.areaCobertura.radio}}
+                    value="{{datosForm.areaCobertura.radio}}"
+                {{/if}}
                     placeholder="1"
                     required
             />
