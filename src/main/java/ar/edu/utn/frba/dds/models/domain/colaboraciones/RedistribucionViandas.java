@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones;
 
+import ar.edu.utn.frba.dds.dtos.colaboraciones.RedistribucionViandaDto;
+import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.HeladeraLlenaException;
 import ar.edu.utn.frba.dds.exceptions.HeladeraVaciaException;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
@@ -58,11 +60,11 @@ public class RedistribucionViandas extends EntidadPersistente implements IPuntaj
     this.heladeraDestino.agregarVianda(this.cantidad);
   }
 
-  public void validarCantidades() {
+  public void validarCantidades(RedistribucionViandaDto dto) {
     if (this.cantidad > this.heladeraOrigen.getViandas())
-      throw new HeladeraVaciaException(MensajeHeladeraVaciaFactory.generarMensaje(this.heladeraOrigen.getNombre()));
+      throw new DniDuplicadoException(MensajeHeladeraVaciaFactory.generarMensaje(this.heladeraOrigen.getNombre()), dto); //todo HeladeraVaciaException(MensajeHeladeraVaciaFactory.generarMensaje(this.heladeraOrigen.getNombre()), dto); no anda
     if (this.getCantidad() > this.heladeraDestino.getCuposLibresViandas())
-      throw new HeladeraLlenaException(MensajeHeladeraLLenaFactory.generarMensaje(this.heladeraDestino.getNombre()));
+      throw new DniDuplicadoException(MensajeHeladeraLLenaFactory.generarMensaje(this.heladeraDestino.getNombre()), dto); //todo HeladeraLlenaException(MensajeHeladeraLLenaFactory.generarMensaje(this.heladeraDestino.getNombre()), dto); no anda
   }
 
   @Override

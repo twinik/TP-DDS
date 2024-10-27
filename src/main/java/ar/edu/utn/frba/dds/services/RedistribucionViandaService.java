@@ -27,11 +27,11 @@ public class RedistribucionViandaService {
     redistribucionViandas.setHeladeraDestino(this.heladerasService.obtenerHeladera(dto.getDestino().getId()));
     redistribucionViandas.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
     if (redistribucionViandas.getFecha().isBefore(LocalDate.now().minusDays(1)))
-      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
     redistribucionViandas.setCantidad(dto.getCantViandas());
     if (dto.getIdMotivo() != null)
       redistribucionViandas.setMotivo(this.motivoRedistribucionService.obtenerMotivo(dto.getIdMotivo()));
-    redistribucionViandas.validarCantidades();
+    redistribucionViandas.validarCantidades(dto);
     this.redistribucionesViandaRepository.guardar(redistribucionViandas);
     this.solicitudAperturaHeladeraService.generarSolicitud(redistribucionViandas);
 

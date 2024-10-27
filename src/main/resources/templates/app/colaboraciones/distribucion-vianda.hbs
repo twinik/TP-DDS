@@ -23,8 +23,7 @@
                 <p
                         class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                    Indique primero heladera de origen y luego la
-                    heladera de destino
+                    Seleccione heladera de origen y de destino
                 </p>
 
                 <div
@@ -44,12 +43,15 @@
                         <div
                                 class="popup-button popup-destino"
                                 onclick="clickSelectDestino(this)"
+
                         >
                             Seleccionar Como Destino
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- todo, el form te devuelve el id todo raro, habria que con js hacer que vuelvan a seleccionarse las heladeras -->
 
             <div class="flex flex-row">
 						<span
@@ -67,13 +69,9 @@
             </div>
 
             <div class="flex flex-row">
-						<span
-                                class="mr-1 text-left block mb-2 text-sm dark:text-white"
-                        >Heladera destino: </span
-                        ><span
-                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    id="heladeraDestino"
-            ></span>
+                <span class="mr-1 text-left block mb-2 text-sm dark:text-white">Heladera destino: </span>
+                <span class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      id="heladeraDestino"></span>
                 <input
                         type="hidden"
                         name="idHeladeraDestino"
@@ -94,6 +92,9 @@
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Cantidad de viandas"
                     required
+                {{#if datosForm.cantViandas}}
+                    value="{{datosForm.cantViandas}}"
+                {{/if}}
                     min="1"
             />
 
@@ -129,6 +130,9 @@
                     type="text"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Fecha de distribución"
+                {{#if datosForm.fecha}}
+                    value="{{datosForm.fecha}}"
+                {{/if}}
             />
 
             <button
@@ -154,9 +158,9 @@
     ></script>
     <script src="/js/utils-heladeras.js"></script>
     <script src="/js/heladeras-seleccion-origen-destino.js"></script>
-    <script src="/js/form-handler.js"></script>
+    <script src="/js/form-handler-distribucion.js"></script>
     <script>
-        handleFormSubmit('form-redis','enviar-redis');
+        handleFormSubmit('form-redis', 'enviar-redis');
     </script>
 {{/partial}}
 

@@ -50,3 +50,15 @@ function clickOnPopup(element) {
         e => e.id == id
     ).title;
 }
+
+document.getElementById('form-vianda').addEventListener('submit', function (event) {
+    const heladeraSelectedHidden = document.getElementById("idHeladera");
+    const heladeraError = document.getElementById("heladera-error");
+
+    if (!heladeraSelectedHidden.value) {
+        event.preventDefault();
+        heladeraError.classList.remove("hidden");
+    } else {
+        heladeraError.classList.add("hidden");
+    }
+});

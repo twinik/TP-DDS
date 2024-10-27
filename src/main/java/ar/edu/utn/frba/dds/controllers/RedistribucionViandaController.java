@@ -33,6 +33,7 @@ public class RedistribucionViandaController implements ICrudViewsHandler {
     public void create(Context context) {
         Map<String,Object> model = new HashMap<>();
         model.put("message",context.queryParam("message"));
+        model.put("datosForm", context.consumeSessionAttribute("formDto"));
         model.put("motivos",this.motivoRedistribucionService.obtenerMotivos());
         context.render("/app/colaboraciones/distribucion-vianda.hbs",model);
     }

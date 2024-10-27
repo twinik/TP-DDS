@@ -27,7 +27,7 @@ public class ViandasService {
     ingreso.setFechaDonacion(DateHelper.fechaFromString(dto.getFechaDonacion(), "dd/MM/yyyy"));
 
     if (ingreso.getFechaDonacion().isBefore(LocalDate.now().minusDays(1)))
-      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
 
     ingreso.setHeladera(heladerasService.obtenerHeladera(dto.getHeladeraDto().getId()));
 
