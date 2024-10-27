@@ -12,6 +12,9 @@
             <p class="text-xl mb-8 text-center">Lo sentimos, ha ocurrido un error. Por favor, inténtelo de nuevo más
                 tarde.</p>
         {{/if}}
+        {{#if msjErrorCsv}}
+            <p class="text-xl mb-8 text-center">{{{msjErrorCsv}}}</p>
+        {{/if}}
         <a href="/" class="bg-white text-blue-900 py-2 px-4 rounded-full hover:bg-opacity-90 transition duration-300">
             Volver al inicio
         </a>

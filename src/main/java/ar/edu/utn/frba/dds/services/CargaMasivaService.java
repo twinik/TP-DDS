@@ -6,6 +6,8 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.calculadores.ICalculador
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva.CargaColaboracionCsvReader;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva.CargadorDeColaboraciones;
 import ar.edu.utn.frba.dds.models.domain.emailSending.SendGridMailSender;
+import ar.edu.utn.frba.dds.models.domain.excepciones.CsvInvalidoException;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFilaCsvInvalidaFactory;
 import ar.edu.utn.frba.dds.models.repositories.*;
 import io.javalin.http.UploadedFile;
 import lombok.AllArgsConstructor;
@@ -62,6 +64,7 @@ public class CargaMasivaService {
 
     } catch (IOException e) {
       e.printStackTrace();
+      throw new CsvInvalidoException(MensajeFilaCsvInvalidaFactory.generarMensaje(e.getMessage()));
     }
   }
 

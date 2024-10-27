@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.exceptions.ArchivoNoCargadoException;
 import ar.edu.utn.frba.dds.exceptions.CargaArchivoFailedException;
+import ar.edu.utn.frba.dds.models.domain.excepciones.CsvInvalidoException;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeErrorCsvFactory;
 import ar.edu.utn.frba.dds.services.CargaMasivaService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -41,9 +43,10 @@ public class CargaMasivaController implements ICrudViewsHandler {
             model.put("message", "Colaboraciones cargadas correctamente");
             context.status(201);
             context.render("/app/success.hbs", model);
-        } catch (CargaArchivoFailedException e) {
+        } catch (CargaArchivoFailedException | CsvInvalidoException e) {
             e.printStackTrace();
-            model.put("message", "Error al subir el archivo: " + e.getMessage());
+            model.put("message","Error al subir el archivo");
+            model.put("msjErrorCsv", MensajeErrorCsvFactory.generarMensaje(e.getMessage()));
             context.render("/app/error.hbs", model);
         }
     }

@@ -19,6 +19,8 @@ import ar.edu.utn.frba.dds.models.domain.emailSending.MyMailFactory;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CsvInvalidoException;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFilaCsvInvalidaFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormaColaboracionInvalidaFactory;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
 import ar.edu.utn.frba.dds.models.repositories.IRolesRepository;
@@ -72,27 +74,36 @@ public class CargadorDeColaboraciones {
     ArrayList<IPuntajeCalculable> colaboraciones = new ArrayList<>();
     Colaborador colaborador = null;
 
+    int index = 1;
+
     for (Object reg : registros) {
-      CargaColaboracion carga = (CargaColaboracion) reg;
+      try {
+        CargaColaboracion carga = (CargaColaboracion) reg;
 
-      Optional<Colaborador> colaboradorOption = colaboradorRepository.buscar(
-          new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
-          carga.getDocumento());
-      colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
+        Optional<Colaborador> colaboradorOption = colaboradorRepository.buscar(
+            new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
+            carga.getDocumento());
+        colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
 
-      Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
-      if (forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
+        Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
+        if (forma.isEmpty())
+          throw new CsvInvalidoException(MensajeFilaCsvInvalidaFactory.generarMensaje(index, MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion())));
 
-      validarYAgregarPermisos(colaborador, forma.get());
+        validarYAgregarPermisos(colaborador, forma.get());
 
-      IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
+        IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
 
-      for (int i = 0; i < carga.getCantidad(); i++) {
-        colaboraciones.add(colaboracion);
-        this.calculadorPuntos.sumarPuntosPara(colaborador, colaboracion);
+        for (int i = 0; i < carga.getCantidad(); i++) {
+          colaboraciones.add(colaboracion);
+          this.calculadorPuntos.sumarPuntosPara(colaborador, colaboracion);
+        }
+
+        this.colaboradorRepository.actualizar(colaborador);
+        index++;
+      } catch (RuntimeException e) {
+        e.printStackTrace();
+        throw new CsvInvalidoException(MensajeFilaCsvInvalidaFactory.generarMensaje(index, e.getMessage()));
       }
-
-      this.colaboradorRepository.actualizar(colaborador);
     }
     return colaboraciones;
   }
@@ -110,7 +121,7 @@ public class CargadorDeColaboraciones {
 
 
       Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
-      if (forma.isEmpty()) throw new CsvInvalidoException("El csv no es valido!");
+      if (forma.isEmpty()) throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
       //TODO: solo para personas humanas ??? ?? ??
       TipoColaborador tipo = new TipoColaborador();
       tipo.setTipo(TipoPersona.PERSONA_HUMANA);
@@ -131,8 +142,8 @@ public class CargadorDeColaboraciones {
 
       colaboradorRepository.guardar(nuevoColaborador);
       return nuevoColaborador;
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    } catch (IOException | RuntimeException e) {
+      throw new CsvInvalidoException(e.getMessage());
     }
   }
 
@@ -140,7 +151,7 @@ public class CargadorDeColaboraciones {
     if (!colaborador.getTipoColaborador().tenesFormaColaboracion(forma.getNombreInterno()))
       colaborador.getTipoColaborador().agregarFormasColaboracion(forma);
 
-    Set<String> permisosDeEstaForma  = PermisosHelper.getInstance().fromFormaColaboracion(forma);
+    Set<String> permisosDeEstaForma = PermisosHelper.getInstance().fromFormaColaboracion(forma);
     if (!colaborador.getUsuario().tenesPermisos(permisosDeEstaForma.toArray(new String[0]))) {
       colaborador.getUsuario().getRoles().get(0).agregarPermisos(PermisosHelper.getInstance().buscarPorNombres(permisosDeEstaForma.toArray(new String[0])).toArray(new Permiso[0]));
     }
