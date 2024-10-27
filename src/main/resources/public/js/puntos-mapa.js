@@ -78,7 +78,15 @@ document.getElementById('confirmar').addEventListener('click', async function ()
                 marker.bindPopup(markerTemplate);
             });
         } catch (error) {
-            console.error('Error al obtener donaciones:', error);
+            Swal.fire({
+                title: "¡Ups! El servicio de búsqueda de donaciones no está disponible.",
+                icon: "error",
+                showCancelButton: true,
+                showConfirmButton: false,
+                confirmButtonColor: "#28b463",
+                cancelButtonColor: "#cb4335",
+                cancelButtonText: "Cancelar"
+            });
         }
     }
 });
