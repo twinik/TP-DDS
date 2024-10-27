@@ -26,7 +26,7 @@ public class AltaPersonaVulnerableRepository implements IAltaPersonaVulnerableRe
         n.setApellido("dkfmkadf");
         n.setColaborador(c);
         a.setPersona(n);
-        a.setTarjeta(Tarjeta.of("aaaaaaaaaaa", 0, new FrecuenciaDiaria(), n));
+        a.setTarjeta(Tarjeta.of("aaaaaaaaaaa", 0, new FrecuenciaDiaria(), n, null));
         a.setFecha(LocalDate.now());
         AltaPersonaVulnerableRepository r = new AltaPersonaVulnerableRepository();
         r.guardar(a);

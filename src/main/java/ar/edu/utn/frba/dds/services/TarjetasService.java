@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.dtos.colaboraciones.TarjetaInputDto;
+import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
+import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
@@ -22,10 +23,10 @@ public class TarjetasService {
     private ITarjetasColaboradorRepository tarjetasColaboradorRepository;
     private IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository;
 
-    public void crearTarjeta(PersonaVulnerable vulnerable, TarjetaInputDto dto) {
-        Optional<Tarjeta> posibleTarjeta = this.tarjetasRepository.buscarPorCodigo(dto.getCodigo());
-        if(posibleTarjeta.isPresent()) throw new CodigoInvalidoException(MensajeCodigoDuplicadoFactory.generarMensaje());
-        Tarjeta t = Tarjeta.of(dto.getCodigo(), 0, new FrecuenciaDiaria(), vulnerable);
+    public void crearTarjeta(PersonaVulnerable vulnerable, AltaPersonaVulnerableDto dto) {
+        Optional<Tarjeta> posibleTarjeta = this.tarjetasRepository.buscarPorCodigo(dto.getTarjeta().getCodigo());
+        if(posibleTarjeta.isPresent()) throw new DniDuplicadoException(MensajeCodigoDuplicadoFactory.generarMensaje(), dto); //todo no me anda el CodigoInvalidoException(MensajeCodigoDuplicadoFactory.generarMensaje(), dto);
+        Tarjeta t = Tarjeta.of(dto.getTarjeta().getCodigo(), 0, new FrecuenciaDiaria(), vulnerable, dto);
         tarjetasRepository.guardar(t);
     }
 

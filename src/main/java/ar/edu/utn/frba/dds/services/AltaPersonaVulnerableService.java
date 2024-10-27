@@ -37,12 +37,12 @@ public class AltaPersonaVulnerableService {
     Colaborador colaborador = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
     PersonaVulnerable p = obtenerPersonaVulnerable(dto);
 
-    this.validarDocumento(p.getTipoDocumento(), dto.getNroDocumento());
+    this.validarDocumento(p.getTipoDocumento(), dto);
 
     if (dto.getFechaNacimiento() != null){
       p.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
       if(p.getFechaNacimiento().isAfter(LocalDate.now()))
-        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
     }
 
 
@@ -52,7 +52,7 @@ public class AltaPersonaVulnerableService {
     a.setFecha(LocalDate.now());
     try {
       this.personasVulnerablesRepository.guardar(p);
-      this.tarjetasService.crearTarjeta(p, dto.getTarjeta());
+      this.tarjetasService.crearTarjeta(p, dto);
       this.calculadorPuntos.sumarPuntosPara(colaborador, a);
       this.altaPersonaVulnerableRepository.guardar(a);
     } catch (CodigoInvalidoException e) {
@@ -99,7 +99,7 @@ public class AltaPersonaVulnerableService {
     if (dto.getFechaNacimiento() != null){
       p.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
       if(p.getFechaNacimiento().isAfter(LocalDate.now()))
-        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
     }
     p.setFechaRegistro(LocalDate.now());
     p.setDomicilio(dto.getDomicilio());
@@ -110,10 +110,10 @@ public class AltaPersonaVulnerableService {
     return p;
   }
 
-  private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento) {
-    if (!DniHelper.esValido(nroDocumento)) throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
-    Optional<PersonaVulnerable> user = this.personasVulnerablesRepository.buscarPorDni(tipoDocumento,nroDocumento);
-    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
+  private void validarDocumento(TipoDocumento tipoDocumento, AltaPersonaVulnerableDto dto) {
+    if (!DniHelper.esValido(dto.getNroDocumento())) throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
+    Optional<PersonaVulnerable> user = this.personasVulnerablesRepository.buscarPorDni(tipoDocumento, dto.getNroDocumento());
+    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
   }
 
 }

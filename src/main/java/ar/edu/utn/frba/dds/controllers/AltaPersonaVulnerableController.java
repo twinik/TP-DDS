@@ -28,6 +28,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
   public void create(Context context) {
     HashMap<String, Object> model = new HashMap<>();
     model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
+    model.put("datosForm", context.consumeSessionAttribute("formDto"));
     model.put("message", context.queryParam("message"));
     context.render("/app/colaboraciones/alta-persona-vulnerable.hbs", model);
   }
@@ -41,6 +42,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
       menores.add(i);
     }
     model.put("menores", menores);
+    model.put("datosForm", context.consumeSessionAttribute("formDto"));
     model.put("message", context.queryParam("message"));
     context.render("/app/colaboraciones/alta-hijo-vulnerable.hbs", model);
   }

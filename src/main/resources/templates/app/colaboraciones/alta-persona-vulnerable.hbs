@@ -14,7 +14,8 @@
     <div class="p-10 mx-auto max-w-7xl">
         <h1 class="title1 mb-8">Alta de persona vulnerable</h1>
 
-        <form id="form-vul" method="post" action="/colaborar/registrar-persona-vulnerable" class="content-center max-w-md mx-auto">
+        <form id="form-vul" method="post" action="/colaborar/registrar-persona-vulnerable"
+              class="content-center max-w-md mx-auto">
             {{#if message}}
                 <p id="error-message" style="background: rgb(255, 163, 163);"
                    class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
@@ -30,6 +31,9 @@
                     name="nombre"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Nombre"
+                {{#if datosForm.nombre}}
+                    value="{{datosForm.nombre}}"
+                {{/if}}
                     required
             />
 
@@ -44,6 +48,9 @@
                     name="apellido"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Apellido"
+                {{#if datosForm.apellido}}
+                    value="{{datosForm.apellido}}"
+                {{/if}}
                     required
             />
 
@@ -74,6 +81,9 @@
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Documento"
+                {{#if datosForm.nroDocumento}}
+                    value="{{datosForm.nroDocumento}}"
+                {{/if}}
                     required
                     min="1"
             />
@@ -93,6 +103,9 @@
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Fecha de nacimiento"
                     name="fechaNacimiento"
+                {{#if datosForm.fechaNacimiento}}
+                    value="{{datosForm.fechaNacimiento}}"
+                {{/if}}
             />
 
             <label
@@ -214,7 +227,8 @@
                         min="1"
                 />
             </div>
-
+            <!-- todo, con estos luche como un enfermo para que se pueda hacer que te muestre el radio marcado o por lo menos que te muestre la direccion
+             pero si llegas a poner no y te queda la direccion que pusiste antes se guarda igual asi que no-->
             <label
                     for="cod-tarjeta"
                     class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -227,6 +241,9 @@
                     aria-describedby="helper-text-explanation"
                     class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ingrese código"
+                {{#if datosForm.tarjeta.codigo}}
+                    value="{{datosForm.tarjeta.codigo}}"
+                {{/if}}
                     required
                     min="1"
             />
@@ -279,7 +296,7 @@
     <script src="/js/alta-tarjeta.js"></script>
     <script src="/js/form-handler.js"></script>
     <script>
-        handleFormSubmit('form-vul','enviar-vul');
+        handleFormSubmit('form-vul', 'enviar-vul');
     </script>
 {{/partial}}
 
