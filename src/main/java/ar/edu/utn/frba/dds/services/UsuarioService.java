@@ -39,7 +39,7 @@ public class UsuarioService {
 
   public Usuario obtenerUsuario(String idUsuario) {
     Optional<Usuario> user = usuariosRepository.buscar(idUsuario);
-    user.ifPresent(usuario -> this.usuariosRepository.refresh(usuario));
+    //user.ifPresent(usuario -> this.usuariosRepository.refresh(usuario));
     return user.orElse(null);
   }
 
