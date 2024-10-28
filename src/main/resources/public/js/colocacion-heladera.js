@@ -140,6 +140,8 @@ function clickOnPopup(element) {
     const longitudElegida = element.getAttribute('data-lng');
     const calleElegida = element.getAttribute('data-calle');
     const alturaElegida = element.getAttribute('data-altura');
+    document.getElementById('latitud').value = latitudElegida
+    document.getElementById('longitud').value = longitudElegida
     document.getElementById('latitudElegida').value = latitudElegida;
     document.getElementById('longitudElegida').value = longitudElegida;
     document.getElementById('calle').value = calleElegida || '';
