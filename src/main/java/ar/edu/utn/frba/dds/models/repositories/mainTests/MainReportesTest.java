@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.models.repositories.mainTests;
 
-import static ar.edu.utn.frba.dds.models.domain.reportes.TipoReporte.*;
+import static ar.edu.utn.frba.dds.models.domain.reportes.TipoReporte.FALLAS_HELADERA;
+import static ar.edu.utn.frba.dds.models.domain.reportes.TipoReporte.VIANDA_X_COLAB;
+import static ar.edu.utn.frba.dds.models.domain.reportes.TipoReporte.VIANDA_X_HELADERA;
 
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
@@ -14,7 +16,14 @@ import ar.edu.utn.frba.dds.models.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.reportes.Reporte;
 import ar.edu.utn.frba.dds.models.domain.reportes.ReportesFactory;
-import ar.edu.utn.frba.dds.models.repositories.*;
+import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
+import ar.edu.utn.frba.dds.models.repositories.IDonacionesViandaRepository;
+import ar.edu.utn.frba.dds.models.repositories.IFallasTecnicasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IRedistribucionesViandaRepository;
+import ar.edu.utn.frba.dds.models.repositories.IReportesRepository;
+import ar.edu.utn.frba.dds.models.repositories.IViandasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -25,7 +25,7 @@ public class MedioContactoDto {
 
   public static boolean estanCamposLLenos(List<MedioContactoDto> lista, Object formDto) {
     if (lista.isEmpty()) throw new FormIncompletoException(MensajeContactoVacioFactory.generarMensaje(), formDto);
-    return lista.stream().allMatch(m -> (m.canal != null && m.valor != null));
+    return lista.stream().allMatch(m -> m.canal != null && m.valor != null);
   }
 
 }

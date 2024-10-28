@@ -52,7 +52,7 @@ public class ReporteFallasHeladera extends Reporte {
     Map<String, Long> fallasTecnicasPorHeladera =
         fallasTecnicasRepository.buscarFallasAgrupadasPorHeladera(hoy.toLocalDate());
 
-    alertasPorHeladera.forEach(((heladera, cant) -> fallasTecnicasPorHeladera.merge(heladera, cant, Long::sum)));
+    alertasPorHeladera.forEach((heladera, cant) -> fallasTecnicasPorHeladera.merge(heladera, cant, Long::sum));
 
     String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 

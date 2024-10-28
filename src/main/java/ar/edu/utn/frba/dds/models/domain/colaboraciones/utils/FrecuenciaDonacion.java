@@ -15,6 +15,6 @@ public enum FrecuenciaDonacion {
   }
 
   public static FrecuenciaDonacion fromOrdinal(Integer ordinal) {
-    return FrecuenciaDonacion.values()[ordinal];
+    return values()[ordinal];
   }
 }

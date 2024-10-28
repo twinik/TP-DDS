@@ -40,7 +40,7 @@ public class TwilioWhatsappSender implements WhatsappSenderAdapter {
 
   public void enviarWhatsapp(String mensaje, String numeroTelefono) {
     // Send the WhatsApp message
-    Message message = Message.creator(
+    Message.creator(
         new PhoneNumber(numeroTelefono),
         new PhoneNumber(TWILIO_NUMBER),
         mensaje

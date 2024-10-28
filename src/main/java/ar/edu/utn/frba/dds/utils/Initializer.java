@@ -6,7 +6,11 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.MotivoRedistribucionVianda;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.Producto;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.*;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoColaborador;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Rol;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
@@ -25,8 +29,29 @@ import ar.edu.utn.frba.dds.models.domain.tarjetas.PosibleCodigoTarjeta;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.AreaDeCobertura;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.Tecnico;
-import ar.edu.utn.frba.dds.models.domain.utils.*;
-import ar.edu.utn.frba.dds.models.repositories.*;
+import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
+import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
+import ar.edu.utn.frba.dds.models.domain.utils.MedioDeContacto;
+import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.models.domain.utils.Ubicacion;
+import ar.edu.utn.frba.dds.models.repositories.IAlertasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
+import ar.edu.utn.frba.dds.models.repositories.IColocacionHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IFallasTecnicasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IFormasColaboracionRespository;
+import ar.edu.utn.frba.dds.models.repositories.IFormularioRepository;
+import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IModeloHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IMotivoRedistribucionRepository;
+import ar.edu.utn.frba.dds.models.repositories.IOfertaProductoRepository;
+import ar.edu.utn.frba.dds.models.repositories.IPermisosRepository;
+import ar.edu.utn.frba.dds.models.repositories.IPosiblesCodigosTarjetaRepository;
+import ar.edu.utn.frba.dds.models.repositories.IRolesRepository;
+import ar.edu.utn.frba.dds.models.repositories.ISensorMovimientoRepository;
+import ar.edu.utn.frba.dds.models.repositories.ISensorTemperaturaRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
+import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -51,7 +76,7 @@ public class Initializer {
     IAlertasRepository alertasRepository = ServiceLocator.get(IAlertasRepository.class);
     IColocacionHeladeraRepository colocacionHeladeraRepository = ServiceLocator.get(IColocacionHeladeraRepository.class);
     IPermisosRepository permisosRepository = ServiceLocator.get(IPermisosRepository.class);
-    IReportesRepository reportesRepository = ServiceLocator.get(IReportesRepository.class);
+//    IReportesRepository reportesRepository = ServiceLocator.get(IReportesRepository.class);
     IFallasTecnicasRepository fallasTecnicasRepository = ServiceLocator.get(IFallasTecnicasRepository.class);
 
     Usuario u1 = new Usuario("usuario@mail.com", PasswordHasher.hashPassword("contra"));
@@ -276,6 +301,6 @@ public class Initializer {
   }
 
   public static void main(String[] args) {
-    Initializer.init();
+    init();
   }
 }

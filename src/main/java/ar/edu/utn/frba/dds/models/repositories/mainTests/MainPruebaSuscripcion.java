@@ -7,11 +7,11 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.RecomendadorHeladeras;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.models.domain.suscripciones.Suscripcion;
 import ar.edu.utn.frba.dds.models.domain.suscripciones.SuscripcionDesperfectoHeladera;
+import ar.edu.utn.frba.dds.models.domain.utils.CanalContacto;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
 import ar.edu.utn.frba.dds.models.repositories.ISuscripcionesRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
-import java.util.Optional;
 
 public class MainPruebaSuscripcion {
 
@@ -28,7 +28,7 @@ public class MainPruebaSuscripcion {
     colaboradoresRepository.buscar(c.getId());
 
     NotificationStrategyFactory factory = new NotificationStrategyFactory();
-    Suscripcion nueva = new Suscripcion(c, null, new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));
+    Suscripcion nueva = new Suscripcion(c, factory.create(CanalContacto.EMAIL), new SuscripcionDesperfectoHeladera(new RecomendadorHeladeras()));
 
     Heladera h = new Heladera();
     h.setNombre("un_nombre");
@@ -39,7 +39,7 @@ public class MainPruebaSuscripcion {
 
     suscripcionesRepository.guardar(nueva);
 
-    Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(nueva.getId());
+    //Optional<Suscripcion> hidratada = suscripcionesRepository.buscar(nueva.getId());
 
     //suscripcionesRepository.eliminar(hidratada.get());
 

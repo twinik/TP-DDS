@@ -19,28 +19,19 @@ public class ShowCampoDto {
     ShowCampoDto c = new ShowCampoDto();
     c.setId(campo.getId());
     c.setPregunta(campo.getPregunta());
-    c.setTipo(ShowCampoDto.mapTipoToString(campo.getTipo()));
+    c.setTipo(mapTipoToString(campo.getTipo()));
     c.setObligatorio(campo.isObligatorio());
-    c.setOpciones(campo.getOpciones().stream().map(o -> {
-      return new ShowOpcionDto(o.getId(), o.getOpcion());
-    }).toList());
+    c.setOpciones(campo.getOpciones().stream().map(o -> new ShowOpcionDto(o.getId(), o.getOpcion())).toList());
     return c;
   }
 
   public static String mapTipoToString(TipoCampo tipo) {
-    switch (tipo) {
-      case LIBRE:
-        return "texto-libre";
-      case MULTIPLE_CHOICE:
-        return "multiple-choice";
-      case CHOICE:
-        return "single-choice";
-      case NUMERICO:
-        return "numerico";
-      case FECHA:
-        return "fecha";
-      default:
-        throw new RuntimeException("Tipo de campo de formulario invalido");
-    }
+    return switch (tipo) {
+      case LIBRE -> "texto-libre";
+      case MULTIPLE_CHOICE -> "multiple-choice";
+      case CHOICE -> "single-choice";
+      case NUMERICO -> "numerico";
+      case FECHA -> "fecha";
+    };
   }
 }

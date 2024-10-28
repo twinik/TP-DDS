@@ -77,15 +77,15 @@ public class Tarjeta extends EntidadPersistente {
   }
 
   public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Integer cantidadUsosDia) {
-    return Tarjeta.of(codigo, nroUsos, frecuenciaPermitida, duenio, LocalDate.now(), cantidadUsosDia);
+    return of(codigo, nroUsos, frecuenciaPermitida, duenio, LocalDate.now(), cantidadUsosDia);
   }
 
   public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio) {
-    return Tarjeta.of(codigo, nroUsos, frecuenciaPermitida, duenio, 0);
+    return of(codigo, nroUsos, frecuenciaPermitida, duenio, 0);
   }
 
   public static Tarjeta of(String codigo, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio) {
-    return Tarjeta.of(codigo, 0, frecuenciaPermitida, duenio);
+    return of(codigo, 0, frecuenciaPermitida, duenio);
   }
 
   public void agregarUsos(UsoTarjeta uso) {

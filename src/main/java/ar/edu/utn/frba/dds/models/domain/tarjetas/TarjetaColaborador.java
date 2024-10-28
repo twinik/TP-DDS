@@ -56,14 +56,10 @@ public class TarjetaColaborador extends EntidadPersistente {
   }
 
   public static TarjetaColaborador of(Colaborador colaborador, String codigo) throws NoTieneDireccionException {
-//        if (colaborador.getDireccion() == null)
-//            throw new NoTieneDireccionException(MensajeExcepcionDireccionTarjetaFactory.generarMensaje());
     return new TarjetaColaborador(codigo, colaborador, true, LocalDate.now(), null, new ArrayList<>());
   }
 
   public static TarjetaColaborador of(Colaborador colaborador, String codigo, LocalDate fechaAlta) throws NoTieneDireccionException {
-//        if (colaborador.getDireccion() == null)
-//            throw new NoTieneDireccionException(MensajeExcepcionDireccionTarjetaFactory.generarMensaje());
     return new TarjetaColaborador(codigo, colaborador, true, fechaAlta, null, new ArrayList<>());
   }
 

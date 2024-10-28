@@ -58,7 +58,6 @@ public abstract class Incidente extends EntidadPersistente {
       NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
       try {
         strategy.notificar(tecnicoAContactar, new ConfigReader("config.properties").getProperty("ASUNTO_MENSAJE_TECNICO"), message);
-        ;
       } catch (IOException e) {
         throw new RuntimeException(e);
       }

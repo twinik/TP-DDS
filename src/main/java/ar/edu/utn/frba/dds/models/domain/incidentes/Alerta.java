@@ -36,7 +36,7 @@ public class Alerta extends Incidente {
   }
 
   public static Alerta of(Heladera heladera, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {
-    return Alerta.of(heladera, LocalDateTime.now(), tecnicosHelper, notificationStrategyFactory, tipoAlerta);
+    return of(heladera, LocalDateTime.now(), tecnicosHelper, notificationStrategyFactory, tipoAlerta);
   }
 
   @Override

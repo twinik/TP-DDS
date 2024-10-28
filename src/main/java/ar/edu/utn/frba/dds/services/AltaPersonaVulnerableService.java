@@ -6,7 +6,6 @@ import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.TutoradoInputDto;
 import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
-import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.helpers.DniHelper;
 import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
@@ -40,7 +39,7 @@ public class AltaPersonaVulnerableService {
     this.validarDocumento(p.getTipoDocumento(), dto);
 
     if (dto.getFechaNacimiento() != null) {
-      p.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+      p.setFechaNacimiento(fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
       if (p.getFechaNacimiento().isAfter(LocalDate.now()))
         throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
     }
@@ -97,7 +96,7 @@ public class AltaPersonaVulnerableService {
     p.setNombre(dto.getNombre());
     p.setApellido(dto.getApellido());
     if (dto.getFechaNacimiento() != null) {
-      p.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
+      p.setFechaNacimiento(fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
       if (p.getFechaNacimiento().isAfter(LocalDate.now()))
         throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
     }

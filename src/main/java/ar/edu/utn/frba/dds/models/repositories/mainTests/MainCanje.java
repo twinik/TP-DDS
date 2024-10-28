@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.models.repositories.mainTests;
 
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CanjeProducto;
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.CategoriaOferta;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.Producto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 public class MainCanje {
 
   public static void main(String[] args) {
-    CategoriaOferta cat = CategoriaOferta.valueOf(null);
     IOfertaProductoRepository ofertasRepo = ServiceLocator.get(IOfertaProductoRepository.class);
     IColaboradoresRepository colabRepo = ServiceLocator.get(IColaboradoresRepository.class);
     ICanjeProductoRepository repo = ServiceLocator.get(ICanjeProductoRepository.class);
@@ -44,9 +42,6 @@ public class MainCanje {
     comprador.restarPuntos(canje.getPuntosGastados());
 
     repo.guardar(canje);
-
-
-    //CanjeProducto
   }
 
 }

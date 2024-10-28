@@ -32,11 +32,11 @@ public class GeneradorDeCodigosHelper {
   }
 
   public static void main(String[] args) {
-    String prueba = GeneradorDeCodigosHelper.generarAlfanumericoUnico(20);
+    String prueba = generarAlfanumericoUnico(20);
     System.out.println("Código generado: " + prueba);
 
     String codigoAValidar = "abc123DEF45";
-    boolean esValido = GeneradorDeCodigosHelper.esCodigoValido(codigoAValidar, 11);
+    boolean esValido = esCodigoValido(codigoAValidar, 11);
     System.out.println("¿Es válido el código '" + codigoAValidar + "'? " + esValido);
   }
 

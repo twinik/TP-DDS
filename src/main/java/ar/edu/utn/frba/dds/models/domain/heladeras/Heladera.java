@@ -132,7 +132,7 @@ public class Heladera extends EntidadPersistente {
 
   public boolean temperaturaEsAdecuada() {
     Float temp = this.registroTemperaturas.get(registroTemperaturas.size() - 1).temperaturaRegistrada;
-    return (temp < this.modelo.getTempMax() && temp > this.modelo.getTempMin());
+    return temp < this.modelo.getTempMax() && temp > this.modelo.getTempMin();
   }
 
   public float getUltimaTemperaturaRegistrada() {
