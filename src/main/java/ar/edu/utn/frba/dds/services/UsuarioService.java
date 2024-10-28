@@ -6,11 +6,9 @@ import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioNavbarDto;
 import ar.edu.utn.frba.dds.exceptions.LoginFailedException;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.utils.PasswordHasher;
-import ar.edu.utn.frba.dds.utils.PermisosHelper;
 import lombok.AllArgsConstructor;
 import java.util.Optional;
 
@@ -41,7 +39,7 @@ public class UsuarioService {
 
     public Usuario obtenerUsuario(String idUsuario) {
         Optional<Usuario> user = usuariosRepository.buscar(idUsuario);
-      user.ifPresent(usuario -> this.usuariosRepository.refresh(usuario));
+        user.ifPresent(usuario -> this.usuariosRepository.refresh(usuario));
         return user.orElse(null);
     }
 

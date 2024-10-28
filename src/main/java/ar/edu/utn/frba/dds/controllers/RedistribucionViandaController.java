@@ -31,18 +31,19 @@ public class RedistribucionViandaController implements ICrudViewsHandler {
 
     @Override
     public void create(Context context) {
-        Map<String,Object> model = new HashMap<>();
-        model.put("message",context.queryParam("message"));
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", context.queryParam("message"));
         model.put("datosForm", context.consumeSessionAttribute("formDto"));
-        model.put("motivos",this.motivoRedistribucionService.obtenerMotivos());
-        context.render("/app/colaboraciones/distribucion-vianda.hbs",model);
+        model.put("motivos", this.motivoRedistribucionService.obtenerMotivos());
+        context.render("/app/colaboraciones/distribucion-vianda.hbs", model);
     }
 
     @Override
     public void save(Context context) {
         RedistribucionViandaDto dto = RedistribucionViandaDto.of(context);
-        if(!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
-        if(dto.getDestino().getId().equals(dto.getOrigen().getId())) throw new MismaHeladeraException(MensajeMismaHeladeraFactory.generarMensaje());
+        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+        if (dto.getDestino().getId().equals(dto.getOrigen().getId()))
+            throw new MismaHeladeraException(MensajeMismaHeladeraFactory.generarMensaje());
         this.redistribucionViandasService.solicitarRedistribucion(dto);
         Map<String, Object> model = new HashMap<>();
         model.put("message", "Su solcitud de redistribución ha sido registrada con éxito, esperamos su donación con ansias");

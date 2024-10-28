@@ -16,6 +16,6 @@ public class UsuarioNavbarDto {
 
     public Boolean esAdmin() {
         return this.permisoTecnico || this.permisoFormulario || this.permisoModeloHeladera || this.permisoCodTarjeta
-            || this.permisoCsv;
+                || this.permisoCsv;
     }
 }

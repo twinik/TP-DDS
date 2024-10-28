@@ -4,7 +4,7 @@ function handleFormSubmit(formId, submitButtonId) {
     const heladeraError = document.getElementById('heladera-error');
     const heladeraId = document.getElementById('idHeladera');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         if (!heladeraId.value) {
             event.preventDefault();
             heladeraError.classList.remove('hidden');

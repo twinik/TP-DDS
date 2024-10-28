@@ -23,6 +23,7 @@ public class MedioContactoRepository implements IMedioContactoRepository, WithSi
     public void guardar(MedioDeContacto visitaTecnico) {
         withTransaction(() -> entityManager().persist(visitaTecnico));
     }
+
     @Override
     public void actualizar(MedioDeContacto visitaTecnico) {
         withTransaction(() -> entityManager().merge(visitaTecnico));

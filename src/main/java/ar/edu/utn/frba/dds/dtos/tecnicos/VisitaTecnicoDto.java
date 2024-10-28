@@ -8,7 +8,6 @@ import io.javalin.http.Context;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,12 +22,12 @@ public class VisitaTecnicoDto {
     private String incidente;
 
     public static VisitaTecnicoDto of(Context context) {
-    String idTecnico = context.formParam("tecnico");
-    String fechaVisita = context.formParam("fecha");
-    String descripcion = context.formParam("desc");
-    String incidente = context.formParam("incidente");
-    boolean solucionado = "Sí".equals(context.formParam("incidenteSolucionado"));
+        String idTecnico = context.formParam("tecnico");
+        String fechaVisita = context.formParam("fecha");
+        String descripcion = context.formParam("desc");
+        String incidente = context.formParam("incidente");
+        boolean solucionado = "Sí".equals(context.formParam("incidenteSolucionado"));
 
-    return new VisitaTecnicoDto(idTecnico, fechaVisita, descripcion, null, solucionado, incidente);
-}
+        return new VisitaTecnicoDto(idTecnico, fechaVisita, descripcion, null, solucionado, incidente);
+    }
 }

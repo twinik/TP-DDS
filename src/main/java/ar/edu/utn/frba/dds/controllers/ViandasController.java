@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.colaboraciones.IngresoViandaDto;
-import ar.edu.utn.frba.dds.dtos.colaboraciones.ViandaDto;
 import ar.edu.utn.frba.dds.services.ViandasService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;

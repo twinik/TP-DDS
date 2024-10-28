@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.dtos.personas;
 import ar.edu.utn.frba.dds.dtos.DireccionDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
-import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import io.javalin.http.Context;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,8 +47,9 @@ public class PersonaJuridicaDto {
     }
 
     public boolean estanCamposLlenos() {
-        if (this.tipoOrganizacion == null) throw new FormIncompletoException("Debes seleccionar un tipo de organizacion valido", this);
-        return this.razonSocial != null && (this.direccion == null || this.direccion.estanCamposLlenos(this)) && this.rubro != null &&  FormaColaboracionDto.validarSeleccion(this.formasColaboracion, this) &&
+        if (this.tipoOrganizacion == null)
+            throw new FormIncompletoException("Debes seleccionar un tipo de organizacion valido", this);
+        return this.razonSocial != null && (this.direccion == null || this.direccion.estanCamposLlenos(this)) && this.rubro != null && FormaColaboracionDto.validarSeleccion(this.formasColaboracion, this) &&
                 MedioContactoDto.estanCamposLLenos(this.mediosDeContacto, this) && this.usuarioDto != null && this.tipoOrganizacion != null;
     }
 

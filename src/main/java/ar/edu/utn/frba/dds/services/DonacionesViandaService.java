@@ -14,11 +14,11 @@ public class DonacionesViandaService {
 
     public void crearDonaciones(IngresoVianda ingresoVianda) {
 
-    List<DonacionVianda> donaciones = ingresoVianda.donar();
+        List<DonacionVianda> donaciones = ingresoVianda.donar();
 
-    donaciones.forEach(d -> calculadorPuntos.sumarPuntosPara(d.getColaborador(), d));
+        donaciones.forEach(d -> calculadorPuntos.sumarPuntosPara(d.getColaborador(), d));
 
-    donacionesViandaRepository.guardar(donaciones);
+        donacionesViandaRepository.guardar(donaciones);
 
-  }
+    }
 }

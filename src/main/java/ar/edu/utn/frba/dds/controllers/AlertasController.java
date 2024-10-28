@@ -13,48 +13,48 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class AlertasController implements ICrudViewsHandler {
-  private AlertasService alertasService;
-  private HeladerasService heladerasService;
+    private AlertasService alertasService;
+    private HeladerasService heladerasService;
 
-  @Override
-  public void index(Context context) {
-    // TODO: agregar paginacion y filtros
-    List<AlertaDto> alertas = alertasService.obtenerTodos();
-    List<HeladeraDto> heladeras = heladerasService.obtenerHeladerasConAlerta();
-    Map<String, Object> model = new HashMap<>();
-    model.put("alertas", alertas);
-    model.put("heladeras", heladeras);
-    context.status(200);
-    context.render("/app/heladeras/listado-alertas.hbs", model);
-  }
+    @Override
+    public void index(Context context) {
+        // TODO: agregar paginacion y filtros
+        List<AlertaDto> alertas = alertasService.obtenerTodos();
+        List<HeladeraDto> heladeras = heladerasService.obtenerHeladerasConAlerta();
+        Map<String, Object> model = new HashMap<>();
+        model.put("alertas", alertas);
+        model.put("heladeras", heladeras);
+        context.status(200);
+        context.render("/app/heladeras/listado-alertas.hbs", model);
+    }
 
-  @Override
-  public void show(Context context) {
+    @Override
+    public void show(Context context) {
 
-  }
+    }
 
-  @Override
-  public void create(Context context) {
+    @Override
+    public void create(Context context) {
 
-  }
+    }
 
-  @Override
-  public void save(Context context) {
+    @Override
+    public void save(Context context) {
 
-  }
+    }
 
-  @Override
-  public void edit(Context context) {
+    @Override
+    public void edit(Context context) {
 
-  }
+    }
 
-  @Override
-  public void update(Context context) {
+    @Override
+    public void update(Context context) {
 
-  }
+    }
 
-  @Override
-  public void delete(Context context) {
+    @Override
+    public void delete(Context context) {
 
-  }
+    }
 }

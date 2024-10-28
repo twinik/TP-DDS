@@ -5,9 +5,9 @@ import ar.edu.utn.frba.dds.models.domain.colaboraciones.OfertaProducto;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import lombok.Setter;
 
 /**
  * CanjeProducto class representa una colaboracion de un colaborador.
@@ -19,29 +19,29 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CanjeProducto extends EntidadPersistente {
-  @ManyToOne
-  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-  private Colaborador comprador;
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    private Colaborador comprador;
 
-  @ManyToOne
-  @JoinColumn(name = "oferta_producto_id", referencedColumnName = "id")
-  private OfertaProducto ofertaCanjeada;
+    @ManyToOne
+    @JoinColumn(name = "oferta_producto_id", referencedColumnName = "id")
+    private OfertaProducto ofertaCanjeada;
 
-  @Column(name = "fecha_canje", columnDefinition = "DATETIME")
-  private LocalDateTime fechaCanje;
+    @Column(name = "fecha_canje", columnDefinition = "DATETIME")
+    private LocalDateTime fechaCanje;
 
-  @Column(name = "puntos_gastados")
-  private Float puntosGastados;
+    @Column(name = "puntos_gastados")
+    private Float puntosGastados;
 
-  /**
-   * Constructor con parametros.
-   */
-  public CanjeProducto(Colaborador comprador,
-                       OfertaProducto ofertaCanjeada,
-                       LocalDateTime fechaCanje, Float puntosGastados) {
-    this.comprador = comprador;
-    this.ofertaCanjeada = ofertaCanjeada;
-    this.fechaCanje = fechaCanje;
-    this.puntosGastados = puntosGastados;
-  }
+    /**
+     * Constructor con parametros.
+     */
+    public CanjeProducto(Colaborador comprador,
+                         OfertaProducto ofertaCanjeada,
+                         LocalDateTime fechaCanje, Float puntosGastados) {
+        this.comprador = comprador;
+        this.ofertaCanjeada = ofertaCanjeada;
+        this.fechaCanje = fechaCanje;
+        this.puntosGastados = puntosGastados;
+    }
 }

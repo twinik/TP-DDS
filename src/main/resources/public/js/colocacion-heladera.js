@@ -9,6 +9,7 @@ async function fetchHeladeras() {
         console.error('Failed to fetch heladeras:', error);
     }
 }
+
 async function fetchHeladerasDonaciones() {
     try {
         const response = await fetch('/heladeras/donar');
@@ -20,6 +21,7 @@ async function fetchHeladerasDonaciones() {
         console.error('Failed to fetch heladeras:', error);
     }
 }
+
 async function fetchDonaciones(provincia, localidad) {
     try {
         const response = await fetch(`/heladeras/recibir-puntos?provincia=${provincia}&localidad=${localidad}`);
@@ -33,6 +35,7 @@ async function fetchDonaciones(provincia, localidad) {
         console.error('Failed to fetch donaciones:', error);
     }
 }
+
 async function fetchDonacionesCercanas(latitud, longitud, radio) {
     try {
         const response = await fetch(`/colaborar/recibir-puntos-colocacion?latitud=${latitud}&longitud=${longitud}&radio=${radio}`);
@@ -46,6 +49,7 @@ async function fetchDonacionesCercanas(latitud, longitud, radio) {
         console.error('Failed to fetch puntos colocacion:', error);
     }
 }
+
 // Map initialization and event handling
 var cabaCoords = [-34.6118, -58.4173];
 var map = L.map("mapa-container").setView(cabaCoords, 13);
@@ -81,19 +85,19 @@ map.on("click", function (e) {
     }
 });
 // Event handler for radio button change
-document.getElementById('seleccionar-punto').addEventListener('change', function() {
+document.getElementById('seleccionar-punto').addEventListener('change', function () {
     document.getElementById('seleccionar-punto-form').style.display = 'block';
     document.getElementById('recomendar-punto-form').style.display = 'none';
     markerLayerGroup.clearLayers();
     if (marker) map.removeLayer(marker);
 });
-document.getElementById('recomendar-punto').addEventListener('change', function() {
+document.getElementById('recomendar-punto').addEventListener('change', function () {
     document.getElementById('seleccionar-punto-form').style.display = 'none';
     document.getElementById('recomendar-punto-form').style.display = 'block';
     if (marker) map.removeLayer(marker); // Remove marker if in recommend mode
 });
 // Event handler for fetching recommendations based on coordinates and radius
-document.getElementById('buscar-recomendaciones').addEventListener('click', async function() {
+document.getElementById('buscar-recomendaciones').addEventListener('click', async function () {
     const latitud = parseFloat(document.getElementById('latitud').value);
     const longitud = parseFloat(document.getElementById('longitud').value);
     const radio = parseFloat(document.getElementById('radio').value);
@@ -120,6 +124,7 @@ document.getElementById('buscar-recomendaciones').addEventListener('click', asyn
         console.error('Error al obtener los puntos de colocacion:', error);
     }
 });
+
 // Form submission handling
 function handleFormSubmit(formId, submitButtonId) {
     document.getElementById(formId).addEventListener('submit', function (event) {
@@ -128,6 +133,7 @@ function handleFormSubmit(formId, submitButtonId) {
         submitButton.innerHTML = 'Enviando...';
     });
 }
+
 // Click popup handler to set chosen point data
 function clickOnPopup(element) {
     const latitudElegida = element.getAttribute('data-lat');

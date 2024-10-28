@@ -1,12 +1,7 @@
 package ar.edu.utn.frba.dds.services;
 
 import ar.edu.utn.frba.dds.dtos.reportes.ReporteDto;
-import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
 import ar.edu.utn.frba.dds.models.domain.reportes.Reporte;
-import ar.edu.utn.frba.dds.models.domain.reportes.ReporteFallasHeladera;
-import ar.edu.utn.frba.dds.models.domain.reportes.ReporteViandasPorColaborador;
-import ar.edu.utn.frba.dds.models.domain.reportes.ReporteViandasPorHeladera;
-import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
 import ar.edu.utn.frba.dds.models.repositories.IReportesRepository;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;

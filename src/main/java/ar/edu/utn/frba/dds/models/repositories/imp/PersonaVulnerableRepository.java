@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.models.domain.PersonaVulnerable;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.repositories.IPersonaVulnerableRepository;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;

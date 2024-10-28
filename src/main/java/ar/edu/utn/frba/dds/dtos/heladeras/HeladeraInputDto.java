@@ -30,8 +30,8 @@ public class HeladeraInputDto {
                         .codigoPostal(context.formParam("codPostal"))
                         .build())
                 .idColaborador(context.sessionAttribute("idColaborador"))
-            .sensorMov(context.formParam("sensorMov") != null && !context.formParam("sensorMov").isBlank())
-            .sensorTemp(context.formParam("sensorTemp") != null && !context.formParam("sensorTemp").isBlank())
+                .sensorMov(context.formParam("sensorMov") != null && !context.formParam("sensorMov").isBlank())
+                .sensorTemp(context.formParam("sensorTemp") != null && !context.formParam("sensorTemp").isBlank())
                 .build();
     }
 

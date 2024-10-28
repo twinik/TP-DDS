@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraInputDto;
-import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.services.ColocacionHeladerasService;
 import ar.edu.utn.frba.dds.services.ModelosService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -29,7 +28,7 @@ public class ColocacionHeladerasController implements ICrudViewsHandler {
     public void create(Context context) {
         Map<String, Object> model = new HashMap<>();
         model.put("modelos", this.modelosService.obtenerModelosDisponibles());
-        model.put("message",context.queryParam("message"));
+        model.put("message", context.queryParam("message"));
         context.status(201);
         context.render("/app/colaboraciones/cargo-heladera.hbs", model);
     }

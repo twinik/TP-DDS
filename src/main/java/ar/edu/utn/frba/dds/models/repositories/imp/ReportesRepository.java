@@ -24,9 +24,9 @@ public class ReportesRepository implements IReportesRepository, WithSimplePersis
     @Override
     public List<Reporte> buscarEntreFechas(LocalDate desde, LocalDate hasta) {
         return entityManager().createQuery("from Reporte where created_at between :desde and :hasta order by created_at desc", Reporte.class)
-            .setParameter("desde", desde.atStartOfDay())
-            .setParameter("hasta", hasta.atTime(LocalTime.MAX))
-            .getResultList();
+                .setParameter("desde", desde.atStartOfDay())
+                .setParameter("hasta", hasta.atTime(LocalTime.MAX))
+                .getResultList();
     }
 
     @Override

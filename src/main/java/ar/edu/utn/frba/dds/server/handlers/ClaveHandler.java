@@ -1,12 +1,9 @@
 package ar.edu.utn.frba.dds.server.handlers;
 
-import ar.edu.utn.frba.dds.dtos.personas.PersonaHumanaDto;
 import ar.edu.utn.frba.dds.exceptions.ClaveDebilException;
 import ar.edu.utn.frba.dds.exceptions.ClaveNoCoincidenException;
 import io.javalin.Javalin;
 import lombok.NoArgsConstructor;
-import java.util.HashMap;
-import java.util.Map;
 
 @NoArgsConstructor
 public class ClaveHandler implements IHandler {

@@ -27,9 +27,9 @@ public class DonacionDineroService {
         DonacionDinero donacion = new DonacionDinero();
         donacion.setColaborador(c);
 
-        if (dto.getFecha() != null){
+        if (dto.getFecha() != null) {
             donacion.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
-            if(donacion.getFecha().isBefore(LocalDate.now()))
+            if (donacion.getFecha().isBefore(LocalDate.now()))
                 throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
         }
         donacion.setMonto(dto.getMonto());

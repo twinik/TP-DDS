@@ -23,7 +23,8 @@ public class FormaColaboracionDto {
     }
 
     public static Boolean validarSeleccion(List<FormaColaboracionDto> formas, Object dto) {
-        if (formas == null || formas.isEmpty()) throw new RegistroFailedException("Debes seleccionar una forma de colaboracion", dto);
+        if (formas == null || formas.isEmpty())
+            throw new RegistroFailedException("Debes seleccionar una forma de colaboracion", dto);
         return true;
     }
 }

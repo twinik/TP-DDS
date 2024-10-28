@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public class DniDuplicadoException extends RuntimeException {
     private Object formDto;
+
     public DniDuplicadoException(String message) {
         super(message);
     }

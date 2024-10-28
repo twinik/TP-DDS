@@ -7,13 +7,13 @@ import lombok.Getter;
 @Builder
 @Getter
 public class MotivoRedistribucionDto {
-  private String id;
-  private String desc;
+    private String id;
+    private String desc;
 
-  public static MotivoRedistribucionDto fromMotivo(MotivoRedistribucionVianda motivo){
-    return MotivoRedistribucionDto.builder().id(motivo.getId())
-        .desc(motivo.getMotivo())
-        .build();
-  }
+    public static MotivoRedistribucionDto fromMotivo(MotivoRedistribucionVianda motivo) {
+        return MotivoRedistribucionDto.builder().id(motivo.getId())
+                .desc(motivo.getMotivo())
+                .build();
+    }
 
 }

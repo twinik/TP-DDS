@@ -39,7 +39,8 @@ public class TecnicosController implements ICrudViewsHandler {
     @Override
     public void save(Context context) {
         TecnicoDto dto = TecnicoDto.of(context);
-        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje(), dto);
+        if (!dto.estanCamposLlenos())
+            throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje(), dto);
 
         this.tecnicosService.crearTecnico(dto);
         Map<String, Object> model = new HashMap<>();

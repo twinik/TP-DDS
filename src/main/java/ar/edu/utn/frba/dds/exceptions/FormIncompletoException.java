@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.exceptions;
 
-import ar.edu.utn.frba.dds.dtos.personas.PersonaHumanaDto;
-import ar.edu.utn.frba.dds.dtos.personas.PersonaJuridicaDto;
 import lombok.Getter;
 
 @Getter

@@ -24,6 +24,7 @@ public class RespuestasFormularioRepository implements IRespuestasFormularioRepo
     public void guardar(RespuestaFormulario respuestaFormulario) {
         withTransaction(() -> entityManager().persist(respuestaFormulario));
     }
+
     @Override
     public void actualizar(RespuestaFormulario respuestaFormulario) {
         withTransaction(() -> entityManager().merge(respuestaFormulario));

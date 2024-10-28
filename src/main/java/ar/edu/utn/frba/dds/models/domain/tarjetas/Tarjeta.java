@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.models.domain.tarjetas;
 
-import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
-import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.helpers.GeneradorDeCodigosHelper;
 import ar.edu.utn.frba.dds.models.converters.FrecuenciaUsoAttributeConverter;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;

@@ -9,17 +9,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FallaTecnicaAltaDto {
-  private String id;
-  private String descripcion;
-  private String urlFoto;
-  private String idColaborador;
-  private String heladeraId;
+    private String id;
+    private String descripcion;
+    private String urlFoto;
+    private String idColaborador;
+    private String heladeraId;
 
-  public static FallaTecnicaAltaDto of(Context ctx) {
-    return FallaTecnicaAltaDto.builder()
-        .heladeraId(ctx.pathParam("id"))
-        .descripcion(ctx.formParam("descripcion"))
-        .idColaborador(ctx.sessionAttribute("idColaborador"))
-        .build();
-  }
+    public static FallaTecnicaAltaDto of(Context ctx) {
+        return FallaTecnicaAltaDto.builder()
+                .heladeraId(ctx.pathParam("id"))
+                .descripcion(ctx.formParam("descripcion"))
+                .idColaborador(ctx.sessionAttribute("idColaborador"))
+                .build();
+    }
 }

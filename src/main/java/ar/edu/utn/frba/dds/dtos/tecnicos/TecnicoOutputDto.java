@@ -7,12 +7,12 @@ import lombok.Getter;
 @Builder
 @Getter
 public class TecnicoOutputDto {
-  private String id;
-  private String nombre;
+    private String id;
+    private String nombre;
 
-  public static TecnicoOutputDto fromTecnico(Tecnico tecnico) {
-    return TecnicoOutputDto.builder().id(tecnico.getId())
-        .nombre(tecnico.getNombre() + " " + tecnico.getApellido())
-        .build();
-  }
+    public static TecnicoOutputDto fromTecnico(Tecnico tecnico) {
+        return TecnicoOutputDto.builder().id(tecnico.getId())
+                .nombre(tecnico.getNombre() + " " + tecnico.getApellido())
+                .build();
+    }
 }

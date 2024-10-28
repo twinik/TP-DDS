@@ -15,75 +15,75 @@ import java.util.Objects;
 
 @AllArgsConstructor
 public class LoginController implements ICrudViewsHandler {
-  private UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
-  public void handleLogin(Context ctx) {
-    UsuarioDto usuario = UsuarioDto.of(ctx);
-    try {
-      LoginDto dto = this.usuarioService.obtenerUsuario(usuario);
-      ctx.sessionAttribute("idUsuario", dto.getIdUsuario());
-      UsuarioNavbarDto usuarioNavbarDto;
-      if (dto.getIdColaborador() != null) {
-        ctx.sessionAttribute("idColaborador", dto.getIdColaborador());
-        usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()), dto.getIdColaborador());
-      } else {
-        usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()));
-      }
+    public void handleLogin(Context ctx) {
+        UsuarioDto usuario = UsuarioDto.of(ctx);
+        try {
+            LoginDto dto = this.usuarioService.obtenerUsuario(usuario);
+            ctx.sessionAttribute("idUsuario", dto.getIdUsuario());
+            UsuarioNavbarDto usuarioNavbarDto;
+            if (dto.getIdColaborador() != null) {
+                ctx.sessionAttribute("idColaborador", dto.getIdColaborador());
+                usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()), dto.getIdColaborador());
+            } else {
+                usuarioNavbarDto = usuarioService.getUsuarioNavbar(usuarioService.obtenerUsuario(dto.getIdUsuario()));
+            }
 
-      ctx.sessionAttribute("username", usuarioNavbarDto.getNombre());
-      ctx.sessionAttribute("email", usuarioNavbarDto.getEmail());
-      ctx.sessionAttribute("permisoTecnico", usuarioNavbarDto.getPermisoTecnico());
-      ctx.sessionAttribute("permisoFormulario", usuarioNavbarDto.getPermisoFormulario());
-      ctx.sessionAttribute("permisoModeloHeladera", usuarioNavbarDto.getPermisoModeloHeladera());
-      ctx.sessionAttribute("permisoTarjeta", usuarioNavbarDto.getPermisoCodTarjeta());
-      ctx.sessionAttribute("permisoCsv", usuarioNavbarDto.getPermisoCsv());
-      ctx.sessionAttribute("admin", usuarioNavbarDto.esAdmin());
+            ctx.sessionAttribute("username", usuarioNavbarDto.getNombre());
+            ctx.sessionAttribute("email", usuarioNavbarDto.getEmail());
+            ctx.sessionAttribute("permisoTecnico", usuarioNavbarDto.getPermisoTecnico());
+            ctx.sessionAttribute("permisoFormulario", usuarioNavbarDto.getPermisoFormulario());
+            ctx.sessionAttribute("permisoModeloHeladera", usuarioNavbarDto.getPermisoModeloHeladera());
+            ctx.sessionAttribute("permisoTarjeta", usuarioNavbarDto.getPermisoCodTarjeta());
+            ctx.sessionAttribute("permisoCsv", usuarioNavbarDto.getPermisoCsv());
+            ctx.sessionAttribute("admin", usuarioNavbarDto.esAdmin());
 
-      if (dto.getFormCompletado() != null && !dto.getFormCompletado()) {
-        throw new FormularioNoCompletadoException(dto.getIdColaborador());
-      }
+            if (dto.getFormCompletado() != null && !dto.getFormCompletado()) {
+                throw new FormularioNoCompletadoException(dto.getIdColaborador());
+            }
 
-      String previousUrl = ctx.sessionAttribute("previousUrl");
-      ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));
-    } catch (LoginFailedException e) {
-      Map<String, String> model = new HashMap<>();
-      model.put("message", "No existe un usuario con ese email o contraseña. Inténtelo nuevamente.");
-      ctx.render("auth/login/inicio-sesion.hbs", model);
+            String previousUrl = ctx.sessionAttribute("previousUrl");
+            ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));
+        } catch (LoginFailedException e) {
+            Map<String, String> model = new HashMap<>();
+            model.put("message", "No existe un usuario con ese email o contraseña. Inténtelo nuevamente.");
+            ctx.render("auth/login/inicio-sesion.hbs", model);
+        }
     }
-  }
 
-  @Override
-  public void index(Context context) {
-    context.render("/auth/login/inicio-sesion.hbs");
-  }
+    @Override
+    public void index(Context context) {
+        context.render("/auth/login/inicio-sesion.hbs");
+    }
 
-  @Override
-  public void show(Context context) {
+    @Override
+    public void show(Context context) {
 
-  }
+    }
 
-  @Override
-  public void create(Context context) {
+    @Override
+    public void create(Context context) {
 
-  }
+    }
 
-  @Override
-  public void save(Context context) {
+    @Override
+    public void save(Context context) {
 
-  }
+    }
 
-  @Override
-  public void edit(Context context) {
+    @Override
+    public void edit(Context context) {
 
-  }
+    }
 
-  @Override
-  public void update(Context context) {
+    @Override
+    public void update(Context context) {
 
-  }
+    }
 
-  @Override
-  public void delete(Context context) {
+    @Override
+    public void delete(Context context) {
 
-  }
+    }
 }

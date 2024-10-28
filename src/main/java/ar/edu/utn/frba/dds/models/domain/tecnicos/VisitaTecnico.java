@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.domain.tecnicos;
 
-import ar.edu.utn.frba.dds.dtos.tecnicos.VisitaTecnicoDto;
 import ar.edu.utn.frba.dds.models.db.EntidadPersistente;
 import ar.edu.utn.frba.dds.models.domain.incidentes.Incidente;
 import lombok.AllArgsConstructor;
@@ -41,7 +40,7 @@ public class VisitaTecnico extends EntidadPersistente {
     @JoinColumn(name = "incidente_id", referencedColumnName = "id", nullable = false)
     private Incidente incidente;
 
-    public boolean estaSolucionado(){
+    public boolean estaSolucionado() {
         return this.solucionado;
     }
 

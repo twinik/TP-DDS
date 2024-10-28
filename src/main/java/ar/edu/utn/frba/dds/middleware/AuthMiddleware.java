@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.middleware;
 
 import ar.edu.utn.frba.dds.exceptions.NoAutorizadoException;
 import ar.edu.utn.frba.dds.exceptions.UsuarioNoAutenticadoException;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeNoAutorizadoFactory;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;

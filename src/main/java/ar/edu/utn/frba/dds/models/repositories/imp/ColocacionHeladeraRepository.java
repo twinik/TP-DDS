@@ -23,6 +23,7 @@ public class ColocacionHeladeraRepository implements IColocacionHeladeraReposito
     public void guardar(ColocacionHeladeras colocacionHeladera) {
         withTransaction(() -> entityManager().persist(colocacionHeladera));
     }
+
     @Override
     public void actualizar(ColocacionHeladeras colocacionHeladera) {
         withTransaction(() -> entityManager().merge(colocacionHeladera));

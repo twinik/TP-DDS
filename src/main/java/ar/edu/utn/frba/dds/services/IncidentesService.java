@@ -12,33 +12,33 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class IncidentesService {
-  private IIncidentesRepository incidentesRepository;
-  private HeladerasService heladerasService;
+    private IIncidentesRepository incidentesRepository;
+    private HeladerasService heladerasService;
 
-  public List<IncidenteDto> obtenerIncidentes() {
-    return incidentesRepository.buscarTodos().stream().map(IncidenteDto::fromIncidente).toList();
-  }
-
-  public Incidente obtenerIncidente(String id) {
-    Optional<Incidente> incidente = this.incidentesRepository.buscar(id);
-    if (incidente.isEmpty())
-      throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Incidente", id));
-    return incidente.get();
-  }
-
-  public void actualizar(Incidente incidente) {
-    this.incidentesRepository.actualizar(incidente);
-  }
-
-
-  public void solucionar(Incidente incidente) {
-    incidente.marcarSolucionado();
-    this.incidentesRepository.actualizar(incidente);
-    Heladera h = incidente.getHeladera();
-    if (this.incidentesRepository.cantidadNoSolucionadosPorHeladera(h) == 0L) {
-      h.habilitar();
+    public List<IncidenteDto> obtenerIncidentes() {
+        return incidentesRepository.buscarTodos().stream().map(IncidenteDto::fromIncidente).toList();
     }
 
-    this.heladerasService.actualizarHeladera(h);
-  }
+    public Incidente obtenerIncidente(String id) {
+        Optional<Incidente> incidente = this.incidentesRepository.buscar(id);
+        if (incidente.isEmpty())
+            throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Incidente", id));
+        return incidente.get();
+    }
+
+    public void actualizar(Incidente incidente) {
+        this.incidentesRepository.actualizar(incidente);
+    }
+
+
+    public void solucionar(Incidente incidente) {
+        incidente.marcarSolucionado();
+        this.incidentesRepository.actualizar(incidente);
+        Heladera h = incidente.getHeladera();
+        if (this.incidentesRepository.cantidadNoSolucionadosPorHeladera(h) == 0L) {
+            h.habilitar();
+        }
+
+        this.heladerasService.actualizarHeladera(h);
+    }
 }

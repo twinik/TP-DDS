@@ -9,11 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FormaColaboracionOutputDto {
-  private String id;
-  private String desc;
+    private String id;
+    private String desc;
 
-  public static FormaColaboracionOutputDto fromForma(FormaColaboracion formaColaboracion) {
-    return new FormaColaboracionOutputDto(formaColaboracion.getId(), formaColaboracion.getDescripcion());
-  }
+    public static FormaColaboracionOutputDto fromForma(FormaColaboracion formaColaboracion) {
+        return new FormaColaboracionOutputDto(formaColaboracion.getId(), formaColaboracion.getDescripcion());
+    }
 
 }

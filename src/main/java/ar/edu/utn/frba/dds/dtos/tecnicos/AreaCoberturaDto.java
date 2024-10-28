@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.dtos.tecnicos;
 
 import ar.edu.utn.frba.dds.exceptions.AreaDeCoberturaVaciaException;
-import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeAreaCoberturaFactory;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,14 +8,14 @@ import lombok.Getter;
 @Builder
 @Getter
 public class AreaCoberturaDto {
-  private Float latitud;
-  private Float longitud;
-  private Float radio;
+    private Float latitud;
+    private Float longitud;
+    private Float radio;
 
-  public boolean estanCamposLlenos(TecnicoDto dto) {
-    if (this.latitud == null || this.longitud == null || this.radio == null) {
-      throw new AreaDeCoberturaVaciaException(MensajeAreaCoberturaFactory.generarMensaje(), dto);
+    public boolean estanCamposLlenos(TecnicoDto dto) {
+        if (this.latitud == null || this.longitud == null || this.radio == null) {
+            throw new AreaDeCoberturaVaciaException(MensajeAreaCoberturaFactory.generarMensaje(), dto);
+        }
+        return true;
     }
-    return true;
-  }
 }

@@ -16,26 +16,26 @@ import java.util.Set;
 @Entity
 @Table(name = "rol")
 public class Rol extends EntidadPersistente {
-  @Column(name = "nombre")
-  private String nombre;
-  @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-  @JoinTable(name = "permisos_x_rol", joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "permiso_id", referencedColumnName = "id"))
-  private List<Permiso> permisos = new ArrayList<>();
+    @Column(name = "nombre")
+    private String nombre;
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(name = "permisos_x_rol", joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "permiso_id", referencedColumnName = "id"))
+    private List<Permiso> permisos = new ArrayList<>();
 
-  public boolean tenesPermiso(String permiso) {
-    return this.permisos.stream().anyMatch(p -> p.tieneIgualDescripcion(permiso));
-  }
+    public static Rol of(Set<Permiso> p) {
+        Rol r = new Rol();
+        r.setNombre("Rol agregado");
+        r.agregarPermisos(p.toArray(new Permiso[0]));
+        return r;
+    }
 
-  public void agregarPermisos(Permiso... permisos) {
-    this.permisos.addAll(Arrays.asList(permisos));
-  }
+    public boolean tenesPermiso(String permiso) {
+        return this.permisos.stream().anyMatch(p -> p.tieneIgualDescripcion(permiso));
+    }
 
-  public static Rol of(Set<Permiso> p) {
-    Rol r = new Rol();
-    r.setNombre("Rol agregado");
-    r.agregarPermisos(p.toArray(new Permiso[0]));
-    return r;
-  }
+    public void agregarPermisos(Permiso... permisos) {
+        this.permisos.addAll(Arrays.asList(permisos));
+    }
 
 }

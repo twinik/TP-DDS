@@ -53,9 +53,9 @@ public class RespuestaFormularioController implements ICrudViewsHandler {
     public void save(Context context) {
         rtaService.crearRespuestaFormulario(RespuestaFormularioDto.fromContext(context));
         context.status(201);
-        Map<String,Object> model = new HashMap<>();
-        model.put("message","Felicidades! su cuenta ha sido creada");
-        context.render("/auth/registro/form-success.hbs",model);
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", "Felicidades! su cuenta ha sido creada");
+        context.render("/auth/registro/form-success.hbs", model);
     }
 
     @Override

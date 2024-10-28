@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.dtos.incidentes;
 
 import ar.edu.utn.frba.dds.models.domain.incidentes.FallaTecnica;
-import io.javalin.http.Context;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

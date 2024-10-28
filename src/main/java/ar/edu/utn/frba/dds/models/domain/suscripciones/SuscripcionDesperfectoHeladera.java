@@ -22,8 +22,8 @@ public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
         try {
             if (!heladera.isHeladeraActiva()) {
                 suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(),
-                    configReader.getProperty("ASUNTO_MAIL_SUSCRIPCION"),
-                    GenerarMensajeHeladerasRecomendadas(heladera));
+                        configReader.getProperty("ASUNTO_MAIL_SUSCRIPCION"),
+                        GenerarMensajeHeladerasRecomendadas(heladera));
             }
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());

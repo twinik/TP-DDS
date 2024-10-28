@@ -52,9 +52,9 @@ public class RegistroController implements ICrudViewsHandler {
         try {
             this.colaboradoresService.registrar(personaJuridicaDto);
             ctx.status(201);
-            Map<String,Object> model = new HashMap<>();
-            model.put("message","Felicidades! su cuenta ha sido creada");
-            ctx.render("/auth/registro/form-success.hbs",model);
+            Map<String, Object> model = new HashMap<>();
+            model.put("message", "Felicidades! su cuenta ha sido creada");
+            ctx.render("/auth/registro/form-success.hbs", model);
         } catch (RegistroFailedException e) {
             ctx.status(400);
             ctx.result("El registro ha fallado: " + e.getMessage());
