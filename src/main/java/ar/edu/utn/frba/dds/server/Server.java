@@ -33,7 +33,6 @@ public class Server {
       AppHandlers.applyHandlers(app);
       Router.init(app);
 
-      // TODO: esto va aca ???
       Brokers.init();
 
       if (Boolean.parseBoolean(PrettyProperties.getInstance().propertyFromName("dev_mode"))) {

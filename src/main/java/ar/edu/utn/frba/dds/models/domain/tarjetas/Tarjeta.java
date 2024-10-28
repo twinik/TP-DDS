@@ -61,9 +61,9 @@ public class Tarjeta extends EntidadPersistente {
     /**
      * Constructor de Tarjeta.
      */
-    public Tarjeta(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, LocalDate fechaAdjudicacion, Integer cantidadUsosDia, AltaPersonaVulnerableDto dto) {
+    public Tarjeta(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, LocalDate fechaAdjudicacion, Integer cantidadUsosDia) {
         if (!GeneradorDeCodigosHelper.esCodigoValido(codigo, 11))
-            throw new DniDuplicadoException("El codigo no es valido", dto);   //todo no me anda el CodigoInvalidoException
+            throw new CodigoInvalidoException("El codigo no es valido");
         this.codigo = codigo;
         this.nroUsos = nroUsos;
         this.frecuenciaPermitida = frecuenciaPermitida;
@@ -74,20 +74,20 @@ public class Tarjeta extends EntidadPersistente {
         this.cantidadUsosDia = cantidadUsosDia;
     }
 
-    public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, LocalDate fechaAdjudicacion, Integer cantidadUsosDia, AltaPersonaVulnerableDto dto) {
-        return new Tarjeta(codigo, nroUsos, frecuenciaPermitida, duenio, fechaAdjudicacion, cantidadUsosDia, dto);
+    public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, LocalDate fechaAdjudicacion, Integer cantidadUsosDia) {
+        return new Tarjeta(codigo, nroUsos, frecuenciaPermitida, duenio, fechaAdjudicacion, cantidadUsosDia);
     }
 
-    public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Integer cantidadUsosDia, AltaPersonaVulnerableDto dto) {
-        return Tarjeta.of(codigo, nroUsos, frecuenciaPermitida, duenio, LocalDate.now(), cantidadUsosDia, dto);
+    public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, Integer cantidadUsosDia) {
+        return Tarjeta.of(codigo, nroUsos, frecuenciaPermitida, duenio, LocalDate.now(), cantidadUsosDia);
     }
 
-    public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, AltaPersonaVulnerableDto dto) {
-        return Tarjeta.of(codigo, nroUsos, frecuenciaPermitida, duenio, 0, dto);
+    public static Tarjeta of(String codigo, Integer nroUsos, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio) {
+        return Tarjeta.of(codigo, nroUsos, frecuenciaPermitida, duenio, 0);
     }
 
-    public static Tarjeta of(String codigo, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio, AltaPersonaVulnerableDto dto) {
-        return Tarjeta.of(codigo, 0, frecuenciaPermitida, duenio, dto);
+    public static Tarjeta of(String codigo, FrecuenciaUso frecuenciaPermitida, PersonaVulnerable duenio) {
+        return Tarjeta.of(codigo, 0, frecuenciaPermitida, duenio);
     }
 
     public void agregarUsos(UsoTarjeta uso) {

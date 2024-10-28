@@ -62,9 +62,9 @@ public class RedistribucionViandas extends EntidadPersistente implements IPuntaj
 
   public void validarCantidades(RedistribucionViandaDto dto) {
     if (this.cantidad > this.heladeraOrigen.getViandas())
-      throw new DniDuplicadoException(MensajeHeladeraVaciaFactory.generarMensaje(this.heladeraOrigen.getNombre()), dto); //todo HeladeraVaciaException(MensajeHeladeraVaciaFactory.generarMensaje(this.heladeraOrigen.getNombre()), dto); no anda
+      throw new HeladeraVaciaException(MensajeHeladeraVaciaFactory.generarMensaje(this.heladeraOrigen.getNombre()), dto);
     if (this.getCantidad() > this.heladeraDestino.getCuposLibresViandas())
-      throw new DniDuplicadoException(MensajeHeladeraLLenaFactory.generarMensaje(this.heladeraDestino.getNombre()), dto); //todo HeladeraLlenaException(MensajeHeladeraLLenaFactory.generarMensaje(this.heladeraDestino.getNombre()), dto); no anda
+      throw new HeladeraLlenaException(MensajeHeladeraLLenaFactory.generarMensaje(this.heladeraDestino.getNombre()), dto);
   }
 
   @Override

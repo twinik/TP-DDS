@@ -19,22 +19,29 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class TarjetasService {
-    private ITarjetasRepository tarjetasRepository;
-    private ITarjetasColaboradorRepository tarjetasColaboradorRepository;
-    private IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository;
+  private ITarjetasRepository tarjetasRepository;
+  private ITarjetasColaboradorRepository tarjetasColaboradorRepository;
+  private IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository;
 
-    public void crearTarjeta(PersonaVulnerable vulnerable, AltaPersonaVulnerableDto dto) {
-        Optional<Tarjeta> posibleTarjeta = this.tarjetasRepository.buscarPorCodigo(dto.getTarjeta().getCodigo());
-        if(posibleTarjeta.isPresent()) throw new DniDuplicadoException(MensajeCodigoDuplicadoFactory.generarMensaje(), dto); //todo no me anda el CodigoInvalidoException(MensajeCodigoDuplicadoFactory.generarMensaje(), dto);
-        Tarjeta t = Tarjeta.of(dto.getTarjeta().getCodigo(), 0, new FrecuenciaDiaria(), vulnerable, dto);
-        tarjetasRepository.guardar(t);
-    }
+  public void crearTarjeta(PersonaVulnerable vulnerable, AltaPersonaVulnerableDto dto) {
+    Optional<Tarjeta> posibleTarjeta = this.tarjetasRepository.buscarPorCodigo(dto.getTarjeta().getCodigo());
+    if (posibleTarjeta.isPresent())
+      throw new CodigoInvalidoException(MensajeCodigoDuplicadoFactory.generarMensaje(), dto);
 
-    public void asignarTarjetaColaborador(Colaborador c) {
-        Optional<PosibleCodigoTarjeta> codigo = this.posiblesCodigosTarjetaRepository.buscarPrimeroLibre();
-        if (codigo.isEmpty()) throw new CodigoInvalidoException(MensajeCodigosNoDisponiblesFactory.generarMensaje());
-        codigo.get().ocupar();
-        TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c, codigo.get().getCodigo());
-        this.tarjetasColaboradorRepository.guardar(tarjetaColaborador);
+    Tarjeta t = null;
+    try {
+      t = Tarjeta.of(dto.getTarjeta().getCodigo(), 0, new FrecuenciaDiaria(), vulnerable);
+    } catch (CodigoInvalidoException e) {
+      throw new CodigoInvalidoException(e.getMessage(), dto);
     }
+    tarjetasRepository.guardar(t);
+  }
+
+  public void asignarTarjetaColaborador(Colaborador c) {
+    Optional<PosibleCodigoTarjeta> codigo = this.posiblesCodigosTarjetaRepository.buscarPrimeroLibre();
+    if (codigo.isEmpty()) throw new CodigoInvalidoException(MensajeCodigosNoDisponiblesFactory.generarMensaje());
+    codigo.get().ocupar();
+    TarjetaColaborador tarjetaColaborador = TarjetaColaborador.of(c, codigo.get().getCodigo());
+    this.tarjetasColaboradorRepository.guardar(tarjetaColaborador);
+  }
 }

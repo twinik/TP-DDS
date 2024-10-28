@@ -18,7 +18,7 @@ public class TarjetaTest {
         duenioMock = Mockito.mock(PersonaVulnerable.class);
         FrecuenciaUso frecuenciaDiaria = new FrecuenciaDiaria();
         FrecuenciaDiaria.setMaximosUsosBase(4);
-        tarjeta = Tarjeta.of(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), 5, frecuenciaDiaria, duenioMock, 10);
+        tarjeta = Tarjeta.of(GeneradorDeCodigosHelper.generarAlfanumericoUnico(11), 5, frecuenciaDiaria, duenioMock);
     }
 
     @Test

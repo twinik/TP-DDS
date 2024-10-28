@@ -74,6 +74,6 @@ public class TecnicosService {
         if (!DniHelper.esValido(nroDocumento))
             throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
         Optional<Tecnico> t = tecnicosRepository.buscar(tipoDocumento, nroDocumento);
-        if (t.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje());
+        if (t.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(),dto);
     }
 }

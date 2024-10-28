@@ -16,7 +16,6 @@ import ar.edu.utn.frba.dds.models.domain.colaboradores.FormaColaboracion;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoColaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersona;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Permiso;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Rol;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CodigoInvalidoException;
@@ -24,7 +23,12 @@ import ar.edu.utn.frba.dds.models.domain.excepciones.NoTieneDireccionException;
 import ar.edu.utn.frba.dds.models.domain.utils.Direccion;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumentoMapper;
-import ar.edu.utn.frba.dds.models.messageFactory.*;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniDuplicadoFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeDniInvalidoFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeEmailDuplicadoFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeFechaInvalidaFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeNoTieneDireccionFactory;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
@@ -72,21 +76,21 @@ public class ColaboradoresService {
   }
 
   public Colaborador actualizarFromDto(Colaborador colaborador, ColaboradorPerfilDto dto) {
-    colaborador.setNombre(dto.getNombre()!= null ?   dto.getNombre(): colaborador.getNombre());
-    colaborador.setApellido(dto.getApellido() != null?  dto.getApellido(): colaborador.getApellido());
-    colaborador.getUsuario().setEmail(dto.getEmail() != null ?  dto.getEmail(): colaborador.getUsuario().getEmail());
+    colaborador.setNombre(dto.getNombre() != null ? dto.getNombre() : colaborador.getNombre());
+    colaborador.setApellido(dto.getApellido() != null ? dto.getApellido() : colaborador.getApellido());
+    colaborador.getUsuario().setEmail(dto.getEmail() != null ? dto.getEmail() : colaborador.getUsuario().getEmail());
     colaborador.setTipoDocumento(dto.getTipoDocumento() != null ? ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()) : colaborador.getTipoDocumento());
     if (dto.getDocumento() != null && !dto.getDocumento().equals(colaborador.getDocumento())) {
       this.validarDocumento(dto.getDocumento());
     }
-    colaborador.setDocumento(dto.getDocumento() != null ?  dto.getDocumento(): colaborador.getDocumento());
+    colaborador.setDocumento(dto.getDocumento() != null ? dto.getDocumento() : colaborador.getDocumento());
     colaborador.setDireccion(dto.getDireccionDto() != null ? new Direccion(dto.getDireccionDto().getCalle(), dto.getDireccionDto().getAltura(), dto.getDireccionDto().getPiso(), dto.getDireccionDto().getCodigoPostal()) : null);
     if (dto.getFechaNacimiento() != null) {
       colaborador.setFechaNacimiento(DateHelper.fechaFromString(dto.getFechaNacimiento(), "dd/MM/yyyy"));
       this.validarFechaNacimiento(colaborador);
     }
-    colaborador.setRubro(dto.getRubro()!= null ?  dto.getRubro() : colaborador.getRubro());
-    colaborador.setRazonSocial(dto.getRazonSocial() != null ?  dto.getRazonSocial(): colaborador.getRazonSocial());
+    colaborador.setRubro(dto.getRubro() != null ? dto.getRubro() : colaborador.getRubro());
+    colaborador.setRazonSocial(dto.getRazonSocial() != null ? dto.getRazonSocial() : colaborador.getRazonSocial());
     colaborador.setTipoPersonaJuridica(dto.getTipoPersonaJuridica() != null ? TipoPersonaJuridica.valueOf(dto.getTipoPersonaJuridica()) : colaborador.getTipoPersonaJuridica());
     List<FormaColaboracion> posiblesNuevasFormas = this.formaColaboracionService.fromDtos(dto.getFormaColaboracionInput());
 
@@ -112,11 +116,15 @@ public class ColaboradoresService {
 
   public String registrar(PersonaHumanaDto dto) {
     Colaborador colaborador = new Colaborador();
-    this.validarSiYaExisteMail(dto.getUsuarioDto());
+    try {
+      this.validarSiYaExisteMail(dto.getUsuarioDto());
+    } catch (EmailDuplicadoException e) {
+      throw new EmailDuplicadoException(e.getMessage(), dto);
+    }
     colaborador.setNombre(dto.getNombre());
     colaborador.setApellido(dto.getApellido());
     colaborador.setTipoDocumento(ServiceLocator.get(TipoDocumentoMapper.class).obtenerTipoDeDocumento(dto.getTipoDocumento()));
-    this.validarDocumento(colaborador.getTipoDocumento(), dto.getNroDocumento(), dto);
+
     colaborador.setDocumento(dto.getNroDocumento());
     colaborador.setDireccion(dto.getDireccion() != null ? new Direccion(dto.getDireccion().getCalle(), dto.getDireccion().getAltura(), dto.getDireccion().getPiso(), dto.getDireccion().getCodigoPostal()) : null);
     TipoColaborador tipo = new TipoColaborador();
@@ -149,7 +157,12 @@ public class ColaboradoresService {
 
   public void registrar(PersonaJuridicaDto dto) {
     Colaborador colaborador = new Colaborador();
-    this.validarSiYaExisteMail(dto.getUsuarioDto());
+    try {
+      this.validarSiYaExisteMail(dto.getUsuarioDto());
+    } catch (EmailDuplicadoException e) {
+      throw new EmailDuplicadoException(e.getMessage(), dto);
+    }
+
     colaborador.setRazonSocial(dto.getRazonSocial());
     colaborador.setTipoPersonaJuridica(TipoPersonaJuridica.valueOf(dto.getTipoOrganizacion()));
     colaborador.setRubro(dto.getRubro());

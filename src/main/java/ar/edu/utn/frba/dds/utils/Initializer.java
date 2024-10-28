@@ -82,7 +82,7 @@ public class Initializer {
     u1.agregarRoles(r1);
     Rol r2 = new Rol();
     r2.setNombre("persona juridica");
-    r2.agregarPermisos(p2, p3, p13);
+    r2.agregarPermisos(p1,p2, p3, p13);
     u2.agregarRoles(r2);
     u3.agregarRoles(r2);
 

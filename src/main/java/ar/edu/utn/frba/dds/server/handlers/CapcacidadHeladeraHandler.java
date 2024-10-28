@@ -10,11 +10,13 @@ public class CapcacidadHeladeraHandler implements IHandler {
   public void setHandle(Javalin app) {
     app.exception(HeladeraVaciaException.class, (e, context) -> {
       e.printStackTrace();
+      context.sessionAttribute("formDto", e.getFormDto());
       context.redirect(context.path() + "?message=" + e.getMessage());
     });
 
     app.exception(HeladeraLlenaException.class, (e, context) -> {
       e.printStackTrace();
+      context.sessionAttribute("formDto", e.getFormDto());
       context.redirect(context.path() + "?message=" + e.getMessage());
     });
   }

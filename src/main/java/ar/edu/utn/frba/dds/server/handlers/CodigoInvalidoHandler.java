@@ -10,6 +10,7 @@ public class CodigoInvalidoHandler implements IHandler {
     public void setHandle(Javalin app) {
         app.exception(CodigoInvalidoException.class, (e, context) -> {
             e.printStackTrace();
+            context.sessionAttribute("formDto", e.getFormDto());
             context.redirect(context.path() + "?message=" + e.getMessage());
         });
     }

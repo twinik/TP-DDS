@@ -29,7 +29,6 @@ public class AperturaHeladera extends EntidadPersistente {
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
-    // TODO: ver por consistencia de datos ??
     @OneToOne
     @JoinColumn(name = "uso_id", referencedColumnName = "id")
     private UsoTarjeta usoTarjeta;
