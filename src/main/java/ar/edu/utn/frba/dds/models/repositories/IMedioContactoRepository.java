@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IMedioContactoRepository {
-    Optional<MedioDeContacto> buscar(String id);
+  Optional<MedioDeContacto> buscar(String id);
 
-    List<MedioDeContacto> buscarTodos();
+  List<MedioDeContacto> buscarTodos();
 
-    void guardar(MedioDeContacto medioDeContacto);
+  void guardar(MedioDeContacto medioDeContacto);
 
-    void actualizar(MedioDeContacto medioDeContacto);
+  void actualizar(MedioDeContacto medioDeContacto);
 
-    void eliminar(MedioDeContacto medioDeContacto);
+  void eliminar(MedioDeContacto medioDeContacto);
 }

@@ -8,15 +8,15 @@ import java.util.Optional;
  * IVisitasTecnicoRepository interface permite interactuar con las visitas de un tecnico.
  */
 public interface IPermisosRepository {
-    Optional<Permiso> buscar(String id);
+  Optional<Permiso> buscar(String id);
 
-    List<Permiso> buscarTodos();
+  List<Permiso> buscarTodos();
 
-    void guardar(Permiso permiso);
+  void guardar(Permiso permiso);
 
-    void guardar(Permiso... permisos);
+  void guardar(Permiso... permisos);
 
-    void actualizar(Permiso permiso);
+  void actualizar(Permiso permiso);
 
-    void eliminar(Permiso permiso);
+  void eliminar(Permiso permiso);
 }

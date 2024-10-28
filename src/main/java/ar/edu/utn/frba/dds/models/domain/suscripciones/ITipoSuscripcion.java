@@ -7,6 +7,6 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
  */
 public interface ITipoSuscripcion {
 
-    void notificar(Heladera heladera, Suscripcion suscripcion);
+  void notificar(Heladera heladera, Suscripcion suscripcion);
 
 }

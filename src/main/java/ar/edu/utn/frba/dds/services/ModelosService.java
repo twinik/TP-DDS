@@ -10,20 +10,20 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class ModelosService {
-    private IModeloHeladeraRepository modeloHeladeraRepository;
+  private IModeloHeladeraRepository modeloHeladeraRepository;
 
-    public List<ModeloHeladeraOutputDto> obtenerModelosDisponibles() {
-        return this.modeloHeladeraRepository.buscarTodos().stream().map(ModeloHeladeraOutputDto::fromModelo).toList();
-    }
+  public List<ModeloHeladeraOutputDto> obtenerModelosDisponibles() {
+    return this.modeloHeladeraRepository.buscarTodos().stream().map(ModeloHeladeraOutputDto::fromModelo).toList();
+  }
 
-    public ModeloHeladera obtenerModelo(String id) {
-        Optional<ModeloHeladera> modelo = this.modeloHeladeraRepository.buscar(id);
-        if (modelo.isEmpty()) throw new RuntimeException("no se encontro un modelo con este id");
-        return modelo.get();
-    }
+  public ModeloHeladera obtenerModelo(String id) {
+    Optional<ModeloHeladera> modelo = this.modeloHeladeraRepository.buscar(id);
+    if (modelo.isEmpty()) throw new RuntimeException("no se encontro un modelo con este id");
+    return modelo.get();
+  }
 
-    public void crearModeloHeladera(ModeloHeladeraInputDto dto) {
-        ModeloHeladera modeloHeladera = new ModeloHeladera(dto.getModelo(), dto.getTempMin(), dto.getTempMax());
-        this.modeloHeladeraRepository.guardar(modeloHeladera);
-    }
+  public void crearModeloHeladera(ModeloHeladeraInputDto dto) {
+    ModeloHeladera modeloHeladera = new ModeloHeladera(dto.getModelo(), dto.getTempMin(), dto.getTempMax());
+    this.modeloHeladeraRepository.guardar(modeloHeladera);
+  }
 }

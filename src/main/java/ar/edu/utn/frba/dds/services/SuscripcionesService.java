@@ -14,37 +14,37 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class SuscripcionesService {
-    private ISuscripcionesRepository repo;
-    private ColaboradoresService colaboradoresService;
+  private ISuscripcionesRepository repo;
+  private ColaboradoresService colaboradoresService;
 
-    public Suscripcion guardarSuscripcion(SuscripcionDto dto) {
-        Suscripcion s = new Suscripcion();
-        s.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
-        switch (dto.getTipoSuscripcion()) {
-            case "viandas-restantes":
-                s.setTipoSuscripcion(new SuscripcionViandasRestantes());
-                s.setNumero(Integer.parseInt(dto.getNumero()));
-                break;
-            case "viandas-faltantes":
-                s.setTipoSuscripcion(new SuscripcionViandasFaltantes());
-                s.setNumero(Integer.parseInt(dto.getNumero()));
-                break;
-            case "desperfecto-heladera":
-                s.setTipoSuscripcion(new SuscripcionDesperfectoHeladera(ServiceLocator.get(RecomendadorHeladeras.class)));
-                break;
-        }
-        switch (dto.getCanalContacto()) {
-            case "whatsapp":
-                s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.WHATSAPP));
-                break;
-            case "email":
-                s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.EMAIL));
-                break;
-            case "telegram":
-                s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.TELEGRAM));
-                break;
-        }
-        this.repo.guardar(s);
-        return s;
+  public Suscripcion guardarSuscripcion(SuscripcionDto dto) {
+    Suscripcion s = new Suscripcion();
+    s.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
+    switch (dto.getTipoSuscripcion()) {
+      case "viandas-restantes":
+        s.setTipoSuscripcion(new SuscripcionViandasRestantes());
+        s.setNumero(Integer.parseInt(dto.getNumero()));
+        break;
+      case "viandas-faltantes":
+        s.setTipoSuscripcion(new SuscripcionViandasFaltantes());
+        s.setNumero(Integer.parseInt(dto.getNumero()));
+        break;
+      case "desperfecto-heladera":
+        s.setTipoSuscripcion(new SuscripcionDesperfectoHeladera(ServiceLocator.get(RecomendadorHeladeras.class)));
+        break;
     }
+    switch (dto.getCanalContacto()) {
+      case "whatsapp":
+        s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.WHATSAPP));
+        break;
+      case "email":
+        s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.EMAIL));
+        break;
+      case "telegram":
+        s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.TELEGRAM));
+        break;
+    }
+    this.repo.guardar(s);
+    return s;
+  }
 }

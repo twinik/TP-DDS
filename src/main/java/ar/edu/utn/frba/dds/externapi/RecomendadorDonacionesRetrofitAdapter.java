@@ -13,48 +13,48 @@ import java.util.List;
  */
 public class RecomendadorDonacionesRetrofitAdapter implements IRecomendacionDonacionesAdapter {
 
-    private static RecomendadorDonacionesRetrofitAdapter instance = null;
-    private static String API_URL = null;
-    private Retrofit retrofit;
+  private static RecomendadorDonacionesRetrofitAdapter instance = null;
+  private static String API_URL = null;
+  private Retrofit retrofit;
 
-    private RecomendadorDonacionesRetrofitAdapter() {
-        this.retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
+  private RecomendadorDonacionesRetrofitAdapter() {
+    this.retrofit = new Retrofit.Builder()
+        .baseUrl(API_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build();
+  }
 
-    public static RecomendadorDonacionesRetrofitAdapter getInstance() throws IOException {
-        if (instance == null) {
-            API_URL = new ConfigReader("config.properties").getProperty("API_URL_2");
-            instance = new RecomendadorDonacionesRetrofitAdapter();
-        }
-        return instance;
+  public static RecomendadorDonacionesRetrofitAdapter getInstance() throws IOException {
+    if (instance == null) {
+      API_URL = new ConfigReader("config.properties").getProperty("API_URL_2");
+      instance = new RecomendadorDonacionesRetrofitAdapter();
     }
+    return instance;
+  }
 
-    @Override
-    public Recomendacion obtenerRecomendacion(String id) {
-        RecomendadorDonacionesService service = this.retrofit.create(RecomendadorDonacionesService.class);
-        Call<Recomendacion> requestRecomendacion = service.obtenerRecomendacion(id);
-        Recomendacion recomendacion;
-        try {
-            recomendacion = requestRecomendacion.execute().body();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return recomendacion;
+  @Override
+  public Recomendacion obtenerRecomendacion(String id) {
+    RecomendadorDonacionesService service = this.retrofit.create(RecomendadorDonacionesService.class);
+    Call<Recomendacion> requestRecomendacion = service.obtenerRecomendacion(id);
+    Recomendacion recomendacion;
+    try {
+      recomendacion = requestRecomendacion.execute().body();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+    return recomendacion;
+  }
 
-    @Override
-    public List<Recomendacion> listarRecomendaciones(String etiquetaProvincia, String etiquetaLocalidad) {
-        RecomendadorDonacionesService service = this.retrofit.create(RecomendadorDonacionesService.class);
-        Call<List<Recomendacion>> requestRecomendaciones = service.listarRecomendaciones(etiquetaProvincia, etiquetaLocalidad);
-        List<Recomendacion> recomendaciones;
-        try {
-            recomendaciones = requestRecomendaciones.execute().body();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return recomendaciones;
+  @Override
+  public List<Recomendacion> listarRecomendaciones(String etiquetaProvincia, String etiquetaLocalidad) {
+    RecomendadorDonacionesService service = this.retrofit.create(RecomendadorDonacionesService.class);
+    Call<List<Recomendacion>> requestRecomendaciones = service.listarRecomendaciones(etiquetaProvincia, etiquetaLocalidad);
+    List<Recomendacion> recomendaciones;
+    try {
+      recomendaciones = requestRecomendaciones.execute().body();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+    return recomendaciones;
+  }
 }

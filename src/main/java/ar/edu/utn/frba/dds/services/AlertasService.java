@@ -10,18 +10,18 @@ import java.util.List;
 @AllArgsConstructor
 public class AlertasService {
 
-    private IAlertasRepository alertasRepository;
+  private IAlertasRepository alertasRepository;
 
-    public List<AlertaDto> obtenerTodos() {
-        return this.alertasRepository.buscarTodos().stream().map(AlertaDto::fromAlerta).toList();
-    }
+  public List<AlertaDto> obtenerTodos() {
+    return this.alertasRepository.buscarTodos().stream().map(AlertaDto::fromAlerta).toList();
+  }
 
-    public void reportarYGuardarSiNoEstabaElMismoProblema(Alerta alerta, Heladera heladera) {
-        List<Alerta> alertasAnteriores = this.alertasRepository.buscarAlertasHeladera(heladera.getId());
-        boolean existeOtraNoSolucionada = alertasAnteriores.stream().anyMatch(a -> !a.isSolucionado() && a.getTipoAlerta().equals(alerta.getTipoAlerta()));
-        if (!existeOtraNoSolucionada) {
-            alerta.reportar();
-            this.alertasRepository.guardar(alerta);
-        }
+  public void reportarYGuardarSiNoEstabaElMismoProblema(Alerta alerta, Heladera heladera) {
+    List<Alerta> alertasAnteriores = this.alertasRepository.buscarAlertasHeladera(heladera.getId());
+    boolean existeOtraNoSolucionada = alertasAnteriores.stream().anyMatch(a -> !a.isSolucionado() && a.getTipoAlerta().equals(alerta.getTipoAlerta()));
+    if (!existeOtraNoSolucionada) {
+      alerta.reportar();
+      this.alertasRepository.guardar(alerta);
     }
+  }
 }

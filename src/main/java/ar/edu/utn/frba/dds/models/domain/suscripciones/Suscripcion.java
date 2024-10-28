@@ -20,36 +20,36 @@ import javax.persistence.*;
 @Setter
 @Getter
 public class Suscripcion extends EntidadPersistente {
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    private Colaborador colaborador;
+  @ManyToOne
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+  private Colaborador colaborador;
 
-    @Convert(converter = NotificationStrategyAttributeConverter.class)
-    @Column(name = "notification_strategy")
-    private NotificationStrategy notificacionStrategy;
+  @Convert(converter = NotificationStrategyAttributeConverter.class)
+  @Column(name = "notification_strategy")
+  private NotificationStrategy notificacionStrategy;
 
-    @Convert(converter = TipoSuscripcionAttributeConverter.class)
-    @Column(name = "tipo_suscripcion")
-    private ITipoSuscripcion tipoSuscripcion;
+  @Convert(converter = TipoSuscripcionAttributeConverter.class)
+  @Column(name = "tipo_suscripcion")
+  private ITipoSuscripcion tipoSuscripcion;
 
-    @Column(name = "numero")
-    private int numero;
+  @Column(name = "numero")
+  private int numero;
 
-    public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion, int numero) {
-        this.colaborador = colaborador;
-        this.notificacionStrategy = notificacionStrategy;
-        this.tipoSuscripcion = tipoSuscripcion;
-        this.numero = numero;
-    }
+  public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion, int numero) {
+    this.colaborador = colaborador;
+    this.notificacionStrategy = notificacionStrategy;
+    this.tipoSuscripcion = tipoSuscripcion;
+    this.numero = numero;
+  }
 
-    public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion) {
-        this.colaborador = colaborador;
-        this.notificacionStrategy = notificacionStrategy;
-        this.tipoSuscripcion = tipoSuscripcion;
-    }
+  public Suscripcion(Colaborador colaborador, NotificationStrategy notificacionStrategy, ITipoSuscripcion tipoSuscripcion) {
+    this.colaborador = colaborador;
+    this.notificacionStrategy = notificacionStrategy;
+    this.tipoSuscripcion = tipoSuscripcion;
+  }
 
-    public void avisarEvento(Heladera heladera) {
-        tipoSuscripcion.notificar(heladera, this);
-    }
+  public void avisarEvento(Heladera heladera) {
+    tipoSuscripcion.notificar(heladera, this);
+  }
 
 }

@@ -10,19 +10,19 @@ import java.util.List;
 
 @AllArgsConstructor
 public class ReportesService {
-    private IReportesRepository repo;
+  private IReportesRepository repo;
 
-    public List<ReporteDto> obtenerReportes(LocalDate desde, LocalDate hasta) {
-        List<Reporte> reportes = this.repo.buscarEntreFechas(desde, hasta);
-        List<ReporteDto> dtos = reportes.stream().map(r -> {
-            ReporteDto dto = new ReporteDto();
-            dto.setFecha(r.getCreated_at().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            dto.setArchivo(r.getRutaArchivo());
-            dto.setTipo(r.getTipo());
-            return dto;
-        }).toList();
-        return dtos;
-    }
+  public List<ReporteDto> obtenerReportes(LocalDate desde, LocalDate hasta) {
+    List<Reporte> reportes = this.repo.buscarEntreFechas(desde, hasta);
+    List<ReporteDto> dtos = reportes.stream().map(r -> {
+      ReporteDto dto = new ReporteDto();
+      dto.setFecha(r.getCreated_at().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+      dto.setArchivo(r.getRutaArchivo());
+      dto.setTipo(r.getTipo());
+      return dto;
+    }).toList();
+    return dtos;
+  }
 
 //    private String getTipoReporte(Reporte r) {
 //        if(r instanceof ReporteViandasPorHeladera) return "Viandas por heladera";

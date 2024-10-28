@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IReportesRepository {
-    Optional<Reporte> buscar(String id);
+  Optional<Reporte> buscar(String id);
 
-    List<Reporte> buscarTodos();
+  List<Reporte> buscarTodos();
 
-    List<Reporte> buscarEntreFechas(LocalDate desde, LocalDate hasta);
+  List<Reporte> buscarEntreFechas(LocalDate desde, LocalDate hasta);
 
-    void guardar(Reporte reporte);
+  void guardar(Reporte reporte);
 
-    void guardar(List<Reporte> reportes);
+  void guardar(List<Reporte> reportes);
 
-    void actualizar(Reporte reporte);
+  void actualizar(Reporte reporte);
 
-    void eliminar(Reporte reporte);
+  void eliminar(Reporte reporte);
 }

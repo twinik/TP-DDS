@@ -19,29 +19,29 @@ import java.util.List;
 @Table(name = "formulario")
 public class Formulario extends EntidadPersistente {
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "formulario_id", referencedColumnName = "id")
-    private List<Campo> campos;
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "formulario_id", referencedColumnName = "id")
+  private List<Campo> campos;
 
-    @Column(name = "nombre")
-    private String nombre;
+  @Column(name = "nombre")
+  private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private Usuario autor;
-
-
-    public Formulario() {
-        this.campos = new ArrayList<Campo>();
-    }
+  @ManyToOne
+  @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+  private Usuario autor;
 
 
-    public void agregarCampos(Campo... campos) {
-        Collections.addAll(this.campos, campos);
-    }
+  public Formulario() {
+    this.campos = new ArrayList<Campo>();
+  }
 
-    public void agregarCampos(List<Campo> campos) {
-        this.campos.addAll(campos);
-    }
+
+  public void agregarCampos(Campo... campos) {
+    Collections.addAll(this.campos, campos);
+  }
+
+  public void agregarCampos(List<Campo> campos) {
+    this.campos.addAll(campos);
+  }
 
 }

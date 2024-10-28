@@ -12,16 +12,16 @@ import java.io.IOException;
 @NoArgsConstructor
 public class SuscripcionViandasRestantes implements ITipoSuscripcion {
 
-    public void notificar(Heladera heladera, Suscripcion suscripcion) {
-        ConfigReader configReader = new ConfigReader("config.properties");
-        try {
-            if (heladera.getViandas() <= suscripcion.getNumero()) {
-                String message = MensajeViandasRestantesFactory.generarMensaje(heladera);
-                suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(), configReader.getProperty("ASUNTO_MAIL_SUSCRIPCION"), message);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+  public void notificar(Heladera heladera, Suscripcion suscripcion) {
+    ConfigReader configReader = new ConfigReader("config.properties");
+    try {
+      if (heladera.getViandas() <= suscripcion.getNumero()) {
+        String message = MensajeViandasRestantesFactory.generarMensaje(heladera);
+        suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(), configReader.getProperty("ASUNTO_MAIL_SUSCRIPCION"), message);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e.getMessage());
     }
+  }
 
 }

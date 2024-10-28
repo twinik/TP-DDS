@@ -12,11 +12,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Provincia {
 
-    private Integer id;
-    private String nombre;
-    private String etiqueta;
+  private Integer id;
+  private String nombre;
+  private String etiqueta;
 
-    public static String of(Context ctx) {
-        return ctx.formParam("provincia");
-    }
+  public static String of(Context ctx) {
+    return ctx.formParam("provincia");
+  }
 }

@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class MedioContactoHelperTest {
 
-    @Test
-    @DisplayName("obtener valor de un contacto")
-    void testObtenerValorContacto() {
-        Colaborador colaborador = new Colaborador();
-        colaborador.agregarMedioContacto(new MedioDeContacto(CanalContacto.EMAIL, "hola@mail"), new MedioDeContacto(CanalContacto.TELEGRAM, "UNID"));
-        Assertions.assertEquals(MedioContactoHelper.getValorContacto(colaborador.getMedioContacto(), CanalContacto.EMAIL), "hola@mail");
-        Assertions.assertEquals(MedioContactoHelper.getValorContacto(colaborador.getMedioContacto(), CanalContacto.TELEGRAM), "UNID");
-        Assertions.assertNull(MedioContactoHelper.getValorContacto(colaborador.getMedioContacto(), CanalContacto.WHATSAPP));
-    }
+  @Test
+  @DisplayName("obtener valor de un contacto")
+  void testObtenerValorContacto() {
+    Colaborador colaborador = new Colaborador();
+    colaborador.agregarMedioContacto(new MedioDeContacto(CanalContacto.EMAIL, "hola@mail"), new MedioDeContacto(CanalContacto.TELEGRAM, "UNID"));
+    Assertions.assertEquals(MedioContactoHelper.getValorContacto(colaborador.getMedioContacto(), CanalContacto.EMAIL), "hola@mail");
+    Assertions.assertEquals(MedioContactoHelper.getValorContacto(colaborador.getMedioContacto(), CanalContacto.TELEGRAM), "UNID");
+    Assertions.assertNull(MedioContactoHelper.getValorContacto(colaborador.getMedioContacto(), CanalContacto.WHATSAPP));
+  }
 }

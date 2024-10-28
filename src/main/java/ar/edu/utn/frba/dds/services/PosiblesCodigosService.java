@@ -9,12 +9,12 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class PosiblesCodigosService {
-    private IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository;
+  private IPosiblesCodigosTarjetaRepository posiblesCodigosTarjetaRepository;
 
-    public void crearPosibleCodigo(PosibleCodigoTarjetaDto dto) {
-        Optional<PosibleCodigoTarjeta> anterior = this.posiblesCodigosTarjetaRepository.buscarPorCodigo(dto.getCodigo());
-        if (anterior.isPresent()) throw new CodigoInvalidoException("Ya existe una tarjeta con este codigo");
-        PosibleCodigoTarjeta p = new PosibleCodigoTarjeta(dto.getCodigo());
-        this.posiblesCodigosTarjetaRepository.guardar(p);
-    }
+  public void crearPosibleCodigo(PosibleCodigoTarjetaDto dto) {
+    Optional<PosibleCodigoTarjeta> anterior = this.posiblesCodigosTarjetaRepository.buscarPorCodigo(dto.getCodigo());
+    if (anterior.isPresent()) throw new CodigoInvalidoException("Ya existe una tarjeta con este codigo");
+    PosibleCodigoTarjeta p = new PosibleCodigoTarjeta(dto.getCodigo());
+    this.posiblesCodigosTarjetaRepository.guardar(p);
+  }
 }

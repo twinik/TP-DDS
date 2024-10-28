@@ -10,19 +10,19 @@ import java.util.Optional;
  * IColaboradorRepository interface permite interactuar con los donacions de viandas
  */
 public interface IDonacionesViandaRepository {
-    Optional<DonacionVianda> buscar(String id);
+  Optional<DonacionVianda> buscar(String id);
 
-    List<DonacionVianda> buscarTodos();
+  List<DonacionVianda> buscarTodos();
 
-    List<DonacionVianda> buscarPorColaborador(String colaborador_id);
+  List<DonacionVianda> buscarPorColaborador(String colaborador_id);
 
-    Map<String, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha);
+  Map<String, Long> buscarDonacionesAgrupadasPorHeladera(LocalDate fecha);
 
-    void guardar(DonacionVianda donacionVianda);
+  void guardar(DonacionVianda donacionVianda);
 
-    void guardar(List<DonacionVianda> donacionesVianda);
+  void guardar(List<DonacionVianda> donacionesVianda);
 
-    void actualizar(DonacionVianda donacionVianda);
+  void actualizar(DonacionVianda donacionVianda);
 
-    void eliminar(DonacionVianda donacionVianda);
+  void eliminar(DonacionVianda donacionVianda);
 }

@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IModeloHeladeraRepository {
-    Optional<ModeloHeladera> buscar(String id);
+  Optional<ModeloHeladera> buscar(String id);
 
-    List<ModeloHeladera> buscarTodos();
+  List<ModeloHeladera> buscarTodos();
 
-    void guardar(ModeloHeladera modeloHeladera);
+  void guardar(ModeloHeladera modeloHeladera);
 
-    void actualizar(ModeloHeladera modeloHeladera);
+  void actualizar(ModeloHeladera modeloHeladera);
 
-    void eliminar(ModeloHeladera modeloHeladera);
+  void eliminar(ModeloHeladera modeloHeladera);
 }

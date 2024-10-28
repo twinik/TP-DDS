@@ -17,14 +17,14 @@ import javax.persistence.Embedded;
 @NoArgsConstructor
 public class AreaDeCobertura {
 
-    @Embedded
-    private Ubicacion referencia;
+  @Embedded
+  private Ubicacion referencia;
 
-    @Column(name = "radio_de_cobertura_en_km")
-    private Float radioDeCoberturaEnKM;
+  @Column(name = "radio_de_cobertura_en_km")
+  private Float radioDeCoberturaEnKM;
 
-    public boolean contieneUbicacion(Ubicacion ubicacion) {
-        float distancia = referencia.calcularDistanciaHasta(ubicacion);
-        return distancia <= radioDeCoberturaEnKM;
-    }
+  public boolean contieneUbicacion(Ubicacion ubicacion) {
+    float distancia = referencia.calcularDistanciaHasta(ubicacion);
+    return distancia <= radioDeCoberturaEnKM;
+  }
 }

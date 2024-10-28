@@ -16,54 +16,54 @@ import java.util.Map;
 @AllArgsConstructor
 public class RedistribucionViandaController implements ICrudViewsHandler {
 
-    private RedistribucionViandaService redistribucionViandasService;
-    private MotivoRedistribucionService motivoRedistribucionService;
+  private RedistribucionViandaService redistribucionViandasService;
+  private MotivoRedistribucionService motivoRedistribucionService;
 
-    @Override
-    public void index(Context context) {
+  @Override
+  public void index(Context context) {
 
-    }
+  }
 
-    @Override
-    public void show(Context context) {
+  @Override
+  public void show(Context context) {
 
-    }
+  }
 
-    @Override
-    public void create(Context context) {
-        Map<String, Object> model = new HashMap<>();
-        model.put("message", context.queryParam("message"));
-        model.put("datosForm", context.consumeSessionAttribute("formDto"));
-        model.put("motivos", this.motivoRedistribucionService.obtenerMotivos());
-        context.render("/app/colaboraciones/distribucion-vianda.hbs", model);
-    }
+  @Override
+  public void create(Context context) {
+    Map<String, Object> model = new HashMap<>();
+    model.put("message", context.queryParam("message"));
+    model.put("datosForm", context.consumeSessionAttribute("formDto"));
+    model.put("motivos", this.motivoRedistribucionService.obtenerMotivos());
+    context.render("/app/colaboraciones/distribucion-vianda.hbs", model);
+  }
 
-    @Override
-    public void save(Context context) {
-        RedistribucionViandaDto dto = RedistribucionViandaDto.of(context);
-        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
-        if (dto.getDestino().getId().equals(dto.getOrigen().getId()))
-            throw new MismaHeladeraException(MensajeMismaHeladeraFactory.generarMensaje());
-        this.redistribucionViandasService.solicitarRedistribucion(dto);
-        Map<String, Object> model = new HashMap<>();
-        model.put("message", "Su solcitud de redistribución ha sido registrada con éxito, esperamos su donación con ansias");
-        context.status(201);
-        context.render("/app/success.hbs", model);
+  @Override
+  public void save(Context context) {
+    RedistribucionViandaDto dto = RedistribucionViandaDto.of(context);
+    if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+    if (dto.getDestino().getId().equals(dto.getOrigen().getId()))
+      throw new MismaHeladeraException(MensajeMismaHeladeraFactory.generarMensaje());
+    this.redistribucionViandasService.solicitarRedistribucion(dto);
+    Map<String, Object> model = new HashMap<>();
+    model.put("message", "Su solcitud de redistribución ha sido registrada con éxito, esperamos su donación con ansias");
+    context.status(201);
+    context.render("/app/success.hbs", model);
 
-    }
+  }
 
-    @Override
-    public void edit(Context context) {
+  @Override
+  public void edit(Context context) {
 
-    }
+  }
 
-    @Override
-    public void update(Context context) {
+  @Override
+  public void update(Context context) {
 
-    }
+  }
 
-    @Override
-    public void delete(Context context) {
+  @Override
+  public void delete(Context context) {
 
-    }
+  }
 }

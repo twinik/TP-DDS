@@ -16,42 +16,42 @@ import org.junit.jupiter.api.Test;
 
 public class RecomendadorDonacionesTest {
 
-    String id;
-    Recomendacion recomendacionHardcodeada;
+  String id;
+  Recomendacion recomendacionHardcodeada;
 
-    @BeforeEach
-    void initTest() {
-        id = "3a7502ae-7185-11ef-98ce-3c7c3f266695";
-        recomendacionHardcodeada = new Recomendacion();
-        recomendacionHardcodeada.setId(id);
-        recomendacionHardcodeada.setNombre("punto2");
-        recomendacionHardcodeada.setCalle("Av. Cordoba");
-        recomendacionHardcodeada.setAltura(4857);
-        recomendacionHardcodeada.setLatitud("5468968245");
-        recomendacionHardcodeada.setLongitud("5643212543");
-        recomendacionHardcodeada.setProvincia(new Provincia(1, "Ciudad Autonoma de Buenos Aires", "caba"));
-        recomendacionHardcodeada.setLocalidad(new Localidad(1, "Almagro", "almagro"));
-    }
+  @BeforeEach
+  void initTest() {
+    id = "3a7502ae-7185-11ef-98ce-3c7c3f266695";
+    recomendacionHardcodeada = new Recomendacion();
+    recomendacionHardcodeada.setId(id);
+    recomendacionHardcodeada.setNombre("punto2");
+    recomendacionHardcodeada.setCalle("Av. Cordoba");
+    recomendacionHardcodeada.setAltura(4857);
+    recomendacionHardcodeada.setLatitud("5468968245");
+    recomendacionHardcodeada.setLongitud("5643212543");
+    recomendacionHardcodeada.setProvincia(new Provincia(1, "Ciudad Autonoma de Buenos Aires", "caba"));
+    recomendacionHardcodeada.setLocalidad(new Localidad(1, "Almagro", "almagro"));
+  }
 
-    @Test
-    @DisplayName("pruebo que lo que me devuelve la mock api sea correcto")
-    void test() {
-        RecomendacionDonaciones recomendadorDonaciones = new RecomendacionDonaciones();
-        IRecomendacionDonacionesAdapter adapter = mock(IRecomendacionDonacionesAdapter.class);
-        when(adapter.obtenerRecomendacion(any())).thenReturn(recomendacionHardcodeada);
-        recomendadorDonaciones.setAdapter(adapter);
-        Recomendacion recomendacion = recomendadorDonaciones.obtenerRecomendacion(id);
-        Assertions.assertEquals(id, recomendacion.getId());
-        Assertions.assertEquals("punto2", recomendacion.getNombre());
-        Assertions.assertEquals("Av. Cordoba", recomendacion.getCalle());
-        Assertions.assertEquals(4857, recomendacion.getAltura());
-        Assertions.assertEquals("5468968245", recomendacion.getLatitud());
-        Assertions.assertEquals("5643212543", recomendacion.getLongitud());
-        Assertions.assertEquals(1, recomendacion.getProvincia().getId());
-        Assertions.assertEquals("Ciudad Autonoma de Buenos Aires", recomendacion.getProvincia().getNombre());
-        Assertions.assertEquals("caba", recomendacion.getProvincia().getEtiqueta());
-        Assertions.assertEquals(1, recomendacion.getLocalidad().getId());
-        Assertions.assertEquals("Almagro", recomendacion.getLocalidad().getNombre());
-        Assertions.assertEquals("almagro", recomendacion.getLocalidad().getEtiqueta());
-    }
+  @Test
+  @DisplayName("pruebo que lo que me devuelve la mock api sea correcto")
+  void test() {
+    RecomendacionDonaciones recomendadorDonaciones = new RecomendacionDonaciones();
+    IRecomendacionDonacionesAdapter adapter = mock(IRecomendacionDonacionesAdapter.class);
+    when(adapter.obtenerRecomendacion(any())).thenReturn(recomendacionHardcodeada);
+    recomendadorDonaciones.setAdapter(adapter);
+    Recomendacion recomendacion = recomendadorDonaciones.obtenerRecomendacion(id);
+    Assertions.assertEquals(id, recomendacion.getId());
+    Assertions.assertEquals("punto2", recomendacion.getNombre());
+    Assertions.assertEquals("Av. Cordoba", recomendacion.getCalle());
+    Assertions.assertEquals(4857, recomendacion.getAltura());
+    Assertions.assertEquals("5468968245", recomendacion.getLatitud());
+    Assertions.assertEquals("5643212543", recomendacion.getLongitud());
+    Assertions.assertEquals(1, recomendacion.getProvincia().getId());
+    Assertions.assertEquals("Ciudad Autonoma de Buenos Aires", recomendacion.getProvincia().getNombre());
+    Assertions.assertEquals("caba", recomendacion.getProvincia().getEtiqueta());
+    Assertions.assertEquals(1, recomendacion.getLocalidad().getId());
+    Assertions.assertEquals("Almagro", recomendacion.getLocalidad().getNombre());
+    Assertions.assertEquals("almagro", recomendacion.getLocalidad().getEtiqueta());
+  }
 }

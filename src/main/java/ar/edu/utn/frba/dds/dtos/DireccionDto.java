@@ -10,39 +10,39 @@ import lombok.Getter;
 @Builder
 @Getter
 public class DireccionDto {
-    private String calle;
-    private Integer altura;
-    private Integer piso;
-    private String codigoPostal;
+  private String calle;
+  private Integer altura;
+  private Integer piso;
+  private String codigoPostal;
 
-    public static DireccionDto of(Context context) {
-        return (context.formParam("calle") != null && !context.formParam("calle").isBlank() ||
-                context.formParam("altura") != null && !context.formParam("altura").isBlank() ||
-                context.formParam("cp") != null && !context.formParam("cp").isBlank() ||
-                context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? DireccionDto
-                .builder()
-                .calle((!context.formParam("calle").isBlank()) ? context.formParam("calle") : null)
-                .altura((context.formParam("altura") != null && !context.formParam("altura").isBlank()) ? Integer.parseInt(context.formParam("altura")) : null)
-                .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.parseInt(context.formParam("piso")) : null)
-                .codigoPostal((context.formParam("codigoPostal") != null && !context.formParam("codigoPostal").isBlank()) ? context.formParam("codigoPostal") : null)
-                .build() : null;
+  public static DireccionDto of(Context context) {
+    return (context.formParam("calle") != null && !context.formParam("calle").isBlank() ||
+        context.formParam("altura") != null && !context.formParam("altura").isBlank() ||
+        context.formParam("cp") != null && !context.formParam("cp").isBlank() ||
+        context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? DireccionDto
+        .builder()
+        .calle((!context.formParam("calle").isBlank()) ? context.formParam("calle") : null)
+        .altura((context.formParam("altura") != null && !context.formParam("altura").isBlank()) ? Integer.parseInt(context.formParam("altura")) : null)
+        .piso((context.formParam("piso") != null && !context.formParam("piso").isBlank()) ? Integer.parseInt(context.formParam("piso")) : null)
+        .codigoPostal((context.formParam("codigoPostal") != null && !context.formParam("codigoPostal").isBlank()) ? context.formParam("codigoPostal") : null)
+        .build() : null;
+  }
+
+  public static DireccionDto fromDireccion(Direccion direccion) {
+    return direccion != null ? DireccionDto
+        .builder()
+        .calle(direccion.getCalle())
+        .altura(direccion.getAltura())
+        .piso(direccion.getPiso())
+        .codigoPostal(direccion.getCodigoPostal())
+        .build() : null;
+  }
+
+
+  public boolean estanCamposLlenos(Object formDto) {
+    if (this.calle == null || this.altura == null || this.codigoPostal == null) {
+      throw new FormIncompletoException(MensajeDirIncompletaFactory.generarMensaje(), formDto);
     }
-
-    public static DireccionDto fromDireccion(Direccion direccion) {
-        return direccion != null ? DireccionDto
-                .builder()
-                .calle(direccion.getCalle())
-                .altura(direccion.getAltura())
-                .piso(direccion.getPiso())
-                .codigoPostal(direccion.getCodigoPostal())
-                .build() : null;
-    }
-
-
-    public boolean estanCamposLlenos(Object formDto) {
-        if (this.calle == null || this.altura == null || this.codigoPostal == null) {
-            throw new FormIncompletoException(MensajeDirIncompletaFactory.generarMensaje(), formDto);
-        }
-        return true;
-    }
+    return true;
+  }
 }

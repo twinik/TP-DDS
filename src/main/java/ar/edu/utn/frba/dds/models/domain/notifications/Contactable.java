@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.models.domain.notifications;
 
 public interface Contactable {
-    String email();
+  String email();
 
-    String telefonoCompleto();
+  String telefonoCompleto();
 
-    String telegramId();
+  String telegramId();
 }

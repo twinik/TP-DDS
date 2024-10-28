@@ -10,31 +10,31 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class AltaPersonaVulnerableDto {
-    private String nombre;
-    private String apellido;
-    private String tipoDocumento;
-    private String nroDocumento;
-    private String fechaNacimiento;
-    private String domicilio;
-    private String idColaborador;
-    private TarjetaInputDto tarjeta;
-    private String tieneTutorados;
-    private String cantidadTutorados;
-    private List<AltaPersonaVulnerableDto> tutorados;
+  private String nombre;
+  private String apellido;
+  private String tipoDocumento;
+  private String nroDocumento;
+  private String fechaNacimiento;
+  private String domicilio;
+  private String idColaborador;
+  private TarjetaInputDto tarjeta;
+  private String tieneTutorados;
+  private String cantidadTutorados;
+  private List<AltaPersonaVulnerableDto> tutorados;
 
-    public static AltaPersonaVulnerableDto of(Context context) {
-        return AltaPersonaVulnerableDto
-                .builder()
-                .nombre(context.formParam("nombre"))
-                .apellido(context.formParam("apellido"))
-                .tipoDocumento(context.formParam("tipoDocumento"))
-                .nroDocumento(context.formParam("nroDocumento"))
-                .fechaNacimiento(context.formParam("fechaNacimiento"))
-                .domicilio((context.formParam("domicilio") != null && !context.formParam("domicilio").isBlank()) ? context.formParam("domicilio") : null)
-                .idColaborador(context.sessionAttribute("idColaborador"))
-                .tarjeta(TarjetaInputDto.of(context))
-                .tieneTutorados(context.formParam("tiene-tutorados"))
-                .cantidadTutorados(context.formParam("cantMenores"))
-                .build();
-    }
+  public static AltaPersonaVulnerableDto of(Context context) {
+    return AltaPersonaVulnerableDto
+        .builder()
+        .nombre(context.formParam("nombre"))
+        .apellido(context.formParam("apellido"))
+        .tipoDocumento(context.formParam("tipoDocumento"))
+        .nroDocumento(context.formParam("nroDocumento"))
+        .fechaNacimiento(context.formParam("fechaNacimiento"))
+        .domicilio((context.formParam("domicilio") != null && !context.formParam("domicilio").isBlank()) ? context.formParam("domicilio") : null)
+        .idColaborador(context.sessionAttribute("idColaborador"))
+        .tarjeta(TarjetaInputDto.of(context))
+        .tieneTutorados(context.formParam("tiene-tutorados"))
+        .cantidadTutorados(context.formParam("cantMenores"))
+        .build();
+  }
 }

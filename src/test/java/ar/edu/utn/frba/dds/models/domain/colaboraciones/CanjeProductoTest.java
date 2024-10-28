@@ -18,48 +18,34 @@ import java.time.LocalDateTime;
 
 class CanjeProductoTest {
 
-    private static final LocalDateTime FECHA_CANJE = LocalDateTime.now();
-    private static final float PUNTOS_NECESARIOS = 100.0f;
+  private static final LocalDateTime FECHA_CANJE = LocalDateTime.now();
+  private static final float PUNTOS_NECESARIOS = 100.0f;
 
-    private Colaborador comprador;
-    private OfertaProducto ofertaCanjeada;
+  private Colaborador comprador;
+  private OfertaProducto ofertaCanjeada;
 
-    @BeforeEach
-    void setUp() {
-        comprador = new Colaborador();
-        comprador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_HUMANA, null));
-        comprador.setPuntosGanados((float) 0);
-        ofertaCanjeada = new OfertaProducto(comprador, LocalDate.now(), new Producto(), PUNTOS_NECESARIOS, CategoriaOferta.ELECTRONICA);
-    }
+  @BeforeEach
+  void setUp() {
+    comprador = new Colaborador();
+    comprador.setTipoColaborador(new TipoColaborador(TipoPersona.PERSONA_HUMANA, null));
+    comprador.setPuntosGanados((float) 0);
+    ofertaCanjeada = new OfertaProducto(comprador, LocalDate.now(), new Producto(), PUNTOS_NECESARIOS, CategoriaOferta.ELECTRONICA);
+  }
 
-    @Test
-    @DisplayName("Canje de producto exitoso")
-    void testCanjeProductoExitoso() throws PuntosInsuficientesException {
-        comprador.sumarPuntos(PUNTOS_NECESARIOS);
-        CanjeProducto canjeProducto = new CanjeProducto(comprador, ofertaCanjeada, FECHA_CANJE, ofertaCanjeada.getPuntosNecesarios());
-        comprador.restarPuntos(canjeProducto.getPuntosGastados());
-        assertEquals(0, comprador.getPuntosGanados());
-    }
+  @Test
+  @DisplayName("Canje de producto exitoso")
+  void testCanjeProductoExitoso() throws PuntosInsuficientesException {
+    comprador.sumarPuntos(PUNTOS_NECESARIOS);
+    CanjeProducto canjeProducto = new CanjeProducto(comprador, ofertaCanjeada, FECHA_CANJE, ofertaCanjeada.getPuntosNecesarios());
+    comprador.restarPuntos(canjeProducto.getPuntosGastados());
+    assertEquals(0, comprador.getPuntosGanados());
+  }
 
-    @Test
-    @DisplayName("Test puede canjear")
-    void testPuedeCanjear() {
-        Assertions.assertFalse(this.ofertaCanjeada.puedeSerCanjeadoPor(comprador));
-        comprador.sumarPuntos(PUNTOS_NECESARIOS);
-        Assertions.assertTrue(this.ofertaCanjeada.puedeSerCanjeadoPor(comprador));
-    }
-
+  @Test
+  @DisplayName("Test puede canjear")
+  void testPuedeCanjear() {
+    Assertions.assertFalse(this.ofertaCanjeada.puedeSerCanjeadoPor(comprador));
+    comprador.sumarPuntos(PUNTOS_NECESARIOS);
+    Assertions.assertTrue(this.ofertaCanjeada.puedeSerCanjeadoPor(comprador));
+  }
 }
-
-
-//  @Test
-//  @DisplayName("Canje de producto fallido por puntos insuficientes")
-//  void testCanjeProductoConPuntosInsuficientes() {
-//    comprador.sumarPuntos(PUNTOS_NECESARIOS - 1);
-//
-//    assertThrows(PuntosInsuficientesException.class, () ->
-//        new CanjeProducto(comprador, ofertaCanjeada, FECHA_CANJE)
-//    );
-//    assertEquals(PUNTOS_NECESARIOS - 1, comprador.getPuntosGanados());
-//  }
-//

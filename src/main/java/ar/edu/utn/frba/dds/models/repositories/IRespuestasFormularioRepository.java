@@ -8,13 +8,13 @@ import java.util.Optional;
  * IRespuestasFormularioRepository interface permite interactuar con las Respuestas de un Formulario.
  */
 public interface IRespuestasFormularioRepository {
-    Optional<RespuestaFormulario> buscar(String id);
+  Optional<RespuestaFormulario> buscar(String id);
 
-    List<RespuestaFormulario> buscarTodos();
+  List<RespuestaFormulario> buscarTodos();
 
-    void guardar(RespuestaFormulario respuestaFormulario);
+  void guardar(RespuestaFormulario respuestaFormulario);
 
-    void actualizar(RespuestaFormulario respuestaFormulario);
+  void actualizar(RespuestaFormulario respuestaFormulario);
 
-    void eliminar(RespuestaFormulario respuestaFormulario);
+  void eliminar(RespuestaFormulario respuestaFormulario);
 }

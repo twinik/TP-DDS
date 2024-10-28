@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ClaveNoCoincidenException extends RuntimeException {
-    Object formDto;
+  Object formDto;
 
-    public ClaveNoCoincidenException(Object formDto) {
-        super("Las claves ingresadas no coinciden!");
-        this.formDto = formDto;
-    }
+  public ClaveNoCoincidenException(Object formDto) {
+    super("Las claves ingresadas no coinciden!");
+    this.formDto = formDto;
+  }
 }

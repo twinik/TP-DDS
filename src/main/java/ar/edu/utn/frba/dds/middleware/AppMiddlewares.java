@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 public class AppMiddlewares {
 
-    private final IMiddleware[] middlewares = new IMiddleware[]{new AuthMiddleware()};
+  private final IMiddleware[] middlewares = new IMiddleware[]{new AuthMiddleware()};
 
-    public static void applyMiddlewares(Javalin app) {
-        Arrays.stream(new AppMiddlewares().middlewares).toList().forEach(middleware -> middleware.apply(app));
-    }
+  public static void applyMiddlewares(Javalin app) {
+    Arrays.stream(new AppMiddlewares().middlewares).toList().forEach(middleware -> middleware.apply(app));
+  }
 }

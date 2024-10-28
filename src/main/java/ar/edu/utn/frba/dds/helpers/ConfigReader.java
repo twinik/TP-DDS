@@ -8,25 +8,25 @@ import java.util.Properties;
  * ConfigReader class permite leer un archivo de configuracion.
  */
 public class ConfigReader {
-    private String filePath;
+  private String filePath;
 
-    public ConfigReader(String filePath) {
-        this.filePath = filePath;
-    }
+  public ConfigReader(String filePath) {
+    this.filePath = filePath;
+  }
 
-    /**
-     * Lee un archivo de configuracion.
-     */
-    public Properties getProperties() throws IOException {
-        Properties prop = new Properties();
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream(filePath)) {
-            prop.load(input);
-        }
-        return prop;
+  /**
+   * Lee un archivo de configuracion.
+   */
+  public Properties getProperties() throws IOException {
+    Properties prop = new Properties();
+    try (InputStream input = getClass().getClassLoader().getResourceAsStream(filePath)) {
+      prop.load(input);
     }
+    return prop;
+  }
 
-    public String getProperty(String key) throws IOException {
-        Properties prop = getProperties();
-        return prop.getProperty(key);
-    }
+  public String getProperty(String key) throws IOException {
+    Properties prop = getProperties();
+    return prop.getProperty(key);
+  }
 }

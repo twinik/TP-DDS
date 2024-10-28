@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface IIncidentesRepository {
 
-    Optional<Incidente> buscar(String id);
+  Optional<Incidente> buscar(String id);
 
-    List<Incidente> buscarTodos();
+  List<Incidente> buscarTodos();
 
-    List<Incidente> buscarPorHeladera(String id);
+  List<Incidente> buscarPorHeladera(String id);
 
-    Long cantidadNoSolucionadosPorHeladera(Heladera h);
+  Long cantidadNoSolucionadosPorHeladera(Heladera h);
 
-    void actualizar(Incidente incidente);
+  void actualizar(Incidente incidente);
 }

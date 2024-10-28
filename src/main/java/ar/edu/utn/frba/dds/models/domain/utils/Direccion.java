@@ -14,19 +14,19 @@ import javax.persistence.Embeddable;
 @Embeddable
 @NoArgsConstructor
 public class Direccion {
-    @Column(name = "calle")
-    private String calle;
-    @Column(name = "altura")
-    private Integer altura;
-    @Column(name = "piso")
-    private Integer piso;
-    @Column(name = "codigoPostal")
-    private String codigoPostal;
+  @Column(name = "calle")
+  private String calle;
+  @Column(name = "altura")
+  private Integer altura;
+  @Column(name = "piso")
+  private Integer piso;
+  @Column(name = "codigoPostal")
+  private String codigoPostal;
 
-    public Direccion(String calle, Integer altura, Integer piso, String codigoPostal) {
-        this.calle = calle;
-        this.altura = altura;
-        this.piso = piso;
-        this.codigoPostal = codigoPostal;
-    }
+  public Direccion(String calle, Integer altura, Integer piso, String codigoPostal) {
+    this.calle = calle;
+    this.altura = altura;
+    this.piso = piso;
+    this.codigoPostal = codigoPostal;
+  }
 }

@@ -25,43 +25,43 @@ import java.util.List;
 @NoArgsConstructor
 public class Tecnico extends EntidadPersistente implements Contactable {
 
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
+  @Column(name = "nombre", nullable = false)
+  private String nombre;
 
-    @Column(name = "apellido", nullable = false)
-    private String apellido;
+  @Column(name = "apellido", nullable = false)
+  private String apellido;
 
-    @Column(name = "nro_documento", nullable = false)
-    private String nroDocumento;
+  @Column(name = "nro_documento", nullable = false)
+  private String nroDocumento;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_documento", nullable = false)
-    private TipoDocumento tipoDocumento;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipo_documento", nullable = false)
+  private TipoDocumento tipoDocumento;
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
-    private List<MedioDeContacto> medioContacto = new ArrayList<>();
+  @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+  @JoinColumn(name = "tecnico_id", referencedColumnName = "id")
+  private List<MedioDeContacto> medioContacto = new ArrayList<>();
 
-    @Embedded
-    private AreaDeCobertura areaDeCobertura;
+  @Embedded
+  private AreaDeCobertura areaDeCobertura;
 
 
-    public void agregarMedioContacto(List<MedioDeContacto> medioContacto) {
-        this.medioContacto.addAll(medioContacto);
-    }
+  public void agregarMedioContacto(List<MedioDeContacto> medioContacto) {
+    this.medioContacto.addAll(medioContacto);
+  }
 
-    @Override
-    public String email() {
-        return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.EMAIL);
-    }
+  @Override
+  public String email() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.EMAIL);
+  }
 
-    @Override
-    public String telefonoCompleto() {
-        return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.WHATSAPP);
-    }
+  @Override
+  public String telefonoCompleto() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.WHATSAPP);
+  }
 
-    @Override
-    public String telegramId() {
-        return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.TELEGRAM);
-    }
+  @Override
+  public String telegramId() {
+    return MedioContactoHelper.getValorContacto(this.medioContacto, CanalContacto.TELEGRAM);
+  }
 }

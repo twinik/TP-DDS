@@ -6,16 +6,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class UsuarioNavbarDto {
-    private String nombre;
-    private String email;
-    private Boolean permisoTecnico = false;
-    private Boolean permisoFormulario = false;
-    private Boolean permisoModeloHeladera = false;
-    private Boolean permisoCodTarjeta = false;
-    private Boolean permisoCsv = false;
+  private String nombre;
+  private String email;
+  private Boolean permisoTecnico = false;
+  private Boolean permisoFormulario = false;
+  private Boolean permisoModeloHeladera = false;
+  private Boolean permisoCodTarjeta = false;
+  private Boolean permisoCsv = false;
 
-    public Boolean esAdmin() {
-        return this.permisoTecnico || this.permisoFormulario || this.permisoModeloHeladera || this.permisoCodTarjeta
-                || this.permisoCsv;
-    }
+  public Boolean esAdmin() {
+    return this.permisoTecnico || this.permisoFormulario || this.permisoModeloHeladera || this.permisoCodTarjeta
+        || this.permisoCsv;
+  }
 }

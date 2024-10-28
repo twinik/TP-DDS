@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PuntoColocacion {
-    private String nombre;
-    private Ubicacion ubicacion;
-    private Direccion direccion;
+  private String nombre;
+  private Ubicacion ubicacion;
+  private Direccion direccion;
 }

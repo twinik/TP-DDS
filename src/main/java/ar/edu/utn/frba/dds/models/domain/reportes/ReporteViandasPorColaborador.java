@@ -22,41 +22,41 @@ import java.util.Map;
 @Entity
 @DiscriminatorValue("viandas_x_colab")
 public class ReporteViandasPorColaborador extends Reporte {
-    @Transient
-    private final String tituloReporte = "Viandas donadas por colaborador - Semana ";
-    @Transient
-    private IPDFGeneratorAdapter pdfGenerator;
-    @Transient
-    private IViandasRepository viandasRepository;
+  @Transient
+  private final String tituloReporte = "Viandas donadas por colaborador - Semana ";
+  @Transient
+  private IPDFGeneratorAdapter pdfGenerator;
+  @Transient
+  private IViandasRepository viandasRepository;
 
 
-    public ReporteViandasPorColaborador(String rutaArchivo, IPDFGeneratorAdapter pdfGenerator, IViandasRepository viandasRepository) {
-        super(rutaArchivo);
-        this.pdfGenerator = pdfGenerator;
-        this.viandasRepository = viandasRepository;
-    }
+  public ReporteViandasPorColaborador(String rutaArchivo, IPDFGeneratorAdapter pdfGenerator, IViandasRepository viandasRepository) {
+    super(rutaArchivo);
+    this.pdfGenerator = pdfGenerator;
+    this.viandasRepository = viandasRepository;
+  }
 
-    public void generarPDF() {
-        LocalDate hoy = LocalDate.now();
-        Map<String, Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);
+  public void generarPDF() {
+    LocalDate hoy = LocalDate.now();
+    Map<String, Long> viandasPorColaborador = viandasRepository.buscarViandasAgrupadasPorColaborador(hoy);
 
-        String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    String tituloConFecha = tituloReporte.concat(" fecha: " + hoy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
-    }
+    pdfGenerator.generarPdf(this.rutaArchivo, tituloConFecha, this.generarEntradasInforme(viandasPorColaborador));
+  }
 
-    @Override
-    public String getTipo() {
-        return "Viandas por colaborador";
-    }
+  @Override
+  public String getTipo() {
+    return "Viandas por colaborador";
+  }
 
-    private String generarEntradasInforme(Map<String, Long> viandasPorColaborador) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n");
-        viandasPorColaborador.forEach((nom_completo, cant) -> stringBuilder
-                .append(String.format("%s ha donado %d vianda(s)\n", nom_completo, cant)));
-        return stringBuilder.toString();
-    }
+  private String generarEntradasInforme(Map<String, Long> viandasPorColaborador) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("\n");
+    viandasPorColaborador.forEach((nom_completo, cant) -> stringBuilder
+        .append(String.format("%s ha donado %d vianda(s)\n", nom_completo, cant)));
+    return stringBuilder.toString();
+  }
 
 
 }

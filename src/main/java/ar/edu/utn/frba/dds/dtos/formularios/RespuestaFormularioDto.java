@@ -10,15 +10,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class RespuestaFormularioDto {
-    private String idColaborador;
-    private String idFormulario;
-    private List<RespuestaACampoDto> respuestas;
+  private String idColaborador;
+  private String idFormulario;
+  private List<RespuestaACampoDto> respuestas;
 
-    public static RespuestaFormularioDto fromContext(Context ctx) {
-        RespuestaFormularioDto dto = new RespuestaFormularioDto();
-        dto.setIdColaborador(ctx.pathParam("idColaborador"));
-        dto.setIdFormulario(ctx.pathParam("idFormulario"));
-        dto.setRespuestas(RespuestaACampoDto.listFromContext(ctx));
-        return dto;
-    }
+  public static RespuestaFormularioDto fromContext(Context ctx) {
+    RespuestaFormularioDto dto = new RespuestaFormularioDto();
+    dto.setIdColaborador(ctx.pathParam("idColaborador"));
+    dto.setIdFormulario(ctx.pathParam("idFormulario"));
+    dto.setRespuestas(RespuestaACampoDto.listFromContext(ctx));
+    return dto;
+  }
 }

@@ -11,50 +11,50 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class ColocacionHeladerasController implements ICrudViewsHandler {
-    private ColocacionHeladerasService colocacionHeladerasService;
-    private ModelosService modelosService;
+  private ColocacionHeladerasService colocacionHeladerasService;
+  private ModelosService modelosService;
 
-    @Override
-    public void index(Context context) {
+  @Override
+  public void index(Context context) {
 
-    }
+  }
 
-    @Override
-    public void show(Context context) {
+  @Override
+  public void show(Context context) {
 
-    }
+  }
 
-    @Override
-    public void create(Context context) {
-        Map<String, Object> model = new HashMap<>();
-        model.put("modelos", this.modelosService.obtenerModelosDisponibles());
-        model.put("message", context.queryParam("message"));
-        context.status(201);
-        context.render("/app/colaboraciones/cargo-heladera.hbs", model);
-    }
+  @Override
+  public void create(Context context) {
+    Map<String, Object> model = new HashMap<>();
+    model.put("modelos", this.modelosService.obtenerModelosDisponibles());
+    model.put("message", context.queryParam("message"));
+    context.status(201);
+    context.render("/app/colaboraciones/cargo-heladera.hbs", model);
+  }
 
-    @Override
-    public void save(Context context) {
-        HeladeraInputDto dto = HeladeraInputDto.of(context);
+  @Override
+  public void save(Context context) {
+    HeladeraInputDto dto = HeladeraInputDto.of(context);
 
-        this.colocacionHeladerasService.crearColocacionHeladera(dto);
+    this.colocacionHeladerasService.crearColocacionHeladera(dto);
 
-        context.status(201);
-        context.redirect("/heladeras");
-    }
+    context.status(201);
+    context.redirect("/heladeras");
+  }
 
-    @Override
-    public void edit(Context context) {
+  @Override
+  public void edit(Context context) {
 
-    }
+  }
 
-    @Override
-    public void update(Context context) {
+  @Override
+  public void update(Context context) {
 
-    }
+  }
 
-    @Override
-    public void delete(Context context) {
+  @Override
+  public void delete(Context context) {
 
-    }
+  }
 }

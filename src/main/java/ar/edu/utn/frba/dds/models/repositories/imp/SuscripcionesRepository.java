@@ -12,67 +12,45 @@ import java.util.Optional;
  */
 public class SuscripcionesRepository implements ISuscripcionesRepository, WithSimplePersistenceUnit {
 
-    @Override
-    public Optional<Suscripcion> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(Suscripcion.class, id));
-    }
+  @Override
+  public Optional<Suscripcion> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(Suscripcion.class, id));
+  }
 
-    @Override
-    public List<Suscripcion> buscarTodos() {
-        return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.activo=:activo", Suscripcion.class).
-                setParameter("activo", true)
-                .getResultList();
-    }
+  @Override
+  public List<Suscripcion> buscarTodos() {
+    return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.activo=:activo", Suscripcion.class).
+        setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public List<Suscripcion> buscarTodosPorColaborador(String colaborador_id) {
-        return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.id =:colaborador_id", Suscripcion.class).
-                setParameter("activo", true)
-                .setParameter("colaborador_id", colaborador_id)
-                .getResultList();
-    }
-
-
-    @Override
-    public void guardar(Suscripcion suscripcion) {
-        withTransaction(() -> entityManager().persist(suscripcion));
-    }
+  @Override
+  public List<Suscripcion> buscarTodosPorColaborador(String colaborador_id) {
+    return entityManager().createQuery("from Suscripcion where activo=:activo and colaborador.id =:colaborador_id", Suscripcion.class).
+        setParameter("activo", true)
+        .setParameter("colaborador_id", colaborador_id)
+        .getResultList();
+  }
 
 
-    @Override
-    public void actualizar(Suscripcion suscripcion) {
-        withTransaction(() -> entityManager().merge(suscripcion));
-    }
+  @Override
+  public void guardar(Suscripcion suscripcion) {
+    withTransaction(() -> entityManager().persist(suscripcion));
+  }
 
-    @Override
-    public void eliminar(Suscripcion suscripcion) {
 
-        withTransaction(() -> {
-            suscripcion.borrarLogico();
-            entityManager().merge(suscripcion);
-        });
-    }
+  @Override
+  public void actualizar(Suscripcion suscripcion) {
+    withTransaction(() -> entityManager().merge(suscripcion));
+  }
 
-  /*public static void main(String[] args) {
-        Suscripcion m = new Suscripcion("otro");
-        Suscripcion m1 = new Suscripcion("uno");
-        Suscripcion m2 = new Suscripcion("hola");
-        ISuscripcionesRepository repositorio = (ISuscripcionesRepository) ServiceLocator.get("suscripcionesRepository");
-        repositorio.guardar(m);
-        repositorio.guardar(m1);
-        repositorio.guardar(m2);
+  @Override
+  public void eliminar(Suscripcion suscripcion) {
 
-        repositorio.eliminar(m1);
-        m2.setMotivo("lo cambio");
-        m2.setUpdated_at(LocalDateTime.of(2023,1,13,1,3));
-      repositorio.actualizar(m2);
-
-        Optional<Suscripcion> suscripcion1 = repositorio.buscar(1L);
-        //System.out.println(hidratado.get().getMotivo());
-        Optional<Suscripcion> suscripcion2 = repositorio.buscar(2L);
-
-        List<Suscripcion> lista = repositorio.buscarTodos();
-
-    }*/
+    withTransaction(() -> {
+      suscripcion.borrarLogico();
+      entityManager().merge(suscripcion);
+    });
+  }
 
 }

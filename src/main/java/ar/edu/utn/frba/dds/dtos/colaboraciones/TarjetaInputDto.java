@@ -7,9 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class TarjetaInputDto {
-    private String codigo;
+  private String codigo;
 
-    public static TarjetaInputDto of(Context context) {
-        return new TarjetaInputDto(context.formParam("codTarjeta"));
-    }
+  public static TarjetaInputDto of(Context context) {
+    return new TarjetaInputDto(context.formParam("codTarjeta"));
+  }
 }

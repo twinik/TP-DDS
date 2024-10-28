@@ -14,20 +14,20 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VisitaTecnicoDto {
 
-    private String idTecnico;
-    private String fechaVisita;
-    private String descripcion;
-    private String urlFoto;
-    private boolean solucionado;
-    private String incidente;
+  private String idTecnico;
+  private String fechaVisita;
+  private String descripcion;
+  private String urlFoto;
+  private boolean solucionado;
+  private String incidente;
 
-    public static VisitaTecnicoDto of(Context context) {
-        String idTecnico = context.formParam("tecnico");
-        String fechaVisita = context.formParam("fecha");
-        String descripcion = context.formParam("desc");
-        String incidente = context.formParam("incidente");
-        boolean solucionado = "Sí".equals(context.formParam("incidenteSolucionado"));
+  public static VisitaTecnicoDto of(Context context) {
+    String idTecnico = context.formParam("tecnico");
+    String fechaVisita = context.formParam("fecha");
+    String descripcion = context.formParam("desc");
+    String incidente = context.formParam("incidente");
+    boolean solucionado = "Sí".equals(context.formParam("incidenteSolucionado"));
 
-        return new VisitaTecnicoDto(idTecnico, fechaVisita, descripcion, null, solucionado, incidente);
-    }
+    return new VisitaTecnicoDto(idTecnico, fechaVisita, descripcion, null, solucionado, incidente);
+  }
 }

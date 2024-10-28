@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IRecomendacionDonacionesAdapter {
 
-    Recomendacion obtenerRecomendacion(String id);
+  Recomendacion obtenerRecomendacion(String id);
 
-    List<Recomendacion> listarRecomendaciones(String etiquetaProvincia, String etiquetaLocalidad);
+  List<Recomendacion> listarRecomendaciones(String etiquetaProvincia, String etiquetaLocalidad);
 }

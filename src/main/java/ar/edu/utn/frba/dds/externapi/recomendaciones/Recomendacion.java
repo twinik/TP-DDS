@@ -11,12 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Recomendacion {
 
-    private String id;
-    private String nombre;
-    private String calle;
-    private Integer altura;
-    private String latitud;
-    private String longitud;
-    private Provincia provincia;
-    private Localidad localidad;
+  private String id;
+  private String nombre;
+  private String calle;
+  private Integer altura;
+  private String latitud;
+  private String longitud;
+  private Provincia provincia;
+  private Localidad localidad;
 }

@@ -26,49 +26,49 @@ import java.time.LocalDateTime;
 @Table(name = "incidente")
 @DiscriminatorColumn(name = "tipo_incidente")
 public abstract class Incidente extends EntidadPersistente {
-    @ManyToOne
-    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-    private Heladera heladera;
+  @ManyToOne
+  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+  private Heladera heladera;
 
-    @Column(name = "timestamp", columnDefinition = "TIMESTAMP")
-    private LocalDateTime timestamp;
+  @Column(name = "timestamp", columnDefinition = "TIMESTAMP")
+  private LocalDateTime timestamp;
 
-    // DESNORMALIZACION PARA PERFORMANCE
-    @Column(name = "solucionado")
-    private boolean solucionado = false;
+  // DESNORMALIZACION PARA PERFORMANCE
+  @Column(name = "solucionado")
+  private boolean solucionado = false;
 
-    @Transient
-    private TecnicosHelper tecnicosHelper;
+  @Transient
+  private TecnicosHelper tecnicosHelper;
 
-    @Transient
-    private NotificationStrategyFactory notificationStrategyFactory;
+  @Transient
+  private NotificationStrategyFactory notificationStrategyFactory;
 
-    public Incidente(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory) {
-        this.heladera = heladera;
-        this.timestamp = timestamp;
-        this.tecnicosHelper = tecnicosHelper;
-        this.notificationStrategyFactory = notificationStrategyFactory;
-    }
+  public Incidente(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory) {
+    this.heladera = heladera;
+    this.timestamp = timestamp;
+    this.tecnicosHelper = tecnicosHelper;
+    this.notificationStrategyFactory = notificationStrategyFactory;
+  }
 
-    public void reportar() {
-        heladera.inhabilitar();
-        Tecnico tecnicoAContactar = tecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
-        String message = MensajeTecnicosIncidenteFactory.generarMensaje(tecnicoAContactar, heladera, timestamp);
-        tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
-            NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
-            try {
-                strategy.notificar(tecnicoAContactar, new ConfigReader("config.properties").getProperty("ASUNTO_MENSAJE_TECNICO"), message);
-                ;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
+  public void reportar() {
+    heladera.inhabilitar();
+    Tecnico tecnicoAContactar = tecnicosHelper.findTecnicoMasCercano(heladera.getUbicacion());
+    String message = MensajeTecnicosIncidenteFactory.generarMensaje(tecnicoAContactar, heladera, timestamp);
+    tecnicoAContactar.getMedioContacto().stream().parallel().forEach(medio -> {
+      NotificationStrategy strategy = notificationStrategyFactory.create(medio.getCanal());
+      try {
+        strategy.notificar(tecnicoAContactar, new ConfigReader("config.properties").getProperty("ASUNTO_MENSAJE_TECNICO"), message);
+        ;
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    });
+  }
 
-    public void marcarSolucionado() {
-        this.solucionado = true;
-    }
+  public void marcarSolucionado() {
+    this.solucionado = true;
+  }
 
-    public abstract String getTipo();
+  public abstract String getTipo();
 
 }

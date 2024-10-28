@@ -18,29 +18,29 @@ import java.time.LocalDateTime;
 @DiscriminatorValue("alerta")
 @NoArgsConstructor
 public class Alerta extends Incidente {
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_alerta")
-    private TipoAlerta tipoAlerta;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipo_alerta")
+  private TipoAlerta tipoAlerta;
 
-    public Alerta(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {
-        super(heladera, timestamp, tecnicosHelper, notificationStrategyFactory);
-        this.tipoAlerta = tipoAlerta;
-    }
+  public Alerta(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {
+    super(heladera, timestamp, tecnicosHelper, notificationStrategyFactory);
+    this.tipoAlerta = tipoAlerta;
+  }
 
-    public Alerta(TipoAlerta tipoAlerta) {
-        this.tipoAlerta = tipoAlerta;
-    }
+  public Alerta(TipoAlerta tipoAlerta) {
+    this.tipoAlerta = tipoAlerta;
+  }
 
-    public static Alerta of(Heladera heladera, LocalDateTime timeStamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {
-        return new Alerta(heladera, timeStamp, tecnicosHelper, notificationStrategyFactory, tipoAlerta);
-    }
+  public static Alerta of(Heladera heladera, LocalDateTime timeStamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {
+    return new Alerta(heladera, timeStamp, tecnicosHelper, notificationStrategyFactory, tipoAlerta);
+  }
 
-    public static Alerta of(Heladera heladera, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {
-        return Alerta.of(heladera, LocalDateTime.now(), tecnicosHelper, notificationStrategyFactory, tipoAlerta);
-    }
+  public static Alerta of(Heladera heladera, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, TipoAlerta tipoAlerta) {
+    return Alerta.of(heladera, LocalDateTime.now(), tecnicosHelper, notificationStrategyFactory, tipoAlerta);
+  }
 
-    @Override
-    public String getTipo() {
-        return TipoAlerta.mapearAString(this.getTipoAlerta());
-    }
+  @Override
+  public String getTipo() {
+    return TipoAlerta.mapearAString(this.getTipoAlerta());
+  }
 }

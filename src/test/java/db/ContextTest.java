@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 
 public class ContextTest implements SimplePersistenceTest {
 
-    @Test
-    void contextUp() {
-        assertNotNull(entityManager());
-    }
+  @Test
+  void contextUp() {
+    assertNotNull(entityManager());
+  }
 
-    @Test
-    void contextUpWithTransaction() throws Exception {
-        withTransaction(() -> {
-        });
-    }
+  @Test
+  void contextUpWithTransaction() throws Exception {
+    withTransaction(() -> {
+    });
+  }
 
 }

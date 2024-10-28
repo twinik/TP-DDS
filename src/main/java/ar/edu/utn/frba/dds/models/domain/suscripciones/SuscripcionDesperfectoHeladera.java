@@ -15,24 +15,24 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SuscripcionDesperfectoHeladera implements ITipoSuscripcion {
-    private RecomendadorHeladeras recomendadorHeladeras;
+  private RecomendadorHeladeras recomendadorHeladeras;
 
-    public void notificar(Heladera heladera, Suscripcion suscripcion) {
-        ConfigReader configReader = new ConfigReader("config.properties");
-        try {
-            if (!heladera.isHeladeraActiva()) {
-                suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(),
-                        configReader.getProperty("ASUNTO_MAIL_SUSCRIPCION"),
-                        GenerarMensajeHeladerasRecomendadas(heladera));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+  public void notificar(Heladera heladera, Suscripcion suscripcion) {
+    ConfigReader configReader = new ConfigReader("config.properties");
+    try {
+      if (!heladera.isHeladeraActiva()) {
+        suscripcion.getNotificacionStrategy().notificar(suscripcion.getColaborador(),
+            configReader.getProperty("ASUNTO_MAIL_SUSCRIPCION"),
+            GenerarMensajeHeladerasRecomendadas(heladera));
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e.getMessage());
     }
+  }
 
-    private String GenerarMensajeHeladerasRecomendadas(Heladera heladera) {
-        List<Heladera> heladeras = recomendadorHeladeras.recomendarCombinacionHeladeras(heladera);
-        return MensajeHeladerasRecomendadasFactory.GenerarMensaje(heladeras, heladera);
-    }
+  private String GenerarMensajeHeladerasRecomendadas(Heladera heladera) {
+    List<Heladera> heladeras = recomendadorHeladeras.recomendarCombinacionHeladeras(heladera);
+    return MensajeHeladerasRecomendadasFactory.GenerarMensaje(heladeras, heladera);
+  }
 
 }

@@ -18,24 +18,24 @@ import java.util.Optional;
 
 @Setter
 public class SensorMovimientoListener implements IMqttMessageListener {
-    private ISensorMovimientoRepository sensorMovimientoRepository;
-    private AlertasService alertasService;
+  private ISensorMovimientoRepository sensorMovimientoRepository;
+  private AlertasService alertasService;
 
-    @Override
-    public void messageArrived(String s, MqttMessage mqttMessage) {
-        try {
-            SensorMovimientoBrokerDto sensorDto = SensorMovimientoBrokerDto.fromString(mqttMessage.toString());
-            Optional<SensorMovimiento> sensorMovimientoOpt = sensorMovimientoRepository.buscar(sensorDto.getIdSensor());
+  @Override
+  public void messageArrived(String s, MqttMessage mqttMessage) {
+    try {
+      SensorMovimientoBrokerDto sensorDto = SensorMovimientoBrokerDto.fromString(mqttMessage.toString());
+      Optional<SensorMovimiento> sensorMovimientoOpt = sensorMovimientoRepository.buscar(sensorDto.getIdSensor());
 
-            if (sensorMovimientoOpt.isPresent()) {
-                Heladera heladera = sensorMovimientoOpt.get().getHeladera();
-                Alerta alerta = Alerta.of(heladera, DateHelper.fromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
-                        , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
-                this.alertasService.reportarYGuardarSiNoEstabaElMismoProblema(alerta, heladera);
-            }
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-
+      if (sensorMovimientoOpt.isPresent()) {
+        Heladera heladera = sensorMovimientoOpt.get().getHeladera();
+        Alerta alerta = Alerta.of(heladera, DateHelper.fromTimestamp(sensorDto.getTimestamp()), ServiceLocator.get(TecnicosHelper.class)
+            , new NotificationStrategyFactory(), TipoAlerta.FRAUDE);
+        this.alertasService.reportarYGuardarSiNoEstabaElMismoProblema(alerta, heladera);
+      }
+    } catch (RuntimeException e) {
+      e.printStackTrace();
     }
+
+  }
 }

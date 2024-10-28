@@ -11,16 +11,16 @@ import java.util.List;
 @Setter
 public class RecomendacionDto {
 
-    private String id;
-    private List<Float> coords;
-    private String nombre;
-    private String calle;
-    private Integer altura;
+  private String id;
+  private List<Float> coords;
+  private String nombre;
+  private String calle;
+  private Integer altura;
 
-    public static RecomendacionDto fromRecomendacion(Recomendacion d) {
-        List<Float> coords = new ArrayList<>();
-        coords.add(Float.parseFloat(d.getLatitud()));
-        coords.add(Float.parseFloat(d.getLongitud()));
-        return new RecomendacionDto(d.getId(), coords, d.getNombre(), d.getCalle(), d.getAltura());
-    }
+  public static RecomendacionDto fromRecomendacion(Recomendacion d) {
+    List<Float> coords = new ArrayList<>();
+    coords.add(Float.parseFloat(d.getLatitud()));
+    coords.add(Float.parseFloat(d.getLongitud()));
+    return new RecomendacionDto(d.getId(), coords, d.getNombre(), d.getCalle(), d.getAltura());
+  }
 }

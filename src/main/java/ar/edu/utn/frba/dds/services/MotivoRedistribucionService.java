@@ -11,17 +11,17 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class MotivoRedistribucionService {
-    private IMotivoRedistribucionRepository motivoRedistribucionRepository;
+  private IMotivoRedistribucionRepository motivoRedistribucionRepository;
 
-    public List<MotivoRedistribucionDto> obtenerMotivos() {
-        return this.motivoRedistribucionRepository.buscarTodos().stream().map(MotivoRedistribucionDto::fromMotivo).toList();
-    }
+  public List<MotivoRedistribucionDto> obtenerMotivos() {
+    return this.motivoRedistribucionRepository.buscarTodos().stream().map(MotivoRedistribucionDto::fromMotivo).toList();
+  }
 
-    public MotivoRedistribucionVianda obtenerMotivo(String id) {
-        Optional<MotivoRedistribucionVianda> motivo = this.motivoRedistribucionRepository.buscar(id);
-        if (motivo.isEmpty())
-            throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Motivo de redistribucion", id));
-        return motivo.get();
-    }
+  public MotivoRedistribucionVianda obtenerMotivo(String id) {
+    Optional<MotivoRedistribucionVianda> motivo = this.motivoRedistribucionRepository.buscar(id);
+    if (motivo.isEmpty())
+      throw new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Motivo de redistribucion", id));
+    return motivo.get();
+  }
 
 }

@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.models.messageFactory.MensajePuntosInsuficientesFacto
  * PuntosInsuficientesException class representa una excepcion de puntos insuficientes.
  */
 public class PuntosInsuficientesException extends Exception {
-    public PuntosInsuficientesException(String producto) {
-        super(MensajePuntosInsuficientesFactory.generarMensaje(producto));
-    }
+  public PuntosInsuficientesException(String producto) {
+    super(MensajePuntosInsuficientesFactory.generarMensaje(producto));
+  }
 }

@@ -9,11 +9,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TelegramNotificacionStrategy implements NotificationStrategy {
 
-    private TelegramSenderAdapter telegramSenderAdapter;
+  private TelegramSenderAdapter telegramSenderAdapter;
 
-    public void notificar(Contactable contactable, String asunto, String message) {
-        telegramSenderAdapter.enviarTelegram(message, contactable.telegramId());
-    }
+  public void notificar(Contactable contactable, String asunto, String message) {
+    telegramSenderAdapter.enviarTelegram(message, contactable.telegramId());
+  }
 
 
 }

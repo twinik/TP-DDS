@@ -13,14 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 public class RecomendacionDonaciones {
 
-    private IRecomendacionDonacionesAdapter adapter;
+  private IRecomendacionDonacionesAdapter adapter;
 
 
-    public Recomendacion obtenerRecomendacion(String id) {
-        return adapter.obtenerRecomendacion(id);
-    }
+  public Recomendacion obtenerRecomendacion(String id) {
+    return adapter.obtenerRecomendacion(id);
+  }
 
-    public List<Recomendacion> listarRecomendaciones(String etiquetaProvincia, String etiquetaLocalidad) {
-        return adapter.listarRecomendaciones(etiquetaProvincia, etiquetaLocalidad);
-    }
+  public List<Recomendacion> listarRecomendaciones(String etiquetaProvincia, String etiquetaLocalidad) {
+    return adapter.listarRecomendaciones(etiquetaProvincia, etiquetaLocalidad);
+  }
 }

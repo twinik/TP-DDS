@@ -19,10 +19,10 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
 public abstract class Reporte extends EntidadPersistente {
-    @Column(name = "ruta_archivo")
-    protected String rutaArchivo;
+  @Column(name = "ruta_archivo")
+  protected String rutaArchivo;
 
-    public abstract void generarPDF();
+  public abstract void generarPDF();
 
-    public abstract String getTipo();
+  public abstract String getTipo();
 }

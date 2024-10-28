@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IMotivoRedistribucionRepository {
-    Optional<MotivoRedistribucionVianda> buscar(String id);
+  Optional<MotivoRedistribucionVianda> buscar(String id);
 
-    List<MotivoRedistribucionVianda> buscarTodos();
+  List<MotivoRedistribucionVianda> buscarTodos();
 
-    void guardar(MotivoRedistribucionVianda motivo);
+  void guardar(MotivoRedistribucionVianda motivo);
 
-    void actualizar(MotivoRedistribucionVianda motivo);
+  void actualizar(MotivoRedistribucionVianda motivo);
 
-    void eliminar(MotivoRedistribucionVianda motivo);
+  void eliminar(MotivoRedistribucionVianda motivo);
 }

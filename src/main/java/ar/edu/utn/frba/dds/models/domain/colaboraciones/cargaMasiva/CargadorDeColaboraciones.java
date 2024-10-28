@@ -46,130 +46,130 @@ import java.util.Set;
 @Setter
 @Getter
 public class CargadorDeColaboraciones {
-    private CSVReaderAdapter csvReader;
-    private MailSenderAdapter mailSender;
-    private String filePath;
-    private String separator;
-    private IColaboradoresRepository colaboradorRepository;
-    private IFormasColaboracionRespository formasColaboracionRespository;
-    private ConfigReader config;
-    private ICalculadorPuntos calculadorPuntos;
-    private IRolesRepository rolesRepository;
+  private CSVReaderAdapter csvReader;
+  private MailSenderAdapter mailSender;
+  private String filePath;
+  private String separator;
+  private IColaboradoresRepository colaboradorRepository;
+  private IFormasColaboracionRespository formasColaboracionRespository;
+  private ConfigReader config;
+  private ICalculadorPuntos calculadorPuntos;
+  private IRolesRepository rolesRepository;
 
-    /**
-     * Constructor con parametros.
-     */
-    public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, IColaboradoresRepository respository, IFormasColaboracionRespository formasColaboracionRespository, ICalculadorPuntos calculadorPuntos, IRolesRepository rolesRepository) throws IOException {
-        this.config = new ConfigReader("config.properties");
-        this.csvReader = csvReader;
-        this.mailSender = mailAdapter;
-        this.filePath = filePath;
-        this.separator = config.getProperty("separator");
-        this.colaboradorRepository = respository;
-        this.formasColaboracionRespository = formasColaboracionRespository;
-        this.calculadorPuntos = calculadorPuntos;
-        this.rolesRepository = rolesRepository;
-    }
+  /**
+   * Constructor con parametros.
+   */
+  public CargadorDeColaboraciones(String filePath, CSVReaderAdapter csvReader, MailSenderAdapter mailAdapter, IColaboradoresRepository respository, IFormasColaboracionRespository formasColaboracionRespository, ICalculadorPuntos calculadorPuntos, IRolesRepository rolesRepository) throws IOException {
+    this.config = new ConfigReader("config.properties");
+    this.csvReader = csvReader;
+    this.mailSender = mailAdapter;
+    this.filePath = filePath;
+    this.separator = config.getProperty("separator");
+    this.colaboradorRepository = respository;
+    this.formasColaboracionRespository = formasColaboracionRespository;
+    this.calculadorPuntos = calculadorPuntos;
+    this.rolesRepository = rolesRepository;
+  }
 
-    /**
-     * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
-     */
-    public List<IPuntajeCalculable> cargarColaboraciones() throws IOException {
-        List<Object> registros = csvReader.readCsv(filePath, separator);
-        ArrayList<IPuntajeCalculable> colaboraciones = new ArrayList<>();
-        Colaborador colaborador = null;
+  /**
+   * Metodo cargarColaboraciones que se encarga de cargar colaboraciones.
+   */
+  public List<IPuntajeCalculable> cargarColaboraciones() throws IOException {
+    List<Object> registros = csvReader.readCsv(filePath, separator);
+    ArrayList<IPuntajeCalculable> colaboraciones = new ArrayList<>();
+    Colaborador colaborador = null;
 
-        int index = 1;
+    int index = 1;
 
-        for (Object reg : registros) {
-            try {
-                CargaColaboracion carga = (CargaColaboracion) reg;
+    for (Object reg : registros) {
+      try {
+        CargaColaboracion carga = (CargaColaboracion) reg;
 
-                Optional<Colaborador> colaboradorOption = colaboradorRepository.buscar(
-                        new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
-                        carga.getDocumento());
-                colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
+        Optional<Colaborador> colaboradorOption = colaboradorRepository.buscar(
+            new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento()),
+            carga.getDocumento());
+        colaborador = colaboradorOption.orElseGet(() -> crearUsuarioColaboradorNoRegistrado(carga, config));
 
-                Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
-                if (forma.isEmpty())
-                    throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
+        Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
+        if (forma.isEmpty())
+          throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
 
-                validarYAgregarPermisos(colaborador, forma.get());
+        validarYAgregarPermisos(colaborador, forma.get());
 
-                IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
+        IPuntajeCalculable colaboracion = CargaToColaboracionMapper.colaboracionFromCarga(carga, colaborador);
 
-                for (int i = 0; i < carga.getCantidad(); i++) {
-                    colaboraciones.add(colaboracion);
-                    this.calculadorPuntos.sumarPuntosPara(colaborador, colaboracion);
-                }
-
-                this.colaboradorRepository.actualizar(colaborador);
-                index++;
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-                throw new CsvInvalidoException(MensajeFilaCsvInvalidaFactory.generarMensaje(index, e.getMessage()));
-            }
+        for (int i = 0; i < carga.getCantidad(); i++) {
+          colaboraciones.add(colaboracion);
+          this.calculadorPuntos.sumarPuntosPara(colaborador, colaboracion);
         }
-        return colaboraciones;
+
+        this.colaboradorRepository.actualizar(colaborador);
+        index++;
+      } catch (RuntimeException e) {
+        e.printStackTrace();
+        throw new CsvInvalidoException(MensajeFilaCsvInvalidaFactory.generarMensaje(index, e.getMessage()));
+      }
     }
+    return colaboraciones;
+  }
 
-    private Colaborador crearUsuarioColaboradorNoRegistrado(CargaColaboracion carga, ConfigReader config) {
-        try {
-            TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
-            String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
-            Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), PasswordHasher.hashPassword(claveGenerada));
-            Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
-            nuevoColaborador.setTipoDocumento(tipoDoc);
-            nuevoColaborador.setDocumento(carga.getDocumento());
-            nuevoColaborador.setNombre(carga.getNombre());
-            nuevoColaborador.setApellido(carga.getApellido());
+  private Colaborador crearUsuarioColaboradorNoRegistrado(CargaColaboracion carga, ConfigReader config) {
+    try {
+      TipoDocumento tipoDoc = new TipoDocumentoMapper().obtenerTipoDeDocumento(carga.getTipoDocumento());
+      String claveGenerada = PasswordGenerator.generatePassword(Integer.parseInt(config.getProperty("password.length")));
+      Usuario nuevoUsuario = UsuarioFactory.createUsuario(carga.getMail(), PasswordHasher.hashPassword(claveGenerada));
+      Colaborador nuevoColaborador = ColaboradorFactory.createColaborador(nuevoUsuario);
+      nuevoColaborador.setTipoDocumento(tipoDoc);
+      nuevoColaborador.setDocumento(carga.getDocumento());
+      nuevoColaborador.setNombre(carga.getNombre());
+      nuevoColaborador.setApellido(carga.getApellido());
 
 
-            Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
-            if (forma.isEmpty())
-                throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
-            //TODO: solo para personas humanas ??? ?? ??
-            TipoColaborador tipo = new TipoColaborador();
-            tipo.setTipo(TipoPersona.PERSONA_HUMANA);
-            tipo.agregarFormasColaboracion(forma.get());
-            nuevoColaborador.setTipoColaborador(tipo);
+      Optional<FormaColaboracion> forma = this.formasColaboracionRespository.buscarPorNombre(carga.getFormaColaboracion());
+      if (forma.isEmpty())
+        throw new CsvInvalidoException(MensajeFormaColaboracionInvalidaFactory.generarMensaje(carga.getFormaColaboracion()));
+      //TODO: solo para personas humanas ??? ?? ??
+      TipoColaborador tipo = new TipoColaborador();
+      tipo.setTipo(TipoPersona.PERSONA_HUMANA);
+      tipo.agregarFormasColaboracion(forma.get());
+      nuevoColaborador.setTipoColaborador(tipo);
 
-            Rol nuevoRol = Rol.of(PermisosHelper.getInstance().buscarPorNombres(PermisosHelper.getInstance().fromFormaColaboracion(forma.get()).toArray(new String[0])));
-            nuevoRol.agregarPermisos(PermisosHelper.getInstance().buscarPorNombres("colaborador-base").toArray(new Permiso[0]));
-            this.rolesRepository.guardar(nuevoRol);
-            nuevoUsuario.agregarRoles(nuevoRol);
-            nuevoColaborador.agregarMedioContacto(new MedioDeContacto(CanalContacto.EMAIL, carga.getMail()));
+      Rol nuevoRol = Rol.of(PermisosHelper.getInstance().buscarPorNombres(PermisosHelper.getInstance().fromFormaColaboracion(forma.get()).toArray(new String[0])));
+      nuevoRol.agregarPermisos(PermisosHelper.getInstance().buscarPorNombres("colaborador-base").toArray(new Permiso[0]));
+      this.rolesRepository.guardar(nuevoRol);
+      nuevoUsuario.agregarRoles(nuevoRol);
+      nuevoColaborador.agregarMedioContacto(new MedioDeContacto(CanalContacto.EMAIL, carga.getMail()));
 
-            MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
-                    carga.getMail(),
-                    config.getProperty("ASUNTO"),
-                    config.getProperty("CUERPO") + " " + claveGenerada);
+      MyEmail email = MyMailFactory.createMail(config.getProperty("MAIL-DIR"),
+          carga.getMail(),
+          config.getProperty("ASUNTO"),
+          config.getProperty("CUERPO") + " " + claveGenerada);
 
-            try {
-                colaboradorRepository.guardar(nuevoColaborador);
-            } catch (RollbackException e) {
-                e.printStackTrace();
-                if (ExceptionHelper.isCausedBy(e, ConstraintViolationException.class))
-                    throw new CsvInvalidoException(MensajeEmailDuplicadoFactory.generarMensaje(carga.getMail()));
-            }
+      try {
+        colaboradorRepository.guardar(nuevoColaborador);
+      } catch (RollbackException e) {
+        e.printStackTrace();
+        if (ExceptionHelper.isCausedBy(e, ConstraintViolationException.class))
+          throw new CsvInvalidoException(MensajeEmailDuplicadoFactory.generarMensaje(carga.getMail()));
+      }
 
-            mailSender.enviarMail(email);
-            return nuevoColaborador;
-        } catch (IOException | RuntimeException e) {
-            e.printStackTrace();
-            throw new CsvInvalidoException(e.getMessage());
-        }
+      mailSender.enviarMail(email);
+      return nuevoColaborador;
+    } catch (IOException | RuntimeException e) {
+      e.printStackTrace();
+      throw new CsvInvalidoException(e.getMessage());
     }
+  }
 
-    private void validarYAgregarPermisos(Colaborador colaborador, FormaColaboracion forma) {
-        if (!colaborador.getTipoColaborador().tenesFormaColaboracion(forma.getNombreInterno()))
-            colaborador.getTipoColaborador().agregarFormasColaboracion(forma);
+  private void validarYAgregarPermisos(Colaborador colaborador, FormaColaboracion forma) {
+    if (!colaborador.getTipoColaborador().tenesFormaColaboracion(forma.getNombreInterno()))
+      colaborador.getTipoColaborador().agregarFormasColaboracion(forma);
 
-        Set<String> permisosDeEstaForma = PermisosHelper.getInstance().fromFormaColaboracion(forma);
-        if (!colaborador.getUsuario().tenesPermisos(permisosDeEstaForma.toArray(new String[0]))) {
-            colaborador.getUsuario().getRoles().get(0).agregarPermisos(PermisosHelper.getInstance().buscarPorNombres(permisosDeEstaForma.toArray(new String[0])).toArray(new Permiso[0]));
-        }
+    Set<String> permisosDeEstaForma = PermisosHelper.getInstance().fromFormaColaboracion(forma);
+    if (!colaborador.getUsuario().tenesPermisos(permisosDeEstaForma.toArray(new String[0]))) {
+      colaborador.getUsuario().getRoles().get(0).agregarPermisos(PermisosHelper.getInstance().buscarPorNombres(permisosDeEstaForma.toArray(new String[0])).toArray(new Permiso[0]));
     }
+  }
 
 
 }

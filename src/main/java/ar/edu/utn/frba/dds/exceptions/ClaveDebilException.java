@@ -4,14 +4,14 @@ import lombok.Getter;
 
 @Getter
 public class ClaveDebilException extends RuntimeException {
-    Object formDto;
+  Object formDto;
 
-    public ClaveDebilException(String message, Object formDto) {
-        super(message);
-        this.formDto = formDto;
-    }
+  public ClaveDebilException(String message, Object formDto) {
+    super(message);
+    this.formDto = formDto;
+  }
 
-    public ClaveDebilException(String message) {
-        super(message);
-    }
+  public ClaveDebilException(String message) {
+    super(message);
+  }
 }

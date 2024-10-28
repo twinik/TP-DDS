@@ -20,8 +20,8 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Table(name = "sensor_movimiento")
 public class SensorMovimiento extends EntidadPersistente {
-    @ManyToOne
-    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-    private Heladera heladera;
+  @ManyToOne
+  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+  private Heladera heladera;
 
 }

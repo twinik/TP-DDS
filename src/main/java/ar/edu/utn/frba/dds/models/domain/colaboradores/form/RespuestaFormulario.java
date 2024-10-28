@@ -19,25 +19,25 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class RespuestaFormulario extends EntidadPersistente {
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
-    private Colaborador colaborador;
+  @ManyToOne
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id", nullable = false)
+  private Colaborador colaborador;
 
-    @ManyToOne
-    @JoinColumn(name = "formulario_id", referencedColumnName = "id", nullable = false)
-    private Formulario formulario;
+  @ManyToOne
+  @JoinColumn(name = "formulario_id", referencedColumnName = "id", nullable = false)
+  private Formulario formulario;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "respuesta_formulario_id", referencedColumnName = "id")
-    private List<RespuestaACampo> respuestas = new ArrayList<>();
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "respuesta_formulario_id", referencedColumnName = "id")
+  private List<RespuestaACampo> respuestas = new ArrayList<>();
 
-    public RespuestaFormulario(Formulario formulario) {
-        this.formulario = formulario;
-    }
+  public RespuestaFormulario(Formulario formulario) {
+    this.formulario = formulario;
+  }
 
 
-    public void agregarRespuestasACampo(RespuestaACampo... respuestas) {
-        Collections.addAll(this.respuestas, respuestas);
-    }
+  public void agregarRespuestasACampo(RespuestaACampo... respuestas) {
+    Collections.addAll(this.respuestas, respuestas);
+  }
 
 }

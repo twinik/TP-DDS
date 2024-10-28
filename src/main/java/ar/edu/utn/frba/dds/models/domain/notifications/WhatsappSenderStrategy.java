@@ -9,14 +9,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class WhatsappSenderStrategy implements NotificationStrategy {
 
-    public WhatsappSenderAdapter whatsappSenderAdapter;
+  public WhatsappSenderAdapter whatsappSenderAdapter;
 
 
-    public WhatsappSenderStrategy() {
-    }
+  public WhatsappSenderStrategy() {
+  }
 
-    public void notificar(Contactable contactable, String asunto, String message) {
-        whatsappSenderAdapter.enviarWhatsapp(message, contactable.telefonoCompleto());
-    }
+  public void notificar(Contactable contactable, String asunto, String message) {
+    whatsappSenderAdapter.enviarWhatsapp(message, contactable.telefonoCompleto());
+  }
 
 }

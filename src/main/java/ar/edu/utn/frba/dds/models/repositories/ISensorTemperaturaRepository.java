@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ISensorTemperaturaRepository {
-    Optional<SensorTemperatura> buscar(String id);
+  Optional<SensorTemperatura> buscar(String id);
 
-    List<SensorTemperatura> buscarTodos();
+  List<SensorTemperatura> buscarTodos();
 
-    void guardar(SensorTemperatura sensorTemperatura);
+  void guardar(SensorTemperatura sensorTemperatura);
 
-    void actualizar(SensorTemperatura sensorTemperatura);
+  void actualizar(SensorTemperatura sensorTemperatura);
 
-    void eliminar(SensorTemperatura sensorTemperatura);
+  void eliminar(SensorTemperatura sensorTemperatura);
 }

@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ISensorMovimientoRepository {
-    Optional<SensorMovimiento> buscar(String id);
+  Optional<SensorMovimiento> buscar(String id);
 
-    List<SensorMovimiento> buscarTodos();
+  List<SensorMovimiento> buscarTodos();
 
-    void guardar(SensorMovimiento sensorMovimiento);
+  void guardar(SensorMovimiento sensorMovimiento);
 
-    void actualizar(SensorMovimiento sensorMovimiento);
+  void actualizar(SensorMovimiento sensorMovimiento);
 
-    void eliminar(SensorMovimiento sensorMovimiento);
+  void eliminar(SensorMovimiento sensorMovimiento);
 }

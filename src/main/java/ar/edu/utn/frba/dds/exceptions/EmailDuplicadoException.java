@@ -5,15 +5,15 @@ import lombok.Getter;
 @Getter
 public class EmailDuplicadoException extends RuntimeException {
 
-    Object formDto;
+  Object formDto;
 
 
-    public EmailDuplicadoException(String message) {
-        super(message);
-    }
+  public EmailDuplicadoException(String message) {
+    super(message);
+  }
 
-    public EmailDuplicadoException(String message, Object formDto) {
-        super(message);
-        this.formDto = formDto;
-    }
+  public EmailDuplicadoException(String message, Object formDto) {
+    super(message);
+    this.formDto = formDto;
+  }
 }

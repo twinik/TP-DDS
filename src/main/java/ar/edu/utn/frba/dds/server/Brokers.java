@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.brokers.TemperaturaHeladeraBroker;
 import java.io.IOException;
 
 public class Brokers {
-    public static void init() {
+  public static void init() {
 //    Thread aperturaBrokerThread = new Thread(() -> {
 //      try {
 //        AperturaHeladeraBroker.suscribirseAAperturasHeladeras();
@@ -37,13 +37,13 @@ public class Brokers {
 //    });
 //
 //    temperaturaBrokerThread.start();
-        try {
-            AperturaHeladeraBroker.suscribirseAAperturasHeladeras();
-            SensorMovimientoBroker.suscribirseASensorMovimiento();
-            TemperaturaHeladeraBroker.suscribirseASensorTemperatura();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    try {
+      AperturaHeladeraBroker.suscribirseAAperturasHeladeras();
+      SensorMovimientoBroker.suscribirseASensorMovimiento();
+      TemperaturaHeladeraBroker.suscribirseASensorTemperatura();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+  }
 
 }

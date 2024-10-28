@@ -15,50 +15,50 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 public class ViandasService {
-    private IViandasRepository viandasRepository;
-    private HeladerasService heladerasService;
-    private SolicitudAperturaHeladeraService solicitudAperturaHeladeraService;
-    private ColaboradoresService colaboradoresService;
+  private IViandasRepository viandasRepository;
+  private HeladerasService heladerasService;
+  private SolicitudAperturaHeladeraService solicitudAperturaHeladeraService;
+  private ColaboradoresService colaboradoresService;
 
-    public void crearIngresoViandas(IngresoViandaDto dto) {
-        IngresoVianda ingreso = new IngresoVianda();
+  public void crearIngresoViandas(IngresoViandaDto dto) {
+    IngresoVianda ingreso = new IngresoVianda();
 
-        ingreso.setFechaDonacion(DateHelper.fechaFromString(dto.getFechaDonacion(), "dd/MM/yyyy"));
+    ingreso.setFechaDonacion(DateHelper.fechaFromString(dto.getFechaDonacion(), "dd/MM/yyyy"));
 
-        if (ingreso.getFechaDonacion().isBefore(LocalDate.now().minusDays(1)))
-            throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
+    if (ingreso.getFechaDonacion().isBefore(LocalDate.now().minusDays(1)))
+      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
 
-        ingreso.setHeladera(heladerasService.obtenerHeladera(dto.getHeladeraDto().getId()));
+    ingreso.setHeladera(heladerasService.obtenerHeladera(dto.getHeladeraDto().getId()));
 
-        ingreso.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
+    ingreso.setColaborador(this.colaboradoresService.obtenerColaborador(dto.getIdColaborador()));
 
-        dto.getViandas().forEach(v -> this.crearVianda(ingreso, v));
+    dto.getViandas().forEach(v -> this.crearVianda(ingreso, v));
 
-        if (ingreso.getHeladera().getCuposLibresViandas() < ingreso.getViandas().size())
-            throw new HeladeraLlenaException(MensajeHeladeraLLenaFactory.generarMensaje(ingreso.getHeladera().getNombre()));
+    if (ingreso.getHeladera().getCuposLibresViandas() < ingreso.getViandas().size())
+      throw new HeladeraLlenaException(MensajeHeladeraLLenaFactory.generarMensaje(ingreso.getHeladera().getNombre()));
 
-        this.viandasRepository.guardar(ingreso.getViandas());
+    this.viandasRepository.guardar(ingreso.getViandas());
 
-        this.solicitudAperturaHeladeraService.generarSolicitud(ingreso);
+    this.solicitudAperturaHeladeraService.generarSolicitud(ingreso);
 
-    }
+  }
 
 
-    public void crearVianda(IngresoVianda ingreso, ViandaDto dto) {
-        Vianda vianda = new Vianda();
-        vianda.setComida(dto.getDesc());
-        vianda.setFechaCaducidad(DateHelper.fechaFromString(dto.getFechaCaducidad(), "dd/MM/yyyy"));
-        if (vianda.getFechaCaducidad().isBefore(LocalDate.now()))
-            throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
-        vianda.setFechaDonacion(ingreso.getFechaDonacion());
+  public void crearVianda(IngresoVianda ingreso, ViandaDto dto) {
+    Vianda vianda = new Vianda();
+    vianda.setComida(dto.getDesc());
+    vianda.setFechaCaducidad(DateHelper.fechaFromString(dto.getFechaCaducidad(), "dd/MM/yyyy"));
+    if (vianda.getFechaCaducidad().isBefore(LocalDate.now()))
+      throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+    vianda.setFechaDonacion(ingreso.getFechaDonacion());
 
-        vianda.setHeladera(ingreso.getHeladera());
+    vianda.setHeladera(ingreso.getHeladera());
 
-        vianda.setCalorias(dto.getCalorias());
-        vianda.setPeso(dto.getPeso());
-        vianda.setColaborador(ingreso.getColaborador());
+    vianda.setCalorias(dto.getCalorias());
+    vianda.setPeso(dto.getPeso());
+    vianda.setColaborador(ingreso.getColaborador());
 
-        ingreso.agregarViandas(vianda);
+    ingreso.agregarViandas(vianda);
 
-    }
+  }
 }

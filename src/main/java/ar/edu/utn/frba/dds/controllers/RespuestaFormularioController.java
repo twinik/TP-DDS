@@ -15,61 +15,61 @@ import java.util.Map;
 @AllArgsConstructor
 public class RespuestaFormularioController implements ICrudViewsHandler {
 
-    private RespuestaFormularioService rtaService;
-    private FormulariosService formService;
+  private RespuestaFormularioService rtaService;
+  private FormulariosService formService;
 
-    private ColaboradoresService colaboradoresService;
+  private ColaboradoresService colaboradoresService;
 
-    @Override
-    public void index(Context context) {
+  @Override
+  public void index(Context context) {
 
+  }
+
+  @Override
+  public void show(Context context) {
+
+  }
+
+  public void obtenerFormulario(Context context) {
+    // obtiene el ultimo formulario activo. Si existe, lo hace contestarlo. Si no existe, pasa directo a login
+    String idColaborador = context.pathParam("idColaborador");
+    Formulario form = this.formService.obtenerUltimo();
+    if (form == null) {
+      this.colaboradoresService.marcarFormCompletado(idColaborador);
+      context.redirect("/login");
+    } else {
+      context.redirect("/responder-formulario/" + form.getId() + "/colaborador/" + idColaborador);
     }
+  }
 
-    @Override
-    public void show(Context context) {
+  @Override
+  public void create(Context context) {
+    Map<String, Object> model = new HashMap<>();
+    model.put("formulario", ShowFormularioDto.fromFormulario(formService.obtenerFormulario(context.pathParam("idFormulario"))));
+    context.render("auth/registro/formulario-colaborador.hbs", model);
+  }
 
-    }
+  @Override
+  public void save(Context context) {
+    rtaService.crearRespuestaFormulario(RespuestaFormularioDto.fromContext(context));
+    context.status(201);
+    Map<String, Object> model = new HashMap<>();
+    model.put("message", "Felicidades! su cuenta ha sido creada");
+    context.render("/auth/registro/form-success.hbs", model);
+  }
 
-    public void obtenerFormulario(Context context) {
-        // obtiene el ultimo formulario activo. Si existe, lo hace contestarlo. Si no existe, pasa directo a login
-        String idColaborador = context.pathParam("idColaborador");
-        Formulario form = this.formService.obtenerUltimo();
-        if (form == null) {
-            this.colaboradoresService.marcarFormCompletado(idColaborador);
-            context.redirect("/login");
-        } else {
-            context.redirect("/responder-formulario/" + form.getId() + "/colaborador/" + idColaborador);
-        }
-    }
+  @Override
+  public void edit(Context context) {
 
-    @Override
-    public void create(Context context) {
-        Map<String, Object> model = new HashMap<>();
-        model.put("formulario", ShowFormularioDto.fromFormulario(formService.obtenerFormulario(context.pathParam("idFormulario"))));
-        context.render("auth/registro/formulario-colaborador.hbs", model);
-    }
+  }
 
-    @Override
-    public void save(Context context) {
-        rtaService.crearRespuestaFormulario(RespuestaFormularioDto.fromContext(context));
-        context.status(201);
-        Map<String, Object> model = new HashMap<>();
-        model.put("message", "Felicidades! su cuenta ha sido creada");
-        context.render("/auth/registro/form-success.hbs", model);
-    }
+  @Override
+  public void update(Context context) {
 
-    @Override
-    public void edit(Context context) {
+  }
 
-    }
+  @Override
+  public void delete(Context context) {
 
-    @Override
-    public void update(Context context) {
-
-    }
-
-    @Override
-    public void delete(Context context) {
-
-    }
+  }
 }

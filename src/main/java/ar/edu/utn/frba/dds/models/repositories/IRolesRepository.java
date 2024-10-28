@@ -8,15 +8,15 @@ import java.util.Optional;
  * IVisitasTecnicoRepository interface permite interactuar con las visitas de un tecnico.
  */
 public interface IRolesRepository {
-    Optional<Rol> buscar(String id);
+  Optional<Rol> buscar(String id);
 
-    List<Rol> buscarTodos();
+  List<Rol> buscarTodos();
 
-    void guardar(Rol rol);
+  void guardar(Rol rol);
 
-    void guardar(Rol... roles);
+  void guardar(Rol... roles);
 
-    void actualizar(Rol rol);
+  void actualizar(Rol rol);
 
-    void eliminar(Rol rol);
+  void eliminar(Rol rol);
 }

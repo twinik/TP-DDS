@@ -17,10 +17,10 @@ import javax.persistence.Table;
 @Table(name = "motivo_redistribucion_vianda")
 @NoArgsConstructor
 public class MotivoRedistribucionVianda extends EntidadPersistente {
-    @Column(name = "motivo_descripcion", columnDefinition = "TEXT")
-    private String motivo;
+  @Column(name = "motivo_descripcion", columnDefinition = "TEXT")
+  private String motivo;
 
-    public MotivoRedistribucionVianda(String motivo) {
-        this.motivo = motivo;
-    }
+  public MotivoRedistribucionVianda(String motivo) {
+    this.motivo = motivo;
+  }
 }

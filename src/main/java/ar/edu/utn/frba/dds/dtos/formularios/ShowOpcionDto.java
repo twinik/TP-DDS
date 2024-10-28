@@ -6,6 +6,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ShowOpcionDto {
-    private String id;
-    private String texto;
+  private String id;
+  private String texto;
 }

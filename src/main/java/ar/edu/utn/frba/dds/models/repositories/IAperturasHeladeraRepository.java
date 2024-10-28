@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IAperturasHeladeraRepository {
-    Optional<AperturaHeladera> buscar(String id);
+  Optional<AperturaHeladera> buscar(String id);
 
-    List<AperturaHeladera> buscarTodos();
+  List<AperturaHeladera> buscarTodos();
 
-    List<AperturaHeladera> buscarPorHeladera(Heladera Heladera);
+  List<AperturaHeladera> buscarPorHeladera(Heladera Heladera);
 
-    void guardar(AperturaHeladera aperturaHeladera);
+  void guardar(AperturaHeladera aperturaHeladera);
 
-    void actualizar(AperturaHeladera aperturaHeladera);
+  void actualizar(AperturaHeladera aperturaHeladera);
 
-    void eliminar(AperturaHeladera aperturaHeladera);
+  void eliminar(AperturaHeladera aperturaHeladera);
 }

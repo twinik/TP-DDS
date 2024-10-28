@@ -5,17 +5,17 @@ import lombok.Getter;
 @Getter
 public class HeladeraVaciaException extends RuntimeException {
 
-    Object formDto;
+  Object formDto;
 
-    public HeladeraVaciaException() {
-    }
+  public HeladeraVaciaException() {
+  }
 
-    public HeladeraVaciaException(String message) {
-        super(message);
-    }
+  public HeladeraVaciaException(String message) {
+    super(message);
+  }
 
-    public HeladeraVaciaException(String message, Object formDto) {
-        super(message);
-        this.formDto = formDto;
-    }
+  public HeladeraVaciaException(String message, Object formDto) {
+    super(message);
+    this.formDto = formDto;
+  }
 }

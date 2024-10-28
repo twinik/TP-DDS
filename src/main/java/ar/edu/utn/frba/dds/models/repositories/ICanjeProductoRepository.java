@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICanjeProductoRepository {
-    Optional<CanjeProducto> buscar(String id);
+  Optional<CanjeProducto> buscar(String id);
 
-    List<CanjeProducto> buscarPorColaborador(String id);
+  List<CanjeProducto> buscarPorColaborador(String id);
 
-    List<CanjeProducto> buscarTodos();
+  List<CanjeProducto> buscarTodos();
 
-    void guardar(CanjeProducto canje);
+  void guardar(CanjeProducto canje);
 
-    void actualizar(CanjeProducto canje);
+  void actualizar(CanjeProducto canje);
 
-    void eliminar(CanjeProducto canje);
+  void eliminar(CanjeProducto canje);
 }

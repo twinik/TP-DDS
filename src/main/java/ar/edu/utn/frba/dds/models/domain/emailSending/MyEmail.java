@@ -13,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class MyEmail {
-    private String emisor;
-    private String receptor;
-    private String asunto;
-    private String cuerpo;
+  private String emisor;
+  private String receptor;
+  private String asunto;
+  private String cuerpo;
 
 }

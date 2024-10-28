@@ -21,86 +21,86 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class PerfilController implements ICrudViewsHandler {
-    private OfertasProductoService ofertasProductoService;
-    private ColaboradoresService colaboradoresService;
-    private FormaColaboracionService formaColaboracionService;
+  private OfertasProductoService ofertasProductoService;
+  private ColaboradoresService colaboradoresService;
+  private FormaColaboracionService formaColaboracionService;
 
-    @Override
-    public void index(Context ctx) {
-        String idColaborador = ctx.sessionAttribute("idColaborador");
-        Colaborador colaborador = colaboradoresService.obtenerColaborador(idColaborador);
-        ColaboradorPerfilDto colaboradorPerfilDto = ColaboradorPerfilDto.fromColaborador(colaborador);
+  @Override
+  public void index(Context ctx) {
+    String idColaborador = ctx.sessionAttribute("idColaborador");
+    Colaborador colaborador = colaboradoresService.obtenerColaborador(idColaborador);
+    ColaboradorPerfilDto colaboradorPerfilDto = ColaboradorPerfilDto.fromColaborador(colaborador);
 
-        if (colaboradorPerfilDto.getFechaNacimiento().equals("null")) {
-            colaboradorPerfilDto.setFechaNacimiento(null);
-        }
-
-        Map<String, Object> model = new HashMap<>();
-        List<CanjeOutputDto> canjes = ofertasProductoService.obtenerCanjes(idColaborador);
-
-        model.put("colaborador", colaboradorPerfilDto);
-        model.put("tiposOrganizacion", Arrays.stream(TipoPersonaJuridica.values()).map(TipoOrganizacionDto::fromTipoOrganizacion).toList());
-        model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
-        List<FormaColaboracionOutputDto> formitas = colaboradorPerfilDto.getTipoPersonaJuridica() != null ? this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "COLOCACION_HELADERA", "OFRECER_PRODUCTOS") : this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA");
-
-
-        model.put("formasColaboracion", formitas.stream().filter(f -> colaboradorPerfilDto.getFormaColaboracionDtos().stream().noneMatch(forma -> f.getDesc().equals(forma.getDesc()))).toList());
-        model.put("canjes", canjes);
-        model.put("message", ctx.queryParam("message"));
-
-        ctx.render("/app/perfil.hbs", model);
+    if (colaboradorPerfilDto.getFechaNacimiento().equals("null")) {
+      colaboradorPerfilDto.setFechaNacimiento(null);
     }
 
-    @Override
-    public void show(Context context) {
+    Map<String, Object> model = new HashMap<>();
+    List<CanjeOutputDto> canjes = ofertasProductoService.obtenerCanjes(idColaborador);
 
+    model.put("colaborador", colaboradorPerfilDto);
+    model.put("tiposOrganizacion", Arrays.stream(TipoPersonaJuridica.values()).map(TipoOrganizacionDto::fromTipoOrganizacion).toList());
+    model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
+    List<FormaColaboracionOutputDto> formitas = colaboradorPerfilDto.getTipoPersonaJuridica() != null ? this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "COLOCACION_HELADERA", "OFRECER_PRODUCTOS") : this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA");
+
+
+    model.put("formasColaboracion", formitas.stream().filter(f -> colaboradorPerfilDto.getFormaColaboracionDtos().stream().noneMatch(forma -> f.getDesc().equals(forma.getDesc()))).toList());
+    model.put("canjes", canjes);
+    model.put("message", ctx.queryParam("message"));
+
+    ctx.render("/app/perfil.hbs", model);
+  }
+
+  @Override
+  public void show(Context context) {
+
+  }
+
+  @Override
+  public void create(Context context) {
+
+  }
+
+  @Override
+  public void save(Context context) {
+
+  }
+
+  @Override
+  public void edit(Context context) {
+
+  }
+
+  @Override
+  public void update(Context context) {
+    ColaboradorPerfilDto colaboradorPerfilDto = ColaboradorPerfilDto.of(context);
+    if (colaboradorPerfilDto.getDireccionDto() != null) {
+      colaboradorPerfilDto.getDireccionDto().estanCamposLlenos(colaboradorPerfilDto);
     }
-
-    @Override
-    public void create(Context context) {
-
-    }
-
-    @Override
-    public void save(Context context) {
-
-    }
-
-    @Override
-    public void edit(Context context) {
-
-    }
-
-    @Override
-    public void update(Context context) {
-        ColaboradorPerfilDto colaboradorPerfilDto = ColaboradorPerfilDto.of(context);
-        if (colaboradorPerfilDto.getDireccionDto() != null) {
-            colaboradorPerfilDto.getDireccionDto().estanCamposLlenos(colaboradorPerfilDto);
-        }
-        Map<String, Object> model = new HashMap<>();
+    Map<String, Object> model = new HashMap<>();
 //    try {
-        colaboradoresService.actualizar(colaboradorPerfilDto);
-        if (colaboradorPerfilDto.getNombre() != null) {
-            context.sessionAttribute("username", colaboradorPerfilDto.getNombre() + " " + colaboradorPerfilDto.getApellido());
-        } else {
-            context.sessionAttribute("username", colaboradorPerfilDto.getRazonSocial());
-        }
-        context.sessionAttribute("email", colaboradorPerfilDto.getEmail());
-        model.put("message", "Perfil actualizado correctamente");
-        context.render("/app/success.hbs", model);
+    colaboradoresService.actualizar(colaboradorPerfilDto);
+    if (colaboradorPerfilDto.getNombre() != null) {
+      context.sessionAttribute("username", colaboradorPerfilDto.getNombre() + " " + colaboradorPerfilDto.getApellido());
+    } else {
+      context.sessionAttribute("username", colaboradorPerfilDto.getRazonSocial());
+    }
+    context.sessionAttribute("email", colaboradorPerfilDto.getEmail());
+    model.put("message", "Perfil actualizado correctamente");
+    context.render("/app/success.hbs", model);
 //    } catch (Exception e) {
 //      e.printStackTrace();
 //      model.put("message", "Error al actualizar el perfil");
 //      context.render("/app/error.hbs", model);
 //    }
-    }
+  }
 
-    @Override
-    public void delete(Context context) {
+  @Override
+  public void delete(Context context) {
 
-    }
+  }
 
-    public void handlePerfil(Context context) {
-        context.redirect("/perfil/" + context.sessionAttribute("idColaborador"));
-    }
+  public void handlePerfil(Context context) {
+    context.redirect("/perfil/" + context.sessionAttribute("idColaborador"));
+  }
 }

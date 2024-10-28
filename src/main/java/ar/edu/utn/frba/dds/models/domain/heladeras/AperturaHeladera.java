@@ -18,28 +18,28 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AperturaHeladera extends EntidadPersistente {
 
-    @OneToOne
-    @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id", unique = true)
-    private SolicitudAperturaHeladera solicitud;
+  @OneToOne
+  @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id", unique = true)
+  private SolicitudAperturaHeladera solicitud;
 
-    @Column(name = "timestamp", columnDefinition = "TIMESTAMP")
-    private LocalDateTime timestamp;
+  @Column(name = "timestamp", columnDefinition = "TIMESTAMP")
+  private LocalDateTime timestamp;
 
-    @ManyToOne
-    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-    private Heladera heladera;
+  @ManyToOne
+  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+  private Heladera heladera;
 
-    @OneToOne
-    @JoinColumn(name = "uso_id", referencedColumnName = "id")
-    private UsoTarjeta usoTarjeta;
+  @OneToOne
+  @JoinColumn(name = "uso_id", referencedColumnName = "id")
+  private UsoTarjeta usoTarjeta;
 
-    public AperturaHeladera(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera) {
-        this.solicitud = solicitud;
-        this.timestamp = timestamp;
-        this.heladera = heladera;
-    }
+  public AperturaHeladera(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera) {
+    this.solicitud = solicitud;
+    this.timestamp = timestamp;
+    this.heladera = heladera;
+  }
 
-    public static AperturaHeladera of(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera) {
-        return new AperturaHeladera(solicitud, timestamp, heladera);
-    }
+  public static AperturaHeladera of(SolicitudAperturaHeladera solicitud, LocalDateTime timestamp, Heladera heladera) {
+    return new AperturaHeladera(solicitud, timestamp, heladera);
+  }
 }

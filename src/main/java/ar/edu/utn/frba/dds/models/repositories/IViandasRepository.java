@@ -7,17 +7,17 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface IViandasRepository {
-    Optional<Vianda> buscar(String id);
+  Optional<Vianda> buscar(String id);
 
-    List<Vianda> buscarTodos();
+  List<Vianda> buscarTodos();
 
-    Map<String, Long> buscarViandasAgrupadasPorColaborador(LocalDate fecha);
+  Map<String, Long> buscarViandasAgrupadasPorColaborador(LocalDate fecha);
 
-    void guardar(Vianda vianda);
+  void guardar(Vianda vianda);
 
-    void guardar(List<Vianda> viandas);
+  void guardar(List<Vianda> viandas);
 
-    void actualizar(Vianda vianda);
+  void actualizar(Vianda vianda);
 
-    void eliminar(Vianda vianda);
+  void eliminar(Vianda vianda);
 }

@@ -9,15 +9,15 @@ import java.util.Optional;
  */
 public interface ISuscripcionesRepository {
 
-    Optional<Suscripcion> buscar(String id);
+  Optional<Suscripcion> buscar(String id);
 
-    List<Suscripcion> buscarTodos();
+  List<Suscripcion> buscarTodos();
 
-    List<Suscripcion> buscarTodosPorColaborador(String colaborador_id);
+  List<Suscripcion> buscarTodosPorColaborador(String colaborador_id);
 
-    void guardar(Suscripcion suscripcion);
+  void guardar(Suscripcion suscripcion);
 
-    void actualizar(Suscripcion suscripcion);
+  void actualizar(Suscripcion suscripcion);
 
-    void eliminar(Suscripcion suscripcion);
+  void eliminar(Suscripcion suscripcion);
 }

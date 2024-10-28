@@ -9,36 +9,36 @@ import java.util.Optional;
 
 @NoArgsConstructor
 public class VisitasTecnicoRepository implements IVisitasTecnicoRepository, WithSimplePersistenceUnit {
-    @Override
-    public Optional<VisitaTecnico> buscar(String id) {
-        return Optional.ofNullable(entityManager().find(VisitaTecnico.class, id));
-    }
+  @Override
+  public Optional<VisitaTecnico> buscar(String id) {
+    return Optional.ofNullable(entityManager().find(VisitaTecnico.class, id));
+  }
 
-    @Override
-    public List<VisitaTecnico> buscarTodos() {
-        return entityManager().createQuery("from VisitaTecnico where activo=:activo", VisitaTecnico.class).
-                setParameter("activo", true)
-                .getResultList();
-    }
+  @Override
+  public List<VisitaTecnico> buscarTodos() {
+    return entityManager().createQuery("from VisitaTecnico where activo=:activo", VisitaTecnico.class).
+        setParameter("activo", true)
+        .getResultList();
+  }
 
-    @Override
-    public void guardar(VisitaTecnico visitaTecnico) {
-        withTransaction(() -> entityManager().persist(visitaTecnico));
-    }
+  @Override
+  public void guardar(VisitaTecnico visitaTecnico) {
+    withTransaction(() -> entityManager().persist(visitaTecnico));
+  }
 
-    @Override
-    public void actualizar(VisitaTecnico visitaTecnico) {
-        withTransaction(() -> entityManager().merge(visitaTecnico));
-    }
+  @Override
+  public void actualizar(VisitaTecnico visitaTecnico) {
+    withTransaction(() -> entityManager().merge(visitaTecnico));
+  }
 
-    @Override
-    public void eliminar(VisitaTecnico visitaTecnico) {
+  @Override
+  public void eliminar(VisitaTecnico visitaTecnico) {
 
-        withTransaction(() -> {
-            visitaTecnico.borrarLogico();
-            entityManager().merge(visitaTecnico);
-        });
-    }
+    withTransaction(() -> {
+      visitaTecnico.borrarLogico();
+      entityManager().merge(visitaTecnico);
+    });
+  }
 
 
 }

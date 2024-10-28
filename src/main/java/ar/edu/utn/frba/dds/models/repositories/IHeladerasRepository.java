@@ -5,26 +5,26 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IHeladerasRepository {
-    Optional<Heladera> buscar(String id);
+  Optional<Heladera> buscar(String id);
 
-    void refresh(List<Heladera> heladeras);
+  void refresh(List<Heladera> heladeras);
 
-    void refresh(Heladera heladera);
+  void refresh(Heladera heladera);
 
-    List<Heladera> buscarTodos();
+  List<Heladera> buscarTodos();
 
-    Heladera buscarPorNombre(String nombre);
+  Heladera buscarPorNombre(String nombre);
 
-    List<Heladera> buscarPorColaborador(String idColaborador);
+  List<Heladera> buscarPorColaborador(String idColaborador);
 
-    List<Heladera> buscarConAlertas();
+  List<Heladera> buscarConAlertas();
 
-    void guardar(Heladera heladera);
+  void guardar(Heladera heladera);
 
-    void actualizar(Heladera heladera);
+  void actualizar(Heladera heladera);
 
-    void actualizar(List<Heladera> heladeras);
+  void actualizar(List<Heladera> heladeras);
 
-    void eliminar(Heladera heladera);
+  void eliminar(Heladera heladera);
 
 }

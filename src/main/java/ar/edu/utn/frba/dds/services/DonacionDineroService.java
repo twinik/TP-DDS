@@ -15,26 +15,26 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 public class DonacionDineroService {
-    private IDonacionDineroRepository donacionDineroRepository;
-    private ColaboradoresService colaboradoresService;
-    private ICalculadorPuntos calculadorPuntos;
+  private IDonacionDineroRepository donacionDineroRepository;
+  private ColaboradoresService colaboradoresService;
+  private ICalculadorPuntos calculadorPuntos;
 
-    public void crearDonacionDinero(DonacionDineroInputDto dto) {
-        Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
+  public void crearDonacionDinero(DonacionDineroInputDto dto) {
+    Colaborador c = this.colaboradoresService.obtenerColaborador(dto.getIdColaborador());
 
-        if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
+    if (!dto.estanCamposLlenos()) throw new FormIncompletoException(MensajeFormIncompletoFactory.generarMensaje());
 
-        DonacionDinero donacion = new DonacionDinero();
-        donacion.setColaborador(c);
+    DonacionDinero donacion = new DonacionDinero();
+    donacion.setColaborador(c);
 
-        if (dto.getFecha() != null) {
-            donacion.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
-            if (donacion.getFecha().isBefore(LocalDate.now()))
-                throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
-        }
-        donacion.setMonto(dto.getMonto());
-        donacion.setFrecuencia(FrecuenciaDonacion.fromOrdinal(dto.getFrecuenciaDonacion()));
-        this.calculadorPuntos.sumarPuntosPara(c, donacion);
-        this.donacionDineroRepository.guardar(donacion);
+    if (dto.getFecha() != null) {
+      donacion.setFecha(DateHelper.fechaFromString(dto.getFecha(), "dd/MM/yyyy"));
+      if (donacion.getFecha().isBefore(LocalDate.now()))
+        throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
     }
+    donacion.setMonto(dto.getMonto());
+    donacion.setFrecuencia(FrecuenciaDonacion.fromOrdinal(dto.getFrecuenciaDonacion()));
+    this.calculadorPuntos.sumarPuntosPara(c, donacion);
+    this.donacionDineroRepository.guardar(donacion);
+  }
 }

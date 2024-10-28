@@ -18,27 +18,27 @@ import java.time.LocalDateTime;
 @Getter
 public class UsoTarjeta extends EntidadPersistente {
 
-    @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
-    private LocalDateTime fechaUso;
+  @Column(name = "fecha_uso", columnDefinition = "TIMESTAMP")
+  private LocalDateTime fechaUso;
 
-    @ManyToOne
-    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-    private Heladera heladera;
+  @ManyToOne
+  @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+  private Heladera heladera;
 
-    private boolean autorizado = true;
+  private boolean autorizado = true;
 
-    private UsoTarjeta(LocalDateTime fechaUso, Heladera heladera) {
-        this.fechaUso = fechaUso;
-        this.heladera = heladera;
-    }
+  private UsoTarjeta(LocalDateTime fechaUso, Heladera heladera) {
+    this.fechaUso = fechaUso;
+    this.heladera = heladera;
+  }
 
-    public static UsoTarjeta of(LocalDateTime fechaUso, Heladera heladera) {
-        return new UsoTarjeta(fechaUso, heladera);
-    }
+  public static UsoTarjeta of(LocalDateTime fechaUso, Heladera heladera) {
+    return new UsoTarjeta(fechaUso, heladera);
+  }
 
-    public void marcarNoAutorizado() {
-        this.autorizado = false;
-    }
+  public void marcarNoAutorizado() {
+    this.autorizado = false;
+  }
 
 
 }

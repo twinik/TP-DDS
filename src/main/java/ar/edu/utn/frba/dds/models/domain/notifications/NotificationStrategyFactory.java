@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class NotificationStrategyFactory {
-    public NotificationStrategy create(CanalContacto canalContacto) {
-        return switch (canalContacto) {
-            case EMAIL -> new MailNotificationStrategy(ServiceLocator.get(SendGridMailSender.class));
-            case WHATSAPP -> new WhatsappSenderStrategy(ServiceLocator.get(TwilioWhatsappSender.class));
-            case TELEGRAM -> new TelegramNotificacionStrategy(ServiceLocator.get(BotTelegramSender.class));
-            default -> throw new InvalidNotificationStrategyException();
-        };
-    }
+  public NotificationStrategy create(CanalContacto canalContacto) {
+    return switch (canalContacto) {
+      case EMAIL -> new MailNotificationStrategy(ServiceLocator.get(SendGridMailSender.class));
+      case WHATSAPP -> new WhatsappSenderStrategy(ServiceLocator.get(TwilioWhatsappSender.class));
+      case TELEGRAM -> new TelegramNotificacionStrategy(ServiceLocator.get(BotTelegramSender.class));
+      default -> throw new InvalidNotificationStrategyException();
+    };
+  }
 }

@@ -17,14 +17,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "permiso")
 public class Permiso extends EntidadPersistente implements RouteRole {
-    @Column(name = "descripcion", nullable = false)
-    private String descripcion;
+  @Column(name = "descripcion", nullable = false)
+  private String descripcion;
 
-    @Column(name = "desc_interna", nullable = false)
-    private String desc_interna;
+  @Column(name = "desc_interna", nullable = false)
+  private String desc_interna;
 
-    public boolean tieneIgualDescripcion(String desc) {
-        return this.desc_interna.equals(desc);
-    }
+  public boolean tieneIgualDescripcion(String desc) {
+    return this.desc_interna.equals(desc);
+  }
 
 }

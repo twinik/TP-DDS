@@ -10,17 +10,17 @@ import java.util.Optional;
  * IAlertasRepository interface permite interactuar con las alertas.
  */
 public interface IAlertasRepository {
-    Optional<Alerta> buscar(String id);
+  Optional<Alerta> buscar(String id);
 
-    List<Alerta> buscarTodos();
+  List<Alerta> buscarTodos();
 
-    List<Alerta> buscarAlertasHeladera(String heladera_id);
+  List<Alerta> buscarAlertasHeladera(String heladera_id);
 
-    Map<String, Long> buscarAlertasAgrupadasPorHeladera(LocalDate fecha);
+  Map<String, Long> buscarAlertasAgrupadasPorHeladera(LocalDate fecha);
 
-    void guardar(Alerta alerta);
+  void guardar(Alerta alerta);
 
-    void actualizar(Alerta alerta);
+  void actualizar(Alerta alerta);
 
-    void eliminar(Alerta alerta);
+  void eliminar(Alerta alerta);
 }

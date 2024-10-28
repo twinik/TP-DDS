@@ -4,14 +4,14 @@ import lombok.Getter;
 
 @Getter
 public class RegistroFailedException extends RuntimeException {
-    Object formDto;
+  Object formDto;
 
-    public RegistroFailedException(String message) {
-        super(message);
-    }
+  public RegistroFailedException(String message) {
+    super(message);
+  }
 
-    public RegistroFailedException(String message, Object formDto) {
-        super(message);
-        this.formDto = formDto;
-    }
+  public RegistroFailedException(String message, Object formDto) {
+    super(message);
+    this.formDto = formDto;
+  }
 }

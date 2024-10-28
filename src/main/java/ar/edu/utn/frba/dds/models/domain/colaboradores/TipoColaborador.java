@@ -19,25 +19,25 @@ import java.util.List;
 @Entity
 @Table(name = "tipo_colaborador")
 public class TipoColaborador extends EntidadPersistente {
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipoPersona")
-    private TipoPersona tipo;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipoPersona")
+  private TipoPersona tipo;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "tipo_colaborador_x_forma_colaboracion", inverseJoinColumns = @JoinColumn(name = "forma_colaboracion_id", referencedColumnName = "id"),
-            joinColumns = @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id"))
-    private List<FormaColaboracion> formasPosiblesColaboracion = new ArrayList<>();
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "tipo_colaborador_x_forma_colaboracion", inverseJoinColumns = @JoinColumn(name = "forma_colaboracion_id", referencedColumnName = "id"),
+      joinColumns = @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id"))
+  private List<FormaColaboracion> formasPosiblesColaboracion = new ArrayList<>();
 
-    public boolean tenesFormaColaboracion(String nombreInterno) {
-        return this.formasPosiblesColaboracion.stream().anyMatch(forma -> forma.getNombreInterno().equals(nombreInterno));
-    }
+  public boolean tenesFormaColaboracion(String nombreInterno) {
+    return this.formasPosiblesColaboracion.stream().anyMatch(forma -> forma.getNombreInterno().equals(nombreInterno));
+  }
 
-    public void agregarFormasColaboracion(List<FormaColaboracion> formas) {
-        this.formasPosiblesColaboracion.addAll(formas);
-    }
+  public void agregarFormasColaboracion(List<FormaColaboracion> formas) {
+    this.formasPosiblesColaboracion.addAll(formas);
+  }
 
-    public void agregarFormasColaboracion(FormaColaboracion forma) {
-        this.formasPosiblesColaboracion.add(forma);
-    }
+  public void agregarFormasColaboracion(FormaColaboracion forma) {
+    this.formasPosiblesColaboracion.add(forma);
+  }
 
 }

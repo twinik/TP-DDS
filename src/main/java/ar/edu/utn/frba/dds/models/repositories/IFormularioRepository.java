@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IFormularioRepository {
-    Optional<Formulario> buscar(String id);
+  Optional<Formulario> buscar(String id);
 
-    List<Formulario> buscarTodos();
+  List<Formulario> buscarTodos();
 
-    void guardar(Formulario formulario);
+  void guardar(Formulario formulario);
 
-    void actualizar(Formulario formulario);
+  void actualizar(Formulario formulario);
 
-    void eliminar(Formulario formulario);
+  void eliminar(Formulario formulario);
 }

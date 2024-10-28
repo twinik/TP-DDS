@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUsuariosRepository {
-    Optional<Usuario> buscar(String id);
+  Optional<Usuario> buscar(String id);
 
-    Optional<Usuario> buscarPorEmail(String email);
+  Optional<Usuario> buscarPorEmail(String email);
 
-    List<Usuario> buscarTodos();
+  List<Usuario> buscarTodos();
 
-    void guardar(Usuario usuario);
+  void guardar(Usuario usuario);
 
-    void actualizar(Usuario usuario);
+  void actualizar(Usuario usuario);
 
-    void eliminar(Usuario usuario);
+  void eliminar(Usuario usuario);
 
-    void refresh(Usuario usuario);
+  void refresh(Usuario usuario);
 
 }

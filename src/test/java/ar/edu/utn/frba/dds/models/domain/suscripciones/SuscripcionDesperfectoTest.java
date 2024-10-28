@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.dds.models.domain.suscripciones;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
@@ -17,49 +19,49 @@ import java.util.List;
 
 public class SuscripcionDesperfectoTest {
 
-    @Test
-    @DisplayName("pruebo que notifique el observer ante evento")
-    void mandarNotificacion() {
-        Suscripcion sucripcion;
-        RecomendadorHeladeras recomendadorHeladeras = Mockito.mock(RecomendadorHeladeras.class);
+  @Test
+  @DisplayName("pruebo que notifique el observer ante evento")
+  void mandarNotificacion() {
+    Suscripcion sucripcion;
+    RecomendadorHeladeras recomendadorHeladeras = Mockito.mock(RecomendadorHeladeras.class);
 
-        NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-        doNothing().when(strategy).notificar(any(),any(), any());
+    NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
+    doNothing().when(strategy).notificar(any(), any(), any());
 
-        sucripcion = new Suscripcion(new Colaborador(),
-                strategy, new SuscripcionDesperfectoHeladera(recomendadorHeladeras), 2);
-
-
-        Heladera heladera = new Heladera(LocalDate.now());
-        heladera.setHeladeraActiva(true);
-        heladera.agregarSuscripcion(sucripcion);
-        heladera.inhabilitar();
+    sucripcion = new Suscripcion(new Colaborador(),
+        strategy, new SuscripcionDesperfectoHeladera(recomendadorHeladeras), 2);
 
 
-        verify(strategy, times(1)).notificar(any(),any(), any());
-    }
-
-    @Test
-    @DisplayName("pruebo que no notifque el observer cuando no debe")
-    void noMandaNada() {
-        Suscripcion sucripcion;
-        RecomendadorHeladeras recomendadorHeladeras = Mockito.mock(RecomendadorHeladeras.class);
-        NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
-        doNothing().when(strategy).notificar(any(),any(), any());
-        sucripcion = new Suscripcion(new Colaborador(),
-                strategy, new SuscripcionDesperfectoHeladera(recomendadorHeladeras), 2);
-
-        List<Vianda> viandas = new ArrayList<>();
-
-        viandas.add(new Vianda());
-
-        Heladera heladera = new Heladera(LocalDate.now());
-        heladera.setCapacidadViandas(5);
-        heladera.agregarSuscripcion(sucripcion);
-        heladera.setViandas(1);
-        heladera.agregarVianda();
+    Heladera heladera = new Heladera(LocalDate.now());
+    heladera.setHeladeraActiva(true);
+    heladera.agregarSuscripcion(sucripcion);
+    heladera.inhabilitar();
 
 
-        verify(strategy, times(0)).notificar(any(),any(), any());
-    }
+    verify(strategy, times(1)).notificar(any(), any(), any());
+  }
+
+  @Test
+  @DisplayName("pruebo que no notifque el observer cuando no debe")
+  void noMandaNada() {
+    Suscripcion sucripcion;
+    RecomendadorHeladeras recomendadorHeladeras = Mockito.mock(RecomendadorHeladeras.class);
+    NotificationStrategy strategy = Mockito.mock(NotificationStrategy.class);
+    doNothing().when(strategy).notificar(any(), any(), any());
+    sucripcion = new Suscripcion(new Colaborador(),
+        strategy, new SuscripcionDesperfectoHeladera(recomendadorHeladeras), 2);
+
+    List<Vianda> viandas = new ArrayList<>();
+
+    viandas.add(new Vianda());
+
+    Heladera heladera = new Heladera(LocalDate.now());
+    heladera.setCapacidadViandas(5);
+    heladera.agregarSuscripcion(sucripcion);
+    heladera.setViandas(1);
+    heladera.agregarVianda();
+
+
+    verify(strategy, times(0)).notificar(any(), any(), any());
+  }
 }

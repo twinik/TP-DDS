@@ -12,13 +12,13 @@ import lombok.Setter;
 @Setter
 public class PosibleCodigoTarjetaDto {
 
-    String codigo;
+  String codigo;
 
-    public static PosibleCodigoTarjetaDto of(Context context) {
-        return new PosibleCodigoTarjetaDto(context.formParam("codigoTarjeta"));
-    }
+  public static PosibleCodigoTarjetaDto of(Context context) {
+    return new PosibleCodigoTarjetaDto(context.formParam("codigoTarjeta"));
+  }
 
-    public boolean estanCamposLlenos() {
-        return this.codigo != null;
-    }
+  public boolean estanCamposLlenos() {
+    return this.codigo != null;
+  }
 }

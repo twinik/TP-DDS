@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IColocacionHeladeraRepository {
-    Optional<ColocacionHeladeras> buscar(String id);
+  Optional<ColocacionHeladeras> buscar(String id);
 
-    List<ColocacionHeladeras> buscarTodos();
+  List<ColocacionHeladeras> buscarTodos();
 
-    void guardar(ColocacionHeladeras colocacionHeladera);
+  void guardar(ColocacionHeladeras colocacionHeladera);
 
-    void actualizar(ColocacionHeladeras colocacionHeladera);
+  void actualizar(ColocacionHeladeras colocacionHeladera);
 
-    void eliminar(ColocacionHeladeras colocacionHeladera);
+  void eliminar(ColocacionHeladeras colocacionHeladera);
 }

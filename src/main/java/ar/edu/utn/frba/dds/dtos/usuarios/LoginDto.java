@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LoginDto {
-    private String idUsuario;
-    private String idColaborador;
-    private Boolean formCompletado = null;
+  private String idUsuario;
+  private String idColaborador;
+  private Boolean formCompletado = null;
 }

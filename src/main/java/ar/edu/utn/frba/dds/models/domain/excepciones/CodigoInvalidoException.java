@@ -5,14 +5,14 @@ import lombok.Getter;
 @Getter
 public class CodigoInvalidoException extends RuntimeException {
 
-    Object formDto;
+  Object formDto;
 
-    public CodigoInvalidoException(String message) {
-        super(message);
-    }
+  public CodigoInvalidoException(String message) {
+    super(message);
+  }
 
-    public CodigoInvalidoException(String message, Object formDto) {
-        super(message);
-        this.formDto = formDto;
-    }
+  public CodigoInvalidoException(String message, Object formDto) {
+    super(message);
+    this.formDto = formDto;
+  }
 }

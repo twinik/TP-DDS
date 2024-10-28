@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICampoRepository {
-    Optional<Campo> buscar(String id);
+  Optional<Campo> buscar(String id);
 
-    List<Campo> buscarTodos();
+  List<Campo> buscarTodos();
 
-    void guardar(Campo campo);
+  void guardar(Campo campo);
 
-    void actualizar(Campo campo);
+  void actualizar(Campo campo);
 
-    void eliminar(Campo campo);
+  void eliminar(Campo campo);
 }

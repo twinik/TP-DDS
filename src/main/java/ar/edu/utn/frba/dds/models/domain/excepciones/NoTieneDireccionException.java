@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class NoTieneDireccionException extends RuntimeException {
-    private Object formDto;
+  private Object formDto;
 
-    public NoTieneDireccionException(String message, Object formDto) {
-        super(message);
-        this.formDto = formDto;
-    }
+  public NoTieneDireccionException(String message, Object formDto) {
+    super(message);
+    this.formDto = formDto;
+  }
 }

@@ -13,15 +13,15 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 public class CalculadorHeladerasCercanas {
-    private IHeladerasRepository heladerasRepository;
-    private int limite;
+  private IHeladerasRepository heladerasRepository;
+  private int limite;
 
-    public List<Heladera> getHeladerasCercanasA(Heladera heladera) {
-        return heladerasRepository.buscarTodos().stream()
-                .filter(Heladera::isHeladeraActiva)
-                .sorted(Comparator.comparing(h -> h.getUbicacion().calcularDistanciaHasta(heladera.getUbicacion())))
-                .limit(this.limite)
-                .collect(Collectors.toList());
-    }
+  public List<Heladera> getHeladerasCercanasA(Heladera heladera) {
+    return heladerasRepository.buscarTodos().stream()
+        .filter(Heladera::isHeladeraActiva)
+        .sorted(Comparator.comparing(h -> h.getUbicacion().calcularDistanciaHasta(heladera.getUbicacion())))
+        .limit(this.limite)
+        .collect(Collectors.toList());
+  }
 
 }

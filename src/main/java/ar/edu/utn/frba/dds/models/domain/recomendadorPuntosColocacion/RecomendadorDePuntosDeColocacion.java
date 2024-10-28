@@ -16,19 +16,19 @@ import java.io.IOException;
 @NoArgsConstructor
 public class RecomendadorDePuntosDeColocacion {
 
-    RecomendadorDePuntosAdapter recomendadorDePuntosAdapter;
+  RecomendadorDePuntosAdapter recomendadorDePuntosAdapter;
 
-    public static void main(String[] args) throws IOException {
-        RecomendadorDePuntosDeColocacion recomendadorDePuntosDeColocacion = new RecomendadorDePuntosDeColocacion();
-        recomendadorDePuntosDeColocacion.setRecomendadorDePuntosAdapter(RecomendadorRetrofitAdapter.getInstance());
-        ListadoUbicaciones listadoUbicaciones = recomendadorDePuntosDeColocacion.recomendarUbicacion(new Ubicacion(30f, 50f), 2f);
-        System.out.println(listadoUbicaciones);
-    }
+  public static void main(String[] args) throws IOException {
+    RecomendadorDePuntosDeColocacion recomendadorDePuntosDeColocacion = new RecomendadorDePuntosDeColocacion();
+    recomendadorDePuntosDeColocacion.setRecomendadorDePuntosAdapter(RecomendadorRetrofitAdapter.getInstance());
+    ListadoUbicaciones listadoUbicaciones = recomendadorDePuntosDeColocacion.recomendarUbicacion(new Ubicacion(30f, 50f), 2f);
+    System.out.println(listadoUbicaciones);
+  }
 
-    /**
-     * Recomienda una ubicacion.
-     */
-    public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
-        return this.recomendadorDePuntosAdapter.recomendarUbicacion(punto, radio);
-    }
+  /**
+   * Recomienda una ubicacion.
+   */
+  public ListadoUbicaciones recomendarUbicacion(Ubicacion punto, Float radio) {
+    return this.recomendadorDePuntosAdapter.recomendarUbicacion(punto, radio);
+  }
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ReporteDto {
-    private String fecha;
-    private String tipo;
-    private String archivo;
+  private String fecha;
+  private String tipo;
+  private String archivo;
 }

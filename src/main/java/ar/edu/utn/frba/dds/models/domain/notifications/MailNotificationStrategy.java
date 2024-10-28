@@ -12,19 +12,19 @@ import java.io.IOException;
  */
 @AllArgsConstructor
 public class MailNotificationStrategy implements NotificationStrategy {
-    private MailSenderAdapter mailSenderAdapter;
+  private MailSenderAdapter mailSenderAdapter;
 
-    /**
-     * @param contactable
-     */
-    @Override
-    public void notificar(Contactable contactable, String asunto, String message) {
-        ConfigReader config = new ConfigReader("config.properties");
-        try {
-            mailSenderAdapter.enviarMail(MyMailFactory.createMail(config.getProperty("MAIL-DIR")
-                    , contactable.email(), asunto, message));
-        } catch (IOException e) {
-            throw new CrearMailException(e);
-        }
+  /**
+   * @param contactable
+   */
+  @Override
+  public void notificar(Contactable contactable, String asunto, String message) {
+    ConfigReader config = new ConfigReader("config.properties");
+    try {
+      mailSenderAdapter.enviarMail(MyMailFactory.createMail(config.getProperty("MAIL-DIR")
+          , contactable.email(), asunto, message));
+    } catch (IOException e) {
+      throw new CrearMailException(e);
     }
+  }
 }

@@ -6,17 +6,17 @@ import java.util.Optional;
 
 public interface IPosiblesCodigosTarjetaRepository {
 
-    Optional<PosibleCodigoTarjeta> buscarPrimeroLibre();
+  Optional<PosibleCodigoTarjeta> buscarPrimeroLibre();
 
-    Optional<PosibleCodigoTarjeta> buscar(String id);
+  Optional<PosibleCodigoTarjeta> buscar(String id);
 
-    Optional<PosibleCodigoTarjeta> buscarPorCodigo(String codigo);
+  Optional<PosibleCodigoTarjeta> buscarPorCodigo(String codigo);
 
-    List<PosibleCodigoTarjeta> buscarTodos();
+  List<PosibleCodigoTarjeta> buscarTodos();
 
-    void guardar(PosibleCodigoTarjeta codigo);
+  void guardar(PosibleCodigoTarjeta codigo);
 
-    void actualizar(PosibleCodigoTarjeta codigo);
+  void actualizar(PosibleCodigoTarjeta codigo);
 
-    void eliminar(PosibleCodigoTarjeta codigo);
+  void eliminar(PosibleCodigoTarjeta codigo);
 }

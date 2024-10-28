@@ -5,6 +5,6 @@ package ar.edu.utn.frba.dds.models.domain.notifications;
  */
 public interface NotificationStrategy {
 
-    void notificar(Contactable contactable, String asunto, String message);
+  void notificar(Contactable contactable, String asunto, String message);
 
 }

@@ -21,23 +21,23 @@ import java.time.LocalDateTime;
 @DiscriminatorValue("falla_tecnica")
 @NoArgsConstructor
 public class FallaTecnica extends Incidente {
-    @ManyToOne
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    private Colaborador colaborador;
-    @Column(name = "descripcion", columnDefinition = "TEXT")
-    private String descripcion;
-    @Column(name = "url_foto", columnDefinition = "TEXT")
-    private String urlFoto;
+  @ManyToOne
+  @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+  private Colaborador colaborador;
+  @Column(name = "descripcion", columnDefinition = "TEXT")
+  private String descripcion;
+  @Column(name = "url_foto", columnDefinition = "TEXT")
+  private String urlFoto;
 
-    public FallaTecnica(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, Colaborador colaborador, String descripcion, String urlFoto) {
-        super(heladera, timestamp, tecnicosHelper, notificationStrategyFactory);
-        this.colaborador = colaborador;
-        this.descripcion = descripcion;
-        this.urlFoto = urlFoto;
-    }
+  public FallaTecnica(Heladera heladera, LocalDateTime timestamp, TecnicosHelper tecnicosHelper, NotificationStrategyFactory notificationStrategyFactory, Colaborador colaborador, String descripcion, String urlFoto) {
+    super(heladera, timestamp, tecnicosHelper, notificationStrategyFactory);
+    this.colaborador = colaborador;
+    this.descripcion = descripcion;
+    this.urlFoto = urlFoto;
+  }
 
-    @Override
-    public String getTipo() {
-        return "Falla técnica";
-    }
+  @Override
+  public String getTipo() {
+    return "Falla técnica";
+  }
 }
