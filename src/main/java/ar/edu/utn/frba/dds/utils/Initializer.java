@@ -145,7 +145,7 @@ public class Initializer {
     tipo2.getFormasPosiblesColaboracion().add(ofrecerProductos);
     TipoColaborador tipo3 = new TipoColaborador(TipoPersona.PERSONA_JURIDICA, new ArrayList<>());
 
-    MedioDeContacto wsp = new MedioDeContacto(CanalContacto.WHATSAPP, "+5491132458865");
+    MedioDeContacto wsp = new MedioDeContacto(CanalContacto.WHATSAPP, "+5491131558666");
     MedioDeContacto telegram = new MedioDeContacto(CanalContacto.TELEGRAM, "+5491132458865");
     MedioDeContacto email = new MedioDeContacto(CanalContacto.EMAIL, "jorgito@mail.com");
 
@@ -245,6 +245,7 @@ public class Initializer {
 
     List<MedioDeContacto> contactoTecnico = new ArrayList<>();
     contactoTecnico.add(new MedioDeContacto(CanalContacto.EMAIL, "gturri@frba.utn.edu.ar"));
+    contactoTecnico.add(wsp);
     Tecnico t1 = new Tecnico("Juan", "Fernandez", "34564992", TipoDocumento.DNI, contactoTecnico, new AreaDeCobertura(new Ubicacion(-34.61178f, -58.417308f), 20f));
 
     tecnicosRepository.guardar(t1);
