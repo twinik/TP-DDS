@@ -47,6 +47,7 @@ public class CargaMasivaController implements ICrudViewsHandler {
       e.printStackTrace();
       model.put("message", "Error al subir el archivo");
       model.put("msjErrorCsv", MensajeErrorCsvFactory.generarMensaje(e.getMessage()));
+      context.status(400);
       context.render("/app/error.hbs", model);
     }
   }
