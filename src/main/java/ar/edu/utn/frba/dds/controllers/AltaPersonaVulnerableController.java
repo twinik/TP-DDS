@@ -7,12 +7,8 @@ import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.services.AltaPersonaVulnerableService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import lombok.AllArgsConstructor;
+import java.util.*;
 
 @AllArgsConstructor
 public class AltaPersonaVulnerableController implements ICrudViewsHandler {

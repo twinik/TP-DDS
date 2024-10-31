@@ -2,12 +2,7 @@ package ar.edu.utn.frba.dds.models.repositories.mainTests;
 
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.autenticacion.Usuario;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Campo;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Formulario;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.form.Opcion;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.form.RespuestaACampo;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.form.RespuestaFormulario;
-import ar.edu.utn.frba.dds.models.domain.colaboradores.form.TipoCampo;
+import ar.edu.utn.frba.dds.models.domain.colaboradores.form.*;
 import ar.edu.utn.frba.dds.models.repositories.IColaboradoresRepository;
 import ar.edu.utn.frba.dds.models.repositories.IFormularioRepository;
 import ar.edu.utn.frba.dds.models.repositories.IRespuestasFormularioRepository;
