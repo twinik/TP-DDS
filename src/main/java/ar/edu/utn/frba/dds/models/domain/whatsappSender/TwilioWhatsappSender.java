@@ -5,6 +5,7 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 
 public class TwilioWhatsappSender implements WhatsappSenderAdapter {
@@ -39,12 +40,17 @@ public class TwilioWhatsappSender implements WhatsappSenderAdapter {
   }
 
   public void enviarWhatsapp(String mensaje, String numeroTelefono) {
-    // Send the WhatsApp message
-    Message.creator(
-        new PhoneNumber("whatsapp:" +  numeroTelefono),
-        new PhoneNumber(TWILIO_NUMBER),
-        mensaje
-    ).create();
-
+    CompletableFuture.runAsync(() -> {
+      try {
+        Message.creator(
+            new PhoneNumber("whatsapp:" + numeroTelefono),
+            new PhoneNumber(TWILIO_NUMBER),
+            mensaje
+        ).create();
+      } catch (Exception e) {
+        e.printStackTrace(); // Log or handle the exception
+      }
+    });
   }
+
 }

@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Permite enviar un mensaje de Telegram.
@@ -65,15 +66,19 @@ public class BotTelegramSender extends TelegramLongPollingBot implements Telegra
     // No se implementa
   }
 
-  public void enviarTelegram(String mensaje, String usuarioId) {
-    SendMessage message = new SendMessage();
-    message.setChatId(usuarioId);
-    message.setText(mensaje);
 
-    try {
-      execute(message);
-    } catch (TelegramApiException e) {
-      e.printStackTrace();
-    }
+  public void enviarTelegram(String mensaje, String usuarioId) {
+    CompletableFuture.runAsync(() -> {
+      SendMessage message = new SendMessage();
+      message.setChatId(usuarioId);
+      message.setText(mensaje);
+
+      try {
+        execute(message);
+      } catch (TelegramApiException e) {
+        e.printStackTrace(); // Log or handle the exception
+      }
+    });
   }
+
 }
