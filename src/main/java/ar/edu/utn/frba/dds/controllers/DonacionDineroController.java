@@ -3,9 +3,11 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.DonacionDineroInputDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.FrecuenciaDonacionDineroDto;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.utils.FrecuenciaDonacion;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.DonacionDineroService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,6 +43,7 @@ public class DonacionDineroController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("message", "Su donación fue registrada con éxito");
     context.status(201);
+    ServiceLocator.get(StepMeterRegistry.class).counter("Donaciones_de_dinero").increment();
     context.render("/app/success.hbs", model);
   }
 

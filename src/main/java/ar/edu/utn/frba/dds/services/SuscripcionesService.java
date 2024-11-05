@@ -22,12 +22,12 @@ public class SuscripcionesService {
   private ISuscripcionesRepository repo;
   private ColaboradoresService colaboradoresService;
 
-  public Map<String,Boolean> contactosDisponibles(String idColaborador){
+  public Map<String, Boolean> contactosDisponibles(String idColaborador) {
     Colaborador c = this.colaboradoresService.obtenerColaborador(idColaborador);
-    Map<String,Boolean> result = new HashMap<>();
-    result.put("tieneMail",c.email() != null);
-    result.put("whastapp",c.telefonoCompleto()!= null);
-    result.put("telegram",c.telegramId() != null);
+    Map<String, Boolean> result = new HashMap<>();
+    result.put("tieneMail", c.email() != null);
+    result.put("whastapp", c.telefonoCompleto() != null);
+    result.put("telegram", c.telegramId() != null);
     return result;
   }
 
@@ -50,15 +50,18 @@ public class SuscripcionesService {
     }
     switch (dto.getCanalContacto()) {
       case "whatsapp":
-        if(s.getColaborador().telefonoCompleto() == null) throw new ContactoVacioException(MensajeConatctoVacioSuscripcionFactory.generarMensaje("whatsapp"));
+        if (s.getColaborador().telefonoCompleto() == null)
+          throw new ContactoVacioException(MensajeConatctoVacioSuscripcionFactory.generarMensaje("whatsapp"));
         s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.WHATSAPP));
         break;
       case "email":
-        if(s.getColaborador().email() == null) throw new ContactoVacioException(MensajeConatctoVacioSuscripcionFactory.generarMensaje("email"));
+        if (s.getColaborador().email() == null)
+          throw new ContactoVacioException(MensajeConatctoVacioSuscripcionFactory.generarMensaje("email"));
         s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.EMAIL));
         break;
       case "telegram":
-        if(s.getColaborador().telegramId() == null) throw new ContactoVacioException(MensajeConatctoVacioSuscripcionFactory.generarMensaje("telegram"));
+        if (s.getColaborador().telegramId() == null)
+          throw new ContactoVacioException(MensajeConatctoVacioSuscripcionFactory.generarMensaje("telegram"));
         s.setNotificacionStrategy(new NotificationStrategyFactory().create(CanalContacto.TELEGRAM));
         break;
     }

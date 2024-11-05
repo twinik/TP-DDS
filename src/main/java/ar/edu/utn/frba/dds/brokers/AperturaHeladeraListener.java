@@ -10,9 +10,16 @@ import ar.edu.utn.frba.dds.models.domain.tarjetas.Tarjeta;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.TarjetaColaborador;
 import ar.edu.utn.frba.dds.models.domain.tarjetas.UsoTarjeta;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
-import ar.edu.utn.frba.dds.models.repositories.*;
+import ar.edu.utn.frba.dds.models.repositories.IAperturasHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
+import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITarjetasColaboradorRepository;
+import ar.edu.utn.frba.dds.models.repositories.ITarjetasRepository;
+import ar.edu.utn.frba.dds.models.repositories.IUsosTarjetaRepository;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.DonacionesViandaService;
 import ar.edu.utn.frba.dds.services.RedistribucionViandaService;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,16 +56,19 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
       aperturasHeladeraRepository.guardar(aperturaHeladera);
       if (tarjetaOpt.isPresent()) {
         tarjetaOpt.get().agregarUso(aperturaHeladera);
-        if (solicitudAperturaHeladeraOpt.isEmpty())
-          throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Solcitud apertura", aperturaDto.idSolicitudApertura));
+        if (solicitudAperturaHeladeraOpt.isEmpty()) {
+          throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Solicitud apertura", aperturaDto.idSolicitudApertura));
+        }
         manejarAperturaColaborador(heladera, solicitudAperturaHeladeraOpt.get());
       } else {
-        if (tarjetaPersonaVulnerableOpt.isEmpty())
+        if (tarjetaPersonaVulnerableOpt.isEmpty()) {
           throw new RuntimeException(MensajeRecursoInexistenteFactory.generarMensaje("Tarjeta de persona vulnerable", aperturaDto.idTarjetaPersonaVulnerable));
+        }
         manejarAperturaPersonaVulnerable(heladera, tarjetaPersonaVulnerableOpt.get(), aperturaHeladera);
       }
     } catch (RuntimeException e) {
       System.err.println("Error in messageArrived: " + e.getMessage());
+      ServiceLocator.get(StepMeterRegistry.class).counter("Apertura_Heladera", "status", "error").increment();
       e.printStackTrace();
     }
 
@@ -68,6 +78,7 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
     if (solicitudAperturaHeladera.esDonacionDeViandas()) {
       // asumo que es donacion vianda
       donacionesViandaService.crearDonaciones(solicitudAperturaHeladera.getViandas());
+      ServiceLocator.get(StepMeterRegistry.class).counter("Apertura_Heladera", "status", "ok").increment();
       return;
     }
     try {
@@ -77,7 +88,9 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
       } else {
         this.redistribucionViandaService.efecutarRedistribucionDestino(solicitudAperturaHeladera.getRedistribucionViandas());
       }
+      ServiceLocator.get(StepMeterRegistry.class).counter("Apertura_Heladera", "status", "ok").increment();
     } catch (HeladeraVaciaException e) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Apertura_Heladera", "status", "error").increment();
       e.printStackTrace();
     }
 
@@ -93,7 +106,9 @@ public class AperturaHeladeraListener implements IMqttMessageListener {
       tarjeta.agregarUsos(usoTarjeta);
       aperturaHeladera.setUsoTarjeta(usoTarjeta);
       this.tarjetasRepository.actualizar(tarjeta);
+      ServiceLocator.get(StepMeterRegistry.class).counter("Apertura_Heladera", "status", "ok").increment();
     } catch (HeladeraVaciaException e) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Apertura_Heladera", "status", "error").increment();
       e.printStackTrace();
     }
     this.aperturasHeladeraRepository.actualizar(aperturaHeladera);

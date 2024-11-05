@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.middleware.AppMiddlewares;
 import ar.edu.utn.frba.dds.server.handlers.AppHandlers;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.utils.Initializer;
 import ar.edu.utn.frba.dds.utils.JavalinRenderer;
 import ar.edu.utn.frba.dds.utils.PrettyProperties;
@@ -12,6 +13,8 @@ import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.json.JavalinGson;
+import io.javalin.micrometer.MicrometerPlugin;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -26,9 +29,15 @@ public class Server {
 
   public static void init() {
     if (app == null) {
+//      final var metricsUtils = new DDMetricsUtils("heladeras_solidarias");
+//      final var registry = metricsUtils.getRegistry();
+      final var registry = ServiceLocator.get(StepMeterRegistry.class);
 
+      final var micrometerPlugin = new MicrometerPlugin(config ->
+          config.registry = registry
+      );
       Integer port = Integer.parseInt(PrettyProperties.getInstance().propertyFromName("server_port"));
-      app = Javalin.create(config()).start(port);
+      app = Javalin.create(config(micrometerPlugin)).start(port);
       AppMiddlewares.applyMiddlewares(app);
       AppHandlers.applyHandlers(app);
       Router.init(app);
@@ -41,7 +50,7 @@ public class Server {
     }
   }
 
-  private static Consumer<JavalinConfig> config() {
+  private static Consumer<JavalinConfig> config(MicrometerPlugin micrometerPlugin) {
     return config -> {
       config.staticFiles.add(staticFiles -> {
         staticFiles.hostedPath = "/";
@@ -59,6 +68,8 @@ public class Server {
         staticFiles.directory = "reportes";
         staticFiles.location = Location.EXTERNAL;
       });
+
+      config.registerPlugin(micrometerPlugin);
 
       config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
         Handlebars handlebars = new Handlebars();

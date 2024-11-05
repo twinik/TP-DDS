@@ -2,7 +2,11 @@ package ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva;
 
 import ar.edu.utn.frba.dds.helpers.LocalDateTimeTypeAdapter;
 import ar.edu.utn.frba.dds.helpers.LocalDateTypeAdapter;
-import ar.edu.utn.frba.dds.models.domain.colaboraciones.*;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.AltaPersonaVulnerable;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionDinero;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.DonacionVianda;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.IPuntajeCalculable;
+import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.Colaborador;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

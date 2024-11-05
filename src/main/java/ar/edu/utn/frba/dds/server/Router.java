@@ -1,14 +1,39 @@
 package ar.edu.utn.frba.dds.server;
 
-import ar.edu.utn.frba.dds.controllers.*;
+import ar.edu.utn.frba.dds.controllers.AlertasController;
+import ar.edu.utn.frba.dds.controllers.AltaPersonaVulnerableController;
+import ar.edu.utn.frba.dds.controllers.CanjeProductoController;
+import ar.edu.utn.frba.dds.controllers.CargaMasivaController;
+import ar.edu.utn.frba.dds.controllers.ColocacionHeladerasController;
+import ar.edu.utn.frba.dds.controllers.DonacionDineroController;
+import ar.edu.utn.frba.dds.controllers.FallasTecnicasController;
+import ar.edu.utn.frba.dds.controllers.FormulariosController;
+import ar.edu.utn.frba.dds.controllers.HeladerasController;
+import ar.edu.utn.frba.dds.controllers.LoginController;
+import ar.edu.utn.frba.dds.controllers.LogoutController;
+import ar.edu.utn.frba.dds.controllers.ModelosHeladeraController;
+import ar.edu.utn.frba.dds.controllers.OfertasProductoController;
+import ar.edu.utn.frba.dds.controllers.PerfilController;
+import ar.edu.utn.frba.dds.controllers.PosiblesCodigosTarjetasController;
+import ar.edu.utn.frba.dds.controllers.RecomendacionesController;
+import ar.edu.utn.frba.dds.controllers.RedistribucionViandaController;
+import ar.edu.utn.frba.dds.controllers.RegistroController;
+import ar.edu.utn.frba.dds.controllers.ReportesController;
+import ar.edu.utn.frba.dds.controllers.RespuestaFormularioController;
+import ar.edu.utn.frba.dds.controllers.SuscripcionesController;
+import ar.edu.utn.frba.dds.controllers.TecnicosController;
+import ar.edu.utn.frba.dds.controllers.ViandasController;
+import ar.edu.utn.frba.dds.controllers.VisitasTecnicoController;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import io.javalin.Javalin;
 import io.javalin.http.NotFoundResponse;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * EL router es el encargado de las RUTAS.
  */
 
+@Slf4j
 public class Router {
   /**
    * Inicio de App.
@@ -113,12 +138,14 @@ public class Router {
     app.get("/", ctx -> ctx.redirect("/quienes-somos"));
 
     app.exception(Exception.class, (e, ctx) -> {
+      log.error("error 500 ", e);
       e.printStackTrace();
       ctx.status(500);
       ctx.render("/app/500.hbs");
     });
 
     app.exception(NotFoundResponse.class, (e, ctx) -> {
+      log.error("error 404 ", e);
       e.printStackTrace();
       ctx.status(404);
       ctx.render("/app/404.hbs");

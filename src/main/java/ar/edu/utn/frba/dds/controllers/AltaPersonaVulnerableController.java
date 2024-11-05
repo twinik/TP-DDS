@@ -4,11 +4,17 @@ import ar.edu.utn.frba.dds.dtos.TipoDocumentoDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.AltaPersonaVulnerableDto;
 import ar.edu.utn.frba.dds.dtos.colaboraciones.TutoradoInputDto;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.AltaPersonaVulnerableService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 public class AltaPersonaVulnerableController implements ICrudViewsHandler {
@@ -60,6 +66,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
       Map<String, Object> model = new HashMap<>();
       model.put("message", "El alta de la persona: " + dto.getNombre() + " " + dto.getApellido() + " fue registrado con exito");
       context.status(201);
+      ServiceLocator.get(StepMeterRegistry.class).counter("Alta_persona_vulnerable").increment();
       context.render("/app/success.hbs", model);
     }
   }

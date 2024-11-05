@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.services;
 
+import ar.edu.utn.frba.dds.brokers.BrokerPublisher;
+import ar.edu.utn.frba.dds.helpers.ConfigReader;
+import ar.edu.utn.frba.dds.helpers.DateHelper;
 import ar.edu.utn.frba.dds.models.domain.colaboraciones.RedistribucionViandas;
 import ar.edu.utn.frba.dds.models.domain.heladeras.IngresoVianda;
 import ar.edu.utn.frba.dds.models.domain.heladeras.SolicitudAperturaHeladera;
@@ -48,7 +51,16 @@ public class SolicitudAperturaHeladeraService {
   private void publicarABroker(SolicitudAperturaHeladera solicitudAperturaHeladera) {
     this.solicitudesAperturaHeladeraRepository.guardar(solicitudAperturaHeladera);
     try {
-      solicitudAperturaHeladera.publicarSolicitudABroker();
+      ConfigReader configReader = new ConfigReader("config.properties");
+      String topic = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER_TOPIC") + "/" + solicitudAperturaHeladera.getHeladera().getNombre(); // cada heladera se va a suscribir a su topic
+      String broker = configReader.getProperty("APERTURA_APERTURA_HELADERA_BROKER");
+      String clientId = configReader.getProperty("CLIENT_ID");
+
+      String timestampEnMilis = Long.toString(DateHelper.getTimestamp(solicitudAperturaHeladera.getTimestamp()));
+      String content = String.join(";", solicitudAperturaHeladera.getColaborador().getId(), timestampEnMilis, solicitudAperturaHeladera.getId());
+
+      BrokerPublisher brokerPublisher = new BrokerPublisher(topic, broker, clientId);
+      brokerPublisher.publicar(content);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

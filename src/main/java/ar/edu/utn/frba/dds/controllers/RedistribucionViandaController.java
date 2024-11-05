@@ -5,10 +5,12 @@ import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.MismaHeladeraException;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeMismaHeladeraFactory;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.MotivoRedistribucionService;
 import ar.edu.utn.frba.dds.services.RedistribucionViandaService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +50,7 @@ public class RedistribucionViandaController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("message", "Su solcitud de redistribución ha sido registrada con éxito, esperamos su donación con ansias");
     context.status(201);
+    ServiceLocator.get(StepMeterRegistry.class).counter("Redistribucion_de_viandas").increment();
     context.render("/app/success.hbs", model);
 
   }

@@ -1,7 +1,10 @@
 package ar.edu.utn.frba.dds.models.domain.helpers;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import ar.edu.utn.frba.dds.models.domain.emailSending.MailSenderAdapter;
 import ar.edu.utn.frba.dds.models.domain.emailSending.MyEmail;

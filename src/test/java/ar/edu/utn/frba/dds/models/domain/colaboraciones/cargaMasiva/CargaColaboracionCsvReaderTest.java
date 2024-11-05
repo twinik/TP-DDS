@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.models.domain.colaboraciones.cargaMasiva;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import ar.edu.utn.frba.dds.helpers.ConfigReader;
 import org.junit.jupiter.api.BeforeEach;

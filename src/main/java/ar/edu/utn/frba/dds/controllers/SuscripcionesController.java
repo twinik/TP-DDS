@@ -35,11 +35,11 @@ public class SuscripcionesController implements ICrudViewsHandler {
 
     HeladeraDto h = this.heladerasService.getHeladeraDto(heladeraId);
 
-    Map<String,Boolean> mediosDisponibles = this.suscripcionesService.contactosDisponibles(context.sessionAttribute("idColaborador"));
+    Map<String, Boolean> mediosDisponibles = this.suscripcionesService.contactosDisponibles(context.sessionAttribute("idColaborador"));
 
     Map<String, Object> model = new HashMap<>();
-    mediosDisponibles.forEach((medio,tiene) -> {
-      if(tiene) model.put(medio,medio);
+    mediosDisponibles.forEach((medio, tiene) -> {
+      if (tiene) model.put(medio, medio);
     });
     model.put("heladera", h);
     context.render("/app/heladeras/suscripcion.hbs", model);
@@ -58,7 +58,7 @@ public class SuscripcionesController implements ICrudViewsHandler {
       context.render("/app/success.hbs", model);
     } catch (ContactoVacioException e) {
       e.printStackTrace();
-      model.put("message",e.getMessage());
+      model.put("message", e.getMessage());
       context.status(400);
       context.render("/app/error.hbs", model);
     }

@@ -1,10 +1,12 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.heladeras.HeladeraInputDto;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.ColocacionHeladerasService;
 import ar.edu.utn.frba.dds.services.ModelosService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +42,7 @@ public class ColocacionHeladerasController implements ICrudViewsHandler {
     this.colocacionHeladerasService.crearColocacionHeladera(dto);
 
     context.status(201);
+    ServiceLocator.get(StepMeterRegistry.class).counter("Heladeras_colocadas").increment();
     context.redirect("/heladeras");
   }
 
