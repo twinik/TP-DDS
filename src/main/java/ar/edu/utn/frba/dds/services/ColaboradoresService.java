@@ -34,6 +34,7 @@ import ar.edu.utn.frba.dds.models.repositories.IUsuariosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.utils.PasswordHasher;
 import ar.edu.utn.frba.dds.utils.PermisosHelper;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
@@ -119,6 +120,7 @@ public class ColaboradoresService {
     try {
       this.validarSiYaExisteMail(dto.getUsuarioDto());
     } catch (EmailDuplicadoException e) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       throw new EmailDuplicadoException(e.getMessage(), dto);
     }
     colaborador.setNombre(dto.getNombre());
@@ -149,10 +151,11 @@ public class ColaboradoresService {
     try {
       this.tarjetasService.asignarTarjetaColaborador(colaborador);
     } catch (CodigoInvalidoException e) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       this.colaboradoresRepository.eliminar(colaborador);
       throw e;
     }
-
+    ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "ok").increment();
     return colaborador.getId();
   }
 
@@ -198,20 +201,32 @@ public class ColaboradoresService {
   }
 
   private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento, PersonaHumanaDto dto) {
-    if (!DniHelper.esValido(nroDocumento))
+    if (!DniHelper.esValido(nroDocumento)) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
+    }
+
     Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(tipoDocumento, nroDocumento);
-    if (user.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
+    if (user.isPresent()) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
+    }
   }
 
   private void validarDocumento(String nroDocumento) {
-    if (!DniHelper.esValido(nroDocumento))
+    if (!DniHelper.esValido(nroDocumento)) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
+    }
+
   }
 
   private void validarFechaNacimiento(Colaborador c, Object dto) {
-    if (c.getFechaNacimiento().isAfter(LocalDate.now()))
+    if (c.getFechaNacimiento().isAfter(LocalDate.now())) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
+    }
+
   }
 
 }

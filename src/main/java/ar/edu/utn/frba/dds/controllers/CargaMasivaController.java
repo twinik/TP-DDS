@@ -4,10 +4,12 @@ import ar.edu.utn.frba.dds.exceptions.ArchivoNoCargadoException;
 import ar.edu.utn.frba.dds.exceptions.CargaArchivoFailedException;
 import ar.edu.utn.frba.dds.models.domain.excepciones.CsvInvalidoException;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeErrorCsvFactory;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.CargaMasivaService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,12 +44,14 @@ public class CargaMasivaController implements ICrudViewsHandler {
       this.service.cargarColaboraciones(archivoSubido);
       model.put("message", "Colaboraciones cargadas correctamente");
       context.status(201);
+      ServiceLocator.get(StepMeterRegistry.class).counter("CargasCsv","status","ok").increment();
       context.render("/app/success.hbs", model);
     } catch (CargaArchivoFailedException | CsvInvalidoException e) {
       e.printStackTrace();
       model.put("message", "Error al subir el archivo");
       model.put("msjErrorCsv", MensajeErrorCsvFactory.generarMensaje(e.getMessage()));
       context.status(400);
+      ServiceLocator.get(StepMeterRegistry.class).counter("CargasCsv","status","failed").increment();
       context.render("/app/error.hbs", model);
     }
   }

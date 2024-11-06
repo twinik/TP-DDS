@@ -5,9 +5,11 @@ import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioDto;
 import ar.edu.utn.frba.dds.dtos.usuarios.UsuarioNavbarDto;
 import ar.edu.utn.frba.dds.exceptions.FormularioNoCompletadoException;
 import ar.edu.utn.frba.dds.exceptions.LoginFailedException;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,10 +46,12 @@ public class LoginController implements ICrudViewsHandler {
       }
 
       String previousUrl = ctx.sessionAttribute("previousUrl");
+      ServiceLocator.get(StepMeterRegistry.class).counter("Logins","status","ok").increment();
       ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));
     } catch (LoginFailedException e) {
       Map<String, String> model = new HashMap<>();
       model.put("message", "No existe un usuario con ese email o contraseña. Inténtelo nuevamente.");
+      ServiceLocator.get(StepMeterRegistry.class).counter("Logins","status","failed").increment();
       ctx.render("auth/login/inicio-sesion.hbs", model);
     }
   }

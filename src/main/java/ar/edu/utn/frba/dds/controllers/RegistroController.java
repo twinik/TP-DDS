@@ -14,11 +14,13 @@ import ar.edu.utn.frba.dds.helpers.factories.ValidadorFactory;
 import ar.edu.utn.frba.dds.models.domain.colaboradores.TipoPersonaJuridica;
 import ar.edu.utn.frba.dds.models.domain.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeFormIncompletoFactory;
+import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.ColaboradoresService;
 import ar.edu.utn.frba.dds.services.FormaColaboracionService;
 import ar.edu.utn.frba.dds.services.UsuarioService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import lombok.AllArgsConstructor;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -61,22 +63,33 @@ public class RegistroController implements ICrudViewsHandler {
       ctx.render("/auth/registro/form-success.hbs", model);
     } catch (RegistroFailedException e) {
       ctx.status(400);
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro","status","failed").increment();
       ctx.result("El registro ha fallado: " + e.getMessage());
     }
   }
 
   private void validarContra(PersonaHumanaDto personaHumanaDto) {
-    if (!personaHumanaDto.sonClavesIguales()) throw new ClaveNoCoincidenException(personaHumanaDto);
+    if (!personaHumanaDto.sonClavesIguales()) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      throw new ClaveNoCoincidenException(personaHumanaDto);
+    }
     ValidadorClaves validador = ValidadorFactory.create();
-    if (!validador.esValida(personaHumanaDto.getUsuarioDto().getClave()))
+    if (!validador.esValida(personaHumanaDto.getUsuarioDto().getClave())) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo(), personaHumanaDto);
+    }
   }
 
   private void validarContra(PersonaJuridicaDto personaJuridicaDto) {
-    if (!personaJuridicaDto.sonClavesIguales()) throw new ClaveNoCoincidenException(personaJuridicaDto);
+    if (!personaJuridicaDto.sonClavesIguales()) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      throw new ClaveNoCoincidenException(personaJuridicaDto);
+    }
     ValidadorClaves validador = ValidadorFactory.create();
-    if (!validador.esValida(personaJuridicaDto.getUsuarioDto().getClave()))
+    if (!validador.esValida(personaJuridicaDto.getUsuarioDto().getClave())) {
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       throw new ClaveDebilException(validador.getMotivoNoValida().getMotivo(), personaJuridicaDto);
+    }
   }
 
   @Override
