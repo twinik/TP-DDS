@@ -120,7 +120,7 @@ public class ColaboradoresService {
     try {
       this.validarSiYaExisteMail(dto.getUsuarioDto());
     } catch (EmailDuplicadoException e) {
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "rejected").increment();
       throw new EmailDuplicadoException(e.getMessage(), dto);
     }
     colaborador.setNombre(dto.getNombre());
@@ -155,7 +155,6 @@ public class ColaboradoresService {
       this.colaboradoresRepository.eliminar(colaborador);
       throw e;
     }
-    ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "ok").increment();
     return colaborador.getId();
   }
 
@@ -202,20 +201,20 @@ public class ColaboradoresService {
 
   private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento, PersonaHumanaDto dto) {
     if (!DniHelper.esValido(nroDocumento)) {
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "rejected").increment();
       throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
     }
 
     Optional<Colaborador> user = this.colaboradoresRepository.buscarPorDni(tipoDocumento, nroDocumento);
     if (user.isPresent()) {
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "rejected").increment();
       throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
     }
   }
 
   private void validarDocumento(String nroDocumento) {
     if (!DniHelper.esValido(nroDocumento)) {
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "rejected").increment();
       throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje());
     }
 
@@ -223,7 +222,7 @@ public class ColaboradoresService {
 
   private void validarFechaNacimiento(Colaborador c, Object dto) {
     if (c.getFechaNacimiento().isAfter(LocalDate.now())) {
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "rejected").increment();
       throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje(), dto);
     }
 
