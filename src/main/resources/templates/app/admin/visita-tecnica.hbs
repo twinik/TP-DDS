@@ -1,0 +1,71 @@
+{{#partial "btn-volver"}}
+    <div class="flex">
+        <a href="/admin/visitas-tecnico">
+            <button
+                    class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            >
+                Volver
+            </button>
+        </a>
+    </div>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto bg-white dark:bg-gray-700 rounded-lg shadow-xl overflow-hidden">
+            <div class="px-6 py-8 sm:p-10">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-8">
+                    Visita Técnica
+                </h1>
+
+                <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Nombre del técnico que registró la visita:</span>
+                        <span class="text-lg font-semibold text-gray-900 dark:text-white">{{visita.nombreCompletoTecnico}}</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Fecha:</span>
+                        <span class="text-lg font-semibold text-gray-900 dark:text-white">{{visita.fechaVisita}}</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Incidente:</span>
+                        <span class="text-sm font-semibold text-gray-900 dark:text-white">
+                            {{visita.incidente.tipo}} en {{visita.incidente.nombreHeladera}}
+                            del día {{visita.incidente.fecha}} {{visita.incidente.hora}}
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Solucionó el problema:</span>
+                        <span class="text-lg font-semibold text-gray-900 dark:text-white">
+                            {{#if visita.solucionado}}
+                                Solucionado
+                            {{else}}
+                                No solucionado
+                            {{/if}}</span>
+                    </div>
+
+                    <div class="bg-gray-100 dark:bg-gray-600 rounded-lg p-4">
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Descripción:</h2>
+                        <p class="text-gray-700 dark:text-gray-200 break-words overflow-hidden">{{visita.descripcion}}</p>
+                    </div>
+
+                    {{#if visita.urlFoto}}
+                        <div class="mt-8">
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Imagen de la
+                                visita:</h2>
+                            <div class="bg-white dark:bg-gray-800 p-2 rounded-lg shadow-inner">
+                                <img class="w-full h-auto object-contain rounded-lg" src="{{visita.urlFoto}}"
+                                     alt="Imagen de la visita técnica"/>
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+
+{{> templates/app/base}}

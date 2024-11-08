@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.services;
 
+import ar.edu.utn.frba.dds.dtos.incidentes.FallaTecnicaListadoDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.TecnicoDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.TecnicoOutputDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.VisitaTecnicoDto;
+import ar.edu.utn.frba.dds.dtos.tecnicos.VisitaTecnicoListadoDto;
 import ar.edu.utn.frba.dds.exceptions.DniDuplicadoException;
 import ar.edu.utn.frba.dds.exceptions.FormIncompletoException;
 import ar.edu.utn.frba.dds.exceptions.RecursoInexistenteException;
@@ -69,11 +71,23 @@ public class TecnicosService {
     this.visitasTecnicoRepository.guardar(visitaTecnico);
   }
 
-
   private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento, TecnicoDto dto) {
     if (!DniHelper.esValido(nroDocumento))
       throw new DniDuplicadoException(MensajeDniInvalidoFactory.generarMensaje(), dto);
     Optional<Tecnico> t = tecnicosRepository.buscar(tipoDocumento, nroDocumento);
     if (t.isPresent()) throw new DniDuplicadoException(MensajeDniDuplicadoFactory.generarMensaje(), dto);
   }
+
+  public List<VisitaTecnicoListadoDto> obtenerTodasLasVisitas() {
+    List<VisitaTecnico> visitas = this.visitasTecnicoRepository.buscarTodos();
+    return visitas.stream().map(VisitaTecnicoListadoDto::fromVisita).toList();
+  }
+
+  public VisitaTecnicoListadoDto obtenerVisita(String id) {
+    return VisitaTecnicoListadoDto
+        .fromVisita(this.visitasTecnicoRepository
+            .buscar(id)
+            .orElseThrow(() -> new RecursoInexistenteException(MensajeRecursoInexistenteFactory.generarMensaje("Visitas técnico", id))));
+  }
+
 }

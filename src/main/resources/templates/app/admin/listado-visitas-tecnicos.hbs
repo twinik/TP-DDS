@@ -1,0 +1,64 @@
+{{#partial "contenido"}}
+    <div class="p-6 sm:p-10 mx-auto max-w-5xl">
+        <h1 class="title1 text-3xl sm:text-4xl font-bold mb-8">Listado de visitas de técnicos</h1>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <table class="w-full table-auto">
+                <thead>
+                <tr class="azulIntermedio">
+                    <th class="p-4 text-center text-lg font-semibold text-white">Técnico</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Fecha</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Incidente</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Solucionó el problema</th>
+                    <th class="p-4 text-center text-lg font-semibold text-white">Detalles</th>
+                </tr>
+                </thead>
+                <tbody id="alertasBody">
+                {{#each visitas}}
+                    <tr class="border-b alerta-row hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                        <td class="p-4 text-base">{{this.nombreCompletoTecnico}}</td>
+                        <td class="p-4 text-base max-w-xs break-words overflow-hidden">
+                            <p class="text-center">
+                                {{this.fechaVisita}}
+                            </p>
+                        </td>
+                        <td class="p-4 text-base max-w-xs break-words overflow-hidden">
+                            <p class="text-center">
+                                {{this.incidente.tipo}} en {{this.incidente.nombreHeladera}} del día {{this.incidente.fecha}} a
+                                las {{this.incidente.hora}}
+                            </p>
+                        </td>
+                        <td class="p-4 text-base">
+                            {{#if this.solucionado}}
+                                Solucionado
+                            {{else}}
+                                No solucionado
+                            {{/if}}
+                        </td>
+                        <td class="p-4 text-base">
+                            <button
+                                    class="py-1 text-sm font-medium text-blue-600 hover:text-blue-800 focus:outline-none"
+                                    onclick="redirigirAVisita('{{this.id}}')"
+                            >
+                                Ver más
+                            </button>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script>
+        function redirigirAVisita(visitaId) {
+            const currentRoute = window.location.pathname;  // Get the current route
+            const newRoute = `${currentRoute}/${visitaId}`;
+            window.location.href = newRoute;
+        }
+    </script>
+{{/partial}}
+
+{{> templates/app/base}}

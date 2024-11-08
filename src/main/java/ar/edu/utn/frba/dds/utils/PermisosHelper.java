@@ -34,6 +34,8 @@ public class PermisosHelper {
         //ADMIN
         case "/admin/tecnicos/nuevo" -> Set.of("alta-tecnico");
         case "/admin/visitas-tecnico/nuevo" -> Set.of("alta-tecnico");
+        case "/admin/visitas-tecnico" -> Set.of("alta-tecnico");
+        case "/admin/visitas-tecnico/{id}" -> Set.of("alta-tecnico");
         case "/admin/formularios/nuevo" -> Set.of("alta-formulario");
         case "/admin/modelos-heladeras/nuevo" -> Set.of("alta-modelo-heladera");
         case "/admin/tarjeta/nuevo" -> Set.of("alta-cod-tarjeta");

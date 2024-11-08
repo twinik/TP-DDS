@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.models.domain.heladeras.Heladera;
 import ar.edu.utn.frba.dds.models.domain.incidentes.FallaTecnica;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.models.messageFactory.MensajeFallaTecnicaExistenteException;
+import ar.edu.utn.frba.dds.models.messageFactory.MensajeRecursoInexistenteFactory;
 import ar.edu.utn.frba.dds.models.repositories.IFallasTecnicasRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import lombok.AllArgsConstructor;
@@ -49,7 +50,7 @@ public class FallasTecnicasService {
   public FallaTecnicaDto obtenerFallaTecnica(String id) {
     return FallaTecnicaDto.fromFalla(
         this.fallasTecnicasRepository.buscar(id)
-            .orElseThrow(() -> new RecursoNoDisponibleException("Esta falla tecnica no existe")));
+            .orElseThrow(() -> new RecursoNoDisponibleException(MensajeRecursoInexistenteFactory.generarMensaje("Fallas técnicas",id))));
   }
 
   public void crear(FallaTecnicaAltaDto dto) {

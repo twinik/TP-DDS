@@ -13,7 +13,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class VisitaTecnicoDto {
-
   private String idTecnico;
   private String fechaVisita;
   private String descripcion;

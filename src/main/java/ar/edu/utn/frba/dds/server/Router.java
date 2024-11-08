@@ -70,6 +70,8 @@ public class Router {
 
     app.get("/admin/visitas-tecnico/nuevo", ServiceLocator.get(VisitasTecnicoController.class)::create);
     app.post("/admin/visitas-tecnico/nuevo", ServiceLocator.get(VisitasTecnicoController.class)::save);
+    app.get("/admin/visitas-tecnico", ServiceLocator.get(VisitasTecnicoController.class)::index);
+    app.get("/admin/visitas-tecnico/{id}", ServiceLocator.get(VisitasTecnicoController.class)::show);
 
     app.get("/responder-formulario/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::obtenerFormulario);
     app.get("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::create);
