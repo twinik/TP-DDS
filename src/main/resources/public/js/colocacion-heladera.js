@@ -69,7 +69,7 @@ map.on("click", function (e) {
         document.getElementById("longitudElegida").value = e.latlng.lng.toFixed(6);
         const markerTemplate = `<div class="flex flex-col popup-content">
                 <div class="popup-title">Nuevo Punto</div>
-                <div class="popup-button" data-lat="${e.latlng.lat}" data-lng="${e.latlng.lng}" onclick="clickOnPopup(this)">
+                <div class="popup-button" data-lat="${e.latlng.lat.toFixed(6)}" data-lng="${e.latlng.lng.toFixed(6)}" onclick="clickOnPopup(this)">
                     Seleccionar
                 </div>
             </div>`;

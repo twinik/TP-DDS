@@ -20,7 +20,7 @@ public class HeladeraInputDto {
   private String idColaborador;
 
   public static HeladeraInputDto of(Context context) {
-    return HeladeraInputDto.builder().nombre(context.formParam("nombre"))
+    return HeladeraInputDto.builder().nombre(sanitizarNombreHeladera(context.formParam("nombre")))
         .idModelo(context.formParam("modelo"))
         .capacidad(Integer.valueOf(context.formParam("capacidad")))
         .fecha(context.formParam("fecha"))
@@ -38,6 +38,10 @@ public class HeladeraInputDto {
   public boolean estanCamposLlenos() {
     return this.nombre != null && this.capacidad != null && this.fecha != null && this.idModelo != null && this.direccion != null
         && this.ubicacion != null;
+  }
+
+  private static String sanitizarNombreHeladera(String nombre){
+    return nombre.trim().replaceAll("\\s+", "-");
   }
 
 }
