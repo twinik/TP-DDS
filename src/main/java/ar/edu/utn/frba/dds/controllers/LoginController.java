@@ -58,7 +58,7 @@ public class LoginController implements ICrudViewsHandler {
 
   @Override
   public void index(Context context) {
-    context.render("/auth/login/inicio-sesion.hbs");
+    context.render("auth/login/inicio-sesion.hbs");
   }
 
   @Override

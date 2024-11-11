@@ -29,7 +29,7 @@ public class ModelosHeladeraController implements ICrudViewsHandler {
   public void create(Context context) {
     Map<String, Object> model = new HashMap<>();
     model.put("message", context.queryParam("message"));
-    context.render("/app/admin/alta-modelo-heladera.hbs", model);
+    context.render("app/admin/alta-modelo-heladera.hbs", model);
   }
 
   @Override
@@ -40,7 +40,7 @@ public class ModelosHeladeraController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("message", "El modelo " + dto.getModelo() + " fue regisrado con exito!");
     context.status(201);
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

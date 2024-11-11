@@ -30,7 +30,7 @@ public class CargaMasivaController implements ICrudViewsHandler {
 
   @Override
   public void create(Context context) {
-    context.render("/app/carga-masiva/carga-masiva.hbs");
+    context.render("app/carga-masiva/carga-masiva.hbs");
   }
 
   @Override
@@ -45,14 +45,14 @@ public class CargaMasivaController implements ICrudViewsHandler {
       model.put("message", "Colaboraciones cargadas correctamente");
       context.status(201);
       ServiceLocator.get(StepMeterRegistry.class).counter("CargasCsv","status","ok").increment();
-      context.render("/app/success.hbs", model);
+      context.render("app/success.hbs", model);
     } catch (CargaArchivoFailedException | CsvInvalidoException e) {
       e.printStackTrace();
       model.put("message", "Error al subir el archivo");
       model.put("msjErrorCsv", MensajeErrorCsvFactory.generarMensaje(e.getMessage()));
       context.status(400);
       ServiceLocator.get(StepMeterRegistry.class).counter("CargasCsv","status","failed").increment();
-      context.render("/app/error.hbs", model);
+      context.render("app/error.hbs", model);
     }
   }
 

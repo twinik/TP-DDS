@@ -42,7 +42,7 @@ public class RecomendacionesController implements ICrudViewsHandler {
 
   @Override
   public void index(Context context) {
-    context.render("/app/heladeras/puntosdonacion.hbs");
+    context.render("app/heladeras/puntosdonacion.hbs");
   }
 
   @Override

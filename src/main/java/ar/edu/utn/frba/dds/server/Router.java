@@ -78,7 +78,7 @@ public class Router {
     app.post("/responder-formulario/{idFormulario}/colaborador/{idColaborador}", ServiceLocator.get(RespuestaFormularioController.class)::save);
 
     // COLABORACIONES
-    app.get("/colaborar", ctx -> ctx.render("/app/colaboraciones/colaborar.hbs"));
+    app.get("/colaborar", ctx -> ctx.render("app/colaboraciones/colaborar.hbs"));
 
     app.get("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::create);
     app.post("/colaborar/donar-dinero", ServiceLocator.get(DonacionDineroController.class)::save);
@@ -135,22 +135,22 @@ public class Router {
     app.post("/productos", ServiceLocator.get(OfertasProductoController.class)::save);
     app.post("/canjear-producto/{id}", ServiceLocator.get(CanjeProductoController.class)::save);
 
-    app.get("/quienes-somos", ctx -> ctx.render("/app/quienes-somos.hbs"));
-    app.get("/quienes-somos2", ctx -> ctx.render("/app/quienes-somos2.hbs"));
+    app.get("/quienes-somos", ctx -> ctx.render("app/quienes-somos.hbs"));
+    app.get("/quienes-somos2", ctx -> ctx.render("app/quienes-somos2.hbs"));
     app.get("/", ctx -> ctx.redirect("/quienes-somos"));
 
     app.exception(Exception.class, (e, ctx) -> {
       log.error("error 500 ", e);
       e.printStackTrace();
       ctx.status(500);
-      ctx.render("/app/500.hbs");
+      ctx.render("app/500.hbs");
     });
 
     app.exception(NotFoundResponse.class, (e, ctx) -> {
       log.error("error 404 ", e);
       e.printStackTrace();
       ctx.status(404);
-      ctx.render("/app/404.hbs");
+      ctx.render("app/404.hbs");
     });
   }
 }

@@ -37,7 +37,7 @@ public class RedistribucionViandaController implements ICrudViewsHandler {
     model.put("message", context.queryParam("message"));
     model.put("datosForm", context.consumeSessionAttribute("formDto"));
     model.put("motivos", this.motivoRedistribucionService.obtenerMotivos());
-    context.render("/app/colaboraciones/distribucion-vianda.hbs", model);
+    context.render("app/colaboraciones/distribucion-vianda.hbs", model);
   }
 
   @Override
@@ -51,7 +51,7 @@ public class RedistribucionViandaController implements ICrudViewsHandler {
     model.put("message", "Su solcitud de redistribución ha sido registrada con éxito, esperamos su donación con ansias");
     context.status(201);
     ServiceLocator.get(StepMeterRegistry.class).counter("Redistribucion_de_viandas").increment();
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
 
   }
 

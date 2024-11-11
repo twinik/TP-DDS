@@ -32,7 +32,7 @@ public class ColocacionHeladerasController implements ICrudViewsHandler {
     model.put("modelos", this.modelosService.obtenerModelosDisponibles());
     model.put("message", context.queryParam("message"));
     context.status(201);
-    context.render("/app/colaboraciones/cargo-heladera.hbs", model);
+    context.render("app/colaboraciones/cargo-heladera.hbs", model);
   }
 
   @Override

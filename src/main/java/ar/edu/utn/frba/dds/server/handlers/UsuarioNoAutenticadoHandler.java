@@ -9,7 +9,7 @@ public class UsuarioNoAutenticadoHandler implements IHandler {
     app.exception(NoAutorizadoException.class, (e, context) -> {
       e.printStackTrace();
       context.status(401);
-      context.render("/app/401.hbs");
+      context.render("app/401.hbs");
     });
   }
 }

@@ -30,7 +30,7 @@ public class ViandasController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("datosForm", context.consumeSessionAttribute("formDto"));
     model.put("message", context.queryParam("message"));
-    context.render("/app/colaboraciones/donacion-vianda.hbs", model);
+    context.render("app/colaboraciones/donacion-vianda.hbs", model);
   }
 
   @Override
@@ -42,7 +42,7 @@ public class ViandasController implements ICrudViewsHandler {
     model.put("message", "Su solicitud de donación ha sido registrada con éxito, esperamos su donación con ansias");
     context.status(201);
     ServiceLocator.get(StepMeterRegistry.class).counter("Donaciones_de_viandas").increment();
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

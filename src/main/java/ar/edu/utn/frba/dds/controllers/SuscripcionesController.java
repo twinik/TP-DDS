@@ -42,7 +42,7 @@ public class SuscripcionesController implements ICrudViewsHandler {
       if (tiene) model.put(medio, medio);
     });
     model.put("heladera", h);
-    context.render("/app/heladeras/suscripcion.hbs", model);
+    context.render("app/heladeras/suscripcion.hbs", model);
   }
 
   @Override
@@ -55,12 +55,12 @@ public class SuscripcionesController implements ICrudViewsHandler {
       this.heladerasService.agregarSuscripcionAHeladera(h, nuevaSuscripcion);
       model.put("message", "Tu suscripcion fue registrada con exito");
       context.status(201);
-      context.render("/app/success.hbs", model);
+      context.render("app/success.hbs", model);
     } catch (ContactoVacioException e) {
       e.printStackTrace();
       model.put("message", e.getMessage());
       context.status(400);
-      context.render("/app/error.hbs", model);
+      context.render("app/error.hbs", model);
     }
   }
 

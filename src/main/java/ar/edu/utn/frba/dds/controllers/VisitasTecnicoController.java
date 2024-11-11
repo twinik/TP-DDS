@@ -22,14 +22,14 @@ public class VisitasTecnicoController implements ICrudViewsHandler {
   public void index(Context context) {
     Map<String, Object> model = new HashMap<>();
     model.put("visitas", this.tecnicosService.obtenerTodasLasVisitas());
-    context.render("/app/admin/listado-visitas-tecnicos.hbs", model);
+    context.render("app/admin/listado-visitas-tecnicos.hbs", model);
   }
 
   @Override
   public void show(Context context) {
     Map<String, Object> model = new HashMap<>();
     model.put("visita", this.tecnicosService.obtenerVisita(context.pathParam("id")));
-    context.render("/app/admin/visita-tecnica.hbs", model);
+    context.render("app/admin/visita-tecnica.hbs", model);
   }
 
   @Override
@@ -38,7 +38,7 @@ public class VisitasTecnicoController implements ICrudViewsHandler {
     model.put("message", context.queryParam("message"));
     model.put("tecnicos", this.tecnicosService.obtenerTodos());
     model.put("incidentes", this.incidentesService.obtenerIncidentes());
-    context.render("/app/admin/alta-visita-tecnico.hbs", model);
+    context.render("app/admin/alta-visita-tecnico.hbs", model);
   }
 
   @Override
@@ -57,7 +57,7 @@ public class VisitasTecnicoController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("message", "La visita se registró con éxito");
     context.status(201);
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

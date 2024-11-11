@@ -28,7 +28,7 @@ public class PosiblesCodigosTarjetasController implements ICrudViewsHandler {
   public void create(Context context) {
     Map<String, Object> model = new HashMap<>();
     model.put("message", context.queryParam("message"));
-    context.render("/app/admin/alta-tarjetas.hbs", model);
+    context.render("app/admin/alta-tarjetas.hbs", model);
   }
 
   @Override
@@ -42,7 +42,7 @@ public class PosiblesCodigosTarjetasController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("message", "La tarjeta fue registrada con exito");
     context.status(201);
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

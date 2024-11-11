@@ -48,7 +48,7 @@ public class PerfilController implements ICrudViewsHandler {
     model.put("canjes", canjes);
     model.put("message", ctx.queryParam("message"));
 
-    ctx.render("/app/perfil.hbs", model);
+    ctx.render("app/perfil.hbs", model);
   }
 
   @Override
@@ -87,11 +87,11 @@ public class PerfilController implements ICrudViewsHandler {
     }
     context.sessionAttribute("email", colaboradorPerfilDto.getEmail());
     model.put("message", "Perfil actualizado correctamente");
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
 //    } catch (Exception e) {
 //      e.printStackTrace();
 //      model.put("message", "Error al actualizar el perfil");
-//      context.render("/app/error.hbs", model);
+//      context.render("app/error.hbs", model);
 //    }
   }
 

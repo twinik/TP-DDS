@@ -33,7 +33,7 @@ public class DonacionDineroController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("frecuenciasDonacion", Arrays.stream(FrecuenciaDonacion.values()).map(FrecuenciaDonacionDineroDto::of).toList());
     model.put("message", context.queryParam("message"));
-    context.render("/app/colaboraciones/donacion-dinero.hbs", model);
+    context.render("app/colaboraciones/donacion-dinero.hbs", model);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class DonacionDineroController implements ICrudViewsHandler {
     model.put("message", "Su donación fue registrada con éxito");
     context.status(201);
     ServiceLocator.get(StepMeterRegistry.class).counter("Donaciones_de_dinero").increment();
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

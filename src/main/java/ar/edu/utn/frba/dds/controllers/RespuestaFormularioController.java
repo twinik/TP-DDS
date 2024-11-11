@@ -55,7 +55,7 @@ public class RespuestaFormularioController implements ICrudViewsHandler {
     context.status(201);
     Map<String, Object> model = new HashMap<>();
     model.put("message", "Felicidades! su cuenta ha sido creada");
-    context.render("/auth/registro/form-success.hbs", model);
+    context.render("auth/registro/form-success.hbs", model);
   }
 
   @Override

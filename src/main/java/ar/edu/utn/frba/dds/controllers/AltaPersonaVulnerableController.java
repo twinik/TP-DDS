@@ -36,7 +36,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
     model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
     model.put("datosForm", context.consumeSessionAttribute("formDto"));
     model.put("message", context.queryParam("message"));
-    context.render("/app/colaboraciones/alta-persona-vulnerable.hbs", model);
+    context.render("app/colaboraciones/alta-persona-vulnerable.hbs", model);
   }
 
   public void createTutorados(Context context) {
@@ -50,7 +50,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
     model.put("menores", menores);
     model.put("datosForm", context.consumeSessionAttribute("formDto"));
     model.put("message", context.queryParam("message"));
-    context.render("/app/colaboraciones/alta-hijo-vulnerable.hbs", model);
+    context.render("app/colaboraciones/alta-hijo-vulnerable.hbs", model);
   }
 
   @Override
@@ -67,7 +67,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
       model.put("message", "El alta de la persona: " + dto.getNombre() + " " + dto.getApellido() + " fue registrado con exito");
       context.status(201);
       ServiceLocator.get(StepMeterRegistry.class).counter("Alta_persona_vulnerable").increment();
-      context.render("/app/success.hbs", model);
+      context.render("app/success.hbs", model);
     }
   }
 
@@ -82,7 +82,7 @@ public class AltaPersonaVulnerableController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("message", "El alta de los tutorados fue registrado con exito");
     context.status(201);
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

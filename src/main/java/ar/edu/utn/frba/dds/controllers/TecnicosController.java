@@ -33,7 +33,7 @@ public class TecnicosController implements ICrudViewsHandler {
     model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
     model.put("datosForm", context.consumeSessionAttribute("formDto"));
     model.put("message", context.queryParam("message"));
-    context.render("/app/admin/alta-tecnico.hbs", model);
+    context.render("app/admin/alta-tecnico.hbs", model);
   }
 
   @Override
@@ -46,7 +46,7 @@ public class TecnicosController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
     model.put("message", "El tecnico: " + dto.getNombre() + " " + dto.getApellido() + " fue registrado con exito");
     context.status(201);
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

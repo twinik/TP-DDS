@@ -62,7 +62,7 @@ public class RegistroController implements ICrudViewsHandler {
       Map<String, Object> model = new HashMap<>();
       ServiceLocator.get(StepMeterRegistry.class).counter("Registro","status","ok").increment();
       model.put("message", "Felicidades! su cuenta ha sido creada");
-      ctx.render("/auth/registro/form-success.hbs", model);
+      ctx.render("auth/registro/form-success.hbs", model);
     } catch (RegistroFailedException e) {
       ctx.status(400);
       ServiceLocator.get(StepMeterRegistry.class).counter("Registro","status","failed").increment();
@@ -96,7 +96,7 @@ public class RegistroController implements ICrudViewsHandler {
 
   @Override
   public void index(Context context) {
-    context.render("/auth/registro/registro.hbs");
+    context.render("auth/registro/registro.hbs");
   }
 
   @Override
@@ -112,12 +112,12 @@ public class RegistroController implements ICrudViewsHandler {
       model.put("tiposDocumento", Arrays.stream(TipoDocumento.values()).map(TipoDocumentoDto::fromTipoDocumento).toList());
       model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "DONACION_VIANDA", "REDISTRIBUCION_VIANDA", "REGISTRO_PERSONA"));
       model.put("message", context.queryParam("message"));
-      context.render("/auth/registro/registro-humano.hbs", model);
+      context.render("auth/registro/registro-humano.hbs", model);
     } else if (context.pathParam("tipo-persona").equals("persona-juridica")) {
       model.put("tiposOrganizacion", Arrays.stream(TipoPersonaJuridica.values()).map(TipoOrganizacionDto::fromTipoOrganizacion).toList());
       model.put("formasColaboracion", this.formaColaboracionService.obtenerFormas("DONACION_DINERO", "COLOCACION_HELADERA", "OFRECER_PRODUCTOS"));
       model.put("message", context.queryParam("message"));
-      context.render("/auth/registro/registro-juridico.hbs", model);
+      context.render("auth/registro/registro-juridico.hbs", model);
     } else if (context.pathParam("tipo-persona").equals("admin")) {
       // TODO: registro admin????
       context.redirect("/");

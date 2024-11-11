@@ -53,7 +53,7 @@ public class FallasTecnicasController implements ICrudViewsHandler {
     Map<String, Object> model = new HashMap<>();
 
     model.put("heladera", h);
-    context.render("/app/heladeras/reportar-falla.hbs", model);
+    context.render("app/heladeras/reportar-falla.hbs", model);
   }
 
   @Override
@@ -72,7 +72,7 @@ public class FallasTecnicasController implements ICrudViewsHandler {
     Map<String, String> model = new HashMap<>();
     model.put("message", "La falla tecnica fue registrada con exito!");
     context.status(201);
-    context.render("/app/success.hbs", model);
+    context.render("app/success.hbs", model);
   }
 
   @Override

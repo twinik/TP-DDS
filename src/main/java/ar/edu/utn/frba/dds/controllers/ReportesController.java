@@ -34,7 +34,7 @@ public class ReportesController implements ICrudViewsHandler {
     model.put("fechaDesde", fechaDesde.format(formatter));
     model.put("fechaHasta", fechaHasta.format(formatter));
     model.put("reportes", reportes);
-    context.render("/app/reportes/reportes.hbs", model);
+    context.render("app/reportes/reportes.hbs", model);
   }
 
   @Override

@@ -31,7 +31,7 @@ public class OfertasProductoController implements ICrudViewsHandler {
       model.put("puntosDisp", puntosdDisponibles);
     }
     model.put("ofertas", ofertas);
-    context.render("/app/productos/productos.hbs", model);
+    context.render("app/productos/productos.hbs", model);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class OfertasProductoController implements ICrudViewsHandler {
     //PRETENDE DEVOLVER UNA VISTA CON UN FORMULARIO PARA DAR DE ALTA UNA NUEVA OFERTA
     Map<String, Object> model = new HashMap<>();
     model.put("categorias", Arrays.stream(CategoriaOferta.values()).map(CategoriaOfertaDto::of).toList());
-    context.render("/app/colaboraciones/ofrecer-productos.hbs", model);
+    context.render("app/colaboraciones/ofrecer-productos.hbs", model);
   }
 
   @Override
