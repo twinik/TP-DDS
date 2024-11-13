@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.models.repositories.ISolicitudesAperturaHeladeraRepos
 import lombok.AllArgsConstructor;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.concurrent.CompletableFuture;
 
 @AllArgsConstructor
 public class SolicitudAperturaHeladeraService {
@@ -23,7 +24,7 @@ public class SolicitudAperturaHeladeraService {
     solicitudAperturaHeladera.setMotivo("apertura para ingresar una donacion");
     solicitudAperturaHeladera.setViandas(ingreso);
     solicitudAperturaHeladera.setTimestamp(LocalDateTime.now());
-    this.publicarABroker(solicitudAperturaHeladera);
+    this.publicarABrokerAsync(solicitudAperturaHeladera);
   }
 
   public void generarSolicitud(RedistribucionViandas redistribucionViandas) {
@@ -44,8 +45,8 @@ public class SolicitudAperturaHeladeraService {
     solicitudAperturaDestino.setTimestamp(LocalDateTime.now());
 
 
-    this.publicarABroker(solicitudAperturaHeladeraOrigen);
-    this.publicarABroker(solicitudAperturaDestino);
+    this.publicarABrokerAsync(solicitudAperturaHeladeraOrigen);
+    this.publicarABrokerAsync(solicitudAperturaDestino);
   }
 
   private void publicarABroker(SolicitudAperturaHeladera solicitudAperturaHeladera) {
@@ -64,5 +65,9 @@ public class SolicitudAperturaHeladeraService {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private void publicarABrokerAsync(SolicitudAperturaHeladera solicitudAperturaHeladera) {
+    CompletableFuture.runAsync(() -> this.publicarABroker(solicitudAperturaHeladera));
   }
 }

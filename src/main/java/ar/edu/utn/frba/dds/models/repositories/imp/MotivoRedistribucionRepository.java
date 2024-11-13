@@ -18,7 +18,7 @@ public class MotivoRedistribucionRepository implements IMotivoRedistribucionRepo
 
   @Override
   public List<MotivoRedistribucionVianda> buscarTodos() {
-    return entityManager().createQuery("from MotivoRedistribucionVianda where activo=:activo", MotivoRedistribucionVianda.class).
+    return entityManager().createQuery("from MotivoRedistribucionVianda where activo=:activo order by motivo desc", MotivoRedistribucionVianda.class).
         setParameter("activo", true)
         .getResultList();
   }
