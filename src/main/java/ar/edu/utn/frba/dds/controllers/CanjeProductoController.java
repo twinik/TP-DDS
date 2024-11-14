@@ -39,13 +39,13 @@ public class CanjeProductoController implements ICrudViewsHandler {
       model.put("message", "El canje del producto fue realizado con exito");
       model.put("nombreProducto", oferta.getProducto().getNombre());
       model.put("puntosProducto", oferta.getPuntosNecesarios());
-      ServiceLocator.get(StepMeterRegistry.class).counter("Canjes","status","ok").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Canjes", "status", "ok").increment();
       context.status(201);
       context.render("app/success.hbs", model);
     } catch (Exception e) {
       model.put("message", e.getMessage());
       context.status(400);
-      ServiceLocator.get(StepMeterRegistry.class).counter("Canjes","status","failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Canjes", "status", "failed").increment();
       context.render("app/error.hbs", model);
     }
   }

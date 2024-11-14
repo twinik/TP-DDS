@@ -40,7 +40,7 @@ public class HeladeraInputDto {
         && this.ubicacion != null;
   }
 
-  private static String sanitizarNombreHeladera(String nombre){
+  private static String sanitizarNombreHeladera(String nombre) {
     return nombre.trim().replaceAll("\\s+", "-");
   }
 

@@ -46,12 +46,12 @@ public class LoginController implements ICrudViewsHandler {
       }
 
       String previousUrl = ctx.sessionAttribute("previousUrl");
-      ServiceLocator.get(StepMeterRegistry.class).counter("Logins","status","ok").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Logins", "status", "ok").increment();
       ctx.redirect(Objects.requireNonNullElse(previousUrl, "/"));
     } catch (LoginFailedException e) {
       Map<String, String> model = new HashMap<>();
       model.put("message", "No existe un usuario con ese email o contraseña. Inténtelo nuevamente.");
-      ServiceLocator.get(StepMeterRegistry.class).counter("Logins","status","failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Logins", "status", "failed").increment();
       ctx.render("auth/login/inicio-sesion.hbs", model);
     }
   }

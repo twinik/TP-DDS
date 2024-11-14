@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.dtos.incidentes.FallaTecnicaListadoDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.TecnicoDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.TecnicoOutputDto;
 import ar.edu.utn.frba.dds.dtos.tecnicos.VisitaTecnicoDto;

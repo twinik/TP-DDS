@@ -50,7 +50,7 @@ public class FallasTecnicasService {
   public FallaTecnicaDto obtenerFallaTecnica(String id) {
     return FallaTecnicaDto.fromFalla(
         this.fallasTecnicasRepository.buscar(id)
-            .orElseThrow(() -> new RecursoNoDisponibleException(MensajeRecursoInexistenteFactory.generarMensaje("Fallas técnicas",id))));
+            .orElseThrow(() -> new RecursoNoDisponibleException(MensajeRecursoInexistenteFactory.generarMensaje("Fallas técnicas", id))));
   }
 
   public void crear(FallaTecnicaAltaDto dto) {

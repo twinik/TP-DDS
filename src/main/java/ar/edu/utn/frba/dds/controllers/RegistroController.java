@@ -43,7 +43,7 @@ public class RegistroController implements ICrudViewsHandler {
     this.validarContra(nuevaPersonaHumana);
     try {
       String idNuevoColab = this.colaboradoresService.registrar(nuevaPersonaHumana);
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro","status","ok").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "ok").increment();
       ctx.redirect("/responder-formulario/colaborador/" + idNuevoColab);
     } catch (RegistroFailedException e) {
       ctx.status(400);
@@ -60,12 +60,12 @@ public class RegistroController implements ICrudViewsHandler {
       this.colaboradoresService.registrar(personaJuridicaDto);
       ctx.status(201);
       Map<String, Object> model = new HashMap<>();
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro","status","ok").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "ok").increment();
       model.put("message", "Felicidades! su cuenta ha sido creada");
       ctx.render("auth/registro/form-success.hbs", model);
     } catch (RegistroFailedException e) {
       ctx.status(400);
-      ServiceLocator.get(StepMeterRegistry.class).counter("Registro","status","failed").increment();
+      ServiceLocator.get(StepMeterRegistry.class).counter("Registro", "status", "failed").increment();
       ctx.result("El registro ha fallado: " + e.getMessage());
     }
   }

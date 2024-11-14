@@ -2,10 +2,10 @@ package ar.edu.utn.frba.dds.dtos.tecnicos;
 
 import ar.edu.utn.frba.dds.dtos.incidentes.IncidenteDto;
 import ar.edu.utn.frba.dds.models.domain.tecnicos.VisitaTecnico;
-import java.time.format.DateTimeFormatter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
