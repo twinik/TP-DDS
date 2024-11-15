@@ -13,9 +13,12 @@ import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.AlertasService;
 import java.io.IOException;
 import java.util.List;
+import java.util.TimeZone;
 
 public class FallaConexionCronJob {
   public static void main(String[] args) {
+    TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
+
     int limite_minutos;
     IHeladerasRepository heladerasRepository = ServiceLocator.get(IHeladerasRepository.class);
     AlertasService alertasService = ServiceLocator.get(AlertasService.class);

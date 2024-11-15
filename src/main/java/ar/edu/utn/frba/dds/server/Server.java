@@ -16,6 +16,7 @@ import io.javalin.json.JavalinGson;
 import io.javalin.micrometer.MicrometerPlugin;
 import io.micrometer.core.instrument.step.StepMeterRegistry;
 import java.io.IOException;
+import java.util.TimeZone;
 import java.util.function.Consumer;
 
 public class Server {
@@ -31,6 +32,8 @@ public class Server {
     if (app == null) {
 //      final var metricsUtils = new DDMetricsUtils("heladeras_solidarias");
 //      final var registry = metricsUtils.getRegistry();
+      TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
+
       final var registry = ServiceLocator.get(StepMeterRegistry.class);
 
       final var micrometerPlugin = new MicrometerPlugin(config ->

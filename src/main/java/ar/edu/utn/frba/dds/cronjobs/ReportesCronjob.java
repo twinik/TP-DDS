@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * genera los reportes semanales con estadisticas
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class ReportesCronjob {
   public static void main(String[] args) {
+    TimeZone.setDefault(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
 
     ReportesFactory reportesFactory = ServiceLocator.get(ReportesFactory.class);
     IReportesRepository repository = ServiceLocator.get(IReportesRepository.class);
