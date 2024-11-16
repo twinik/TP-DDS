@@ -46,6 +46,10 @@ public class IncidentesRepository implements IIncidentesRepository, WithSimplePe
           entityManager().merge(incidente);
         }
     );
+  }
+
+  @Override
+  public void refresh(Incidente incidente){
     entityManager().refresh(incidente);
   }
 

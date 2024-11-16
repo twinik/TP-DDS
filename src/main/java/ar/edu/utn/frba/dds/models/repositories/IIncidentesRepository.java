@@ -16,4 +16,6 @@ public interface IIncidentesRepository {
   Long cantidadNoSolucionadosPorHeladera(Heladera h);
 
   void actualizar(Incidente incidente);
+
+  void refresh(Incidente incidente);
 }

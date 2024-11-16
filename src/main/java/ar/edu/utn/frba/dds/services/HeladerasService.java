@@ -64,6 +64,10 @@ public class HeladerasService {
     this.repoHeladeras.actualizar(heladera);
   }
 
+  public void refresh(Heladera heladera){
+    this.repoHeladeras.refresh(heladera);
+  }
+
   public void actualizarHeladera(HeladeraDto dto, String idColaborador) {
     Heladera heladera = this.obtenerHeladera(dto.getId());
     if (idColaborador == null) throw new NoAutorizadoException(MensajeNoAutorizadoFactory.generarMensaje());

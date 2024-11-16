@@ -32,7 +32,7 @@ public class FallaConexionCronJob {
     for (Heladera h : heladeras) {
 
       if (verifcador.huboFallaConexion(h, limite_minutos)) { // Agregar desde el archivo de config (ya esta)
-        Alerta alerta = Alerta.of(h, new TecnicosHelper(ServiceLocator.get(ITecnicosRepository.class))
+        Alerta alerta = Alerta.of(h, ServiceLocator.get(TecnicosHelper.class)
             , new NotificationStrategyFactory(), TipoAlerta.FALLA_CONEXION);
         alertasService.reportarYGuardarSiNoEstabaElMismoProblema(alerta, h);
       }
