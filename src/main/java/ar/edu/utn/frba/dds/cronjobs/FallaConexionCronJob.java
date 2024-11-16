@@ -8,7 +8,6 @@ import ar.edu.utn.frba.dds.models.domain.incidentes.Alerta;
 import ar.edu.utn.frba.dds.models.domain.incidentes.TipoAlerta;
 import ar.edu.utn.frba.dds.models.domain.notifications.NotificationStrategyFactory;
 import ar.edu.utn.frba.dds.models.repositories.IHeladerasRepository;
-import ar.edu.utn.frba.dds.models.repositories.ITecnicosRepository;
 import ar.edu.utn.frba.dds.serviceLocator.ServiceLocator;
 import ar.edu.utn.frba.dds.services.AlertasService;
 import java.io.IOException;
