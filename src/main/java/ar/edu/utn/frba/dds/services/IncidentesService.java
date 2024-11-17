@@ -32,15 +32,19 @@ public class IncidentesService {
 
 
   public void solucionar(Incidente incidente) {
+
+
     Heladera h = incidente.getHeladera();
-    if (this.incidentesRepository.cantidadNoSolucionadosPorHeladera(h) == 1L) {
-      h.habilitar();
-    }
+
     incidente.marcarSolucionado();
     this.incidentesRepository.actualizar(incidente);
-    this.heladerasService.actualizarHeladera(h);
-    this.heladerasService.refresh(h);
     this.incidentesRepository.refresh(incidente);
+
+    if (this.incidentesRepository.cantidadNoSolucionadosPorHeladera(h) == 0L) {
+      h.habilitar();
+      this.heladerasService.actualizarHeladera(h);
+      this.heladerasService.refresh(h);
+    }
 
   }
 }
