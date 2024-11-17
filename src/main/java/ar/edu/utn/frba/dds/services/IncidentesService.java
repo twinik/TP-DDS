@@ -38,7 +38,7 @@ public class IncidentesService {
 
     incidente.marcarSolucionado();
     this.incidentesRepository.actualizar(incidente);
-    this.incidentesRepository.refresh(incidente);
+    //this.incidentesRepository.refresh(incidente);
 
     if (this.incidentesRepository.cantidadNoSolucionadosPorHeladera(h) == 0L) {
       h.habilitar();
