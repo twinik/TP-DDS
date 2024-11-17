@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.models.messageFactory.MensajeTecnicosIncidenteFactory
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -34,7 +35,7 @@ import java.time.LocalDateTime;
 @Table(name = "incidente")
 @DiscriminatorColumn(name = "tipo_incidente")
 public abstract class Incidente extends EntidadPersistente {
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "heladera_id", referencedColumnName = "id")
   private Heladera heladera;
 

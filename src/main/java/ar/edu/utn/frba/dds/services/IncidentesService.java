@@ -42,8 +42,8 @@ public class IncidentesService {
 
     if (this.incidentesRepository.cantidadNoSolucionadosPorHeladera(h) == 0L) {
       h.habilitar();
-      this.heladerasService.actualizarHeladera(h);
-      this.heladerasService.refresh(h);
+      this.incidentesRepository.actualizar(incidente);
+     // this.heladerasService.refresh(h);
     }
 
   }
