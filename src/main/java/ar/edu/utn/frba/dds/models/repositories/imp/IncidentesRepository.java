@@ -25,6 +25,7 @@ public class IncidentesRepository implements IIncidentesRepository, WithSimplePe
   @Override
   public List<Incidente> buscarPorHeladera(String id) {
     return entityManager().createQuery("from Incidente where solucionado=:solucionado and heladera.id=:id and activo=:activo", Incidente.class)
+        .setHint("org.hibernate.cacheable", false)
         .setParameter("solucionado", false)
         .setParameter("activo", true)
         .setParameter("id", id)
@@ -42,15 +43,10 @@ public class IncidentesRepository implements IIncidentesRepository, WithSimplePe
 
   @Override
   public void actualizar(Incidente incidente) {
-    withTransaction(() -> {
-          entityManager().merge(incidente);
-          entityManager().flush();
-        }
-    );
-  }
+    withTransaction(() -> entityManager().merge(incidente));}
 
   @Override
-  public void refresh(Incidente incidente){
+  public void refresh(Incidente incidente) {
     entityManager().refresh(incidente);
   }
 
