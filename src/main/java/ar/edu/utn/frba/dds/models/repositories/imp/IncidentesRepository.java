@@ -35,6 +35,7 @@ public class IncidentesRepository implements IIncidentesRepository, WithSimplePe
   @Override
   public Long cantidadNoSolucionadosPorHeladera(Heladera h) {
     return entityManager().createQuery("select count(*) from Incidente i where solucionado=:solucionado and heladera.id=:hel and activo=:activo", Long.class)
+        .setParameter("solucionado", false)
         .setParameter("activo", true)
         .setParameter("hel", h.getId())
         .getSingleResult();
