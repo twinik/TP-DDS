@@ -7,7 +7,7 @@ const getCanalLabel = index => {
 const getSelectTemplate = index => {
     return `<select id="canal-contacto-${index}" name="canal-${index}" class="mt-1 mb-4 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
         <option value="Whatsapp">Whatsapp</option>
-        <option value="Mail">Mail</option>
+        <option value="Email">Mail</option>
         <option value="Telegram">Telegram</option>
     </select>`;
 };
