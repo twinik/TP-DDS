@@ -27,4 +27,5 @@ public interface IHeladerasRepository {
 
   void eliminar(Heladera heladera);
 
+  void detach(Heladera h);
 }

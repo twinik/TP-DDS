@@ -100,4 +100,8 @@ public class HeladerasService {
     return heladeras.stream().map(HeladeraDto::fromHeladera).toList();
   }
 
+  public void detach(Heladera h){
+    this.repoHeladeras.detach(h);
+  }
+
 }

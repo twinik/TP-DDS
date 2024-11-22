@@ -36,10 +36,11 @@ public class IncidentesService {
     if (this.incidentesRepository.cantidadNoSolucionadosPorHeladera(h) == 1L) {
       System.out.println("estoy aca");
       h.habilitar();
-      //this.heladerasService.actualizarHeladera(h);
+      this.heladerasService.detach(h);
+      this.heladerasService.actualizarHeladera(h);
     }
     incidente.marcarSolucionado();
-    //this.incidentesRepository.actualizar(incidente);
+    this.incidentesRepository.actualizar(incidente);
   }
 
 }

@@ -76,4 +76,9 @@ public class HeladeraRepository implements IHeladerasRepository, WithSimplePersi
       entityManager().merge(heladera);
     });
   }
+
+  @Override
+  public void detach(Heladera h) {
+    entityManager().detach(h);
+  }
 }

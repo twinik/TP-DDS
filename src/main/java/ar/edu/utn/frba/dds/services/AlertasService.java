@@ -11,6 +11,7 @@ import java.util.List;
 public class AlertasService {
 
   private IAlertasRepository alertasRepository;
+  private HeladerasService heladerasService;
 
   public List<AlertaDto> obtenerTodos() {
     return this.alertasRepository.buscarTodos().stream().map(AlertaDto::fromAlerta).toList();
@@ -20,8 +21,10 @@ public class AlertasService {
     List<Alerta> alertasAnteriores = this.alertasRepository.buscarAlertasHeladera(heladera.getId());
     boolean existeOtraNoSolucionada = alertasAnteriores.stream().anyMatch(a -> !a.isSolucionado() && a.getTipoAlerta().equals(alerta.getTipoAlerta()));
     if (!existeOtraNoSolucionada) {
-      alerta.reportar();
       this.alertasRepository.guardar(alerta);
+      alerta.reportar();
+      this.heladerasService.detach(heladera);
+      this.heladerasService.actualizarHeladera(heladera);
     }
   }
 }

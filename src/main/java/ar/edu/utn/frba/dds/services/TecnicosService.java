@@ -65,9 +65,10 @@ public class TecnicosService {
     visitaTecnico.setIncidente(this.incidentesService.obtenerIncidente(dto.getIncidente()));
     if (visitaTecnico.getTimestamp().isAfter(LocalDateTime.now()) || visitaTecnico.getTimestamp().isBefore(visitaTecnico.getIncidente().getTimestamp()))
       throw new FormIncompletoException(MensajeFechaInvalidaFactory.generarMensaje());
+    this.visitasTecnicoRepository.guardar(visitaTecnico);
     if (visitaTecnico.estaSolucionado())
       this.incidentesService.solucionar(visitaTecnico.getIncidente());
-    this.visitasTecnicoRepository.guardar(visitaTecnico);
+
   }
 
   private void validarDocumento(TipoDocumento tipoDocumento, String nroDocumento, TecnicoDto dto) {

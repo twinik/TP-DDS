@@ -47,7 +47,7 @@ public class BrokerSubscriber {
       sampleClient.connect(connOpts);
       System.out.println("Connected");
 
-      System.out.println("Subscribe to topic");
+      System.out.println("Subscribe to topic: " + this.topic);
       sampleClient.subscribe(this.topic, this.receptor);
 
       System.out.println("Right! We are subscribed");

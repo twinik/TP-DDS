@@ -254,7 +254,7 @@ public class ServiceLocator {
 
         // SERVICIOS
       else if (clase.equals(AlertasService.class))
-        add(clase, new AlertasService(get(IAlertasRepository.class)));
+        add(clase, new AlertasService(get(IAlertasRepository.class),get(HeladerasService.class)));
       else if (clase.equals(AltaPersonaVulnerableService.class))
         add(clase, new AltaPersonaVulnerableService(get(IPersonaVulnerableRepository.class), get(IAltaPersonaVulnerableRepository.class), get(ColaboradoresService.class), get(ICalculadorPuntos.class), get(TarjetasService.class)));
       else if (clase.equals(CalculadorHeladerasCercanas.class)) {
