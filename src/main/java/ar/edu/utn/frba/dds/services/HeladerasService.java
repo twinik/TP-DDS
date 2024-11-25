@@ -21,7 +21,7 @@ public class HeladerasService {
   public List<HeladeraMapaDto> getHeladerasParaMapa() {
     List<Heladera> heladeras = repoHeladeras.buscarTodos();
     this.repoHeladeras.refresh(heladeras);
-    List<HeladeraMapaDto> resultado = heladeras.stream().map(HeladeraMapaDto::fromHeladera).collect(Collectors.toList());
+    List<HeladeraMapaDto> resultado = heladeras.stream().map(HeladeraMapaDto::fromHeladera).toList();
     return resultado;
   }
 
