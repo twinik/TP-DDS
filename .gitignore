@@ -33,6 +33,7 @@ target/**
 **/.DS_Store
 
 persistence.xml
+config.properties
 
 # API Recomendador Donaciones
 node_modules
